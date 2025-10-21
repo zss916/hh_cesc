@@ -1,0 +1,9 @@
+import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/generated/assets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_echart/flutter_echart.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+part 'logic.dart';
+part 'view.dart';
