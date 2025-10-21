@@ -1,6 +1,6 @@
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/router/index.dart';
-import 'package:cescpro/page/station/detail/statistics/widget/line_chart.dart';
+import 'package:cescpro/page/station/detail/monitor/cluster/line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

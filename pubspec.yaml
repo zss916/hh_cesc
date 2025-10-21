@@ -60,6 +60,8 @@ dependencies:
   #marquee: ^2.3.0
   marquee_widget: ^1.2.0
   flutter_popup: 3.3.9
+  flutter_datetime_picker_plus: 2.2.0
+  intl: 0.20.2
 
 
 

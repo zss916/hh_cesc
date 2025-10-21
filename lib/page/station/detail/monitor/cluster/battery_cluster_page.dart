@@ -1,8 +1,11 @@
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/router/index.dart';
-import 'package:cescpro/page/station/detail/statistics/widget/line_chart.dart';
+import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/page/station/detail/monitor/cluster/line_chart.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class BatteryClusterPage extends StatelessWidget {
   const BatteryClusterPage({super.key});
@@ -270,47 +273,12 @@ class BatteryClusterPage extends StatelessWidget {
                   Row(
                     children: [
                       Spacer(),
-                      Row(
-                        children: [
-                          Container(
-                            width: 7,
-                            height: 7,
-                            margin: EdgeInsets.only(right: 5.w),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF3874F2),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                          Text(
-                            "功率",
-                            style: TextStyle(
-                              color: Color(0xD9FFFFFF),
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ],
+                      LineTitleWidget(
+                        title: TKey.power.tr,
+                        color: Color(0xFF3874F2),
                       ),
                       VerticalDivider(width: 16.w, color: Colors.transparent),
-                      Row(
-                        children: [
-                          Container(
-                            width: 7,
-                            height: 7,
-                            margin: EdgeInsets.only(right: 5.w),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF0BC3C4),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                          Text(
-                            "SOC",
-                            style: TextStyle(
-                              color: Color(0xD9FFFFFF),
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ],
-                      ),
+                      LineTitleWidget(title: "SOC", color: Color(0xFF0BC3C4)),
                       Spacer(),
                     ],
                   ),

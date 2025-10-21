@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @immutable
-class LineChartWidget extends StatefulWidget {
-  const LineChartWidget({super.key});
+class StatisticsLineChartWidget extends StatefulWidget {
+  const StatisticsLineChartWidget({super.key});
 
   @override
   State<StatefulWidget> createState() => LineChartWidgetState();
 }
 
-class LineChartWidgetState extends State<LineChartWidget> {
+class LineChartWidgetState extends State<StatisticsLineChartWidget> {
   @override
   void initState() {
     super.initState();
@@ -44,12 +44,7 @@ class _LineChart extends StatelessWidget {
   );
 
   ///触摸
-  LineTouchData get lineTouchData1 => LineTouchData(
-    handleBuiltInTouches: false,
-    touchTooltipData: LineTouchTooltipData(
-      getTooltipColor: (touchedSpot) => Colors.white.withValues(alpha: 0.8),
-    ),
-  );
+  LineTouchData get lineTouchData1 => LineTouchData(enabled: false);
 
   FlTitlesData get titlesData1 => FlTitlesData(
     bottomTitles: AxisTitles(sideTitles: bottomTitles),
@@ -58,25 +53,22 @@ class _LineChart extends StatelessWidget {
     leftTitles: AxisTitles(sideTitles: leftTitles()),
   );
 
+  ///折现数据列表
   List<LineChartBarData> get lineBarsData1 => [
     lineChartBarData1_1,
     lineChartBarData1_2,
+    lineChartBarData1_3,
+    lineChartBarData1_4,
+    lineChartBarData1_5,
   ];
 
-  /*LineTouchData get lineTouchData2 => const LineTouchData(enabled: false);
-*/
-  /* FlTitlesData get titlesData2 => FlTitlesData(
-    bottomTitles: AxisTitles(sideTitles: bottomTitles),
-    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-    topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-    leftTitles: AxisTitles(sideTitles: leftTitles()),
-  );*/
-
-  /* List<LineChartBarData> get lineBarsData2 => [
-    lineChartBarData2_1,
-    lineChartBarData2_2,
-    lineChartBarData2_3,
-  ];*/
+  ///左侧文案
+  SideTitles leftTitles() => SideTitles(
+    getTitlesWidget: leftTitleWidgets,
+    showTitles: true,
+    interval: 1,
+    reservedSize: 30,
+  );
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     TextStyle style = TextStyle(
@@ -111,12 +103,12 @@ class _LineChart extends StatelessWidget {
     );
   }
 
-  ///左侧文案
-  SideTitles leftTitles() => SideTitles(
-    getTitlesWidget: leftTitleWidgets,
+  ///底部文案
+  SideTitles get bottomTitles => SideTitles(
     showTitles: true,
-    interval: 1,
     reservedSize: 30,
+    interval: 1,
+    getTitlesWidget: bottomTitleWidgets,
   );
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
@@ -150,14 +142,6 @@ class _LineChart extends StatelessWidget {
     return SideTitleWidget(meta: meta, space: 2, child: text);
   }
 
-  ///底部文案
-  SideTitles get bottomTitles => SideTitles(
-    showTitles: true,
-    reservedSize: 30,
-    interval: 1,
-    getTitlesWidget: bottomTitleWidgets,
-  );
-
   ///网格
   FlGridData get gridData =>
       FlGridData(show: true, horizontalInterval: 1, drawVerticalLine: false);
@@ -185,7 +169,10 @@ class _LineChart extends StatelessWidget {
     dotData: const FlDotData(show: false),
 
     ///线下面的区域(true)
-    belowBarData: BarAreaData(show: false),
+    belowBarData: BarAreaData(
+      show: true,
+      color: Color(0xFF3874F2).withValues(alpha: 0.15),
+    ),
     spots: const [
       ///点坐标
       FlSpot(1, 1),
@@ -206,9 +193,10 @@ class _LineChart extends StatelessWidget {
     isStrokeCapRound: true,
     dotData: const FlDotData(show: false),
     belowBarData: BarAreaData(
-      show: false,
-      color: Colors.pink.withValues(alpha: 0),
+      show: true,
+      color: Color(0xFF0BC3C4).withValues(alpha: 0.15),
     ),
+
     spots: const [
       FlSpot(1, 1),
       FlSpot(3, 2.8),
@@ -219,75 +207,87 @@ class _LineChart extends StatelessWidget {
     ],
   );
 
-  /*  LineChartBarData get lineChartBarData1_3 => LineChartBarData(
+  ///折线3
+  LineChartBarData get lineChartBarData1_3 => LineChartBarData(
+    ///是否圆一点
     isCurved: true,
-    color: Colors.cyan,
-    barWidth: 8,
+    color: Color(0xFFF9C74F),
+    barWidth: 1,
     isStrokeCapRound: true,
-    dotData: const FlDotData(show: false),
-    belowBarData: BarAreaData(show: false),
-    spots: const [
-      FlSpot(1, 2.8),
-      FlSpot(3, 1.9),
-      FlSpot(6, 3),
-      FlSpot(10, 1.3),
-      FlSpot(13, 2.5),
-    ],
-  );
 
-  LineChartBarData get lineChartBarData2_1 => LineChartBarData(
-    isCurved: true,
-    curveSmoothness: 0,
-    color: Colors.green.withValues(alpha: 0.5),
-    barWidth: 4,
-    isStrokeCapRound: true,
+    ///点数据
     dotData: const FlDotData(show: false),
-    belowBarData: BarAreaData(show: false),
-    spots: const [
-      FlSpot(1, 1),
-      FlSpot(3, 4),
-      FlSpot(5, 1.8),
-      FlSpot(7, 5),
-      FlSpot(10, 2),
-      FlSpot(12, 2.2),
-      FlSpot(13, 1.8),
-    ],
-  );
 
-  LineChartBarData get lineChartBarData2_2 => LineChartBarData(
-    isCurved: true,
-    color: Colors.pink.withValues(alpha: 0.5),
-    barWidth: 4,
-    isStrokeCapRound: true,
-    dotData: const FlDotData(show: false),
+    ///线下面的区域(true)
     belowBarData: BarAreaData(
       show: true,
-      color: Colors.pink.withValues(alpha: 0.2),
+      color: Color(0xFFF9C74F).withValues(alpha: 0.15),
     ),
     spots: const [
+      ///点坐标
       FlSpot(1, 1),
-      FlSpot(3, 2.8),
-      FlSpot(7, 1.2),
-      FlSpot(10, 2.8),
-      FlSpot(12, 2.6),
-      FlSpot(13, 3.9),
+      FlSpot(2, 2),
+      FlSpot(3.3, 1.5),
+      FlSpot(6.5, 3.4),
+      FlSpot(9, 2.2),
+      FlSpot(12.5, 4),
+      FlSpot(13, 1.6),
     ],
   );
 
-  LineChartBarData get lineChartBarData2_3 => LineChartBarData(
+  ///折线4
+  LineChartBarData get lineChartBarData1_4 => LineChartBarData(
+    ///是否圆一点
     isCurved: true,
-    curveSmoothness: 0,
-    color: Colors.cyan.withValues(alpha: 0.5),
-    barWidth: 2,
+    color: Color(0xFFF94144),
+    barWidth: 1,
     isStrokeCapRound: true,
-    dotData: const FlDotData(show: true),
-    belowBarData: BarAreaData(show: false),
+
+    ///点数据
+    dotData: const FlDotData(show: false),
+
+    ///线下面的区域(true)
+    belowBarData: BarAreaData(
+      show: true,
+      color: Color(0xFFF94144).withValues(alpha: 0.15),
+    ),
     spots: const [
-      FlSpot(1, 3.8),
-      FlSpot(3, 1.9),
-      FlSpot(6, 5),
-      FlSpot(10, 3.3),
-      FlSpot(13, 4.5),
+      ///点坐标
+      FlSpot(0.5, 1.5),
+      FlSpot(2.1, 2),
+      FlSpot(3.2, 1.5),
+      FlSpot(5.2, 3.4),
+      FlSpot(7, 3.2),
+      FlSpot(10.5, 1.3),
+      FlSpot(13.3, 3),
     ],
-  );*/
+  );
+
+  ///折线5
+  LineChartBarData get lineChartBarData1_5 => LineChartBarData(
+    ///是否圆一点
+    isCurved: true,
+    color: Color(0xFFB131DB),
+    barWidth: 1,
+    isStrokeCapRound: true,
+
+    ///点数据
+    dotData: const FlDotData(show: false),
+
+    ///线下面的区域(true)
+    belowBarData: BarAreaData(
+      show: true,
+      color: Color(0xFFB131DB).withValues(alpha: 0.15),
+    ),
+    spots: const [
+      ///点坐标
+      FlSpot(0.2, 1.5),
+      FlSpot(2.1, 2.3),
+      FlSpot(3.2, 1.8),
+      FlSpot(5.2, 3.4),
+      FlSpot(7.2, 3.2),
+      FlSpot(8.5, 1.6),
+      FlSpot(14.3, 3.1),
+    ],
+  );
 }

@@ -163,6 +163,26 @@ class TKey {
   static const String oliveSiteDetails = "oliveSiteDetails";
 
   static const String powerAnalysis = "powerAnalysis";
+
+  static const String revenueStatistics = "revenueStatistics";
+
+  static const String electricityIndicatorsAndEfficiency =
+      "electricityIndicatorsAndEfficiency";
+
+  static const String power = "power";
+
+  static const String charge = "charge";
+
+  static const String discharge = "discharge";
+
+  static const String day = "day";
+
+  static const String month = "month";
+
+  static const String year = "year";
+
+  static const String photovoltaicPowerGeneration =
+      "photovoltaicPowerGeneration";
 }
 
 const en = {
@@ -194,6 +214,8 @@ const en = {
   "accumulatedPhotovoltaicPowerGeneration": "累计光伏发电量",
   "reset": "复位",
   "confirm": "确定",
+  "charge": "充电",
+  "discharge": "放电",
   "accountCode": "账号：%s",
   "message": "消息",
   "systemSetting": "系统设置",
@@ -243,5 +265,12 @@ const en = {
   "photovoltaicInstalledCapacity": "光伏装机容量",
   "photovoltaicInstalledPower": "光伏装机功率",
   "oliveSiteDetails": "详情",
+  "power": "功率",
   "powerAnalysis": "功率分析",
+  "revenueStatistics": "收益统计",
+  "electricityIndicatorsAndEfficiency": "电量指标及效率",
+  "day": "日",
+  "month": "月",
+  "year": "年",
+  "photovoltaicPowerGeneration": "光伏发电量",
 };
