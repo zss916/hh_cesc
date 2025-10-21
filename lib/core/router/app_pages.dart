@@ -14,6 +14,7 @@ class APages {
   static const batteryCluster = '/batteryCluster';
   static const distributionMap = '/distributionMap';
   static const oliveSiteDetail = '/oliveSiteDetail';
+  static const reportDetail = '/reportDetail';
 
   static final List<GetPage> routes = [
     /// 登录
@@ -51,5 +52,8 @@ class APages {
 
     ///概览电站详情
     GetPage(name: oliveSiteDetail, page: () => OliveSiteDetailPage()),
+
+    ///报告详情
+    GetPage(name: reportDetail, page: () => ReportDetailPage()),
   ];
 }

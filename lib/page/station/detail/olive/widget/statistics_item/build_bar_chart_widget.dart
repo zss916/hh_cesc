@@ -160,6 +160,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidget>
                     ],
                     indicatorColor: Colors.white,
                     indicatorWeight: 0,
+                    indicatorSize: TabBarIndicatorSize.tab,
                     indicator: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [Color(0xFF43FFFF), Color(0xFF0978E9)],

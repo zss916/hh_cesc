@@ -11,16 +11,11 @@ class TableWidget extends StatelessWidget {
       child: Container(
         width: double.maxFinite,
         clipBehavior: Clip.hardEdge,
-        margin: EdgeInsetsDirectional.only(
-          top: 100,
-          start: 20,
-          end: 20,
-          bottom: 50,
-        ),
+        margin: EdgeInsetsDirectional.only(bottom: 10.h),
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(width: 1, color: Color(0xFFD9D9D9)),
-          borderRadius: BorderRadius.circular(16),
+          color: Colors.transparent,
+          border: Border.all(width: 1, color: Color(0xFF5A5D66)),
+          borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
           children: [
@@ -35,9 +30,9 @@ class TableWidget extends StatelessWidget {
                       alignment: AlignmentDirectional.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15.5),
+                          topLeft: Radius.circular(3),
                         ),
-                        color: Color(0xFFEDEDFD),
+                        color: Colors.white10,
                       ),
                       child: Text(
                         "日期",
@@ -45,9 +40,9 @@ class TableWidget extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: const Color(0xFF323133),
+                          color: Colors.white,
                           fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -56,7 +51,7 @@ class TableWidget extends StatelessWidget {
                   Expanded(
                     child: Container(
                       alignment: AlignmentDirectional.center,
-                      decoration: BoxDecoration(color: Color(0xFFEDEDFD)),
+                      decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
                       child: Text(
                         "时段",
@@ -64,9 +59,9 @@ class TableWidget extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: const Color(0xFF323133),
+                          color: Colors.white,
                           fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -75,15 +70,15 @@ class TableWidget extends StatelessWidget {
                   Expanded(
                     child: Container(
                       alignment: AlignmentDirectional.center,
-                      decoration: BoxDecoration(color: Color(0xFFEDEDFD)),
+                      decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
                       child: Text(
                         "充电量\n(kwh)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: const Color(0xFF323133),
+                          color: Colors.white,
                           fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -92,15 +87,15 @@ class TableWidget extends StatelessWidget {
                   Expanded(
                     child: Container(
                       alignment: AlignmentDirectional.center,
-                      decoration: BoxDecoration(color: Color(0xFFEDEDFD)),
+                      decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
                       child: Text(
                         "放电量\n(kwh)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: const Color(0xFF323133),
+                          color: Colors.white,
                           fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -111,18 +106,18 @@ class TableWidget extends StatelessWidget {
                       alignment: AlignmentDirectional.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(15.5),
+                          topRight: Radius.circular(3),
                         ),
-                        color: Color(0xFFEDEDFD),
+                        color: Colors.white10,
                       ),
                       width: double.maxFinite,
                       child: Text(
                         "综合效率\n(%)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: const Color(0xFF323133),
+                          color: Colors.white,
                           fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -143,7 +138,7 @@ class TableWidget extends StatelessWidget {
                   constraints: BoxConstraints(minHeight: 66),
                   decoration: BoxDecoration(
                     border: Border(
-                      top: BorderSide(width: 1, color: Color(0xFFD9D9D9)),
+                      top: BorderSide(width: 1, color: Color(0xFF5A5D66)),
                     ),
                   ),
                   child: IntrinsicHeight(
@@ -156,10 +151,10 @@ class TableWidget extends StatelessWidget {
                             width: double.maxFinite,
                             alignment: AlignmentDirectional.center,
                             child: Text(
-                              "2025-08-01",
+                              "08-01\n2025",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: const Color(0xFF323133),
+                                color: const Color(0xD9FFFFFF),
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -174,7 +169,7 @@ class TableWidget extends StatelessWidget {
                               border: Border(
                                 left: BorderSide(
                                   width: 1,
-                                  color: Color(0xFFD9D9D9),
+                                  color: Color(0xFF5A5D66),
                                 ),
                               ),
                             ),
@@ -202,7 +197,7 @@ class TableWidget extends StatelessWidget {
                               border: Border(
                                 left: BorderSide(
                                   width: 1,
-                                  color: Color(0xFFD9D9D9),
+                                  color: Color(0xFF5A5D66),
                                 ),
                               ),
                             ),
@@ -230,7 +225,7 @@ class TableWidget extends StatelessWidget {
                               border: Border(
                                 left: BorderSide(
                                   width: 1,
-                                  color: Color(0xFFD9D9D9),
+                                  color: Color(0xFF5A5D66),
                                 ),
                               ),
                             ),
@@ -258,7 +253,7 @@ class TableWidget extends StatelessWidget {
                               border: Border(
                                 left: BorderSide(
                                   width: 1,
-                                  color: Color(0xFFD9D9D9),
+                                  color: Color(0xFF5A5D66),
                                 ),
                               ),
                             ),
@@ -267,7 +262,7 @@ class TableWidget extends StatelessWidget {
                               "87.54",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: const Color(0xFF323133),
+                                color: Color(0xD9FFFFFF),
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -290,7 +285,7 @@ class TableWidget extends StatelessWidget {
   Widget buildChildItem({required String title}) => Container(
     alignment: AlignmentDirectional.center,
     decoration: BoxDecoration(
-      border: Border(bottom: BorderSide(width: 0, color: Color(0xFFD9D9D9))),
+      border: Border(bottom: BorderSide(width: 0, color: Color(0xFF5A5D66))),
     ),
     width: double.maxFinite,
     height: 40,
@@ -298,7 +293,7 @@ class TableWidget extends StatelessWidget {
       title,
       textAlign: TextAlign.center,
       style: TextStyle(
-        color: const Color(0xFF323133),
+        color: const Color(0xD9FFFFFF),
         fontSize: 12.sp,
         fontWeight: FontWeight.w400,
       ),
@@ -307,9 +302,9 @@ class TableWidget extends StatelessWidget {
 
   ///分割线
   Widget buildChildItemDiver() =>
-      Container(height: 1, width: double.maxFinite, color: Color(0xFFD9D9D9));
+      Container(height: 1, width: double.maxFinite, color: Color(0xFF5A5D66));
 
   ///垂直分割线
   Widget buildVChildItemDiver() =>
-      Container(width: 1, height: double.maxFinite, color: Color(0xFFD9D9D9));
+      Container(width: 1, height: double.maxFinite, color: Color(0xFF5A5D66));
 }

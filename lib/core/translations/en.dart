@@ -9,6 +9,10 @@ class TKey {
 
   static const String login = "login";
 
+  static const String cancel = "cancel";
+
+  static const String confirm = "confirm";
+
   static const String appTip = "appTip";
 
   static const String home = "home";
@@ -39,8 +43,6 @@ class TKey {
   static const String deviceNum = "deviceNum";
 
   static const String reset = "reset";
-
-  static const String confirm = "confirm";
 
   static const String stationNum = "stationNum";
 
@@ -181,6 +183,8 @@ class TKey {
 
   static const String year = "year";
 
+  static const String selectTime = "selectTime";
+
   static const String photovoltaicPowerGeneration =
       "photovoltaicPowerGeneration";
 }
@@ -273,4 +277,6 @@ const en = {
   "month": "月",
   "year": "年",
   "photovoltaicPowerGeneration": "光伏发电量",
+  "cancel": "取消",
+  "selectTime": "选择时间",
 };

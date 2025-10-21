@@ -36,4 +36,7 @@ class PageTools {
 
   ///概览电站详情
   static toOliveSiteDetail() => Get.toNamed(APages.oliveSiteDetail);
+
+  ///报告详情
+  static toReportDetail() => Get.toNamed(APages.reportDetail);
 }

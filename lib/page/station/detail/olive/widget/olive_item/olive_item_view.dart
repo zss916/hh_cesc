@@ -1,3 +1,4 @@
+import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/grid_view_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/line_status_widget.dart';
@@ -97,7 +98,7 @@ class OliveItemView extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    //
+                    PageTools.toReportDetail();
                   },
                   child: Container(
                     alignment: AlignmentDirectional.center,
