@@ -5,8 +5,9 @@ import 'package:get/get.dart';
 
 class InputAccount extends StatefulWidget {
   final Function(String) onInput;
+  final String? account;
 
-  const InputAccount({super.key, required this.onInput});
+  const InputAccount({super.key, required this.onInput, this.account});
 
   @override
   _EditNameState createState() => _EditNameState();

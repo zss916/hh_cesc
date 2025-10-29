@@ -1,6 +1,8 @@
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/grid_view_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/olive_item/line/gplot_line_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/line_status_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,9 +48,265 @@ class OliveItemView extends StatelessWidget {
               color: Color(0xFF313540),
               borderRadius: BorderRadius.circular(8),
             ),
+            padding: EdgeInsetsDirectional.all(5.r),
             margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
             width: double.maxFinite,
-            height: 386,
+            height: (Get.width - 32.w),
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                GplotLineWidget(
+                  defaultLines: [
+                    [
+                      {
+                        'start': Offset(70.r, (Get.width - 32.w) / 2),
+                        'end': Offset(125.r, (Get.width - 32.w) / 2),
+                      },
+                    ],
+                    [
+                      {
+                        'start': Offset(70.r + 150.r, (Get.width - 32.w) / 2),
+                        'end': Offset(125.r + 150.r, (Get.width - 32.w) / 2),
+                      },
+                    ],
+                    [
+                      {
+                        'start': Offset((Get.width - 32.w) / 2, 70.r),
+                        'end': Offset((Get.width - 32.w) / 2, 70.r + 75.r),
+                      },
+                    ],
+                    [
+                      {
+                        'start': Offset((Get.width - 32.w) / 2, 70.r + 155.r),
+                        'end': Offset(
+                          (Get.width - 32.w) / 2,
+                          70.r + 75.r + 120.r,
+                        ),
+                      },
+                    ],
+                  ],
+                  lines: [
+                    [
+                      {
+                        'start': Offset(70.r, (Get.width - 32.w) / 2),
+                        'end': Offset(125.r, (Get.width - 32.w) / 2),
+                      },
+                    ],
+                    [
+                      {
+                        'start': Offset(70.r + 150.r, (Get.width - 32.w) / 2),
+                        'end': Offset(125.r + 150.r, (Get.width - 32.w) / 2),
+                      },
+                    ],
+                    [
+                      {
+                        'start': Offset((Get.width - 32.w) / 2, 70.r),
+                        'end': Offset((Get.width - 32.w) / 2, 70.r + 75.r),
+                      },
+                    ],
+                    [
+                      {
+                        'start': Offset((Get.width - 32.w) / 2, 70.r + 155.r),
+                        'end': Offset(
+                          (Get.width - 32.w) / 2,
+                          70.r + 75.r + 120.r,
+                        ),
+                      },
+                    ],
+                  ],
+                ),
+
+                Center(
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Image.asset(
+                        Assets.gplotInverter,
+                        width: 110.r,
+                        height: 110.r,
+                      ),
+                      PositionedDirectional(
+                        bottom: 0,
+                        child: Text(
+                          "EMS",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                PositionedDirectional(
+                  bottom: 0,
+                  end: 0,
+                  start: 0,
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Transform.scale(
+                        scale: 0.9,
+                        child: Image.asset(
+                          Assets.gplotBattery,
+                          width: 75.r,
+                          height: 75.r,
+                        ),
+                      ),
+                      PositionedDirectional(
+                        start: (Get.width - 32.r) / 2 - 90.r,
+                        bottom: 5.r,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Battery",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "8.5W",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "SOC:80%",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                PositionedDirectional(
+                  top: 0,
+                  bottom: 0,
+                  start: 0,
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Image.asset(Assets.gplotLoad, width: 75.r, height: 75.r),
+                      PositionedDirectional(
+                        top: (Get.width - 32.w) / 2 + 20.r,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Load",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "8.5W",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                PositionedDirectional(
+                  top: 0,
+                  end: 0,
+                  bottom: 0,
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Image.asset(
+                        Assets.gplotPowerGrid,
+                        width: 75.r,
+                        height: 75.r,
+                      ),
+                      PositionedDirectional(
+                        top: (Get.width - 32.w) / 2 + 20.r,
+                        end: 20.r,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Grid",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "8.5W",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                PositionedDirectional(
+                  top: 0,
+                  start: 0,
+                  end: 0,
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Image.asset(Assets.gplotPv, width: 75.r, height: 75.r),
+                      PositionedDirectional(
+                        start: (Get.width - 32.r) / 2 - 90.r,
+                        top: 10.r,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "PV",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "8.5W",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
 
           GridViewWidget(),

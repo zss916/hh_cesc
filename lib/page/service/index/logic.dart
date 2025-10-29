@@ -7,6 +7,16 @@ class ServiceLogic extends GetxController {
   }
 
   @override
+  void onReady() {
+    super.onReady();
+    loadUserInfo();
+  }
+
+  Future<void> loadUserInfo() async {
+    UserInfoEntity? value = await AdminAPI.getUserInfo();
+  }
+
+  @override
   void onClose() {
     super.onClose();
   }

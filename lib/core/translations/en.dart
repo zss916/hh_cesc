@@ -44,6 +44,8 @@ class TKey {
 
   static const String reset = "reset";
 
+  static const String total = "total";
+
   static const String stationNum = "stationNum";
 
   static const String stationStatus = "stationStatus";
@@ -279,4 +281,5 @@ const en = {
   "photovoltaicPowerGeneration": "光伏发电量",
   "cancel": "取消",
   "selectTime": "选择时间",
+  "total": "累计",
 };

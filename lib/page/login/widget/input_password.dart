@@ -172,7 +172,7 @@ class _EditNameState extends State<InputPassword> {
               style: TextStyle(
                 color: widget.isShowError
                     ? const Color(0xFFFF4141)
-                    : const Color(0xFF6A686D),
+                    : Colors.transparent,
                 fontSize: 12.sp,
                 fontWeight: FontWeight.normal,
               ),

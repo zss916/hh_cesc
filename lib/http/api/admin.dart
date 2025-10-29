@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/bean/token_entity.dart';
+import 'package:cescpro/http/bean/user_info_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
 
@@ -15,7 +18,7 @@ abstract class AdminAPI {
         ApiPath.postLogin,
         data: {"username": username, "password": password},
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return TokenEntity.fromJson(result["data"]);
       } else {
         AppLoading.toast(result["message"]);
@@ -27,14 +30,18 @@ abstract class AdminAPI {
   }
 
   ///获取当前登录用户信息
-  static Future<dynamic> getLoginInfo({required String id}) async {
+  static Future<UserInfoEntity?> getUserInfo({String? id}) async {
     try {
-      var result = await Http.instance.get(
-        ApiPath.getInfoApp,
-        // query: {"id": id},
-      );
-      if (result["code"] == 0) {
-        return result["data"];
+      Map<String, dynamic> params = {};
+      if (id != null) {
+        params["id"] = id;
+      }
+      var result = await Http.instance.get(ApiPath.getInfoApp, query: params);
+      if (result["code"] == HttpStatus.ok) {
+        UserInfoEntity value = UserInfoEntity.fromJson(
+          result["data"]["userInfo"],
+        );
+        return value;
       } else {
         AppLoading.toast(result["message"]);
         return null;

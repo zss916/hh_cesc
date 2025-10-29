@@ -23,4 +23,8 @@ class TokenEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  String get tokenHeadValue => tokenHead ?? '';
+
+  String get tokenValue => accessToken ?? '';
 }

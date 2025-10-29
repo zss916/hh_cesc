@@ -2,6 +2,11 @@
 class Assets {
   Assets._();
 
+  static const String gplotBattery = 'assets/gplot/battery.png';
+  static const String gplotInverter = 'assets/gplot/inverter.png';
+  static const String gplotLoad = 'assets/gplot/load.png';
+  static const String gplotPowerGrid = 'assets/gplot/power_grid.png';
+  static const String gplotPv = 'assets/gplot/pv.png';
   static const String imgAccumulatedPhotovoltaic =
       'assets/img/accumulated_photovoltaic.png';
   static const String imgAlarm = 'assets/img/alarm.png';

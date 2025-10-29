@@ -26,6 +26,9 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         drawerIndex = event.index;
       });
     });
+
+    //debugPrint("===>> ${AuthorizationHeader.getAuthorization()}");
+    // AdminAPI.getLoginInfo();
   }
 
   @override
@@ -70,7 +73,13 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         scrollBehavior: null,
         physics: const NeverScrollableScrollPhysics(),
         controller: pageCtrl,
-        children: [HomePage(), StationPage(), AlarmPage(), ServicePage()],
+        children: [
+          AppKeepAlivePage(HomePage()),
+
+          StationPage(),
+          AlarmPage(),
+          ServicePage(),
+        ],
       ),
       bottomNavigationBar: Container(
         clipBehavior: Clip.hardEdge,

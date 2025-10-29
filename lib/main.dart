@@ -1,4 +1,3 @@
-import 'package:cescpro/page/main/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,12 +40,12 @@ class MyApp extends StatelessWidget {
           ),
           tabBarTheme: TabBarThemeData(dividerColor: Colors.transparent),
         ),
-        //initialRoute: APages.splash,
+        initialRoute: APages.splash,
         // home: TableWidget(),
         //home: LineChartWidget(),
         //home: BarChartWidget(),
         // home: SplashPage(),
-        home: MainPage(),
+        //home: MainPage(),
         /*home: StatusPieChart(
           total: 10,
           normal: 5,

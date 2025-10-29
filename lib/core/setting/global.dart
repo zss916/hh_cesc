@@ -1,5 +1,6 @@
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/storage/storage.dart';
+import 'package:cescpro/core/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,8 @@ class Global {
     ]).whenComplete(() async {
       AppLoading();
     });
+
+    await Get.putAsync<User>(() => User().init());
   }
 
   static void setSystemUi() {

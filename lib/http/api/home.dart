@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/statistic_report_entity.dart';
@@ -5,7 +7,24 @@ import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
 import 'package:flutter/foundation.dart';
 
-class BizAPI {
+class HomeAPI {
+  /*  "data": {
+  I/flutter (32566): ║             "totalIncome": 1239855.195,
+  I/flutter (32566): ║             "todayIncome": 1189.725,
+  I/flutter (32566): ║             "capacity": 6020,
+  I/flutter (32566): ║             "totalPos": 3884.383,
+  I/flutter (32566): ║             "totalNeg": 3338.35,
+  I/flutter (32566): ║             "totalPvNeg": 0,
+  I/flutter (32566): ║             "deviceNum": 28,
+  I/flutter (32566): ║             "siteNum": 8,
+  I/flutter (32566): ║             "normalNum": 8,
+  I/flutter (32566): ║             "faultNum": 0,
+  I/flutter (32566): ║             "alarmNum": 0,
+  I/flutter (32566): ║             "cutOffNum": 0,
+  I/flutter (32566): ║             "co2": 2620.6,
+  I/flutter (32566): ║             "coal": 400.6
+  I/flutter (32566): ║        }*/
+
   ///站点首页信息展信
   static Future<HomeStatisticEntity?> postStatisticRecord({
     String? siteId,
@@ -35,7 +54,7 @@ class BizAPI {
         ApiPath.postStatisticRecord,
         data: map,
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return HomeStatisticEntity.fromJson(result["data"]);
       } else {
         AppLoading.toast(result["message"]);

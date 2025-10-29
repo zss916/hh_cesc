@@ -15,6 +15,7 @@ class APages {
   static const distributionMap = '/distributionMap';
   static const oliveSiteDetail = '/oliveSiteDetail';
   static const reportDetail = '/reportDetail';
+  static const main = '/main';
 
   static final List<GetPage> routes = [
     /// 登录
@@ -55,5 +56,8 @@ class APages {
 
     ///报告详情
     GetPage(name: reportDetail, page: () => ReportDetailPage()),
+
+    /// 首页
+    GetPage(name: main, page: () => MainPage()),
   ];
 }

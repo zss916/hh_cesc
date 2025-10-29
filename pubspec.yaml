@@ -44,6 +44,8 @@ dependencies:
   #图表
   fl_chart: 1.1.1
   easy_date_timeline: 2.0.9
+  #select_range_date: 0.0.3
+  calendar_date_picker2: 2.0.1
   ####
   #custom_date_range_picker: ^1.2.0
   #calendar_date_picker2: 2.0.1
@@ -101,5 +103,7 @@ flutter:
   assets:
     - assets/
     - assets/img/
+    - assets/gplot/
+
 
 

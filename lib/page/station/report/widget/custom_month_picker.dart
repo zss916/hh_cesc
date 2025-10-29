@@ -98,6 +98,7 @@ class _CustomMonthPickerState extends State<CustomMonthPicker> {
                           currentDate.year - 1,
                           currentDate.month,
                         );
+                        widget.onChanged(currentDate);
                       });
                     },
                     child: Container(
@@ -123,6 +124,7 @@ class _CustomMonthPickerState extends State<CustomMonthPicker> {
                               value.year,
                               currentDate.month,
                             );
+                            widget.onChanged(currentDate);
                           });
                         },
                       );

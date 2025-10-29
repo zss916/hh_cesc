@@ -4,8 +4,17 @@ class SplashLogic extends GetxController {
   @override
   void onInit() {
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     Future.delayed(Duration(seconds: 2), () {
-      PageTools.toLogin();
+      if (User.to.isLogin) {
+        PageTools.offAllNamedMain();
+      } else {
+        PageTools.offAndToNamedLogin();
+      }
     });
   }
 

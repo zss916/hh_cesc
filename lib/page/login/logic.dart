@@ -10,4 +10,26 @@ class LoginLogic extends GetxController {
   void onClose() {
     super.onClose();
   }
+
+  //String account = 'cesc';
+  //String password = 'cesc123!';
+
+  String account = '';
+  String password = '';
+
+  Future<void> toLogin() async {
+    AppLoading.show();
+    TokenEntity? value =
+        await AdminAPI.login(
+          username: account,
+          password: password,
+        ).whenComplete(() {
+          AppLoading.dismiss();
+        });
+    if (value != null) {
+      User.setTokenHead(tokenHead: value.tokenHeadValue);
+      User.setToken(token: value.tokenValue);
+      PageTools.offAllNamedMain();
+    }
+  }
 }
