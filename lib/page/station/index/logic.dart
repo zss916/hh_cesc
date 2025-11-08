@@ -8,6 +8,8 @@ class StationLogic extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    viewState = 2;
+    update();
   }
 
   @override
@@ -27,6 +29,7 @@ class StationLogic extends GetxController {
         await SiteAPI.postPointList(name: name);
     if (isSuccessful) {
       data = value;
+      viewState = data.isEmpty ? 1 : 0;
       update();
     }
   }

@@ -26,7 +26,7 @@ class MessageAPI {
         ApiPath.postQueryMessage,
         data: map,
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<MessageItemEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => MessageItemEntity.fromJson(e)).toList(),

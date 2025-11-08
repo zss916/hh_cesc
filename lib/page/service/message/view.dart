@@ -8,21 +8,48 @@ class MessageCenterPage extends StatelessWidget {
     return Scaffold(
       appBar: baseAppBar(title: TKey.messageCenter.tr),
       backgroundColor: Color(0xFF23282E),
-      body: SizedBox(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        child: ListView.separated(
-          padding: EdgeInsetsDirectional.only(top: 10.h, bottom: 100.h),
-          itemCount: 30,
-          itemBuilder: (_, int index) => buildMessageItem(),
-          separatorBuilder: (_, int index) =>
-              Divider(height: 16.h, color: Colors.transparent),
-        ),
+      body: GetBuilder<MessageCenterLogic>(
+        init: MessageCenterLogic(),
+        builder: (logic) {
+          return SizedBox(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            child: buildBody(viewState: logic.viewState, logic: logic),
+          );
+        },
       ),
     );
   }
 
-  Widget buildMessageItem() {
+  Widget buildBody({
+    required int viewState,
+    required MessageCenterLogic logic,
+  }) {
+    return switch (viewState) {
+      _ when viewState == 0 => buildList(logic: logic),
+      _ when viewState == 1 => buildEmpty(),
+      _ when viewState == 2 => Container(
+        margin: EdgeInsetsDirectional.only(bottom: 50.h),
+        child: Center(child: CircularProgressIndicator()),
+      ),
+      _ => SizedBox.shrink(),
+    };
+  }
+
+  Widget buildList({required MessageCenterLogic logic}) {
+    return ListView.separated(
+      padding: EdgeInsetsDirectional.only(top: 10.h, bottom: 100.h),
+      itemCount: logic.data.length,
+      itemBuilder: (_, int index) {
+        MessageItemEntity item = logic.data[index];
+        return buildMessageItem(item: item);
+      },
+      separatorBuilder: (_, int index) =>
+          Divider(height: 16.h, color: Colors.transparent),
+    );
+  }
+
+  Widget buildMessageItem({required MessageItemEntity item}) {
     return Container(
       width: double.maxFinite,
       padding: EdgeInsetsDirectional.symmetric(
@@ -44,7 +71,7 @@ class MessageCenterPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "PCS告警提醒",
+                    item.title ?? "",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -54,9 +81,27 @@ class MessageCenterPage extends StatelessWidget {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 5.w),
-                  child: Text(
-                    "未读",
-                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      if (item.status == 0)
+                        Text(
+                          TKey.unRead.tr,
+                          style: TextStyle(
+                            color: Color(0x80FFFFFF),
+                            fontSize: 12.sp,
+                          ),
+                        ),
+
+                      if (item.status == 1)
+                        Text(
+                          TKey.read.tr,
+                          style: TextStyle(
+                            color: Color(0x80FFFFFF),
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                    ],
                   ),
                 ),
               ],
@@ -68,7 +113,7 @@ class MessageCenterPage extends StatelessWidget {
             alignment: AlignmentDirectional.centerStart,
             width: double.maxFinite,
             child: Text(
-              "您的设备PCS告警温度于2025-09-08 19:23开始温度高于45°C度，请尽快联系管理员查明原因。",
+              item.content ?? "",
               style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
             ),
           ),
@@ -80,14 +125,14 @@ class MessageCenterPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "发送时间：2025-09-08 19:23",
+                    "${TKey.sendTime.tr}${item.sendTime ?? ""}",
                     style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 5.w),
                   child: Text(
-                    "发送人：管理员",
+                    "${TKey.sender.tr}${item.senderName}",
                     style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                   ),
                 ),
@@ -98,4 +143,26 @@ class MessageCenterPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget buildEmpty() => SizedBox(
+    width: double.maxFinite,
+    height: double.maxFinite,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(Assets.imgEmpty, width: 200, height: 95),
+        Text(
+          TKey.noDataAvailable.tr,
+          style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
+        ),
+        Container(
+          margin: EdgeInsetsDirectional.only(top: 17.h, bottom: 120.h),
+          child: Text(
+            TKey.noDataAvailableTip.tr,
+            style: TextStyle(fontSize: 14, color: Color(0xFF909399)),
+          ),
+        ),
+      ],
+    ),
+  );
 }

@@ -35,10 +35,7 @@ class ServicePage extends StatelessWidget {
               MessageItemWidget(
                 unReadNum: logic.unreadNum,
                 onTap: () {
-                  // logic.loadUserInfo();
-                  // PageTools.toMessageCenter();
-
-                  logic.getUnreadNum();
+                  PageTools.toMessageCenter();
                 },
               ),
               Container(

@@ -65,7 +65,9 @@ class StationPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(child: buildBody(viewState: 0, logic: logic)),
+              Expanded(
+                child: buildBody(viewState: logic.viewState, logic: logic),
+              ),
             ],
           );
         },

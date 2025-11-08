@@ -227,6 +227,14 @@ class TKey {
   static const String stop = "stop";
 
   static const String standby = "standby";
+
+  static const String unRead = "unRead";
+
+  static const String read = "read";
+
+  static const String sender = "sender";
+
+  static const String sendTime = "sendTime";
 }
 
 const en = {
@@ -339,4 +347,8 @@ const en = {
   "interrupt": "中断",
   "stop": "停止",
   "standby": "待机",
+  "unRead": "未读",
+  "read": "已读",
+  "sender": "发送人：",
+  "sendTime": "发送时间：",
 };
