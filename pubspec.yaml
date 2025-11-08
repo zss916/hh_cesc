@@ -20,7 +20,7 @@ dependencies:
   shared_preferences: 2.5.3
   cached_network_image: 3.4.1
   flutter_screenutil: 5.9.3
-  pull_to_refresh: 2.0.0
+ # pull_to_refresh_flutter3: 2.0.2
   flutter_easyloading: 3.0.5
   permission_handler: 12.0.1
   event_bus: ^2.0.1
@@ -44,8 +44,10 @@ dependencies:
   #图表
   fl_chart: 1.1.1
   easy_date_timeline: 2.0.9
-  #select_range_date: 0.0.3
   calendar_date_picker2: 2.0.1
+  easy_refresh: ^3.4.0
+
+
   ####
   #custom_date_range_picker: ^1.2.0
   #calendar_date_picker2: 2.0.1

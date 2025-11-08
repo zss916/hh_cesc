@@ -5,7 +5,6 @@ import 'package:cescpro/components/keep_alive_page.dart';
 import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
-import 'package:cescpro/http/base/header/authorization_header.dart';
 import 'package:cescpro/page/alarm/index/index.dart';
 import 'package:cescpro/page/home/index.dart';
 import 'package:cescpro/page/main/widget/alarm_drawer.dart';
@@ -17,5 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+part 'binding.dart';
 part 'logic.dart';
 part 'view.dart';

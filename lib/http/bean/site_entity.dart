@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/site_entity.g.dart';
+import 'package:get/utils.dart';
 
 export 'package:cescpro/generated/json/site_entity.g.dart';
 
@@ -64,6 +66,22 @@ class SiteEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  ///站点名称
+  String get showSiteName => (Get.isZh) ? (name ?? "") : (cname ?? "");
+
+  ///储能装机功率
+  String get showPower => "${power ?? 0}kw";
+
+  ///soc
+  String get showSoc => "${soc ?? 0}%";
+
+  ///光伏功率
+  String get showPvPower => "${pvPower ?? 0}kw";
+
+  ///今日充放电
+  String get chargeAndRecharge =>
+      "${((charge ?? 0) / 1000).toStringAsFixed(2)}kw/${((recharge ?? 0) / 1000).toStringAsFixed(2)}kw";
 }
 
 @JsonSerializable()

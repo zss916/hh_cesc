@@ -13,4 +13,18 @@ class AuthInterceptor extends Interceptor {
     options.headers["Authorization"] = AuthorizationHeader.getAuthorization();
     handler.next(options);
   }
+
+  /* @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    //super.onResponse(response, handler);
+    //99999
+    if (response.statusCode == HttpStatus.ok) {
+      var entity = const JsonDecoder().convert(response.data.toString());
+      if (entity is Map<String, dynamic>) {
+        int code = entity["code"];
+        String msg = entity["message"];
+        debugPrint("====>>>>  code:$code, msg:$msg");
+      }
+    }
+  }*/
 }

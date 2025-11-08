@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/bean/message_item_entity.dart';
 import 'package:cescpro/http/http.dart';
@@ -44,7 +46,7 @@ class MessageAPI {
   static Future<int> getUnreadNum() async {
     try {
       var result = await Http.instance.get(ApiPath.getUnreadNum);
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return (result["data"] as int?) ?? 0;
       } else {
         AppLoading.toast(result["message"]);

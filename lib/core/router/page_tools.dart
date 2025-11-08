@@ -46,4 +46,7 @@ class PageTools {
   static toMain() => Get.toNamed(APages.main);
 
   static offAllNamedMain() => Get.offAllNamed(APages.main);
+
+  ///跳到登录
+  static offAllNamedSplash() => Get.toNamed(APages.splash);
 }

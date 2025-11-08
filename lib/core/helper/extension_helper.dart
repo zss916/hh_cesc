@@ -1,3 +1,6 @@
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
 extension MoneyExtension on double {
   ///元 => 万元
   String get moneyFormatted {
@@ -7,4 +10,16 @@ extension MoneyExtension on double {
       return toStringAsFixed(2);
     }
   }
+}
+
+extension TimestampExtension on int {
+  String get timestampFormat => DateFormat(
+    'yyyy-MM-dd HH:mm:ss',
+  ).format(DateTime.fromMillisecondsSinceEpoch(this));
+}
+
+extension CheckLancode on GetInterface {
+  bool get isZh => Get.locale?.languageCode == "zh";
+
+  bool get isEn => Get.locale?.languageCode == "en";
 }

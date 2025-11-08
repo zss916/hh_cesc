@@ -189,6 +189,44 @@ class TKey {
 
   static const String photovoltaicPowerGeneration =
       "photovoltaicPowerGeneration";
+
+  static const String deviceSerialNumber = "deviceSerialNumber";
+
+  static const String alarmDevice = "alarmDevice";
+
+  static const String alarmContent = "alarmContent";
+
+  static const String startTime = "startTime";
+
+  static const String endTime = "endTime";
+
+  static const String inProgress = "inProgress";
+
+  static const String ended = "ended";
+
+  static const String energyStoragePower = "energyStoragePower";
+
+  static const String photovoltaicPower = "photovoltaicPower";
+
+  static const String todayChargeAndDischarge = "todayChargeAndDischarge";
+
+  static const String pureEnergyStorage = "pureEnergyStorage";
+
+  static const String pvStorageCharging = "pvStorageCharging";
+
+  static const String energyStorageLiquidCooling = "energyStorageLiquidCooling";
+
+  static const String pvStorage = "pvStorage";
+
+  static const String common = "common";
+
+  static const String fault = "fault";
+
+  static const String interrupt = "interrupt";
+
+  static const String stop = "stop";
+
+  static const String standby = "standby";
 }
 
 const en = {
@@ -282,4 +320,23 @@ const en = {
   "cancel": "取消",
   "selectTime": "选择时间",
   "total": "累计",
+  "deviceSerialNumber": "设备序列号:",
+  "alarmDevice": "告警设备:",
+  "alarmContent": "告警内容:",
+  "startTime": "开始时间:",
+  "endTime": "结束时间:",
+  "inProgress": "发生中",
+  "ended": "已结束",
+  "energyStoragePower": "储能功率",
+  "photovoltaicPower": "光伏功率",
+  "todayChargeAndDischarge": "今日充放电",
+  "pureEnergyStorage": "纯储能",
+  "pvStorageCharging": "光储充",
+  "energyStorageLiquidCooling": "储能液冷",
+  "pvStorage": "光储",
+  "common": "正常",
+  "fault": "故障",
+  "interrupt": "中断",
+  "stop": "停止",
+  "standby": "待机",
 };

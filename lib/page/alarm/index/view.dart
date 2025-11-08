@@ -40,26 +40,38 @@ class AlarmPage extends StatelessWidget {
         ],
       ),
       backgroundColor: Color(0xFF23282E),
-      body: buildBody(viewState: 2),
+      body: GetBuilder<AlarmLogic>(
+        init: AlarmLogic(),
+        builder: (logic) => buildBody(viewState: logic.viewState, logic: logic),
+      ),
     );
   }
 
-  Widget buildBody({required int viewState}) {
+  Widget buildBody({required int viewState, required AlarmLogic logic}) {
     return switch (viewState) {
-      _ when viewState == 1 => buildList(),
-      _ when viewState == 2 => buildEmpty(),
-      _ => SizedBox(),
+      _ when viewState == 0 => buildList(logic: logic),
+      _ when viewState == 1 => buildEmpty(),
+      _ when viewState == 2 => Container(
+        margin: EdgeInsetsDirectional.only(bottom: 50.h),
+        child: Center(child: CircularProgressIndicator()),
+      ),
+      _ => SizedBox.shrink(),
     };
   }
 
-  Widget buildList() => ListView.separated(
-    padding: EdgeInsetsDirectional.only(top: 0, bottom: 150),
-    itemCount: 10,
-    itemBuilder: (BuildContext context, int index) {
-      return AlarmItem();
-    },
-    separatorBuilder: (BuildContext context, int index) =>
-        const Divider(height: 16, color: Colors.transparent),
+  Widget buildList({required AlarmLogic logic}) => EasyRefresh(
+    onRefresh: () => logic.refreshData(),
+    onLoad: () => logic.loadMoreData(),
+    child: ListView.separated(
+      padding: EdgeInsetsDirectional.only(top: 0, bottom: 150.h),
+      itemCount: logic.data.length,
+      itemBuilder: (BuildContext context, int index) {
+        AlarmItemEntity item = logic.data[index];
+        return AlarmItem(item: item);
+      },
+      separatorBuilder: (BuildContext context, int index) =>
+          const Divider(height: 16, color: Colors.transparent),
+    ),
   );
 
   Widget buildEmpty() => SizedBox(

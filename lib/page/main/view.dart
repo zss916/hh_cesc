@@ -75,9 +75,8 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
         controller: pageCtrl,
         children: [
           AppKeepAlivePage(HomePage()),
-
           StationPage(),
-          AlarmPage(),
+          AppKeepAlivePage(AlarmPage()),
           ServicePage(),
         ],
       ),

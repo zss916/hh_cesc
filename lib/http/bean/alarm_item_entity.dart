@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cescpro/generated/json/alarm_item_entity.g.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
+import 'package:intl/intl.dart';
 
 export 'package:cescpro/generated/json/alarm_item_entity.g.dart';
 
@@ -36,5 +37,13 @@ class AlarmItemEntity {
   @override
   String toString() {
     return jsonEncode(this);
+  }
+
+  //   "startTimeMill": 1761988267000,
+
+  String getStartTime() {
+    return DateFormat(
+      'yyyy-MM-dd HH:mm:ss',
+    ).format(DateTime.fromMillisecondsSinceEpoch(startTimeMill ?? 0));
   }
 }

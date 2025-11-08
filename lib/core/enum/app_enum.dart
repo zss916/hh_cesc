@@ -113,3 +113,19 @@ enum PowerType {
 
 ///告警等级
 enum Alarm { level1, level2, level3 }
+
+///告警状态
+enum AlarmSatusEnum { ended, progressing }
+
+extension AlarmExtension on Alarm {
+  int get value {
+    switch (this) {
+      case Alarm.level1:
+        return 1;
+      case Alarm.level2:
+        return 2;
+      case Alarm.level3:
+        return 3;
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/bean/alarm_graph_item_entity.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
@@ -14,15 +16,17 @@ import 'package:flutter/foundation.dart';
 
 class SiteAPI {
   ///用户站点列表
-  static Future<(bool, List<SiteEntity>)> postPointList({
-    required String name,
-  }) async {
+  static Future<(bool, List<SiteEntity>)> postPointList({String? name}) async {
+    Map<String, dynamic> map = {};
+    if (name != null) {
+      map['name'] = name;
+    }
     try {
       var result = await Http.instance.post(
         ApiPath.postPointList,
-        queryParameters: {"name": name},
+        queryParameters: map,
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<SiteEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => SiteEntity.fromJson(e)).toList(),
@@ -59,25 +63,25 @@ class SiteAPI {
   }
 
   ///todo 站点列表
-  static Future<(bool, List<SiteEntity>)> postSiteList() async {
+  static Future<(bool, List<SiteEntity>)> postSiteList({
+    required int pageNum,
+  }) async {
     try {
-      var result = await Http.instance.post(
-        ApiPath.postSiteList,
-        data: {
-          "pageSize": 0,
-          "pageNum": 20,
-          "cid": 0,
-          "siteIds": [0],
-          "name": "",
-          "location": "",
-          "status": 99,
-          "modifyTimeStart": "",
-          "modifyTimeEnd": "",
-          "groupId": 0,
-          "adcode": "",
-        },
-      );
-      if (result["code"] == 0) {
+      Map<String, dynamic> map = {};
+      map["pageNum"] = pageNum;
+      map["pageSize"] = 20;
+      map["cid"] = 0;
+      map["siteIds"] = [0];
+      map["name"] = "";
+      map["location"] = "";
+      map["status"] = 99;
+      map["modifyTimeStart"] = "";
+      map["modifyTimeEnd"] = "";
+      map["groupId"] = 0;
+      map["adcode"] = "";
+
+      var result = await Http.instance.post(ApiPath.postSiteList, data: map);
+      if (result["code"] == HttpStatus.ok) {
         List<SiteEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => SiteEntity.fromJson(e)).toList(),

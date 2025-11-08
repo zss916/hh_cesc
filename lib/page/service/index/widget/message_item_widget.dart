@@ -5,7 +5,12 @@ import 'package:get/get.dart';
 
 class MessageItemWidget extends StatelessWidget {
   final Function onTap;
-  const MessageItemWidget({super.key, required this.onTap});
+  final int unReadNum;
+  const MessageItemWidget({
+    super.key,
+    required this.unReadNum,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,20 +43,21 @@ class MessageItemWidget extends StatelessWidget {
                     style: TextStyle(fontSize: 16.sp, color: Color(0xDEFFFFFF)),
                   ),
                 ),
-                Container(
-                  width: 16,
-                  height: 16,
-                  margin: EdgeInsetsDirectional.only(start: 10.w, end: 8.w),
-                  alignment: AlignmentDirectional.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Color(0xFFFF5353),
+                if (unReadNum > 0)
+                  Container(
+                    width: 16,
+                    height: 16,
+                    margin: EdgeInsetsDirectional.only(start: 10.w, end: 8.w),
+                    alignment: AlignmentDirectional.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Color(0xFFFF5353),
+                    ),
+                    child: Text(
+                      "$unReadNum",
+                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
+                    ),
                   ),
-                  child: Text(
-                    "1",
-                    style: TextStyle(color: Colors.white, fontSize: 12.sp),
-                  ),
-                ),
 
                 Icon(
                   Icons.arrow_forward_ios_rounded,

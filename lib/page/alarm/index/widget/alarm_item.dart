@@ -1,10 +1,15 @@
-import 'package:cescpro/core/enum/app_enum.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/bean/alarm_item_entity.dart';
+import 'package:cescpro/page/alarm/index/widget/alarm_level.dart';
 import 'package:cescpro/page/alarm/index/widget/alarm_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class AlarmItem extends StatelessWidget {
-  const AlarmItem({super.key});
+  final AlarmItemEntity item;
+  const AlarmItem({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +35,21 @@ class AlarmItem extends StatelessWidget {
                   width: double.maxFinite,
                   child: Row(
                     children: [
-                      AlarmStatus(level: Alarm.level3.index),
-                      Container(
-                        margin: EdgeInsetsDirectional.only(
-                          start: 5.w,
-                          end: 5.w,
-                        ),
-                        child: Text(
-                          "广东阡陌一号站",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                      AlarmLevel(level: item.alarmLevel ?? 0),
+                      Expanded(
+                        child: Container(
+                          width: double.maxFinite,
+                          padding: EdgeInsetsDirectional.only(end: 60),
+                          margin: EdgeInsetsDirectional.only(
+                            start: 5.w,
+                            end: 5.w,
+                          ),
+                          child: Text(
+                            item.siteName ?? "",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
                         ),
                       ),
                     ],
@@ -62,7 +73,7 @@ class AlarmItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "EMS设备号：",
+                        TKey.deviceSerialNumber.tr,
                         style: TextStyle(
                           color: Color(0xA6FFFFFF),
                           fontSize: 14,
@@ -70,7 +81,7 @@ class AlarmItem extends StatelessWidget {
                       ),
 
                       Text(
-                        "xxxxxxxxx",
+                        item.sn ?? "",
                         style: TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontSize: 14,
@@ -90,7 +101,7 @@ class AlarmItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "告警设备：",
+                        TKey.alarmDevice.tr,
                         style: TextStyle(
                           color: Color(0xA6FFFFFF),
                           fontSize: 14,
@@ -98,7 +109,7 @@ class AlarmItem extends StatelessWidget {
                       ),
 
                       Text(
-                        "xxxxxxxxx",
+                        item.label ?? "",
                         style: TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontSize: 14,
@@ -118,7 +129,38 @@ class AlarmItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "告警内容：",
+                        TKey.alarmContent.tr,
+                        style: TextStyle(
+                          color: Color(0xA6FFFFFF),
+                          fontSize: 14,
+                        ),
+                      ),
+
+                      Expanded(
+                        child: Text(
+                          item.content ?? "",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: Color(0xFFFFFFFF),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsetsDirectional.symmetric(
+                    vertical: 8,
+                    horizontal: 14,
+                  ),
+                  width: double.maxFinite,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        TKey.startTime.tr,
                         style: TextStyle(
                           color: Color(0xA6FFFFFF),
                           fontSize: 14,
@@ -126,7 +168,9 @@ class AlarmItem extends StatelessWidget {
                       ),
 
                       Text(
-                        "xxxxxxxxx",
+                        item.startTimeMill == null
+                            ? "--"
+                            : (item.startTimeMill ?? 0).timestampFormat,
                         style: TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontSize: 14,
@@ -146,7 +190,7 @@ class AlarmItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "开始时间：",
+                        TKey.endTime.tr,
                         style: TextStyle(
                           color: Color(0xA6FFFFFF),
                           fontSize: 14,
@@ -154,35 +198,9 @@ class AlarmItem extends StatelessWidget {
                       ),
 
                       Text(
-                        "xxxxxxxxx",
-                        style: TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                Container(
-                  padding: EdgeInsetsDirectional.symmetric(
-                    vertical: 8,
-                    horizontal: 14,
-                  ),
-                  width: double.maxFinite,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "结束时间：",
-                        style: TextStyle(
-                          color: Color(0xA6FFFFFF),
-                          fontSize: 14,
-                        ),
-                      ),
-
-                      Text(
-                        "xxxxxxxxx",
+                        item.endTimeMill == null
+                            ? "--"
+                            : (item.endTimeMill ?? 0).timestampFormat,
                         style: TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontSize: 14,
@@ -193,6 +211,12 @@ class AlarmItem extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+
+          PositionedDirectional(
+            top: 15,
+            end: 11.w,
+            child: AlarmStatus(status: item.status ?? 0),
           ),
         ],
       ),

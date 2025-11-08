@@ -29,6 +29,7 @@ class LoginLogic extends GetxController {
     if (value != null) {
       User.setTokenHead(tokenHead: value.tokenHeadValue);
       User.setToken(token: value.tokenValue);
+      //PageTools.toMain();
       PageTools.offAllNamedMain();
     }
   }

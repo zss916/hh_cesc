@@ -18,6 +18,10 @@ class User extends GetxService {
     return StorageService.to.getString(tokenKey);
   }
 
+  static removeToken() {
+    StorageService.to.remove(tokenKey);
+  }
+
   static setToken({required String token}) {
     StorageService.to.setString(tokenKey, token);
   }
