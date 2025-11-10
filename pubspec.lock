@@ -121,6 +121,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.19.1"
+  country_state_city:
+    dependency: "direct main"
+    description:
+      name: country_state_city
+      sha256: "400bf4f455503021d98a1f21eeec41c0aa0d7b2529ea0b07f6799ed3750513c3"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.6"
   cross_file:
     dependency: transitive
     description:
@@ -192,6 +200,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.9"
+  easy_load_more:
+    dependency: "direct main"
+    description:
+      name: easy_load_more
+      sha256: "322f62d9f76250ba681e3c2b1803d9afcc53173ab2f543ad0c9a92fe804f6b6a"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   easy_refresh:
     dependency: "direct main"
     description:
@@ -723,6 +739,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.4.0"
+  pull_to_refresh_flutter3:
+    dependency: "direct main"
+    description:
+      name: pull_to_refresh_flutter3
+      sha256: "37a88d901cca9a46dbdd46523de8e7b35a3e58634a0e775b1a5904981f69b353"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.2"
   realtime_battery_indicator:
     dependency: "direct main"
     description:

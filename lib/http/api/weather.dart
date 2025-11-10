@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/bean/weather_entity.dart';
 import 'package:cescpro/http/http.dart';
@@ -6,7 +8,7 @@ import 'package:cescpro/http/path.dart';
 class WeatherAPI {
   ///天气信息
   static Future<WeatherEntity?> postForecastApp({
-    String? siteId,
+    int? siteId,
     String? date,
   }) async {
     Map<String, dynamic> map = {};
@@ -19,7 +21,7 @@ class WeatherAPI {
     }
     try {
       var result = await Http.instance.post(ApiPath.postForecastApp, data: map);
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return WeatherEntity.fromJson(result["data"]);
       } else {
         AppLoading.toast(result["message"]);

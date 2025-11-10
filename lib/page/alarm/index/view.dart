@@ -24,7 +24,9 @@ class AlarmPage extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(100),
                 onTap: () {
-                  AppEventBus.eventBus.fire(OpenDrawerEvent(2));
+                  AppEventBus.eventBus.fire(
+                    OpenDrawerEvent(DrawerTypeEnum.alarm.index),
+                  );
                 },
                 child: Container(
                   width: 36,
@@ -63,7 +65,7 @@ class AlarmPage extends StatelessWidget {
     onRefresh: () => logic.refreshData(),
     onLoad: () => logic.loadMoreData(),
     child: ListView.separated(
-      padding: EdgeInsetsDirectional.only(top: 0, bottom: 150.h),
+      padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
       itemCount: logic.data.length,
       itemBuilder: (BuildContext context, int index) {
         AlarmItemEntity item = logic.data[index];

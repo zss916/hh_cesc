@@ -49,7 +49,12 @@ class AlarmItemSelect extends StatelessWidget {
                   children: [
                     Text(
                       subTitle ?? TKey.selectHint.tr,
-                      style: TextStyle(color: Color(0x73FFFFFF), fontSize: 14),
+                      style: TextStyle(
+                        color: subTitle != null
+                            ? Colors.white
+                            : Color(0x73FFFFFF),
+                        fontSize: 14,
+                      ),
                     ),
                     Spacer(),
                     Icon(

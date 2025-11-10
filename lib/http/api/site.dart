@@ -44,14 +44,14 @@ class SiteAPI {
 
   ///站点详情
   static Future<SiteDetailEntity?> getPointDetails({
-    required String siteId,
+    required int siteId,
   }) async {
     try {
       var result = await Http.instance.get(
         ApiPath.getPointDetails,
         query: {"siteId": siteId},
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return SiteDetailEntity.fromJson(result["data"]);
       } else {
         AppLoading.toast(result["message"]);
@@ -62,24 +62,54 @@ class SiteAPI {
     }
   }
 
-  ///todo 站点列表
+  ///站点列表
   static Future<(bool, List<SiteEntity>)> postSiteList({
     required int pageNum,
+    int? cid,
+    String? location,
+    String? name,
+    List<int>? siteIds,
+    int? status,
+    String? modifyTimeStart,
+    String? modifyTimeEnd,
+    int? groupId,
+    String? adcode,
+    int? total,
   }) async {
     try {
       Map<String, dynamic> map = {};
       map["pageNum"] = pageNum;
-      map["pageSize"] = 20;
-      map["cid"] = 0;
-      map["siteIds"] = [0];
-      map["name"] = "";
-      map["location"] = "";
-      map["status"] = 99;
-      map["modifyTimeStart"] = "";
-      map["modifyTimeEnd"] = "";
-      map["groupId"] = 0;
-      map["adcode"] = "";
-
+      map["pageSize"] = 10;
+      if (cid != null) {
+        map["cid"] = cid;
+      }
+      if (location != null) {
+        map["location"] = location;
+      }
+      if (name != null) {
+        map["name"] = name;
+      }
+      if (siteIds != null) {
+        map["siteIds"] = siteIds;
+      }
+      if (status != null) {
+        map["status"] = status;
+      }
+      if (modifyTimeStart != null) {
+        map["modifyTimeStart"] = modifyTimeStart;
+      }
+      if (modifyTimeEnd != null) {
+        map["modifyTimeEnd"] = modifyTimeEnd;
+      }
+      if (groupId != null) {
+        map["groupId"] = groupId;
+      }
+      if (adcode != null) {
+        map["adcode"] = adcode;
+      }
+      if (total != null) {
+        map["total"] = total;
+      }
       var result = await Http.instance.post(ApiPath.postSiteList, data: map);
       if (result["code"] == HttpStatus.ok) {
         List<SiteEntity> value = await compute(
@@ -89,7 +119,7 @@ class SiteAPI {
         );
         return (true, value);
       } else {
-        AppLoading.toast(result["message"]);
+        //AppLoading.toast(result["message"]);
         return (false, <SiteEntity>[]);
       }
     } catch (error) {
@@ -99,14 +129,14 @@ class SiteAPI {
 
   ///站点拓扑图
   static Future<SiteTopologyEntity?> getSiteTopology({
-    required String siteId,
+    required int siteId,
   }) async {
     try {
       var result = await Http.instance.get(
         ApiPath.getSiteTopology,
         query: {"siteId": siteId},
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return SiteTopologyEntity.fromJson(result["data"]);
       } else {
         AppLoading.toast(result["message"]);
@@ -119,14 +149,14 @@ class SiteAPI {
 
   ///站点数据统计
   static Future<StatisticRecordEntity?> getSiteStatisticRecord({
-    required String siteId,
+    required int siteId,
   }) async {
     try {
       var result = await Http.instance.get(
         ApiPath.getSiteStatisticRecord,
         query: {"siteId": siteId},
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return StatisticRecordEntity.fromJson(result["data"]);
       } else {
         AppLoading.toast(result["message"]);

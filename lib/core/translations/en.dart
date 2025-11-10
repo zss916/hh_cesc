@@ -235,6 +235,54 @@ class TKey {
   static const String sender = "sender";
 
   static const String sendTime = "sendTime";
+
+  static const String search = "search";
+
+  static const String alarmLevel1 = "alarmLevel1";
+
+  static const String alarmLevel2 = "alarmLevel2";
+
+  static const String alarmLevel3 = "alarmLevel3";
+
+  static const String todayCharging = "todayCharging";
+
+  static const String todayChargingData = "todayChargingData";
+
+  static const String monthChargingData = "monthChargingData";
+
+  static const String yearChargingData = "yearChargingData";
+
+  static const String totalChargingData = "totalChargingData";
+
+  static const String todayDischarge = "todayDischarge";
+
+  static const String lastDayIncome = "lastDayIncome";
+
+  static const String todayIncome = "todayIncome";
+
+  static const String todayPVPowerEarnings = "todayPVPowerEarnings";
+
+  static const String totalRevenueTitle = "totalRevenueTitle";
+
+  static const String currentYearIncome = "currentYearIncome";
+
+  static const String currentMonthIncome = "currentMonthIncome";
+
+  static const String totalNeg = "totalNeg";
+
+  static const String currentYearNeg = "currentYearNeg";
+
+  static const String currentMonthNeg = "currentMonthNeg";
+
+  static const String todayNeg = "todayNeg";
+
+  static const String totalPVNeg = "totalPVNeg";
+
+  static const String currentYearPVNeg = "currentYearPVNeg";
+
+  static const String currentMonthPVNeg = "currentMonthPVNeg";
+
+  static const String todayPVNeg = "todayPVNeg";
 }
 
 const en = {
@@ -351,4 +399,28 @@ const en = {
   "read": "已读",
   "sender": "发送人：",
   "sendTime": "发送时间：",
+  "search": "搜索",
+  "alarmLevel1": "一级告警",
+  "alarmLevel2": "二级告警",
+  "alarmLevel3": "三级告警",
+  "todayCharging": "今日充电",
+  "todayDischarge": "今日放电",
+  "todayIncome": "今日收益",
+  "todayPVPowerEarnings": "今日光伏发电",
+  "todayChargingData": "今日充电量",
+  "monthChargingData": "本月充电量",
+  "yearChargingData": "本年充电量",
+  "totalChargingData": "累计充电量",
+  "totalRevenueTitle": "累计收益",
+  "currentYearIncome": "本年收益",
+  "currentMonthIncome": "本月收益",
+  "lastDayIncome": "昨日收益",
+  "totalNeg": "累计放电量",
+  "currentYearNeg": "本年放电量",
+  "currentMonthNeg": "本月放电量",
+  "todayNeg": "今日放电量",
+  "totalPVNeg": "累计光伏发电量",
+  "currentYearPVNeg": "本年光伏发电量",
+  "currentMonthPVNeg": "本月光伏发电量",
+  "todayPVNeg": "今日光伏发电量",
 };

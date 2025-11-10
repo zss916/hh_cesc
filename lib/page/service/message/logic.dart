@@ -27,8 +27,10 @@ class MessageCenterLogic extends GetxController {
         await MessageAPI.postQueryMessage();
     if (isSuccessful) {
       data = value;
-      viewState = data.isEmpty ? 1 : 0;
-      update();
+    } else {
+      AppLoading.toast("Fail");
     }
+    viewState = data.isEmpty ? 1 : 0;
+    update();
   }
 }

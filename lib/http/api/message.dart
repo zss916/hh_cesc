@@ -7,14 +7,14 @@ import 'package:cescpro/http/path.dart';
 import 'package:flutter/foundation.dart';
 
 class MessageAPI {
-  ///todo 查询用户消息列表
+  /// 查询用户消息列表
   static Future<(bool, List<MessageItemEntity>)> postQueryMessage({
     int? pageNum,
     String? sendTimeStart,
     String? sendTimeEnd,
   }) async {
     Map<String, dynamic> map = {};
-    map["channelType"] = 2;
+    map["channelType"] = 1;
     if (sendTimeStart != null) {
       map["sendTimeStart"] = sendTimeStart;
     }

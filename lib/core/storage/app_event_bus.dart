@@ -6,5 +6,6 @@ class AppEventBus {
 
 class OpenDrawerEvent {
   final int index;
-  OpenDrawerEvent(this.index);
+  final int? siteStatus;
+  OpenDrawerEvent(this.index, {this.siteStatus});
 }

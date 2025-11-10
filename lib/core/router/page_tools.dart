@@ -7,7 +7,8 @@ class PageTools {
   static offAndToNamedLogin() => Get.offAndToNamed(APages.login);
 
   ///站点详情
-  static toStationDetail() => Get.toNamed(APages.stationDetail);
+  static toStationDetail({int? siteId}) =>
+      Get.toNamed(APages.stationDetail, arguments: {"siteId": siteId});
 
   ///切换语言
   static toChangeLanguage() => Get.toNamed(APages.changeLanguage);
@@ -37,7 +38,13 @@ class PageTools {
   static toDistributionMap() => Get.toNamed(APages.distributionMap);
 
   ///概览电站详情
-  static toOliveSiteDetail() => Get.toNamed(APages.oliveSiteDetail);
+  static toOliveSiteDetail({
+    required int index,
+    required StatisticRecordEntity statisticRecord,
+  }) => Get.toNamed(
+    APages.oliveSiteDetail,
+    arguments: {"index": index, "statisticRecord": statisticRecord},
+  );
 
   ///报告详情
   static toReportDetail() => Get.toNamed(APages.reportDetail);
@@ -48,5 +55,5 @@ class PageTools {
   static offAllNamedMain() => Get.offAllNamed(APages.main);
 
   ///跳到登录
-  static offAllNamedSplash() => Get.toNamed(APages.splash);
+  static offAllNamedSplash() => Get.offAllNamed(APages.splash);
 }

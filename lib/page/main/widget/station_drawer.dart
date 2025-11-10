@@ -1,17 +1,34 @@
 import 'package:cescpro/components/warm_status_button.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/page/station/index/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class StationDrawer extends StatelessWidget {
+class StationDrawer extends StatefulWidget {
   final Function onReset;
   final Function onConfirm;
+  final int? status;
   const StationDrawer({
     super.key,
+    this.status,
     required this.onReset,
     required this.onConfirm,
   });
+
+  @override
+  State<StationDrawer> createState() => _StationDrawerState();
+}
+
+class _StationDrawerState extends State<StationDrawer> {
+  int? select;
+
+  @override
+  void initState() {
+    super.initState();
+    select = widget.status;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +50,46 @@ class StationDrawer extends StatelessWidget {
             runSpacing: 14.w,
             spacing: 14.w,
             children: [
-              WarmStatusButton(title: "正常"),
-              WarmStatusButton(title: "告警"),
-              WarmStatusButton(title: "故障"),
-              WarmStatusButton(title: "中断"),
+              WarmStatusButton(
+                title: TKey.common.tr,
+                value: 99,
+                isPressed: select == 99,
+                onSelect: (value) {
+                  setState(() {
+                    select = value;
+                  });
+                },
+              ),
+              WarmStatusButton(
+                title: TKey.alarm.tr,
+                value: -2,
+                isPressed: select == -2,
+                onSelect: (value) {
+                  setState(() {
+                    select = value;
+                  });
+                },
+              ),
+              WarmStatusButton(
+                title: TKey.fault.tr,
+                value: 4,
+                isPressed: select == 4,
+                onSelect: (value) {
+                  setState(() {
+                    select = value;
+                  });
+                },
+              ),
+              WarmStatusButton(
+                title: TKey.interrupt.tr,
+                value: -3,
+                isPressed: select == -3,
+                onSelect: (value) {
+                  setState(() {
+                    select = value;
+                  });
+                },
+              ),
             ],
           ),
         ),
@@ -48,9 +101,36 @@ class StationDrawer extends StatelessWidget {
             runSpacing: 14.w,
             spacing: 14.w,
             children: [
-              WarmStatusButton(title: "充电"),
-              WarmStatusButton(title: "放电"),
-              WarmStatusButton(title: "待机"),
+              WarmStatusButton(
+                title: TKey.charge.tr,
+                value: 1,
+                isPressed: select == 1,
+                onSelect: (value) {
+                  setState(() {
+                    select = value;
+                  });
+                },
+              ),
+              WarmStatusButton(
+                title: TKey.discharge.tr,
+                value: 2,
+                isPressed: select == 2,
+                onSelect: (value) {
+                  setState(() {
+                    select = value;
+                  });
+                },
+              ),
+              WarmStatusButton(
+                title: TKey.standby.tr,
+                value: 3,
+                isPressed: select == 3,
+                onSelect: (value) {
+                  setState(() {
+                    select = value;
+                  });
+                },
+              ),
             ],
           ),
         ),
@@ -61,7 +141,18 @@ class StationDrawer extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  onReset.call();
+                  if (safeFind<StationLogic>()?.statusParam == null) {
+                    select = null;
+                  } else {
+                    if (select != null) {
+                      setState(() {
+                        select = null;
+                        safeFind<StationLogic>()?.statusParam = select;
+                        safeFind<StationLogic>()?.toSearch();
+                      });
+                    }
+                  }
+                  widget.onReset.call();
                 },
                 child: Container(
                   width: double.maxFinite,
@@ -83,7 +174,9 @@ class StationDrawer extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  onConfirm.call();
+                  safeFind<StationLogic>()?.statusParam = select;
+                  safeFind<StationLogic>()?.toSearch();
+                  widget.onConfirm.call();
                 },
                 child: Container(
                   width: double.maxFinite,

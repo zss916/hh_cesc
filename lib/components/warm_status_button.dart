@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class WarmStatusButton extends StatefulWidget {
+// 99.正常 (0:停止1:充电2:放电3:待机) 4: 故障，-3:中断 -2:告警
+class WarmStatusButton extends StatelessWidget {
   final String title;
-  const WarmStatusButton({super.key, required this.title});
-
-  @override
-  State<WarmStatusButton> createState() => _WarmStatusButtonState();
-}
-
-class _WarmStatusButtonState extends State<WarmStatusButton> {
-  bool isPressed = false;
+  final bool isPressed;
+  final int value;
+  final Function(int value)? onSelect;
+  const WarmStatusButton({
+    super.key,
+    required this.title,
+    required this.value,
+    required this.isPressed,
+    this.onSelect,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        setState(() {
-          isPressed = !isPressed;
-        });
+        onSelect?.call(value);
       },
       child: UnconstrainedBox(
         child: Container(
@@ -37,7 +38,7 @@ class _WarmStatusButtonState extends State<WarmStatusButton> {
           ),
           constraints: BoxConstraints(minWidth: 80.w, minHeight: 32.h),
           child: Text(
-            widget.title,
+            title,
             style: TextStyle(color: Colors.white, fontSize: 14),
           ),
         ),

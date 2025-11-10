@@ -7,6 +7,7 @@ import 'package:cescpro/page/home/widget/build_income_widget.dart';
 import 'package:cescpro/page/home/widget/build_station_overview.dart';
 import 'package:cescpro/page/home/widget/build_station_status.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 part 'logic.dart';

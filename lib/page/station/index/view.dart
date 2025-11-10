@@ -34,8 +34,9 @@ class StationPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: SearchBarWidget(
-                        onInput: (value) {
-                          logic.loadData(name: value);
+                        logic: logic,
+                        onInput: () {
+                          logic.toSearch();
                         },
                       ),
                     ),
@@ -43,7 +44,12 @@ class StationPage extends StatelessWidget {
                     InkWell(
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
-                        AppEventBus.eventBus.fire(OpenDrawerEvent(1));
+                        AppEventBus.eventBus.fire(
+                          OpenDrawerEvent(
+                            DrawerTypeEnum.site.index,
+                            siteStatus: logic.statusParam,
+                          ),
+                        );
                       },
                       child: Container(
                         width: 36,
@@ -77,9 +83,9 @@ class StationPage extends StatelessWidget {
 
   Widget buildBody({required int viewState, required StationLogic logic}) {
     return switch (viewState) {
-      _ when viewState == 0 => buildList(logic: logic),
-      _ when viewState == 1 => buildEmpty(),
-      _ when viewState == 2 => Container(
+      _ when viewState == ViewStateEnum.common.index => buildList(logic: logic),
+      _ when viewState == ViewStateEnum.empty.index => buildEmpty(),
+      _ when viewState == ViewStateEnum.loading.index => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CircularProgressIndicator()),
       ),
@@ -110,22 +116,26 @@ class StationPage extends StatelessWidget {
   );
 
   Widget buildList({required StationLogic logic}) {
-    return ListView.separated(
-      padding: EdgeInsetsDirectional.only(top: 0, bottom: 100.h),
-      itemCount: logic.data.length,
-      itemBuilder: (BuildContext context, int index) {
-        SiteEntity item = logic.data[index];
-        return buildItem(item);
-      },
-      separatorBuilder: (BuildContext context, int index) =>
-          const Divider(height: 16, color: Colors.transparent),
+    return EasyRefresh(
+      onRefresh: () => logic.refreshData(),
+      onLoad: () => logic.loadMoreData(),
+      child: ListView.separated(
+        padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
+        itemCount: logic.data.length,
+        itemBuilder: (BuildContext context, int index) {
+          SiteEntity item = logic.data[index];
+          return buildItem(item);
+        },
+        separatorBuilder: (BuildContext context, int index) =>
+            const Divider(height: 16, color: Colors.transparent),
+      ),
     );
   }
 
   Widget buildItem(SiteEntity item) {
     return GestureDetector(
       onTap: () {
-        PageTools.toStationDetail();
+        PageTools.toStationDetail(siteId: item.id);
       },
       child: Container(
         width: double.maxFinite,

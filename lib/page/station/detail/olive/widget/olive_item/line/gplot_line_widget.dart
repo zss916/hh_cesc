@@ -25,7 +25,7 @@ class GplotLineWidget extends StatelessWidget {
       child: Stack(
         children: [
           // 检查 defaultLines 列表的长度，避免访问无效的索引
-          if (defaultLines.length > 0)
+          if (defaultLines.isNotEmpty)
             CustomPaint(painter: CustomLinePainter(lines: defaultLines[0])),
 
           if (defaultLines.length > 1)
@@ -40,7 +40,7 @@ class GplotLineWidget extends StatelessWidget {
           ///icon
 
           // 检查 lines 列表的长度，避免访问无效的索引
-          if (lines.length > 0)
+          if (lines.isNotEmpty)
             LineAnimationWidget(lines: lines[0], animationValue: 4),
           if (lines.length > 1)
             LineAnimationWidget(lines: lines[1], animationValue: 4),

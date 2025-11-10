@@ -83,9 +83,6 @@ class AlarmAPI {
         params["endTimeMill"] = endTimeMill;
       }
 
-      //1762012800000
-      //params["startTimeMill"] = (DateTime.now().millisecondsSinceEpoch);
-
       ///告警开始时间 到结束时间
       ///https://ems.cescpower.com:9088/api/v1/business/alarm/listPage?startTimeMill=1761926400000&endTimeMill=1762012800000&pageSize=10&pageNum=1
 

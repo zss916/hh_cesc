@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/site_entity.g.dart';
-import 'package:get/utils.dart';
 
 export 'package:cescpro/generated/json/site_entity.g.dart';
 
@@ -68,7 +66,7 @@ class SiteEntity {
   }
 
   ///站点名称
-  String get showSiteName => (Get.isZh) ? (name ?? "") : (cname ?? "");
+  String get showSiteName => (name ?? "");
 
   ///储能装机功率
   String get showPower => "${power ?? 0}kw";

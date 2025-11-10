@@ -1,10 +1,15 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/page/alarm/index/index.dart';
 import 'package:cescpro/page/main/widget/alarm_item_select.dart';
-import 'package:flutter/material.dart';
+import 'package:cescpro/page/main/widget/alarm_select_sheet.dart';
+import 'package:flutter/material.dart' hide DatePickerTheme;
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
-class AlarmDrawer extends StatelessWidget {
+class AlarmDrawer extends StatefulWidget {
   final Function onReset;
   final Function onConfirm;
   const AlarmDrawer({
@@ -14,10 +19,27 @@ class AlarmDrawer extends StatelessWidget {
   });
 
   @override
+  State<AlarmDrawer> createState() => _AlarmDrawerState();
+}
+
+class _AlarmDrawerState extends State<AlarmDrawer> {
+  String? startTime;
+  DateTime? startDateTime;
+  String? endTime;
+  DateTime? endDateTime;
+  String? alarmTitle;
+  int? alarmLevel;
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AlarmItemSelect(title: TKey.affiliatedArea.tr, onTap: () {}),
+        AlarmItemSelect(
+          title: TKey.affiliatedArea.tr,
+          onTap: () async {
+            // getCountry();
+          },
+        ),
 
         Divider(height: 24.h, color: Colors.transparent),
 
@@ -29,15 +51,59 @@ class AlarmDrawer extends StatelessWidget {
 
         Divider(height: 24.h, color: Colors.transparent),
 
-        AlarmItemSelect(title: "告警等级", onTap: () {}),
+        AlarmItemSelect(
+          title: TKey.alarmLevel.tr,
+          subTitle: alarmTitle,
+          onTap: () {
+            showAlarmLevelSheet(
+              context: context,
+              onSelect: (String alarmLevelTitle, int level) {
+                setState(() {
+                  alarmTitle = alarmLevelTitle;
+                  alarmLevel = level;
+                });
+              },
+            );
+            //alarmLevel
+          },
+        ),
+        Divider(height: 24.h, color: Colors.transparent),
+
+        AlarmItemSelect(
+          title: TKey.startTime.tr,
+          subTitle: startTime,
+          onTap: () {
+            showDateTimePicker(
+              context: context,
+              onSelect: (date) {
+                String formatted = DateFormat('yyyy-MM-dd').format(date);
+                setState(() {
+                  startTime = formatted;
+                  startDateTime = date;
+                });
+              },
+            );
+          },
+        ),
 
         Divider(height: 24.h, color: Colors.transparent),
 
-        AlarmItemSelect(title: "开始时间", onTap: () {}),
-
-        Divider(height: 24.h, color: Colors.transparent),
-
-        AlarmItemSelect(title: "结束时间", onTap: () {}),
+        AlarmItemSelect(
+          title: TKey.endTime.tr,
+          subTitle: endTime,
+          onTap: () {
+            showDateTimePicker(
+              context: context,
+              onSelect: (date) {
+                String formatted = DateFormat('yyyy-MM-dd').format(date);
+                setState(() {
+                  endTime = formatted;
+                  endDateTime = date;
+                });
+              },
+            );
+          },
+        ),
 
         Spacer(),
 
@@ -47,7 +113,7 @@ class AlarmDrawer extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  onReset.call();
+                  widget.onReset.call();
                 },
                 child: Container(
                   width: double.maxFinite,
@@ -69,7 +135,17 @@ class AlarmDrawer extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  onConfirm.call();
+                  safeFind<AlarmLogic>()?.startTimeMill =
+                      startDateTime?.millisecondsSinceEpoch;
+                  safeFind<AlarmLogic>()?.endTimeMill =
+                      endDateTime?.millisecondsSinceEpoch;
+                  debugPrint(
+                    "start: ${safeFind<AlarmLogic>()?.startTimeMill},"
+                    " end ${safeFind<AlarmLogic>()?.endTimeMill}"
+                    " level:${alarmLevel}",
+                  );
+
+                  // widget.onConfirm.call();
                 },
                 child: Container(
                   width: double.maxFinite,
@@ -91,6 +167,39 @@ class AlarmDrawer extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+
+  void showDateTimePicker({
+    required BuildContext context,
+    Function(DateTime)? onSelect,
+  }) {
+    DatePicker.showDatePicker(
+      context,
+      showTitleActions: true,
+      minTime: DateTime(2010, 1, 1),
+      maxTime: DateTime.now(),
+      //currentTime: DateTime.parse(currentTime),
+      locale: LocaleType.zh,
+      theme: DatePickerTheme(
+        backgroundColor: Color(0xFF23282E),
+        itemStyle: TextStyle(
+          color: Color(0xFFFFFFFF),
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+        ),
+        cancelStyle: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
+        doneStyle: TextStyle(color: Color(0xFF13D4D2), fontSize: 14),
+      ),
+
+      onChanged: (date) {
+        debugPrint('change $date');
+      },
+      onConfirm: (date) {
+        String formatted = DateFormat('yyyy-MM-dd').format(date);
+        debugPrint('confirm $formatted , ${date.millisecondsSinceEpoch}');
+        onSelect?.call(date);
+      },
     );
   }
 }

@@ -11,10 +11,10 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   int select = 0;
-  final PageController pageCtrl = PageController(initialPage: 0);
 
   late StreamSubscription<OpenDrawerEvent> event;
-  int drawerIndex = 1;
+  int drawerIndex = DrawerTypeEnum.site.index;
+  int? siteStatus;
 
   @override
   void initState() {
@@ -24,11 +24,9 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       openDrawer();
       setState(() {
         drawerIndex = event.index;
+        siteStatus = event.siteStatus;
       });
     });
-
-    //debugPrint("===>> ${AuthorizationHeader.getAuthorization()}");
-    // AdminAPI.getLoginInfo();
   }
 
   @override
@@ -58,7 +56,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     super.dispose();
     WidgetsBinding.instance.removeObserver(this);
     event.cancel();
-    pageCtrl.dispose();
   }
 
   @override
@@ -68,15 +65,13 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       backgroundColor: Color(0xFF23282E),
       endDrawer: buildEndDrawer(index: drawerIndex),
       extendBody: true,
-      body: PageView(
-        pageSnapping: false,
-        scrollBehavior: null,
-        physics: const NeverScrollableScrollPhysics(),
-        controller: pageCtrl,
+      body: IndexedStack(
+        index: select,
         children: [
-          AppKeepAlivePage(HomePage()),
+          //AppKeepAlivePage(),
+          HomePage(),
           StationPage(),
-          AppKeepAlivePage(AlarmPage()),
+          AlarmPage(),
           ServicePage(),
         ],
       ),
@@ -160,7 +155,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
           onTap: (i) {
             setState(() {
               select = i;
-              pageCtrl.jumpToPage(i);
             });
           },
         ),
@@ -186,8 +180,9 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
             children: [
-              if (index == 1)
+              if (index == DrawerTypeEnum.site.index)
                 StationDrawer(
+                  status: siteStatus,
                   onReset: () {
                     closeDrawer();
                   },
@@ -195,7 +190,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                     closeDrawer();
                   },
                 ),
-              if (index == 2)
+              if (index == DrawerTypeEnum.alarm.index)
                 AlarmDrawer(
                   onReset: () {
                     closeDrawer();

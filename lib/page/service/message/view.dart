@@ -108,16 +108,18 @@ class MessageCenterPage extends StatelessWidget {
             ),
           ),
           Divider(height: 1, color: Color(0x14EEF2F8)),
-          Container(
-            margin: EdgeInsetsDirectional.only(top: 12.h, bottom: 13.h),
-            alignment: AlignmentDirectional.centerStart,
-            width: double.maxFinite,
-            child: Text(
-              item.content ?? "",
-              style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
+          if (item.showContent.isNotEmpty)
+            Container(
+              margin: EdgeInsetsDirectional.only(top: 12.h, bottom: 13.h),
+              alignment: AlignmentDirectional.centerStart,
+              width: double.maxFinite,
+              child: Text(
+                item.showContent,
+                style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
+              ),
             ),
-          ),
-          Divider(height: 1, color: Color(0x14EEF2F8)),
+          if (item.showContent.isNotEmpty)
+            Divider(height: 1, color: Color(0x14EEF2F8)),
           Container(
             margin: EdgeInsetsDirectional.only(top: 13.h),
             width: double.maxFinite,

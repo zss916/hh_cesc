@@ -3,42 +3,27 @@ part of 'index.dart';
 class AlarmLogic extends GetxController {
   List<AlarmItemEntity> data = [];
 
-  int viewState = 0;
+  int viewState = ViewStateEnum.common.index;
   int pageNum = 1;
+  int? startTimeMill;
+  int? endTimeMill;
 
   @override
   void onInit() {
     super.onInit();
-    viewState = 2;
+    viewState = ViewStateEnum.loading.index;
     update();
   }
 
   @override
   void onReady() {
     super.onReady();
-    loadData();
+    refreshData();
   }
 
   @override
   void onClose() {
     super.onClose();
-  }
-
-  Future<void> loadData({int pageNum = 1}) async {
-    //https://ems.cescpower.com:9088/api/v1/business/alarm/listPage?adcode=&pageSize=10&pageNum=1
-    final (bool isSuccessful, List<AlarmItemEntity> value) =
-        await AlarmAPI.getListPageApp(pageNum: pageNum);
-    if (isSuccessful) {
-      if (pageNum == 1) {
-        data = value;
-        viewState = data.isEmpty ? 1 : 0;
-        update();
-      } else {
-        data.addAll(value);
-        viewState = data.isEmpty ? 1 : 0;
-        update();
-      }
-    }
   }
 
   refreshData() {
@@ -49,5 +34,31 @@ class AlarmLogic extends GetxController {
   loadMoreData() {
     pageNum += 1;
     loadData(pageNum: pageNum);
+  }
+
+  Future<void> loadData({int pageNum = 1}) async {
+    //https://ems.cescpower.com:9088/api/v1/business/alarm/listPage?adcode=&pageSize=10&pageNum=1
+    final (
+      bool isSuccessful,
+      List<AlarmItemEntity> value,
+    ) = await AlarmAPI.getListPageApp(
+      pageNum: pageNum,
+      startTimeMill: startTimeMill,
+      endTimeMill: endTimeMill,
+    );
+    if (isSuccessful) {
+      if (pageNum == 1) {
+        data = value;
+      } else {
+        data.addAll(value);
+      }
+    } else {
+      pageNum -= 1;
+      AppLoading.toast("Fail");
+    }
+    viewState = data.isEmpty
+        ? ViewStateEnum.empty.index
+        : ViewStateEnum.common.index;
+    update();
   }
 }

@@ -1,5 +1,7 @@
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/bean/statistic_record_entity.dart';
+import 'package:cescpro/page/station/detail/olive/detail/olive_site_detail_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,25 +14,37 @@ class OliveSiteDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: baseAppBar(title: TKey.oliveSiteDetails.tr),
       backgroundColor: Color(0xFF23282E),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Divider(height: 16.h, color: Colors.transparent),
-            buildChargingCapacityItem(),
-            Divider(height: 16.h, color: Colors.transparent),
-            buildRevenueItem(),
-            Divider(height: 16.h, color: Colors.transparent),
-            buildDischargeCapacityItem(),
-            Divider(height: 16.h, color: Colors.transparent),
-            buildPowerGenerationItem(),
-            Divider(height: 16.h, color: Colors.transparent),
-          ],
-        ),
+      body: GetBuilder<OliveSiteDetailLogic>(
+        init: OliveSiteDetailLogic(),
+        builder: (logic) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                if (logic.index == 0)
+                  Divider(height: 16.h, color: Colors.transparent),
+                if (logic.index == 0)
+                  buildChargingCapacityItem(logic.statisticRecord),
+                if (logic.index == 2)
+                  Divider(height: 16.h, color: Colors.transparent),
+                if (logic.index == 2) buildRevenueItem(logic.statisticRecord),
+                if (logic.index == 1)
+                  Divider(height: 16.h, color: Colors.transparent),
+                if (logic.index == 1)
+                  buildDischargeCapacityItem(logic.statisticRecord),
+                if (logic.index == 3)
+                  Divider(height: 16.h, color: Colors.transparent),
+                if (logic.index == 3)
+                  buildPowerGenerationItem(logic.statisticRecord),
+                Divider(height: 16.h, color: Colors.transparent),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget buildChargingCapacityItem() {
+  Widget buildChargingCapacityItem(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       padding: EdgeInsetsDirectional.all(16.r),
@@ -44,12 +58,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "今日充电量:",
+                "${TKey.todayChargingData.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.todayTotalPos ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -58,12 +72,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "本月充电量:",
+                "${TKey.monthChargingData.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "111kwh",
+                "${value?.currentMonthTotalPos ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -72,12 +86,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "本年充电量:",
+                "${TKey.yearChargingData.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.currentYearTotalPos ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -86,12 +100,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "累计充电量:",
+                "${TKey.totalChargingData.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.todayTotalPos ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -101,7 +115,7 @@ class OliveSiteDetailPage extends StatelessWidget {
     );
   }
 
-  Widget buildRevenueItem() {
+  Widget buildRevenueItem(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       padding: EdgeInsetsDirectional.all(16.r),
@@ -115,12 +129,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "昨日收益:",
+                "${TKey.lastDayIncome.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.lastDayIncome ?? 0}¥",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -129,12 +143,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "本月收益:",
+                "${TKey.currentMonthIncome.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "111kwh",
+                "${value?.currentMonthIncome ?? 0}¥",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -143,12 +157,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "本年收益:",
+                "${TKey.currentYearIncome.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.currentYearIncome ?? 0}¥",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -157,12 +171,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "累计收益:",
+                "${TKey.totalRevenueTitle.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.todayIncome ?? 0}¥",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -172,7 +186,7 @@ class OliveSiteDetailPage extends StatelessWidget {
     );
   }
 
-  Widget buildDischargeCapacityItem() {
+  Widget buildDischargeCapacityItem(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       padding: EdgeInsetsDirectional.all(16.r),
@@ -186,12 +200,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "今日放电量:",
+                "${TKey.todayNeg.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.todayPvTotalNeg ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -200,12 +214,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "本月放电量:",
+                "${TKey.currentMonthNeg.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "111kwh",
+                "${value?.currentMonthTotalNeg ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -214,12 +228,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "本年放电量:",
+                "${TKey.currentYearNeg.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.currentYearTotalNeg ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -228,12 +242,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "累计放电量:",
+                "${TKey.totalNeg.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.totalNeg ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -243,7 +257,7 @@ class OliveSiteDetailPage extends StatelessWidget {
     );
   }
 
-  Widget buildPowerGenerationItem() {
+  Widget buildPowerGenerationItem(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       padding: EdgeInsetsDirectional.all(16.r),
@@ -257,12 +271,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "今日发电量:",
+                "${TKey.todayPVNeg.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.todayPvTotalNeg ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -271,12 +285,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "本月放电量:",
+                "${TKey.currentMonthPVNeg.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "111kwh",
+                "${value?.monthPvTotalNeg ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -285,12 +299,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "本年放电量:",
+                "${TKey.currentYearPVNeg.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.yearPvTotalNeg ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -299,12 +313,12 @@ class OliveSiteDetailPage extends StatelessWidget {
           Row(
             children: [
               Text(
-                "累计放电量:",
+                "${TKey.totalPVNeg.tr}:",
                 style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
               ),
               Spacer(),
               Text(
-                "110kwh",
+                "${value?.todayPvTotalNeg ?? 0}kwh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],

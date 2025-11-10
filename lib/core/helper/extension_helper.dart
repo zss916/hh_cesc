@@ -12,6 +12,10 @@ extension MoneyExtension on double {
   }
 }
 
+extension TimesExtension on DateTime {
+  String get timestampFormat => DateFormat('yyyy-MM-dd').format(this);
+}
+
 extension TimestampExtension on int {
   String get timestampFormat => DateFormat(
     'yyyy-MM-dd HH:mm:ss',
@@ -22,4 +26,12 @@ extension CheckLancode on GetInterface {
   bool get isZh => Get.locale?.languageCode == "zh";
 
   bool get isEn => Get.locale?.languageCode == "en";
+}
+
+S? safeFind<S>() {
+  if (Get.isRegistered<S>() == true) {
+    final s = Get.find<S>();
+    return s;
+  }
+  return null;
 }

@@ -39,4 +39,6 @@ class MessageItemEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  String get showContent => (content) ?? (digest ?? "");
 }
