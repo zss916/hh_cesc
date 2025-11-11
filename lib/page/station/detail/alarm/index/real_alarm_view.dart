@@ -1,6 +1,8 @@
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/bean/analysis_entity.dart';
+import 'package:cescpro/page/station/detail/alarm/index/real_alarm_logic.dart';
 import 'package:cescpro/page/station/detail/alarm/index/widget/pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,41 +10,49 @@ import 'package:get/get.dart';
 //import 'package:marquee/marquee.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 
-class AlarmView extends StatelessWidget {
-  const AlarmView({super.key});
+class RealAlarmView extends StatelessWidget {
+  const RealAlarmView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: baseAppBar(title: TKey.realTimeData.tr),
       backgroundColor: Color(0xFF23282E),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            buildTopItem(),
-            Divider(height: 12.h, color: Colors.transparent),
+      body: GetBuilder<RealAlarmLogic>(
+        init: RealAlarmLogic(),
+        builder: (logic) {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                buildTopItem(logic.siteId),
+                Divider(height: 12.h, color: Colors.transparent),
 
-            buildItem(),
+                if (logic.totalAlarmData != null)
+                  buildTotalAlarmItem(logic.totalAlarmData!, logic),
 
-            buildItem(),
+                if ((logic.list2).isNotEmpty) buildHighestAlarmItem(logic),
 
-            buildFocusOn(),
+                if ((logic.list3).isNotEmpty) buildAttentionAlarmItem(logic),
 
-            Divider(height: 150.h, color: Colors.transparent),
-          ],
-        ),
+                buildFocusOn(),
+
+                Divider(height: 150.h, color: Colors.transparent),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget buildTopItem() => Container(
+  Widget buildTopItem(int? siteId) => Container(
     decoration: BoxDecoration(color: Color(0xFF313540)),
     width: double.maxFinite,
     child: Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          PageTools.toAlarmDetail();
+          PageTools.toAlarmDetail(siteId: siteId);
         },
         child: Container(
           width: double.maxFinite,
@@ -66,7 +76,10 @@ class AlarmView extends StatelessWidget {
     ),
   );
 
-  Widget buildItem() => Container(
+  Widget buildTotalAlarmItem(
+    AnalysisTotalAlarmData value,
+    RealAlarmLogic logic,
+  ) => Container(
     width: double.maxFinite,
     constraints: BoxConstraints(minHeight: 230),
     padding: EdgeInsets.all(15.r),
@@ -77,7 +90,12 @@ class AlarmView extends StatelessWidget {
     margin: EdgeInsetsDirectional.only(start: 16.w, end: 16.w, bottom: 16.h),
     child: Row(
       children: [
-        PieChartWidget(size: Size(140.w, 140.w), title: "告警总数", count: "2511"),
+        PieChartWidget(
+          size: Size(140.w, 140.w),
+          title: TKey.alarmTotal.tr,
+          count: "${value.totalCnt ?? 0}",
+          list: logic.list,
+        ),
         VerticalDivider(color: Colors.transparent, width: 20.w),
         Expanded(
           child: Column(
@@ -94,12 +112,12 @@ class AlarmView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "一级告警",
+                    TKey.alarmLevel1.tr,
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                   Spacer(),
                   Text(
-                    "12台",
+                    TKey.alarmCount.trArgs(["${value.firstCnt ?? 0}"]),
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],
@@ -117,12 +135,12 @@ class AlarmView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "二级告警",
+                    TKey.alarmLevel2.tr,
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                   Spacer(),
                   Text(
-                    "12台",
+                    TKey.alarmCount.trArgs(["${value.secondCnt ?? 0}"]),
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],
@@ -140,12 +158,12 @@ class AlarmView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "三级告警",
+                    TKey.alarmLevel3.tr,
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                   Spacer(),
                   Text(
-                    "12台",
+                    TKey.alarmCount.trArgs(["${value.thirdCnt ?? 0}"]),
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],
@@ -163,15 +181,121 @@ class AlarmView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "其他",
+                    TKey.other.tr,
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                   Spacer(),
                   Text(
-                    "12台",
+                    TKey.alarmCount.trArgs(["${value.otherCnt ?? 0}"]),
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget buildHighestAlarmItem(RealAlarmLogic logic) => Container(
+    width: double.maxFinite,
+    constraints: BoxConstraints(minHeight: 230),
+    padding: EdgeInsets.all(15.r),
+    decoration: BoxDecoration(
+      color: Color(0xFF313540),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    margin: EdgeInsetsDirectional.only(start: 16.w, end: 16.w, bottom: 16.h),
+    child: Row(
+      children: [
+        PieChartWidget(
+          size: Size(140.w, 140.w),
+          title: TKey.highLevel.tr,
+          count: "${logic.highestAlarmData?.totalCnt ?? 0}",
+          list: logic.list2,
+        ),
+        VerticalDivider(color: Colors.transparent, width: 20.w),
+        Expanded(
+          child: Column(
+            spacing: 15.h,
+            children: [
+              ...(logic.list2).map(
+                (e) => Row(
+                  children: [
+                    Container(
+                      width: 10,
+                      height: 10,
+                      margin: EdgeInsetsDirectional.only(end: 10.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: e["color"] ?? Colors.transparent,
+                      ),
+                    ),
+                    Text(
+                      e["title"] ?? "",
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                    Spacer(),
+                    Text(
+                      TKey.alarmCount.trArgs(["${e["number"] ?? 0}"]),
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget buildAttentionAlarmItem(RealAlarmLogic logic) => Container(
+    width: double.maxFinite,
+    constraints: BoxConstraints(minHeight: 230),
+    padding: EdgeInsets.all(15.r),
+    decoration: BoxDecoration(
+      color: Color(0xFF313540),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    margin: EdgeInsetsDirectional.only(start: 16.w, end: 16.w, bottom: 16.h),
+    child: Row(
+      children: [
+        PieChartWidget(
+          size: Size(140.w, 140.w),
+          title: "",
+          count: "${logic.highestAlarmData?.totalCnt ?? 0}",
+          list: logic.list3,
+        ),
+        VerticalDivider(color: Colors.transparent, width: 20.w),
+        Expanded(
+          child: Column(
+            spacing: 15.h,
+            children: [
+              ...(logic.list3).map(
+                (e) => Row(
+                  children: [
+                    Container(
+                      width: 10,
+                      height: 10,
+                      margin: EdgeInsetsDirectional.only(end: 10.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: e["color"] ?? Colors.transparent,
+                      ),
+                    ),
+                    Text(
+                      e["title"] ?? "",
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                    Spacer(),
+                    Text(
+                      TKey.alarmCount.trArgs(["${e["number"] ?? 0}"]),
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

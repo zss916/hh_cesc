@@ -10,6 +10,10 @@ class PageTools {
   static toStationDetail({int? siteId}) =>
       Get.toNamed(APages.stationDetail, arguments: {"siteId": siteId});
 
+  ///告警详情
+  static toAlarmDetail({int? siteId}) =>
+      Get.toNamed(APages.alarmDetail, arguments: {"siteId": siteId});
+
   ///切换语言
   static toChangeLanguage() => Get.toNamed(APages.changeLanguage);
 
@@ -24,9 +28,6 @@ class PageTools {
 
   ///启动页
   static toSplash() => Get.toNamed(APages.splash);
-
-  ///告警详情
-  static toAlarmDetail() => Get.toNamed(APages.alarmDetail);
 
   ///监控详情
   static toMonitorDetail() => Get.toNamed(APages.monitorDetail);

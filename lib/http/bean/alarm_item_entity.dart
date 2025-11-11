@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/json/alarm_item_entity.g.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 export 'package:cescpro/generated/json/alarm_item_entity.g.dart';
@@ -45,5 +47,17 @@ class AlarmItemEntity {
     return DateFormat(
       'yyyy-MM-dd HH:mm:ss',
     ).format(DateTime.fromMillisecondsSinceEpoch(startTimeMill ?? 0));
+  }
+
+  String? get alarmLevelType {
+    if (alarmLevel == 1) {
+      return TKey.alarmLevel1.tr;
+    } else if (alarmLevel == 2) {
+      return TKey.alarmLevel2.tr;
+    } else if (alarmLevel == 3) {
+      return TKey.alarmLevel3.tr;
+    } else {
+      return null;
+    }
   }
 }

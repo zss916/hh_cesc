@@ -9,7 +9,7 @@ class StationDetailPage extends StatefulWidget {
 
 class _StationDetailState extends State<StationDetailPage> {
   int select = 0;
-  final PageController pageCtrl = PageController(initialPage: 0);
+  // PageController pageCtrl = PageController(initialPage: 0);
 
   @override
   void initState() {
@@ -18,7 +18,7 @@ class _StationDetailState extends State<StationDetailPage> {
 
   @override
   void dispose() {
-    pageCtrl.dispose();
+    // pageCtrl.dispose();
     super.dispose();
   }
 
@@ -27,12 +27,13 @@ class _StationDetailState extends State<StationDetailPage> {
     return Scaffold(
       backgroundColor: Color(0xFF23282E),
       extendBody: true,
-      body: PageView(
-        pageSnapping: false,
+      body: IndexedStack(
+        index: select,
+        /*  pageSnapping: false,
         scrollBehavior: null,
         physics: const NeverScrollableScrollPhysics(),
-        controller: pageCtrl,
-        children: [OliveView(), MonitorView(), AlarmView()],
+        controller: pageCtrl,*/
+        children: [OliveView(), MonitorView(), RealAlarmView()],
       ),
       bottomNavigationBar: Container(
         clipBehavior: Clip.hardEdge,
@@ -114,7 +115,7 @@ class _StationDetailState extends State<StationDetailPage> {
           onTap: (i) {
             setState(() {
               select = i;
-              pageCtrl.jumpToPage(i);
+              // pageCtrl.jumpToPage(i);
             });
           },
         ),

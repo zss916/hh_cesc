@@ -1,3 +1,7 @@
+import 'dart:math';
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -34,4 +38,21 @@ S? safeFind<S>() {
     return s;
   }
   return null;
+}
+
+extension RandomColor on int {
+  Color get rColor {
+    final Random random = Random();
+    final int red = random.nextInt(256); // 生成0到255之间的随机数作为红色值
+    final int green = random.nextInt(256); // 生成0到255之间的随机数作为绿色值
+    final int blue = random.nextInt(256); // 生成0到255之间的随机数作为蓝色值
+    final Color randomColor = Color.fromARGB(
+      255,
+      red,
+      green,
+      blue,
+    ); // 创建Color对象
+
+    return randomColor;
+  }
 }

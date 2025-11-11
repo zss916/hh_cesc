@@ -23,7 +23,7 @@ class AppLoading {
 
   static void show({
     String? text,
-    bool dismissOnTap = true,
+    bool dismissOnTap = false,
     int milliseconds = 2000,
   }) {
     EasyLoading.instance.userInteractions = false;

@@ -48,7 +48,7 @@ class AlarmLogic extends GetxController {
     );
     if (isSuccessful) {
       if (pageNum == 1) {
-        data = value;
+        data.assignAll(value);
       } else {
         data.addAll(value);
       }

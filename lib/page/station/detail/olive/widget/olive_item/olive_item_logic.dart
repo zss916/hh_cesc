@@ -39,7 +39,7 @@ class OliveItemLogic extends GetxController {
     super.onInit();
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
-      siteId = map['siteId'];
+      siteId = map['siteId'] as int?;
     }
   }
 

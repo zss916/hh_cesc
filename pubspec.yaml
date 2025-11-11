@@ -51,6 +51,7 @@ dependencies:
   country_state_city: ^0.1.6
   #加载更多
   easy_load_more: 2.0.0
+  collection: 1.19.1
 
 
   ####

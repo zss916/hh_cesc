@@ -51,9 +51,9 @@ class AlarmPage extends StatelessWidget {
 
   Widget buildBody({required int viewState, required AlarmLogic logic}) {
     return switch (viewState) {
-      _ when viewState == 0 => buildList(logic: logic),
-      _ when viewState == 1 => buildEmpty(),
-      _ when viewState == 2 => Container(
+      _ when viewState == ViewStateEnum.common.index => buildList(logic: logic),
+      _ when viewState == ViewStateEnum.empty.index => buildEmpty(),
+      _ when viewState == ViewStateEnum.loading.index => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CircularProgressIndicator()),
       ),

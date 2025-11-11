@@ -8,26 +8,43 @@ import 'package:cescpro/http/path.dart';
 import 'package:flutter/foundation.dart';
 
 class AlarmAPI {
-  ///todo 实时告警数据
+  ///实时告警数据
   static Future<(bool, List<AlarmItemEntity>)> postRealTimePage({
-    required String siteId,
+    required int siteId,
+    int? pageNum = 1,
+    int? pageSize = 10,
+    int? alarmLevel,
+    String? compType,
   }) async {
-    Map<String, dynamic> map = {};
-    map["siteId"] = siteId;
+    Map<String, dynamic> params = {};
+    params["siteId"] = siteId;
+    if (pageNum != null) {
+      params["pageNum"] = pageNum;
+    }
+    if (pageSize != null) {
+      params["pageSize"] = pageSize;
+    }
+    //告警级别。1-一级告警，2-二级告警，3-三级告警
+    if (alarmLevel != null) {
+      params["alarmLevel"] = alarmLevel;
+    }
+    if (compType != null) {
+      params["compType"] = compType;
+    }
     try {
       var result = await Http.instance.post(
         ApiPath.postRealTimePage,
-        data: map,
+        data: params,
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<AlarmItemEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => AlarmItemEntity.fromJson(e)).toList(),
-          (result['data'] as List),
+          (result['data']['list'] as List),
         );
-        return (false, value);
+        return (true, value);
       } else {
-        AppLoading.toast(result["message"]);
+        //AppLoading.toast(result["message"]);
         return (false, <AlarmItemEntity>[]);
       }
     } catch (error) {
@@ -118,7 +135,7 @@ class AlarmAPI {
         map["did"] = did;
       }
       var result = await Http.instance.get(ApiPath.getAnalysis, query: map);
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return AnalysisEntity.fromJson(result['data']);
       } else {
         AppLoading.toast(result["message"]);

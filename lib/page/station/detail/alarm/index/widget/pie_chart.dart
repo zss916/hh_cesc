@@ -8,11 +8,13 @@ class PieChartWidget extends StatefulWidget {
   final Size size;
   final String title;
   final String count;
+  final List list;
   const PieChartWidget({
     super.key,
     required this.size,
     required this.title,
     required this.count,
+    required this.list,
   });
 
   @override
@@ -31,10 +33,10 @@ class _PieChartWidgetState extends State<PieChartWidget>
   late Animation<double> _numberAnimation;
 
   List _list = [
-    {"title": "一级告警", "number": 200, "color": Colors.lightBlueAccent},
-    {"title": "二级告警", "number": 200, "color": Colors.green},
-    {"title": "三级告警", "number": 400, "color": Colors.amber},
-    {"title": "其他", "number": 100, "color": Colors.orange},
+    {"title": "一级告警", "number": 0, "color": Color(0xFFEE2727)},
+    {"title": "二级告警", "number": 0, "color": Color(0xFFFFE725)},
+    {"title": "三级告警", "number": 0, "color": Color(0xFF376FFF)},
+    {"title": "其他", "number": 0, "color": Color(0xFF26FFBD)},
   ];
 
   @override
@@ -73,6 +75,9 @@ class _PieChartWidgetState extends State<PieChartWidget>
     /// 开始执行动画
     _animationController.reset();
     _animationController.forward();
+
+    _list = widget.list;
+    //debugPrint("liat====>>> ${_list.toString()}");
   }
 
   @override

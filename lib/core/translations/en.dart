@@ -283,6 +283,16 @@ class TKey {
   static const String currentMonthPVNeg = "currentMonthPVNeg";
 
   static const String todayPVNeg = "todayPVNeg";
+
+  static const String alarmTotal = "alarmTotal";
+
+  static const String other = "other";
+
+  static const String alarmCount = "alarmCount";
+
+  static const String highLevel = "highLevel";
+
+  static const String timeOfOccurrence = "timeOfOccurrence";
 }
 
 const en = {
@@ -423,4 +433,9 @@ const en = {
   "currentYearPVNeg": "本年光伏发电量",
   "currentMonthPVNeg": "本月光伏发电量",
   "todayPVNeg": "今日光伏发电量",
+  "alarmTotal": "告警总数",
+  "other": "其他",
+  "alarmCount": "%s台",
+  "highLevel": "最高等级",
+  "timeOfOccurrence": "发生时间",
 };

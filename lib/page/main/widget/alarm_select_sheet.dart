@@ -6,13 +6,17 @@ import 'package:get/get.dart';
 void showAlarmLevelSheet({
   required BuildContext context,
   Function(String, int)? onSelect,
+  int? selectLevel,
 }) {
-  Get.bottomSheet(AlarmSelectSheetWidget(onSelect: onSelect));
+  Get.bottomSheet(
+    AlarmSelectSheetWidget(selectLevel: selectLevel, onSelect: onSelect),
+  );
 }
 
 class AlarmSelectSheetWidget extends StatefulWidget {
   final Function(String, int)? onSelect;
-  const AlarmSelectSheetWidget({super.key, this.onSelect});
+  final int? selectLevel;
+  const AlarmSelectSheetWidget({super.key, this.onSelect, this.selectLevel});
 
   @override
   State<AlarmSelectSheetWidget> createState() => _AlarmSelectSheetWidgetState();
@@ -21,6 +25,14 @@ class AlarmSelectSheetWidget extends StatefulWidget {
 class _AlarmSelectSheetWidgetState extends State<AlarmSelectSheetWidget> {
   int? select;
   String? selectTitle;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.selectLevel != null) {
+      select = widget.selectLevel;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
