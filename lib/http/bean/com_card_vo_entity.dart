@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/com_card_vo_entity.g.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 export 'package:cescpro/generated/json/com_card_vo_entity.g.dart';
 
@@ -52,6 +54,11 @@ class ComCardVoItems {
   String toString() {
     return jsonEncode(this);
   }
+
+  String get showValue => Get.isEn ? (enValue ?? "") : (value ?? "");
+
+  String get showFieldName =>
+      Get.isEn ? (fieldNameEn ?? "") : (fieldNameCn ?? "");
 }
 
 @JsonSerializable()
@@ -75,4 +82,9 @@ class ComCardVoDefaultList {
   String toString() {
     return jsonEncode(this);
   }
+
+  String get showValue => Get.isEn ? (enValue ?? "") : (value ?? "");
+
+  String get showFieldName =>
+      Get.isEn ? (fieldNameEn ?? "") : (fieldNameCn ?? "");
 }

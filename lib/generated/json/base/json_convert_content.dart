@@ -2,6 +2,7 @@
 // ignore_for_file: camel_case_types
 // ignore_for_file: prefer_single_quotes
 
+import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/http/bean/alarm_graph_item_entity.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/http/bean/analysis_entity.dart';
@@ -174,6 +175,14 @@ class JsonConvert {
 
   //list is returned by type
   static M? _getListChildType<M>(List<Map<String, dynamic>> data) {
+    if (<CountryEntity>[] is M) {
+      return data
+              .map<CountryEntity>(
+                (Map<String, dynamic> e) => CountryEntity.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
     if (<AlarmGraphItemEntity>[] is M) {
       return data
               .map<AlarmGraphItemEntity>(
@@ -302,14 +311,6 @@ class JsonConvert {
       return data
               .map<CompTreeEntity>(
                 (Map<String, dynamic> e) => CompTreeEntity.fromJson(e),
-              )
-              .toList()
-          as M;
-    }
-    if (<CompTreeChild>[] is M) {
-      return data
-              .map<CompTreeChild>(
-                (Map<String, dynamic> e) => CompTreeChild.fromJson(e),
               )
               .toList()
           as M;
@@ -570,6 +571,7 @@ class JsonConvert {
 
 class JsonConvertClassCollection {
   Map<String, JsonConvertFunction> convertFuncMap = {
+    (CountryEntity).toString(): CountryEntity.fromJson,
     (AlarmGraphItemEntity).toString(): AlarmGraphItemEntity.fromJson,
     (AlarmItemEntity).toString(): AlarmItemEntity.fromJson,
     (AnalysisEntity).toString(): AnalysisEntity.fromJson,
@@ -589,7 +591,6 @@ class JsonConvertClassCollection {
     (ComTypeListEntity).toString(): ComTypeListEntity.fromJson,
     (ComTypeListItem).toString(): ComTypeListItem.fromJson,
     (CompTreeEntity).toString(): CompTreeEntity.fromJson,
-    (CompTreeChild).toString(): CompTreeChild.fromJson,
     (ElecGraphEntity).toString(): ElecGraphEntity.fromJson,
     (HomeStatisticEntity).toString(): HomeStatisticEntity.fromJson,
     (MessageItemEntity).toString(): MessageItemEntity.fromJson,

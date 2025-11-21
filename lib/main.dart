@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           //home: LineChartWidget(),
           //home: BarChartWidget(),
           // home: SplashPage(),
-          //home: MainPage(),
+          // home: MainPage(),
           /*home: StatusPieChart(
           total: 10,
           normal: 5,

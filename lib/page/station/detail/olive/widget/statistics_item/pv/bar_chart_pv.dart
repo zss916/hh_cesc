@@ -2,14 +2,14 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BarChartWidget extends StatefulWidget {
-  const BarChartWidget({super.key});
+class BarChartWidgetPV extends StatefulWidget {
+  const BarChartWidgetPV({super.key});
 
   @override
   State<StatefulWidget> createState() => BarChartWidgetState();
 }
 
-class BarChartWidgetState extends State<BarChartWidget> {
+class BarChartWidgetState extends State<BarChartWidgetPV> {
   late List<BarChartGroupData> showingBarGroups;
 
   @override
@@ -153,29 +153,11 @@ class BarChartWidgetState extends State<BarChartWidget> {
       x: x,
       barRods: [
         BarChartRodData(
-          //toY: y1,
-          fromY: y1,
-          toY: 0,
-          gradient: LinearGradient(
-            colors: [Color(0xFF43FFFF), Color(0xFF0978E9)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(2),
-            topRight: Radius.circular(2),
-            bottomLeft: Radius.zero,
-            bottomRight: Radius.zero,
-          ),
-          //color: Color(0xFF39FFEF),
-          width: 8.w,
-        ),
-        BarChartRodData(
           fromY: y1,
           toY: 0,
           //toY: y2,
           gradient: LinearGradient(
-            colors: [Color(0xFFFFC08C), Color(0xFFFF8334)],
+            colors: [Color(0xFFFEDB65), Color(0xFFFFA600)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),

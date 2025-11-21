@@ -175,6 +175,10 @@ class TKey {
 
   static const String power = "power";
 
+  static const String current = "current";
+
+  static const String voltage = "voltage";
+
   static const String charge = "charge";
 
   static const String discharge = "discharge";
@@ -278,6 +282,8 @@ class TKey {
 
   static const String totalPVNeg = "totalPVNeg";
 
+  static const String batterySystem = "batterySystem";
+
   static const String currentYearPVNeg = "currentYearPVNeg";
 
   static const String currentMonthPVNeg = "currentMonthPVNeg";
@@ -292,7 +298,23 @@ class TKey {
 
   static const String highLevel = "highLevel";
 
+  static const String electricityMeter = "electricityMeter";
+
   static const String timeOfOccurrence = "timeOfOccurrence";
+
+  static const String temperatureAndHumidity = "temperatureAndHumidity";
+
+  static const String liquidCooling = "liquidCooling";
+
+  static const String alarmStatus = "alarmStatus";
+
+  static const String status = "status";
+
+  static const String acSide = "acSide";
+
+  static const String electricalPhase = "electricalPhase";
+
+  static const String basicInformation = "basicInformation";
 }
 
 const en = {
@@ -438,4 +460,14 @@ const en = {
   "alarmCount": "%s台",
   "highLevel": "最高等级",
   "timeOfOccurrence": "发生时间",
+  "batterySystem": "电池系统",
+  "electricityMeter": "电表",
+  "temperatureAndHumidity": "温湿度",
+  "liquidCooling": "液冷",
+  "status": "状态",
+  "basicInformation": "基础信息",
+  "current": "电流",
+  "voltage": "电压",
+  "electricalPhase": "电相",
+  "acSide": "交流侧",
 };

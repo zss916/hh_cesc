@@ -51,4 +51,26 @@ class SiteDetailEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  String get workModel {
+    if (status == 99) {
+      return "Normal";
+    } else if (status == 0) {
+      return "Stop";
+    } else if (status == 1) {
+      return "Charge";
+    } else if (status == 2) {
+      return "Discharge";
+    } else if (status == 3) {
+      return "Standby";
+    } else if (status == 4) {
+      return "Fault";
+    } else if (status == -3) {
+      return "interrupt";
+    } else if (status == -2) {
+      return "alarm";
+    } else {
+      return "";
+    }
+  }
 }

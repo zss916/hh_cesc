@@ -1,4 +1,4 @@
-import 'package:cescpro/http/bean/site_detail_entity.dart';
+import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
 import 'package:cescpro/page/login/index.dart';
 import 'package:cescpro/page/main/index.dart';

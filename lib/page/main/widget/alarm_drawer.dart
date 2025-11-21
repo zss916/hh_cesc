@@ -1,8 +1,11 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/model/country_entity.dart';
+import 'package:cescpro/core/service/app_info_service.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/alarm/index/index.dart';
+import 'package:cescpro/page/main/sheet/alarm_select_sheet.dart';
+import 'package:cescpro/page/main/sheet/select_country_sheet.dart';
 import 'package:cescpro/page/main/widget/alarm_item_select.dart';
-import 'package:cescpro/page/main/widget/alarm_select_sheet.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +32,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
   DateTime? endDateTime;
   String? alarmTitle;
   int? alarmLevel;
+  CountryEntity? countryItem;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +40,17 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
       children: [
         AlarmItemSelect(
           title: TKey.affiliatedArea.tr,
-          onTap: () async {
-            // getCountry();
+          subTitle: countryItem?.en,
+          onTap: () {
+            showSelectCountrySheet(
+              country: countryItem,
+              AppInfoService.to.countryList,
+              onSelectItem: (CountryEntity? country) {
+                setState(() {
+                  countryItem = country;
+                });
+              },
+            );
           },
         ),
 
@@ -64,7 +77,6 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
                 });
               },
             );
-            //alarmLevel
           },
         ),
         Divider(height: 24.h, color: Colors.transparent),
@@ -139,13 +151,13 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
                       startDateTime?.millisecondsSinceEpoch;
                   safeFind<AlarmLogic>()?.endTimeMill =
                       endDateTime?.millisecondsSinceEpoch;
-                  debugPrint(
+                  safeFind<AlarmLogic>()?.countryCode = countryItem?.code;
+
+                  /* debugPrint(
                     "start: ${safeFind<AlarmLogic>()?.startTimeMill},"
                     " end ${safeFind<AlarmLogic>()?.endTimeMill}"
                     " level:${alarmLevel}",
-                  );
-
-                  // widget.onConfirm.call();
+                  );*/
                 },
                 child: Container(
                   width: double.maxFinite,

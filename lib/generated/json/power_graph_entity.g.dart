@@ -29,6 +29,12 @@ PowerGraphEntity $PowerGraphEntityFromJson(Map<String, dynamic> json) {
   if (list != null) {
     powerGraphEntity.list = list;
   }
+  final List<int>? yList = (json['yList'] as List<dynamic>?)
+      ?.map((e) => jsonConvert.convert<int>(e) as int)
+      .toList();
+  if (yList != null) {
+    powerGraphEntity.yList = yList;
+  }
   return powerGraphEntity;
 }
 
@@ -40,6 +46,7 @@ Map<String, dynamic> $PowerGraphEntityToJson(PowerGraphEntity entity) {
   data['sn'] = entity.sn;
   data['title'] = entity.title;
   data['list'] = entity.list?.map((v) => v.toJson()).toList();
+  data['yList'] = entity.yList;
   return data;
 }
 
@@ -51,6 +58,7 @@ extension PowerGraphEntityExtension on PowerGraphEntity {
     String? sn,
     String? title,
     List<PowerGraphList>? list,
+    List<int>? yList,
   }) {
     return PowerGraphEntity()
       ..type = type ?? this.type
@@ -58,7 +66,8 @@ extension PowerGraphEntityExtension on PowerGraphEntity {
       ..did = did ?? this.did
       ..sn = sn ?? this.sn
       ..title = title ?? this.title
-      ..list = list ?? this.list;
+      ..list = list ?? this.list
+      ..yList = yList ?? this.yList;
   }
 }
 

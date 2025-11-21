@@ -1,3 +1,4 @@
+import 'package:cescpro/core/service/app_info_service.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/storage/storage.dart';
 import 'package:cescpro/core/user/user.dart';
@@ -13,6 +14,7 @@ class Global {
       Get.put<StorageService>(StorageService()).init(),
     ]).whenComplete(() async {
       AppLoading();
+      Get.putAsync<AppInfoService>(() => AppInfoService().init());
     });
 
     await Get.putAsync<User>(() => User().init());

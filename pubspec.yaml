@@ -112,6 +112,6 @@ flutter:
     - assets/
     - assets/img/
     - assets/gplot/
-
+    - assets/json/
 
 

@@ -34,7 +34,7 @@ class RealAlarmView extends StatelessWidget {
 
                 if ((logic.list3).isNotEmpty) buildAttentionAlarmItem(logic),
 
-                buildFocusOn(),
+                buildFocusOn(logic),
 
                 Divider(height: 150.h, color: Colors.transparent),
               ],
@@ -264,7 +264,7 @@ class RealAlarmView extends StatelessWidget {
       children: [
         PieChartWidget(
           size: Size(140.w, 140.w),
-          title: "",
+          title: TKey.focusOn.tr,
           count: "${logic.highestAlarmData?.totalCnt ?? 0}",
           list: logic.list3,
         ),
@@ -304,7 +304,7 @@ class RealAlarmView extends StatelessWidget {
     ),
   );
 
-  Widget buildFocusOn() => Column(
+  Widget buildFocusOn(RealAlarmLogic logic) => Column(
     children: [
       Container(
         width: double.maxFinite,
@@ -334,18 +334,15 @@ class RealAlarmView extends StatelessWidget {
           // bottom: 200.h,
         ),
         child: Marquee(
-          child: Text(
-            ' 这是一段重点gdfsgdsfgsdf关注这gfdsgdfsgdfsgdsfgdsfgdsfgsdfgdsf'
-            '是一段重点关注gfsdgdfsgdsfgdsf这是gdfsgdfsgdfsgdfsgdfsgdsfgsdf'
-            '一段重点关注这是一段重点关注这是一段gdfsgdfsgdsf重gdfsgdfsgdfsgdfsgdfsgdsf点关注这'
-            '是一段重点关注fdsgdfsgdfsgdfsgdsfgdsfgfdsgdsfgsdfgsdfgdsfgdsfgfdsgdfsgdsfgsdgsdf',
-            style: TextStyle(fontSize: 14, color: Colors.white),
-          ),
           direction: Axis.vertical,
-          animationDuration: Duration(seconds: 4),
+          animationDuration: Duration(seconds: 10),
           backDuration: Duration(milliseconds: 5000),
           pauseDuration: Duration(milliseconds: 500),
           directionMarguee: DirectionMarguee.oneDirection,
+          child: Text(
+            logic.contents,
+            style: TextStyle(fontSize: 14, color: Colors.white),
+          ),
         ),
         /*child: Marquee(
           text: 'Some sample text that takes some space.',

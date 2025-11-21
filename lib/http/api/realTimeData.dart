@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/bean/cell_data_entity.dart';
 import 'package:cescpro/http/bean/com_card_vo_entity.dart';
@@ -141,7 +143,7 @@ class RealTimeDataAPI {
           "compType": compType,
         },
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         return ComTypeListEntity.fromJson(result['data']);
       } else {
         AppLoading.toast(result["message"]);
@@ -153,7 +155,7 @@ class RealTimeDataAPI {
   }
 
   ///获取实时数据组卡片列表
-  static Future<ComCardVoEntity?> postComponentListByDev({
+  static Future<List<ComCardVoEntity>> postComponentListByDev({
     required String siteId,
     required int did,
     required int nodeNo,
@@ -171,14 +173,19 @@ class RealTimeDataAPI {
           "compType": compType,
         },
       );
-      if (result["code"] == 0) {
-        return ComCardVoEntity.fromJson(result['data']);
+      if (result["code"] == HttpStatus.ok) {
+        List<ComCardVoEntity> value = await compute(
+          (List<dynamic> jsonList) =>
+              jsonList.map((e) => ComCardVoEntity.fromJson(e)).toList(),
+          (result['data'] as List),
+        );
+        return value;
       } else {
         AppLoading.toast(result["message"]);
-        return null;
+        return <ComCardVoEntity>[];
       }
     } catch (error) {
-      return null;
+      return <ComCardVoEntity>[];
     }
   }
 }

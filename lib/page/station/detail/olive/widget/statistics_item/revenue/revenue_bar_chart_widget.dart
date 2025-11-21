@@ -1,33 +1,34 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/bar_chart.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/month_bar_chart.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/year_bar_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class BuildBarChartWidget extends StatefulWidget {
+class RevenueBarChartWidget extends StatefulWidget {
   final String title;
   final StatisticsItemLogic logic;
-  const BuildBarChartWidget({
+
+  const RevenueBarChartWidget({
     super.key,
     required this.title,
     required this.logic,
   });
 
   @override
-  State<BuildBarChartWidget> createState() => _BuildBarChartWidget();
+  State<RevenueBarChartWidget> createState() => _RevenueBarChartWidget();
 }
 
-class _BuildBarChartWidget extends State<BuildBarChartWidget>
+class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
     with SingleTickerProviderStateMixin {
   late final TabController tabCtrl;
 
   @override
   void initState() {
     super.initState();
-    tabCtrl = TabController(length: 3, vsync: this);
+    tabCtrl = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -81,35 +82,32 @@ class _BuildBarChartWidget extends State<BuildBarChartWidget>
               Column(
                 children: [
                   Divider(height: 30.h, color: Colors.transparent),
-                  Container(
-                    color: Colors.transparent,
-                    height: 270,
-                    width: double.maxFinite,
-                    child: TabBarView(
-                      controller: tabCtrl,
-                      children: [
-                        BarChartWidget(),
-                        BarChartWidget(),
-                        BarChartWidget(),
-                      ],
+                  if (widget.logic.incomeY.isNotEmpty)
+                    Container(
+                      color: Colors.transparent,
+                      height: 330,
+                      width: double.maxFinite,
+                      child: TabBarView(
+                        controller: tabCtrl,
+                        children: [
+                          ///月
+                          MonthBarChartWidget(
+                            yList: widget.logic.incomeY,
+                            xList: widget.logic.monthX,
+                          ),
+
+                          ///年
+                          YearBarChartWidget(),
+                        ],
+                      ),
+                    )
+                  else
+                    Container(
+                      color: Colors.transparent,
+                      height: 330,
+                      width: double.maxFinite,
                     ),
-                  ),
                   Divider(height: 5.h, color: Colors.transparent),
-                  Row(
-                    children: [
-                      Spacer(),
-                      LineTitleWidget(
-                        title: TKey.charge.tr,
-                        color: Color(0xFF39FFEF),
-                      ),
-                      VerticalDivider(width: 16.w, color: Colors.transparent),
-                      LineTitleWidget(
-                        title: TKey.discharge.tr,
-                        color: Color(0xFFFFC08C),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
                 ],
               ),
 
@@ -129,18 +127,6 @@ class _BuildBarChartWidget extends State<BuildBarChartWidget>
                   child: TabBar(
                     controller: tabCtrl,
                     tabs: [
-                      Tab(
-                        child: Container(
-                          width: 120.w,
-                          height: 28.h,
-                          padding: EdgeInsetsDirectional.symmetric(
-                            horizontal: 2,
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(TKey.day.tr),
-                        ),
-                      ),
-
                       Tab(
                         child: Container(
                           width: 120.w,
@@ -185,16 +171,14 @@ class _BuildBarChartWidget extends State<BuildBarChartWidget>
                     onTap: (index) {
                       debugPrint("index ==> $index");
                       if (index == 0) {
-                        widget.logic.loadPVTrend(type: 0);
-                      } else if (index == 1) {
                         DateTime now = DateTime.now();
                         DateTime start = DateTime(now.year, now.month, 1);
                         DateTime end = DateTime(now.year, now.month, now.day);
                         debugPrint(
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
-                        widget.logic.loadPVTrend(
-                          type: 2,
+                        widget.logic.loadEle(
+                          type: 1,
                           startTimeStamp: start.millisecondsSinceEpoch,
                           endTimeStamp: end.millisecondsSinceEpoch,
                         );
@@ -205,8 +189,8 @@ class _BuildBarChartWidget extends State<BuildBarChartWidget>
                         debugPrint(
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
-                        widget.logic.loadPVTrend(
-                          type: 1,
+                        widget.logic.loadEle(
+                          type: 2,
                           startTimeStamp: start.millisecondsSinceEpoch,
                           endTimeStamp: end.millisecondsSinceEpoch,
                         );

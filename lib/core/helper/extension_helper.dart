@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:cescpro/core/translations/en.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -54,5 +55,22 @@ extension RandomColor on int {
     ); // 创建Color对象
 
     return randomColor;
+  }
+}
+
+///ARR和CLU要归到电池系统
+///MERER 电表
+///DRIER 温湿度
+///COOL 液冷
+//[ARR, CLU, PCS, AIR_COOL, DRIER, METER, DIDO]
+extension TitleName on String {
+  String getTitle() {
+    return switch (this) {
+      _ when (this == "ARR" || this == "CLU") => TKey.batterySystem.tr,
+      _ when (this == "METER") => TKey.electricityMeter.tr,
+      _ when (this == "DRIER") => TKey.temperatureAndHumidity.tr,
+      _ when (this == "COOL") => TKey.liquidCooling.tr,
+      _ => this,
+    };
   }
 }

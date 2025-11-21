@@ -10,7 +10,7 @@ import 'package:flutter/foundation.dart';
 class AlarmAPI {
   ///实时告警数据
   static Future<(bool, List<AlarmItemEntity>)> postRealTimePage({
-    required int siteId,
+    required String siteId,
     int? pageNum = 1,
     int? pageSize = 10,
     int? alarmLevel,

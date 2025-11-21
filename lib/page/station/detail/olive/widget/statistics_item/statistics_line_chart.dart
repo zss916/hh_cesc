@@ -1,10 +1,12 @@
+import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @immutable
 class StatisticsLineChartWidget extends StatefulWidget {
-  const StatisticsLineChartWidget({super.key});
+  final List<PowerGraphList> value;
+  const StatisticsLineChartWidget({super.key, required this.value});
 
   @override
   State<StatefulWidget> createState() => LineChartWidgetState();
@@ -18,99 +20,138 @@ class LineChartWidgetState extends State<StatisticsLineChartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _LineChart();
+    return _LineChart(widget.value);
   }
 }
 
 class _LineChart extends StatelessWidget {
-  const _LineChart();
+  final List<PowerGraphList> powerList;
 
-  @override
-  Widget build(BuildContext context) {
-    return LineChart(sampleData1, duration: const Duration(milliseconds: 250));
-  }
-
-  ///数据1
-  LineChartData get sampleData1 => LineChartData(
-    lineTouchData: lineTouchData1,
-    gridData: gridData,
-    titlesData: titlesData1,
-    borderData: borderData,
-    lineBarsData: lineBarsData1,
-    minX: 0,
-    maxX: 14,
-    maxY: 5,
-    minY: 0,
-  );
-
-  ///触摸
-  LineTouchData get lineTouchData1 => LineTouchData(enabled: false);
-
-  FlTitlesData get titlesData1 => FlTitlesData(
-    bottomTitles: AxisTitles(sideTitles: bottomTitles),
-    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-    topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-    leftTitles: AxisTitles(sideTitles: leftTitles()),
-  );
+  const _LineChart(this.powerList);
 
   ///折现数据列表
   List<LineChartBarData> get lineBarsData1 => [
-    lineChartBarData1_1,
-    lineChartBarData1_2,
-    lineChartBarData1_3,
-    lineChartBarData1_4,
-    lineChartBarData1_5,
+    LineChartBarData(
+      ///是否圆一点
+      isCurved: true,
+      color: Color(0xFF3874F2),
+      barWidth: 1,
+      isStrokeCapRound: true,
+
+      ///点数据
+      dotData: const FlDotData(show: false),
+
+      ///线下面的区域(true)
+      belowBarData: BarAreaData(
+        show: true,
+        color: Color(0xFF3874F2).withValues(alpha: 0.15),
+      ),
+      spots: [
+        ...(powerList ?? []).map((e) => e.mFlSpot),
+        /*...(list[0].list??[])
+            .map((e) => FlSpot(0,0)),
+        */
+        ///点坐标
+        // FlSpot(1, 1),
+        // FlSpot(3, 1.5),
+      ],
+    ),
+    //lineChartBarData1_2,
+    //lineChartBarData1_3,
+    //lineChartBarData1_4,
+    //lineChartBarData1_5,
   ];
 
-  ///左侧文案
-  SideTitles leftTitles() => SideTitles(
-    getTitlesWidget: leftTitleWidgets,
-    showTitles: true,
-    interval: 1,
-    reservedSize: 30,
-  );
-
-  Widget leftTitleWidgets(double value, TitleMeta meta) {
-    TextStyle style = TextStyle(
-      fontWeight: FontWeight.normal,
-      fontSize: 12.sp,
-      color: Color(0x80FFFFFF),
+  @override
+  Widget build(BuildContext context) {
+    return LineChart(
+      LineChartData(
+        lineTouchData: LineTouchData(enabled: false),
+        gridData: FlGridData(
+          show: true,
+          horizontalInterval: 1,
+          drawVerticalLine: false,
+        ),
+        titlesData: FlTitlesData(
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 30,
+              interval: 1,
+              getTitlesWidget: bottomTitleWidgets,
+            ),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              getTitlesWidget: leftTitleWidgets,
+              showTitles: true,
+              interval: 1,
+              reservedSize: 30,
+            ),
+          ),
+        ),
+        borderData: FlBorderData(
+          show: true,
+          border: Border(
+            bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
+            left: const BorderSide(color: Colors.transparent, width: 0),
+            right: const BorderSide(color: Colors.transparent, width: 0),
+            top: const BorderSide(color: Colors.transparent, width: 0),
+          ),
+        ),
+        lineBarsData: lineBarsData1,
+        //minX: 0,
+        //maxX: 24,
+        // minY: 0,
+        // maxY: 80,
+        //minY: (powerList.first.list?.first.time ?? 0).toDouble(),
+        //maxY: (powerList.first.list?.last.time ?? 0).toDouble(),
+      ),
+      duration: const Duration(milliseconds: 250),
     );
-    String text;
+  }
+
+  ///left title
+  Widget leftTitleWidgets(double value, TitleMeta meta) {
+    String text = "";
     switch (value.toInt()) {
       case 0:
-        text = '0';
+        // text = '${powerList.first.yList[0]}';
         break;
       case 1:
-        text = '20';
+        // text = '${powerList.first.yList[1]}';
         break;
       case 2:
-        text = '40';
+        // text = '${powerList.first.yList[2]}';
         break;
       case 3:
-        text = '60';
+        // text = '${powerList.first.yList[3]}';
         break;
       case 4:
-        text = '80';
+        //  text = '${powerList.first.yList[4]}';
         break;
       default:
         return SizedBox.shrink();
     }
-
     return SideTitleWidget(
       meta: meta,
-      child: Text(text, style: style, textAlign: TextAlign.center),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontWeight: FontWeight.normal,
+          fontSize: 12.sp,
+          color: Color(0x80FFFFFF),
+        ),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 
-  ///底部文案
-  SideTitles get bottomTitles => SideTitles(
-    showTitles: true,
-    reservedSize: 30,
-    interval: 1,
-    getTitlesWidget: bottomTitleWidgets,
-  );
-
+  ///底部title
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     TextStyle style = TextStyle(
       fontWeight: FontWeight.normal,
@@ -119,20 +160,26 @@ class _LineChart extends StatelessWidget {
     );
     Widget text;
     switch (value.toInt()) {
-      case 1:
-        text = Text('00:00', style: style);
+      case 0:
+        text = Container(
+          margin: EdgeInsetsGeometry.only(left: 24.w),
+          child: Text('00:00', style: style),
+        );
         break;
-      case 4:
-        text = Text('01:00', style: style);
+      case 6:
+        text = Text('06:00', style: style);
         break;
-      case 7:
-        text = Text('02:00', style: style);
+      case 12:
+        text = Text('12:00', style: style);
         break;
-      case 10:
-        text = Text('03:00', style: style);
+      case 18:
+        text = Text('18:00', style: style);
         break;
-      case 13:
-        text = Text('04:00', style: style);
+      case 24:
+        text = Container(
+          margin: EdgeInsetsGeometry.only(right: 22.w),
+          child: Text('24:00', style: style),
+        );
         break;
       default:
         text = const Text('');
@@ -141,21 +188,6 @@ class _LineChart extends StatelessWidget {
 
     return SideTitleWidget(meta: meta, space: 2, child: text);
   }
-
-  ///网格
-  FlGridData get gridData =>
-      FlGridData(show: true, horizontalInterval: 1, drawVerticalLine: false);
-
-  /// 边框
-  FlBorderData get borderData => FlBorderData(
-    show: true,
-    border: Border(
-      bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-      left: const BorderSide(color: Colors.transparent, width: 0),
-      right: const BorderSide(color: Colors.transparent, width: 0),
-      top: const BorderSide(color: Colors.transparent, width: 0),
-    ),
-  );
 
   ///折线1
   LineChartBarData get lineChartBarData1_1 => LineChartBarData(

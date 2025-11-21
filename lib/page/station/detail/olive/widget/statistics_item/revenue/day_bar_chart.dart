@@ -2,14 +2,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BarChartWidget extends StatefulWidget {
-  const BarChartWidget({super.key});
+class DayBarChartWidget extends StatefulWidget {
+  final double? maxY;
+  const DayBarChartWidget({super.key, this.maxY});
 
   @override
   State<StatefulWidget> createState() => BarChartWidgetState();
 }
 
-class BarChartWidgetState extends State<BarChartWidget> {
+class BarChartWidgetState extends State<DayBarChartWidget> {
   late List<BarChartGroupData> showingBarGroups;
 
   @override
@@ -33,7 +34,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
     return BarChart(
       BarChartData(
         ///最大值dataList.reduce(max)；
-        maxY: 5,
+        maxY: widget.maxY,
         minY: 0,
         barTouchData: BarTouchData(enabled: false),
         titlesData: FlTitlesData(

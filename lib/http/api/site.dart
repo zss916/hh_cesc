@@ -169,7 +169,7 @@ class SiteAPI {
 
   ///获取光伏发电趋势数据
   static Future<(bool, List<PvTrendEntity>)> postPvTrend({
-    required String siteId,
+    required int siteId,
     required int startTimeStamp,
     required int endTimeStamp,
     required int queryType,
@@ -180,12 +180,12 @@ class SiteAPI {
         ApiPath.postPvTrend,
         data: {
           "siteId": siteId,
-          "startTimeStamp": 0,
-          "endTimeStamp": 0,
-          "queryType": 0,
+          "startTimeStamp": startTimeStamp,
+          "endTimeStamp": endTimeStamp,
+          "queryType": queryType,
         },
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<PvTrendEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => PvTrendEntity.fromJson(e)).toList(),
@@ -203,22 +203,22 @@ class SiteAPI {
 
   ///查询收益，充放电统计以及效率
   static Future<(bool, List<ElecGraphEntity>)> postElecGraph({
-    required String siteId,
-    required int startTimeStamp,
-    required int endTimeStamp,
-    required int queryType,
+    required int siteId,
+    int? startTimeStamp,
+    int? endTimeStamp,
+    int? queryType,
   }) async {
     try {
       var result = await Http.instance.post(
         ApiPath.postElecGraph,
         data: {
           "siteId": siteId,
-          "startTimeStamp": 0,
-          "endTimeStamp": 0,
-          "queryType": 0,
+          "startTimeStamp": startTimeStamp ?? 0,
+          "endTimeStamp": endTimeStamp ?? 0,
+          "queryType": queryType ?? 0,
         },
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<ElecGraphEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => ElecGraphEntity.fromJson(e)).toList(),
@@ -236,16 +236,25 @@ class SiteAPI {
 
   ///功率分析
   static Future<(bool, List<PowerGraphEntity>)> postPowerGraph({
-    required String siteId,
-    required int startTimeStamp,
-    required int endTimeStamp,
+    required int siteId,
+    int? startTimeStamp,
+    int? endTimeStamp,
+    int? queryType,
   }) async {
     try {
-      var result = await Http.instance.post(
-        ApiPath.postPowerGraph,
-        data: {"siteId": siteId, "startTimeStamp": 0, "endTimeStamp": 0},
-      );
-      if (result["code"] == 0) {
+      Map<String, dynamic> map = {};
+      map['siteId'] = siteId;
+      if (startTimeStamp != null) {
+        map['startTimeStamp'] = startTimeStamp;
+      }
+      if (endTimeStamp != null) {
+        map['endTimeStamp'] = endTimeStamp;
+      }
+      if (queryType != null) {
+        map['queryType'] = queryType;
+      }
+      var result = await Http.instance.post(ApiPath.postPowerGraph, data: map);
+      if (result["code"] == HttpStatus.ok) {
         List<PowerGraphEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => PowerGraphEntity.fromJson(e)).toList(),
@@ -278,7 +287,7 @@ class SiteAPI {
           "queryType": 0,
         },
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<AlarmGraphItemEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => AlarmGraphItemEntity.fromJson(e)).toList(),
@@ -310,7 +319,7 @@ class SiteAPI {
         map["type"] = type;
       }
       var result = await Http.instance.get(ApiPath.getCompTree, query: map);
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<CompTreeEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => CompTreeEntity.fromJson(e)).toList(),

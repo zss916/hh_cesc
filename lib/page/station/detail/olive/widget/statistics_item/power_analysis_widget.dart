@@ -1,6 +1,9 @@
+import 'package:cescpro/core/color/colors.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_line_chart.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +11,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class PowerAnalysisWidget extends StatefulWidget {
-  const PowerAnalysisWidget({super.key});
+  final StatisticsItemLogic logic;
+  const PowerAnalysisWidget({super.key, required this.logic});
 
   @override
   State<PowerAnalysisWidget> createState() => _PowerAnalysisWidgetState();
@@ -40,7 +44,7 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
               InkWell(
                 borderRadius: BorderRadius.circular(5),
                 onTap: () {
-                  showDateTimePicker();
+                  showDateTimePicker(widget.logic);
                 },
                 child: Container(
                   padding: EdgeInsetsDirectional.symmetric(
@@ -84,60 +88,63 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
             children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
+              Stack(
+                alignment: Alignment.center,
                 children: [
-                  Container(
-                    color: Colors.transparent,
-                    height: 270,
-                    width: double.maxFinite,
-                    child: StatisticsLineChartWidget(),
-                  ),
-                  Divider(height: 5.h, color: Colors.transparent),
-                  Container(
-                    padding: EdgeInsetsDirectional.symmetric(horizontal: 15.w),
-                    width: double.maxFinite,
-                    child: Wrap(
-                      spacing: 15.w,
-                      runSpacing: 8.h,
+                  if (widget.logic.powerView == PowerViewType.common.index)
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        LineTitleWidget(
-                          color: Color(0xFF3874F2),
-                          title: "光伏功率",
+                        Container(
+                          color: Colors.transparent,
+                          height: 270,
+                          width: double.maxFinite,
+                          child: StatisticsLineChartWidget(
+                            value: widget.logic.showPowerList.first.list ?? [],
+                          ),
                         ),
-
-                        LineTitleWidget(
-                          color: Color(0xFF00FADC),
-                          title: "电网功率",
-                        ),
-
-                        LineTitleWidget(
-                          color: Color(0xFFF9C74F),
-                          title: "电池总功率",
-                        ),
-
-                        LineTitleWidget(
-                          color: Color(0xFFF94144),
-                          title: "设备1#电池功率",
-                        ),
-
-                        LineTitleWidget(
-                          color: Color(0xFFB131DB),
-                          title: "设备2#电池功率",
+                        Divider(height: 5.h, color: Colors.transparent),
+                        Container(
+                          padding: EdgeInsetsDirectional.symmetric(
+                            horizontal: 15.w,
+                          ),
+                          width: double.maxFinite,
+                          child: Wrap(
+                            spacing: 15.w,
+                            runSpacing: 8.h,
+                            children: [
+                              ...widget.logic.showPowerList.mapIndexed(
+                                (i, e) => LineTitleWidget(
+                                  color: AppColors.colorList[i],
+                                  title: e.title ?? "",
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                  if (widget.logic.powerView == PowerViewType.loading.index)
+                    SizedBox(
+                      height: 280,
+                      width: double.maxFinite,
+                      child: Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
+                    ),
+                  if (widget.logic.powerView == PowerViewType.empty.index)
+                    SizedBox(height: 280, width: double.maxFinite),
                 ],
               ),
-              PositionedDirectional(
-                start: 0.w,
-                top: 15.h,
-                child: Text(
-                  "(KW)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+              if (widget.logic.powerView == 0)
+                PositionedDirectional(
+                  start: 0.w,
+                  top: 15.h,
+                  child: Text(
+                    "(KW)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  ),
                 ),
-              ),
             ],
           ),
         ),
@@ -145,7 +152,7 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
     );
   }
 
-  void showDateTimePicker() {
+  void showDateTimePicker(StatisticsItemLogic logic) {
     DatePicker.showDatePicker(
       context,
       showTitleActions: true,
@@ -172,6 +179,9 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
         String formatted = DateFormat('yyyy-MM-dd').format(date);
         setState(() {
           currentTime = formatted;
+          logic.startTimeStamp = date.millisecondsSinceEpoch;
+          logic.endTimeStamp = date.millisecondsSinceEpoch;
+          logic.loadPower();
         });
       },
     );

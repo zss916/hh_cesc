@@ -3,27 +3,27 @@ import 'package:cescpro/http/bean/home_statistic_entity.dart';
 
 HomeStatisticEntity $HomeStatisticEntityFromJson(Map<String, dynamic> json) {
   final HomeStatisticEntity homeStatisticEntity = HomeStatisticEntity();
-  final double? totalIncome = jsonConvert.convert<double>(json['totalIncome']);
+  final num? totalIncome = jsonConvert.convert<num>(json['totalIncome']);
   if (totalIncome != null) {
     homeStatisticEntity.totalIncome = totalIncome;
   }
-  final double? todayIncome = jsonConvert.convert<double>(json['todayIncome']);
+  final num? todayIncome = jsonConvert.convert<num>(json['todayIncome']);
   if (todayIncome != null) {
     homeStatisticEntity.todayIncome = todayIncome;
   }
-  final int? capacity = jsonConvert.convert<int>(json['capacity']);
+  final num? capacity = jsonConvert.convert<num>(json['capacity']);
   if (capacity != null) {
     homeStatisticEntity.capacity = capacity;
   }
-  final double? totalPos = jsonConvert.convert<double>(json['totalPos']);
+  final num? totalPos = jsonConvert.convert<num>(json['totalPos']);
   if (totalPos != null) {
     homeStatisticEntity.totalPos = totalPos;
   }
-  final double? totalNeg = jsonConvert.convert<double>(json['totalNeg']);
+  final num? totalNeg = jsonConvert.convert<num>(json['totalNeg']);
   if (totalNeg != null) {
     homeStatisticEntity.totalNeg = totalNeg;
   }
-  final double? totalPvNeg = jsonConvert.convert<double>(json['totalPvNeg']);
+  final num? totalPvNeg = jsonConvert.convert<num>(json['totalPvNeg']);
   if (totalPvNeg != null) {
     homeStatisticEntity.totalPvNeg = totalPvNeg;
   }
@@ -51,11 +51,11 @@ HomeStatisticEntity $HomeStatisticEntityFromJson(Map<String, dynamic> json) {
   if (cutOffNum != null) {
     homeStatisticEntity.cutOffNum = cutOffNum;
   }
-  final double? co2 = jsonConvert.convert<double>(json['co2']);
+  final num? co2 = jsonConvert.convert<num>(json['co2']);
   if (co2 != null) {
     homeStatisticEntity.co2 = co2;
   }
-  final double? coal = jsonConvert.convert<double>(json['coal']);
+  final num? coal = jsonConvert.convert<num>(json['coal']);
   if (coal != null) {
     homeStatisticEntity.coal = coal;
   }
@@ -83,20 +83,20 @@ Map<String, dynamic> $HomeStatisticEntityToJson(HomeStatisticEntity entity) {
 
 extension HomeStatisticEntityExtension on HomeStatisticEntity {
   HomeStatisticEntity copyWith({
-    double? totalIncome,
-    double? todayIncome,
-    int? capacity,
-    double? totalPos,
-    double? totalNeg,
-    double? totalPvNeg,
+    num? totalIncome,
+    num? todayIncome,
+    num? capacity,
+    num? totalPos,
+    num? totalNeg,
+    num? totalPvNeg,
     int? deviceNum,
     int? siteNum,
     int? normalNum,
     int? faultNum,
     int? alarmNum,
     int? cutOffNum,
-    double? co2,
-    double? coal,
+    num? co2,
+    num? coal,
   }) {
     return HomeStatisticEntity()
       ..totalIncome = totalIncome ?? this.totalIncome

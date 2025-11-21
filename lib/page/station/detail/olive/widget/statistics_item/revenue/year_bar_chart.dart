@@ -2,14 +2,14 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BarChartWidget extends StatefulWidget {
-  const BarChartWidget({super.key});
+class YearBarChartWidget extends StatefulWidget {
+  const YearBarChartWidget({super.key});
 
   @override
   State<StatefulWidget> createState() => BarChartWidgetState();
 }
 
-class BarChartWidgetState extends State<BarChartWidget> {
+class BarChartWidgetState extends State<YearBarChartWidget> {
   late List<BarChartGroupData> showingBarGroups;
 
   @override

@@ -28,6 +28,7 @@ class OliveItemLogic extends GetxController {
   SiteDetailEntity? siteDetail;
   String get showChargeAvg => "${siteDetail?.chargeAvg ?? 0}";
   String get showRechargeAvg => "${siteDetail?.rechargeAvg ?? 0}";
+  String get workModel => siteDetail?.workModel ?? "";
 
   StatisticRecordEntity? statisticRecord;
   String get showTodayIncome => "${statisticRecord?.todayIncome ?? 0}";

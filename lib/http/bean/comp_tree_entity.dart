@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/comp_tree_entity.g.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 export 'package:cescpro/generated/json/comp_tree_entity.g.dart';
 
@@ -14,7 +16,9 @@ class CompTreeEntity {
   String? labelVal;
   String? labelCn;
   String? labelEn;
-  List<CompTreeChild>? child;
+  List<CompTreeEntity>? child;
+
+  String get labelName => Get.isEn ? (labelEn ?? "") : (labelCn ?? "");
 
   CompTreeEntity();
 
@@ -29,7 +33,7 @@ class CompTreeEntity {
   }
 }
 
-@JsonSerializable()
+/*@JsonSerializable()
 class CompTreeChild {
   String? label;
   String? key;
@@ -51,4 +55,4 @@ class CompTreeChild {
   String toString() {
     return jsonEncode(this);
   }
-}
+}*/

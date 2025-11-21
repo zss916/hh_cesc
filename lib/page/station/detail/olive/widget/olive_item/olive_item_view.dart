@@ -57,14 +57,15 @@ class OliveItemView extends StatelessWidget {
                           color: Color(0xB3FFFFFF),
                         ),
                       ),
-                      LineStatusWidget(),
-                      Text(
-                        "online",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0xDEFFFFFF),
+                      if (logic.workModel.isNotEmpty) LineStatusWidget(),
+                      if (logic.workModel.isNotEmpty)
+                        Text(
+                          logic.workModel,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color(0xDEFFFFFF),
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),

@@ -47,20 +47,24 @@ class AlarmItemSelect extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Text(
-                      subTitle ?? TKey.selectHint.tr,
-                      style: TextStyle(
-                        color: subTitle != null
-                            ? Colors.white
-                            : Color(0x73FFFFFF),
-                        fontSize: 14,
+                    Expanded(
+                      child: Text(
+                        subTitle ?? TKey.selectHint.tr,
+                        style: TextStyle(
+                          color: subTitle != null
+                              ? Colors.white
+                              : Color(0x73FFFFFF),
+                          fontSize: 14,
+                        ),
                       ),
                     ),
-                    Spacer(),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                      color: Colors.white60,
+                    Container(
+                      margin: EdgeInsetsDirectional.only(start: 5),
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                        color: Colors.white60,
+                      ),
                     ),
                   ],
                 ),

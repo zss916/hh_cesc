@@ -1,26 +1,25 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/bar_chart.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/bar_chart_pv.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class BuildBarChartWidget extends StatefulWidget {
+class BuildBarChartWidgetPV extends StatefulWidget {
   final String title;
   final StatisticsItemLogic logic;
-  const BuildBarChartWidget({
+  const BuildBarChartWidgetPV({
     super.key,
     required this.title,
     required this.logic,
   });
 
   @override
-  State<BuildBarChartWidget> createState() => _BuildBarChartWidget();
+  State<BuildBarChartWidgetPV> createState() => _BuildBarChartWidget();
 }
 
-class _BuildBarChartWidget extends State<BuildBarChartWidget>
+class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
     with SingleTickerProviderStateMixin {
   late final TabController tabCtrl;
 
@@ -88,28 +87,13 @@ class _BuildBarChartWidget extends State<BuildBarChartWidget>
                     child: TabBarView(
                       controller: tabCtrl,
                       children: [
-                        BarChartWidget(),
-                        BarChartWidget(),
-                        BarChartWidget(),
+                        BarChartWidgetPV(),
+                        BarChartWidgetPV(),
+                        BarChartWidgetPV(),
                       ],
                     ),
                   ),
                   Divider(height: 5.h, color: Colors.transparent),
-                  Row(
-                    children: [
-                      Spacer(),
-                      LineTitleWidget(
-                        title: TKey.charge.tr,
-                        color: Color(0xFF39FFEF),
-                      ),
-                      VerticalDivider(width: 16.w, color: Colors.transparent),
-                      LineTitleWidget(
-                        title: TKey.discharge.tr,
-                        color: Color(0xFFFFC08C),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
                 ],
               ),
 

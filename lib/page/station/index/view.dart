@@ -135,7 +135,7 @@ class StationPage extends StatelessWidget {
   Widget buildItem(SiteEntity item) {
     return GestureDetector(
       onTap: () {
-        PageTools.toStationDetail(siteId: item.id);
+        PageTools.toStationDetail(siteId: item.id, site: item);
       },
       child: Container(
         width: double.maxFinite,

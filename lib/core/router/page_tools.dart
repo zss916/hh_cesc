@@ -7,8 +7,10 @@ class PageTools {
   static offAndToNamedLogin() => Get.offAndToNamed(APages.login);
 
   ///站点详情
-  static toStationDetail({int? siteId}) =>
-      Get.toNamed(APages.stationDetail, arguments: {"siteId": siteId});
+  static toStationDetail({int? siteId, SiteEntity? site}) => Get.toNamed(
+    APages.stationDetail,
+    arguments: {"siteId": siteId, "site": site},
+  );
 
   ///告警详情
   static toAlarmDetail({int? siteId}) =>
@@ -30,7 +32,8 @@ class PageTools {
   static toSplash() => Get.toNamed(APages.splash);
 
   ///监控详情
-  static toMonitorDetail() => Get.toNamed(APages.monitorDetail);
+  static toMonitorDetail({required String devType}) =>
+      Get.toNamed(APages.monitorDetail, arguments: {"devType": devType});
 
   ///监控详情
   static toBatteryCluster() => Get.toNamed(APages.batteryCluster);

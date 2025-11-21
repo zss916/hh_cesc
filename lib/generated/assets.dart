@@ -37,4 +37,6 @@ class Assets {
   static const String imgStation = 'assets/img/station.png';
   static const String imgStationS = 'assets/img/station_s.png';
   static const String imgTodayRecharge = 'assets/img/today_recharge.png';
+  static const String jsonCountryAndArea = 'assets/json/country_and_area.json';
+  static const String jsonPcaCode = 'assets/json/pca-code.json';
 }

@@ -1,6 +1,8 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/alarm.dart';
+import 'package:cescpro/http/api/subscribe.dart';
+import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/http/bean/analysis_entity.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +45,8 @@ class RealAlarmLogic extends GetxController {
 
   List list3 = [];
 
+  String contents = "";
+
   @override
   void onInit() {
     super.onInit();
@@ -56,6 +60,7 @@ class RealAlarmLogic extends GetxController {
   void onReady() {
     super.onReady();
     loadData();
+    getImportantList();
   }
 
   final List<Color> colors = [
@@ -99,6 +104,20 @@ class RealAlarmLogic extends GetxController {
             .toList();
       }
       update();
+    }
+  }
+
+  Future<void> getImportantList() async {
+    if (siteId != null) {
+      final (bool isSucceeful, List<AlarmItemEntity> value) =
+          await SubscribeAPI.getImportantList(siteId: siteId!);
+      if (isSucceeful) {
+        if (value.isNotEmpty) {
+          List<String> contentList = value.map((e) => e.showContent()).toList();
+          contents = contentList.join(",");
+          update();
+        }
+      }
     }
   }
 

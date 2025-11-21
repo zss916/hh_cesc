@@ -7,6 +7,7 @@ class AlarmLogic extends GetxController {
   int pageNum = 1;
   int? startTimeMill;
   int? endTimeMill;
+  String? countryCode;
 
   @override
   void onInit() {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/json/alarm_item_entity.g.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
@@ -41,8 +42,6 @@ class AlarmItemEntity {
     return jsonEncode(this);
   }
 
-  //   "startTimeMill": 1761988267000,
-
   String getStartTime() {
     return DateFormat(
       'yyyy-MM-dd HH:mm:ss',
@@ -59,5 +58,28 @@ class AlarmItemEntity {
     } else {
       return null;
     }
+  }
+
+  ///持续时间
+  Duration get dif => DateTime.fromMillisecondsSinceEpoch(
+    endTimeMill ?? (DateTime.now().millisecondsSinceEpoch),
+  ).difference(DateTime.fromMillisecondsSinceEpoch(startTimeMill ?? 0));
+
+  String get keepTime {
+    if (dif.inDays == 0) {
+      return "${(dif.inHours) % 24}时${(dif.inMinutes) % 60}分${(dif.inSeconds) % 60}秒";
+    } else if ((dif.inDays == 0) && (dif.inHours == 0)) {
+      return "${(dif.inMinutes) % 60}分${(dif.inSeconds) % 60}秒";
+    } else if ((dif.inDays == 0) &&
+        (dif.inHours == 0) &&
+        (dif.inMinutes == 0)) {
+      return "${(dif.inSeconds) % 60}秒";
+    } else {
+      return "${dif.inDays}天${(dif.inHours) % 24}时${(dif.inMinutes) % 60}分${(dif.inSeconds) % 60}秒";
+    }
+  }
+
+  String showContent() {
+    return "${label ?? ""}${devType ?? ""}${(startTimeMill ?? 0).timestampFormat}发生了${alarmLevelType ?? ""}${content ?? ""},持续时间${keepTime}\n\n";
   }
 }

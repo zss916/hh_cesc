@@ -50,7 +50,7 @@ class AlarmDetailLogic extends GetxController {
         bool isSuccessful,
         List<AlarmItemEntity> value,
       ) = await AlarmAPI.postRealTimePage(
-        siteId: siteId!,
+        siteId: "$siteId",
         alarmLevel: alarmLevel,
         compType: compType,
       ).whenComplete(() => AppLoading.dismiss());

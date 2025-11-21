@@ -5,7 +5,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/widget/alarm_level_status_widget.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
-import 'package:cescpro/page/main/widget/alarm_select_sheet.dart';
+import 'package:cescpro/page/main/sheet/alarm_select_sheet.dart';
 import 'package:cescpro/page/station/detail/alarm/detail/alarm_detail_logic.dart';
 import 'package:cescpro/page/station/detail/alarm/detail/sheet/device_select_sheet.dart';
 import 'package:easy_refresh/easy_refresh.dart';
@@ -160,7 +160,7 @@ class AlarmDetailPage extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    item.label ?? "",
+                    item.name ?? "",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
