@@ -1,0 +1,400 @@
+import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/page/station/detail/monitor/cluster/line_chart.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/child/top_item_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+///电池系统
+class BatteryView extends StatelessWidget {
+  final MonitorDetailLogic logic;
+  const BatteryView({super.key, required this.logic});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TopItemWidget(title: logic.compTree),
+        Divider(height: 12.h, color: Colors.transparent),
+
+        ///状态
+        buildBatterySatusItem(logic),
+        Divider(height: 12.h, color: Colors.transparent),
+
+        ///基础数据
+        buildBatteryBaseInfoItem(logic),
+        Divider(height: 12.h, color: Colors.transparent),
+
+        ///ComponentTypeList
+        // buildDirectFlowMeasurement(),
+        // Divider(height: 12.h, color: Colors.transparent),
+
+        ///AC
+        /// buildACSide(),
+        /// Divider(height: 12.h, color: Colors.transparent),
+
+        ///???
+        // buildInfoList(),
+        // Divider(height: 12.h, color: Colors.transparent),
+
+        ///todo 实时曲线
+        buildLineChartWidget(),
+        Divider(height: 12.h, color: Colors.transparent),
+
+        ///实时数据
+        RealTimeDataWidget(comCardVoList: logic.comCardVoList),
+        Divider(height: 120.h, color: Colors.transparent),
+      ],
+    );
+  }
+
+  ///电池状态
+  Widget buildBatterySatusItem(MonitorDetailLogic logic) => Column(
+    children: [
+      Container(
+        padding: EdgeInsetsDirectional.only(
+          start: 18.w,
+          end: 18.w,
+          bottom: 16.h,
+        ),
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          TKey.status.tr,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsetsDirectional.all(16.r),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFF313540),
+        ),
+        width: double.maxFinite,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  logic.comTypeList?.signalStatus?.value ?? "--",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+
+            Divider(height: 16.h, color: Colors.transparent),
+
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.runStatus?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  logic.comTypeList?.runStatus?.value ?? "--",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+
+            Divider(height: 16.h, color: Colors.transparent),
+
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.alarmStatus?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  logic.comTypeList?.alarmStatus?.value ?? "--",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+
+  ///电池基础信息
+  Widget buildBatteryBaseInfoItem(MonitorDetailLogic logic) => Column(
+    children: [
+      Container(
+        padding: EdgeInsetsDirectional.only(
+          start: 18.w,
+          end: 18.w,
+          bottom: 16.h,
+        ),
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          TKey.basicInformation.tr,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+        ),
+      ),
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsetsDirectional.all(16.r),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFF313540),
+        ),
+        width: double.maxFinite,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.soc?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.soc?.value ?? "0"}${logic.comTypeList?.soc?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.voltage?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.voltage?.value ?? "0"}${logic.comTypeList?.voltage?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.current?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.current?.value ?? "0"}${logic.comTypeList?.current?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.singleMaxVoltage?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.singleMaxVoltage?.value ?? "0"}${logic.comTypeList?.singleMaxVoltage?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.singleMinVoltage?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.singleMinVoltage?.value ?? "0"}${logic.comTypeList?.singleMinVoltage?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.singleMaxTemp?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.singleMaxTemp?.value ?? 0}${logic.comTypeList?.singleMaxTemp?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.singleMinTemp?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.singleMinTemp?.value ?? 0}${logic.comTypeList?.singleMinTemp?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.maxChargePower?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.maxChargePower?.value ?? "0"}${logic.comTypeList?.maxChargePower?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            Row(
+              children: [
+                Text(
+                  "${logic.comTypeList?.maxOutPower?.showFieldName ?? ""}:",
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+                Spacer(),
+                Text(
+                  "${logic.comTypeList?.maxOutPower?.value ?? "0"}${logic.comTypeList?.maxOutPower?.unit ?? ""}",
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+
+  Widget buildLineChartWidget() {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsetsDirectional.only(
+            start: 18.w,
+            end: 18.w,
+            bottom: 16.h,
+          ),
+          alignment: AlignmentDirectional.centerStart,
+          child: Text(
+            "实时曲线",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsetsDirectional.only(
+            start: 5.w,
+            end: 10.w,
+            bottom: 15.h,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color(0xFF313540),
+          ),
+          width: double.maxFinite,
+          child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    color: Colors.transparent,
+                    height: 270,
+                    width: double.maxFinite,
+                    child: LineChartWidget(),
+                  ),
+                  Divider(height: 5.h, color: Colors.transparent),
+                  Row(
+                    children: [
+                      Spacer(),
+                      Row(
+                        children: [
+                          Container(
+                            width: 7,
+                            height: 7,
+                            margin: EdgeInsets.only(right: 5.w),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF3874F2),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                          Text(
+                            "功率",
+                            style: TextStyle(
+                              color: Color(0xD9FFFFFF),
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                      VerticalDivider(width: 16.w, color: Colors.transparent),
+                      Row(
+                        children: [
+                          Container(
+                            width: 7,
+                            height: 7,
+                            margin: EdgeInsets.only(right: 5.w),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF0BC3C4),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                          Text(
+                            "SOC",
+                            style: TextStyle(
+                              color: Color(0xD9FFFFFF),
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ],
+              ),
+              PositionedDirectional(
+                start: 0.w,
+                top: 15.h,
+                child: Text(
+                  "(KW)",
+                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

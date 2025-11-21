@@ -23,7 +23,12 @@ class MonitorDetailLogic extends GetxController {
   void onInit() {
     super.onInit();
     if (Get.arguments != null) {
-      devType = Get.arguments["devType"] as String?;
+      String? mDevType = Get.arguments["devType"] as String?;
+      if ((mDevType ?? "").contains("COOL")) {
+        devType = "COOL";
+      } else {
+        devType = mDevType;
+      }
       title = (Get.arguments["devType"] as String).getTitle();
     }
   }
@@ -31,19 +36,22 @@ class MonitorDetailLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    //getCompTree();
+    getCompTree();
     loadComType();
-    // loadComponentListByDev();
+    loadComponentListByDev();
   }
 
   Future<void> loadComType() async {
     //{"siteId":530,"compType":"ARR","did":577,"devNo":2,"nodeNo":2}
     //{"siteId":530,"compType":"PCS","did":577,"devNo":1,"nodeNo":2}
+    //{"siteId":530,"compType":"METER","did":577,"devNo":8,"nodeNo":1}
+    //{"siteId":530,"orderBy":"","orderType":"","compType":"COOL","did":577,"devNo":6,"nodeNo":2}
     ComTypeListEntity? value = await RealTimeDataAPI.postComponentTypeList(
       siteId: "530",
-      compType: devType ?? "",
+      //compType: devType ?? "",
+      compType: "COOL",
       did: 577,
-      devNo: 1,
+      devNo: 6,
       nodeNo: 2,
     );
     if (value != null) {
@@ -53,11 +61,14 @@ class MonitorDetailLogic extends GetxController {
   }
 
   Future<void> loadComponentListByDev() async {
+    //{"siteId":530,"orderBy":"","orderType":"","compType":"DIDO","did":577,"devNo":7,"nodeNo":2}
+    //{"siteId":530,"orderBy":"","orderType":"","compType":"DRIER","did":577,"devNo":5,"nodeNo":2}
     List<ComCardVoEntity> value = await RealTimeDataAPI.postComponentListByDev(
       siteId: "530",
+      // compType: "COOL",
       compType: devType ?? '',
       did: 577,
-      devNo: 1,
+      devNo: 7,
       nodeNo: 2,
     );
     comCardVoList.assignAll(value);
@@ -66,7 +77,7 @@ class MonitorDetailLogic extends GetxController {
 
   Future<void> getCompTree() async {
     final (bool isSuccessful, List<CompTreeEntity> value) =
-        await SiteAPI.getCompTree(siteId: "530", type: devType);
+        await SiteAPI.getCompTree(siteId: "530", type: "COOL");
     if (isSuccessful) {
       List<Map<String, dynamic>> list = value.map((e) => e.toJson()).toList();
       String title = handExtractPath(list);
