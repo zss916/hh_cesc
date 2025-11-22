@@ -310,7 +310,15 @@ class TKey {
 
   static const String status = "status";
 
+  static const String singleTemp = "singleTemp";
+
   static const String acSide = "acSide";
+
+  static const String cellVoltage = "cellVoltage";
+
+  static const String distributionMap = "distributionMap";
+
+  static const String batteryCluster = "batteryCluster";
 
   static const String electricalPhase = "electricalPhase";
 
@@ -470,4 +478,8 @@ const en = {
   "voltage": "电压",
   "electricalPhase": "电相",
   "acSide": "交流侧",
+  "batteryCluster": "电池集群",
+  "distributionMap": "分布图",
+  "singleTemp": "单体温度",
+  "cellVoltage": "单体电压",
 };

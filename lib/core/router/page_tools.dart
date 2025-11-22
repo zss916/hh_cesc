@@ -32,14 +32,53 @@ class PageTools {
   static toSplash() => Get.toNamed(APages.splash);
 
   ///监控详情
-  static toMonitorDetail({required String devType}) =>
-      Get.toNamed(APages.monitorDetail, arguments: {"devType": devType});
+  static toMonitorDetail({
+    required String siteId,
+    required String devType,
+    required String title,
+  }) => Get.toNamed(
+    APages.monitorDetail,
+    arguments: {"title": title, "devType": devType, 'siteId': siteId},
+  );
 
   ///监控详情
-  static toBatteryCluster() => Get.toNamed(APages.batteryCluster);
+  static toBatteryCluster({
+    String? siteId,
+    int? did,
+    int? nodeNo,
+    int? devNo,
+  }) => Get.toNamed(
+    APages.batteryCluster,
+    arguments: {
+      "devType": "CLU",
+      'siteId': siteId,
+      "did": did,
+      "nodeNo": nodeNo,
+      "devNo": devNo,
+    },
+  );
 
   ///分布图
-  static toDistributionMap() => Get.toNamed(APages.distributionMap);
+  static toDistributionMap({
+    required String title,
+    required String content,
+    String? siteId,
+    int? did,
+    int? nodeNo,
+    int? devNo,
+    int? type,
+  }) => Get.toNamed(
+    APages.distributionMap,
+    arguments: {
+      "title": title,
+      "content": content,
+      "siteId": siteId,
+      "did": did,
+      "nodeNo": nodeNo,
+      "devNo": devNo,
+      "type": type,
+    },
+  );
 
   ///概览电站详情
   static toOliveSiteDetail({

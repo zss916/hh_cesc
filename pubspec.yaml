@@ -84,9 +84,11 @@ dependencies:
 #  flutter_datetime_picker_plus: ^2.2.0
 
   #漂亮的UI
+  #syncfusion_flutter_datepicker: ^31.2.12
 #  progressive_time_picker: ^1.0.3
 
   #flutter_echart: 2.0.0
+  #extended_phone_number_input: ^1.0.2
 
 
 

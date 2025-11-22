@@ -1,9 +1,10 @@
-import 'package:cescpro/core/router/index.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/sheet/select_title_sheet.dart';
 import 'package:flutter/material.dart';
 
 class TopItemWidget extends StatelessWidget {
-  final String title;
-  const TopItemWidget({super.key, required this.title});
+  final MonitorDetailLogic logic;
+  const TopItemWidget({super.key, required this.logic});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,13 @@ class TopItemWidget extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            PageTools.toBatteryCluster();
+            showSelectTitleSheet(
+              logic.titles,
+              onSelect: (value) {
+                logic.compTree = value;
+                logic.update();
+              },
+            );
           },
           child: Container(
             width: double.maxFinite,
@@ -22,7 +29,7 @@ class TopItemWidget extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  title,
+                  logic.compTree,
                   style: TextStyle(color: Colors.white, fontSize: 14),
                 ),
                 Spacer(),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/cell_data_entity.g.dart';
@@ -24,6 +25,12 @@ class CellDataEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  double get minTemp =>
+      (cells ?? []).map((e) => (e.temp ?? 0)).toList().reduce(min);
+
+  double get maxTemp =>
+      (cells ?? []).map((e) => (e.temp ?? 0)).toList().reduce(max);
 }
 
 @JsonSerializable()

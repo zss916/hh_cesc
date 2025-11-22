@@ -1,7 +1,10 @@
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/bean/com_type_list_entity.dart';
+import 'package:cescpro/page/station/detail/monitor/cluster/battery_cluster_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/cluster/line_chart.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,31 +13,37 @@ import 'package:get/get.dart';
 class BatteryClusterPage extends StatelessWidget {
   const BatteryClusterPage({super.key});
 
+  //电池集群
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: baseAppBar(title: "电池集群"),
+      appBar: baseAppBar(title: TKey.batteryCluster.tr),
       backgroundColor: Color(0xFF23282E),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            buildSatusItem(),
-            Divider(height: 12.h, color: Colors.transparent),
-            buildBaseInfoItem(),
-            Divider(height: 12.h, color: Colors.transparent),
-            buildLineChartWidget(),
-            Divider(height: 12.h, color: Colors.transparent),
-            buildDistributionMap(),
-            Divider(height: 12.h, color: Colors.transparent),
-            buildRealTimeData(),
-            Divider(height: 120.h, color: Colors.transparent),
-          ],
+        child: GetBuilder<BatteryClusterLogic>(
+          init: BatteryClusterLogic(),
+          builder: (logic) {
+            return Column(
+              children: [
+                buildSatusItem(logic),
+                Divider(height: 12.h, color: Colors.transparent),
+                buildBaseInfoItem(logic),
+                Divider(height: 12.h, color: Colors.transparent),
+                buildLineChartWidget(),
+                Divider(height: 12.h, color: Colors.transparent),
+                buildDistributionMap(logic),
+                Divider(height: 12.h, color: Colors.transparent),
+                RealTimeDataWidget(comCardVoList: logic.comCardVoList),
+                Divider(height: 120.h, color: Colors.transparent),
+              ],
+            );
+          },
         ),
       ),
     );
   }
 
-  Widget buildSatusItem() => Column(
+  Widget buildSatusItem(BatteryClusterLogic logic) => Column(
     children: [
       Container(
         padding: EdgeInsetsDirectional.only(
@@ -44,7 +53,7 @@ class BatteryClusterPage extends StatelessWidget {
         ),
         alignment: AlignmentDirectional.centerStart,
         child: Text(
-          "状态",
+          TKey.status.tr,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
@@ -53,6 +62,7 @@ class BatteryClusterPage extends StatelessWidget {
         ),
       ),
       Container(
+        constraints: BoxConstraints(minHeight: 120.h),
         margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsetsDirectional.all(16.r),
         decoration: BoxDecoration(
@@ -62,54 +72,61 @@ class BatteryClusterPage extends StatelessWidget {
         width: double.maxFinite,
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "通信状态：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "通信正常",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.signalStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.signalStatus?.value ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "系统状态：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "待机",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.runStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.runStatus?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.runStatus?.value ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "告警状态：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "正常",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.alarmStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.alarmStatus?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.alarmStatus?.value ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
     ],
   );
 
-  Widget buildBaseInfoItem() => Column(
+  Widget buildBaseInfoItem(BatteryClusterLogic logic) => Column(
     children: [
       Container(
         padding: EdgeInsetsDirectional.only(
@@ -119,7 +136,7 @@ class BatteryClusterPage extends StatelessWidget {
         ),
         alignment: AlignmentDirectional.centerStart,
         child: Text(
-          "基础信息",
+          TKey.basicInformation.tr,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
@@ -128,6 +145,7 @@ class BatteryClusterPage extends StatelessWidget {
         ),
       ),
       Container(
+        constraints: BoxConstraints(minHeight: 180.h),
         margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsetsDirectional.all(16.r),
         decoration: BoxDecoration(
@@ -137,89 +155,140 @@ class BatteryClusterPage extends StatelessWidget {
         width: double.maxFinite,
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "SOC：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "5%",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.soc?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.soc?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.soc?.value ?? "0"}${logic.comTypeList?.soc?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "电压：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "834.7V",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.voltage?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.voltage?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.voltage?.value ?? "0"}${logic.comTypeList?.voltage?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "电流：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "0.0A",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.current?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.current?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.current?.value ?? "0"}${logic.comTypeList?.current?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "最高/最低单体电压：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "3.309v/3.205v",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.singleMaxVoltage?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.singleMaxVoltage?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.singleMaxVoltage?.value ?? "0"}${logic.comTypeList?.singleMaxVoltage?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "最高/最低单体温度：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "3.309v/3.205v",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.singleMinVoltage?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.singleMinVoltage?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.singleMinVoltage?.value ?? "0"}${logic.comTypeList?.singleMinVoltage?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "最大允许充电/放电功率：",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "3.309kW/3.205KW",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.singleMaxTemp?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.singleMaxTemp?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.singleMaxTemp?.value ?? 0}${logic.comTypeList?.singleMaxTemp?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.singleMinTemp?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.singleMinTemp?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.singleMinTemp?.value ?? 0}${logic.comTypeList?.singleMinTemp?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.maxChargePower?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.maxChargePower?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.maxChargePower?.value ?? "0"}${logic.comTypeList?.maxChargePower?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.maxOutPower?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.maxOutPower?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.maxOutPower?.value ?? "0"}${logic.comTypeList?.maxOutPower?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
@@ -299,7 +368,7 @@ class BatteryClusterPage extends StatelessWidget {
     );
   }
 
-  Widget buildDistributionMap() => Column(
+  Widget buildDistributionMap(BatteryClusterLogic logic) => Column(
     children: [
       Container(
         padding: EdgeInsetsDirectional.only(
@@ -309,7 +378,7 @@ class BatteryClusterPage extends StatelessWidget {
         ),
         alignment: AlignmentDirectional.centerStart,
         child: Text(
-          "分布图",
+          TKey.distributionMap.tr,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
@@ -334,12 +403,24 @@ class BatteryClusterPage extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    //
+                    ComTypeListItem? maxTemp = logic.comTypeList?.singleMaxTemp;
+                    ComTypeListItem? minTemp = logic.comTypeList?.singleMinTemp;
+                    String content =
+                        "${maxTemp?.showFieldName ?? ""}/${minTemp?.showFieldName ?? ""}:${maxTemp?.showValue ?? ""}${minTemp?.unit ?? ""}/${minTemp?.showValue ?? ""}${minTemp?.unit ?? ""}";
+                    PageTools.toDistributionMap(
+                      title: TKey.singleTemp.tr,
+                      content: content,
+                      siteId: logic.siteId,
+                      did: logic.did,
+                      nodeNo: logic.nodeNo,
+                      devNo: logic.devNo,
+                      type: 1,
+                    );
                   },
                   child: Container(
                     alignment: AlignmentDirectional.center,
                     child: Text(
-                      "单体温度",
+                      TKey.singleTemp.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14.sp),
                     ),
                   ),
@@ -361,7 +442,15 @@ class BatteryClusterPage extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    //
+                    PageTools.toDistributionMap(
+                      title: "SOC",
+                      content: "",
+                      siteId: logic.siteId,
+                      did: logic.did,
+                      nodeNo: logic.nodeNo,
+                      devNo: logic.devNo,
+                      type: 2,
+                    );
                   },
                   child: Container(
                     alignment: AlignmentDirectional.center,
@@ -388,12 +477,25 @@ class BatteryClusterPage extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    PageTools.toDistributionMap();
+                    ComTypeListItem? maxV = logic.comTypeList?.singleMaxVoltage;
+                    ComTypeListItem? minV = logic.comTypeList?.singleMinVoltage;
+                    String content =
+                        "${maxV?.showFieldName ?? ""}/${minV?.showFieldName ?? ""}:${maxV?.showValue ?? ""}${minV?.unit ?? ""}/${minV?.showValue ?? ""}${minV?.unit ?? ""}";
+
+                    PageTools.toDistributionMap(
+                      title: TKey.cellVoltage.tr,
+                      content: content,
+                      siteId: logic.siteId,
+                      did: logic.did,
+                      nodeNo: logic.nodeNo,
+                      devNo: logic.devNo,
+                      type: 3,
+                    );
                   },
                   child: Container(
                     alignment: AlignmentDirectional.center,
                     child: Text(
-                      "单体电压",
+                      TKey.cellVoltage.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14.sp),
                     ),
                   ),
@@ -406,121 +508,4 @@ class BatteryClusterPage extends StatelessWidget {
       ),
     ],
   );
-
-  Widget buildRealTimeData() {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsetsDirectional.only(
-            start: 18.w,
-            end: 18.w,
-            bottom: 16.h,
-          ),
-          alignment: AlignmentDirectional.centerStart,
-          child: Text(
-            "实时数据",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-            ),
-          ),
-        ),
-        ListView.separated(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: 3,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.w),
-              padding: EdgeInsetsDirectional.all(16.r),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color(0xFF313540),
-              ),
-              width: double.maxFinite,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "分组${index}",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFFFFFFFF),
-                        ),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                  Divider(height: 16.h, color: Colors.transparent),
-                  Row(
-                    children: [
-                      Text(
-                        "SOC：",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xA6FFFFFF),
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        "5%",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFFFFFFFF),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(height: 16.h, color: Colors.transparent),
-                  Row(
-                    children: [
-                      Text(
-                        "电压：",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xA6FFFFFF),
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        "834.7V",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFFFFFFFF),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Divider(height: 16.h, color: Colors.transparent),
-                  Row(
-                    children: [
-                      Text(
-                        "电流：",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xA6FFFFFF),
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        "0.0A",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFFFFFFFF),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) =>
-              Divider(color: Colors.transparent, height: 16.h),
-        ),
-      ],
-    );
-  }
 }

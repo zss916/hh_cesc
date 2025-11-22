@@ -54,9 +54,11 @@ class MonitorView extends StatelessWidget {
     itemBuilder: (BuildContext context, int index) {
       return GestureDetector(
         onTap: () {
-          // [ARR, CLU, PCS, AIR_COOL, DRIER, METER, DIDO]
-          // logic.data[index].getTitle();
-          PageTools.toMonitorDetail(devType: logic.data[index]);
+          PageTools.toMonitorDetail(
+            siteId: "${logic.site?.id}",
+            devType: logic.data[index].type,
+            title: logic.data[index].title,
+          );
         },
         child: Container(
           width: double.maxFinite,
@@ -69,7 +71,7 @@ class MonitorView extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              logic.data[index],
+              logic.data[index].title,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,

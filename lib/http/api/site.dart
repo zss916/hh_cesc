@@ -305,13 +305,15 @@ class SiteAPI {
 
   ///获取组件树
   static Future<(bool, List<CompTreeEntity>)> getCompTree({
-    required String siteId,
+    String? siteId,
     String? did,
     String? type,
   }) async {
     try {
       Map<String, dynamic> map = {};
-      map["siteId"] = siteId;
+      if (siteId != null) {
+        map["siteId"] = siteId;
+      }
       if (did != null) {
         map["did"] = did;
       }

@@ -1,4 +1,3 @@
-import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/api/alarm.dart';
 import 'package:cescpro/http/api/realTimeData.dart';
@@ -9,8 +8,7 @@ import 'package:cescpro/http/bean/com_type_list_entity.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:get/get.dart';
 
-class MonitorDetailLogic extends GetxController {
-  String title = "";
+class BatteryClusterLogic extends GetxController {
   String? devType;
   String? siteId;
   int? did;
@@ -28,7 +26,6 @@ class MonitorDetailLogic extends GetxController {
     if (Get.arguments != null) {
       devType = Get.arguments["devType"] as String?;
       siteId = Get.arguments["siteId"] as String?;
-      title = Get.arguments["title"] as String;
     }
   }
 
@@ -51,13 +48,11 @@ class MonitorDetailLogic extends GetxController {
     final (bool isSuccessful, List<CompTreeEntity> value) =
         await SiteAPI.getCompTree(siteId: siteId, type: devType);
     if (isSuccessful) {
-      List<Map<String, dynamic>> list = value.map((e) => e.toJson()).toList();
-      String title = _handExtractPath(list);
-      compTree = title;
       titles.assignAll(value);
       did = value.first.val;
       nodeNo = value.first.child?.first.val;
       devNo = value.first.child?.first.child?.first.val;
+      //debugPrint("ddd===>>>>>>did:$did,nodeNo:$nodeNo,devNo$devNo");
       update();
     }
   }
@@ -86,29 +81,6 @@ class MonitorDetailLogic extends GetxController {
     );
     comCardVoList.assignAll(value);
     update();
-  }
-
-  String _handExtractPath(List<dynamic> data) {
-    List<String> pathSegments = [];
-
-    void traverse(Map<String, dynamic> node) {
-      if (node['labelCn'] != null && node['labelEn'] != null) {
-        pathSegments.add(Get.isEn ? node['labelEn'] : node['labelCn']);
-      }
-
-      if (node['child'] != null && node['child'] is List) {
-        List<dynamic> children = node['child'];
-        if (children.isNotEmpty) {
-          traverse(children.first);
-        }
-      }
-    }
-
-    if (data.isNotEmpty) {
-      traverse(data.first);
-    }
-
-    return pathSegments.join('/');
   }
 
   ///todo

@@ -1,5 +1,4 @@
 import 'package:cescpro/components/common_app_bar.dart';
-import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/battery_view.dart';
@@ -26,10 +25,9 @@ class MonitorDetailPage extends StatelessWidget {
             child: Stack(
               alignment: Alignment.topCenter,
               children: [
-                if (logic.devType == "PCS") PcsView(logic: logic),
+                if (logic.devType == "ARR") BatteryView(logic: logic),
 
-                if (logic.devType == "ARR" || logic.devType == "CLU")
-                  BatteryView(logic: logic),
+                if (logic.devType == "PCS") PcsView(logic: logic),
 
                 if (logic.devType == "METER") MeterView(logic: logic),
 
@@ -45,34 +43,6 @@ class MonitorDetailPage extends StatelessWidget {
       },
     );
   }
-
-  Widget buildTopItem({required String title}) => Container(
-    decoration: BoxDecoration(color: Color(0xFF313540)),
-    width: double.maxFinite,
-    child: Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () {
-          PageTools.toBatteryCluster();
-        },
-        child: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Row(
-            children: [
-              Text(title, style: TextStyle(color: Colors.white, fontSize: 14)),
-              Spacer(),
-              Icon(
-                Icons.arrow_right_rounded,
-                color: Color(0xA6FFFFFF),
-                size: 25,
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
-  );
 
   ///todo
   Widget buildInfoList() => Column(

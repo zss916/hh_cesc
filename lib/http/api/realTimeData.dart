@@ -13,11 +13,11 @@ import 'package:flutter/foundation.dart';
 class RealTimeDataAPI {
   ///获取单体数据
   static Future<(bool, List<CellDataEntity>)> postCellData({
-    required String siteId,
-    required int did,
-    required int nodeNo,
-    required int devNo,
-    required String compType,
+    String? siteId,
+    int? did,
+    int? nodeNo,
+    int? devNo,
+    String? compType,
   }) async {
     try {
       var result = await Http.instance.post(
@@ -30,7 +30,7 @@ class RealTimeDataAPI {
           "compType": compType,
         },
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<CellDataEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => CellDataEntity.fromJson(e)).toList(),
@@ -126,11 +126,11 @@ class RealTimeDataAPI {
 
   ///获取实时数据组件类型列表
   static Future<ComTypeListEntity?> postComponentTypeList({
-    required String siteId,
-    required int did,
-    required int nodeNo,
-    required int devNo,
-    required String compType,
+    String? siteId,
+    int? did,
+    int? nodeNo,
+    int? devNo,
+    String? compType,
   }) async {
     try {
       var result = await Http.instance.post(
@@ -156,11 +156,11 @@ class RealTimeDataAPI {
 
   ///获取实时数据组卡片列表
   static Future<List<ComCardVoEntity>> postComponentListByDev({
-    required String siteId,
-    required int did,
-    required int nodeNo,
-    required int devNo,
-    required String compType,
+    String? siteId,
+    int? did,
+    int? nodeNo,
+    int? devNo,
+    String? compType,
   }) async {
     try {
       var result = await Http.instance.post(

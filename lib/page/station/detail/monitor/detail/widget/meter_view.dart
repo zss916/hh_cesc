@@ -15,7 +15,7 @@ class MeterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TopItemWidget(title: logic.compTree),
+        TopItemWidget(logic: logic),
         Divider(height: 12.h, color: Colors.transparent),
 
         ///状态
@@ -53,6 +53,7 @@ class MeterView extends StatelessWidget {
         ),
       ),
       Container(
+        constraints: BoxConstraints(minHeight: 160.h),
         margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsetsDirectional.all(16.r),
         decoration: BoxDecoration(
@@ -62,67 +63,68 @@ class MeterView extends StatelessWidget {
         width: double.maxFinite,
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  logic.comTypeList?.signalStatus?.value ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.signalStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.signalStatus?.value ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
 
             Divider(height: 16.h, color: Colors.transparent),
-
-            Row(
-              children: [
-                Text(
-                  "${logic.comTypeList?.activePowerT?.showFieldName ?? ""}:",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.activePowerT?.value ?? "0"}${logic.comTypeList?.activePowerT?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
-
-            Divider(height: 16.h, color: Colors.transparent),
-
-            Row(
-              children: [
-                Text(
-                  "${logic.comTypeList?.reactivePowerT?.showFieldName ?? ""}:",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.reactivePowerT?.value ?? "0"}${logic.comTypeList?.reactivePowerT?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.activePowerT?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.activePowerT?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.activePowerT?.value ?? "0"}${logic.comTypeList?.activePowerT?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
 
             Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.reactivePowerT?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.reactivePowerT?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.reactivePowerT?.value ?? "0"}${logic.comTypeList?.reactivePowerT?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
 
-            Row(
-              children: [
-                Text(
-                  "${logic.comTypeList?.powerTFactor?.showFieldName ?? ""}:",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  logic.comTypeList?.powerTFactor?.value ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.powerTFactor?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.powerTFactor?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.powerTFactor?.value ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
           ],
         ),
       ),

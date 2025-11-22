@@ -15,7 +15,7 @@ class PcsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TopItemWidget(title: logic.compTree),
+        TopItemWidget(logic: logic),
         Divider(height: 12.h, color: Colors.transparent),
 
         ///状态
@@ -61,6 +61,7 @@ class PcsView extends StatelessWidget {
         ),
       ),
       Container(
+        constraints: BoxConstraints(minHeight: 120.h),
         margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsetsDirectional.all(16.r),
         decoration: BoxDecoration(
@@ -70,51 +71,54 @@ class PcsView extends StatelessWidget {
         width: double.maxFinite,
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  logic.comTypeList?.signalStatus?.value ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.signalStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.signalStatus?.value ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
 
             Divider(height: 16.h, color: Colors.transparent),
 
-            Row(
-              children: [
-                Text(
-                  "${logic.comTypeList?.runStatus?.showFieldName ?? ""}:",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  logic.comTypeList?.runStatus?.value ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.runStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.runStatus?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.runStatus?.value ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
 
             Divider(height: 16.h, color: Colors.transparent),
 
-            Row(
-              children: [
-                Text(
-                  "${logic.comTypeList?.gridStatus?.showFieldName ?? ""}:",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  logic.comTypeList?.gridStatus?.value ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.gridStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.gridStatus?.showFieldName ?? ""}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.gridStatus?.value ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
@@ -141,6 +145,7 @@ class PcsView extends StatelessWidget {
         ),
       ),
       Container(
+        constraints: BoxConstraints(minHeight: 150.h),
         margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsetsDirectional.all(16.r),
         decoration: BoxDecoration(
@@ -150,159 +155,231 @@ class PcsView extends StatelessWidget {
         width: double.maxFinite,
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.totalChargeElectric?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.totalChargeElectric?.value ?? "0"}${logic.comTypeList?.totalChargeElectric?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.dcPower?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.dcPower?.showFieldName ?? "--"}:",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.dcPower?.showValue ?? "0"}${logic.comTypeList?.dcPower?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.totalOutElectric?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.totalOutElectric?.value ?? "0"}${logic.comTypeList?.totalOutElectric?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.dcVoltage?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.dcVoltage?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.dcVoltage?.value ?? "0"}${logic.comTypeList?.dcVoltage?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.hz?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.hz?.value ?? "0"}${logic.comTypeList?.hz?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.dcCurrent?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.dcCurrent?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.dcCurrent?.value ?? "0"}${logic.comTypeList?.dcCurrent?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.temp?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.temp?.value ?? "0"}${logic.comTypeList?.temp?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.totalChargeElectric?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.totalChargeElectric?.showFieldName ??
+                        "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.totalChargeElectric?.value ?? "0"}${logic.comTypeList?.totalChargeElectric?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.activePowerT?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.activePowerT?.value ?? "0"}${logic.comTypeList?.activePowerT?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+            if (logic.comTypeList?.totalOutElectric?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.totalOutElectric?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.totalOutElectric?.value ?? "0"}${logic.comTypeList?.totalOutElectric?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.reactivePowerT?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.reactivePowerT?.value ?? "0"}${logic.comTypeList?.reactivePowerT?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.hz?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.hz?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.hz?.value ?? "0"}${logic.comTypeList?.hz?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.powerTFactor?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.powerTFactor?.value ?? "0"}${logic.comTypeList?.powerTFactor?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.temp?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.temp?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.temp?.value ?? "0"}${logic.comTypeList?.temp?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.apparentPowerT?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.apparentPowerT?.value ?? "0"}${logic.comTypeList?.apparentPowerT?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.activePowerT?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.activePowerT?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.activePowerT?.value ?? "0"}${logic.comTypeList?.activePowerT?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.powerAFactor?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.powerAFactor?.value ?? "0"}${logic.comTypeList?.powerAFactor?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.reactivePowerT?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.reactivePowerT?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.reactivePowerT?.value ?? "0"}${logic.comTypeList?.reactivePowerT?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.powerBFactor?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.powerBFactor?.value ?? "0"}${logic.comTypeList?.powerBFactor?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.powerTFactor?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.powerTFactor?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.powerTFactor?.value ?? "0"}${logic.comTypeList?.powerTFactor?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  logic.comTypeList?.powerCFactor?.showFieldName ?? "--",
-                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                ),
-                Spacer(),
-                Text(
-                  "${logic.comTypeList?.powerCFactor?.value ?? "0"}${logic.comTypeList?.powerCFactor?.unit ?? ""}",
-                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                ),
-              ],
-            ),
+
+            if (logic.comTypeList?.apparentPowerT?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.apparentPowerT?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.apparentPowerT?.value ?? "0"}${logic.comTypeList?.apparentPowerT?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+
+            if (logic.comTypeList?.powerAFactor?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.powerAFactor?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.powerAFactor?.value ?? "0"}${logic.comTypeList?.powerAFactor?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+
+            if (logic.comTypeList?.powerBFactor?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.powerBFactor?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.powerBFactor?.value ?? "0"}${logic.comTypeList?.powerBFactor?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+
+            if (logic.comTypeList?.powerCFactor?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    logic.comTypeList?.powerCFactor?.showFieldName ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.powerCFactor?.value ?? "0"}${logic.comTypeList?.powerCFactor?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
             Divider(height: 16.h, color: Colors.transparent),
           ],
         ),

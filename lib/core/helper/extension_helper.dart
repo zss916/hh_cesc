@@ -28,8 +28,9 @@ extension TimestampExtension on int {
 }
 
 extension CheckLancode on GetInterface {
-  bool get isZh => Get.locale?.languageCode == "zh";
+  // bool get isZh => Get.locale?.languageCode == "zh";
 
+  ///目前根据手机语言判断
   bool get isEn => Get.locale?.languageCode == "en";
 }
 

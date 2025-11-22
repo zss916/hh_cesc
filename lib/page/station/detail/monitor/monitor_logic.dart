@@ -1,13 +1,20 @@
 import 'package:cescpro/core/enum/app_enum.dart';
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/home.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:get/get.dart';
+
+class MonitorModel {
+  String title;
+  String type;
+  MonitorModel({required this.title, required this.type});
+}
 
 class MonitorLogic extends GetxController {
   SiteEntity? site;
   int viewState = ViewStateEnum.common.index;
 
-  List<String> data = [];
+  List<MonitorModel> data = [];
 
   @override
   void onInit() {
@@ -41,13 +48,35 @@ class MonitorLogic extends GetxController {
         protocolId: site?.protocolId,
       );
       if (isSuccessful) {
-        //[ARR, CLU, PCS, AIR_COOL, DRIER, METER, DIDO]
-        data.assignAll(value);
+        for (var e in value) {
+          if (e == "ARR" || e == "CLU") {
+            bool isHas = data.any((e) => e.type == "ARR");
+            if (!isHas) {
+              data.add(MonitorModel(type: "ARR", title: TKey.batterySystem.tr));
+            }
+          } else if (e == "COOL") {
+            data.add(MonitorModel(type: "COOL", title: TKey.liquidCooling.tr));
+          } else if (e == "DRIER") {
+            data.add(
+              MonitorModel(
+                type: "DRIER",
+                title: TKey.temperatureAndHumidity.tr,
+              ),
+            );
+          } else if (e == "METER") {
+            data.add(
+              MonitorModel(type: "METER", title: TKey.electricityMeter.tr),
+            );
+          } else {
+            data.add(MonitorModel(type: e, title: e));
+          }
+        }
+
+        viewState = data.isEmpty
+            ? ViewStateEnum.empty.index
+            : ViewStateEnum.common.index;
+        update();
       }
-      viewState = data.isEmpty
-          ? ViewStateEnum.empty.index
-          : ViewStateEnum.common.index;
-      update();
     }
   }
 }

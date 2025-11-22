@@ -27,6 +27,15 @@ class ComTypeListEntity {
 
   ///pcs
 
+  ComTypeListItem? get dcCurrent =>
+      (selfList ?? []).where((e) => e.fieldName == "dcCurrent").firstOrNull;
+
+  ComTypeListItem? get dcVoltage =>
+      (selfList ?? []).where((e) => e.fieldName == "dcVoltage").firstOrNull;
+
+  ComTypeListItem? get dcPower =>
+      (selfList ?? []).where((e) => e.fieldName == "dcPower").firstOrNull;
+
   ComTypeListItem? get activePowerA =>
       (selfList ?? []).where((e) => e.fieldName == "activePowerA").firstOrNull;
 
@@ -161,4 +170,10 @@ class ComTypeListItem {
 
   String get showFieldName =>
       Get.isEn ? (fieldNameEn ?? "") : (fieldNameCn ?? "");
+
+  String get showValue => Get.isEn ? (enValue ?? "") : (value ?? "");
+
+  // String? get currentValue => (fieldName == "current") ? showValue : "";
+
+  // String? get currentName => (fieldName == "current") ? showFieldName : "";
 }

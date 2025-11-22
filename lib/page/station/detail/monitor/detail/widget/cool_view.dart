@@ -12,7 +12,7 @@ class CoolView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TopItemWidget(title: logic.compTree),
+        TopItemWidget(logic: logic),
         Divider(height: 12.h, color: Colors.transparent),
 
         ///实时数据
