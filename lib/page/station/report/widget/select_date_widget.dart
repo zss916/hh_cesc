@@ -1,19 +1,28 @@
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class SelectDateWidget extends StatefulWidget {
-  const SelectDateWidget({super.key});
+  final Function(DateTime start, DateTime end) onSelect;
+  const SelectDateWidget({super.key, required this.onSelect});
 
   @override
   State<SelectDateWidget> createState() => _SelectDateWidgetState();
 }
 
 class _SelectDateWidgetState extends State<SelectDateWidget> {
-  DateTime startDateTime = DateTime.now();
+  DateTime startDateTime = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    1,
+  );
   DateTime endDateTime = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +53,20 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
                   onValueChanged: (dates) {},
                 );*/
 
-                Get.bottomSheet(
+                showSelectTimePicker(
+                  context: context,
+                  initDateTime: DateTime(
+                    DateTime.now().year,
+                    DateTime.now().month,
+                    1,
+                  ),
+                  onConfirm: (value) {
+                    startDateTime = value;
+                    widget.onSelect.call(startDateTime, endDateTime);
+                  },
+                );
+
+                /* Get.bottomSheet(
                   Container(
                     width: double.maxFinite,
                     color: Colors.white,
@@ -68,7 +90,7 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
                       },
                     ),
                   ),
-                );
+                );*/
 
                 /*showSelectTimePicker(
                   context: context,
@@ -117,15 +139,14 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
             InkWell(
               borderRadius: BorderRadius.circular(5.r),
               onTap: () {
-                /*showSelectTimePicker(
+                showSelectTimePicker(
                   context: context,
-                  initDateTime: endDateTime,
-                  onConfirm: (dateTime) {
-                    setState(() {
-                      endDateTime = dateTime;
-                    });
+                  initDateTime: DateTime.now(),
+                  onConfirm: (value) {
+                    endDateTime = value;
+                    widget.onSelect.call(startDateTime, endDateTime);
                   },
-                );*/
+                );
               },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
@@ -160,10 +181,8 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
     );
   }
 
-  void showSelectRangDatePicker() {}
-
   /// 显示时间选择器
-  /*void showSelectTimePicker({
+  void showSelectTimePicker({
     required BuildContext context,
     required DateTime initDateTime,
     Function(DateTime)? onConfirm,
@@ -195,7 +214,7 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
         // String formatted = DateFormat('yyyy-MM-dd').format(date);
       },
     );
-  }*/
+  }
 
   ///日期范围选择
   /*Future<void> showDateRangeSheet({

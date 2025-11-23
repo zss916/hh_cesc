@@ -1,6 +1,10 @@
-part of 'index.dart';
+import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/http/api/home.dart';
+import 'package:cescpro/http/bean/statistic_report_entity.dart';
+import 'package:cescpro/page/station/revenue/index.dart';
+import 'package:get/get.dart';
 
-class ReportDetailLogic extends GetxController {
+class PowerLevelLogic extends GetxController {
   String? location;
   int? siteId;
   int reportType = 1;

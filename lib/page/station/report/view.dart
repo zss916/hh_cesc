@@ -15,6 +15,11 @@ class _ReportDetailPageState extends State<ReportDetailPage>
   void initState() {
     super.initState();
     tabCtrl = TabController(length: 2, vsync: this);
+    tabCtrl.addListener(() {
+      if (tabCtrl.index == tabCtrl.animation?.value) {
+        int reportType = (tabCtrl.index + 1);
+      }
+    });
   }
 
   @override
@@ -34,8 +39,8 @@ class _ReportDetailPageState extends State<ReportDetailPage>
         centerTitle: true,
         title: KuGouTabBar(
           tabs: [
-            Tab(text: "电量"),
-            Tab(text: "止度"),
+            Tab(text: TKey.powerLevel.tr),
+            Tab(text: TKey.stopDegree.tr),
           ],
           controller: tabCtrl,
           labelStyle: const TextStyle(
@@ -64,47 +69,7 @@ class _ReportDetailPageState extends State<ReportDetailPage>
       backgroundColor: Color(0xFF23282E),
       body: TabBarView(
         controller: tabCtrl,
-        children: [
-          SingleChildScrollView(
-            child: Container(
-              width: double.maxFinite,
-              padding: EdgeInsetsDirectional.symmetric(
-                horizontal: 10.w,
-                vertical: 15.h,
-              ),
-              margin: EdgeInsetsDirectional.only(
-                top: 12.h,
-                bottom: 100.h,
-                start: 16.w,
-                end: 16.w,
-              ),
-              decoration: BoxDecoration(
-                color: Color(0xFF313540),
-                borderRadius: BorderRadius.circular(14.r),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsetsDirectional.only(bottom: 15.h),
-                    width: double.maxFinite,
-                    child: Text(
-                      "新城区党政机关办公区源网荷储一体江苏某XXXXXXXXX站点",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ),
-                  BuildSelectTimeWidget(),
-                  TableWidget(),
-                ],
-              ),
-            ),
-          ),
-
-          Container(),
-        ],
+        children: [PowerLevelView(), StopDegreeView()],
       ),
     );
   }

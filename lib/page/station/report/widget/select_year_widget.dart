@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class SelectYearWidget extends StatefulWidget {
-  const SelectYearWidget({super.key});
+  final Function(DateTime) onSelect;
+  const SelectYearWidget({super.key, required this.onSelect});
 
   @override
   State<SelectYearWidget> createState() => _SelectYearWidgetState();
@@ -26,7 +27,7 @@ class _SelectYearWidgetState extends State<SelectYearWidget> {
       child: InkWell(
         borderRadius: BorderRadius.circular(5),
         onTap: () {
-          showYearSheet(dateTime: selectDateTime);
+          showYearSheet(dateTime: selectDateTime, onSelect: widget.onSelect);
         },
         child: Container(
           width: double.maxFinite,
@@ -64,7 +65,10 @@ class _SelectYearWidgetState extends State<SelectYearWidget> {
   }
 
   ///年选择
-  void showYearSheet({required DateTime dateTime}) {
+  void showYearSheet({
+    required DateTime dateTime,
+    required Function(DateTime) onSelect,
+  }) {
     Get.bottomSheet(
       CustomYearPicker(
         firstDate: DateTime(2015),
@@ -73,6 +77,7 @@ class _SelectYearWidgetState extends State<SelectYearWidget> {
         onChanged: (value) {
           setState(() {
             selectDateTime = value;
+            onSelect.call(selectDateTime);
           });
         },
       ),

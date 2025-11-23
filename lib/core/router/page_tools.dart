@@ -89,9 +89,6 @@ class PageTools {
     arguments: {"index": index, "statisticRecord": statisticRecord},
   );
 
-  ///报告详情
-  static toReportDetail() => Get.toNamed(APages.reportDetail);
-
   ///首页
   static toMain() => Get.toNamed(APages.main);
 
@@ -99,4 +96,16 @@ class PageTools {
 
   ///跳到登录
   static offAllNamedSplash() => Get.offAllNamed(APages.splash);
+
+  ///收益
+  static toRevenue({int? siteId, String? location}) => Get.toNamed(
+    APages.revenue,
+    arguments: {"siteId": siteId, "location": location},
+  );
+
+  ///报告详情
+  static toReportDetail({int? siteId, String? location}) => Get.toNamed(
+    APages.reportDetail,
+    arguments: {"siteId": siteId, "location": location},
+  );
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/statistic_report_entity.g.dart';
+import 'package:cescpro/page/station/revenue/index.dart';
 
 export 'package:cescpro/generated/json/statistic_report_entity.g.dart';
 
@@ -116,6 +117,24 @@ class StatisticReportDailyElecIncomeDetail {
   @override
   String toString() {
     return jsonEncode(this);
+  }
+
+  String showDate(QueryType type) {
+    if (formatDate == null) {
+      return "";
+    } else {
+      if (type == QueryType.daily) {
+        List<String> list = formatDate!.split("-");
+        return "${list[0]}\n${list[1]}-${list[2]}";
+      } else if (type == QueryType.monthly) {
+        List<String> list = formatDate!.split("-");
+        return "${list[0]}\n${list[1]}";
+      } else if (type == QueryType.yearly) {
+        return formatDate ?? "";
+      } else {
+        return "";
+      }
+    }
   }
 }
 

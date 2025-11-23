@@ -1,9 +1,24 @@
 part of 'index.dart';
 
-class ReportDetailLogic extends GetxController {
+enum QueryType { daily, monthly, yearly }
+
+extension QueryTypeValue on QueryType {
+  int get value {
+    if (this == QueryType.daily) {
+      return 1;
+    } else if (this == QueryType.monthly) {
+      return 2;
+    } else if (this == QueryType.yearly) {
+      return 3;
+    } else {
+      return 1;
+    }
+  }
+}
+
+class RevenueLogic extends GetxController {
   String? location;
   int? siteId;
-  int reportType = 1;
   QueryType queryType = QueryType.daily;
   int? date;
   int? startTimeStamp;
@@ -33,12 +48,8 @@ class ReportDetailLogic extends GetxController {
     loadData();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
   Future<void> loadData() async {
+    //1.daily 2.monthly 3.yearly
     AppLoading.show();
     final (
       bool isSuccessful,
@@ -46,7 +57,7 @@ class ReportDetailLogic extends GetxController {
     ) = await HomeAPI.postStatisticReportApp(
       siteId: siteId,
       queryType: queryType.value,
-      reportType: reportType,
+      reportType: 3,
       startTimeStamp: startTimeStamp,
       endTimeStamp: endTimeStamp,
       date: date,

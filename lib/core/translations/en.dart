@@ -323,6 +323,40 @@ class TKey {
   static const String electricalPhase = "electricalPhase";
 
   static const String basicInformation = "basicInformation";
+
+  static const String powerLevel = "powerLevel";
+
+  static const String stopDegree = "stopDegree";
+
+  static const String date = "date";
+
+  static const String amount = "amount";
+
+  static const String chargingData = "chargingData";
+
+  static const String duration = "duration";
+
+  static const String neg = "neg";
+
+  static const String totalEfficiency = "totalEfficiency";
+
+  static const String sharp = "sharp";
+
+  static const String peak = "peak";
+
+  static const String average = "average";
+
+  static const String valley = "valley";
+
+  static const String all = "all";
+
+  static const String chargingAmount = "chargingAmount";
+
+  static const String dischargingAmount = "dischargingAmount";
+
+  static const String forwardActiveEnergy = "forwardActiveEnergy";
+
+  static const String negativeActiveContribution = "negativeActiveContribution";
 }
 
 const en = {
@@ -447,6 +481,7 @@ const en = {
   "todayDischarge": "今日放电",
   "todayIncome": "今日收益",
   "todayPVPowerEarnings": "今日光伏发电",
+  "chargingData": "充电量",
   "todayChargingData": "今日充电量",
   "monthChargingData": "本月充电量",
   "yearChargingData": "本年充电量",
@@ -458,6 +493,7 @@ const en = {
   "totalNeg": "累计放电量",
   "currentYearNeg": "本年放电量",
   "currentMonthNeg": "本月放电量",
+  "neg": "放电量",
   "todayNeg": "今日放电量",
   "totalPVNeg": "累计光伏发电量",
   "currentYearPVNeg": "本年光伏发电量",
@@ -482,4 +518,19 @@ const en = {
   "distributionMap": "分布图",
   "singleTemp": "单体温度",
   "cellVoltage": "单体电压",
+  "powerLevel": "电量",
+  "stopDegree": "止度",
+  "date": "日期",
+  "duration": "时段",
+  "totalEfficiency": "综合效率",
+  "sharp": "尖",
+  "peak": "峰",
+  "average": "平",
+  "valley": "谷",
+  "all": "总",
+  "forwardActiveEnergy": "正向有功",
+  "negativeActiveContribution": "负向有功",
+  "chargingAmount": "充电金额",
+  "dischargingAmount": "放电金额",
+  "amount": "金额",
 };

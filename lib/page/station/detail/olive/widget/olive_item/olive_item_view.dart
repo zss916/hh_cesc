@@ -380,7 +380,7 @@ class OliveItemView extends StatelessWidget {
                   statisticRecord: logic.statisticRecord,
                 ),
 
-                buildReport(),
+                buildReport(logic),
                 buildSiteInfo(siteDetail: logic.siteDetail),
 
                 SizedBox(height: 200.h),
@@ -396,7 +396,7 @@ class OliveItemView extends StatelessWidget {
     await Future.delayed(const Duration(seconds: 2));
   }
 
-  Widget buildReport() => Column(
+  Widget buildReport(OliveItemLogic logic) => Column(
     children: [
       Container(
         padding: EdgeInsetsDirectional.only(
@@ -432,7 +432,10 @@ class OliveItemView extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    PageTools.toReportDetail();
+                    PageTools.toReportDetail(
+                      siteId: logic.siteId,
+                      location: logic.siteDetail?.location,
+                    );
                   },
                   child: Container(
                     alignment: AlignmentDirectional.center,
@@ -446,6 +449,34 @@ class OliveItemView extends StatelessWidget {
             ),
           ),
           VerticalDivider(width: 16.w, color: Colors.transparent),
+          if (false)
+            Expanded(
+              child: Container(
+                width: double.maxFinite,
+                height: 36,
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: Color(0xFF313540),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      //
+                    },
+                    child: Container(
+                      alignment: AlignmentDirectional.center,
+                      child: Text(
+                        TKey.settlement.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          if (false) VerticalDivider(width: 16.w, color: Colors.transparent),
           Expanded(
             child: Container(
               width: double.maxFinite,
@@ -459,33 +490,11 @@ class OliveItemView extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    //
+                    PageTools.toRevenue(
+                      siteId: logic.siteId,
+                      location: logic.siteDetail?.location,
+                    );
                   },
-                  child: Container(
-                    alignment: AlignmentDirectional.center,
-                    child: Text(
-                      TKey.settlement.tr,
-                      style: TextStyle(color: Colors.white, fontSize: 14.sp),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          VerticalDivider(width: 16.w, color: Colors.transparent),
-          Expanded(
-            child: Container(
-              width: double.maxFinite,
-              height: 36,
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.r),
-                color: Color(0xFF313540),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {},
                   child: Container(
                     alignment: AlignmentDirectional.center,
                     child: Text(

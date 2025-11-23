@@ -65,17 +65,44 @@ class HomeAPI {
     }
   }
 
-  ///todo 电量、止度、收益报表
+  ///电量、止度、收益报表
   static Future<(bool, List<StatisticReportEntity>)> postStatisticReportApp({
-    String? siteId,
+    int? siteId,
+    int? queryType,
+    int? reportType,
+    String? adcode,
+    int? startTimeStamp,
+    int? endTimeStamp,
+    int? date,
   }) async {
     Map<String, dynamic> map = {};
+    if (siteId != null) {
+      map['siteId'] = siteId;
+    }
+    if (queryType != null) {
+      map['queryType'] = queryType;
+    }
+    if (reportType != null) {
+      map['reportType'] = reportType;
+    }
+    if (adcode != null) {
+      map['adcode'] = adcode;
+    }
+    if (startTimeStamp != null) {
+      map['startTimeStamp'] = startTimeStamp;
+    }
+    if (endTimeStamp != null) {
+      map['endTimeStamp'] = endTimeStamp;
+    }
+    if (date != null) {
+      map['date'] = date;
+    }
     try {
       var result = await Http.instance.post(
         ApiPath.postStatisticReportApp,
         data: map,
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<StatisticReportEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => StatisticReportEntity.fromJson(e)).toList(),

@@ -10,12 +10,14 @@ class CustomMonthPicker extends StatefulWidget {
   final ValueChanged<DateTime> onChanged;
   final DateTime firstDate;
   final DateTime lastDate;
+  final Function(DateTime)? onConfirm;
   const CustomMonthPicker({
     super.key,
     required this.selectedDate,
     required this.onChanged,
     required this.firstDate,
     required this.lastDate,
+    this.onConfirm,
   });
 
   @override
@@ -70,8 +72,9 @@ class _CustomMonthPickerState extends State<CustomMonthPicker> {
 
                 TextButton(
                   onPressed: () {
+                    widget.onConfirm?.call(currentDate);
+                    //widget.onChanged(currentDate);
                     Get.back();
-                    widget.onChanged(currentDate);
                   },
                   child: Text(
                     TKey.confirm.tr,

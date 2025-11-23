@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class SelectMonthWidget extends StatefulWidget {
-  const SelectMonthWidget({super.key});
+  final Function(DateTime) onSelect;
+  const SelectMonthWidget({super.key, required this.onSelect});
 
   @override
   State<SelectMonthWidget> createState() => _SelectMonthWidgetState();
@@ -21,7 +22,7 @@ class _SelectMonthWidgetState extends State<SelectMonthWidget> {
       child: InkWell(
         borderRadius: BorderRadius.circular(5),
         onTap: () {
-          showMonthSheet(dateTime: selectDateTime);
+          showMonthSheet(dateTime: selectDateTime, onSelect: widget.onSelect);
         },
         child: Container(
           width: double.maxFinite,
@@ -59,12 +60,21 @@ class _SelectMonthWidgetState extends State<SelectMonthWidget> {
   }
 
   ///月选择
-  void showMonthSheet({required DateTime dateTime}) {
+  void showMonthSheet({
+    required DateTime dateTime,
+    required Function(DateTime) onSelect,
+  }) {
     Get.bottomSheet(
       CustomMonthPicker(
         firstDate: DateTime(2015),
         lastDate: DateTime.now(),
         selectedDate: dateTime,
+        onConfirm: (value) {
+          setState(() {
+            selectDateTime = value;
+          });
+          onSelect.call(value);
+        },
         onChanged: (value) {
           setState(() {
             selectDateTime = value;
