@@ -62,7 +62,6 @@ class SiteAPI {
     }
   }
 
-  ///站点列表
   static Future<(bool, List<SiteEntity>)> postSiteList({
     required int pageNum,
     int? cid,
@@ -111,6 +110,26 @@ class SiteAPI {
         map["total"] = total;
       }
       var result = await Http.instance.post(ApiPath.postSiteList, data: map);
+      if (result["code"] == HttpStatus.ok) {
+        List<SiteEntity> value = await compute(
+          (List<dynamic> jsonList) =>
+              jsonList.map((e) => SiteEntity.fromJson(e)).toList(),
+          (result['data']['list'] as List),
+        );
+        return (true, value);
+      } else {
+        //AppLoading.toast(result["message"]);
+        return (false, <SiteEntity>[]);
+      }
+    } catch (error) {
+      return (false, <SiteEntity>[]);
+    }
+  }
+
+  ///站点列表
+  static Future<(bool, List<SiteEntity>)> postSites() async {
+    try {
+      var result = await Http.instance.post(ApiPath.postSiteList, data: {});
       if (result["code"] == HttpStatus.ok) {
         List<SiteEntity> value = await compute(
           (List<dynamic> jsonList) =>

@@ -2,9 +2,12 @@ import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/core/service/app_info_service.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/page/alarm/index/index.dart';
+import 'package:cescpro/page/main/index.dart';
 import 'package:cescpro/page/main/sheet/alarm_select_sheet.dart';
 import 'package:cescpro/page/main/sheet/select_country_sheet.dart';
+import 'package:cescpro/page/main/sheet/site_select_sheet.dart';
 import 'package:cescpro/page/main/widget/alarm_item_select.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
@@ -33,6 +36,25 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
   String? alarmTitle;
   int? alarmLevel;
   CountryEntity? countryItem;
+  SiteEntity? site;
+
+  @override
+  void initState() {
+    super.initState();
+    site = safeFind<AlarmLogic>()?.site;
+    countryItem = safeFind<AlarmLogic>()?.country;
+    alarmTitle = (safeFind<AlarmLogic>()?.alarmLevel ?? 0).getAlarmTitle();
+    int? startTimeMill = safeFind<AlarmLogic>()?.startTimeMill;
+    if (startTimeMill != null) {
+      startDateTime = DateTime.fromMillisecondsSinceEpoch(startTimeMill);
+      startTime = DateFormat('yyyy-MM-dd').format(startDateTime!);
+    }
+    int? endTimeMill = safeFind<AlarmLogic>()?.endTimeMill;
+    if (endTimeMill != null) {
+      endDateTime = DateTime.fromMillisecondsSinceEpoch(endTimeMill);
+      endTime = DateFormat('yyyy-MM-dd').format(endDateTime!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +62,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
       children: [
         AlarmItemSelect(
           title: TKey.affiliatedArea.tr,
-          subTitle: countryItem?.en,
+          subTitle: countryItem?.name,
           onTap: () {
             showSelectCountrySheet(
               country: countryItem,
@@ -56,12 +78,25 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
 
         Divider(height: 24.h, color: Colors.transparent),
 
-        AlarmItemSelect(title: TKey.siteName.tr, onTap: () {}),
+        AlarmItemSelect(
+          title: TKey.siteName.tr,
+          subTitle: site?.name,
+          onTap: () {
+            List<SiteEntity> data = safeFind<MainLogic>()?.sites ?? [];
+            showSiteSelectSheet(
+              sites: data,
+              onSelect: (value) {
+                setState(() {
+                  site = value;
+                });
+              },
+            );
+          },
+        ),
 
-        Divider(height: 24.h, color: Colors.transparent),
+        //Divider(height: 24.h, color: Colors.transparent),
 
-        AlarmItemSelect(title: "设备类型", onTap: () {}),
-
+        // AlarmItemSelect(title: "设备类型", onTap: () {}),
         Divider(height: 24.h, color: Colors.transparent),
 
         AlarmItemSelect(
@@ -125,6 +160,12 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
+                  safeFind<AlarmLogic>()?.startTimeMill = null;
+                  safeFind<AlarmLogic>()?.endTimeMill = null;
+                  safeFind<AlarmLogic>()?.country = null;
+                  safeFind<AlarmLogic>()?.alarmLevel = null;
+                  safeFind<AlarmLogic>()?.site = null;
+                  safeFind<AlarmLogic>()?.loadData();
                   widget.onReset.call();
                 },
                 child: Container(
@@ -151,7 +192,11 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
                       startDateTime?.millisecondsSinceEpoch;
                   safeFind<AlarmLogic>()?.endTimeMill =
                       endDateTime?.millisecondsSinceEpoch;
-                  safeFind<AlarmLogic>()?.countryCode = countryItem?.code;
+                  safeFind<AlarmLogic>()?.country = countryItem;
+                  safeFind<AlarmLogic>()?.alarmLevel = alarmLevel;
+                  safeFind<AlarmLogic>()?.site = site;
+                  safeFind<AlarmLogic>()?.loadData();
+                  widget.onConfirm.call();
 
                   /* debugPrint(
                     "start: ${safeFind<AlarmLogic>()?.startTimeMill},"

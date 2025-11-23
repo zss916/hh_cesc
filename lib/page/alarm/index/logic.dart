@@ -7,7 +7,11 @@ class AlarmLogic extends GetxController {
   int pageNum = 1;
   int? startTimeMill;
   int? endTimeMill;
-  String? countryCode;
+  CountryEntity? country;
+  //
+  int? alarmLevel;
+  // String? adcode;
+  SiteEntity? site;
 
   @override
   void onInit() {
@@ -44,6 +48,9 @@ class AlarmLogic extends GetxController {
       List<AlarmItemEntity> value,
     ) = await AlarmAPI.getListPageApp(
       pageNum: pageNum,
+      adcode: country?.code,
+      alarmLevel: alarmLevel,
+      siteId: site?.id,
       startTimeMill: startTimeMill,
       endTimeMill: endTimeMill,
     );

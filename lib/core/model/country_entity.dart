@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/country_entity.g.dart';
+import 'package:get/get.dart';
 
 export 'package:cescpro/generated/json/country_entity.g.dart';
 
@@ -22,4 +24,6 @@ class CountryEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  String get name => Get.isEn ? (en ?? "") : (zh ?? "");
 }

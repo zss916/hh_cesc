@@ -75,3 +75,14 @@ extension TitleName on String {
     };
   }
 }
+
+extension AlarmLeveTime on int {
+  String? getAlarmTitle() {
+    return switch (this) {
+      _ when (this == 1) => TKey.alarmLevel1.tr,
+      _ when (this == 2) => TKey.alarmLevel2.tr,
+      _ when (this == 3) => TKey.alarmLevel3.tr,
+      _ => null,
+    };
+  }
+}
