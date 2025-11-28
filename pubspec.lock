@@ -9,14 +9,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.1.1"
-  args:
-    dependency: transitive
-    description:
-      name: args
-      sha256: d0481093c50b1da8910eb0bb301626d4d8eb7284aa739614d2b394ee09e3ea04
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.7.0"
   async:
     dependency: transitive
     description:
@@ -33,30 +25,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0"
-  based_battery_indicator:
-    dependency: "direct main"
-    description:
-      name: based_battery_indicator
-      sha256: dd2bcc3940346905a5bd9705de5f464f8a65e37291aff0afc00e400829a40772
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.3+1"
-  battery_plus:
-    dependency: transitive
-    description:
-      name: battery_plus
-      sha256: "80c40c9f5763c797f6802797983392e9560eff749a199baeba1229e5aba77ef5"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "4.1.0"
-  battery_plus_platform_interface:
-    dependency: transitive
-    description:
-      name: battery_plus_platform_interface
-      sha256: "19fd8418a81aeb2dea8fb7026b1fdf56b6c6d319baf8d703fa0d13c1d5c7ba2f"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.2.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -145,14 +113,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.7"
-  cupertino_battery_indicator:
-    dependency: "direct main"
-    description:
-      name: cupertino_battery_indicator
-      sha256: b41fa6ac61e9b397cd8eea6e908292ef22f6d343b4ca9ad7b71871ea215a516b
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.2.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -168,14 +128,6 @@ packages:
       relative: true
     source: path
     version: "0.8.3"
-  dbus:
-    dependency: transitive
-    description:
-      name: dbus
-      sha256: "79e0c23480ff85dc68de79e2cd6334add97e48f7f4865d17686dd6ea81a47e8c"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.7.11"
   dio:
     dependency: "direct main"
     description:
@@ -399,10 +351,10 @@ packages:
     dependency: "direct main"
     description:
       name: get
-      sha256: c79eeb4339f1f3deffd9ec912f8a923834bec55f7b49c9e882b8fef2c139d425
+      sha256: "5ed34a7925b85336e15d472cc4cfe7d9ebf4ab8e8b9f688585bf6b50f4c3d79a"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.7.2"
+    version: "4.7.3"
   http:
     dependency: transitive
     description:
@@ -707,14 +659,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.1"
-  petitparser:
-    dependency: transitive
-    description:
-      name: petitparser
-      sha256: "1a97266a94f7350d30ae522c0af07890c70b8e62c71e8e3920d1db4d23c057d1"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "7.0.1"
   platform:
     dependency: transitive
     description:
@@ -747,14 +691,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.2"
-  realtime_battery_indicator:
-    dependency: "direct main"
-    description:
-      name: realtime_battery_indicator
-      sha256: "4b81a6efccda3dae38be9548259a93e80c217b748873f196d8f26a0a861b7186"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.2"
   rxdart:
     dependency: transitive
     description:
@@ -920,6 +856,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.7.7"
+  time_zone_plus:
+    dependency: "direct main"
+    description:
+      name: time_zone_plus
+      sha256: b1d64da0b063ef374c002e7d043b613e142737168449cc2edac984f01d126966
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.4"
+  timezone:
+    dependency: "direct main"
+    description:
+      name: timezone
+      sha256: dd14a3b83cfd7cb19e7888f1cbc20f258b8d71b54c06f79ac585f14093a287d1
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.10.1"
   typed_data:
     dependency: transitive
     description:
@@ -928,14 +880,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.4.0"
-  upower:
-    dependency: transitive
-    description:
-      name: upower
-      sha256: cf042403154751180affa1d15614db7fa50234bc2373cd21c3db666c38543ebf
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.7.0"
   url_launcher:
     dependency: "direct main"
     description:
@@ -1072,14 +1016,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
-  xml:
-    dependency: transitive
-    description:
-      name: xml
-      sha256: "971043b3a0d3da28727e40ed3e0b5d18b742fa5a68665cca88e74b7876d5e025"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "6.6.1"
 sdks:
   dart: ">=3.9.0 <4.0.0"
   flutter: ">=3.35.0"

@@ -18,7 +18,6 @@ class Http {
     _dio.httpClientAdapter = httpAdapter;
     _dio.interceptors.add(AuthInterceptor());
     _dio.interceptors.add(prettyDioLogger);
-    //_dio.interceptors.add(AliceHelper.instance.getAliceDioAdapter());
   }
 
   void cancelRequests(CancelToken token) {

@@ -52,7 +52,7 @@ class AlarmAPI {
     }
   }
 
-  ///todo 告警列表，全量
+  ///告警列表，全量
   static Future<(bool, List<AlarmItemEntity>)> getListPageApp({
     int? pageNum = 1,
     int? pageSize = 10,
@@ -86,7 +86,6 @@ class AlarmAPI {
         params["siteId"] = siteId;
       }
       //所属区域(USA)
-      //https://ems.cescpower.com:9088/api/v1/business/alarm/listPage?adcode=USA&pre_adcode%5B0%5D=USA&pageSize=10&pageNum=1
       if (adcode != null) {
         params["adcode"] = adcode;
       }
@@ -99,9 +98,6 @@ class AlarmAPI {
       if (endTimeMill != null) {
         params["endTimeMill"] = endTimeMill;
       }
-
-      ///告警开始时间 到结束时间
-      ///https://ems.cescpower.com:9088/api/v1/business/alarm/listPage?startTimeMill=1761926400000&endTimeMill=1762012800000&pageSize=10&pageNum=1
 
       var result = await Http.instance.get(
         ApiPath.getListPageApp,
