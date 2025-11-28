@@ -350,6 +350,8 @@ class TKey {
 
   static const String all = "all";
 
+  static const String realTimeSoc = "realTimeSoc";
+
   static const String chargingAmount = "chargingAmount";
 
   static const String dischargingAmount = "dischargingAmount";
@@ -533,4 +535,5 @@ const en = {
   "chargingAmount": "充电金额",
   "dischargingAmount": "放电金额",
   "amount": "金额",
+  "realTimeSoc": "实时曲线",
 };

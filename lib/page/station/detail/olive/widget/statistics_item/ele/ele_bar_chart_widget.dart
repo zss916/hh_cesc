@@ -1,26 +1,27 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/widget/revenue_barchart_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/widget/ele_barchart_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class RevenueBarChartWidget extends StatefulWidget {
+class EleBarChartWidget extends StatefulWidget {
   final String title;
   final StatisticsItemLogic logic;
 
-  const RevenueBarChartWidget({
+  const EleBarChartWidget({
     super.key,
     required this.title,
     required this.logic,
   });
 
   @override
-  State<RevenueBarChartWidget> createState() => _RevenueBarChartWidget();
+  State<EleBarChartWidget> createState() => _RevenueBarChartWidget();
 }
 
-class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
+class _RevenueBarChartWidget extends State<EleBarChartWidget>
     with SingleTickerProviderStateMixin {
   late final TabController tabCtrl;
 
@@ -92,33 +93,39 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                         controller: tabCtrl,
                         children: [
                           ///周
-                          RevenueBarchartWidget(
+                          EleBarchartItemWidget(
                             data: widget.logic.revenueList
-                                .map((e) => (e.totalIncome ?? 0))
+                                .map((e) => (e.totalCharge ?? 0))
+                                .toList(),
+                            data2: widget.logic.revenueList
+                                .map((e) => (e.totalRecharge ?? 0))
                                 .toList(),
                             labels: widget.logic.labels,
-                            maxY: widget.logic.revenueMaxY ?? 0,
-                            minY: widget.logic.revenueMinY ?? 0,
+                            maxY: widget.logic.eleMaxY ?? 0,
                           ),
 
                           ///月
-                          RevenueBarchartWidget(
+                          EleBarchartItemWidget(
                             data: widget.logic.revenueList
-                                .map((e) => (e.totalIncome ?? 0))
+                                .map((e) => (e.totalCharge ?? 0))
+                                .toList(),
+                            data2: widget.logic.revenueList
+                                .map((e) => (e.totalRecharge ?? 0))
                                 .toList(),
                             labels: widget.logic.labels,
-                            maxY: widget.logic.revenueMaxY ?? 0,
-                            minY: widget.logic.revenueMinY ?? 0,
+                            maxY: widget.logic.eleMaxY ?? 0,
                           ),
 
                           ///年
-                          RevenueBarchartWidget(
+                          EleBarchartItemWidget(
                             data: widget.logic.revenueList
-                                .map((e) => (e.totalIncome ?? 0))
+                                .map((e) => (e.totalCharge ?? 0))
+                                .toList(),
+                            data2: widget.logic.revenueList
+                                .map((e) => (e.totalRecharge ?? 0))
                                 .toList(),
                             labels: widget.logic.labels,
-                            maxY: widget.logic.revenueMaxY ?? 0,
-                            minY: widget.logic.revenueMinY ?? 0,
+                            maxY: widget.logic.eleMaxY ?? 0,
                           ),
                         ],
                       ),
@@ -126,10 +133,26 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                   else
                     Container(
                       color: Colors.transparent,
-                      height: 330,
+                      height: 280.h,
                       width: double.maxFinite,
                     ),
                   Divider(height: 5.h, color: Colors.transparent),
+
+                  Row(
+                    children: [
+                      Spacer(),
+                      LineTitleWidget(
+                        title: TKey.charge.tr,
+                        color: Color(0xFF39FFEF),
+                      ),
+                      VerticalDivider(width: 16.w, color: Colors.transparent),
+                      LineTitleWidget(
+                        title: TKey.discharge.tr,
+                        color: Color(0xFFFFC08C),
+                      ),
+                      Spacer(),
+                    ],
+                  ),
                 ],
               ),
 
@@ -214,7 +237,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
                         widget.logic.loadRevenue(
-                          type: DataType.revenue,
+                          type: DataType.ele,
                           queryType: index,
                           startTimeStamp: start.millisecondsSinceEpoch,
                           endTimeStamp: end.millisecondsSinceEpoch,
@@ -228,7 +251,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
                         widget.logic.loadRevenue(
-                          type: DataType.revenue,
+                          type: DataType.ele,
                           queryType: index,
                           startTimeStamp: start.millisecondsSinceEpoch,
                           endTimeStamp: end.millisecondsSinceEpoch,
@@ -242,7 +265,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
                         widget.logic.loadRevenue(
-                          type: DataType.revenue,
+                          type: DataType.ele,
                           queryType: index,
                           startTimeStamp: start.millisecondsSinceEpoch,
                           endTimeStamp: end.millisecondsSinceEpoch,
@@ -257,7 +280,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                 start: 0.w,
                 top: 50.h,
                 child: Text(
-                  "(¥)",
+                  "(KW)",
                   style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                 ),
               ),

@@ -48,17 +48,17 @@ class RealTimeDataAPI {
 
   ///获取soc power曲线图数据
   static Future<(bool, List<SocEntity>)> postSocGraph({
-    required String siteId,
-    required int did,
-    required int nodeNo,
-    required int devNo,
-    required String compType,
-    required int startTimeStamp,
-    required int endTimeStamp,
+    String? siteId,
+    int? did,
+    int? nodeNo,
+    int? devNo,
+    String? compType,
+    int? startTimeStamp,
+    int? endTimeStamp,
   }) async {
     try {
       var result = await Http.instance.post(
-        ApiPath.postPowerGraph,
+        ApiPath.postSocGraph,
         data: {
           "siteId": siteId,
           "did": did,
@@ -69,7 +69,7 @@ class RealTimeDataAPI {
           "endTimeStamp": endTimeStamp,
         },
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<SocEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => SocEntity.fromJson(e)).toList(),
@@ -87,13 +87,13 @@ class RealTimeDataAPI {
 
   ///获取power曲线图数据
   static Future<(bool, List<PowerEntity>)> postGraph({
-    required String siteId,
-    required int did,
-    required int nodeNo,
-    required int devNo,
-    required String compType,
-    required int startTimeStamp,
-    required int endTimeStamp,
+    String? siteId,
+    int? did,
+    int? nodeNo,
+    int? devNo,
+    String? compType,
+    int? startTimeStamp,
+    int? endTimeStamp,
   }) async {
     try {
       var result = await Http.instance.post(
@@ -108,7 +108,7 @@ class RealTimeDataAPI {
           "endTimeStamp": endTimeStamp,
         },
       );
-      if (result["code"] == 0) {
+      if (result["code"] == HttpStatus.ok) {
         List<PowerEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => PowerEntity.fromJson(e)).toList(),

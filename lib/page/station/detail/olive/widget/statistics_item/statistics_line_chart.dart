@@ -29,39 +29,6 @@ class _LineChart extends StatelessWidget {
 
   const _LineChart(this.powerList);
 
-  ///折现数据列表
-  List<LineChartBarData> get lineBarsData1 => [
-    LineChartBarData(
-      ///是否圆一点
-      isCurved: true,
-      color: Color(0xFF3874F2),
-      barWidth: 1,
-      isStrokeCapRound: true,
-
-      ///点数据
-      dotData: const FlDotData(show: false),
-
-      ///线下面的区域(true)
-      belowBarData: BarAreaData(
-        show: true,
-        color: Color(0xFF3874F2).withValues(alpha: 0.15),
-      ),
-      spots: [
-        ...(powerList ?? []).map((e) => e.mFlSpot),
-        /*...(list[0].list??[])
-            .map((e) => FlSpot(0,0)),
-        */
-        ///点坐标
-        // FlSpot(1, 1),
-        // FlSpot(3, 1.5),
-      ],
-    ),
-    //lineChartBarData1_2,
-    //lineChartBarData1_3,
-    //lineChartBarData1_4,
-    //lineChartBarData1_5,
-  ];
-
   @override
   Widget build(BuildContext context) {
     return LineChart(
@@ -103,7 +70,37 @@ class _LineChart extends StatelessWidget {
             top: const BorderSide(color: Colors.transparent, width: 0),
           ),
         ),
-        lineBarsData: lineBarsData1,
+        lineBarsData: [
+          LineChartBarData(
+            ///是否圆一点
+            isCurved: true,
+            color: Color(0xFF3874F2),
+            barWidth: 1,
+            isStrokeCapRound: true,
+
+            ///点数据
+            dotData: const FlDotData(show: false),
+
+            ///线下面的区域(true)
+            belowBarData: BarAreaData(
+              show: true,
+              color: Color(0xFF3874F2).withValues(alpha: 0.15),
+            ),
+            spots: [
+              // ...(powerList ?? []).map((e) => e.mFlSpot),
+              /*...(list[0].list??[])
+            .map((e) => FlSpot(0,0)),
+        */
+              ///点坐标
+              // FlSpot(1, 1),
+              // FlSpot(3, 1.5),
+            ],
+          ),
+          //lineChartBarData1_2,
+          //lineChartBarData1_3,
+          //lineChartBarData1_4,
+          //lineChartBarData1_5,
+        ],
         //minX: 0,
         //maxX: 24,
         // minY: 0,
@@ -117,30 +114,10 @@ class _LineChart extends StatelessWidget {
 
   ///left title
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    String text = "";
-    switch (value.toInt()) {
-      case 0:
-        // text = '${powerList.first.yList[0]}';
-        break;
-      case 1:
-        // text = '${powerList.first.yList[1]}';
-        break;
-      case 2:
-        // text = '${powerList.first.yList[2]}';
-        break;
-      case 3:
-        // text = '${powerList.first.yList[3]}';
-        break;
-      case 4:
-        //  text = '${powerList.first.yList[4]}';
-        break;
-      default:
-        return SizedBox.shrink();
-    }
     return SideTitleWidget(
       meta: meta,
       child: Text(
-        text,
+        "${value}",
         style: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 12.sp,

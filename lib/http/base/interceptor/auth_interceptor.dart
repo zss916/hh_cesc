@@ -21,12 +21,12 @@ class AuthInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     if (response.statusCode == HttpStatus.ok) {
-      //  debugPrint("data =>> ${response.data}");
       Map<String, dynamic> map = response.data as Map<String, dynamic>;
       if (map["code"] == 99999) {
         User.removeToken();
         PageTools.offAllNamedSplash();
         AppLoading.toast("${map["message"]}");
+        return;
       } else {
         super.onResponse(response, handler);
       }

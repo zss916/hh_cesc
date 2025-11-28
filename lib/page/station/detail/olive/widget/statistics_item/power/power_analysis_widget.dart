@@ -1,8 +1,8 @@
 import 'package:cescpro/core/color/colors.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_line_chart.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
@@ -97,11 +97,9 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                       children: [
                         Container(
                           color: Colors.transparent,
-                          height: 270,
+                          height: 300.h,
                           width: double.maxFinite,
-                          child: StatisticsLineChartWidget(
-                            value: widget.logic.showPowerList.first.list ?? [],
-                          ),
+                          child: PowerLineChart(logic: widget.logic),
                         ),
                         Divider(height: 5.h, color: Colors.transparent),
                         Container(

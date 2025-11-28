@@ -43,6 +43,7 @@ dependencies:
   intl: 0.20.2
   #图表
   fl_chart: 1.1.1
+  #fl_chart_flutter:
   easy_date_timeline: 2.0.9
   calendar_date_picker2: 2.0.1
   easy_refresh: ^3.4.0
@@ -90,7 +91,9 @@ dependencies:
   #flutter_echart: 2.0.0
   #extended_phone_number_input: ^1.0.2
 
-
+  #图表-折线图
+  #flutter_data_graph: ^0.0.9+1
+  #fl_animated_linechart: ^1.2.0
 
 
   flutter_echart:

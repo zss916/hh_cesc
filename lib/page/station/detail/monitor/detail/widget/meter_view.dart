@@ -1,8 +1,8 @@
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/station/detail/monitor/cluster/line_chart.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/top_item_widget.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,7 +22,7 @@ class MeterView extends StatelessWidget {
         buildMeterSatusItem(logic),
         Divider(height: 12.h, color: Colors.transparent),
 
-        ///todo 实时曲线
+        ///实时曲线
         buildLineChartWidget(),
         Divider(height: 12.h, color: Colors.transparent),
 
@@ -142,7 +142,7 @@ class MeterView extends StatelessWidget {
           ),
           alignment: AlignmentDirectional.centerStart,
           child: Text(
-            "实时曲线",
+            TKey.realTimeSoc.tr,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w500,
@@ -168,11 +168,18 @@ class MeterView extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    color: Colors.transparent,
-                    height: 270,
-                    width: double.maxFinite,
-                    child: LineChartWidget(),
+                  Divider(height: 5.h, color: Colors.transparent),
+                  GetBuilder<MonitorDetailLogic>(
+                    id: "realTimeData",
+                    init: MonitorDetailLogic(),
+                    builder: (logic) {
+                      return Container(
+                        color: Colors.transparent,
+                        height: 270.h,
+                        width: double.maxFinite,
+                        child: MonitorLineChartWidget2(logic: logic),
+                      );
+                    },
                   ),
                   Divider(height: 5.h, color: Colors.transparent),
                   Row(
@@ -190,28 +197,7 @@ class MeterView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "功率",
-                            style: TextStyle(
-                              color: Color(0xD9FFFFFF),
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      VerticalDivider(width: 16.w, color: Colors.transparent),
-                      Row(
-                        children: [
-                          Container(
-                            width: 7,
-                            height: 7,
-                            margin: EdgeInsets.only(right: 5.w),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF0BC3C4),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                          Text(
-                            "SOC",
+                            TKey.power.tr,
                             style: TextStyle(
                               color: Color(0xD9FFFFFF),
                               fontSize: 12.sp,

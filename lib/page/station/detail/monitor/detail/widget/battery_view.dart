@@ -1,10 +1,10 @@
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/com_type_list_entity.dart';
-import 'package:cescpro/page/station/detail/monitor/cluster/line_chart.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/top_item_widget.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 ///电池系统
 class BatteryView extends StatelessWidget {
   final MonitorDetailLogic logic;
+
   const BatteryView({super.key, required this.logic});
 
   @override
@@ -33,7 +34,7 @@ class BatteryView extends StatelessWidget {
         buildInfoList(logic),
         Divider(height: 12.h, color: Colors.transparent),
 
-        ///todo 实时曲线
+        ///实时曲线
         buildLineChartWidget(),
         Divider(height: 12.h, color: Colors.transparent),
 
@@ -309,7 +310,7 @@ class BatteryView extends StatelessWidget {
           ),
           alignment: AlignmentDirectional.centerStart,
           child: Text(
-            "实时曲线",
+            TKey.realTimeSoc.tr,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w500,
@@ -335,12 +336,26 @@ class BatteryView extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    color: Colors.transparent,
-                    height: 270,
-                    width: double.maxFinite,
-                    child: LineChartWidget(),
+                  Divider(height: 5.h, color: Colors.transparent),
+
+                  GetBuilder<MonitorDetailLogic>(
+                    id: "realTimeData",
+                    init: MonitorDetailLogic(),
+                    builder: (logic) {
+                      return Container(
+                        color: Colors.transparent,
+                        height: 270.h,
+                        width: double.maxFinite,
+                        child: MonitorLineChartWidget(logic: logic),
+                      );
+                    },
                   ),
+                  /* Container(
+                    color: Colors.transparent,
+                    height: 270.h,
+                    width: double.maxFinite,
+                    child: MonitorLineChartWidget(logic: logic),
+                  ),*/
                   Divider(height: 5.h, color: Colors.transparent),
                   Row(
                     children: [
@@ -357,7 +372,7 @@ class BatteryView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "功率",
+                            TKey.power.tr,
                             style: TextStyle(
                               color: Color(0xD9FFFFFF),
                               fontSize: 12.sp,

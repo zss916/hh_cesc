@@ -1,4 +1,7 @@
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/ele_bar_chart_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_analysis_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/build_bar_chart_widget_pv.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/revenue_bar_chart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
@@ -13,15 +16,16 @@ class StatisticsItemView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          /*GetBuilder<StatisticsItemLogic>(
+          ///功率折线
+          GetBuilder<StatisticsItemLogic>(
             id: "powerGraph",
             init: StatisticsItemLogic(),
             builder: (logic) {
               return PowerAnalysisWidget(logic: logic);
             },
-          ),*/
+          ),
 
-          //收益统计
+          ///收益统计
           GetBuilder<StatisticsItemLogic>(
             id: 'revenue',
             init: StatisticsItemLogic(),
@@ -33,53 +37,32 @@ class StatisticsItemView extends StatelessWidget {
             },
           ),
 
-          /* BuildBarChartWidget(
-            title: TKey.electricityIndicatorsAndEfficiency.tr,
-            logic: StatisticsItemLogic(),
-          ),*/
+          ///电量
+          GetBuilder<StatisticsItemLogic>(
+            id: 'ele',
+            init: StatisticsItemLogic(),
+            builder: (logic) {
+              return EleBarChartWidget(
+                title: TKey.electricityIndicatorsAndEfficiency.tr,
+                logic: logic,
+              );
+            },
+          ),
 
-          /*BuildBarChartWidgetPV(
-            title: TKey.photovoltaicPowerGeneration.tr,
-            logic: StatisticsItemLogic(),
-          ),*/
+          ///光伏发电量
+          GetBuilder<StatisticsItemLogic>(
+            id: "pv",
+            init: StatisticsItemLogic(),
+            builder: (logic) {
+              return BuildBarChartWidgetPV(
+                title: TKey.photovoltaicPowerGeneration.tr,
+                logic: logic,
+              );
+            },
+          ),
           SizedBox(height: 200.h),
         ],
       ),
     );
-    /* return GetBuilder<StatisticsItemLogic>(
-      init: StatisticsItemLogic(),
-      builder: (logic) {
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              GetBuilder<StatisticsItemLogic>(
-                id: "powerGraph",
-                init: StatisticsItemLogic(),
-                builder: (logic) {
-                  return PowerAnalysisWidget(logic: logic);
-                },
-              ),
-
-              BuildBarChartWidget(
-                title: TKey.revenueStatistics.tr,
-                logic: logic,
-              ),
-
-              BuildBarChartWidget(
-                title: TKey.electricityIndicatorsAndEfficiency.tr,
-                logic: logic,
-              ),
-
-              BuildBarChartWidgetPV(
-                title: TKey.photovoltaicPowerGeneration.tr,
-                logic: logic,
-              ),
-
-              SizedBox(height: 200.h),
-            ],
-          ),
-        );
-      },
-    );*/
   }
 }

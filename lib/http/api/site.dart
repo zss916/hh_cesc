@@ -188,10 +188,10 @@ class SiteAPI {
 
   ///获取光伏发电趋势数据
   static Future<(bool, List<PvTrendEntity>)> postPvTrend({
-    required int siteId,
-    required int startTimeStamp,
-    required int endTimeStamp,
-    required int queryType,
+    int? siteId,
+    int? startTimeStamp,
+    int? endTimeStamp,
+    int? queryType,
   }) async {
     try {
       //1.月 2.年 0.日(间隔15分钟，仅电量)
@@ -222,7 +222,7 @@ class SiteAPI {
 
   ///查询收益，充放电统计以及效率
   static Future<(bool, List<ElecGraphEntity>)> postElecGraph({
-    required int siteId,
+    int? siteId,
     int? startTimeStamp,
     int? endTimeStamp,
     int? queryType,
@@ -255,7 +255,7 @@ class SiteAPI {
 
   ///功率分析
   static Future<(bool, List<PowerGraphEntity>)> postPowerGraph({
-    required int siteId,
+    int? siteId,
     int? startTimeStamp,
     int? endTimeStamp,
     int? queryType,

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/power_graph_entity.g.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 export 'package:cescpro/generated/json/power_graph_entity.g.dart';
 
@@ -45,7 +44,7 @@ class PowerGraphList {
   //int get xAxis => Duration(seconds: time).inHours;
 
   ///坐标
-  FlSpot get mFlSpot => FlSpot(time.toDouble(), val);
+  // FlSpot get mFlSpot => FlSpot(time.toDouble(), val);
 
   PowerGraphList();
 

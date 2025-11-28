@@ -1,6 +1,6 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/bar_chart_pv.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/pv_barchart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,20 +79,48 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
             children: [
               Column(
                 children: [
-                  Divider(height: 30.h, color: Colors.transparent),
-                  Container(
-                    color: Colors.transparent,
-                    height: 270,
-                    width: double.maxFinite,
-                    child: TabBarView(
-                      controller: tabCtrl,
-                      children: [
-                        BarChartWidgetPV(),
-                        BarChartWidgetPV(),
-                        BarChartWidgetPV(),
-                      ],
+                  Divider(height: 60.h, color: Colors.transparent),
+
+                  if (widget.logic.labels.isNotEmpty)
+                    Container(
+                      color: Colors.transparent,
+                      height: 280.h,
+                      width: double.maxFinite,
+                      child: TabBarView(
+                        physics: NeverScrollableScrollPhysics(),
+                        controller: tabCtrl,
+                        children: [
+                          PVBarchartItemWidget(
+                            data: widget.logic.pvList
+                                .map((e) => (e.summaryValue ?? 0))
+                                .toList(),
+                            labels: widget.logic.pvLabels,
+                            maxY: widget.logic.pvMaxY ?? 0,
+                          ),
+                          PVBarchartItemWidget(
+                            data: widget.logic.pvList
+                                .map((e) => (e.summaryValue ?? 0))
+                                .toList(),
+                            labels: widget.logic.pvLabels,
+                            maxY: widget.logic.pvMaxY ?? 0,
+                          ),
+                          PVBarchartItemWidget(
+                            data: widget.logic.pvList
+                                .map((e) => (e.summaryValue ?? 0))
+                                .toList(),
+                            labels: widget.logic.pvLabels,
+                            maxY: widget.logic.pvMaxY ?? 0,
+                          ),
+                        ],
+                      ),
+                    )
+                  else
+                    Container(
+                      color: Colors.transparent,
+                      height: 280.h,
+                      width: double.maxFinite,
                     ),
-                  ),
+
                   Divider(height: 5.h, color: Colors.transparent),
                 ],
               ),
@@ -111,6 +139,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                   ),
                   padding: EdgeInsetsDirectional.all(2),
                   child: TabBar(
+                    physics: NeverScrollableScrollPhysics(),
                     controller: tabCtrl,
                     tabs: [
                       Tab(
@@ -167,30 +196,43 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                     ),
                     unselectedLabelStyle: TextStyle(fontSize: 14),
                     onTap: (index) {
-                      debugPrint("index ==> $index");
                       if (index == 0) {
-                        widget.logic.loadPVTrend(type: 0);
+                        ///周
+                        DateTime now = DateTime.now().toUtc();
+                        // DateTime start = DateTime(now.year, now.month, 1);
+                        DateTime end = DateTime(now.year, now.month, now.day);
+                        DateTime start = end.subtract(Duration(days: 7));
+                        debugPrint(
+                          "start:${start.timestampFormat},end:${end.timestampFormat}",
+                        );
+                        widget.logic.loadPVTrend(
+                          queryType: index,
+                          startTimeStamp: start.millisecondsSinceEpoch,
+                          endTimeStamp: end.millisecondsSinceEpoch,
+                        );
                       } else if (index == 1) {
-                        DateTime now = DateTime.now();
+                        ///月
+                        DateTime now = DateTime.now().toUtc();
                         DateTime start = DateTime(now.year, now.month, 1);
                         DateTime end = DateTime(now.year, now.month, now.day);
                         debugPrint(
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
                         widget.logic.loadPVTrend(
-                          type: 2,
+                          queryType: index,
                           startTimeStamp: start.millisecondsSinceEpoch,
                           endTimeStamp: end.millisecondsSinceEpoch,
                         );
-                      } else {
-                        DateTime now = DateTime.now();
+                      } else if (index == 2) {
+                        ///年
+                        DateTime now = DateTime.now().toUtc();
                         DateTime start = DateTime(now.year, 1, 1);
-                        DateTime end = DateTime(now.year, now.month, now.day);
+                        DateTime end = DateTime(now.year, now.month + 1, 0);
                         debugPrint(
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
                         widget.logic.loadPVTrend(
-                          type: 1,
+                          queryType: index,
                           startTimeStamp: start.millisecondsSinceEpoch,
                           endTimeStamp: end.millisecondsSinceEpoch,
                         );

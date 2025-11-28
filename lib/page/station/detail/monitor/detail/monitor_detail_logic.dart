@@ -1,12 +1,15 @@
+import 'dart:math';
+
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
-import 'package:cescpro/http/api/alarm.dart';
 import 'package:cescpro/http/api/realTimeData.dart';
 import 'package:cescpro/http/api/site.dart';
-import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/http/bean/com_card_vo_entity.dart';
 import 'package:cescpro/http/bean/com_type_list_entity.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
+import 'package:cescpro/http/bean/power_entity.dart';
+import 'package:cescpro/http/bean/soc_entity.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MonitorDetailLogic extends GetxController {
@@ -44,6 +47,7 @@ class MonitorDetailLogic extends GetxController {
     Future.wait([
       loadComType(),
       loadComponentListByDev(),
+      loadSocGraph(),
     ]).whenComplete(() => AppLoading.dismiss());
   }
 
@@ -111,9 +115,81 @@ class MonitorDetailLogic extends GetxController {
     return pathSegments.join('/');
   }
 
-  ///todo
-  Future<void> loadRealData() async {
-    final (bool isSuccessful, List<AlarmItemEntity> value) =
-        await AlarmAPI.postRealTimePage(siteId: "530", compType: "ARR");
+  ///实时数据
+  List<SocEntity> arrList = [];
+  List<PowerEntity> powerList = [];
+  double maxY = 0.0;
+  double minY = 0.0;
+  int maxX = 0;
+
+  Future<void> loadSocGraph() async {
+    DateTime now = DateTime.now();
+    DateTime startOfDay = DateTime(now.year, now.month, now.day - 1, 0, 0, 0);
+    DateTime endOfToday = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      24,
+      0,
+      0,
+    ).subtract(Duration(microseconds: 1));
+
+    if (devType == "ARR") {
+      final (
+        bool isSuccessful,
+        List<SocEntity> value,
+      ) = await RealTimeDataAPI.postSocGraph(
+        siteId: siteId,
+        did: did,
+        devNo: devNo,
+        nodeNo: nodeNo,
+        compType: devType,
+        startTimeStamp: (startOfDay.microsecondsSinceEpoch / 1000).floor(),
+        endTimeStamp: (endOfToday.microsecondsSinceEpoch / 1000).floor(),
+      );
+      if (isSuccessful) {
+        arrList.assignAll(value);
+        if (arrList.isNotEmpty) {
+          List<double> powerList = arrList.map((e) => e.power ?? 0).toList();
+          double powerListMax = powerList.reduce(max);
+          double powerListMin = powerList.reduce(min);
+          List<int> socList = arrList.map((e) => e.soc ?? 0).toList();
+          int socListMax = socList.reduce(max);
+          int socListMin = socList.reduce(min);
+          maxY = (powerListMax > socListMax.toDouble())
+              ? powerListMax
+              : socListMax.toDouble();
+          minY = (powerListMin > socListMin.toDouble())
+              ? socListMin.toDouble()
+              : powerListMin;
+          maxX = arrList.length;
+        }
+        update(["realTimeData"]);
+        debugPrint("maxY:$maxY, minY:$minY,maxY:$maxX");
+      }
+    } else if (devType == "PCS" || devType == "METER") {
+      final (
+        bool isSuccessful,
+        List<PowerEntity> value,
+      ) = await RealTimeDataAPI.postGraph(
+        siteId: siteId,
+        did: did,
+        devNo: devNo,
+        nodeNo: nodeNo,
+        compType: devType,
+        startTimeStamp: (startOfDay.microsecondsSinceEpoch / 1000).floor(),
+        endTimeStamp: (endOfToday.microsecondsSinceEpoch / 1000).floor(),
+      );
+      if (isSuccessful) {
+        powerList.assignAll(value);
+        if (powerList.isNotEmpty) {
+          List<double> powers = powerList.map((e) => e.power ?? 0).toList();
+          maxY = powers.reduce(max);
+          minY = powers.reduce(min);
+          maxX = powerList.length;
+        }
+        update(["realTimeData"]);
+      }
+    }
   }
 }

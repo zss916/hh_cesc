@@ -39,6 +39,7 @@ class _OliveViewState extends State<OliveView>
         ),
         centerTitle: true,
         title: KuGouTabBar(
+          physics: NeverScrollableScrollPhysics(),
           tabs: [
             Tab(text: TKey.oliveView.tr),
             Tab(text: TKey.statistics.tr),
@@ -69,6 +70,7 @@ class _OliveViewState extends State<OliveView>
       ),
       backgroundColor: Color(0xFF23282E),
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         controller: tabCtrl,
         children: [OliveItemView(), StatisticsItemView()],
       ),
