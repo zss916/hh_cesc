@@ -23,7 +23,7 @@ class MonitorDetailLogic extends GetxController {
   List<CompTreeEntity> titles = [];
   ComTypeListEntity? comTypeList;
   List<ComCardVoEntity> comCardVoList = [];
-  String compTree = "--";
+  String compTree = "";
 
   @override
   void onInit() {
@@ -47,8 +47,8 @@ class MonitorDetailLogic extends GetxController {
     Future.wait([
       loadComType(),
       loadComponentListByDev(),
-      loadSocGraph(),
     ]).whenComplete(() => AppLoading.dismiss());
+    loadSocGraph();
   }
 
   Future<void> getCompTree() async {
@@ -117,10 +117,13 @@ class MonitorDetailLogic extends GetxController {
 
   ///实时数据
   List<SocEntity> arrList = [];
+  double arrMaxY = 0.0;
+  double arrMinY = 0.0;
+  double arrMaxX = 0.0;
   List<PowerEntity> powerList = [];
-  double maxY = 0.0;
-  double minY = 0.0;
-  int maxX = 0;
+  double powerMaxY = 0.0;
+  double powerMinY = 0.0;
+  double powerMaxX = 0.0;
 
   Future<void> loadSocGraph() async {
     DateTime now = DateTime.now();
@@ -156,16 +159,16 @@ class MonitorDetailLogic extends GetxController {
           List<int> socList = arrList.map((e) => e.soc ?? 0).toList();
           int socListMax = socList.reduce(max);
           int socListMin = socList.reduce(min);
-          maxY = (powerListMax > socListMax.toDouble())
+          arrMaxY = (powerListMax > socListMax.toDouble())
               ? powerListMax
               : socListMax.toDouble();
-          minY = (powerListMin > socListMin.toDouble())
+          arrMinY = (powerListMin > socListMin.toDouble())
               ? socListMin.toDouble()
               : powerListMin;
-          maxX = arrList.length;
+          arrMaxX = arrList.length.toDouble();
         }
         update(["realTimeData"]);
-        debugPrint("maxY:$maxY, minY:$minY,maxY:$maxX");
+        //debugPrint("maxY:$maxY, minY:$minY,maxY:$maxX");
       }
     } else if (devType == "PCS" || devType == "METER") {
       final (
@@ -184,11 +187,12 @@ class MonitorDetailLogic extends GetxController {
         powerList.assignAll(value);
         if (powerList.isNotEmpty) {
           List<double> powers = powerList.map((e) => e.power ?? 0).toList();
-          maxY = powers.reduce(max);
-          minY = powers.reduce(min);
-          maxX = powerList.length;
+          powerMaxY = powers.reduce(max);
+          powerMinY = powers.reduce(min);
+          powerMaxX = powerList.length.toDouble();
         }
         update(["realTimeData"]);
+        debugPrint("maxY:$powerMaxX, minY:$powerMinY,maxY:$powerMaxY");
       }
     }
   }

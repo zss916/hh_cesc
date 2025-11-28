@@ -12,22 +12,23 @@ class RealTimeDataWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          padding: EdgeInsetsDirectional.only(
-            start: 18.w,
-            end: 18.w,
-            bottom: 16.h,
-          ),
-          alignment: AlignmentDirectional.centerStart,
-          child: Text(
-            TKey.realTimeData.tr,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
+        if (comCardVoList.isNotEmpty)
+          Container(
+            padding: EdgeInsetsDirectional.only(
+              start: 18.w,
+              end: 18.w,
+              bottom: 16.h,
+            ),
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              TKey.realTimeData.tr,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+              ),
             ),
           ),
-        ),
         comCardVoList.length == 1
             ? Container(
                 margin: EdgeInsets.symmetric(horizontal: 16.w),

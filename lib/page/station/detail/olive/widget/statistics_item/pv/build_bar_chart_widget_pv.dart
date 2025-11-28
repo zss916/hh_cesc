@@ -81,7 +81,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                 children: [
                   Divider(height: 60.h, color: Colors.transparent),
 
-                  if (widget.logic.labels.isNotEmpty)
+                  if (widget.logic.pvList.isNotEmpty)
                     Container(
                       color: Colors.transparent,
                       height: 280.h,

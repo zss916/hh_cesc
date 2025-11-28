@@ -727,7 +727,18 @@ class PcsView extends StatelessWidget {
                         color: Colors.transparent,
                         height: 270.h,
                         width: double.maxFinite,
-                        child: MonitorLineChartWidget2(logic: logic),
+                        child: logic.powerList.isEmpty
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : MonitorLineChartWidget2(
+                                powerList: logic.powerList,
+                                maxY: logic.powerMaxY,
+                                minY: logic.powerMinY,
+                                maxX: logic.powerMaxX,
+                              ),
                       );
                     },
                   ),

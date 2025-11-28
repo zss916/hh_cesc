@@ -1,14 +1,23 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/http/bean/power_entity.dart';
-import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MonitorLineChartWidget2 extends StatefulWidget {
-  final MonitorDetailLogic logic;
-  const MonitorLineChartWidget2({super.key, required this.logic});
+  final List<PowerEntity> powerList;
+  final double maxX;
+  final double maxY;
+  final double minY;
+
+  const MonitorLineChartWidget2({
+    super.key,
+    required this.powerList,
+    required this.maxX,
+    required this.maxY,
+    required this.minY,
+  });
 
   @override
   State<StatefulWidget> createState() => MonitorLineChartWidgetState();
@@ -21,7 +30,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToRight();
+      // _scrollToRight();
     });
   }
 
@@ -43,36 +52,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        /* PositionedDirectional(
-          start: 0,
-          top: 25,
-          bottom: 0,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(6, (index) {
-              final style = TextStyle(
-                color: Color(0xA8FFFFFF),
-                fontWeight: FontWeight.w400,
-                fontSize: 10.sp,
-              );
-              if (index == 5) {
-                return Text(
-                  (widget.logic.minY).toDouble().toStringAsFixed(2),
-                  style: style,
-                );
-              } else {
-                return Text(
-                  (widget.logic.maxY * (4 - index) / 4)
-                      .toDouble()
-                      .toStringAsFixed(1),
-                  style: style,
-                );
-              }
-            }),
-          ),
-        ),*/
         SingleChildScrollView(
-          //physics: NeverScrollableScrollPhysics(),
           controller: _scrollController,
           scrollDirection: Axis.horizontal,
           child: Container(
@@ -84,18 +64,13 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
             ),
             height: double.maxFinite,
             width: MediaQuery.of(context).size.width,
-            /*  width: widget.logic.arrList.length <= 10
-                ? MediaQuery.of(context).size.width - 80
-                : widget.logic.arrList.length * 2.0,*/
             child: LineChart(
               LineChartData(
                 lineTouchData: lineTouchData,
                 gridData: FlGridData(
                   show: true,
-                  // horizontalInterval: 10,
                   drawHorizontalLine: true,
                   drawVerticalLine: false,
-                  //horizontalInterval: ((widget.logic.maxY) / 3),
                 ),
                 titlesData: FlTitlesData(
                   rightTitles: const AxisTitles(
@@ -110,15 +85,11 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                       reservedSize: 25,
                       getTitlesWidget: (value, meta) {
                         return SideTitleWidget(
-                          //axisSide: meta.axisSide,
-                          //(widget.logic.arrList[value.toInt()].time ?? 0).hms
-                          // space: 2,
                           meta: meta,
-                          child: value.toInt() == widget.logic.powerList.length
+                          child: value.toInt() == widget.powerList.length
                               ? SizedBox.shrink()
                               : Text(
-                                  (widget.logic.powerList[value.toInt()].time ??
-                                          0)
+                                  (widget.powerList[value.toInt()].time ?? 0)
                                       .hms,
                                   style: TextStyle(
                                     color: Color(0xA8FFFFFF),
@@ -133,11 +104,10 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 25,
+                      reservedSize: 35,
                       getTitlesWidget: (value, meta) {
                         return SideTitleWidget(
-                          //axisSide: meta.axisSide,
-                          space: 2,
+                          //space: 2,
                           meta: meta,
                           child: Text(
                             "$value",
@@ -164,34 +134,18 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                     top: const BorderSide(color: Colors.transparent, width: 0),
                   ),
                 ),
-                lineBarsData: lineBarsData(widget.logic.powerList),
+                lineBarsData: lineBarsData(widget.powerList),
                 minX: 0,
-                maxX: widget.logic.maxX.toDouble(),
-                maxY: widget.logic.maxY,
-                minY: widget.logic.minY,
+                maxX: widget.maxX.toDouble(),
+                maxY: widget.maxY,
+                minY: widget.minY,
                 extraLinesData: ExtraLinesData(
                   horizontalLines: [
-                    /* HorizontalLine(
-                      y: widget.logic.minY,
-                      // color: Colors.transparent, // 水平线颜色
-                      // strokeWidth: 1, // 水平线宽度
-                      color: Color(0xA8FFFFFF),
-                      strokeWidth: 0.4,
-                      dashArray: [8, 4],
-                    ),*/
                     HorizontalLine(
                       y: 0,
                       color: Colors.transparent, // 水平线颜色
                       strokeWidth: 0.4, // 水平线宽度
                     ),
-                    /*  HorizontalLine(
-                      y: widget.logic.maxY,
-                      // color: Colors.transparent, // 水平线颜色
-                      // strokeWidth: 1, // 水平线宽度
-                      color: Color(0xA8FFFFFF),
-                      strokeWidth: 0.4,
-                      dashArray: [8, 4],
-                    ),*/
                   ],
                 ),
               ),

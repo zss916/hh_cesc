@@ -346,16 +346,21 @@ class BatteryView extends StatelessWidget {
                         color: Colors.transparent,
                         height: 270.h,
                         width: double.maxFinite,
-                        child: MonitorLineChartWidget(logic: logic),
+                        child: logic.arrList.isEmpty
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : MonitorLineChartWidget(
+                                arrList: logic.arrList,
+                                maxX: logic.arrMaxX.toDouble(),
+                                maxY: logic.arrMaxY,
+                                minY: logic.arrMinY,
+                              ),
                       );
                     },
                   ),
-                  /* Container(
-                    color: Colors.transparent,
-                    height: 270.h,
-                    width: double.maxFinite,
-                    child: MonitorLineChartWidget(logic: logic),
-                  ),*/
                   Divider(height: 5.h, color: Colors.transparent),
                   Row(
                     children: [
