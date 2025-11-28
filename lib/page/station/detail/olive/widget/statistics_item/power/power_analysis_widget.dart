@@ -91,50 +91,50 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
               Stack(
                 alignment: Alignment.center,
                 children: [
-                  if (widget.logic.powerView == PowerViewType.common.index)
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          color: Colors.transparent,
-                          height: 300.h,
-                          width: double.maxFinite,
-                          child: PowerLineChart(logic: widget.logic),
-                        ),
-                        Divider(height: 5.h, color: Colors.transparent),
-                        Container(
-                          padding: EdgeInsetsDirectional.symmetric(
-                            horizontal: 15.w,
-                          ),
-                          width: double.maxFinite,
-                          child: Wrap(
-                            spacing: 15.w,
-                            runSpacing: 8.h,
-                            children: [
-                              ...widget.logic.showPowerList.mapIndexed(
-                                (i, e) => LineTitleWidget(
-                                  color: AppColors.colorList[i],
-                                  title: e.title ?? "",
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        color: Colors.transparent,
+                        height: 300.h,
+                        width: double.maxFinite,
+                        child: widget.logic.powerLines.isEmpty
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
                                 ),
+                              )
+                            : PowerLineChart(
+                                list: widget.logic.powerLines,
+                                maxX: widget.logic.maxX,
+                                minY: widget.logic.minY,
+                                maxY: widget.logic.maxY,
                               ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  if (widget.logic.powerView == PowerViewType.loading.index)
-                    SizedBox(
-                      height: 280,
-                      width: double.maxFinite,
-                      child: Center(
-                        child: CircularProgressIndicator(color: Colors.white),
                       ),
-                    ),
-                  if (widget.logic.powerView == PowerViewType.empty.index)
-                    SizedBox(height: 280, width: double.maxFinite),
+                      Divider(height: 5.h, color: Colors.transparent),
+                      Container(
+                        padding: EdgeInsetsDirectional.symmetric(
+                          horizontal: 15.w,
+                        ),
+                        width: double.maxFinite,
+                        child: Wrap(
+                          spacing: 15.w,
+                          runSpacing: 8.h,
+                          children: [
+                            ...widget.logic.titles.mapIndexed(
+                              (i, e) => LineTitleWidget(
+                                color: AppColors.colorList[i],
+                                title: e,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-              if (widget.logic.powerView == 0)
+              if (widget.logic.powerLines.isNotEmpty)
                 PositionedDirectional(
                   start: 0.w,
                   top: 15.h,

@@ -18,9 +18,8 @@ class StatisticsItemLogic extends GetxController {
   int? endTimeStamp = DateTime.now().millisecondsSinceEpoch;
 
   ///功率折线图表
-  List<PowerGraphEntity> powerList = [];
-  List<PowerGraphEntity> get showPowerList =>
-      powerList.where((e) => (e.list ?? []).isNotEmpty).toList();
+  List<List<PowerGraphList>> powerLines = [];
+  List<String> titles = [];
   double minY = 0.0;
   double maxY = 0.0;
   double maxX = 0.0;
@@ -40,9 +39,6 @@ class StatisticsItemLogic extends GetxController {
   ///电量指标
   double? eleMaxY;
 
-  ///common 0,loading 1,empty 2
-  int powerView = PowerViewType.common.index;
-
   @override
   void onInit() {
     super.onInit();
@@ -61,25 +57,25 @@ class StatisticsItemLogic extends GetxController {
 
     loadPower();
 
-    /* loadRevenue(
+    loadRevenue(
       type: DataType.revenue,
       queryType: 0,
       startTimeStamp: start.millisecondsSinceEpoch,
       endTimeStamp: end.millisecondsSinceEpoch,
-    );*/
+    );
 
-    /*loadRevenue(
+    loadRevenue(
       type: DataType.ele,
       queryType: 0,
       startTimeStamp: start.millisecondsSinceEpoch,
       endTimeStamp: end.millisecondsSinceEpoch,
-    );*/
+    );
 
-    /* loadPVTrend(
+    loadPVTrend(
       queryType: 0,
       startTimeStamp: start.millisecondsSinceEpoch,
       endTimeStamp: end.millisecondsSinceEpoch,
-    );*/
+    );
   }
 
   @override
@@ -93,55 +89,63 @@ class StatisticsItemLogic extends GetxController {
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
-    powerView = PowerViewType.loading.index;
-    update(["powerGraph"]);
-    //{siteId: 530, startTimeStamp: 1763049600000, endTimeStamp: 1763135999999}
-    //{"siteId":530,"startTimeStamp":1764086400000,"endTimeStamp":1764172799999}
-    //start:2025-11-14 00:00:00,end:2025-11-14 23:59:59
-    final (bool isSuccessful, List<PowerGraphEntity> value) =
-        await SiteAPI.postPowerGraph(
-          siteId: siteId,
-          startTimeStamp: 1764086400000,
-          endTimeStamp: 1764172799999,
-        ).whenComplete(() {
-          // powerView = PowerViewType.common.index;
-          // update(["powerGraph"]);
-        });
+    final (
+      bool isSuccessful,
+      List<PowerGraphEntity> value,
+    ) = await SiteAPI.postPowerGraph(
+      siteId: siteId,
+      startTimeStamp: 1764086400000,
+      endTimeStamp: 1764172799999,
+    );
     if (isSuccessful) {
-      powerList.assignAll(value);
-      handData(powerList);
-      powerView = PowerViewType.common.index;
+      powerLines.assignAll(
+        value
+            .where(((a) => (a.list ?? []).isNotEmpty))
+            .map((e) => (e.list ?? [])),
+      );
+      titles.assignAll(
+        value
+            .where(((a) => (a.list ?? []).isNotEmpty))
+            .map((w) => w.title ?? ""),
+      );
+      handData(value);
       update(["powerGraph"]);
     }
   }
 
   ///处理数据
   void handData(List<PowerGraphEntity> powerList) {
-    List<PowerGraphList> value = powerList.first.list ?? [];
-    if (value.isNotEmpty) {
-      List<double> valList = (value).map((e) => e.val).toList();
-      maxY = valList.reduce(max);
-      minY = valList.reduce(min);
-      maxX = value.length.toDouble();
-    }
+    List<List<PowerGraphList>> data = powerList
+        .where((e) => (e.list ?? []).isNotEmpty)
+        .map((e) => (e.list ?? []))
+        .toList();
+    if (data.isNotEmpty) {
+      maxY = data
+          .map((e) => e.map((e) => e.val).toList().reduce(max))
+          .toList()
+          .reduce(max);
+      minY = data
+          .map((e) => e.map((e) => e.val).toList().reduce(min))
+          .toList()
+          .reduce(min);
 
-    /* for (PowerGraphEntity value in powerList) {
-      //List<int> timeList = (value.list??[]).map((e) => e.time).toList();
-      List<double> valList = (value.list ?? []).map((e) => e.val).toList();
-      if (valList.isNotEmpty) {
-        double valMax = valList.reduce(max);
-        double valMin = valList.reduce(min);
-        double range = valMax - valMin;
-        double interval = range / 4;
-        List<int> partitions = [];
-        for (int i = 0; i < 5; i++) {
-          double point = valMin + (interval * i);
-          partitions.add(point.round());
-        }
-        value.yList = partitions;
+      maxX = data.map((e) => e.length).reduce(max).toDouble();
+
+      for (List<PowerGraphList> value in data) {
+        //List<double> valList = value.map((e) => e.val).toList();
+        //double maxVal = valList.reduce(max);
+        //double minVal = valList.reduce(min);
+        //double len = valList.length.toDouble();
+        // debugPrint("maxVal:$maxVal,minVal:$minVal");
+        //I/flutter (21958): maxVal:118.1,minVal:-70.4
+        // I/flutter (21958): maxVal:72.7,minVal:-131.9
       }
-    }*/
+    }
   }
+
+  List<double> maxVals = [];
+  List<double> minVals = [];
+  List<double> lens = [];
 
   ///收益统计和电量指标
   Future<void> loadRevenue({

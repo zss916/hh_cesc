@@ -1,14 +1,24 @@
+import 'package:cescpro/core/color/colors.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PowerLineChart extends StatefulWidget {
-  final StatisticsItemLogic logic;
-  const PowerLineChart({super.key, required this.logic});
+  final List<List<PowerGraphList>> list;
+  final double maxX;
+  final double minY;
+  final double maxY;
+
+  const PowerLineChart({
+    super.key,
+    required this.list,
+    required this.maxX,
+    required this.maxY,
+    required this.minY,
+  });
 
   @override
   State<StatefulWidget> createState() => MonitorLineChartWidgetState();
@@ -21,7 +31,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToRight();
+      //  _scrollToRight();
     });
   }
 
@@ -76,21 +86,11 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
                       reservedSize: 25,
                       getTitlesWidget: (value, meta) {
                         return SideTitleWidget(
-                          //axisSide: meta.axisSide,
-                          //(widget.logic.arrList[value.toInt()].time ?? 0).hms
-                          // space: 2,
                           meta: meta,
-                          child:
-                              value.toInt() ==
-                                  (widget.logic.showPowerList.first.list ?? [])
-                                      .length
+                          child: value.toInt() == (widget.list.first).length
                               ? SizedBox.shrink()
                               : Text(
-                                  ((widget.logic.showPowerList.first.list ??
-                                                  [])[value.toInt()]
-                                              .time ??
-                                          0)
-                                      .hms,
+                                  ((widget.list.first)[value.toInt()].time).hms,
                                   style: TextStyle(
                                     color: Color(0xA8FFFFFF),
                                     fontWeight: FontWeight.w400,
@@ -134,15 +134,13 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
                     top: const BorderSide(color: Colors.transparent, width: 0),
                   ),
                 ),
-                lineBarsData: lineBarsData(
-                  (widget.logic.showPowerList).first.list ?? [],
-                ),
+                lineBarsData: lineBarsData(widget.list),
                 minX: 0,
-                maxX: widget.logic.maxX.toDouble(),
-                maxY: widget.logic.maxY,
-                minY: widget.logic.minY,
+                maxX: widget.maxX.toDouble(),
+                maxY: widget.maxY,
+                minY: widget.minY,
               ),
-              duration: const Duration(milliseconds: 2000),
+              duration: const Duration(seconds: 2),
             ),
           ),
         ),
@@ -160,26 +158,37 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
   );
 
   ///折现数据列表
-  List<LineChartBarData> lineBarsData(List<PowerGraphList> lines) {
-    return [
-      LineChartBarData(
-        ///是否圆一点
-        isCurved: true,
-        color: Color(0xFF3874F2),
-        barWidth: 1,
-        isStrokeCapRound: true,
+  List<LineChartBarData> lineBarsData(List<List<PowerGraphList>> lines) {
+    return lines.isEmpty
+        ? <LineChartBarData>[]
+        : [
+            ...lines.mapIndexed(
+              (i, e) => buildLineChartBarData(AppColors.colorList[i], e),
+            ),
+          ];
+  }
 
-        ///点数据
-        dotData: const FlDotData(show: false),
+  LineChartBarData buildLineChartBarData(
+    Color color,
+    List<PowerGraphList> lines,
+  ) {
+    return LineChartBarData(
+      ///是否圆一点
+      isCurved: true,
+      color: color,
+      barWidth: 1,
+      isStrokeCapRound: true,
 
-        ///线下面的区域(true)
-        belowBarData: BarAreaData(show: false),
-        spots: [
-          ...lines.mapIndexed(
-            (i, e) => FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),
-          ),
-        ],
-      ),
-    ];
+      ///点数据
+      dotData: const FlDotData(show: false),
+
+      ///线下面的区域(true)
+      belowBarData: BarAreaData(show: false),
+      spots: [
+        ...lines.mapIndexed(
+          (i, e) => FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),
+        ),
+      ],
+    );
   }
 }

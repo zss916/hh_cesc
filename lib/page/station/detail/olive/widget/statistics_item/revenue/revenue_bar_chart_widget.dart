@@ -128,6 +128,9 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                       color: Colors.transparent,
                       height: 330,
                       width: double.maxFinite,
+                      child: Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
                     ),
                   Divider(height: 5.h, color: Colors.transparent),
                 ],

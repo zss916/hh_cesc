@@ -157,19 +157,6 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
         sideTitles: SideTitles(
           showTitles: false,
           reservedSize: 30,
-          /* getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
-            return SideTitleWidget(
-              //axisSide: meta.axisSide,
-              space: 4,
-              meta: meta,
-              child: Text("$value", style: style),
-            );
-          },*/
         ), // 左边Y轴标签禁用，手动创建
       ),
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),

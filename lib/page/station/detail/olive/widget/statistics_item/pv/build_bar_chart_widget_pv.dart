@@ -119,6 +119,9 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                       color: Colors.transparent,
                       height: 280.h,
                       width: double.maxFinite,
+                      child: Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
                     ),
 
                   Divider(height: 5.h, color: Colors.transparent),

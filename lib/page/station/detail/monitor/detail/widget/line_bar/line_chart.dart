@@ -22,7 +22,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToRight();
+      // _scrollToRight();
     });
   }
 
