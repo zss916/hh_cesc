@@ -7,3 +7,14 @@ web 端
 https://ems.cescpower.com/#/login
 
 账号：ntbkd 密码：ntbkd123!
+
+1.logo(android ok) ，splash
+2.协议
+3.英语文案 和 切换语言
+4.android 手机适配，iPhone 手机适配
+5.16kb
+
+蒲公英地址：https://www.pgyer.com
+
+
+flutter build apk --release

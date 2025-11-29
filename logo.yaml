@@ -1,0 +1,11 @@
+#添加 flutter_launcher_icons: ^0.13.1
+
+# Terminal => flutter pub run flutter_launcher_icons -f logo.yaml
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: false
+  image_path: "assets/launcher/logo.jpg"
+  min_sdk_android: 21
+  #adaptive_icon_background: "assets/launcher/logo_b.png"
+  #adaptive_icon_foreground: "assets/launcher/logo_f.png"
+  #adaptive_icon_monochrome: "assets/launcher/logo_f.png"

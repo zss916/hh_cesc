@@ -29,8 +29,10 @@ class ChangeLanguagePage extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {
-                      ///
+                    onTap: () async {
+                      await Get.updateLocale(Locale('zh', 'CN'));
+                      await LanTools.setLocal();
+                      PageTools.offAndToNamedMain();
                     },
                     child: Container(
                       padding: EdgeInsetsDirectional.symmetric(
@@ -56,8 +58,10 @@ class ChangeLanguagePage extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {
-                      ///
+                    onTap: () async {
+                      await Get.updateLocale(Locale('en', 'US'));
+                      await LanTools.setLocal();
+                      PageTools.offAndToNamedMain();
                     },
                     child: Container(
                       padding: EdgeInsetsDirectional.symmetric(

@@ -1,3 +1,4 @@
+import 'package:cescpro/core/translations/lan_tools.dart';
 import 'package:cescpro/core/widget/footer.dart';
 import 'package:cescpro/core/widget/header.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,8 @@ class MyApp extends StatelessWidget {
         designSize: const Size(375, 812),
         builder: (context, child) => GetMaterialApp(
           title: AppSetting.appName,
-          debugShowCheckedModeBanner: true,
-          locale: Get.deviceLocale,
+          debugShowCheckedModeBanner: false,
+          locale: LanTools.getLocale() ?? Get.deviceLocale,
           translations: AppTranslations(),
           fallbackLocale: const Locale("en"),
           getPages: APages.routes,

@@ -4,6 +4,8 @@ class PageTools {
   ///登录
   static toLogin() => Get.toNamed(APages.login);
 
+  static offAndToNamedMain() => Get.offAndToNamed(APages.main);
+
   static offAndToNamedLogin() => Get.offAndToNamed(APages.login);
 
   ///站点详情

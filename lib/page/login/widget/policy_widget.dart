@@ -1,6 +1,8 @@
+import 'package:cescpro/core/translations/en.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class PolicyWidget extends StatelessWidget {
   final Function onServiceTap;
@@ -18,7 +20,7 @@ class PolicyWidget extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(
-            text: "登录即表示您已阅读，理解并同意",
+            text: TKey.loginAgreement.tr,
             children: [
               const TextSpan(text: '《'),
               TextSpan(
@@ -26,7 +28,7 @@ class PolicyWidget extends StatelessWidget {
                   color: const Color(0xFFFFFFFF),
                   fontSize: 12.sp,
                 ),
-                text: "用户协议",
+                text: TKey.userAgreement.tr,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     onServiceTap.call();
@@ -40,7 +42,7 @@ class PolicyWidget extends StatelessWidget {
                   color: const Color(0xFFFFFFFF),
                   fontSize: 12.sp,
                 ),
-                text: "隐私协议",
+                text: TKey.privacyPolicy.tr,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     onPrivacyTap.call();
