@@ -61,6 +61,11 @@ dependencies:
   flutter_launcher_icons: 0.14.4
   #本地存储
   flutter_secure_storage: ^9.2.4
+  #splash
+  flutter_native_splash: 2.4.7
+  #K 线图
+  #ace_chart: ^0.0.1+3
+  flutter_inappwebview: 6.1.5
 
 
 
@@ -128,5 +133,6 @@ flutter:
     - assets/img/
     - assets/gplot/
     - assets/json/
+    - assets/html/
 
 

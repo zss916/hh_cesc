@@ -85,7 +85,14 @@ class AboutPage extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      PageTools.toWeb(
+                        title: TKey.privacyPolicy.tr,
+                        url: Get.isEn
+                            ? Assets.htmlUserPolicyEn
+                            : Assets.htmlUserPolicyZh,
+                      );
+                    },
                     child: Container(
                       alignment: AlignmentDirectional.center,
                       margin: EdgeInsetsDirectional.all(16),
@@ -113,7 +120,14 @@ class AboutPage extends StatelessWidget {
                 Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      PageTools.toWeb(
+                        title: TKey.privacyPolicy.tr,
+                        url: Get.isEn
+                            ? Assets.htmlUserPolicyEn
+                            : Assets.htmlUserPolicyZh,
+                      );
+                    },
                     child: Container(
                       alignment: AlignmentDirectional.center,
                       margin: EdgeInsetsDirectional.all(16),

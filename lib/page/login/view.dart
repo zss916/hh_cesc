@@ -53,7 +53,24 @@ class LoginPage extends StatelessWidget {
 
                   SizedBox(height: 20.h),
 
-                  PolicyWidget(onPrivacyTap: () {}, onServiceTap: () {}),
+                  PolicyWidget(
+                    onPrivacyTap: () {
+                      PageTools.toWeb(
+                        title: TKey.privacyPolicy.tr,
+                        url: Get.isEn
+                            ? Assets.htmlUserPolicyEn
+                            : Assets.htmlUserPolicyZh,
+                      );
+                    },
+                    onServiceTap: () {
+                      PageTools.toWeb(
+                        title: TKey.userAgreement.tr,
+                        url: Get.isEn
+                            ? Assets.htmlUserPolicyEn
+                            : Assets.htmlUserPolicyZh,
+                      );
+                    },
+                  ),
                   Spacer(),
                   Container(
                     margin: EdgeInsetsDirectional.only(

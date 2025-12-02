@@ -8,9 +8,9 @@ https://ems.cescpower.com/#/login
 
 账号：ntbkd 密码：ntbkd123!
 
-1.logo(android ok) ，splash
+1.logo(android ok) ，splash(android ok) 
 2.协议
-3.英语文案 和 切换语言
+3.英语文案( developing) 和 切换语言(ok)
 4.android 手机适配，iPhone 手机适配
 5.16kb
 

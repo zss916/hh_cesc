@@ -15,6 +15,7 @@ import 'package:cescpro/page/station/detail/monitor/distribution/distribution_ma
 import 'package:cescpro/page/station/detail/olive/detail/olive_site_detail_page.dart';
 import 'package:cescpro/page/station/report/index.dart';
 import 'package:cescpro/page/station/revenue/index.dart';
+import 'package:cescpro/page/web/webview_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

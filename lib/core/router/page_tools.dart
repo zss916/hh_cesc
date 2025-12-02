@@ -1,6 +1,10 @@
 part of 'index.dart';
 
 class PageTools {
+  ///assets/html/user_guide_index.html
+  static toWeb({required String url, required String title}) =>
+      Get.toNamed(APages.web, arguments: {"url": url, "title": title});
+
   ///登录
   static toLogin() => Get.toNamed(APages.login);
 

@@ -17,6 +17,7 @@ class APages {
   static const reportDetail = '/reportDetail';
   static const main = '/main';
   static const revenue = '/revenue';
+  static const web = '/web';
 
   static final List<GetPage> routes = [
     /// 登录
@@ -63,5 +64,8 @@ class APages {
 
     /// 收益
     GetPage(name: revenue, page: () => RevenuePage()),
+
+    ///web
+    GetPage(name: web, page: () => WebViewPage()),
   ];
 }
