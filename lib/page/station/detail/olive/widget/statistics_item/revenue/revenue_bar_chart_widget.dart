@@ -210,9 +210,25 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                       if (index == 0) {
                         ///周
                         DateTime now = DateTime.now().toUtc();
-                        // DateTime start = DateTime(now.year, now.month, 1);
-                        DateTime end = DateTime(now.year, now.month, now.day);
-                        DateTime start = end.subtract(Duration(days: 7));
+                        DateTime end = DateTime(
+                          now.year,
+                          now.month,
+                          now.day + 1,
+                          24,
+                          0,
+                          0,
+                        ).subtract(Duration(microseconds: 1));
+                        DateTime startsSubtract = end.subtract(
+                          Duration(days: 7),
+                        );
+                        DateTime start = DateTime(
+                          startsSubtract.year,
+                          startsSubtract.month,
+                          startsSubtract.day,
+                          0,
+                          0,
+                          0,
+                        );
                         debugPrint(
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
@@ -226,7 +242,14 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                         ///月
                         DateTime now = DateTime.now().toUtc();
                         DateTime start = DateTime(now.year, now.month, 1);
-                        DateTime end = DateTime(now.year, now.month, now.day);
+                        DateTime end = DateTime(
+                          now.year,
+                          now.month + 1,
+                          0,
+                          24,
+                          0,
+                          0,
+                        ).subtract(Duration(microseconds: 1));
                         debugPrint(
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );
@@ -240,7 +263,14 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                         ///年
                         DateTime now = DateTime.now().toUtc();
                         DateTime start = DateTime(now.year, 1, 1);
-                        DateTime end = DateTime(now.year, now.month + 1, 0);
+                        DateTime end = DateTime(
+                          now.year,
+                          13,
+                          0,
+                          24,
+                          0,
+                          0,
+                        ).subtract(Duration(microseconds: 1));
                         debugPrint(
                           "start:${start.timestampFormat},end:${end.timestampFormat}",
                         );

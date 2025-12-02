@@ -8,14 +8,29 @@ import 'package:cescpro/http/bean/pv_trend_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum PowerViewType { common, loading, empty }
+enum PowerViewType { loading, common, empty }
 
 enum DataType { revenue, ele }
 
 class StatisticsItemLogic extends GetxController {
   int? siteId;
-  int? startTimeStamp = DateTime.now().millisecondsSinceEpoch;
-  int? endTimeStamp = DateTime.now().millisecondsSinceEpoch;
+
+  int? powerStartTime = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+    0,
+    0,
+    0,
+  ).millisecondsSinceEpoch;
+  int? powerEndTime = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+    24,
+    0,
+    0,
+  ).subtract(Duration(microseconds: 1)).millisecondsSinceEpoch;
 
   ///功率折线图表
   List<List<PowerGraphList>> powerLines = [];
@@ -23,6 +38,7 @@ class StatisticsItemLogic extends GetxController {
   double minY = 0.0;
   double maxY = 0.0;
   double maxX = 0.0;
+  int powerViewStatus = PowerViewType.loading.index;
 
   ///光伏发电量
   List<PvTrendEntity> pvList = [];
@@ -52,10 +68,25 @@ class StatisticsItemLogic extends GetxController {
   void onReady() {
     super.onReady();
     DateTime now = DateTime.now().toUtc();
-    DateTime end = DateTime(now.year, now.month, now.day);
-    DateTime start = end.subtract(Duration(days: 7));
+    DateTime end = DateTime(
+      now.year,
+      now.month,
+      now.day + 1,
+      24,
+      0,
+      0,
+    ).subtract(Duration(microseconds: 1));
+    DateTime startsSubtract = end.subtract(Duration(days: 7));
+    DateTime start = DateTime(
+      startsSubtract.year,
+      startsSubtract.month,
+      startsSubtract.day,
+      0,
+      0,
+      0,
+    );
 
-    loadPower();
+    loadPower(startTimeStamp: powerStartTime, endTimeStamp: powerEndTime);
 
     loadRevenue(
       type: DataType.revenue,
@@ -89,13 +120,16 @@ class StatisticsItemLogic extends GetxController {
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
+    powerViewStatus = PowerViewType.loading.index;
+    update(["powerGraph"]);
+
     final (
       bool isSuccessful,
       List<PowerGraphEntity> value,
     ) = await SiteAPI.postPowerGraph(
       siteId: siteId,
-      startTimeStamp: 1764086400000,
-      endTimeStamp: 1764172799999,
+      startTimeStamp: startTimeStamp,
+      endTimeStamp: endTimeStamp,
     );
     if (isSuccessful) {
       powerLines.assignAll(
@@ -108,13 +142,19 @@ class StatisticsItemLogic extends GetxController {
             .where(((a) => (a.list ?? []).isNotEmpty))
             .map((w) => w.title ?? ""),
       );
-      handData(value);
+      handPowerData(value);
+      powerViewStatus = powerLines.isEmpty
+          ? PowerViewType.empty.index
+          : PowerViewType.common.index;
+      update(["powerGraph"]);
+    } else {
+      powerViewStatus = PowerViewType.empty.index;
       update(["powerGraph"]);
     }
   }
 
   ///处理数据
-  void handData(List<PowerGraphEntity> powerList) {
+  void handPowerData(List<PowerGraphEntity> powerList) {
     List<List<PowerGraphList>> data = powerList
         .where((e) => (e.list ?? []).isNotEmpty)
         .map((e) => (e.list ?? []))
@@ -130,16 +170,6 @@ class StatisticsItemLogic extends GetxController {
           .reduce(min);
 
       maxX = data.map((e) => e.length).reduce(max).toDouble();
-
-      for (List<PowerGraphList> value in data) {
-        //List<double> valList = value.map((e) => e.val).toList();
-        //double maxVal = valList.reduce(max);
-        //double minVal = valList.reduce(min);
-        //double len = valList.length.toDouble();
-        // debugPrint("maxVal:$maxVal,minVal:$minVal");
-        //I/flutter (21958): maxVal:118.1,minVal:-70.4
-        // I/flutter (21958): maxVal:72.7,minVal:-131.9
-      }
     }
   }
 

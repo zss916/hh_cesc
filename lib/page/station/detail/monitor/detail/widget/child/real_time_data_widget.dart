@@ -147,7 +147,9 @@ class RealTimeDataWidget extends StatelessWidget {
                                   ),
                                   Spacer(),
                                   Text(
-                                    "${comItem.showValue}${comItem.unit}",
+                                    comItem.showValue.isEmpty
+                                        ? "-"
+                                        : "${comItem.showValue}${comItem.unit}",
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Color(0xFFFFFFFF),

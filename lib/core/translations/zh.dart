@@ -426,7 +426,7 @@ const zh = {
   "siteName": "站点名称",
   "noDataAvailable": "暂无数据",
   "noDataAvailableTip": "还没有数据哦",
-  "oliveView": "橄览",
+  "oliveView": "概览",
   "statistics": "统计",
   "monitor": "监控",
   "control": "控制",

@@ -1,4 +1,5 @@
 import 'package:cescpro/components/common_app_bar.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
 import 'package:cescpro/page/station/detail/olive/detail/olive_site_detail_logic.dart';
@@ -134,7 +135,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.lastDayIncome ?? 0}¥",
+                "${(value?.lastDayIncome ?? 0).formatAmount()}¥",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -148,7 +149,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.currentMonthIncome ?? 0}¥",
+                "${(value?.currentMonthIncome ?? 0).formatAmount()}¥",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -162,7 +163,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.currentYearIncome ?? 0}¥",
+                "${(value?.currentYearIncome ?? 0).formatAmount()}¥",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -176,7 +177,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.todayIncome ?? 0}¥",
+                "${(value?.todayIncome ?? 0).formatAmount()}¥",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],

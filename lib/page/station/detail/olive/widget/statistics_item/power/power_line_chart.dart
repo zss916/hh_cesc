@@ -81,25 +81,35 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
                     sideTitles: SideTitles(showTitles: false),
                   ),
                   bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 25,
-                      getTitlesWidget: (value, meta) {
-                        return SideTitleWidget(
-                          meta: meta,
-                          child: value.toInt() == (widget.list.first).length
-                              ? SizedBox.shrink()
-                              : Text(
-                                  ((widget.list.first)[value.toInt()].time).hms,
-                                  style: TextStyle(
-                                    color: Color(0xA8FFFFFF),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 6.sp,
-                                  ),
-                                ),
-                        );
-                      },
-                    ),
+                    sideTitles: widget.list.isEmpty
+                        ? SideTitles(
+                            showTitles: true,
+                            reservedSize: 25,
+                            getTitlesWidget: (value, meta) =>
+                                SizedBox(height: 10),
+                          )
+                        : SideTitles(
+                            showTitles: true,
+                            reservedSize: 25,
+                            getTitlesWidget: (value, meta) {
+                              return SideTitleWidget(
+                                meta: meta,
+                                child:
+                                    value.toInt() == (widget.list.first).length
+                                    ? SizedBox.shrink()
+                                    : Text(
+                                        ((widget.list.first)[value.toInt()]
+                                                .time)
+                                            .hms,
+                                        style: TextStyle(
+                                          color: Color(0xA8FFFFFF),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 6.sp,
+                                        ),
+                                      ),
+                              );
+                            },
+                          ),
                   ),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(

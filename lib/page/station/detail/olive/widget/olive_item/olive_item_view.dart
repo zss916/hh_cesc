@@ -50,13 +50,14 @@ class OliveItemView extends StatelessWidget {
                           ],
                         ),
                       Spacer(),
-                      Text(
-                        TKey.workModel.tr,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Color(0xB3FFFFFF),
+                      if (logic.workModel.isNotEmpty)
+                        Text(
+                          TKey.workModel.tr,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Color(0xB3FFFFFF),
+                          ),
                         ),
-                      ),
                       if (logic.workModel.isNotEmpty) LineStatusWidget(),
                       if (logic.workModel.isNotEmpty)
                         Text(
@@ -128,17 +129,17 @@ class OliveItemView extends StatelessWidget {
                         lines: [
                           [
                             {
-                              'start': Offset(70.r, (Get.width - 32.w) / 2),
-                              'end': Offset(125.r, (Get.width - 32.w) / 2),
+                              'end': Offset(70.r, (Get.width - 32.w) / 2),
+                              'start': Offset(125.r, (Get.width - 32.w) / 2),
                             },
                           ],
                           [
                             {
-                              'start': Offset(
+                              'end': Offset(
                                 70.r + 150.r,
                                 (Get.width - 32.w) / 2,
                               ),
-                              'end': Offset(
+                              'start': Offset(
                                 125.r + 150.r,
                                 (Get.width - 32.w) / 2,
                               ),
@@ -393,7 +394,7 @@ class OliveItemView extends StatelessWidget {
   }
 
   Future<void> refresh(OliveItemLogic logic) async {
-    await Future.delayed(const Duration(seconds: 2));
+    await logic.loadData();
   }
 
   Widget buildReport(OliveItemLogic logic) => Column(

@@ -1,3 +1,4 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,7 @@ class IncomeWidget extends StatelessWidget {
                 children: [
                   FittedBox(
                     child: Text(
-                      "$totalIncome",
+                      totalIncome.toDouble().formatAmount(),
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 36.sp,
@@ -66,7 +67,7 @@ class IncomeWidget extends StatelessWidget {
                 children: [
                   FittedBox(
                     child: Text(
-                      "$todayIncome",
+                      todayIncome.toDouble().formatAmount(),
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 36.sp,

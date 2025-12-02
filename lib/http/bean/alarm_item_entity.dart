@@ -30,6 +30,9 @@ class AlarmItemEntity {
   String? createTime;
   String? label;
 
+  String get deviceName =>
+      "${label ?? ''}${Get.isEn ? (enName ?? "") : (name ?? "")}";
+
   AlarmItemEntity();
 
   factory AlarmItemEntity.fromJson(Map<String, dynamic> json) =>

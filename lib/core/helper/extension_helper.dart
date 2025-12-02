@@ -89,3 +89,20 @@ extension AlarmLeveTime on int {
     };
   }
 }
+
+extension AmountFormat on double {
+  String formatAmount() {
+    if ((this.toString().length - this.toString().lastIndexOf(".") - 1) < 2) {
+      //小数点后有几位小数
+      return this
+          .toStringAsFixed(2)
+          .substring(0, this.toString().lastIndexOf(".") + 2 + 1)
+          .toString();
+    } else {
+      return this
+          .toString()
+          .substring(0, this.toString().lastIndexOf(".") + 2 + 1)
+          .toString();
+    }
+  }
+}

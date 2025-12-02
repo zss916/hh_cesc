@@ -3,7 +3,7 @@ part of 'index.dart';
 class HomeLogic extends GetxController {
   HomeStatisticEntity? homeData;
   // bool isExceedThousand = false;
-  num get totalIncome => homeData?.totalIncome ?? 0.0;
+  num get totalIncome => (homeData?.totalIncome ?? 0.0);
   num get todayIncome => homeData?.todayIncome ?? 0.0;
   int get deviceNum => homeData?.deviceNum ?? 0; //设备数量
   int get siteNum => homeData?.siteNum ?? 0; //站点数量

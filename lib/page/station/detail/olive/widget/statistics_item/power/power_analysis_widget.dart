@@ -98,18 +98,9 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                         color: Colors.transparent,
                         height: 300.h,
                         width: double.maxFinite,
-                        child: widget.logic.powerLines.isEmpty
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                ),
-                              )
-                            : PowerLineChart(
-                                list: widget.logic.powerLines,
-                                maxX: widget.logic.maxX,
-                                minY: widget.logic.minY,
-                                maxY: widget.logic.maxY,
-                              ),
+                        child: buildBody(
+                          viewState: widget.logic.powerViewStatus,
+                        ),
                       ),
                       Divider(height: 5.h, color: Colors.transparent),
                       Container(
@@ -150,6 +141,33 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
     );
   }
 
+  Widget buildBody({required int viewState}) {
+    return switch (viewState) {
+      _ when viewState == PowerViewType.loading.index => buildLoading(),
+      _ when viewState == PowerViewType.common.index => buildPowerLineChart(),
+      _ when viewState == PowerViewType.empty.index => buildEmpty(),
+      _ => buildEmpty(),
+    };
+  }
+
+  ///loading
+  Widget buildLoading() =>
+      Center(child: CircularProgressIndicator(color: Colors.white));
+
+  ///line chart
+  Widget buildPowerLineChart() {
+    return PowerLineChart(
+      list: widget.logic.powerLines,
+      maxX: widget.logic.maxX,
+      minY: widget.logic.minY,
+      maxY: widget.logic.maxY,
+    );
+  }
+
+  ///empty
+  Widget buildEmpty() =>
+      PowerLineChart(list: [], maxX: 0.0, minY: 0.0, maxY: 100.0);
+
   void showDateTimePicker(StatisticsItemLogic logic) {
     DatePicker.showDatePicker(
       context,
@@ -177,9 +195,29 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
         String formatted = DateFormat('yyyy-MM-dd').format(date);
         setState(() {
           currentTime = formatted;
-          logic.startTimeStamp = date.millisecondsSinceEpoch;
-          logic.endTimeStamp = date.millisecondsSinceEpoch;
-          logic.loadPower();
+          int? powerStartTime = DateTime(
+            date.year,
+            date.month,
+            date.day,
+            0,
+            0,
+            0,
+          ).millisecondsSinceEpoch;
+          int? powerEndTime = DateTime(
+            date.year,
+            date.month,
+            date.day,
+            24,
+            0,
+            0,
+          ).subtract(Duration(microseconds: 1)).millisecondsSinceEpoch;
+
+          logic.powerStartTime = powerStartTime;
+          logic.powerEndTime = powerEndTime;
+          logic.loadPower(
+            startTimeStamp: powerStartTime,
+            endTimeStamp: powerEndTime,
+          );
         });
       },
     );

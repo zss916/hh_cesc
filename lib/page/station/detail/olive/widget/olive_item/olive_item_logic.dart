@@ -13,7 +13,7 @@ class OliveItemLogic extends GetxController {
   WeatherEntity? weather;
 
   String get weatherData => weather == null
-      ? ""
+      ? "--"
       : "${weather?.desc ?? ""}${weather?.tempMin ?? 0}°~${weather?.tempMax ?? 0}°";
 
   SiteTopologyEntity? topology;
@@ -47,6 +47,10 @@ class OliveItemLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    loadData();
+  }
+
+  Future<void> loadData() async {
     loadWeather();
     getSiteTopology();
     getPointDetails();

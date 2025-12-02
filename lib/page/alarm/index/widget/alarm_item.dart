@@ -109,7 +109,7 @@ class AlarmItem extends StatelessWidget {
                       ),
 
                       Text(
-                        item.label ?? "",
+                        item.deviceName,
                         style: TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontSize: 14,
