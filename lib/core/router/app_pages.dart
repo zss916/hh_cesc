@@ -66,6 +66,6 @@ class APages {
     GetPage(name: revenue, page: () => RevenuePage()),
 
     ///web
-    GetPage(name: web, page: () => WebViewPage()),
+    GetPage(name: web, page: () => WebPage()),
   ];
 }
