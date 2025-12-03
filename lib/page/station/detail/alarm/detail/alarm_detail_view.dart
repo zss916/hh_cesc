@@ -136,6 +136,7 @@ class AlarmDetailPage extends StatelessWidget {
   }
 
   Widget buildList({required AlarmDetailLogic logic}) => EasyRefresh(
+    header: MaterialHeader(),
     onRefresh: () => logic.refreshData(),
     onLoad: () => logic.loadMoreData(),
     child: ListView.separated(
