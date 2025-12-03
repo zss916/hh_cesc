@@ -265,7 +265,7 @@ class RealAlarmView extends StatelessWidget {
         PieChartWidget(
           size: Size(140.w, 140.w),
           title: TKey.focusOn.tr,
-          count: "${logic.highestAlarmData?.totalCnt ?? 0}",
+          count: "${logic.attentionAlarmData?.totalCnt ?? 0}",
           list: logic.list3,
         ),
         VerticalDivider(color: Colors.transparent, width: 20.w),

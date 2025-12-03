@@ -93,7 +93,7 @@ class RealAlarmLogic extends GetxController {
       }
 
       if ((analysis?.attentionAlarmData?.items ?? []).isNotEmpty) {
-        list3 = (analysis?.highestAlarmData?.items)!
+        list3 = (analysis?.attentionAlarmData?.items)!
             .mapIndexed(
               (i, e) => {
                 "title": e.type ?? "",

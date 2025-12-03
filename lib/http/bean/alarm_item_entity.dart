@@ -83,6 +83,6 @@ class AlarmItemEntity {
   }
 
   String showContent() {
-    return "${label ?? ""}${devType ?? ""}${(startTimeMill ?? 0).timestampFormat}发生了${alarmLevelType ?? ""}${content ?? ""},持续时间${keepTime}\n\n";
+    return "${label ?? ""}${devType ?? ""}, ${(startTimeMill ?? 0).timestampFormat}发生了${alarmLevelType ?? ""}${content ?? ""},持续时间${keepTime}\n\n";
   }
 }
