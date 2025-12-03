@@ -117,6 +117,7 @@ class StationPage extends StatelessWidget {
 
   Widget buildList({required StationLogic logic}) {
     return EasyRefresh(
+      header: MaterialHeader(),
       onRefresh: () => logic.refreshData(),
       onLoad: () => logic.loadMoreData(),
       child: ListView.separated(

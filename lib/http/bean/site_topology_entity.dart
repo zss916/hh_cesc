@@ -16,6 +16,50 @@ class SiteTopologyEntity {
   int? siteId;
   int? did; //设备id
   bool? hasPv; //是否有光伏
+  ///load只会进，pv只会出
+
+  ///pv 是否出
+  /* bool get isPVOut =>
+      (line ?? []).any((e) => (((e.from ?? "").trim().toLowerCase()) == "pv"));
+*/
+  ///load 是否进
+  /*
+  bool get isLoadIn =>
+      (line ?? []).any((e) => (((e.to ?? "").trim().toLowerCase()) == "load"));
+*/
+  //{from: GRID, to: STORAGE}
+  ///grid -> load
+  bool get isGridToLoad => (line ?? []).any(
+    (e) =>
+        (((e.from ?? "").trim().toLowerCase()) == "grid") &&
+        ((e.to ?? "").trim().toLowerCase()) == "load",
+  );
+
+  ///grid out
+  bool get isGridOut => (line ?? []).any(
+    (e) => (((e.from ?? "").trim().toLowerCase()) == "grid"),
+  );
+
+  ///grid in
+  bool get isGridIn =>
+      (line ?? []).any((e) => ((e.to ?? "").trim().toLowerCase()) == "grid");
+
+  ///battery out
+  bool get isBatteryOut => (line ?? []).any(
+    (e) => (((e.from ?? "").trim().toLowerCase()) == "storage"),
+  );
+
+  ///battery in
+  bool get isBatteryIn => (line ?? []).any(
+    (e) => (((e.to ?? "").trim().toLowerCase()) == "storage"),
+  );
+
+  ///grid -> storage
+  bool get isGridSTORAGE => (line ?? []).any(
+    (e) =>
+        (((e.from ?? "").trim().toLowerCase()) == "grid") &&
+        ((e.to ?? "").trim().toLowerCase()) == "storage",
+  );
 
   SiteTopologyEntity();
 

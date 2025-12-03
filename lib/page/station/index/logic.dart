@@ -90,7 +90,7 @@ class StationLogic extends GetxController {
           ? ViewStateEnum.empty.index
           : ViewStateEnum.common.index;
       update();
-      AppLoading.toast("Fail");
+      // AppLoading.toast("Fail");
     }
   }
 

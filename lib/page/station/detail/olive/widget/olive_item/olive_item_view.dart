@@ -128,25 +128,42 @@ class OliveItemView extends StatelessWidget {
                         ],
                         lines: [
                           [
+                            ///load <- ems
                             {
                               'end': Offset(70.r, (Get.width - 32.w) / 2),
                               'start': Offset(125.r, (Get.width - 32.w) / 2),
                             },
                           ],
+
                           [
-                            {
-                              'end': Offset(
-                                70.r + 150.r,
-                                (Get.width - 32.w) / 2,
-                              ),
-                              'start': Offset(
-                                125.r + 150.r,
-                                (Get.width - 32.w) / 2,
-                              ),
-                            },
+                            ///grid <->ems
+                            if (logic.topology?.isGridOut == true)
+                              {
+                                'end': Offset(
+                                  70.r + 150.r,
+                                  (Get.width - 32.w) / 2,
+                                ),
+                                'start': Offset(
+                                  125.r + 150.r,
+                                  (Get.width - 32.w) / 2,
+                                ),
+                              },
+
+                            if (logic.topology?.isGridOut == false)
+                              {
+                                'start': Offset(
+                                  70.r + 150.r,
+                                  (Get.width - 32.w) / 2,
+                                ),
+                                'end': Offset(
+                                  125.r + 150.r,
+                                  (Get.width - 32.w) / 2,
+                                ),
+                              },
                           ],
                           if (logic.isHasPv)
                             [
+                              ///pv -> ems
                               {
                                 'start': Offset((Get.width - 32.w) / 2, 70.r),
                                 'end': Offset(
@@ -155,17 +172,32 @@ class OliveItemView extends StatelessWidget {
                                 ),
                               },
                             ],
+
                           [
-                            {
-                              'start': Offset(
-                                (Get.width - 32.w) / 2,
-                                70.r + 155.r,
-                              ),
-                              'end': Offset(
-                                (Get.width - 32.w) / 2,
-                                70.r + 75.r + 120.r,
-                              ),
-                            },
+                            ///ems <-> battery
+                            if (logic.topology?.isBatteryOut == false)
+                              {
+                                'start': Offset(
+                                  (Get.width - 32.w) / 2,
+                                  70.r + 155.r,
+                                ),
+                                'end': Offset(
+                                  (Get.width - 32.w) / 2,
+                                  70.r + 75.r + 120.r,
+                                ),
+                              },
+
+                            if (logic.topology?.isBatteryOut == true)
+                              {
+                                'end': Offset(
+                                  (Get.width - 32.w) / 2,
+                                  70.r + 155.r,
+                                ),
+                                'start': Offset(
+                                  (Get.width - 32.w) / 2,
+                                  70.r + 75.r + 120.r,
+                                ),
+                              },
                           ],
                         ],
                       ),

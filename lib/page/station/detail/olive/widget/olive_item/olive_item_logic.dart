@@ -81,8 +81,9 @@ class OliveItemLogic extends GetxController {
     if (value != null) {
       topology = value;
 
-      ///todo 拓扑图
+      ///拓扑图
       List<SiteTopologyLine> topologyLine = value.line ?? [];
+
       // [{from: GRID, to: LOAD}, {from: GRID, to: STORAGE}]
       //PV,STORAGE,LOAD,GRID
       update();
