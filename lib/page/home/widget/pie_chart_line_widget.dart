@@ -42,6 +42,7 @@ class PieChartLineWidget extends StatelessWidget {
               radius: 60.0,
               startAngle: 0.0,
             ),
+
             PieChartModel(
               name: '告警',
               value: (alarmNum / total),
@@ -50,19 +51,21 @@ class PieChartLineWidget extends StatelessWidget {
               radius: 60.0,
               startAngle: 0.0,
             ),
-            PieChartModel(
-              name: '正常',
-              value: (normalNum / total),
-              data: normalNum,
-              color: Color(0xFF3BFFC5),
-              radius: 60.0,
-              startAngle: 0.0,
-            ),
+
             PieChartModel(
               name: '中断',
               value: (cutOffNum / total),
               data: cutOffNum,
               color: Color(0xFF44A7FF),
+              radius: 60.0,
+              startAngle: 0.0,
+            ),
+
+            PieChartModel(
+              name: '正常',
+              value: (normalNum / total),
+              data: normalNum,
+              color: Color(0xFF3BFFC5),
               radius: 60.0,
               startAngle: 0.0,
             ),
@@ -195,17 +198,20 @@ class PieChartPainter extends CustomPainter {
     double sweepAngle,
     PieChartModel model,
   ) {
-    var ratio = (sweepAngle / 360.0 * 100).toStringAsFixed(0);
+    var ratio = (sweepAngle / 360.0 * 100).toStringAsFixed(1);
     // 处理名称超长问题，最多2行，超出部分以省略号显示
     // 10 -> 最多10个字位数
     var top = Text(_getWrappedText("${model.name} ${model.data}", 20));
     var topTextPainter = getTextPainter(top, color: model.color);
     // 百分比显示
-    var bottom = Text("$ratio%");
+    // var bottom = Text("$ratio%");
+    var bottom = Text("");
     var bottomTextPainter = getTextPainter(bottom);
 
     //var bottom = Text("${model.data}");
     //var bottomTextPainter = getTextPainter(bottom, color: model.color);
+
+    //sweepAngle = 20.0;
 
     var startX = radius * (cos((startAngle + (sweepAngle / 2)) * (pi / 180)));
     var startY = radius * (sin((startAngle + (sweepAngle / 2)) * (pi / 180)));

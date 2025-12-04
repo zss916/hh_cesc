@@ -35,4 +35,20 @@ class HomeLogic extends GetxController {
       update();
     }
   }
+
+  ///排序算法
+  List<int> interleaveSort(List<int> list) {
+    list.sort(); // 先排序
+    List<int> result = [];
+    int left = 0, right = list.length - 1;
+    while (left <= right) {
+      if (left == right) {
+        result.add(list[left]);
+      } else {
+        result.add(list[right--]);
+        result.add(list[left++]);
+      }
+    }
+    return result;
+  }
 }
