@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/site_entity.g.dart';
 
@@ -79,7 +80,7 @@ class SiteEntity {
 
   ///今日充放电
   String get chargeAndRecharge =>
-      "${((charge ?? 0) / 1000).toStringAsFixed(2)}MKW/${((recharge ?? 0) / 1000).toStringAsFixed(2)}MKW";
+      "${(charge ?? 0).formatPower}${(charge ?? 0).formatPowerUnit}/${(recharge ?? 0).formatPower}${(recharge ?? 0).formatPowerUnit}";
 }
 
 @JsonSerializable()

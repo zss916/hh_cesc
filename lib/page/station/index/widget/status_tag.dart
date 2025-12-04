@@ -18,8 +18,15 @@ class StatusTag extends StatelessWidget {
         bottom: 2.h,
       ),
       decoration: BoxDecoration(
-        color: Color(0x3322EEBD),
-        border: Border.all(width: 1, color: Color(0xFF22EEBD)),
+        color: (status == 4 || status == -3 || status == -2)
+            ? Color(0x33B71C1C)
+            : Color(0x3322EEBD),
+        border: Border.all(
+          width: 1,
+          color: (status == 4 || status == -3 || status == -2)
+              ? Colors.red
+              : Color(0xFF22EEBD),
+        ),
         borderRadius: BorderRadius.circular(50.r),
       ),
       child: Stack(
@@ -65,21 +72,21 @@ class StatusTag extends StatelessWidget {
             Text(
               TKey.fault.tr,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: Color(0xFF22EEBD)),
+              style: TextStyle(fontSize: 12, color: Colors.red),
             ),
 
           if (status == -3)
             Text(
               TKey.interrupt.tr,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: Color(0xFF22EEBD)),
+              style: TextStyle(fontSize: 12, color: Colors.red),
             ),
 
           if (status == -2)
             Text(
               TKey.alarm.tr,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: Color(0xFF22EEBD)),
+              style: TextStyle(fontSize: 12, color: Colors.red),
             ),
         ],
       ),

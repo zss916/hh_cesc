@@ -367,6 +367,9 @@ class TKey {
   static const String userAgreement = "userAgreement";
 
   static const String privacyPolicy = "privacyPolicy";
+
+  static const String energySChaAndDischa =
+      "energyStorageChargingAndDischargingCapacity";
 }
 
 const en2 = {
@@ -453,6 +456,7 @@ const en2 = {
   "powerAnalysis": "功率分析",
   "revenueStatistics": "收益统计",
   "electricityIndicatorsAndEfficiency": "电量指标及效率",
+  "energyStorageChargingAndDischargingCapacity": "储能充放电量",
   "day": "日",
   "month": "月",
   "year": "年",
@@ -569,15 +573,15 @@ const en = {
   "moneyKUnit": "Thousand (\$)",
   "moneyWUnit": "Ten Thousand (\$)",
   "stationOverview": "Station Overview",
-  "energyStorageInstalledCapacity": "Energy Storage Installed Capacity",
-  "cumulativeChargingCapacity": "Cumulative Charging Capacity",
+  "energyStorageInstalledCapacity": "Installed Capacity",
+  "cumulativeChargingCapacity": "Accumulated Charging Energy",
   "deviceNum": "Device Count",
   "stationNum": "Station Count",
   "stationStatus": "Station Status",
   "environmentalValue": "Environmental Value",
   "resolveStandardCoal": "Standard Coal Equivalent",
   "co2EmissionReduction": "CO2 Emission Reduction",
-  "cumulativeDischargeCapacity": "Cumulative Discharge Capacity",
+  "cumulativeDischargeCapacity": "Accumulated Discharge Energy",
   "accumulatedPhotovoltaicPowerGeneration":
       "Accumulated Photovoltaic Power Generation",
   "reset": "Reset",
@@ -653,7 +657,8 @@ const en = {
   "ended": "Ended",
   "energyStoragePower": "Energy Storage Power",
   "photovoltaicPower": "Photovoltaic Power",
-  "todayChargeAndDischarge": "Charge and Discharge",
+  "todayChargeAndDischarge": "Chg/Dchg",
+  "chargeAndDischarge": "Chg/Dchg",
   "pureEnergyStorage": "Pure Energy Storage",
   "pvStorageCharging": "PV Storage Charging",
   "energyStorageLiquidCooling": "Energy Storage Liquid Cooling",
@@ -728,4 +733,6 @@ const en = {
   "dischargingAmount": "Discharging Amount",
   "amount": "Amount",
   "realTimeSoc": "Real-Time Curve",
+  "energyStorageChargingAndDischargingCapacity":
+      "Energy Storage Charging And Discharging Capacity",
 };

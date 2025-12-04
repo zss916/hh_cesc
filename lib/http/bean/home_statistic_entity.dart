@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/home_statistic_entity.g.dart';
 
@@ -32,6 +33,16 @@ class HomeStatisticEntity {
   @override
   String toString() {
     return jsonEncode(this);
+  }
+
+  ///
+  String showValue(double value) {
+    if (value >= 1000) {
+      double mwhValue = value / 1000;
+      return mwhValue.formatMWh();
+    } else {
+      return value.formatKWh();
+    }
   }
 
   /*  /// 今日收入

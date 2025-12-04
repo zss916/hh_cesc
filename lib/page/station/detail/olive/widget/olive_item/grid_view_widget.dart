@@ -9,17 +9,26 @@ import 'package:get/get.dart';
 
 class GridViewWidget extends StatelessWidget {
   final String todayCharging;
+  final String todayChargingUnit;
   final String todayDischarge;
+  final String todayDischargeUnit;
   final String showTodayIncome;
   final String todayPVPowerEarnings;
+  final String todayPVPowerEarningsUnit;
   final SiteDetailEntity? siteDetail;
   final StatisticRecordEntity? statisticRecord;
+  final String currencyUnit;
+
   const GridViewWidget({
     super.key,
     required this.todayCharging,
+    required this.todayChargingUnit,
     required this.todayDischarge,
+    required this.todayDischargeUnit,
     required this.showTodayIncome,
+    required this.currencyUnit,
     required this.todayPVPowerEarnings,
+    required this.todayPVPowerEarningsUnit,
     this.siteDetail,
     this.statisticRecord,
   });
@@ -106,7 +115,7 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.todayCharging.tr}(kwh)",
+                              "${TKey.todayCharging.tr}($todayChargingUnit)",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -189,7 +198,7 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.todayDischarge.tr}(kwh)",
+                              "${TKey.todayDischarge.tr}($todayDischargeUnit)",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -209,7 +218,7 @@ class GridViewWidget extends StatelessWidget {
                     SizedBox(
                       width: double.maxFinite,
                       child: Text(
-                        "$todayDischarge",
+                        todayDischarge,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 24.sp,
@@ -272,7 +281,7 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.lastDayIncome.tr}(¥)",
+                              "${TKey.lastDayIncome.tr}($currencyUnit)",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -355,7 +364,7 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.todayPVPowerEarnings.tr}(kwh)",
+                              "${TKey.todayPVPowerEarnings.tr}($todayPVPowerEarningsUnit)",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

@@ -20,3 +20,7 @@ https://ems.cescpower.com:9088/#/login
 flutter build apk --release
 
 bug文档: https://ka1vopqysgx.feishu.cn/wiki/RgTKwjZLSiepeNkjEzmcKPzLnpe?from=from_copylink
+
+
+Admin
+HhAdmin123#

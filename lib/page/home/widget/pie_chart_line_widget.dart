@@ -35,7 +35,7 @@ class PieChartLineWidget extends StatelessWidget {
           total: total,
           models: [
             PieChartModel(
-              name: '故障',
+              name: TKey.fault.tr,
               data: faultNum,
               value: (faultNum / total),
               color: Color(0xFFF8D834),
@@ -44,7 +44,7 @@ class PieChartLineWidget extends StatelessWidget {
             ),
 
             PieChartModel(
-              name: '告警',
+              name: TKey.alarm.tr,
               value: (alarmNum / total),
               data: alarmNum,
               color: Color(0xFFFF9C4A),
@@ -53,7 +53,7 @@ class PieChartLineWidget extends StatelessWidget {
             ),
 
             PieChartModel(
-              name: '中断',
+              name: TKey.interrupt.tr,
               value: (cutOffNum / total),
               data: cutOffNum,
               color: Color(0xFF44A7FF),
@@ -62,7 +62,7 @@ class PieChartLineWidget extends StatelessWidget {
             ),
 
             PieChartModel(
-              name: '正常',
+              name: TKey.common.tr,
               value: (normalNum / total),
               data: normalNum,
               color: Color(0xFF3BFFC5),

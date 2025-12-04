@@ -175,8 +175,8 @@ class StationPage extends StatelessWidget {
                   Wrap(
                     spacing: 5.w,
                     children: [
-                      if ((item.types ?? []).isNotEmpty)
-                        CommonTag(type: (item.types ?? []).first),
+                      //if ((item.types ?? []).isNotEmpty)
+                      // CommonTag(type: (item.types ?? []).first),
                       if (item.status != null)
                         StatusTag(status: item.status ?? 99),
                     ],
@@ -280,7 +280,7 @@ class StationPage extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              child: Text(
+                              child: AutoSizeText(
                                 item.chargeAndRecharge,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(

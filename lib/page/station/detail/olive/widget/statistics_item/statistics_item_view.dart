@@ -43,7 +43,7 @@ class StatisticsItemView extends StatelessWidget {
             init: StatisticsItemLogic(),
             builder: (logic) {
               return EleBarChartWidget(
-                title: TKey.electricityIndicatorsAndEfficiency.tr,
+                title: TKey.energySChaAndDischa.tr,
                 logic: logic,
               );
             },

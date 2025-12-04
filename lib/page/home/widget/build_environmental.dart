@@ -38,7 +38,8 @@ class BuildEnvironmental extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  height: 95.h,
+                  //height: 95.h + 20,
+                  constraints: BoxConstraints(minHeight: 95.h),
                   decoration: BoxDecoration(
                     color: Color(0xFF313540),
                     borderRadius: BorderRadius.circular(20),
@@ -111,7 +112,8 @@ class BuildEnvironmental extends StatelessWidget {
               VerticalDivider(width: 13, color: Colors.transparent),
               Expanded(
                 child: Container(
-                  height: 95.h,
+                  //height: 95.h,
+                  constraints: BoxConstraints(minHeight: 95.h),
                   decoration: BoxDecoration(
                     color: Color(0xFF313540),
                     borderRadius: BorderRadius.circular(20),

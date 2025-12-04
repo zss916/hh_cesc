@@ -103,18 +103,16 @@ class _BuildSelectTimeWidgetState extends State<BuildSelectTimeWidget> {
                     widget.logic.endTimeStamp = end.millisecondsSinceEpoch;
                   } else if (widget.logic.queryType == QueryType.monthly) {
                     widget.logic.date = dateTime.millisecondsSinceEpoch;
-                    // DateTime start = DateTime(dateTime.year, 1, 1);
-                    DateTime start = DateTime(
-                      dateTime.year,
-                      dateTime.month,
-                      dateTime.day,
-                    );
+                    DateTime start = DateTime(dateTime.year, dateTime.month, 1);
                     widget.logic.startTimeStamp = start.millisecondsSinceEpoch;
                     DateTime end = DateTime(
                       dateTime.year,
-                      dateTime.month,
-                      dateTime.day + 1,
-                    );
+                      dateTime.month + 1,
+                      0,
+                      24,
+                      0,
+                      0,
+                    ).subtract(Duration(microseconds: 1));
                     widget.logic.endTimeStamp = end.millisecondsSinceEpoch;
                   } else if (widget.logic.queryType == QueryType.yearly) {
                     widget.logic.date = dateTime.millisecondsSinceEpoch;

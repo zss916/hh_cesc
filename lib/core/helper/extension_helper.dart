@@ -90,7 +90,7 @@ extension AlarmLeveTime on int {
   }
 }
 
-extension AmountFormat on double {
+extension AmountFormat on num {
   String formatAmount() {
     if ((this.toString().length - this.toString().lastIndexOf(".") - 1) < 2) {
       //小数点后有几位小数
@@ -105,4 +105,43 @@ extension AmountFormat on double {
           .toString();
     }
   }
+
+  ///匹配mwh
+  String formatMWh() {
+    if ((this.toString().length - this.toString().lastIndexOf(".") - 1) < 3) {
+      //小数点后有几位小数
+      return this
+          .toStringAsFixed(3)
+          .substring(0, this.toString().lastIndexOf(".") + 3 + 1)
+          .toString();
+    } else {
+      return this
+          .toString()
+          .substring(0, this.toString().lastIndexOf(".") + 3 + 1)
+          .toString();
+    }
+  }
+
+  ///匹配kwh
+  String formatKWh() {
+    if ((this.toString().length - this.toString().lastIndexOf(".") - 1) < 3) {
+      //小数点后有几位小数
+      return this
+          .toStringAsFixed(3)
+          .substring(0, this.toString().lastIndexOf(".") + 3 + 1)
+          .toString();
+    } else {
+      return this
+          .toString()
+          .substring(0, this.toString().lastIndexOf(".") + 3 + 1)
+          .toString();
+    }
+  }
+
+  ///(充电/放电)转化
+  String get formatPower =>
+      (this >= 1000) ? (this / 1000).formatMWh() : formatKWh();
+
+  ///(充电/放电)单位 转化
+  String get formatPowerUnit => (this >= 1000) ? "MWh" : "kWh";
 }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
@@ -127,40 +128,42 @@ class OliveItemView extends StatelessWidget {
                           ],
                         ],
                         lines: [
-                          [
-                            ///load <- ems
-                            {
-                              'end': Offset(70.r, (Get.width - 32.w) / 2),
-                              'start': Offset(125.r, (Get.width - 32.w) / 2),
-                            },
-                          ],
-
-                          [
-                            ///grid <->ems
-                            if (logic.topology?.isGridOut == true)
+                          if (logic.topology?.load != null)
+                            [
+                              ///load <- ems
                               {
-                                'end': Offset(
-                                  70.r + 150.r,
-                                  (Get.width - 32.w) / 2,
-                                ),
-                                'start': Offset(
-                                  125.r + 150.r,
-                                  (Get.width - 32.w) / 2,
-                                ),
+                                'end': Offset(70.r, (Get.width - 32.w) / 2),
+                                'start': Offset(125.r, (Get.width - 32.w) / 2),
                               },
+                            ],
 
-                            if (logic.topology?.isGridOut == false)
-                              {
-                                'start': Offset(
-                                  70.r + 150.r,
-                                  (Get.width - 32.w) / 2,
-                                ),
-                                'end': Offset(
-                                  125.r + 150.r,
-                                  (Get.width - 32.w) / 2,
-                                ),
-                              },
-                          ],
+                          if (logic.topology?.grid != null)
+                            [
+                              ///grid <->ems
+                              if (logic.topology?.isGridOut == true)
+                                {
+                                  'end': Offset(
+                                    70.r + 150.r,
+                                    (Get.width - 32.w) / 2,
+                                  ),
+                                  'start': Offset(
+                                    125.r + 150.r,
+                                    (Get.width - 32.w) / 2,
+                                  ),
+                                },
+
+                              if (logic.topology?.isGridOut == false)
+                                {
+                                  'start': Offset(
+                                    70.r + 150.r,
+                                    (Get.width - 32.w) / 2,
+                                  ),
+                                  'end': Offset(
+                                    125.r + 150.r,
+                                    (Get.width - 32.w) / 2,
+                                  ),
+                                },
+                            ],
                           if (logic.isHasPv)
                             [
                               ///pv -> ems
@@ -173,32 +176,33 @@ class OliveItemView extends StatelessWidget {
                               },
                             ],
 
-                          [
-                            ///ems <-> battery
-                            if (logic.topology?.isBatteryOut == false)
-                              {
-                                'start': Offset(
-                                  (Get.width - 32.w) / 2,
-                                  70.r + 155.r,
-                                ),
-                                'end': Offset(
-                                  (Get.width - 32.w) / 2,
-                                  70.r + 75.r + 120.r,
-                                ),
-                              },
+                          if (logic.topology?.storage != null)
+                            [
+                              ///ems <-> battery
+                              if (logic.topology?.isBatteryOut == false)
+                                {
+                                  'start': Offset(
+                                    (Get.width - 32.w) / 2,
+                                    70.r + 155.r,
+                                  ),
+                                  'end': Offset(
+                                    (Get.width - 32.w) / 2,
+                                    70.r + 75.r + 120.r,
+                                  ),
+                                },
 
-                            if (logic.topology?.isBatteryOut == true)
-                              {
-                                'end': Offset(
-                                  (Get.width - 32.w) / 2,
-                                  70.r + 155.r,
-                                ),
-                                'start': Offset(
-                                  (Get.width - 32.w) / 2,
-                                  70.r + 75.r + 120.r,
-                                ),
-                              },
-                          ],
+                              if (logic.topology?.isBatteryOut == true)
+                                {
+                                  'end': Offset(
+                                    (Get.width - 32.w) / 2,
+                                    70.r + 155.r,
+                                  ),
+                                  'start': Offset(
+                                    (Get.width - 32.w) / 2,
+                                    70.r + 75.r + 120.r,
+                                  ),
+                                },
+                            ],
                         ],
                       ),
 
@@ -226,6 +230,7 @@ class OliveItemView extends StatelessWidget {
                         ),
                       ),
 
+                      ///battery
                       PositionedDirectional(
                         bottom: 0,
                         end: 0,
@@ -278,6 +283,7 @@ class OliveItemView extends StatelessWidget {
                         ),
                       ),
 
+                      ///load
                       PositionedDirectional(
                         top: 0,
                         bottom: 0,
@@ -290,34 +296,39 @@ class OliveItemView extends StatelessWidget {
                               width: 75.r,
                               height: 75.r,
                             ),
-                            PositionedDirectional(
-                              top: (Get.width - 32.w) / 2 + 20.r,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    "Load",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${logic.loadPower}KW",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
+                          ],
+                        ),
+                      ),
+
+                      ///load text
+                      PositionedDirectional(
+                        top: (Get.width - 32.w) / 2 + 20.r,
+                        start: 0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Load",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "${logic.loadPower}KW",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ],
                         ),
                       ),
 
+                      ///grid
                       PositionedDirectional(
                         top: 0,
                         end: 0,
@@ -330,32 +341,41 @@ class OliveItemView extends StatelessWidget {
                               width: 75.r,
                               height: 75.r,
                             ),
-                            PositionedDirectional(
-                              top: (Get.width - 32.w) / 2 + 20.r,
-                              end: 20.r,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    "Grid",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${logic.gridPower}KW",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
                           ],
+                        ),
+                      ),
+
+                      ///grid text
+                      PositionedDirectional(
+                        top: (Get.width - 32.w) / 2 + 20.r,
+                        end: 20.r,
+                        child: SizedBox(
+                          width: 100.w,
+                          // color: Colors.yellow,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Grid",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              AutoSizeText(
+                                "${logic.gridPower}KW",
+                                minFontSize: 10,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
 
@@ -406,11 +426,15 @@ class OliveItemView extends StatelessWidget {
 
                 GridViewWidget(
                   todayCharging: logic.showChargeAvg,
+                  todayChargingUnit: logic.showChargeAvgUnit,
                   todayDischarge: logic.showRechargeAvg,
+                  todayDischargeUnit: logic.showRechargeAvgUnit,
                   showTodayIncome: logic.showLastDayIncome,
                   todayPVPowerEarnings: logic.showTodayPvTotalNeg,
+                  todayPVPowerEarningsUnit: logic.showTodayPvTotalNegUnit,
                   siteDetail: logic.siteDetail,
                   statisticRecord: logic.statisticRecord,
+                  currencyUnit: logic.currencyUnit,
                 ),
 
                 buildReport(logic),

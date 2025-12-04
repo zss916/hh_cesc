@@ -26,15 +26,35 @@ class OliveItemLogic extends GetxController {
   List<SiteTopologyLine> line = [];
 
   SiteDetailEntity? siteDetail;
-  String get showChargeAvg => "${siteDetail?.chargeAvg ?? 0}";
-  String get showRechargeAvg => "${siteDetail?.rechargeAvg ?? 0}";
+
+  ///今天充电
+  String get showChargeAvg =>
+      siteDetail?.showValue(siteDetail?.chargeAvg ?? 0) ?? "0.000";
+  String get showChargeAvgUnit =>
+      siteDetail?.showUnit(siteDetail?.chargeAvg ?? 0) ?? "kWh";
+
+  ///今天放电
+  String get showRechargeAvg =>
+      siteDetail?.showValue(siteDetail?.rechargeAvg ?? 0) ?? "0.000";
+  String get showRechargeAvgUnit =>
+      siteDetail?.showUnit(siteDetail?.rechargeAvg ?? 0) ?? "kWh";
+
   String get workModel => siteDetail?.workModel ?? "";
 
   StatisticRecordEntity? statisticRecord;
-  String get showTodayIncome => "${statisticRecord?.todayIncome ?? 0}";
+  //String get showTodayIncome => "${statisticRecord?.todayIncome ?? 0}";
   String get showLastDayIncome =>
       (statisticRecord?.lastDayIncome ?? 0).moneyFormatted;
-  String get showTodayPvTotalNeg => "${statisticRecord?.todayPvTotalNeg ?? 0}";
+
+  ///判断获取货币符号
+  String get currencyUnit => true ? "¥" : "€";
+
+  ///今日光伏发电量
+  String get showTodayPvTotalNeg =>
+      statisticRecord?.showValue(statisticRecord?.todayPvTotalNeg ?? 0) ??
+      "0.000";
+  String get showTodayPvTotalNegUnit =>
+      statisticRecord?.showUnit(statisticRecord?.todayPvTotalNeg ?? 0) ?? "kWh";
 
   @override
   void onInit() {

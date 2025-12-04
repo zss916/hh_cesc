@@ -367,6 +367,9 @@ class TKey {
   static const String privacyPolicy = "privacyPolicy";
 
   static const String chargeAndDischarge = "chargeAndDischarge";
+
+  static const String energySChaAndDischa =
+      "energyStorageChargingAndDischargingCapacity";
 }
 
 const zh = {
@@ -548,4 +551,5 @@ const zh = {
   "dischargingAmount": "放电金额",
   "amount": "金额",
   "realTimeSoc": "实时曲线",
+  "energyStorageChargingAndDischargingCapacity": "储能充放电量",
 };

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class BuildStationOverview extends StatelessWidget {
                 Container(
                   margin: EdgeInsetsDirectional.only(top: 2),
                   width: double.maxFinite,
-                  child: Text(
+                  child: AutoSizeText(
                     TKey.energyStorageInstalledCapacity.tr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -184,7 +185,7 @@ class BuildStationOverview extends StatelessWidget {
                 Container(
                   margin: EdgeInsetsDirectional.only(top: 2),
                   width: double.maxFinite,
-                  child: Text(
+                  child: AutoSizeText(
                     TKey.cumulativeChargingCapacity.tr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -194,7 +195,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(mwh)",
+                    "(${totalPos.toDouble().formatPowerUnit})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -205,7 +206,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    "$totalPos",
+                    totalPos.toDouble().formatPower,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -274,7 +275,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(mkh)",
+                    "(${totalNeg.toDouble().formatPowerUnit})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -285,7 +286,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    "$totalNeg",
+                    totalNeg.toDouble().formatPower,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -354,7 +355,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(kWh)",
+                    "(${totalPvNeg.toDouble().formatPowerUnit})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -365,7 +366,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    "$totalPvNeg",
+                    totalPvNeg.toDouble().formatPower,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

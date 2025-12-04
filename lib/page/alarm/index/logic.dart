@@ -31,9 +31,9 @@ class AlarmLogic extends GetxController {
     super.onClose();
   }
 
-  refreshData() {
+  refreshData({bool? isLoading}) {
     pageNum = 1;
-    loadData(pageNum: pageNum);
+    loadData(pageNum: pageNum, isLoading: isLoading ?? false);
   }
 
   loadMoreData() {
@@ -41,8 +41,8 @@ class AlarmLogic extends GetxController {
     loadData(pageNum: pageNum);
   }
 
-  Future<void> loadData({int pageNum = 1}) async {
-    //https://ems.cescpower.com:9088/api/v1/business/alarm/listPage?adcode=&pageSize=10&pageNum=1
+  Future<void> loadData({int pageNum = 1, bool isLoading = false}) async {
+    if (isLoading) AppLoading.show();
     final (
       bool isSuccessful,
       List<AlarmItemEntity> value,
@@ -53,7 +53,7 @@ class AlarmLogic extends GetxController {
       siteId: site?.id,
       startTimeMill: startTimeMill,
       endTimeMill: endTimeMill,
-    );
+    ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       if (pageNum == 1) {
         data.assignAll(value);

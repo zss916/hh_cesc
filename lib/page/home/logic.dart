@@ -8,6 +8,7 @@ class HomeLogic extends GetxController {
   int get deviceNum => homeData?.deviceNum ?? 0; //设备数量
   int get siteNum => homeData?.siteNum ?? 0; //站点数量
   num get capacity => homeData?.capacity ?? 0.0; //站点容量
+
   num get totalPos => homeData?.totalPos ?? 0.0; //累计充电
   num get totalNeg => homeData?.totalNeg ?? 0.0; //累计放电
   num get totalPvNeg => homeData?.totalPvNeg ?? 0.0; //累计光伏发电

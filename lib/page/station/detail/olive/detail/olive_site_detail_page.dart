@@ -45,6 +45,7 @@ class OliveSiteDetailPage extends StatelessWidget {
     );
   }
 
+  ///充电
   Widget buildChargingCapacityItem(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
@@ -64,7 +65,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.todayTotalPos ?? 0}kwh",
+                value?.showTodayTotalPos() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -78,7 +79,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.currentMonthTotalPos ?? 0}kwh",
+                value?.showMonthTotalPos() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -92,7 +93,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.currentYearTotalPos ?? 0}kwh",
+                value?.showYearTotalPos() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -106,7 +107,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.todayTotalPos ?? 0}kwh",
+                value?.showTotalPos() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -116,6 +117,7 @@ class OliveSiteDetailPage extends StatelessWidget {
     );
   }
 
+  ///收益
   Widget buildRevenueItem(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
@@ -135,7 +137,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${(value?.lastDayIncome ?? 0).formatAmount()}¥",
+                "${(value?.lastDayIncome ?? 0).formatAmount()}${value?.currencyUnit}",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -149,7 +151,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${(value?.currentMonthIncome ?? 0).formatAmount()}¥",
+                "${(value?.currentMonthIncome ?? 0).formatAmount()}${value?.currencyUnit}",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -163,7 +165,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${(value?.currentYearIncome ?? 0).formatAmount()}¥",
+                "${(value?.currentYearIncome ?? 0).formatAmount()}${value?.currencyUnit}",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -177,7 +179,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${(value?.todayIncome ?? 0).formatAmount()}¥",
+                "${(value?.todayIncome ?? 0).formatAmount()}${value?.currencyUnit}",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -187,6 +189,7 @@ class OliveSiteDetailPage extends StatelessWidget {
     );
   }
 
+  ///放电
   Widget buildDischargeCapacityItem(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
@@ -206,7 +209,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.todayPvTotalNeg ?? 0}kwh",
+                value?.showTodayTotalNeg() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -220,7 +223,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.currentMonthTotalNeg ?? 0}kwh",
+                value?.showMonthTotalNeg() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -234,7 +237,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.currentYearTotalNeg ?? 0}kwh",
+                value?.showYearTotalNeg() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -248,7 +251,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.totalNeg ?? 0}kwh",
+                value?.showTotalNeg() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -258,6 +261,7 @@ class OliveSiteDetailPage extends StatelessWidget {
     );
   }
 
+  ///光伏发电量
   Widget buildPowerGenerationItem(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
@@ -277,7 +281,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.todayPvTotalNeg ?? 0}kwh",
+                value?.showTodayPVTotalNeg() ?? "0.00kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -291,7 +295,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.monthPvTotalNeg ?? 0}kwh",
+                value?.showMonthPVTotalNeg() ?? "0.000kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -305,7 +309,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.yearPvTotalNeg ?? 0}kwh",
+                value?.showYearPVTotalPos() ?? "0.00kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
@@ -319,7 +323,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${value?.todayPvTotalNeg ?? 0}kwh",
+                value?.showTotalPVNeg() ?? "0.00kWh",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],
