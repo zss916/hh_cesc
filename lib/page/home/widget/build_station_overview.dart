@@ -193,7 +193,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(kWh)",
+                    "(MWh)",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -273,7 +273,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(kWh)",
+                    "(MWh)",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),

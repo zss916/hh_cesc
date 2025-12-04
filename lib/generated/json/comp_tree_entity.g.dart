@@ -41,6 +41,18 @@ CompTreeEntity $CompTreeEntityFromJson(Map<String, dynamic> json) {
   if (isSelected != null) {
     compTreeEntity.isSelected = isSelected;
   }
+  final bool? isChildSelected = jsonConvert.convert<bool>(
+    json['isChildSelected'],
+  );
+  if (isChildSelected != null) {
+    compTreeEntity.isChildSelected = isChildSelected;
+  }
+  final bool? isChildChildSelected = jsonConvert.convert<bool>(
+    json['isChildChildSelected'],
+  );
+  if (isChildChildSelected != null) {
+    compTreeEntity.isChildChildSelected = isChildChildSelected;
+  }
   return compTreeEntity;
 }
 
@@ -55,6 +67,8 @@ Map<String, dynamic> $CompTreeEntityToJson(CompTreeEntity entity) {
   data['labelEn'] = entity.labelEn;
   data['child'] = entity.child?.map((v) => v.toJson()).toList();
   data['isSelected'] = entity.isSelected;
+  data['isChildSelected'] = entity.isChildSelected;
+  data['isChildChildSelected'] = entity.isChildChildSelected;
   return data;
 }
 
@@ -69,6 +83,8 @@ extension CompTreeEntityExtension on CompTreeEntity {
     String? labelEn,
     List<CompTreeEntity>? child,
     bool? isSelected,
+    bool? isChildSelected,
+    bool? isChildChildSelected,
   }) {
     return CompTreeEntity()
       ..label = label ?? this.label
@@ -79,6 +95,9 @@ extension CompTreeEntityExtension on CompTreeEntity {
       ..labelCn = labelCn ?? this.labelCn
       ..labelEn = labelEn ?? this.labelEn
       ..child = child ?? this.child
-      ..isSelected = isSelected ?? this.isSelected;
+      ..isSelected = isSelected ?? this.isSelected
+      ..isChildSelected = isChildSelected ?? this.isChildSelected
+      ..isChildChildSelected =
+          isChildChildSelected ?? this.isChildChildSelected;
   }
 }

@@ -272,7 +272,7 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.todayIncome.tr}(¥)",
+                              "${TKey.lastDayIncome.tr}(¥)",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

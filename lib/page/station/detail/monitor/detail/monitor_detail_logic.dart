@@ -51,6 +51,15 @@ class MonitorDetailLogic extends GetxController {
     loadSocGraph();
   }
 
+  void switchTree() {
+    AppLoading.show();
+    Future.wait([
+      loadComType(),
+      loadComponentListByDev(),
+    ]).whenComplete(() => AppLoading.dismiss());
+    loadSocGraph();
+  }
+
   Future<void> getCompTree() async {
     final (bool isSuccessful, List<CompTreeEntity> value) =
         await SiteAPI.getCompTree(siteId: siteId, type: devType);

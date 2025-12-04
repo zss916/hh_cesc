@@ -407,7 +407,7 @@ class OliveItemView extends StatelessWidget {
                 GridViewWidget(
                   todayCharging: logic.showChargeAvg,
                   todayDischarge: logic.showRechargeAvg,
-                  showTodayIncome: logic.showTodayIncome,
+                  showTodayIncome: logic.showLastDayIncome,
                   todayPVPowerEarnings: logic.showTodayPvTotalNeg,
                   siteDetail: logic.siteDetail,
                   statisticRecord: logic.statisticRecord,

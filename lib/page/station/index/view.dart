@@ -272,7 +272,7 @@ class StationPage extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              "${TKey.todayChargeAndDischarge.tr}: ",
+                              "${TKey.chargeAndDischarge.tr}: ",
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontSize: 12,

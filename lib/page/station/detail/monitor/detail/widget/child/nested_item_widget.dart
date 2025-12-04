@@ -38,6 +38,9 @@ class NestedItemWidgetState extends State<NestedItemWidget> {
           onTap: () {
             setState(() {
               isItemExpanded = !isItemExpanded;
+              /* for (CompTreeEntity value in (widget.item.child ?? [])) {
+                value.isSelected = false;
+              }*/
               if (isItemExpanded) {
                 widget.item.isSelected = isItemExpanded;
               } else {

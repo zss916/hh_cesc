@@ -41,5 +41,5 @@ class Assets {
   static const String imgTodayRecharge = 'assets/img/today_recharge.png';
   static const String jsonCountryAndArea = 'assets/json/country_and_area.json';
   static const String jsonPcaCode = 'assets/json/pca-code.json';
-  static const String launcherLogo = 'assets/launcher/logo.jpg';
+  static const String launcherAppLogo = 'assets/launcher/app_logo.jpg';
 }

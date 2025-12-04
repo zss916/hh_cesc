@@ -80,6 +80,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
           ),
           bottomNavigationBar: Container(
             clipBehavior: Clip.hardEdge,
+            constraints: BoxConstraints(maxHeight: 65.h),
             margin: EdgeInsetsDirectional.only(bottom: 20, start: 20, end: 20),
             decoration: BoxDecoration(
               color: Color(0xFF474F59),

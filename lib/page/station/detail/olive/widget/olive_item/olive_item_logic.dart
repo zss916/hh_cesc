@@ -32,7 +32,8 @@ class OliveItemLogic extends GetxController {
 
   StatisticRecordEntity? statisticRecord;
   String get showTodayIncome => "${statisticRecord?.todayIncome ?? 0}";
-  String get showLastDayIncome => "${statisticRecord?.lastDayIncome ?? 0}";
+  String get showLastDayIncome =>
+      (statisticRecord?.lastDayIncome ?? 0).moneyFormatted;
   String get showTodayPvTotalNeg => "${statisticRecord?.todayPvTotalNeg ?? 0}";
 
   @override

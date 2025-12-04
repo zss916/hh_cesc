@@ -365,6 +365,8 @@ class TKey {
   static const String userAgreement = "userAgreement";
 
   static const String privacyPolicy = "privacyPolicy";
+
+  static const String chargeAndDischarge = "chargeAndDischarge";
 }
 
 const zh = {
@@ -471,6 +473,7 @@ const zh = {
   "energyStoragePower": "储能功率",
   "photovoltaicPower": "光伏功率",
   "todayChargeAndDischarge": "今日充放电",
+  "chargeAndDischarge": "充放电",
   "pureEnergyStorage": "纯储能",
   "pvStorageCharging": "光储充",
   "energyStorageLiquidCooling": "储能液冷",

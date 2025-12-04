@@ -79,7 +79,7 @@ class SiteEntity {
 
   ///今日充放电
   String get chargeAndRecharge =>
-      "${((charge ?? 0) / 1000).toStringAsFixed(2)}kw/${((recharge ?? 0) / 1000).toStringAsFixed(2)}kw";
+      "${((charge ?? 0) / 1000).toStringAsFixed(2)}MKW/${((recharge ?? 0) / 1000).toStringAsFixed(2)}MKW";
 }
 
 @JsonSerializable()

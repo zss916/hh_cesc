@@ -17,9 +17,12 @@ class TopItemWidget extends StatelessWidget {
           onTap: () {
             showSelectTitleSheet(
               logic.titles,
-              onSelect: (value) {
+              onSelect: (value, did, nodeNo, devNo) {
                 logic.compTree = value;
-                logic.update();
+                logic.did = did;
+                logic.nodeNo = nodeNo;
+                logic.devNo = devNo;
+                logic.switchTree();
               },
             );
           },

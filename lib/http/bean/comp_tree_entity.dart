@@ -18,6 +18,8 @@ class CompTreeEntity {
   String? labelEn;
   List<CompTreeEntity>? child;
   bool? isSelected;
+  bool? isChildSelected;
+  bool? isChildChildSelected;
 
   String get labelName => Get.isEn ? (labelEn ?? "") : (labelCn ?? "");
 

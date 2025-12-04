@@ -4,7 +4,7 @@
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  image_path: "assets/launcher/logo.jpg"
+  image_path: "assets/launcher/app_logo.jpg"
   min_sdk_android: 21
   #adaptive_icon_background: "assets/launcher/logo_b.png"
   #adaptive_icon_foreground: "assets/launcher/logo_f.png"
