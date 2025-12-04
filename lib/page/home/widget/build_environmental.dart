@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class BuildEnvironmental extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
+                  height: 95.h,
                   decoration: BoxDecoration(
                     color: Color(0xFF313540),
                     borderRadius: BorderRadius.circular(20),
@@ -71,7 +73,8 @@ class BuildEnvironmental extends StatelessWidget {
                             ),
                             SizedBox(
                               width: double.maxFinite,
-                              child: Text.rich(
+                              child: AutoSizeText.rich(
+                                minFontSize: 10,
                                 TextSpan(
                                   children: [
                                     TextSpan(
@@ -108,6 +111,7 @@ class BuildEnvironmental extends StatelessWidget {
               VerticalDivider(width: 13, color: Colors.transparent),
               Expanded(
                 child: Container(
+                  height: 95.h,
                   decoration: BoxDecoration(
                     color: Color(0xFF313540),
                     borderRadius: BorderRadius.circular(20),
@@ -143,7 +147,8 @@ class BuildEnvironmental extends StatelessWidget {
 
                             SizedBox(
                               width: double.maxFinite,
-                              child: Text.rich(
+                              child: AutoSizeText.rich(
+                                minFontSize: 10,
                                 TextSpan(
                                   children: [
                                     TextSpan(
