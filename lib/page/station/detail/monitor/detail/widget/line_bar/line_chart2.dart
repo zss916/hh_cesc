@@ -90,7 +90,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                               ? SizedBox.shrink()
                               : Text(
                                   (widget.powerList[value.toInt()].time ?? 0)
-                                      .hms,
+                                      .mDHms,
                                   style: TextStyle(
                                     color: Color(0xA8FFFFFF),
                                     fontWeight: FontWeight.w400,
@@ -107,7 +107,6 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                       reservedSize: 35,
                       getTitlesWidget: (value, meta) {
                         return SideTitleWidget(
-                          //space: 2,
                           meta: meta,
                           child: Text(
                             "$value",

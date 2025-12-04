@@ -93,13 +93,47 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
               // padding: const EdgeInsets.all(12.0),
               height: double.maxFinite,
               width: widget.data.length <= 4
-                  ? MediaQuery.of(context).size.width - 80
+                  ? MediaQuery.of(context).size.width - 20
                   : widget.data.length * 80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
               child: BarChart(
                 BarChartData(
                   maxY: widget.maxY,
                   minY: widget.minY,
-                  barTouchData: BarTouchData(enabled: false), // 禁用触摸数据
+                  barTouchData: BarTouchData(
+                    enabled: true,
+                    touchTooltipData: BarTouchTooltipData(
+                      getTooltipColor: (_) => Color(0x66000000),
+                      tooltipHorizontalAlignment: FLHorizontalAlignment.right,
+                      tooltipMargin: -30,
+                      getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                        return BarTooltipItem(
+                          '${widget.labels[groupIndex]}\n',
+                          TextStyle(color: Color(0xFF0978E9), fontSize: 8.sp),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: ((rod.toY - 1).toStringAsFixed(
+                                2,
+                              )).toString(),
+                              style: TextStyle(
+                                color: Color(0xFF0978E9),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 10.sp,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    touchCallback: (FlTouchEvent event, barTouchResponse) {
+                      setState(() {
+                        if (!event.isInterestedForInteractions ||
+                            barTouchResponse == null ||
+                            barTouchResponse.spot == null) {
+                          return;
+                        }
+                      });
+                    },
+                  ),
                   titlesData: _buildTitlesData(), // 构建标题数据
                   borderData: FlBorderData(show: false), // 边框数据
                   barGroups: _buildBarGroups(), // 构建柱状图组

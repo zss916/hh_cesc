@@ -28,6 +28,10 @@ extension TimestampExtension on int {
 
   String get hms =>
       DateFormat('HH:mm:ss').format(DateTime.fromMillisecondsSinceEpoch(this));
+
+  String get mDHms => DateFormat(
+    'MM-dd HH:mm:ss',
+  ).format(DateTime.fromMillisecondsSinceEpoch(this));
 }
 
 extension CheckLancode on GetInterface {
