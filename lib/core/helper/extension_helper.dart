@@ -142,10 +142,65 @@ extension AmountFormat on num {
     }
   }
 
+  ///功率值
+  String formatPowerValue() {
+    if (this >= 10000) {
+      num mValue = this / 1000;
+      if (mValue >= 10000) {
+        ///gwh
+        return (mValue / 1000).toStringAsFixed(3);
+      } else {
+        ///mwh
+        return mValue.toStringAsFixed(3);
+      }
+    } else {
+      ///kwh
+      return toStringAsFixed(2);
+    }
+  }
+
+  ///功率单位
+  String formatPowerValueUnit() {
+    if (this >= 10000) {
+      num mValue = this / 1000;
+      if (mValue >= 10000) {
+        ///gwh
+        return "GWh";
+      } else {
+        ///mwh
+        return "MWh";
+      }
+    } else {
+      ///kwh
+      return "kWh";
+    }
+  }
+
+  String formatPowerValueAndUnit() {
+    if (this >= 10000) {
+      num mValue = this / 1000;
+      if (mValue >= 10000) {
+        ///gwh
+        return "${(mValue / 1000).toStringAsFixed(3)}GWh";
+      } else {
+        ///mwh
+        return "${mValue.toStringAsFixed(3)}MWh";
+      }
+    } else {
+      ///kwh
+      return "${toStringAsFixed(2)}kWh";
+    }
+  }
+
+  ///排量等单位
+  String get weightUnit => (this >= 1000) ? " t" : " kg";
+
   ///(充电/放电)转化
+  /*
   String get formatPower =>
       (this >= 1000) ? (this / 1000).formatMWh() : formatKWh();
+*/
 
   ///(充电/放电)单位 转化
-  String get formatPowerUnit => (this >= 1000) ? "MWh" : "kWh";
+  /*String get formatPowerUnit => (this >= 1000) ? "MWh" : "kWh";*/
 }

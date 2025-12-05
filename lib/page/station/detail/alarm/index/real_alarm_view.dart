@@ -34,7 +34,7 @@ class RealAlarmView extends StatelessWidget {
 
                 if ((logic.list3).isNotEmpty) buildAttentionAlarmItem(logic),
 
-                buildFocusOn(logic),
+                if (logic.contents.isNotEmpty) buildFocusOn(logic),
 
                 Divider(height: 150.h, color: Colors.transparent),
               ],

@@ -195,7 +195,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(${totalPos.toDouble().formatPowerUnit})",
+                    "(${totalPos.formatPowerValueUnit()})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -206,7 +206,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    totalPos.toDouble().formatPower,
+                    totalPos.formatPowerValue(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -275,7 +275,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(${totalNeg.toDouble().formatPowerUnit})",
+                    "(${totalNeg.formatPowerValueUnit()})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -286,7 +286,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    totalNeg.toDouble().formatPower,
+                    totalNeg.formatPowerValue(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -355,7 +355,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(${totalPvNeg.toDouble().formatPowerUnit})",
+                    "(${totalPvNeg.formatPowerValueUnit()})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -366,7 +366,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    totalPvNeg.toDouble().formatPower,
+                    totalPvNeg.formatPowerValue(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

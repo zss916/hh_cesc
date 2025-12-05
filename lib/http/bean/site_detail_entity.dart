@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/site_detail_entity.g.dart';
 
@@ -75,20 +74,20 @@ class SiteDetailEntity {
     }
   }
 
-  String showValue(double value) {
+  /* String showValue(double value) {
     if (value > 1000) {
       double mwhValue = value / 1000;
       return mwhValue.formatMWh();
     } else {
       return value.formatKWh();
     }
-  }
+  }*/
 
-  String showUnit(double value) {
+  /*  String showUnit(double value) {
     if (value > 1000) {
-      return "MKh";
+      return "MWh";
     } else {
       return "kWh";
     }
-  }
+  }*/
 }

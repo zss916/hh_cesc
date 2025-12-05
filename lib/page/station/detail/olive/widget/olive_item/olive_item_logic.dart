@@ -28,16 +28,15 @@ class OliveItemLogic extends GetxController {
   SiteDetailEntity? siteDetail;
 
   ///今天充电
-  String get showChargeAvg =>
-      siteDetail?.showValue(siteDetail?.chargeAvg ?? 0) ?? "0.000";
+  String get showChargeAvg => (siteDetail?.chargeAvg ?? 0).formatPowerValue();
   String get showChargeAvgUnit =>
-      siteDetail?.showUnit(siteDetail?.chargeAvg ?? 0) ?? "kWh";
+      (siteDetail?.chargeAvg ?? 0).formatPowerValueUnit();
 
   ///今天放电
   String get showRechargeAvg =>
-      siteDetail?.showValue(siteDetail?.rechargeAvg ?? 0) ?? "0.000";
+      (siteDetail?.rechargeAvg ?? 0).formatPowerValue();
   String get showRechargeAvgUnit =>
-      siteDetail?.showUnit(siteDetail?.rechargeAvg ?? 0) ?? "kWh";
+      (siteDetail?.rechargeAvg ?? 0).formatPowerValueUnit();
 
   String get workModel => siteDetail?.workModel ?? "";
 
@@ -51,10 +50,9 @@ class OliveItemLogic extends GetxController {
 
   ///今日光伏发电量
   String get showTodayPvTotalNeg =>
-      statisticRecord?.showValue(statisticRecord?.todayPvTotalNeg ?? 0) ??
-      "0.000";
+      (statisticRecord?.todayPvTotalNeg ?? 0).formatPowerValue();
   String get showTodayPvTotalNegUnit =>
-      statisticRecord?.showUnit(statisticRecord?.todayPvTotalNeg ?? 0) ?? "kWh";
+      (statisticRecord?.todayPvTotalNeg ?? 0).formatPowerValueUnit();
 
   @override
   void onInit() {

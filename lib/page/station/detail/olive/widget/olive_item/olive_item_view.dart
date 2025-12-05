@@ -72,142 +72,470 @@ class OliveItemView extends StatelessWidget {
                   ),
                 ),
 
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xFF313540),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: EdgeInsetsDirectional.all(5.r),
-                  margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
-                  width: double.maxFinite,
-                  height: (Get.width - 32.w),
-                  child: Stack(
-                    alignment: AlignmentDirectional.center,
-                    children: [
-                      GplotLineWidget(
-                        defaultLines: [
-                          [
-                            {
-                              'start': Offset(70.r, (Get.width - 32.w) / 2),
-                              'end': Offset(125.r, (Get.width - 32.w) / 2),
-                            },
-                          ],
-                          [
-                            {
-                              'start': Offset(
-                                70.r + 150.r,
-                                (Get.width - 32.w) / 2,
-                              ),
-                              'end': Offset(
-                                125.r + 150.r,
-                                (Get.width - 32.w) / 2,
-                              ),
-                            },
-                          ],
-                          if (logic.isHasPv)
+                if (logic.isHasPv)
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFF313540),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsetsDirectional.all(5.r),
+                    margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
+                    width: double.maxFinite,
+                    height: (Get.width - 32.w),
+                    child: Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: [
+                        GplotLineWidget(
+                          defaultLines: [
                             [
                               {
-                                'start': Offset((Get.width - 32.w) / 2, 70.r),
-                                'end': Offset(
+                                'start': Offset(70.r, (Get.width - 32.w) / 2),
+                                'end': Offset(125.r, (Get.width - 32.w) / 2),
+                              },
+                            ],
+                            [
+                              {
+                                'start': Offset(
+                                  70.r + 150.r,
                                   (Get.width - 32.w) / 2,
-                                  70.r + 75.r,
+                                ),
+                                'end': Offset(
+                                  125.r + 150.r,
+                                  (Get.width - 32.w) / 2,
                                 ),
                               },
                             ],
-                          [
-                            {
-                              'start': Offset(
-                                (Get.width - 32.w) / 2,
-                                70.r + 155.r,
-                              ),
-                              'end': Offset(
-                                (Get.width - 32.w) / 2,
-                                70.r + 75.r + 120.r,
-                              ),
-                            },
-                          ],
-                        ],
-                        lines: [
-                          if (logic.topology?.load != null)
-                            [
-                              ///load <- ems
-                              {
-                                'end': Offset(70.r, (Get.width - 32.w) / 2),
-                                'start': Offset(125.r, (Get.width - 32.w) / 2),
-                              },
-                            ],
-
-                          if (logic.topology?.grid != null)
-                            [
-                              ///grid <->ems
-                              if (logic.topology?.isGridOut == true)
+                            if (logic.isHasPv)
+                              [
                                 {
+                                  'start': Offset((Get.width - 32.w) / 2, 70.r),
                                   'end': Offset(
-                                    70.r + 150.r,
                                     (Get.width - 32.w) / 2,
-                                  ),
-                                  'start': Offset(
-                                    125.r + 150.r,
-                                    (Get.width - 32.w) / 2,
+                                    70.r + 75.r,
                                   ),
                                 },
-
-                              if (logic.topology?.isGridOut == false)
-                                {
-                                  'start': Offset(
-                                    70.r + 150.r,
-                                    (Get.width - 32.w) / 2,
-                                  ),
-                                  'end': Offset(
-                                    125.r + 150.r,
-                                    (Get.width - 32.w) / 2,
-                                  ),
-                                },
-                            ],
-                          if (logic.isHasPv)
+                              ],
                             [
-                              ///pv -> ems
                               {
-                                'start': Offset((Get.width - 32.w) / 2, 70.r),
+                                'start': Offset(
+                                  (Get.width - 32.w) / 2,
+                                  70.r + 155.r,
+                                ),
                                 'end': Offset(
                                   (Get.width - 32.w) / 2,
-                                  70.r + 75.r,
+                                  70.r + 75.r + 120.r,
                                 ),
                               },
                             ],
-
-                          if (logic.topology?.storage != null)
-                            [
-                              ///ems <-> battery
-                              if (logic.topology?.isBatteryOut == false)
+                          ],
+                          lines: [
+                            if (logic.topology?.load != null)
+                              [
+                                ///load <- ems
                                 {
+                                  'end': Offset(70.r, (Get.width - 32.w) / 2),
                                   'start': Offset(
+                                    125.r,
                                     (Get.width - 32.w) / 2,
-                                    70.r + 155.r,
-                                  ),
-                                  'end': Offset(
-                                    (Get.width - 32.w) / 2,
-                                    70.r + 75.r + 120.r,
                                   ),
                                 },
+                              ],
 
-                              if (logic.topology?.isBatteryOut == true)
+                            if (logic.topology?.grid != null)
+                              [
+                                ///grid <->ems
+                                if (logic.topology?.isGridOut == true)
+                                  {
+                                    'end': Offset(
+                                      70.r + 150.r,
+                                      (Get.width - 32.w) / 2,
+                                    ),
+                                    'start': Offset(
+                                      125.r + 150.r,
+                                      (Get.width - 32.w) / 2,
+                                    ),
+                                  },
+
+                                if (logic.topology?.isGridOut == false)
+                                  {
+                                    'start': Offset(
+                                      70.r + 150.r,
+                                      (Get.width - 32.w) / 2,
+                                    ),
+                                    'end': Offset(
+                                      125.r + 150.r,
+                                      (Get.width - 32.w) / 2,
+                                    ),
+                                  },
+                              ],
+                            if (logic.isHasPv)
+                              [
+                                ///pv -> ems
                                 {
+                                  'start': Offset((Get.width - 32.w) / 2, 70.r),
                                   'end': Offset(
                                     (Get.width - 32.w) / 2,
-                                    70.r + 155.r,
-                                  ),
-                                  'start': Offset(
-                                    (Get.width - 32.w) / 2,
-                                    70.r + 75.r + 120.r,
+                                    70.r + 75.r,
                                   ),
                                 },
+                              ],
+
+                            if (logic.topology?.storage != null)
+                              [
+                                ///ems <-> battery
+                                if (logic.topology?.isBatteryOut == false)
+                                  {
+                                    'start': Offset(
+                                      (Get.width - 32.w) / 2,
+                                      70.r + 155.r,
+                                    ),
+                                    'end': Offset(
+                                      (Get.width - 32.w) / 2,
+                                      70.r + 75.r + 120.r,
+                                    ),
+                                  },
+
+                                if (logic.topology?.isBatteryOut == true)
+                                  {
+                                    'end': Offset(
+                                      (Get.width - 32.w) / 2,
+                                      70.r + 155.r,
+                                    ),
+                                    'start': Offset(
+                                      (Get.width - 32.w) / 2,
+                                      70.r + 75.r + 120.r,
+                                    ),
+                                  },
+                              ],
+                          ],
+                        ),
+
+                        Center(
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Image.asset(
+                                Assets.gplotInverter,
+                                width: 110.r,
+                                height: 110.r,
+                              ),
+                              PositionedDirectional(
+                                bottom: 0,
+                                child: Text(
+                                  "EMS",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
                             ],
-                        ],
-                      ),
+                          ),
+                        ),
 
-                      Center(
-                        child: Stack(
+                        ///battery
+                        PositionedDirectional(
+                          bottom: 0,
+                          end: 0,
+                          start: 0,
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Transform.scale(
+                                scale: 0.9,
+                                child: Image.asset(
+                                  Assets.gplotBattery,
+                                  width: 75.r,
+                                  height: 75.r,
+                                ),
+                              ),
+                              PositionedDirectional(
+                                start: (Get.width - 32.r) / 2 - 100.r,
+                                bottom: 5.r,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "Battery",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${logic.storagePower}KW",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      "SOC:${logic.storageSoc}%",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///load
+                        PositionedDirectional(
+                          top: 0,
+                          bottom: 0,
+                          start: 0,
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Image.asset(
+                                Assets.gplotLoad,
+                                width: 75.r,
+                                height: 75.r,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///load text
+                        PositionedDirectional(
+                          top: (Get.width - 32.w) / 2 + 20.r,
+                          start: 0,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Load",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                "${logic.loadPower}KW",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///grid
+                        PositionedDirectional(
+                          top: 0,
+                          end: 0,
+                          bottom: 0,
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Image.asset(
+                                Assets.gplotPowerGrid,
+                                width: 75.r,
+                                height: 75.r,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///grid text
+                        PositionedDirectional(
+                          top: (Get.width - 32.w) / 2 + 20.r,
+                          end: 20.r,
+                          child: SizedBox(
+                            width: 100.w,
+                            // color: Colors.yellow,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Grid",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                AutoSizeText(
+                                  "${logic.gridPower}KW",
+                                  minFontSize: 10,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        if (logic.isHasPv)
+                          PositionedDirectional(
+                            top: 0,
+                            start: 0,
+                            end: 0,
+                            child: Stack(
+                              alignment: AlignmentDirectional.center,
+                              children: [
+                                Image.asset(
+                                  Assets.gplotPv,
+                                  width: 75.r,
+                                  height: 75.r,
+                                ),
+                                PositionedDirectional(
+                                  start: (Get.width - 32.r) / 2 - 90.r,
+                                  top: 10.r,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "PV",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${logic.pvPower}KW",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  )
+                else
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xFF313540),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    padding: EdgeInsetsDirectional.all(5.r),
+                    margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
+                    width: double.maxFinite,
+                    height: (Get.width - 120.w),
+                    child: Stack(
+                      alignment: AlignmentDirectional.topCenter,
+                      children: [
+                        GplotLineWidget(
+                          defaultLines: [
+                            [
+                              {
+                                'start': Offset(70.r, 20 + (75.r / 2)),
+                                'end': Offset(125.r, 20 + (75.r / 2)),
+                              },
+                            ],
+                            [
+                              {
+                                'start': Offset(80.r + 150.r, 20 + (75.r / 2)),
+                                'end': Offset(140.r + 150.r, 20 + (75.r / 2)),
+                              },
+                            ],
+                            [
+                              {
+                                'start': Offset(
+                                  (Get.width - 32.w) / 2,
+                                  20 + 100.r,
+                                ),
+                                'end': Offset(
+                                  (Get.width - 32.w) / 2,
+                                  20 + 100.r + 50.r,
+                                ),
+                              },
+                            ],
+                          ],
+                          lines: [
+                            if (logic.topology?.load != null)
+                              [
+                                ///load <- ems
+                                {
+                                  'end': Offset(70.r, 20 + (75.r / 2)),
+                                  'start': Offset(125.r, 20 + (75.r / 2)),
+                                },
+                              ],
+
+                            if (logic.topology?.grid != null)
+                              [
+                                ///grid <->ems
+                                if (logic.topology?.isGridOut == true)
+                                  {
+                                    'end': Offset(
+                                      70.r + 150.r,
+                                      20 + (75.r / 2),
+                                    ),
+                                    'start': Offset(
+                                      125.r + 150.r,
+                                      20 + (75.r / 2),
+                                    ),
+                                  },
+
+                                if (logic.topology?.isGridOut == false)
+                                  {
+                                    'start': Offset(
+                                      70.r + 150.r,
+                                      (Get.width - 32.w) / 2,
+                                    ),
+                                    'end': Offset(
+                                      125.r + 150.r,
+                                      (Get.width - 32.w) / 2,
+                                    ),
+                                  },
+                              ],
+
+                            if (logic.topology?.storage != null)
+                              [
+                                ///ems <-> battery
+                                if (logic.topology?.isBatteryOut == false)
+                                  {
+                                    'start': Offset(
+                                      (Get.width - 32.w) / 2,
+                                      20 + 100.r,
+                                    ),
+                                    'end': Offset(
+                                      (Get.width - 32.w) / 2,
+                                      20 + 100.r + 50.r,
+                                    ),
+                                  },
+
+                                if (logic.topology?.isBatteryOut == true)
+                                  {
+                                    'end': Offset(
+                                      (Get.width - 32.w) / 2,
+                                      20 + 100.r,
+                                    ),
+                                    'start': Offset(
+                                      (Get.width - 32.w) / 2,
+                                      20 + 100.r + 50.r,
+                                    ),
+                                  },
+                              ],
+                          ],
+                        ),
+
+                        Stack(
                           alignment: AlignmentDirectional.center,
                           children: [
                             Image.asset(
@@ -228,178 +556,31 @@ class OliveItemView extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),
 
-                      ///battery
-                      PositionedDirectional(
-                        bottom: 0,
-                        end: 0,
-                        start: 0,
-                        child: Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            Transform.scale(
-                              scale: 0.9,
-                              child: Image.asset(
-                                Assets.gplotBattery,
-                                width: 75.r,
-                                height: 75.r,
-                              ),
-                            ),
-                            PositionedDirectional(
-                              start: (Get.width - 32.r) / 2 - 100.r,
-                              bottom: 5.r,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    "Battery",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${logic.storagePower}KW",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  Text(
-                                    "SOC:${logic.storageSoc}%",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      ///load
-                      PositionedDirectional(
-                        top: 0,
-                        bottom: 0,
-                        start: 0,
-                        child: Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            Image.asset(
-                              Assets.gplotLoad,
-                              width: 75.r,
-                              height: 75.r,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      ///load text
-                      PositionedDirectional(
-                        top: (Get.width - 32.w) / 2 + 20.r,
-                        start: 0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Load",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              "${logic.loadPower}KW",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      ///grid
-                      PositionedDirectional(
-                        top: 0,
-                        end: 0,
-                        bottom: 0,
-                        child: Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            Image.asset(
-                              Assets.gplotPowerGrid,
-                              width: 75.r,
-                              height: 75.r,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      ///grid text
-                      PositionedDirectional(
-                        top: (Get.width - 32.w) / 2 + 20.r,
-                        end: 20.r,
-                        child: SizedBox(
-                          width: 100.w,
-                          // color: Colors.yellow,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "Grid",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              AutoSizeText(
-                                "${logic.gridPower}KW",
-                                minFontSize: 10,
-                                maxLines: 1,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      if (logic.isHasPv)
+                        ///battery
                         PositionedDirectional(
-                          top: 0,
-                          start: 0,
+                          bottom: 10,
                           end: 0,
+                          start: 0,
                           child: Stack(
                             alignment: AlignmentDirectional.center,
                             children: [
-                              Image.asset(
-                                Assets.gplotPv,
-                                width: 75.r,
-                                height: 75.r,
+                              Transform.scale(
+                                scale: 0.9,
+                                child: Image.asset(
+                                  Assets.gplotBattery,
+                                  width: 75.r,
+                                  height: 75.r,
+                                ),
                               ),
                               PositionedDirectional(
-                                start: (Get.width - 32.r) / 2 - 90.r,
-                                top: 10.r,
+                                start: (Get.width - 32.r) / 2 - 100.r,
+                                bottom: 5.r,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      "PV",
+                                      "Battery",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 13.sp,
@@ -407,7 +588,15 @@ class OliveItemView extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "${logic.pvPower}KW",
+                                      "${logic.storagePower}KW",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      "SOC:${logic.storageSoc}%",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 13.sp,
@@ -420,9 +609,104 @@ class OliveItemView extends StatelessWidget {
                             ],
                           ),
                         ),
-                    ],
+
+                        ///load
+                        PositionedDirectional(
+                          top: 20,
+                          start: 0,
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Image.asset(
+                                Assets.gplotLoad,
+                                width: 75.r,
+                                height: 75.r,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///load text
+                        PositionedDirectional(
+                          top: 75.r + 20,
+                          start: 10,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Load",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                "${logic.loadPower}KW",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///grid
+                        PositionedDirectional(
+                          top: 25,
+                          end: 0,
+                          // bottom: 0,
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Image.asset(
+                                Assets.gplotPowerGrid,
+                                width: 75.r,
+                                height: 75.r,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        ///grid text
+                        PositionedDirectional(
+                          top: 75.r + 25,
+                          end: 20.r,
+                          child: SizedBox(
+                            width: 100.w,
+                            // color: Colors.yellow,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Grid",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                AutoSizeText(
+                                  "${logic.gridPower}KW",
+                                  minFontSize: 10,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
 
                 GridViewWidget(
                   todayCharging: logic.showChargeAvg,
