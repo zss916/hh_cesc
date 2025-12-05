@@ -83,79 +83,26 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                 children: [
                   Divider(height: 60.h, color: Colors.transparent),
 
-                  if (widget.logic.labels.isNotEmpty)
-                    Container(
-                      color: Colors.transparent,
-                      height: 280.h,
-                      width: double.maxFinite,
-                      child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        controller: tabCtrl,
-                        children: [
-                          ///周
-                          EleBarchartItemWidget(
-                            data: widget.logic.revenueList
-                                .map((e) => (e.totalCharge ?? 0))
-                                .toList(),
-                            data2: widget.logic.revenueList
-                                .map((e) => (e.totalRecharge ?? 0))
-                                .toList(),
-                            labels: widget.logic.labels,
-                            maxY: widget.logic.eleMaxY ?? 0,
-                          ),
+                  buildBody(viewState: widget.logic.eleViewStatus),
 
-                          ///月
-                          EleBarchartItemWidget(
-                            data: widget.logic.revenueList
-                                .map((e) => (e.totalCharge ?? 0))
-                                .toList(),
-                            data2: widget.logic.revenueList
-                                .map((e) => (e.totalRecharge ?? 0))
-                                .toList(),
-                            labels: widget.logic.labels,
-                            maxY: widget.logic.eleMaxY ?? 0,
-                          ),
-
-                          ///年
-                          EleBarchartItemWidget(
-                            data: widget.logic.revenueList
-                                .map((e) => (e.totalCharge ?? 0))
-                                .toList(),
-                            data2: widget.logic.revenueList
-                                .map((e) => (e.totalRecharge ?? 0))
-                                .toList(),
-                            labels: widget.logic.labels,
-                            maxY: widget.logic.eleMaxY ?? 0,
-                          ),
-                        ],
-                      ),
-                    )
-                  else
-                    Container(
-                      color: Colors.transparent,
-                      height: 280.h,
-                      width: double.maxFinite,
-                      child: Center(
-                        child: CircularProgressIndicator(color: Colors.white),
-                      ),
-                    ),
                   Divider(height: 5.h, color: Colors.transparent),
 
-                  Row(
-                    children: [
-                      Spacer(),
-                      LineTitleWidget(
-                        title: TKey.charge.tr,
-                        color: Color(0xFF39FFEF),
-                      ),
-                      VerticalDivider(width: 16.w, color: Colors.transparent),
-                      LineTitleWidget(
-                        title: TKey.discharge.tr,
-                        color: Color(0xFFFFC08C),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
+                  if (widget.logic.revenueList.isNotEmpty)
+                    Row(
+                      children: [
+                        Spacer(),
+                        LineTitleWidget(
+                          title: TKey.charge.tr,
+                          color: Color(0xFF39FFEF),
+                        ),
+                        VerticalDivider(width: 16.w, color: Colors.transparent),
+                        LineTitleWidget(
+                          title: TKey.discharge.tr,
+                          color: Color(0xFFFFC08C),
+                        ),
+                        Spacer(),
+                      ],
+                    ),
                 ],
               ),
 
@@ -303,18 +250,103 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                 ),
               ),
 
-              PositionedDirectional(
-                start: 0.w,
-                top: 50.h,
-                child: Text(
-                  "(KW)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+              if (widget.logic.revenueList.isNotEmpty)
+                PositionedDirectional(
+                  start: 0.w,
+                  top: 50.h,
+                  child: Text(
+                    "(KW)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  ),
                 ),
-              ),
             ],
           ),
         ),
       ],
     );
   }
+
+  Widget buildBody({required int viewState}) {
+    return switch (viewState) {
+      _ when viewState == ViewType.loading.index => buildLoading(),
+      _ when viewState == ViewType.common.index => buildEle(),
+      _ when viewState == ViewType.empty.index => buildEmpty(),
+      _ => buildEmpty(),
+    };
+  }
+
+  Widget buildEle() {
+    return Container(
+      color: Colors.transparent,
+      height: 280.h,
+      width: double.maxFinite,
+      child: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: tabCtrl,
+        children: [
+          ///周
+          EleBarchartItemWidget(
+            data: widget.logic.revenueList
+                .map((e) => (e.totalCharge ?? 0))
+                .toList(),
+            data2: widget.logic.revenueList
+                .map((e) => (e.totalRecharge ?? 0))
+                .toList(),
+            labels: widget.logic.labels,
+            maxY: widget.logic.eleMaxY ?? 0,
+          ),
+
+          ///月
+          EleBarchartItemWidget(
+            data: widget.logic.revenueList
+                .map((e) => (e.totalCharge ?? 0))
+                .toList(),
+            data2: widget.logic.revenueList
+                .map((e) => (e.totalRecharge ?? 0))
+                .toList(),
+            labels: widget.logic.labels,
+            maxY: widget.logic.eleMaxY ?? 0,
+          ),
+
+          ///年
+          EleBarchartItemWidget(
+            data: widget.logic.revenueList
+                .map((e) => (e.totalCharge ?? 0))
+                .toList(),
+            data2: widget.logic.revenueList
+                .map((e) => (e.totalRecharge ?? 0))
+                .toList(),
+            labels: widget.logic.labels,
+            maxY: widget.logic.eleMaxY ?? 0,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLoading() => SizedBox(
+    height: 280.h,
+    width: double.maxFinite,
+    child: Center(child: CircularProgressIndicator(color: Colors.white)),
+  );
+
+  Widget buildEmpty() => Container(
+    color: Colors.transparent,
+    height: 280.h,
+    width: double.maxFinite,
+    child: TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: tabCtrl,
+      children: [
+        ///周
+        EleBarchartItemWidget(data: [], data2: [], labels: [], maxY: 0),
+
+        ///月
+        EleBarchartItemWidget(data: [], data2: [], labels: [], maxY: 0),
+
+        ///年
+        EleBarchartItemWidget(data: [], data2: [], labels: [], maxY: 0),
+      ],
+    ),
+  );
 }

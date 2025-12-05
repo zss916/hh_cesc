@@ -1,3 +1,4 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,25 +44,26 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        PositionedDirectional(
-          start: 0,
-          top: 3,
-          bottom: 22,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(5, (index) {
-              final style = TextStyle(
-                color: Color(0xA8FFFFFF),
-                fontWeight: FontWeight.w400,
-                fontSize: 10.sp,
-              );
-              return Text(
-                (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(1),
-                style: style,
-              );
-            }),
+        if (widget.data.isNotEmpty)
+          PositionedDirectional(
+            start: 0,
+            top: 3,
+            bottom: 22,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(5, (index) {
+                final style = TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 10.sp,
+                );
+                return Text(
+                  (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(1),
+                  style: style,
+                );
+              }),
+            ),
           ),
-        ),
 
         // 滚动视图中的柱状图
         Container(
@@ -86,48 +88,50 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                 BarChartData(
                   maxY: widget.maxY,
                   minY: 0,
-                  barTouchData: BarTouchData(
-                    enabled: true,
-                    touchTooltipData: BarTouchTooltipData(
-                      getTooltipColor: (_) => Color(0x66000000),
-                      tooltipHorizontalAlignment: FLHorizontalAlignment.right,
-                      tooltipMargin: -30,
-                      getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                        return BarTooltipItem(
-                          '${widget.labels[groupIndex]}\n',
-                          TextStyle(
-                            color: rodIndex == 0
-                                ? Color(0xFF39FFEF)
-                                : Color(0xFFFFC08C),
-                            fontSize: 8.sp,
+                  barTouchData: widget.labels.isEmpty
+                      ? null
+                      : BarTouchData(
+                          enabled: true,
+                          touchTooltipData: BarTouchTooltipData(
+                            getTooltipColor: (_) => Color(0x66000000),
+                            tooltipHorizontalAlignment:
+                                FLHorizontalAlignment.right,
+                            tooltipMargin: -30,
+                            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                              return BarTooltipItem(
+                                '${widget.labels[groupIndex]}\n',
+                                TextStyle(
+                                  color: rodIndex == 0
+                                      ? Color(0xFF39FFEF)
+                                      : Color(0xFFFFC08C),
+                                  fontSize: 8.sp,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: (rod.toY).toDouble().formatAmount(),
+                                    style: TextStyle(
+                                      color: rodIndex == 0
+                                          ? Color(0xFF39FFEF)
+                                          : Color(0xFFFFC08C),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10.sp,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: ((rod.toY - 1).toStringAsFixed(
-                                2,
-                              )).toString(),
-                              style: TextStyle(
-                                color: rodIndex == 0
-                                    ? Color(0xFF39FFEF)
-                                    : Color(0xFFFFC08C),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 10.sp,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                    touchCallback: (FlTouchEvent event, barTouchResponse) {
-                      setState(() {
-                        if (!event.isInterestedForInteractions ||
-                            barTouchResponse == null ||
-                            barTouchResponse.spot == null) {
-                          return;
-                        }
-                      });
-                    },
-                  ),
+                          touchCallback:
+                              (FlTouchEvent event, barTouchResponse) {
+                                setState(() {
+                                  if (!event.isInterestedForInteractions ||
+                                      barTouchResponse == null ||
+                                      barTouchResponse.spot == null) {
+                                    return;
+                                  }
+                                });
+                              },
+                        ),
                   titlesData: _buildTitlesData(), // 构建标题数据
                   borderData: FlBorderData(show: false), // 边框数据
                   barGroups: _buildBarGroups(), // 构建柱状图组
@@ -135,7 +139,9 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                     show: true,
                     drawHorizontalLine: true,
                     drawVerticalLine: false,
-                    horizontalInterval: ((widget.maxY) / 4), // 确保水平线间隔与 Y 轴标签一致
+                    horizontalInterval: widget.maxY == 0
+                        ? 10
+                        : ((widget.maxY) / 4), // 确保水平线间隔与 Y 轴标签一致
                     getDrawingHorizontalLine: (value) {
                       return FlLine(
                         strokeWidth: 0.4,

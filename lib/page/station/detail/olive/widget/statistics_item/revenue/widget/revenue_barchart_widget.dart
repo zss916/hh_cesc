@@ -1,3 +1,4 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,32 +51,35 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
     return Stack(
       children: [
         // Y 轴标签
-        PositionedDirectional(
-          start: 0,
-          top: 5,
-          bottom: 0,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(6, (index) {
-              final style = TextStyle(
-                color: Color(0xA8FFFFFF),
-                fontWeight: FontWeight.w400,
-                fontSize: 10.sp,
-              );
-              if (index == 5) {
-                return Text(
-                  (widget.minY).toDouble().toStringAsFixed(2),
-                  style: style,
+        if (widget.data.isNotEmpty)
+          PositionedDirectional(
+            start: 0,
+            top: 5,
+            bottom: 0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(6, (index) {
+                final style = TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 10.sp,
                 );
-              } else {
-                return Text(
-                  (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(2),
-                  style: style,
-                );
-              }
-            }),
+                if (index == 5) {
+                  return Text(
+                    (widget.minY).toDouble().toStringAsFixed(2),
+                    style: style,
+                  );
+                } else {
+                  return Text(
+                    (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(
+                      2,
+                    ),
+                    style: style,
+                  );
+                }
+              }),
+            ),
           ),
-        ),
         // 滚动视图中的柱状图
         Container(
           margin: EdgeInsetsDirectional.only(start: 40.w), // 确保柱状图不与Y轴标签重叠
@@ -101,29 +105,33 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                   minY: widget.minY,
                   barTouchData: BarTouchData(
                     enabled: true,
-                    touchTooltipData: BarTouchTooltipData(
-                      getTooltipColor: (_) => Color(0x66000000),
-                      tooltipHorizontalAlignment: FLHorizontalAlignment.right,
-                      tooltipMargin: -30,
-                      getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                        return BarTooltipItem(
-                          '${widget.labels[groupIndex]}\n',
-                          TextStyle(color: Color(0xFF0978E9), fontSize: 8.sp),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: ((rod.toY - 1).toStringAsFixed(
-                                2,
-                              )).toString(),
-                              style: TextStyle(
-                                color: Color(0xFF0978E9),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 10.sp,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+                    touchTooltipData: widget.labels.isEmpty
+                        ? null
+                        : BarTouchTooltipData(
+                            getTooltipColor: (_) => Color(0x66000000),
+                            tooltipHorizontalAlignment:
+                                FLHorizontalAlignment.right,
+                            tooltipMargin: -30,
+                            getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                              return BarTooltipItem(
+                                '${widget.labels[groupIndex]}\n',
+                                TextStyle(
+                                  color: Color(0xFF0978E9),
+                                  fontSize: 8.sp,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: (rod.toY).toDouble().formatAmount(),
+                                    style: TextStyle(
+                                      color: Color(0xFF0978E9),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 10.sp,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
                     touchCallback: (FlTouchEvent event, barTouchResponse) {
                       setState(() {
                         if (!event.isInterestedForInteractions ||
@@ -141,7 +149,9 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                     show: true,
                     drawHorizontalLine: true,
                     drawVerticalLine: false,
-                    horizontalInterval: ((widget.maxY) / 4), // 确保水平线间隔与 Y 轴标签一致
+                    horizontalInterval: widget.maxY == 0
+                        ? 10
+                        : ((widget.maxY) / 4), // 确保水平线间隔与 Y 轴标签一致
                     getDrawingHorizontalLine: (value) {
                       return FlLine(
                         strokeWidth: 0.4,
@@ -193,23 +203,25 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
     return FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
-        sideTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 15,
-          getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 10.sp,
-            );
-            return SideTitleWidget(
-              //axisSide: meta.axisSide,
-              space: 4,
-              meta: meta,
-              child: Text(widget.labels[value.toInt()], style: style),
-            );
-          },
-        ),
+        sideTitles: widget.labels.isEmpty
+            ? SideTitles(showTitles: false)
+            : SideTitles(
+                showTitles: true,
+                reservedSize: 15,
+                getTitlesWidget: (value, meta) {
+                  final style = TextStyle(
+                    color: Color(0xA8FFFFFF),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 10.sp,
+                  );
+                  return SideTitleWidget(
+                    //axisSide: meta.axisSide,
+                    space: 4,
+                    meta: meta,
+                    child: Text(widget.labels[value.toInt()], style: style),
+                  );
+                },
+              ),
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(

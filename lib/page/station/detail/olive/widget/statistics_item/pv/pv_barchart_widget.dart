@@ -41,25 +41,26 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        PositionedDirectional(
-          start: 0,
-          top: 3,
-          bottom: 22,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(5, (index) {
-              final style = TextStyle(
-                color: Color(0xA8FFFFFF),
-                fontWeight: FontWeight.w400,
-                fontSize: 10.sp,
-              );
-              return Text(
-                (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(1),
-                style: style,
-              );
-            }),
+        if (widget.data.isNotEmpty)
+          PositionedDirectional(
+            start: 0,
+            top: 3,
+            bottom: 22,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(5, (index) {
+                final style = TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 10.sp,
+                );
+                return Text(
+                  (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(1),
+                  style: style,
+                );
+              }),
+            ),
           ),
-        ),
 
         // 滚动视图中的柱状图
         Container(
@@ -92,7 +93,9 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                     show: true,
                     drawHorizontalLine: true,
                     drawVerticalLine: false,
-                    horizontalInterval: ((widget.maxY) / 4), // 确保水平线间隔与 Y 轴标签一致
+                    horizontalInterval: widget.maxY == 0
+                        ? 10
+                        : ((widget.maxY) / 4), // 确保水平线间隔与 Y 轴标签一致
                     getDrawingHorizontalLine: (value) {
                       return FlLine(
                         strokeWidth: 0.4,
@@ -135,23 +138,25 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
     return FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
-        sideTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 25,
-          getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 10.sp,
-            );
-            return SideTitleWidget(
-              //axisSide: meta.axisSide,
-              space: 4,
-              meta: meta,
-              child: Text(widget.labels[value.toInt()], style: style),
-            );
-          },
-        ),
+        sideTitles: widget.labels.isEmpty
+            ? SideTitles(showTitles: false)
+            : SideTitles(
+                showTitles: true,
+                reservedSize: 25,
+                getTitlesWidget: (value, meta) {
+                  final style = TextStyle(
+                    color: Color(0xA8FFFFFF),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 10.sp,
+                  );
+                  return SideTitleWidget(
+                    //axisSide: meta.axisSide,
+                    space: 4,
+                    meta: meta,
+                    child: Text(widget.labels[value.toInt()], style: style),
+                  );
+                },
+              ),
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(

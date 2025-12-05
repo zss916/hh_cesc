@@ -81,48 +81,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                 children: [
                   Divider(height: 60.h, color: Colors.transparent),
 
-                  if (widget.logic.pvList.isNotEmpty)
-                    Container(
-                      color: Colors.transparent,
-                      height: 280.h,
-                      width: double.maxFinite,
-                      child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        controller: tabCtrl,
-                        children: [
-                          PVBarchartItemWidget(
-                            data: widget.logic.pvList
-                                .map((e) => (e.summaryValue ?? 0))
-                                .toList(),
-                            labels: widget.logic.pvLabels,
-                            maxY: widget.logic.pvMaxY ?? 0,
-                          ),
-                          PVBarchartItemWidget(
-                            data: widget.logic.pvList
-                                .map((e) => (e.summaryValue ?? 0))
-                                .toList(),
-                            labels: widget.logic.pvLabels,
-                            maxY: widget.logic.pvMaxY ?? 0,
-                          ),
-                          PVBarchartItemWidget(
-                            data: widget.logic.pvList
-                                .map((e) => (e.summaryValue ?? 0))
-                                .toList(),
-                            labels: widget.logic.pvLabels,
-                            maxY: widget.logic.pvMaxY ?? 0,
-                          ),
-                        ],
-                      ),
-                    )
-                  else
-                    Container(
-                      color: Colors.transparent,
-                      height: 280.h,
-                      width: double.maxFinite,
-                      child: Center(
-                        child: CircularProgressIndicator(color: Colors.white),
-                      ),
-                    ),
+                  buildBody(viewState: widget.logic.pvViewStatus),
 
                   Divider(height: 5.h, color: Colors.transparent),
                 ],
@@ -275,18 +234,84 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                 ),
               ),
 
-              PositionedDirectional(
-                start: 0.w,
-                top: 50.h,
-                child: Text(
-                  "(KW)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+              if (widget.logic.pvList.isNotEmpty)
+                PositionedDirectional(
+                  start: 0.w,
+                  top: 50.h,
+                  child: Text(
+                    "(KW)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  ),
                 ),
-              ),
             ],
           ),
         ),
       ],
     );
   }
+
+  Widget buildBody({required int viewState}) {
+    return switch (viewState) {
+      _ when viewState == ViewType.loading.index => buildLoading(),
+      _ when viewState == ViewType.common.index => buildPv(),
+      _ when viewState == ViewType.empty.index => buildEmpty(),
+      _ => buildEmpty(),
+    };
+  }
+
+  Widget buildPv() {
+    return Container(
+      color: Colors.transparent,
+      height: 280.h,
+      width: double.maxFinite,
+      child: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: tabCtrl,
+        children: [
+          PVBarchartItemWidget(
+            data: widget.logic.pvList
+                .map((e) => (e.summaryValue ?? 0))
+                .toList(),
+            labels: widget.logic.pvLabels,
+            maxY: widget.logic.pvMaxY ?? 0,
+          ),
+          PVBarchartItemWidget(
+            data: widget.logic.pvList
+                .map((e) => (e.summaryValue ?? 0))
+                .toList(),
+            labels: widget.logic.pvLabels,
+            maxY: widget.logic.pvMaxY ?? 0,
+          ),
+          PVBarchartItemWidget(
+            data: widget.logic.pvList
+                .map((e) => (e.summaryValue ?? 0))
+                .toList(),
+            labels: widget.logic.pvLabels,
+            maxY: widget.logic.pvMaxY ?? 0,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLoading() => SizedBox(
+    height: 280.h,
+    width: double.maxFinite,
+    child: Center(child: CircularProgressIndicator(color: Colors.white)),
+  );
+
+  Widget buildEmpty() => Container(
+    color: Colors.transparent,
+    height: 280.h,
+    width: double.maxFinite,
+    child: TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: tabCtrl,
+      children: [
+        PVBarchartItemWidget(data: [], labels: [], maxY: 0),
+        PVBarchartItemWidget(data: [], labels: [], maxY: 0),
+        PVBarchartItemWidget(data: [], labels: [], maxY: 0),
+      ],
+    ),
+  );
 }

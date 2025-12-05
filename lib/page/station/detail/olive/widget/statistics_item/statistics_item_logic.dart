@@ -8,7 +8,7 @@ import 'package:cescpro/http/bean/pv_trend_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum PowerViewType { loading, common, empty }
+enum ViewType { loading, common, empty }
 
 enum DataType { revenue, ele }
 
@@ -38,22 +38,25 @@ class StatisticsItemLogic extends GetxController {
   double minY = 0.0;
   double maxY = 0.0;
   double maxX = 0.0;
-  int powerViewStatus = PowerViewType.loading.index;
+  int powerViewStatus = ViewType.loading.index;
 
   ///光伏发电量
   List<PvTrendEntity> pvList = [];
   List<String> pvLabels = [];
   double? pvMaxY;
   double? pvMinY;
+  int pvViewStatus = ViewType.loading.index;
 
   ///收益
   List<ElecGraphEntity> revenueList = [];
   double? revenueMaxY;
   double? revenueMinY;
   List<String> labels = [];
+  int revenueViewStatus = ViewType.loading.index;
 
   ///电量指标
   double? eleMaxY;
+  int eleViewStatus = ViewType.loading.index;
 
   @override
   void onInit() {
@@ -120,7 +123,7 @@ class StatisticsItemLogic extends GetxController {
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
-    powerViewStatus = PowerViewType.loading.index;
+    powerViewStatus = ViewType.loading.index;
     update(["powerGraph"]);
 
     final (
@@ -144,11 +147,11 @@ class StatisticsItemLogic extends GetxController {
       );
       handPowerData(value);
       powerViewStatus = powerLines.isEmpty
-          ? PowerViewType.empty.index
-          : PowerViewType.common.index;
+          ? ViewType.empty.index
+          : ViewType.common.index;
       update(["powerGraph"]);
     } else {
-      powerViewStatus = PowerViewType.empty.index;
+      powerViewStatus = ViewType.empty.index;
       update(["powerGraph"]);
     }
   }
@@ -198,9 +201,24 @@ class StatisticsItemLogic extends GetxController {
       revenueList.assignAll(value);
       if (type == DataType.revenue) {
         handRevenueData(revenueList);
+        revenueViewStatus = revenueList.isEmpty
+            ? ViewType.empty.index
+            : ViewType.common.index;
         update(["revenue"]);
       } else if (type == DataType.ele) {
         handEleData(revenueList);
+        eleViewStatus = revenueList.isEmpty
+            ? ViewType.empty.index
+            : ViewType.common.index;
+        update(["ele"]);
+      }
+    } else {
+      if (type == DataType.revenue) {
+        revenueViewStatus = ViewType.empty.index;
+        update(["revenue"]);
+      }
+      if (type == DataType.ele) {
+        eleViewStatus = ViewType.empty.index;
         update(["ele"]);
       }
     }
@@ -244,6 +262,12 @@ class StatisticsItemLogic extends GetxController {
     if (isSuccessful) {
       pvList.assignAll(value);
       handPVData(pvList);
+      pvViewStatus = pvList.isEmpty
+          ? ViewType.empty.index
+          : ViewType.common.index;
+      update(["pv"]);
+    } else {
+      pvViewStatus = ViewType.empty.index;
       update(["pv"]);
     }
   }

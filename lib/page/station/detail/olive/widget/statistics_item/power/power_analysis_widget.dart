@@ -143,9 +143,9 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
 
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
-      _ when viewState == PowerViewType.loading.index => buildLoading(),
-      _ when viewState == PowerViewType.common.index => buildPowerLineChart(),
-      _ when viewState == PowerViewType.empty.index => buildEmpty(),
+      _ when viewState == ViewType.loading.index => buildLoading(),
+      _ when viewState == ViewType.common.index => buildPowerLineChart(),
+      _ when viewState == ViewType.empty.index => buildEmpty(),
       _ => buildEmpty(),
     };
   }

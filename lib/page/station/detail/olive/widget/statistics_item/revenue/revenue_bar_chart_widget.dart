@@ -82,56 +82,8 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                 children: [
                   Divider(height: 60.h, color: Colors.transparent),
 
-                  if (widget.logic.labels.isNotEmpty)
-                    Container(
-                      color: Colors.transparent,
-                      height: 280.h,
-                      width: double.maxFinite,
-                      child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        controller: tabCtrl,
-                        children: [
-                          ///周
-                          RevenueBarchartWidget(
-                            data: widget.logic.revenueList
-                                .map((e) => (e.totalIncome ?? 0))
-                                .toList(),
-                            labels: widget.logic.labels,
-                            maxY: widget.logic.revenueMaxY ?? 0,
-                            minY: widget.logic.revenueMinY ?? 0,
-                          ),
+                  buildBody(viewState: widget.logic.revenueViewStatus),
 
-                          ///月
-                          RevenueBarchartWidget(
-                            data: widget.logic.revenueList
-                                .map((e) => (e.totalIncome ?? 0))
-                                .toList(),
-                            labels: widget.logic.labels,
-                            maxY: widget.logic.revenueMaxY ?? 0,
-                            minY: widget.logic.revenueMinY ?? 0,
-                          ),
-
-                          ///年
-                          RevenueBarchartWidget(
-                            data: widget.logic.revenueList
-                                .map((e) => (e.totalIncome ?? 0))
-                                .toList(),
-                            labels: widget.logic.labels,
-                            maxY: widget.logic.revenueMaxY ?? 0,
-                            minY: widget.logic.revenueMinY ?? 0,
-                          ),
-                        ],
-                      ),
-                    )
-                  else
-                    Container(
-                      color: Colors.transparent,
-                      height: 330,
-                      width: double.maxFinite,
-                      child: Center(
-                        child: CircularProgressIndicator(color: Colors.white),
-                      ),
-                    ),
                   Divider(height: 5.h, color: Colors.transparent),
                 ],
               ),
@@ -285,19 +237,97 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                   ),
                 ),
               ),
-
-              PositionedDirectional(
-                start: 0.w,
-                top: 50.h,
-                child: Text(
-                  "(¥)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+              if (widget.logic.labels.isNotEmpty)
+                PositionedDirectional(
+                  start: 0.w,
+                  top: 50.h,
+                  child: Text(
+                    "(¥)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  ),
                 ),
-              ),
             ],
           ),
         ),
       ],
     );
   }
+
+  Widget buildBody({required int viewState}) {
+    return switch (viewState) {
+      _ when viewState == ViewType.loading.index => buildLoading(),
+      _ when viewState == ViewType.common.index => buildRevenue(),
+      _ when viewState == ViewType.empty.index => buildEmpty(),
+      _ => buildEmpty(),
+    };
+  }
+
+  Widget buildRevenue() {
+    return Container(
+      color: Colors.transparent,
+      height: 280.h,
+      width: double.maxFinite,
+      child: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: tabCtrl,
+        children: [
+          ///周
+          RevenueBarchartWidget(
+            data: widget.logic.revenueList
+                .map((e) => (e.totalIncome ?? 0))
+                .toList(),
+            labels: widget.logic.labels,
+            maxY: widget.logic.revenueMaxY ?? 0,
+            minY: widget.logic.revenueMinY ?? 0,
+          ),
+
+          ///月
+          RevenueBarchartWidget(
+            data: widget.logic.revenueList
+                .map((e) => (e.totalIncome ?? 0))
+                .toList(),
+            labels: widget.logic.labels,
+            maxY: widget.logic.revenueMaxY ?? 0,
+            minY: widget.logic.revenueMinY ?? 0,
+          ),
+
+          ///年
+          RevenueBarchartWidget(
+            data: widget.logic.revenueList
+                .map((e) => (e.totalIncome ?? 0))
+                .toList(),
+            labels: widget.logic.labels,
+            maxY: widget.logic.revenueMaxY ?? 0,
+            minY: widget.logic.revenueMinY ?? 0,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLoading() => SizedBox(
+    height: 280.h,
+    width: double.maxFinite,
+    child: Center(child: CircularProgressIndicator(color: Colors.white)),
+  );
+
+  Widget buildEmpty() => Container(
+    color: Colors.transparent,
+    height: 280.h,
+    width: double.maxFinite,
+    child: TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: tabCtrl,
+      children: [
+        ///周
+        RevenueBarchartWidget(data: [], labels: [], maxY: 0, minY: 0),
+
+        ///月
+        RevenueBarchartWidget(data: [], labels: [], maxY: 0, minY: 0),
+
+        ///年
+        RevenueBarchartWidget(data: [], labels: [], maxY: 0, minY: 0),
+      ],
+    ),
+  );
 }
