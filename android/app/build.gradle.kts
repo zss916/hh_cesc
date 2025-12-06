@@ -29,7 +29,7 @@ android {
 
     signingConfigs {
 
-        release {
+        create("release") {
             if (System.getenv()["CI"]) {
                 storeFile = file(System.getenv()["CM_KEYSTORE_PATH"] as String)
                 storePassword = System.getenv()["CM_KEYSTORE_PASSWORD"] as String
