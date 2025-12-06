@@ -25,3 +25,6 @@ bug文档: https://ka1vopqysgx.feishu.cn/wiki/RgTKwjZLSiepeNkjEzmcKPzLnpe?from=f
 
 Admin
 HhAdmin123#
+
+
+flutter build ipa --release

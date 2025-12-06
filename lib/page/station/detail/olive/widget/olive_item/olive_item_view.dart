@@ -451,8 +451,8 @@ class OliveItemView extends StatelessWidget {
                             ],
                             [
                               {
-                                'start': Offset(80.r + 150.r, 20 + (75.r / 2)),
-                                'end': Offset(140.r + 150.r, 20 + (75.r / 2)),
+                                'start': Offset(75.r + 150.r, 20 + (75.r / 2)),
+                                'end': Offset(130.r + 150.r, 20 + (75.r / 2)),
                               },
                             ],
                             [
@@ -497,11 +497,11 @@ class OliveItemView extends StatelessWidget {
                                   {
                                     'start': Offset(
                                       70.r + 150.r,
-                                      (Get.width - 32.w) / 2,
+                                      20 + (75.r / 2),
                                     ),
                                     'end': Offset(
                                       125.r + 150.r,
-                                      (Get.width - 32.w) / 2,
+                                      20 + (75.r / 2),
                                     ),
                                   },
                               ],

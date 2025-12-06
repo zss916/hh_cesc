@@ -727,7 +727,7 @@ const en = {
   "acSide": "AC side",
   "batteryCluster": "Battery Cluster",
   "distributionMap": "Distribution Map",
-  "singleTemp": "Cell Temperature",
+  "singleTemp": "Cell Temp",
   "cellVoltage": "Cell Voltage",
   "powerLevel": "Power Level",
   "stopDegree": "Stop Degree",

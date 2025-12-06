@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/statistic_report_entity.dart';
 import 'package:cescpro/page/station/revenue/index.dart';
@@ -8,7 +9,11 @@ import 'package:get/get.dart';
 class RevenueTableWidget extends StatelessWidget {
   final List<StatisticReportDailyElecIncomeDetail> data;
   final QueryType queryType;
-  const RevenueTableWidget({super.key, required this.data,required this.queryType});
+  const RevenueTableWidget({
+    super.key,
+    required this.data,
+    required this.queryType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class RevenueTableWidget extends StatelessWidget {
           children: [
             SizedBox(
               width: double.maxFinite,
-              height: 60,
+              height: 72,
               child: Row(
                 children: [
                   Expanded(
@@ -94,7 +99,7 @@ class RevenueTableWidget extends StatelessWidget {
                       alignment: AlignmentDirectional.center,
                       decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
-                      child: Text(
+                      child: AutoSizeText(
                         "${TKey.dischargingAmount.tr}\n(￥)",
                         textAlign: TextAlign.center,
                         style: TextStyle(

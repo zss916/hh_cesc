@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
@@ -81,7 +82,7 @@ class BatteryClusterPage extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.signalStatus?.value ?? "--",
+                    logic.comTypeList?.signalStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -98,7 +99,7 @@ class BatteryClusterPage extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.runStatus?.value ?? "--",
+                    logic.comTypeList?.runStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -115,7 +116,7 @@ class BatteryClusterPage extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.alarmStatus?.value ?? "--",
+                    logic.comTypeList?.alarmStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -306,7 +307,7 @@ class BatteryClusterPage extends StatelessWidget {
           ),
           alignment: AlignmentDirectional.centerStart,
           child: Text(
-            "实时曲线",
+            TKey.realTimeSoc.tr,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w500,
@@ -418,9 +419,11 @@ class BatteryClusterPage extends StatelessWidget {
                     );
                   },
                   child: Container(
+                    padding: EdgeInsets.all(4),
                     alignment: AlignmentDirectional.center,
-                    child: Text(
+                    child: AutoSizeText(
                       TKey.singleTemp.tr,
+                      maxLines: 1,
                       style: TextStyle(color: Colors.white, fontSize: 14.sp),
                     ),
                   ),
@@ -494,8 +497,9 @@ class BatteryClusterPage extends StatelessWidget {
                   },
                   child: Container(
                     alignment: AlignmentDirectional.center,
-                    child: Text(
+                    child: AutoSizeText(
                       TKey.cellVoltage.tr,
+                      maxLines: 1,
                       style: TextStyle(color: Colors.white, fontSize: 14.sp),
                     ),
                   ),
