@@ -37,10 +37,10 @@ android {
 
         create("release") {
             if (System.getenv("CI")?.isNotEmpty() ?: false) {
-                storeFile = file(System.getenv()["CM_KEYSTORE_PATH"] as String)
-                storePassword = System.getenv()["CM_KEYSTORE_PASSWORD"] as String
-                keyAlias = System.getenv()["CM_KEY_ALIAS"] as String
-                keyPassword = System.getenv()["CM_KEY_PASSWORD"] as String
+                storeFile = file(System.getenv("CM_KEYSTORE_PATH") as String)
+                storePassword = System.getenv("CM_KEYSTORE_PASSWORD") as String
+                keyAlias = System.getenv("CM_KEY_ALIAS") as String
+                keyPassword = System.getenv("CM_KEY_PASSWORD") as String
             } else {
                 storeFile = file(project.property("storeFile") as String)
                 storePassword = project.property("storePassword") as String
