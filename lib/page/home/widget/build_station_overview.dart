@@ -132,7 +132,7 @@ class BuildStationOverview extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: Color(0xFFFFFFFF),
-                      fontSize: 26.sp,
+                      fontSize: 25.sp,
                     ),
                   ),
                 ),
@@ -212,7 +212,7 @@ class BuildStationOverview extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: Color(0xFFFFFFFF),
-                      fontSize: 26.sp,
+                      fontSize: 25.sp,
                     ),
                   ),
                 ),
@@ -292,7 +292,7 @@ class BuildStationOverview extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: Color(0xFFFFFFFF),
-                      fontSize: 26.sp,
+                      fontSize: 25.sp,
                     ),
                   ),
                 ),
@@ -372,7 +372,7 @@ class BuildStationOverview extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       color: Color(0xFFFFFFFF),
-                      fontSize: 26.sp,
+                      fontSize: 25.sp,
                     ),
                   ),
                 ),

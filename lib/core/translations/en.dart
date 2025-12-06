@@ -370,6 +370,18 @@ class TKey {
 
   static const String energySChaAndDischa =
       "energyStorageChargingAndDischargingCapacity";
+
+  static const String happened = "happened";
+
+  static const String keepTime = "keepTime";
+
+  static const String hour = "hour";
+
+  static const String minute = "minute";
+
+  static const String second = "second";
+
+  static const String dayTitle = "dayTitle";
 }
 
 const en2 = {
@@ -623,7 +635,7 @@ const en = {
   "alarmDetailsData": "Alarm Details Data",
   "alarmLevel": "Alarm Level",
   "deviceType": "Device Type",
-  "todayWeather": "Today's Weather:",
+  "todayWeather": "Weather:",
   "workModel": "Work Mode:",
   "singleSiteStatisticalReport": "Single Station Statistical Report",
   "revenue": "Revenue",
@@ -735,4 +747,10 @@ const en = {
   "realTimeSoc": "Real-Time Curve",
   "energyStorageChargingAndDischargingCapacity":
       "Energy Storage Charging And Discharging Capacity",
+  "happened": "happened",
+  "keepTime": "duration",
+  "hour": "hour",
+  "minute": "minute",
+  "second": "second",
+  "dayTitle": "day",
 };

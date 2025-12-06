@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
@@ -860,7 +861,7 @@ class OliveItemView extends StatelessWidget {
           top: 24.h,
           start: 18.w,
           end: 18.w,
-          bottom: 16.h,
+          bottom: 0.h,
         ),
         alignment: AlignmentDirectional.centerStart,
         child: Text(
@@ -872,7 +873,6 @@ class OliveItemView extends StatelessWidget {
           ),
         ),
       ),
-
       Container(
         width: double.maxFinite,
         margin: EdgeInsets.only(
@@ -888,110 +888,212 @@ class OliveItemView extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "${TKey.powerSiteName.tr}:",
-                  style: TextStyle(fontSize: 12.sp, color: Color(0xA6FFFFFF)),
-                ),
-                Expanded(
-                  child: Text(
-                    siteDetail?.name ?? "",
-                    style: TextStyle(fontSize: 12.sp, color: Color(0xFFFFFFFF)),
-                  ),
-                ),
-              ],
-            ),
-            Divider(height: 8.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "${TKey.affiliatedCustomer.tr}:",
-                  style: TextStyle(fontSize: 12.sp, color: Color(0xA6FFFFFF)),
-                ),
-                Expanded(
-                  child: Text(
-                    siteDetail?.cname ?? "",
-                    style: TextStyle(fontSize: 12.sp, color: Color(0xFFFFFFFF)),
-                  ),
-                ),
-              ],
-            ),
-            Divider(height: 8.h, color: Colors.transparent),
-            Row(
-              children: [
-                Text(
-                  "${TKey.energyStorageDevicesCount.tr}:",
-                  style: TextStyle(fontSize: 12.sp, color: Color(0xA6FFFFFF)),
-                ),
-                Expanded(
-                  child: Text(
-                    "${siteDetail?.hasDevCount ?? 0}",
-                    style: TextStyle(fontSize: 12.sp, color: Color(0xFFFFFFFF)),
-                  ),
-                ),
-              ],
-            ),
-            Divider(height: 8.h, color: Colors.transparent),
-            Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text(
-                        "${TKey.energyStorageInstalledPower.tr}:",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Color(0xA6FFFFFF),
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          "${siteDetail?.power ?? 0}kw",
+            Container(
+              alignment: Alignment.centerLeft,
+              width: double.maxFinite,
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "${TKey.powerSiteName.tr}: ",
+                      children: [
+                        TextSpan(
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Color(0xFFFFFFFF),
                           ),
+                          text: siteDetail?.name ?? "",
                         ),
+                      ],
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Color(0xA6FFFFFF),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                VerticalDivider(width: 10.w, color: Colors.transparent),
-                Expanded(
-                  child: Row(
-                    children: [
-                      Text(
-                        "${TKey.energyStorageInstalledCapacity.tr}:",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Color(0xA6FFFFFF),
-                        ),
-                      ),
-
-                      Expanded(
-                        child: Text(
-                          "${siteDetail?.capacity ?? 0}kwh",
+                textAlign: TextAlign.start,
+              ),
+            ),
+            Divider(height: 8.h, color: Colors.transparent),
+            Container(
+              alignment: Alignment.centerLeft,
+              width: double.maxFinite,
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "${TKey.affiliatedCustomer.tr}: ",
+                      children: [
+                        TextSpan(
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Color(0xFFFFFFFF),
                           ),
+                          text: siteDetail?.cname ?? "",
                         ),
+                      ],
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Color(0xA6FFFFFF),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+                textAlign: TextAlign.start,
+              ),
             ),
             Divider(height: 8.h, color: Colors.transparent),
-            if (siteDetail?.hasPv ?? false)
+            Container(
+              alignment: Alignment.centerLeft,
+              width: double.maxFinite,
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "${TKey.energyStorageDevicesCount.tr}: ",
+                      children: [
+                        TextSpan(
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Color(0xFFFFFFFF),
+                          ),
+                          text: "${siteDetail?.hasDevCount ?? 0}",
+                        ),
+                      ],
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Color(0xA6FFFFFF),
+                      ),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.start,
+              ),
+            ),
+            Divider(height: 8.h, color: Colors.transparent),
+            if (Get.isEn)
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    width: double.maxFinite,
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "${TKey.energyStorageInstalledPower.tr}: ",
+                            children: [
+                              TextSpan(
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: Color(0xFFFFFFFF),
+                                ),
+                                text: "${siteDetail?.power ?? 0}kw",
+                              ),
+                            ],
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Color(0xA6FFFFFF),
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  Divider(height: 8.h, color: Colors.transparent),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    width: double.maxFinite,
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "${TKey.energyStorageInstalledCapacity.tr}: ",
+                            children: [
+                              TextSpan(
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: Color(0xFFFFFFFF),
+                                ),
+                                text: "${siteDetail?.capacity ?? 0}kwh",
+                              ),
+                            ],
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Color(0xA6FFFFFF),
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ],
+              )
+            else
               Row(
                 children: [
                   Expanded(
                     child: Row(
                       children: [
                         Text(
-                          "${TKey.photovoltaicInstalledPower.tr}:",
+                          "${TKey.energyStorageInstalledPower.tr}: ",
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Color(0xA6FFFFFF),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            "${siteDetail?.power ?? 0}kw",
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Color(0xFFFFFFFF),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  VerticalDivider(width: 10.w, color: Colors.transparent),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Text(
+                          "${TKey.energyStorageInstalledCapacity.tr}: ",
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Color(0xA6FFFFFF),
+                          ),
+                        ),
+
+                        Expanded(
+                          child: Text(
+                            "${siteDetail?.capacity ?? 0}kwh",
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Color(0xFFFFFFFF),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            Divider(height: 8.h, color: Colors.transparent),
+
+            if ((siteDetail?.hasPv ?? false) && Get.isEn)
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Text(
+                          "${TKey.photovoltaicInstalledPower.tr}: ",
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Color(0xA6FFFFFF),
@@ -1014,7 +1116,7 @@ class OliveItemView extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          "${TKey.photovoltaicInstalledCapacity.tr}:",
+                          "${TKey.photovoltaicInstalledCapacity.tr}: ",
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Color(0xA6FFFFFF),
@@ -1034,6 +1136,69 @@ class OliveItemView extends StatelessWidget {
                   ),
                 ],
               ),
+
+            if ((siteDetail?.hasPv ?? false) && !Get.isEn)
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    width: double.maxFinite,
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "${TKey.photovoltaicInstalledPower.tr}: ",
+                            children: [
+                              TextSpan(
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: Color(0xFFFFFFFF),
+                                ),
+                                text: "${siteDetail?.pvPower ?? 0}kw",
+                              ),
+                            ],
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Color(0xA6FFFFFF),
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  Divider(height: 8.h, color: Colors.transparent),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    width: double.maxFinite,
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "${TKey.photovoltaicInstalledCapacity.tr}: ",
+                            children: [
+                              TextSpan(
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  color: Color(0xFFFFFFFF),
+                                ),
+                                text: "${siteDetail?.pvCapacity ?? 0}kwh",
+                              ),
+                            ],
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: Color(0xA6FFFFFF),
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ],
+              ),
+
             Divider(height: 8.h, color: Colors.transparent),
             if (siteDetail?.picture != null)
               Container(

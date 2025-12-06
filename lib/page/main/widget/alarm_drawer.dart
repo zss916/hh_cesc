@@ -237,7 +237,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
       minTime: DateTime(2010, 1, 1),
       maxTime: DateTime.now(),
       //currentTime: DateTime.parse(currentTime),
-      locale: LocaleType.zh,
+      locale: Get.isEn ? LocaleType.en : LocaleType.zh,
       theme: DatePickerTheme(
         backgroundColor: Color(0xFF23282E),
         itemStyle: TextStyle(

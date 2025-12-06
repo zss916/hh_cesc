@@ -1,7 +1,9 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SelectDateWidget extends StatefulWidget {
   final Function(DateTime start, DateTime end) onSelect;
@@ -193,7 +195,7 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
       minTime: DateTime(2015, 1, 1),
       maxTime: DateTime.now(),
       currentTime: initDateTime,
-      locale: LocaleType.zh,
+      locale: Get.isEn ? LocaleType.en : LocaleType.zh,
       theme: DatePickerTheme(
         backgroundColor: Color(0xFF23282E),
         itemStyle: TextStyle(

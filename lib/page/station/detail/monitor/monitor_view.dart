@@ -63,6 +63,7 @@ class MonitorView extends StatelessWidget {
         child: Container(
           width: double.maxFinite,
           alignment: Alignment.center,
+          padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0x99767E8A), Color(0x99414852)],
@@ -72,6 +73,7 @@ class MonitorView extends StatelessWidget {
           child: Center(
             child: Text(
               logic.data[index].title,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,

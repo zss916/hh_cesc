@@ -370,6 +370,18 @@ class TKey {
 
   static const String energySChaAndDischa =
       "energyStorageChargingAndDischargingCapacity";
+
+  static const String happened = "happened";
+
+  static const String keepTime = "keepTime";
+
+  static const String hour = "hour";
+
+  static const String minute = "minute";
+
+  static const String second = "second";
+
+  static const String dayTitle = "dayTitle";
 }
 
 const zh = {
@@ -552,4 +564,10 @@ const zh = {
   "amount": "金额",
   "realTimeSoc": "实时曲线",
   "energyStorageChargingAndDischargingCapacity": "储能充放电量",
+  "happened": "发生了",
+  "keepTime": "持续时间",
+  "hour": "时",
+  "minute": "分",
+  "second": "秒",
+  "dayTitle": "天",
 };

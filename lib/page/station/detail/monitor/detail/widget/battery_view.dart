@@ -1,3 +1,4 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/com_type_list_entity.dart';
@@ -84,7 +85,7 @@ class BatteryView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.signalStatus?.value ?? "--",
+                    logic.comTypeList?.signalStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -101,7 +102,7 @@ class BatteryView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.runStatus?.value ?? "--",
+                    logic.comTypeList?.runStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -118,7 +119,7 @@ class BatteryView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.alarmStatus?.value ?? "--",
+                    logic.comTypeList?.alarmStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -473,7 +474,8 @@ class BatteryView extends StatelessWidget {
                 .where((e) => e.fieldName == "voltage")
                 .firstOrNull;
             return AspectRatio(
-              aspectRatio: 140 / 186,
+              aspectRatio: Get.isEn ? (200 / 186) : (140 / 186),
+              //aspectRatio: ,
               child: Container(
                 width: double.maxFinite,
                 height: double.maxFinite,

@@ -63,6 +63,8 @@ class AlarmItemEntity {
     }
   }
 
+  String get showName => Get.isEn ? (enName ?? "") : (name ?? "");
+
   ///持续时间
   Duration get dif => DateTime.fromMillisecondsSinceEpoch(
     endTimeMill ?? (DateTime.now().millisecondsSinceEpoch),
@@ -70,19 +72,19 @@ class AlarmItemEntity {
 
   String get keepTime {
     if (dif.inDays == 0) {
-      return "${(dif.inHours) % 24}时${(dif.inMinutes) % 60}分${(dif.inSeconds) % 60}秒";
+      return "${(dif.inHours) % 24} ${TKey.hour.tr} ${(dif.inMinutes) % 60} ${TKey.minute.tr} ${(dif.inSeconds) % 60} ${TKey.second.tr}";
     } else if ((dif.inDays == 0) && (dif.inHours == 0)) {
-      return "${(dif.inMinutes) % 60}分${(dif.inSeconds) % 60}秒";
+      return "${(dif.inMinutes) % 60} ${TKey.minute.tr} ${(dif.inSeconds) % 60} ${TKey.second.tr}";
     } else if ((dif.inDays == 0) &&
         (dif.inHours == 0) &&
         (dif.inMinutes == 0)) {
-      return "${(dif.inSeconds) % 60}秒";
+      return "${(dif.inSeconds) % 60} ${TKey.second.tr}";
     } else {
-      return "${dif.inDays}天${(dif.inHours) % 24}时${(dif.inMinutes) % 60}分${(dif.inSeconds) % 60}秒";
+      return "${dif.inDays} ${TKey.dayTitle.tr} ${(dif.inHours) % 24} ${TKey.hour.tr} ${(dif.inMinutes) % 60} ${TKey.minute.tr} ${(dif.inSeconds) % 60} ${TKey.second.tr}";
     }
   }
 
   String showContent() {
-    return "${label ?? ""}${devType ?? ""}, ${(startTimeMill ?? 0).timestampFormat}发生了${alarmLevelType ?? ""}${content ?? ""},持续时间${keepTime}\n\n";
+    return "${label ?? ""}${devType ?? ""}, ${(startTimeMill ?? 0).timestampFormat} ${TKey.happened.tr} ${alarmLevelType ?? ""} ${content ?? ""}, ${TKey.keepTime.tr} $keepTime\n\n";
   }
 }

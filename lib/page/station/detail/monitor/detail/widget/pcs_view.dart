@@ -80,7 +80,7 @@ class PcsView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.signalStatus?.value ?? "--",
+                    logic.comTypeList?.signalStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -97,7 +97,7 @@ class PcsView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.runStatus?.value ?? "--",
+                    logic.comTypeList?.runStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -114,7 +114,7 @@ class PcsView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.gridStatus?.value ?? "--",
+                    logic.comTypeList?.gridStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],

@@ -10,9 +10,10 @@ https://ems.cescpower.com:9088/#/login
 
 1.logo(android ok,ios ok) ，splash(android ok,ios ok) 
 2.协议(隐私协议 ok,服务条款 ?)
-3.英语文案( developing) 和 切换语言(ok)
+3.英语文案( 90%) 和 切换语言(ok)
 4.android 手机适配，iPhone 手机适配
 5.16kb
+6.货币问题
 
 蒲公英地址：https://www.pgyer.com
 

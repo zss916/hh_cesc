@@ -30,7 +30,7 @@ class StopDegreeTableWidget extends StatelessWidget {
           children: [
             SizedBox(
               width: double.maxFinite,
-              height: 60,
+              height: 72,
               child: Row(
                 children: [
                   Expanded(

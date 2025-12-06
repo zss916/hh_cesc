@@ -1,4 +1,5 @@
 import 'package:cescpro/core/color/colors.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart.dart';
@@ -175,7 +176,7 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
       minTime: DateTime(2010, 1, 1),
       maxTime: DateTime.now(),
       currentTime: DateTime.parse(currentTime),
-      locale: LocaleType.zh,
+      locale: Get.isEn ? LocaleType.en : LocaleType.zh,
       theme: DatePickerTheme(
         backgroundColor: Color(0xFF23282E),
         itemStyle: TextStyle(

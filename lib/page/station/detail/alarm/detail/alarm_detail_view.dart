@@ -161,7 +161,7 @@ class AlarmDetailPage extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    item.name ?? "",
+                    item.showName,
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],

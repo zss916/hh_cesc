@@ -72,7 +72,7 @@ class MeterView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.comTypeList?.signalStatus?.value ?? "--",
+                    logic.comTypeList?.signalStatus?.showValue ?? "--",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],

@@ -156,6 +156,8 @@ class ComTypeListItem {
   String? value;
   String? enValue;
 
+  // String get showValue => Get.isEn? (enValue??""):(value??"");
+
   ComTypeListItem();
 
   factory ComTypeListItem.fromJson(Map<String, dynamic> json) =>
