@@ -28,3 +28,5 @@ HhAdmin123#
 
 
 flutter build ipa --release
+
+CI/CD:https://flutterci.com
