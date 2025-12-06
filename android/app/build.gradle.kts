@@ -15,8 +15,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
+   /* kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
+    }*/
+
+    kotlin{
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+        }
     }
 
     defaultConfig {
@@ -30,7 +36,7 @@ android {
     signingConfigs {
 
         create("release") {
-            if (System.getenv("CI")) {
+            if (System.getenv("CI")?.isNotEmpty() ?: false) {
                 storeFile = file(System.getenv()["CM_KEYSTORE_PATH"] as String)
                 storePassword = System.getenv()["CM_KEYSTORE_PASSWORD"] as String
                 keyAlias = System.getenv()["CM_KEY_ALIAS"] as String
