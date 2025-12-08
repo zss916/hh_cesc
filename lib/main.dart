@@ -13,6 +13,10 @@ import 'core/setting/global.dart';
 import 'core/translations/language.dart';
 
 Future<void> main() async {
+  /*FlutterError.onError = (FlutterErrorDetails details) {
+    debugPrint("details ==> ${details.toString()}");
+  };*/
+
   await Global.init();
   runApp(const MyApp());
 }

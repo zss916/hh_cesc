@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LineStatusWidget extends StatelessWidget {
-  const LineStatusWidget({super.key});
+  final int status;
+  const LineStatusWidget({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,9 @@ class LineStatusWidget extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Color(0xFF13D4D2).withValues(alpha: 0.20),
+            color: (status == 4 || status == -3 || status == -2)
+                ? Color(0xFFB71C1C).withValues(alpha: 0.20)
+                : Color(0xFF13D4D2).withValues(alpha: 0.20),
             offset: Offset(0, 0),
             blurRadius: 4,
           ),
@@ -28,7 +31,9 @@ class LineStatusWidget extends StatelessWidget {
                 width: 6,
                 height: 6,
                 decoration: BoxDecoration(
-                  color: Color(0xFF13D4D2),
+                  color: (status == 4 || status == -3 || status == -2)
+                      ? Color(0xFFB71C1C).withValues(alpha: 0.20)
+                      : Color(0xFF13D4D2),
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),

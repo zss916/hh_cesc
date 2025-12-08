@@ -1,4 +1,5 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/generated/assets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +42,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
   void _scrollToRight() {
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(seconds: 2),
       curve: Curves.easeOut,
     );
   }
@@ -49,6 +50,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
         // Y 轴标签
         if (widget.data.isNotEmpty)
@@ -81,120 +83,122 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
             ),
           ),
         // 滚动视图中的柱状图
-        Container(
-          margin: EdgeInsetsDirectional.only(start: 40.w), // 确保柱状图不与Y轴标签重叠
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            scrollDirection: Axis.horizontal,
-            child: Container(
-              //color: Colors.green,
-              padding: const EdgeInsetsDirectional.only(
-                start: 12,
-                end: 12,
-                top: 12,
-                bottom: 0,
-              ),
-              // padding: const EdgeInsets.all(12.0),
-              height: double.maxFinite,
-              width: widget.data.length <= 4
-                  ? MediaQuery.of(context).size.width - 20
-                  : widget.data.length * 80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
-              child: BarChart(
-                BarChartData(
-                  maxY: widget.maxY,
-                  minY: widget.minY,
-                  barTouchData: BarTouchData(
-                    enabled: true,
-                    touchTooltipData: widget.labels.isEmpty
-                        ? null
-                        : BarTouchTooltipData(
-                            getTooltipColor: (_) => Color(0x66000000),
-                            tooltipHorizontalAlignment:
-                                FLHorizontalAlignment.right,
-                            tooltipMargin: -30,
-                            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                              return BarTooltipItem(
-                                '${widget.labels[groupIndex]}\n',
-                                TextStyle(
-                                  color: Color(0xFF0978E9),
-                                  fontSize: 8.sp,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: (rod.toY).toDouble().formatAmount(),
-                                    style: TextStyle(
-                                      color: Color(0xFF0978E9),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 10.sp,
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                    touchCallback: (FlTouchEvent event, barTouchResponse) {
-                      setState(() {
-                        if (!event.isInterestedForInteractions ||
-                            barTouchResponse == null ||
-                            barTouchResponse.spot == null) {
-                          return;
-                        }
-                      });
-                    },
-                  ),
-                  titlesData: _buildTitlesData(), // 构建标题数据
-                  borderData: FlBorderData(show: false), // 边框数据
-                  barGroups: _buildBarGroups(), // 构建柱状图组
-                  gridData: FlGridData(
-                    show: true,
-                    drawHorizontalLine: true,
-                    drawVerticalLine: false,
-                    horizontalInterval: widget.maxY == 0
+        if (widget.data.isNotEmpty)
+          Container(
+            margin: EdgeInsetsDirectional.only(start: 40.w), // 确保柱状图不与Y轴标签重叠
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                padding: const EdgeInsetsDirectional.only(
+                  start: 12,
+                  end: 12,
+                  top: 12,
+                  bottom: 0,
+                ),
+                height: double.maxFinite,
+                width: widget.data.length <= 4
+                    ? MediaQuery.of(context).size.width - 20
+                    : widget.data.length * 80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
+                child: BarChart(
+                  BarChartData(
+                    maxY: widget.maxY,
+                    minY: widget.minY,
+                    barTouchData: buildBarTouchData(),
+                    titlesData: _buildTitlesData(),
+                    borderData: FlBorderData(show: false), // 边框数据
+                    barGroups: _buildBarGroups(), // 构建柱状图组
+                    gridData: FlGridData(
+                      show: true,
+                      drawHorizontalLine: true,
+                      drawVerticalLine: false,
+                      /*  horizontalInterval: widget.maxY == 0
                         ? 10
-                        : ((widget.maxY) / 4), // 确保水平线间隔与 Y 轴标签一致
-                    getDrawingHorizontalLine: (value) {
-                      return FlLine(
-                        strokeWidth: 0.4,
-                        dashArray: [8, 4],
-                        color: Color(0xA8FFFFFF), // 水平线颜色
-                        //strokeWidth: 1, // 水平线宽度
-                      );
-                    },
-                  ), // 网格数据
-                  alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                  extraLinesData: ExtraLinesData(
-                    horizontalLines: [
-                      HorizontalLine(
-                        y: widget.minY,
-                        // color: Colors.transparent, // 水平线颜色
-                        // strokeWidth: 1, // 水平线宽度
-                        color: Color(0xA8FFFFFF),
-                        strokeWidth: 0.4,
-                        dashArray: [8, 4],
-                      ),
+                        : ((widget.maxY) / 4), */
+                      // 确保水平线间隔与 Y 轴标签一致
+                      getDrawingHorizontalLine: (value) {
+                        return FlLine(
+                          strokeWidth: 0.4,
+                          dashArray: [8, 4],
+                          color: Color(0xA8FFFFFF), // 水平线颜色
+                          //strokeWidth: 1, // 水平线宽度
+                        );
+                      },
+                    ),
+                    alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+                    extraLinesData: ExtraLinesData(
+                      horizontalLines: [
+                        HorizontalLine(
+                          y: widget.minY,
+                          // color: Colors.transparent, // 水平线颜色
+                          // strokeWidth: 1, // 水平线宽度
+                          color: Color(0xA8FFFFFF),
+                          strokeWidth: 0.4,
+                          dashArray: [8, 4],
+                        ),
 
-                      HorizontalLine(
-                        y: 0,
-                        color: Colors.white, // 水平线颜色
-                        strokeWidth: 1, // 水平线宽度
-                      ),
-                      HorizontalLine(
-                        y: widget.maxY,
-                        // color: Colors.transparent, // 水平线颜色
-                        // strokeWidth: 1, // 水平线宽度
-                        color: Color(0xA8FFFFFF),
-                        strokeWidth: 0.4,
-                        dashArray: [8, 4],
-                      ),
-                    ],
+                        HorizontalLine(
+                          y: 0,
+                          color: Colors.white, // 水平线颜色
+                          strokeWidth: 1, // 水平线宽度
+                        ),
+                        HorizontalLine(
+                          y: widget.maxY,
+                          // color: Colors.transparent, // 水平线颜色
+                          // strokeWidth: 1, // 水平线宽度
+                          color: Color(0xA8FFFFFF),
+                          strokeWidth: 0.4,
+                          dashArray: [8, 4],
+                        ),
+                      ],
+                    ),
+                    // 额外线条数据
                   ),
-                  // 额外线条数据
                 ),
               ),
             ),
-          ),
-        ),
+          )
+        else
+          Image.asset(Assets.imgEmpty, width: 100, height: 100),
       ],
+    );
+  }
+
+  BarTouchData buildBarTouchData() {
+    return BarTouchData(
+      enabled: true,
+      touchTooltipData: widget.labels.isEmpty
+          ? null
+          : BarTouchTooltipData(
+              getTooltipColor: (_) => Color(0x66000000),
+              tooltipHorizontalAlignment: FLHorizontalAlignment.right,
+              tooltipMargin: -30,
+              getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                return BarTooltipItem(
+                  '${widget.labels[groupIndex]}\n',
+                  TextStyle(color: Color(0xFF0978E9), fontSize: 8.sp),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: (rod.toY).toDouble().formatAmount(),
+                      style: TextStyle(
+                        color: Color(0xFF0978E9),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+      touchCallback: (FlTouchEvent event, barTouchResponse) {
+        setState(() {
+          if (!event.isInterestedForInteractions ||
+              barTouchResponse == null ||
+              barTouchResponse.spot == null) {
+            return;
+          }
+        });
+      },
     );
   }
 

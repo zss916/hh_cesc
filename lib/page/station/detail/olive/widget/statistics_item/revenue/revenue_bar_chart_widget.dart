@@ -81,9 +81,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
               Column(
                 children: [
                   Divider(height: 60.h, color: Colors.transparent),
-
                   buildBody(viewState: widget.logic.revenueViewStatus),
-
                   Divider(height: 5.h, color: Colors.transparent),
                 ],
               ),

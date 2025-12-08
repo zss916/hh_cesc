@@ -29,7 +29,8 @@ class OliveItemView extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 18.h, left: 16.w, right: 16.w),
                   width: double.maxFinite,
-                  child: Row(
+                  child: Wrap(
+                    spacing: 10,
                     children: [
                       if (logic.weather != null)
                         Row(
@@ -51,23 +52,29 @@ class OliveItemView extends StatelessWidget {
                             ),
                           ],
                         ),
-                      Spacer(),
+
                       if (logic.workModel.isNotEmpty)
-                        Text(
-                          TKey.workModel.tr,
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Color(0xB3FFFFFF),
-                          ),
-                        ),
-                      if (logic.workModel.isNotEmpty) LineStatusWidget(),
-                      if (logic.workModel.isNotEmpty)
-                        Text(
-                          logic.workModel,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Color(0xDEFFFFFF),
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              TKey.workModel.tr,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Color(0xB3FFFFFF),
+                              ),
+                            ),
+                            LineStatusWidget(
+                              status: logic.siteDetail?.status ?? 99,
+                            ),
+                            Text(
+                              logic.workModel,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Color(0xDEFFFFFF),
+                              ),
+                            ),
+                          ],
                         ),
                     ],
                   ),

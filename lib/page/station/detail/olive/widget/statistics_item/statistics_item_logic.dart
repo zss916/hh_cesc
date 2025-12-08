@@ -104,7 +104,6 @@ class StatisticsItemLogic extends GetxController {
       startTimeStamp: start.millisecondsSinceEpoch,
       endTimeStamp: end.millisecondsSinceEpoch,
     );
-
     loadPVTrend(
       queryType: 0,
       startTimeStamp: start.millisecondsSinceEpoch,
@@ -200,13 +199,17 @@ class StatisticsItemLogic extends GetxController {
     if (isSuccessful) {
       revenueList.assignAll(value);
       if (type == DataType.revenue) {
-        handRevenueData(revenueList);
+        if (revenueList.isNotEmpty) {
+          handRevenueData(revenueList);
+        }
         revenueViewStatus = revenueList.isEmpty
             ? ViewType.empty.index
             : ViewType.common.index;
         update(["revenue"]);
       } else if (type == DataType.ele) {
-        handEleData(revenueList);
+        if (revenueList.isNotEmpty) {
+          handEleData(revenueList);
+        }
         eleViewStatus = revenueList.isEmpty
             ? ViewType.empty.index
             : ViewType.common.index;
@@ -261,7 +264,9 @@ class StatisticsItemLogic extends GetxController {
     ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       pvList.assignAll(value);
-      handPVData(pvList);
+      if (pvList.isNotEmpty) {
+        handPVData(pvList);
+      }
       pvViewStatus = pvList.isEmpty
           ? ViewType.empty.index
           : ViewType.common.index;

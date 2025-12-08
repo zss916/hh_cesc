@@ -95,7 +95,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
                               return SideTitleWidget(
                                 meta: meta,
                                 child:
-                                    value.toInt() == (widget.list.first).length
+                                    value.toInt() >= (widget.list.first).length
                                     ? SizedBox.shrink()
                                     : Text(
                                         ((widget.list.first)[value.toInt()]

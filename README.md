@@ -30,3 +30,11 @@ HhAdmin123#
 flutter build ipa --release
 
 CI/CD:https://flutterci.com
+
+
+Google console
+网址:https://play.google.com/console/u/0/developers/8414414680712895296/app-list
+Google：账号：maojingshu2019@gmail.com 密码：Mao33071
+
+
+Google site 来制作隐私网站
