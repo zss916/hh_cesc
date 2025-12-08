@@ -1,4 +1,5 @@
 import 'package:cescpro/core/enum/app_enum.dart';
+import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/home.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
@@ -36,6 +37,7 @@ class MonitorLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    AppLoading.dismiss();
   }
 
   Future<void> loadData() async {

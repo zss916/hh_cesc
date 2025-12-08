@@ -31,12 +31,6 @@ dependencies:
   webview_flutter: 4.13.0
   keyboard_visibility_pro: 1.0.0
   app_settings: 6.1.1
-  #电量
-  #based_battery_indicator: ^1.0.3+1
-  #cupertino_battery_indicator: ^1.2.1
-  #realtime_battery_indicator: ^1.0.2
-  #circular_menu: ^4.0.0
-  #marquee: ^2.3.0
   marquee_widget: 1.2.0
   flutter_popup: 3.3.9
   flutter_datetime_picker_plus: 2.2.0
@@ -49,11 +43,10 @@ dependencies:
   easy_date_timeline: 2.0.9
   calendar_date_picker2: 2.0.1
   easy_refresh: 3.4.0
-
   #国家数据
   country_state_city: 0.1.6
   #加载更多
-  easy_load_more: 2.0.0
+  #easy_load_more: 2.0.0
   collection: 1.19.1
   #时区
   time_zone_plus: 0.0.4
@@ -63,55 +56,6 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   #splash
   flutter_native_splash: 2.4.7
-  #K 线图
-  #ace_chart: ^0.0.1+3
-  #数图列表
-  #list_treeview: 0.3.1
-  #flutter_simple_treeview: 3.0.2
-
-
-
-  ####
-  #custom_date_range_picker: ^1.2.0
-  #calendar_date_picker2: 2.0.1
-  #simple_month_year_picker: ^1.1.0
-  #月选择
-  #flutter_custom_month_picker: ^0.1.3
-
-
-  #date_range_picker_flutter: ^1.0.2
-  #custom_date_range_plus: ^0.0.3
-#  mrx_charts: ^0.1.3
-#  graphic: ^2.6.0
-#  community_charts_flutter: ^1.0.4
-#  material_charts: ^0.0.34
-#  charts_painter: ^3.1.1
-#  flutter_echarts: ^2.5.0
-  #表格
-  #flutter_expandable_table: ^2.1.0
-  #日期表格calendar
-#  table_calendar: ^3.2.0
-
-  #选择日期
-#  board_datetime_picker: ^2.8.2
-#  cupertino_calendar_picker: ^2.2.6
-#  flutter_popup: ^3.3.9
-#  adoptive_calendar: ^0.2.0
-  #横线的
-#  flutter_datetime_picker_plus: ^2.2.0
-
-  #漂亮的UI
-  #syncfusion_flutter_datepicker: ^31.2.12
-#  progressive_time_picker: ^1.0.3
-
-  #flutter_echart: 2.0.0
-  #extended_phone_number_input: ^1.0.2
-
-  #图表-折线图
-  #flutter_data_graph: ^0.0.9+1
-  #fl_animated_linechart: ^1.2.0
-
-
   flutter_echart:
     path: plugins/flutter_echart-master
   custom_navigation_bar:

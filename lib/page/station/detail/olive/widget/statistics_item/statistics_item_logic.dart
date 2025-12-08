@@ -114,6 +114,7 @@ class StatisticsItemLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    AppLoading.dismiss();
   }
 
   ///功率分析

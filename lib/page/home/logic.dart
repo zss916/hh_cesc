@@ -25,6 +25,12 @@ class HomeLogic extends GetxController {
     loadHome();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+    AppLoading.dismiss();
+  }
+
   Future<void> loadHome({bool loading = true}) async {
     if (loading) AppLoading.show();
     HomeStatisticEntity? value = await HomeAPI.postStatisticRecord()

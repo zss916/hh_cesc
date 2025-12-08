@@ -41,6 +41,12 @@ class MonitorDetailLogic extends GetxController {
     loadData();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+    AppLoading.dismiss();
+  }
+
   Future<void> loadData() async {
     AppLoading.show();
     await getCompTree();

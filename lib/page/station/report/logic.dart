@@ -36,6 +36,7 @@ class ReportDetailLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    AppLoading.dismiss();
   }
 
   Future<void> loadData() async {

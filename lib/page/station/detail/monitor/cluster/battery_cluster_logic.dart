@@ -35,6 +35,12 @@ class BatteryClusterLogic extends GetxController {
     loadData();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+    AppLoading.dismiss();
+  }
+
   Future<void> loadData() async {
     AppLoading.show();
     await getCompTree();

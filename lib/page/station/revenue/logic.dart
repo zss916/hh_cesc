@@ -48,6 +48,12 @@ class RevenueLogic extends GetxController {
     loadData();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+    AppLoading.dismiss();
+  }
+
   Future<void> loadData() async {
     //1.daily 2.monthly 3.yearly
     AppLoading.show();

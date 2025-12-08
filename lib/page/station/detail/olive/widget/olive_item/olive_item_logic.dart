@@ -1,4 +1,5 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/api/weather.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
@@ -80,6 +81,7 @@ class OliveItemLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    AppLoading.dismiss();
   }
 
   Future<void> loadWeather() async {
