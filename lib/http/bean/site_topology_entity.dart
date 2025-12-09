@@ -28,6 +28,32 @@ class SiteTopologyEntity {
       (line ?? []).any((e) => (((e.to ?? "").trim().toLowerCase()) == "load"));
 */
   //{from: GRID, to: STORAGE}
+  //    "line": [{from: GRID, to: LOAD}, {from: GRID, to: STORAGE}]
+
+  bool get isHasLoad => (line ?? []).any(
+    (e) =>
+        (((e.from ?? "").trim().toLowerCase()) == "load") ||
+        ((e.to ?? "").trim().toLowerCase()) == "load",
+  );
+
+  bool get isHasPv => (line ?? []).any(
+    (e) =>
+        (((e.from ?? "").trim().toLowerCase()) == "pv") ||
+        ((e.to ?? "").trim().toLowerCase()) == "pv",
+  );
+
+  bool get isHasGrid => (line ?? []).any(
+    (e) =>
+        (((e.from ?? "").trim().toLowerCase()) == "grid") ||
+        ((e.to ?? "").trim().toLowerCase()) == "grid",
+  );
+
+  bool get isHasStorage => (line ?? []).any(
+    (e) =>
+        (((e.from ?? "").trim().toLowerCase()) == "storage") ||
+        ((e.to ?? "").trim().toLowerCase()) == "storage",
+  );
+
   ///grid -> load
   bool get isGridToLoad => (line ?? []).any(
     (e) =>

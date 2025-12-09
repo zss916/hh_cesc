@@ -95,17 +95,14 @@ class OliveItemLogic extends GetxController {
     }
   }
 
-  ///todo 定时轮询刷新
+  ///
   Future<void> getSiteTopology() async {
     SiteTopologyEntity? value = await SiteAPI.getSiteTopology(
       siteId: siteId ?? 0,
     );
     if (value != null) {
       topology = value;
-
-      ///拓扑图
-      List<SiteTopologyLine> topologyLine = value.line ?? [];
-
+      line = value.line ?? [];
       // [{from: GRID, to: LOAD}, {from: GRID, to: STORAGE}]
       //PV,STORAGE,LOAD,GRID
       update();

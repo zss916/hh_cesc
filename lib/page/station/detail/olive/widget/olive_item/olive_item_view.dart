@@ -136,86 +136,97 @@ class OliveItemView extends StatelessWidget {
                               },
                             ],
                           ],
-                          lines: [
-                            if (logic.topology?.load != null)
-                              [
-                                ///load <- ems
-                                {
-                                  'end': Offset(70.r, (Get.width - 32.w) / 2),
-                                  'start': Offset(
-                                    125.r,
-                                    (Get.width - 32.w) / 2,
-                                  ),
-                                },
-                              ],
+                          lines: logic.line.isEmpty
+                              ? []
+                              : [
+                                  if (logic.topology?.load != null &&
+                                      logic.topology?.isHasLoad == true)
+                                    [
+                                      ///load <- ems
+                                      {
+                                        'end': Offset(
+                                          70.r,
+                                          (Get.width - 32.w) / 2,
+                                        ),
+                                        'start': Offset(
+                                          125.r,
+                                          (Get.width - 32.w) / 2,
+                                        ),
+                                      },
+                                    ],
 
-                            if (logic.topology?.grid != null)
-                              [
-                                ///grid <->ems
-                                if (logic.topology?.isGridOut == true)
-                                  {
-                                    'end': Offset(
-                                      70.r + 150.r,
-                                      (Get.width - 32.w) / 2,
-                                    ),
-                                    'start': Offset(
-                                      125.r + 150.r,
-                                      (Get.width - 32.w) / 2,
-                                    ),
-                                  },
+                                  if (logic.topology?.grid != null &&
+                                      logic.topology?.isHasGrid == true)
+                                    [
+                                      ///grid <->ems
+                                      if (logic.topology?.isGridOut == true)
+                                        {
+                                          'end': Offset(
+                                            70.r + 150.r,
+                                            (Get.width - 32.w) / 2,
+                                          ),
+                                          'start': Offset(
+                                            125.r + 150.r,
+                                            (Get.width - 32.w) / 2,
+                                          ),
+                                        },
 
-                                if (logic.topology?.isGridOut == false)
-                                  {
-                                    'start': Offset(
-                                      70.r + 150.r,
-                                      (Get.width - 32.w) / 2,
-                                    ),
-                                    'end': Offset(
-                                      125.r + 150.r,
-                                      (Get.width - 32.w) / 2,
-                                    ),
-                                  },
-                              ],
-                            if (logic.isHasPv)
-                              [
-                                ///pv -> ems
-                                {
-                                  'start': Offset((Get.width - 32.w) / 2, 70.r),
-                                  'end': Offset(
-                                    (Get.width - 32.w) / 2,
-                                    70.r + 75.r,
-                                  ),
-                                },
-                              ],
+                                      if (logic.topology?.isGridOut == false)
+                                        {
+                                          'start': Offset(
+                                            70.r + 150.r,
+                                            (Get.width - 32.w) / 2,
+                                          ),
+                                          'end': Offset(
+                                            125.r + 150.r,
+                                            (Get.width - 32.w) / 2,
+                                          ),
+                                        },
+                                    ],
+                                  if (logic.isHasPv)
+                                    [
+                                      ///pv -> ems
+                                      {
+                                        'start': Offset(
+                                          (Get.width - 32.w) / 2,
+                                          70.r,
+                                        ),
+                                        'end': Offset(
+                                          (Get.width - 32.w) / 2,
+                                          70.r + 75.r,
+                                        ),
+                                      },
+                                    ],
 
-                            if (logic.topology?.storage != null)
-                              [
-                                ///ems <-> battery
-                                if (logic.topology?.isBatteryOut == false)
-                                  {
-                                    'start': Offset(
-                                      (Get.width - 32.w) / 2,
-                                      70.r + 155.r,
-                                    ),
-                                    'end': Offset(
-                                      (Get.width - 32.w) / 2,
-                                      70.r + 75.r + 120.r,
-                                    ),
-                                  },
+                                  if (logic.topology?.storage != null &&
+                                      logic.topology?.isHasStorage == true)
+                                    [
+                                      ///ems <-> battery
+                                      if (logic.topology?.isBatteryOut == false)
+                                        {
+                                          'start': Offset(
+                                            (Get.width - 32.w) / 2,
+                                            70.r + 155.r,
+                                          ),
+                                          'end': Offset(
+                                            (Get.width - 32.w) / 2,
+                                            70.r + 75.r + 120.r,
+                                          ),
+                                        },
 
-                                if (logic.topology?.isBatteryOut == true)
-                                  {
-                                    'end': Offset(
-                                      (Get.width - 32.w) / 2,
-                                      70.r + 155.r,
-                                    ),
-                                    'start': Offset(
-                                      (Get.width - 32.w) / 2,
-                                      70.r + 75.r + 120.r,
-                                    ),
-                                  },
-                              ],
-                          ],
+                                      if (logic.topology?.isBatteryOut == true)
+                                        {
+                                          'end': Offset(
+                                            (Get.width - 32.w) / 2,
+                                            70.r + 155.r,
+                                          ),
+                                          'start': Offset(
+                                            (Get.width - 32.w) / 2,
+                                            70.r + 75.r + 120.r,
+                                          ),
+                                        },
+                                    ],
+                                ],
                         ),
 
                         Center(
@@ -475,72 +486,77 @@ class OliveItemView extends StatelessWidget {
                               },
                             ],
                           ],
-                          lines: [
-                            if (logic.topology?.load != null)
-                              [
-                                ///load <- ems
-                                {
-                                  'end': Offset(70.r, 20 + (75.r / 2)),
-                                  'start': Offset(125.r, 20 + (75.r / 2)),
-                                },
-                              ],
+                          lines: logic.line.isEmpty
+                              ? []
+                              : [
+                                  if (logic.topology?.load != null &&
+                                      logic.topology?.isHasLoad == true)
+                                    [
+                                      ///load <- ems
+                                      {
+                                        'end': Offset(70.r, 20 + (75.r / 2)),
+                                        'start': Offset(125.r, 20 + (75.r / 2)),
+                                      },
+                                    ],
 
-                            if (logic.topology?.grid != null)
-                              [
-                                ///grid <->ems
-                                if (logic.topology?.isGridOut == true)
-                                  {
-                                    'end': Offset(
-                                      70.r + 150.r,
-                                      20 + (75.r / 2),
-                                    ),
-                                    'start': Offset(
-                                      125.r + 150.r,
-                                      20 + (75.r / 2),
-                                    ),
-                                  },
+                                  if (logic.topology?.grid != null &&
+                                      logic.topology?.isHasGrid == true)
+                                    [
+                                      ///grid <->ems
+                                      if (logic.topology?.isGridOut == true)
+                                        {
+                                          'end': Offset(
+                                            70.r + 150.r,
+                                            20 + (75.r / 2),
+                                          ),
+                                          'start': Offset(
+                                            125.r + 150.r,
+                                            20 + (75.r / 2),
+                                          ),
+                                        },
 
-                                if (logic.topology?.isGridOut == false)
-                                  {
-                                    'start': Offset(
-                                      70.r + 150.r,
-                                      20 + (75.r / 2),
-                                    ),
-                                    'end': Offset(
-                                      125.r + 150.r,
-                                      20 + (75.r / 2),
-                                    ),
-                                  },
-                              ],
+                                      if (logic.topology?.isGridOut == false)
+                                        {
+                                          'start': Offset(
+                                            70.r + 150.r,
+                                            20 + (75.r / 2),
+                                          ),
+                                          'end': Offset(
+                                            125.r + 150.r,
+                                            20 + (75.r / 2),
+                                          ),
+                                        },
+                                    ],
 
-                            if (logic.topology?.storage != null)
-                              [
-                                ///ems <-> battery
-                                if (logic.topology?.isBatteryOut == false)
-                                  {
-                                    'start': Offset(
-                                      (Get.width - 32.w) / 2,
-                                      20 + 100.r,
-                                    ),
-                                    'end': Offset(
-                                      (Get.width - 32.w) / 2,
-                                      20 + 100.r + 50.r,
-                                    ),
-                                  },
+                                  if (logic.topology?.storage != null &&
+                                      logic.topology?.isHasStorage == true)
+                                    [
+                                      ///ems <-> battery
+                                      if (logic.topology?.isBatteryOut == false)
+                                        {
+                                          'start': Offset(
+                                            (Get.width - 32.w) / 2,
+                                            20 + 100.r,
+                                          ),
+                                          'end': Offset(
+                                            (Get.width - 32.w) / 2,
+                                            20 + 100.r + 50.r,
+                                          ),
+                                        },
 
-                                if (logic.topology?.isBatteryOut == true)
-                                  {
-                                    'end': Offset(
-                                      (Get.width - 32.w) / 2,
-                                      20 + 100.r,
-                                    ),
-                                    'start': Offset(
-                                      (Get.width - 32.w) / 2,
-                                      20 + 100.r + 50.r,
-                                    ),
-                                  },
-                              ],
-                          ],
+                                      if (logic.topology?.isBatteryOut == true)
+                                        {
+                                          'end': Offset(
+                                            (Get.width - 32.w) / 2,
+                                            20 + 100.r,
+                                          ),
+                                          'start': Offset(
+                                            (Get.width - 32.w) / 2,
+                                            20 + 100.r + 50.r,
+                                          ),
+                                        },
+                                    ],
+                                ],
                         ),
 
                         Stack(
