@@ -86,15 +86,15 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                       getTitlesWidget: (value, meta) {
                         return SideTitleWidget(
                           meta: meta,
-                          child: value.toInt() == widget.powerList.length
+                          child: value.toInt() >= widget.powerList.length
                               ? SizedBox.shrink()
                               : Text(
                                   (widget.powerList[value.toInt()].time ?? 0)
-                                      .mDHms,
+                                      .hm2,
                                   style: TextStyle(
                                     color: Color(0xA8FFFFFF),
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 6.sp,
+                                    fontSize: 10.sp,
                                   ),
                                 ),
                         );

@@ -12,8 +12,10 @@ https://ems.cescpower.com:9088/#/login
 2.协议(隐私协议 ok,服务条款 ?)
 3.英语文案( 90%) 和 切换语言(ok)
 4.android 手机适配，iPhone 手机适配
-5.16kb
+5.16kb（ok）
 6.货币问题
+7.创建jks
+8.xcode 替换 Bundle ID
 
 蒲公英地址：https://www.pgyer.com
 
@@ -38,3 +40,19 @@ Google：账号：maojingshu2019@gmail.com 密码：Mao33071
 
 
 Google site 来制作隐私网站
+
+截图：flutter screenshot
+
+Apple Store
+1.创建证书：https://developer.apple.com/account/resources/certificates/list
+
+网址：https://developer.apple.com/account/resources/certificates/list
+网址：https://idmsa.apple.com/IDMSWebAuth/signin?appIdKey=891bd3417a7776362562d2197f89480a8547b108fd934911bcbea0110d07f757&path=%2Faccount%2F&rv=1
+Apple：账号：maojingshu2019@gmail.com 密码：Mao33071!
+
+1.创建AppID、Bundle ID
+
+
+com.bujunshou.product
+
+flutter适配鸿蒙插件库：https://gitcode.com/openharmony-tpc/flutter_packages

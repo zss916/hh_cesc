@@ -29,8 +29,15 @@ extension TimestampExtension on int {
   String get hms =>
       DateFormat('HH:mm:ss').format(DateTime.fromMillisecondsSinceEpoch(this));
 
-  String get mDHms => DateFormat(
-    'MM-dd HH:mm:ss',
+  String get hm => DateFormat(
+    'HH:mm',
+  ).format(DateTime.fromMillisecondsSinceEpoch(this * 1000));
+
+  String get hm2 =>
+      DateFormat('HH:mm').format(DateTime.fromMillisecondsSinceEpoch(this));
+
+  String get mDHm => DateFormat(
+    'MM-dd HH:mm',
   ).format(DateTime.fromMillisecondsSinceEpoch(this));
 }
 

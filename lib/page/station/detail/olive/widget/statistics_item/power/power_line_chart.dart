@@ -100,11 +100,11 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
                                     : Text(
                                         ((widget.list.first)[value.toInt()]
                                                 .time)
-                                            .hms,
+                                            .hm,
                                         style: TextStyle(
                                           color: Color(0xA8FFFFFF),
                                           fontWeight: FontWeight.w400,
-                                          fontSize: 6.sp,
+                                          fontSize: 10.sp,
                                         ),
                                       ),
                               );
@@ -193,7 +193,10 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
       dotData: const FlDotData(show: false),
 
       ///线下面的区域(true)
-      belowBarData: BarAreaData(show: false),
+      belowBarData: BarAreaData(
+        show: true,
+        color: color.withValues(alpha: 0.1),
+      ),
       spots: [
         ...lines.mapIndexed(
           (i, e) => FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),

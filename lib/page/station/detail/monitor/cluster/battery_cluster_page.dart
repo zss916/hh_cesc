@@ -6,6 +6,7 @@ import 'package:cescpro/http/bean/com_type_list_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/cluster/battery_cluster_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/cluster/line_chart.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,6 +31,8 @@ class BatteryClusterPage extends StatelessWidget {
                 Divider(height: 12.h, color: Colors.transparent),
                 buildBaseInfoItem(logic),
                 Divider(height: 12.h, color: Colors.transparent),
+
+                ///todo
                 buildLineChartWidget(),
                 Divider(height: 12.h, color: Colors.transparent),
                 buildDistributionMap(logic),
@@ -296,7 +299,7 @@ class BatteryClusterPage extends StatelessWidget {
     ],
   );
 
-  Widget buildLineChartWidget() {
+  Widget buildLineChartWidget2() {
     return Column(
       children: [
         Container(
@@ -349,6 +352,133 @@ class BatteryClusterPage extends StatelessWidget {
                       ),
                       VerticalDivider(width: 16.w, color: Colors.transparent),
                       LineTitleWidget(title: "SOC", color: Color(0xFF0BC3C4)),
+                      Spacer(),
+                    ],
+                  ),
+                ],
+              ),
+              PositionedDirectional(
+                start: 0.w,
+                top: 15.h,
+                child: Text(
+                  "(KW)",
+                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildLineChartWidget() {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsetsDirectional.only(
+            start: 18.w,
+            end: 18.w,
+            bottom: 16.h,
+          ),
+          alignment: AlignmentDirectional.centerStart,
+          child: Text(
+            TKey.realTimeSoc.tr,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsetsDirectional.only(
+            start: 5.w,
+            end: 10.w,
+            bottom: 15.h,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color(0xFF313540),
+          ),
+          width: double.maxFinite,
+          child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Divider(height: 5.h, color: Colors.transparent),
+
+                  GetBuilder<BatteryClusterLogic>(
+                    id: "realTimeData",
+                    init: BatteryClusterLogic(),
+                    builder: (logic) {
+                      return Container(
+                        color: Colors.transparent,
+                        height: 270.h,
+                        width: double.maxFinite,
+                        child: logic.arrList.isEmpty
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : MonitorLineChartWidget(
+                                arrList: logic.arrList,
+                                maxX: logic.arrMaxX.toDouble(),
+                                maxY: logic.arrMaxY,
+                                minY: logic.arrMinY,
+                              ),
+                      );
+                    },
+                  ),
+                  Divider(height: 5.h, color: Colors.transparent),
+                  Row(
+                    children: [
+                      Spacer(),
+                      Row(
+                        children: [
+                          Container(
+                            width: 7,
+                            height: 7,
+                            margin: EdgeInsets.only(right: 5.w),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF3874F2),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                          Text(
+                            TKey.power.tr,
+                            style: TextStyle(
+                              color: Color(0xD9FFFFFF),
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                      VerticalDivider(width: 16.w, color: Colors.transparent),
+                      Row(
+                        children: [
+                          Container(
+                            width: 7,
+                            height: 7,
+                            margin: EdgeInsets.only(right: 5.w),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF0BC3C4),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                          Text(
+                            "SOC",
+                            style: TextStyle(
+                              color: Color(0xD9FFFFFF),
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ],
+                      ),
                       Spacer(),
                     ],
                   ),

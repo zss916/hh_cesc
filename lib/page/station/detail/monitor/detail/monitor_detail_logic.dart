@@ -142,7 +142,7 @@ class MonitorDetailLogic extends GetxController {
 
   Future<void> loadSocGraph() async {
     DateTime now = DateTime.now();
-    DateTime startOfDay = DateTime(now.year, now.month, now.day - 1, 0, 0, 0);
+    DateTime startOfDay = DateTime(now.year, now.month, now.day, 0, 0, 0);
     DateTime endOfToday = DateTime(
       now.year,
       now.month,
