@@ -275,7 +275,8 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(${totalNeg.formatPowerValueUnit()})",
+                    "MWh",
+                    // "(${totalNeg.formatPowerValueUnit()})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -286,7 +287,8 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    totalNeg.formatPowerValue(),
+                    "$totalNeg",
+                    //totalNeg.formatPowerValue(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -355,7 +357,8 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(${totalPvNeg.formatPowerValueUnit()})",
+                    "MWh",
+                    //"(${totalPvNeg.formatPowerValueUnit()})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -366,7 +369,8 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    totalPvNeg.formatPowerValue(),
+                    "$totalPvNeg",
+                    //totalPvNeg.formatPowerValue(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
