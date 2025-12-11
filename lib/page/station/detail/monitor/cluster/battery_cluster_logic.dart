@@ -94,7 +94,9 @@ class BatteryClusterLogic extends GetxController {
   ///实时数据
   List<SocEntity> arrList = [];
   double arrMaxY = 0.0;
+  double arrMaxYR = 0.0;
   double arrMinY = 0.0;
+  double arrMinYR = 0.0;
   double arrMaxX = 0.0;
 
   Future<void> loadSocGraph() async {
@@ -126,16 +128,20 @@ class BatteryClusterLogic extends GetxController {
       if (arrList.isNotEmpty) {
         List<double> powerList = arrList.map((e) => e.power ?? 0).toList();
         double powerListMax = powerList.reduce(max);
+        arrMaxY = powerListMax;
         double powerListMin = powerList.reduce(min);
+        arrMinY = powerListMin;
         List<int> socList = arrList.map((e) => e.soc ?? 0).toList();
         int socListMax = socList.reduce(max);
+        arrMaxYR = socListMax.toDouble();
         int socListMin = socList.reduce(min);
-        arrMaxY = (powerListMax > socListMax.toDouble())
+        arrMinYR = socListMin.toDouble();
+        /*   arrMaxY = (powerListMax > socListMax.toDouble())
             ? powerListMax
             : socListMax.toDouble();
         arrMinY = (powerListMin > socListMin.toDouble())
             ? socListMin.toDouble()
-            : powerListMin;
+            : powerListMin;*/
         arrMaxX = arrList.length.toDouble();
       }
       update(["realTimeData"]);

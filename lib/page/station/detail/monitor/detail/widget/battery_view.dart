@@ -358,6 +358,8 @@ class BatteryView extends StatelessWidget {
                                 maxX: logic.arrMaxX.toDouble(),
                                 maxY: logic.arrMaxY,
                                 minY: logic.arrMinY,
+                                maxYR: logic.arrMaxYR,
+                                minYR: logic.arrMinYR,
                               ),
                       );
                     },
@@ -417,6 +419,15 @@ class BatteryView extends StatelessWidget {
                 top: 15.h,
                 child: Text(
                   "(KW)",
+                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                ),
+              ),
+
+              PositionedDirectional(
+                end: 0.w,
+                top: 15.h,
+                child: Text(
+                  "(%)",
                   style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                 ),
               ),

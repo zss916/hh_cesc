@@ -10,6 +10,8 @@ class MonitorLineChartWidget extends StatefulWidget {
   final double maxX;
   final double maxY;
   final double minY;
+  final double maxYR;
+  final double minYR;
 
   const MonitorLineChartWidget({
     super.key,
@@ -17,6 +19,8 @@ class MonitorLineChartWidget extends StatefulWidget {
     required this.maxX,
     required this.maxY,
     required this.minY,
+    required this.maxYR,
+    required this.minYR,
   });
 
   @override
@@ -58,100 +62,240 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
           child: Container(
             padding: const EdgeInsetsDirectional.only(
               start: 12,
-              end: 12,
+              end: 0,
               top: 12 + 18,
               bottom: 0,
             ),
             height: double.maxFinite,
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width - 32.w - 15.w,
             /*  width: widget.logic.arrList.length <= 10
                 ? MediaQuery.of(context).size.width - 80
                 : widget.logic.arrList.length * 2.0,*/
-            child: LineChart(
-              LineChartData(
-                lineTouchData: lineTouchData,
-                gridData: FlGridData(
-                  show: true,
-                  drawHorizontalLine: true,
-                  drawVerticalLine: false,
-                ),
-                titlesData: FlTitlesData(
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  topTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 25,
-                      getTitlesWidget: (value, meta) {
-                        return SideTitleWidget(
-                          meta: meta,
-                          child: value.toInt() >= widget.arrList.length
-                              ? SizedBox.shrink()
-                              : Text(
-                                  (widget.arrList[value.toInt()].time ?? 0).hm2,
-                                  style: TextStyle(
-                                    color: Color(0xA8FFFFFF),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10.sp,
-                                  ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                LineChart(
+                  LineChartData(
+                    lineTouchData: lineTouchData,
+                    gridData: FlGridData(
+                      show: true,
+                      drawHorizontalLine: true,
+                      drawVerticalLine: false,
+                    ),
+                    titlesData: FlTitlesData(
+                      rightTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 30,
+                          getTitlesWidget: (value, meta) {
+                            return SideTitleWidget(
+                              space: 2,
+                              meta: meta,
+                              child: Text(
+                                "$value",
+                                style: TextStyle(
+                                  color: Color(0xA8FFFFFF),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 8.sp,
                                 ),
-                        );
-                      },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      topTitles: AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      bottomTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 25,
+                          getTitlesWidget: (value, meta) {
+                            return SideTitleWidget(
+                              meta: meta,
+                              child: value.toInt() >= widget.arrList.length
+                                  ? SizedBox.shrink()
+                                  : Text(
+                                      (widget.arrList[value.toInt()].time ?? 0)
+                                          .hm2,
+                                      style: TextStyle(
+                                        color: Color(0xA8FFFFFF),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 10.sp,
+                                      ),
+                                    ),
+                            );
+                          },
+                        ),
+                      ),
+                      leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 30,
+                          getTitlesWidget: (value, meta) {
+                            return SideTitleWidget(
+                              space: 2,
+                              meta: meta,
+                              child: Text(
+                                "$value",
+                                style: TextStyle(
+                                  color: Colors.transparent,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 8.sp,
+                                ),
+                              ),
+                            );
+                          },
+                        ), // 左边Y轴标签禁用，手动创建
+                      ),
+                    ),
+                    borderData: FlBorderData(
+                      show: true,
+                      border: Border(
+                        bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
+                        left: const BorderSide(
+                          color: Colors.transparent,
+                          width: 0,
+                        ),
+                        right: const BorderSide(
+                          color: Colors.transparent,
+                          width: 0,
+                        ),
+                        top: const BorderSide(
+                          color: Colors.transparent,
+                          width: 0,
+                        ),
+                      ),
+                    ),
+                    lineBarsData: lineBarsData2(widget.arrList),
+                    minX: 0,
+                    maxX: widget.maxX.toDouble(),
+                    maxY: 100,
+                    minY: 0,
+                    extraLinesData: ExtraLinesData(
+                      horizontalLines: [
+                        HorizontalLine(
+                          y: 0,
+                          color: Colors.transparent, // 水平线颜色
+                          strokeWidth: 0.4, // 水平线宽度
+                        ),
+                      ],
                     ),
                   ),
-                  leftTitles: AxisTitles(
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 30,
-                      getTitlesWidget: (value, meta) {
-                        return SideTitleWidget(
-                          space: 2,
-                          meta: meta,
-                          child: Text(
-                            "$value",
-                            style: TextStyle(
-                              color: Color(0xA8FFFFFF),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
-                            ),
-                          ),
-                        );
-                      },
-                    ), // 左边Y轴标签禁用，手动创建
-                  ),
+                  duration: const Duration(milliseconds: 2000),
                 ),
-                borderData: FlBorderData(
-                  show: true,
-                  border: Border(
-                    bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-                    left: const BorderSide(color: Colors.transparent, width: 0),
-                    right: const BorderSide(
-                      color: Colors.transparent,
-                      width: 0,
+
+                LineChart(
+                  LineChartData(
+                    lineTouchData: lineTouchData,
+                    gridData: FlGridData(
+                      show: true,
+                      drawHorizontalLine: true,
+                      drawVerticalLine: false,
                     ),
-                    top: const BorderSide(color: Colors.transparent, width: 0),
-                  ),
-                ),
-                lineBarsData: lineBarsData(widget.arrList),
-                minX: 0,
-                maxX: widget.maxX.toDouble(),
-                maxY: widget.maxY,
-                minY: widget.minY,
-                extraLinesData: ExtraLinesData(
-                  horizontalLines: [
-                    HorizontalLine(
-                      y: 0,
-                      color: Colors.transparent, // 水平线颜色
-                      strokeWidth: 0.4, // 水平线宽度
+                    titlesData: FlTitlesData(
+                      rightTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 30,
+                          getTitlesWidget: (value, meta) {
+                            return SideTitleWidget(
+                              space: 2,
+                              meta: meta,
+                              child: Text(
+                                "",
+                                style: TextStyle(
+                                  color: Colors.transparent,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 8.sp,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      topTitles: AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      bottomTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 25,
+                          getTitlesWidget: (value, meta) {
+                            return SideTitleWidget(
+                              meta: meta,
+                              child: value.toInt() >= widget.arrList.length
+                                  ? SizedBox.shrink()
+                                  : Text(
+                                      (widget.arrList[value.toInt()].time ?? 0)
+                                          .hm2,
+                                      style: TextStyle(
+                                        color: Color(0xA8FFFFFF),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 10.sp,
+                                      ),
+                                    ),
+                            );
+                          },
+                        ),
+                      ),
+                      leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 30,
+                          getTitlesWidget: (value, meta) {
+                            return SideTitleWidget(
+                              space: 2,
+                              meta: meta,
+                              child: Text(
+                                "$value",
+                                style: TextStyle(
+                                  color: Color(0xA8FFFFFF),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 8.sp,
+                                ),
+                              ),
+                            );
+                          },
+                        ), // 左边Y轴标签禁用，手动创建
+                      ),
                     ),
-                  ],
+                    borderData: FlBorderData(
+                      show: true,
+                      border: Border(
+                        bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
+                        left: const BorderSide(
+                          color: Colors.transparent,
+                          width: 0,
+                        ),
+                        right: const BorderSide(
+                          color: Colors.transparent,
+                          width: 0,
+                        ),
+                        top: const BorderSide(
+                          color: Colors.transparent,
+                          width: 0,
+                        ),
+                      ),
+                    ),
+                    lineBarsData: lineBarsData3(widget.arrList),
+                    minX: 0,
+                    maxX: widget.maxX.toDouble(),
+                    maxY: widget.maxY,
+                    minY: widget.minY,
+                    extraLinesData: ExtraLinesData(
+                      horizontalLines: [
+                        HorizontalLine(
+                          y: 0,
+                          color: Colors.transparent, // 水平线颜色
+                          strokeWidth: 0.4, // 水平线宽度
+                        ),
+                      ],
+                    ),
+                  ),
+                  duration: const Duration(milliseconds: 2000),
                 ),
-              ),
-              duration: const Duration(milliseconds: 2000),
+              ],
             ),
           ),
         ),
@@ -202,6 +346,50 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
         spots: [
           ...lines.mapIndexed(
             (i, e) => FlSpot(i.toDouble(), (e.soc ?? 0).toDouble()),
+          ),
+        ],
+      ),
+    ];
+  }
+
+  List<LineChartBarData> lineBarsData2(List<SocEntity> lines) {
+    return [
+      LineChartBarData(
+        isCurved: true,
+        color: Color(0xFF0BC3C4),
+        barWidth: 1,
+        isStrokeCapRound: true,
+        dotData: const FlDotData(show: false),
+        belowBarData: BarAreaData(
+          show: false,
+          color: Colors.pink.withValues(alpha: 0),
+        ),
+        spots: [
+          ...lines.mapIndexed(
+            (i, e) => FlSpot(i.toDouble(), (e.soc ?? 0).toDouble()),
+          ),
+        ],
+      ),
+    ];
+  }
+
+  List<LineChartBarData> lineBarsData3(List<SocEntity> lines) {
+    return [
+      LineChartBarData(
+        ///是否圆一点
+        isCurved: true,
+        color: Color(0xFF3874F2),
+        barWidth: 1,
+        isStrokeCapRound: true,
+
+        ///点数据
+        dotData: const FlDotData(show: false),
+
+        ///线下面的区域(true)
+        belowBarData: BarAreaData(show: false),
+        spots: [
+          ...lines.mapIndexed(
+            (i, e) => FlSpot(i.toDouble(), (e.power ?? 0).toDouble()),
           ),
         ],
       ),

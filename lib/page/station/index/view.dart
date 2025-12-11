@@ -84,7 +84,7 @@ class StationPage extends StatelessWidget {
   Widget buildBody({required int viewState, required StationLogic logic}) {
     return switch (viewState) {
       _ when viewState == ViewStateEnum.common.index => buildList(logic: logic),
-      _ when viewState == ViewStateEnum.empty.index => buildEmpty(),
+      _ when viewState == ViewStateEnum.empty.index => buildEmpty(logic: logic),
       _ when viewState == ViewStateEnum.loading.index => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CircularProgressIndicator()),
@@ -93,25 +93,30 @@ class StationPage extends StatelessWidget {
     };
   }
 
-  Widget buildEmpty() => SizedBox(
+  Widget buildEmpty({required StationLogic logic}) => SizedBox(
     width: double.maxFinite,
     height: double.maxFinite,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(Assets.imgEmpty, width: 200, height: 95),
-        Text(
-          TKey.noDataAvailable.tr,
-          style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
-        ),
-        Container(
-          margin: EdgeInsetsDirectional.only(top: 17.h, bottom: 120.h),
-          child: Text(
-            TKey.noDataAvailableTip.tr,
-            style: TextStyle(fontSize: 14, color: Color(0xFF909399)),
+    child: GestureDetector(
+      onTap: () {
+        logic.refreshData();
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(Assets.imgEmpty, width: 200, height: 95),
+          Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
           ),
-        ),
-      ],
+          Container(
+            margin: EdgeInsetsDirectional.only(top: 17.h, bottom: 120.h),
+            child: Text(
+              TKey.noDataAvailableTip.tr,
+              style: TextStyle(fontSize: 14, color: Color(0xFF909399)),
+            ),
+          ),
+        ],
+      ),
     ),
   );
 

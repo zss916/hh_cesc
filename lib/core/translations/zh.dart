@@ -410,7 +410,7 @@ const zh = {
   "stationNum": "电站数量",
   "stationStatus": "电站状态",
   "environmentalValue": "环境价值",
-  "resolveStandardCoal": "解决标准煤",
+  "resolveStandardCoal": "标准耗煤",
   "co2EmissionReduction": "CO2减排量",
   "cumulativeDischargeCapacity": "累计放电量",
   "accumulatedPhotovoltaicPowerGeneration": "累计光伏发电量",

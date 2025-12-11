@@ -1109,7 +1109,7 @@ class OliveItemView extends StatelessWidget {
               ),
             Divider(height: 8.h, color: Colors.transparent),
 
-            if ((siteDetail?.hasPv ?? false) && Get.isEn)
+            /* if ((siteDetail?.hasPv ?? false) && Get.isEn)
               Row(
                 children: [
                   Expanded(
@@ -1158,9 +1158,8 @@ class OliveItemView extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-
-            if ((siteDetail?.hasPv ?? false) && !Get.isEn)
+              ),*/
+            if ((siteDetail?.hasPv ?? false))
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

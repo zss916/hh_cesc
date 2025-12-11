@@ -430,6 +430,8 @@ class BatteryClusterPage extends StatelessWidget {
                                 maxX: logic.arrMaxX.toDouble(),
                                 maxY: logic.arrMaxY,
                                 minY: logic.arrMinY,
+                                maxYR: logic.arrMaxYR,
+                                minYR: logic.arrMinYR,
                               ),
                       );
                     },

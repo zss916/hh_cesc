@@ -154,7 +154,7 @@ class BuildEnvironmental extends StatelessWidget {
                                 TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: "$coal",
+                                      text: coal.toStringAsFixed(2),
                                       children: [
                                         TextSpan(
                                           text: ' t',

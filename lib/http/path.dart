@@ -1,6 +1,7 @@
 class ApiPath {
-  static const String baseUrl = "https://ems.cescpower.com:9088/api/v1";
+  static const String baseUrl = "https://cloud.honghede.com/api/v1";
   //cloud.honghede.com/api/v1
+  //"https://ems.cescpower.com:9088/api/v1"
 
   ///获取当前登录用户信息
   static const String getInfoApp = "/business/admin/infoApp";
