@@ -428,7 +428,7 @@ class BatteryView extends StatelessWidget {
                 top: 15.h,
                 child: Text(
                   "(%)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  style: TextStyle(color: Color(0xFF0BC3C4), fontSize: 12.sp),
                 ),
               ),
             ],

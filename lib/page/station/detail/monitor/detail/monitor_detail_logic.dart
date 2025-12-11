@@ -190,7 +190,7 @@ class MonitorDetailLogic extends GetxController {
           arrMaxX = arrList.length.toDouble();
         }
         update(["realTimeData"]);
-        //debugPrint("maxY:$maxY, minY:$minY,maxY:$maxX");
+        debugPrint("maxY:$arrMaxY, minY:$arrMinY");
       }
     } else if (devType == "PCS" || devType == "METER") {
       final (

@@ -81,6 +81,11 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                       show: true,
                       drawHorizontalLine: true,
                       drawVerticalLine: false,
+                      getDrawingHorizontalLine: (_) => FlLine(
+                        color: Color(0x800BC3C4),
+                        strokeWidth: 0.4,
+                        dashArray: [8, 4],
+                      ),
                     ),
                     titlesData: FlTitlesData(
                       rightTitles: AxisTitles(
@@ -94,7 +99,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                               child: Text(
                                 "$value",
                                 style: TextStyle(
-                                  color: Color(0xA8FFFFFF),
+                                  color: Color(0x800BC3C4),
                                   fontWeight: FontWeight.w400,
                                   fontSize: 8.sp,
                                 ),
@@ -119,7 +124,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                                       (widget.arrList[value.toInt()].time ?? 0)
                                           .hm2,
                                       style: TextStyle(
-                                        color: Color(0xA8FFFFFF),
+                                        color: Colors.transparent,
                                         fontWeight: FontWeight.w400,
                                         fontSize: 10.sp,
                                       ),
@@ -244,18 +249,44 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                           showTitles: true,
                           reservedSize: 30,
                           getTitlesWidget: (value, meta) {
-                            return SideTitleWidget(
-                              space: 2,
-                              meta: meta,
-                              child: Text(
-                                "$value",
-                                style: TextStyle(
-                                  color: Color(0xA8FFFFFF),
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 8.sp,
+                            return switch (value) {
+                              _ when value == meta.max => SideTitleWidget(
+                                space: 2,
+                                meta: meta,
+                                child: Text(
+                                  "$value",
+                                  style: TextStyle(
+                                    color: Color(0xFF3874F2),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 8.sp,
+                                  ),
                                 ),
                               ),
-                            );
+                              _ when value == meta.min => SideTitleWidget(
+                                space: 2,
+                                meta: meta,
+                                child: Text(
+                                  "$value",
+                                  style: TextStyle(
+                                    color: Color(0xFF3874F2),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 8.sp,
+                                  ),
+                                ),
+                              ),
+                              _ => SideTitleWidget(
+                                space: 2,
+                                meta: meta,
+                                child: Text(
+                                  "$value",
+                                  style: TextStyle(
+                                    color: Color(0xA8FFFFFF),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 8.sp,
+                                  ),
+                                ),
+                              ),
+                            };
                           },
                         ), // 左边Y轴标签禁用，手动创建
                       ),
