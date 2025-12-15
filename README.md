@@ -53,10 +53,16 @@ Apple：账号：maojingshu2019@gmail.com 密码：Mao33071!
 1.创建AppID、Bundle ID
 
 
-com.bujunshou.product
+
 
 flutter适配鸿蒙插件库：https://gitcode.com/openharmony-tpc/flutter_packages
 
-Google 审核账号
+Google 审核账号：
 cesc
 cesc123!
+
+Google 包名:
+com.bujunshou.product
+
+Apple 包名:
+com.bujunshou.bjstools

@@ -386,7 +386,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
   List<LineChartBarData> lineBarsData2(List<SocEntity> lines) {
     return [
       LineChartBarData(
-        isCurved: true,
+        isCurved: false,
         color: Color(0xFF0BC3C4),
         barWidth: 1,
         isStrokeCapRound: true,
@@ -408,7 +408,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
     return [
       LineChartBarData(
         ///是否圆一点
-        isCurved: true,
+        isCurved: false,
         color: Color(0xFF3874F2),
         barWidth: 1,
         isStrokeCapRound: true,
