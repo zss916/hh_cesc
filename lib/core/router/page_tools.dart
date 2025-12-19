@@ -38,14 +38,17 @@ class PageTools {
   static toSplash() => Get.toNamed(APages.splash);
 
   ///监控详情
-  static toMonitorDetail({
-    required String siteId,
-    required String devType,
-    required String title,
-  }) => Get.toNamed(
-    APages.monitorDetail,
-    arguments: {"title": title, "devType": devType, 'siteId': siteId},
-  );
+  static toMonitorDetail({required String siteId, MonitorModel? data}) =>
+      Get.toNamed(
+        APages.monitorDetail,
+        arguments: {"data": data, 'siteId': siteId},
+      );
+
+  static toMonitorDetailV1({required String siteId, MonitorModel? data}) =>
+      Get.toNamed(
+        APages.monitorDetailV1,
+        arguments: {"data": data, 'siteId': siteId},
+      );
 
   ///监控详情
   static toBatteryCluster({

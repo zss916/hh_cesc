@@ -42,6 +42,9 @@ class SiteDetailEntity {
   bool? hasPv;
   String? protocolVersion; //协议版本
 
+  ///v1
+  bool get isV1 => protocolVersion == "v1";
+
   SiteDetailEntity();
 
   factory SiteDetailEntity.fromJson(Map<String, dynamic> json) =>

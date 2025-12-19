@@ -28,8 +28,7 @@ MessageItemEntity $MessageItemEntityFromJson(Map<String, dynamic> json) {
     messageItemEntity.channelType = channelType;
   }
   final int? channelDestination = jsonConvert.convert<int>(
-    json['channelDestination'],
-  );
+      json['channelDestination']);
   if (channelDestination != null) {
     messageItemEntity.channelDestination = channelDestination;
   }
@@ -46,8 +45,7 @@ MessageItemEntity $MessageItemEntityFromJson(Map<String, dynamic> json) {
     messageItemEntity.sendTime = sendTime;
   }
   final String? expirationTime = jsonConvert.convert<String>(
-    json['expirationTime'],
-  );
+      json['expirationTime']);
   if (expirationTime != null) {
     messageItemEntity.expirationTime = expirationTime;
   }

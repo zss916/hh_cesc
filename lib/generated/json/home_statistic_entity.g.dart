@@ -1,5 +1,7 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
 
 HomeStatisticEntity $HomeStatisticEntityFromJson(Map<String, dynamic> json) {
   final HomeStatisticEntity homeStatisticEntity = HomeStatisticEntity();

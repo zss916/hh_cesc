@@ -9,6 +9,7 @@ import 'package:cescpro/http/bean/com_type_list_entity.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:cescpro/http/bean/power_entity.dart';
 import 'package:cescpro/http/bean/soc_entity.dart';
+import 'package:cescpro/page/station/detail/monitor/monitor_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,14 +25,19 @@ class MonitorDetailLogic extends GetxController {
   ComTypeListEntity? comTypeList;
   List<ComCardVoEntity> comCardVoList = [];
   String compTree = "";
+  bool isV1 = false;
 
   @override
   void onInit() {
     super.onInit();
     if (Get.arguments != null) {
-      devType = Get.arguments["devType"] as String?;
       siteId = Get.arguments["siteId"] as String?;
-      title = Get.arguments["title"] as String;
+      // devType = Get.arguments["devType"] as String?;
+      // title = Get.arguments["title"] as String;
+      MonitorModel? data = Get.arguments["data"] as MonitorModel?;
+      devType = data?.type;
+      title = data?.title ?? "";
+      isV1 = data?.isV1 ?? false;
     }
   }
 

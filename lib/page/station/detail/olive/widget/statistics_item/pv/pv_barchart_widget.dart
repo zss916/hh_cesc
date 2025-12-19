@@ -1,3 +1,4 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,12 +7,13 @@ class PVBarchartItemWidget extends StatefulWidget {
   final List<double> data; // 数据列表
   final List<String> labels; // 标签列表
   final double maxY; // Y轴的最大值
-
+  final double minY; // Y轴的最大值
   const PVBarchartItemWidget({
     super.key,
     required this.data,
     required this.labels,
     required this.maxY,
+    required this.minY,
   });
 
   @override
@@ -41,7 +43,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        if (widget.data.isNotEmpty)
+        /* if (widget.data.isNotEmpty && widget.minY >= 0)
           PositionedDirectional(
             start: 0,
             top: 3,
@@ -60,11 +62,11 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                 );
               }),
             ),
-          ),
+          ),*/
 
         // 滚动视图中的柱状图
         Container(
-          margin: EdgeInsetsDirectional.only(start: 30.w), // 确保柱状图不与Y轴标签重叠
+          margin: EdgeInsetsDirectional.only(start: 0.w), // 确保柱状图不与Y轴标签重叠
           child: SingleChildScrollView(
             controller: _scrollController,
             scrollDirection: Axis.horizontal,
@@ -84,8 +86,10 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
               child: BarChart(
                 BarChartData(
                   maxY: widget.maxY,
-                  minY: 0,
-                  barTouchData: BarTouchData(enabled: false), // 禁用触摸数据
+                  minY: (widget.minY >= 0) ? 0 : widget.minY,
+                  barTouchData: widget.labels.isEmpty
+                      ? BarTouchData(enabled: false)
+                      : buildBarTouchData(),
                   titlesData: _buildTitlesData(), // 构建标题数据
                   borderData: FlBorderData(show: false), // 边框数据
                   barGroups: _buildBarGroups(), // 构建柱状图组
@@ -93,9 +97,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                     show: true,
                     drawHorizontalLine: true,
                     drawVerticalLine: false,
-                    horizontalInterval: widget.maxY == 0
-                        ? 10
-                        : ((widget.maxY) / 4), // 确保水平线间隔与 Y 轴标签一致
+                    //horizontalInterval: showInterval, // 确保水平线间隔与 Y 轴标签一致
                     getDrawingHorizontalLine: (value) {
                       return FlLine(
                         strokeWidth: 0.4,
@@ -117,7 +119,16 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                         y: widget.maxY,
                         // color: Colors.transparent, // 水平线颜色
                         // strokeWidth: 1, // 水平线宽度
-                        color: Color(0xA8FFFFFF),
+                        color: Color(0xFFFEDB65),
+                        strokeWidth: 0.4,
+                        dashArray: [8, 4],
+                      ),
+
+                      HorizontalLine(
+                        y: widget.minY,
+                        // color: Colors.transparent, // 水平线颜色
+                        // strokeWidth: 1, // 水平线宽度
+                        color: Color(0xFFFEDB65),
                         strokeWidth: 0.4,
                         dashArray: [8, 4],
                       ),
@@ -130,6 +141,56 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
           ),
         ),
       ],
+    );
+  }
+
+  /*  double get showInterval {
+    if (widget.maxY == 0 && widget.minY == 0) {
+      return 10;
+    } else if (widget.maxY > 0 && widget.minY > 0) {
+      return (widget.maxY) / 4;
+    } else if (widget.maxY >= 0 && widget.minY < 0) {
+      return 50;
+    }
+    return 10;
+  }*/
+
+  BarTouchData buildBarTouchData() {
+    return BarTouchData(
+      enabled: true,
+      touchTooltipData: widget.labels.isEmpty
+          ? null
+          : BarTouchTooltipData(
+              getTooltipColor: (_) => Color(0x66000000),
+              tooltipHorizontalAlignment: FLHorizontalAlignment.right,
+              tooltipMargin: -30,
+              direction: TooltipDirection.auto,
+              getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                return BarTooltipItem(
+                  '${widget.labels[groupIndex]}\n',
+                  TextStyle(color: Color(0xFFFEDB65), fontSize: 8.sp),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: (rod.toY).toDouble().formatAmount(),
+                      style: TextStyle(
+                        color: Color(0xFFFEDB65),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+      touchCallback: (FlTouchEvent event, barTouchResponse) {
+        setState(() {
+          if (!event.isInterestedForInteractions ||
+              barTouchResponse == null ||
+              barTouchResponse.spot == null) {
+            return;
+          }
+        });
+      },
     );
   }
 
@@ -160,8 +221,27 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
-          showTitles: false,
-          reservedSize: 30,
+          showTitles: true,
+          reservedSize: 40,
+          getTitlesWidget: (value, meta) {
+            final style = TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+              fontSize: 8.sp,
+            );
+            final style2 = TextStyle(
+              color: Color(0xFFFEDB65),
+              fontWeight: FontWeight.w400,
+              fontSize: 10.sp,
+            );
+
+            bool isShow = (value == widget.minY) || (value == widget.maxY);
+            return SideTitleWidget(
+              space: 1,
+              meta: meta,
+              child: Text("$value", style: isShow ? style2 : style),
+            );
+          },
         ), // 左边Y轴标签禁用，手动创建
       ),
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),

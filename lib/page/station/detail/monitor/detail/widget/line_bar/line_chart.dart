@@ -81,8 +81,11 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                       show: true,
                       drawHorizontalLine: true,
                       drawVerticalLine: false,
-                      getDrawingHorizontalLine: (_) => FlLine(
-                        color: Color(0x800BC3C4),
+                      getDrawingHorizontalLine: (value) => FlLine(
+                        color:
+                            ((value == widget.maxYR) || (value == widget.minYR))
+                            ? Colors.cyanAccent
+                            : Color(0x800BC3C4),
                         strokeWidth: 0.4,
                         dashArray: [8, 4],
                       ),
@@ -93,13 +96,19 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                           showTitles: true,
                           reservedSize: 30,
                           getTitlesWidget: (value, meta) {
+                            bool isShow =
+                                (value == widget.maxYR) ||
+                                (value == widget.minYR);
+
                             return SideTitleWidget(
                               space: 2,
                               meta: meta,
                               child: Text(
-                                "$value",
+                                value.formatNum(),
                                 style: TextStyle(
-                                  color: Color(0x800BC3C4),
+                                  color: isShow
+                                      ? Colors.cyanAccent
+                                      : Color(0x800BC3C4),
                                   fontWeight: FontWeight.w400,
                                   fontSize: 8.sp,
                                 ),
@@ -142,7 +151,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                               space: 2,
                               meta: meta,
                               child: Text(
-                                "$value",
+                                "",
                                 style: TextStyle(
                                   color: Colors.transparent,
                                   fontWeight: FontWeight.w400,
@@ -175,13 +184,27 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                     lineBarsData: lineBarsData2(widget.arrList),
                     minX: 0,
                     maxX: widget.maxX.toDouble(),
-                    maxY: 100,
-                    minY: 0,
+                    maxY: widget.maxYR,
+                    minY: widget.minYR,
                     extraLinesData: ExtraLinesData(
                       horizontalLines: [
-                        HorizontalLine(
+                        /*  HorizontalLine(
                           y: 0,
                           color: Colors.transparent, // 水平线颜色
+                          strokeWidth: 0.4, // 水平线宽度
+                        ),
+*/
+                        HorizontalLine(
+                          y: widget.maxYR,
+                          dashArray: [8, 4],
+                          color: Colors.cyanAccent, // 水平线颜色
+                          strokeWidth: 0.4, // 水平线宽度
+                        ),
+
+                        HorizontalLine(
+                          y: widget.minYR,
+                          dashArray: [8, 4],
+                          color: Colors.cyanAccent, // 水平线颜色
                           strokeWidth: 0.4, // 水平线宽度
                         ),
                       ],
@@ -254,7 +277,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                                 space: 2,
                                 meta: meta,
                                 child: Text(
-                                  "$value",
+                                  value.formatNum(),
                                   style: TextStyle(
                                     color: Color(0xFF3874F2),
                                     fontWeight: FontWeight.w400,
@@ -266,7 +289,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                                 space: 2,
                                 meta: meta,
                                 child: Text(
-                                  "$value",
+                                  value.formatNum(),
                                   style: TextStyle(
                                     color: Color(0xFF3874F2),
                                     fontWeight: FontWeight.w400,
@@ -278,7 +301,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                                 space: 2,
                                 meta: meta,
                                 child: Text(
-                                  "$value",
+                                  value.formatNum(),
                                   style: TextStyle(
                                     color: Color(0xA8FFFFFF),
                                     fontWeight: FontWeight.w400,
@@ -317,6 +340,20 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                     extraLinesData: ExtraLinesData(
                       horizontalLines: [
                         HorizontalLine(
+                          y: widget.maxY,
+                          dashArray: [8, 4],
+                          color: Color(0xFF3874F2), // 水平线颜色
+                          strokeWidth: 0.4, // 水平线宽度
+                        ),
+
+                        HorizontalLine(
+                          y: widget.minY,
+                          dashArray: [8, 4],
+                          color: Color(0xFF3874F2), // 水平线颜色
+                          strokeWidth: 0.4, // 水平线宽度
+                        ),
+
+                        HorizontalLine(
                           y: 0,
                           color: Colors.transparent, // 水平线颜色
                           strokeWidth: 0.4, // 水平线宽度
@@ -344,7 +381,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
   );
 
   ///折现数据列表
-  List<LineChartBarData> lineBarsData(List<SocEntity> lines) {
+  /* List<LineChartBarData> lineBarsData(List<SocEntity> lines) {
     return [
       LineChartBarData(
         ///是否圆一点
@@ -381,7 +418,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
         ],
       ),
     ];
-  }
+  }*/
 
   List<LineChartBarData> lineBarsData2(List<SocEntity> lines) {
     return [

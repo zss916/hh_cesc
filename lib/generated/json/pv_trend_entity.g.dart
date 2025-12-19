@@ -8,8 +8,7 @@ PvTrendEntity $PvTrendEntityFromJson(Map<String, dynamic> json) {
     pvTrendEntity.dateTime = dateTime;
   }
   final double? summaryValue = jsonConvert.convert<double>(
-    json['summaryValue'],
-  );
+      json['summaryValue']);
   if (summaryValue != null) {
     pvTrendEntity.summaryValue = summaryValue;
   }
@@ -24,7 +23,10 @@ Map<String, dynamic> $PvTrendEntityToJson(PvTrendEntity entity) {
 }
 
 extension PvTrendEntityExtension on PvTrendEntity {
-  PvTrendEntity copyWith({String? dateTime, double? summaryValue}) {
+  PvTrendEntity copyWith({
+    String? dateTime,
+    double? summaryValue,
+  }) {
     return PvTrendEntity()
       ..dateTime = dateTime ?? this.dateTime
       ..summaryValue = summaryValue ?? this.summaryValue;

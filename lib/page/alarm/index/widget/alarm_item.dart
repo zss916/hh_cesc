@@ -9,7 +9,8 @@ import 'package:get/get.dart';
 
 class AlarmItem extends StatelessWidget {
   final AlarmItemEntity item;
-  const AlarmItem({super.key, required this.item});
+  final bool isLast;
+  const AlarmItem({super.key, required this.item, required this.isLast});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,11 @@ class AlarmItem extends StatelessWidget {
           Container(
             width: double.maxFinite,
             //constraints: BoxConstraints(minHeight: 200),
-            margin: EdgeInsetsDirectional.only(start: 16.w, end: 16.w),
+            margin: EdgeInsetsDirectional.only(
+              start: 16.w,
+              end: 16.w,
+              bottom: isLast ? 50.h : 0,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
               color: Color(0xFF313540),

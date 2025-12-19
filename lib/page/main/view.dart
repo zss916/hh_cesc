@@ -70,13 +70,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
           extendBody: true,
           body: IndexedStack(
             index: select,
-            children: [
-              //AppKeepAlivePage(),
-              HomePage(),
-              StationPage(),
-              AlarmPage(),
-              ServicePage(),
-            ],
+            children: [HomePage(), StationPage(), AlarmPage(), ServicePage()],
           ),
           bottomNavigationBar: Container(
             clipBehavior: Clip.hardEdge,

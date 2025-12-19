@@ -22,7 +22,10 @@ Map<String, dynamic> $PowerEntityToJson(PowerEntity entity) {
 }
 
 extension PowerEntityExtension on PowerEntity {
-  PowerEntity copyWith({int? time, double? power}) {
+  PowerEntity copyWith({
+    int? time,
+    double? power,
+  }) {
     return PowerEntity()
       ..time = time ?? this.time
       ..power = power ?? this.power;

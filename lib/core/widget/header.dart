@@ -6,6 +6,6 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialClassicHeader(height: 40, color: Colors.white);
+    return const MaterialClassicHeader(height: 40, color: Colors.black);
   }
 }

@@ -42,7 +42,7 @@ dependencies:
   #fl_chart_flutter:
   easy_date_timeline: 2.0.9
   calendar_date_picker2: 2.0.1
-  easy_refresh: 3.4.0
+  #easy_refresh: 3.4.0
   #国家数据
   country_state_city: 0.1.6
   #加载更多
@@ -53,9 +53,12 @@ dependencies:
   #logo
   flutter_launcher_icons: 0.14.4
   #本地存储
-  flutter_secure_storage: ^9.2.4
+  #flutter_secure_storage: ^9.2.4
   #splash
   flutter_native_splash: 2.4.7
+  #fireBase
+  #firebase_core: 4.3.0
+
   flutter_echart:
     path: plugins/flutter_echart-master
   custom_navigation_bar:

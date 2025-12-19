@@ -11,9 +11,6 @@ class LoginLogic extends GetxController {
     super.onClose();
   }
 
-  //String account = 'cesc';
-  //String password = 'cesc123!';
-
   String account = '';
   String password = '';
 

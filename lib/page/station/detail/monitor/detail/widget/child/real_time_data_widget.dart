@@ -40,29 +40,32 @@ class RealTimeDataWidget extends StatelessWidget {
                 width: double.maxFinite,
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          comCardVoList.first.cardName ?? "",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFFFFFFFF),
+                    if (comCardVoList.first.cardName != null)
+                      Row(
+                        children: [
+                          Text(
+                            comCardVoList.first.cardName ?? "",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFFFFFFFF),
+                            ),
                           ),
-                        ),
-                        Spacer(),
-                      ],
-                    ),
-                    Divider(height: 16.h, color: Colors.transparent),
+                          Spacer(),
+                        ],
+                      ),
+                    if (comCardVoList.first.cardName != null)
+                      Divider(height: 16.h, color: Colors.transparent),
                     ListView.separated(
                       shrinkWrap: true,
+                      padding: EdgeInsets.zero,
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: (comCardVoList.first.defaultList ?? []).length,
                       itemBuilder: (BuildContext context, int index) {
                         ComCardVoDefaultList item =
                             (comCardVoList.first.defaultList ?? [])[index];
                         return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 16.w),
-                          padding: EdgeInsetsDirectional.all(16.r),
+                          //margin: EdgeInsets.symmetric(horizontal: 16.w),
+                          //  padding: EdgeInsetsDirectional.all(16.r),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Color(0xFF313540),
@@ -71,7 +74,7 @@ class RealTimeDataWidget extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                item.showFieldName,
+                                item.showFieldName.trim(),
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Color(0xA6FFFFFF),

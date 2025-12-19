@@ -1,12 +1,12 @@
 class ApiPath {
-  ///国外版本
-  static const String baseUrl = "https://cloud.honghede.com/api/v1";
-
-  ///国内版本
-
-  // static const String baseUrl = "https://ems.cescpower.com:9088/api/v1";
   //cloud.honghede.com/api/v1
   //"https://ems.cescpower.com:9088/api/v1"
+
+  ///国外版本
+  //static const String baseUrl = "https://cloud.honghede.com/api/v1";
+
+  ///国内版本
+  static const String baseUrl = "https://ems.cescpower.com:9088/api/v1";
 
   ///获取当前登录用户信息
   static const String getInfoApp = "/business/admin/infoApp";
@@ -22,6 +22,8 @@ class ApiPath {
 
   ///站点列表
   static const String postSiteList = "/business/site/listApp";
+
+  static const String postSiteList2 = "/business/site/listAll";
 
   ///站点拓扑图
   static const String getSiteTopology = "/business/site/siteTopology";
@@ -55,6 +57,10 @@ class ApiPath {
   ///获取协议支持的设备类型列表
   static const String getSupportDevTypesV2 =
       "/business/protocol/supportDevTypesV2";
+
+  ///v1 版本的设备类型
+  static const String getSupportDevTypesV1 =
+      "/business/protocol/supportDevTypes";
 
   ///天气信息
   static const String postForecastApp = "/business/weather/site/forecastApp";
@@ -94,4 +100,31 @@ class ApiPath {
 
   ///查询用户某个渠道的指定位置的未读消息
   static const String getUnreadNum = "/business/message/unreadNum";
+
+  ///v1 获取arr
+  static const String getArrInfo = "/business/device/getArrInfo";
+
+  ///v1 获取clu
+  static const String getCluInfo = "/business/device/getCluInfo";
+
+  ///v1
+  static const String getPcsInfo = "/business/device/getPcsInfo";
+  //siteId=415&did=326&pcsId=0
+
+  ///v1
+  static const String getHotMg = "/business/device/hotmg";
+  //business/device/hotmg?siteId=415
+
+  ///v1
+  static const String getMeterInfo = "/business/device/getMeterInfo";
+  //siteId=415&did=326&meterId=0
+
+  ///v1
+  static const String getDidoInfo = "/business/device/getDidoInfo";
+
+  ///v1
+  static const String getCellInfo = "/business/device/getCellInfo";
+
+  ///v1
+  static const String getIdsTree = "/business/site/getIdsTree";
 }

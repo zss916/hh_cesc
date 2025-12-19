@@ -11,7 +11,11 @@ class AlarmLogic extends GetxController {
   //
   int? alarmLevel;
   // String? adcode;
-  SiteEntity? site;
+  // SiteEntity? site
+  int? siteId;
+  String? siteName;
+
+  RefreshController refreshCtrl = RefreshController(initialRefresh: false);
 
   @override
   void onInit() {
@@ -28,6 +32,7 @@ class AlarmLogic extends GetxController {
 
   @override
   void onClose() {
+    refreshCtrl.dispose();
     super.onClose();
   }
 
@@ -50,15 +55,21 @@ class AlarmLogic extends GetxController {
       pageNum: pageNum,
       adcode: country?.code,
       alarmLevel: alarmLevel,
-      siteId: site?.id,
+      siteId: siteId,
       startTimeMill: startTimeMill,
       endTimeMill: endTimeMill,
     ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       if (pageNum == 1) {
         data.assignAll(value);
+        refreshCtrl.refreshCompleted();
       } else {
         data.addAll(value);
+        if (value.isEmpty) {
+          refreshCtrl.loadNoData();
+        } else {
+          refreshCtrl.loadComplete();
+        }
       }
     } else {
       pageNum -= 1;

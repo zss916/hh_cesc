@@ -30,7 +30,6 @@ class _DeviceSelectSheetWidgetState extends State<DeviceSelectSheetWidget> {
     "ARR",
     "CLU",
     "PCS",
-    "PCS",
     "METER",
     "COOL",
     "AIR_COOL",

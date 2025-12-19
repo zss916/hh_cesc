@@ -6,6 +6,7 @@ import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/http/bean/pv_trend_entity.dart';
+import 'package:cescpro/http/bean/site_data_entity.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
@@ -127,22 +128,22 @@ class SiteAPI {
   }
 
   ///站点列表
-  static Future<(bool, List<SiteEntity>)> postSites() async {
+  static Future<(bool, List<SiteDataEntity>)> postSites() async {
     try {
-      var result = await Http.instance.post(ApiPath.postSiteList, data: {});
+      var result = await Http.instance.post(ApiPath.postSiteList2, data: {});
       if (result["code"] == HttpStatus.ok) {
-        List<SiteEntity> value = await compute(
+        List<SiteDataEntity> value = await compute(
           (List<dynamic> jsonList) =>
-              jsonList.map((e) => SiteEntity.fromJson(e)).toList(),
-          (result['data']['list'] as List),
+              jsonList.map((e) => SiteDataEntity.fromJson(e)).toList(),
+          (result['data'] as List),
         );
         return (true, value);
       } else {
         //AppLoading.toast(result["message"]);
-        return (false, <SiteEntity>[]);
+        return (false, <SiteDataEntity>[]);
       }
     } catch (error) {
-      return (false, <SiteEntity>[]);
+      return (false, <SiteDataEntity>[]);
     }
   }
 

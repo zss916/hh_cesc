@@ -1,7 +1,7 @@
 part of 'index.dart';
 
 class MainLogic extends GetxController {
-  List<SiteEntity> sites = [];
+  List<SiteDataEntity> sites = [];
 
   @override
   void onInit() {
@@ -15,7 +15,7 @@ class MainLogic extends GetxController {
   }
 
   loadSites() async {
-    final (bool isSuccessful, List<SiteEntity> value) =
+    final (bool isSuccessful, List<SiteDataEntity> value) =
         await SiteAPI.postSites();
     if (isSuccessful) {
       sites.assignAll(value);

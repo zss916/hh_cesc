@@ -382,6 +382,44 @@ class TKey {
   static const String second = "second";
 
   static const String dayTitle = "dayTitle";
+
+  static const String stackInfo = "stackInfo";
+
+  static const String cluInfo = "cluInfo";
+
+  static const String pcsInfo = "pcsInfo";
+
+  static const String hotInfo = "hotInfo";
+
+  static const String meterInfo = "meterInfo";
+
+  static const String didoInfo = "didoInfo";
+
+  static const String singleInfo = "singleInfo";
+
+  static const String stack = "stack";
+
+  static const String cluster = "cluster";
+
+  static const String demandMeter = "demandMeter";
+
+  static const String meteringMeter = "meteringMeter";
+
+  static const String pvMeter = "pvMeter";
+
+  static const String energyStorageMeter = "energyStorageMeter";
+
+  static const String loadMeter = "loadMeter";
+
+  static const String communicationStatus = "communicationStatus";
+
+  static const String runStatus = "runStatus";
+
+  static const String notTriggered = "notTriggered";
+
+  static const String triggered = "triggered";
+
+  static const String unknown = "unknown";
 }
 
 const en = {
@@ -407,16 +445,15 @@ const en = {
   "moneyWUnit": "Ten Thousand (\$)",
   "stationOverview": "Station Overview",
   "energyStorageInstalledCapacity": "Installed Capacity",
-  "cumulativeChargingCapacity": "Accumulated Charging Energy",
+  "cumulativeChargingCapacity": "Total Chg Energy",
   "deviceNum": "Device Count",
   "stationNum": "Station Count",
   "stationStatus": "Station Status",
   "environmentalValue": "Environmental Value",
   "resolveStandardCoal": "Standard Coal Consumption",
   "co2EmissionReduction": "CO2 Emission Reduction",
-  "cumulativeDischargeCapacity": "Accumulated Discharge Energy",
-  "accumulatedPhotovoltaicPowerGeneration":
-      "Accumulated Photovoltaic Power Generation",
+  "cumulativeDischargeCapacity": "Total Dchg Energy",
+  "accumulatedPhotovoltaicPowerGeneration": "Total PV Generation",
   "reset": "Reset",
   "confirm": "Confirm",
   "charge": "Charge",
@@ -527,10 +564,10 @@ const en = {
   "currentMonthNeg": "Current Month Discharge",
   "neg": "Discharge",
   "todayNeg": "Today Discharge",
-  "totalPVNeg": "Total PV Power Generation",
-  "currentYearPVNeg": "Current Year PV Power Generation",
-  "currentMonthPVNeg": "Current Month PV Power Generation",
-  "todayPVNeg": "Today PV Power Generation",
+  "totalPVNeg": "Total PV Generation",
+  "currentYearPVNeg": "Current Year PV Generation",
+  "currentMonthPVNeg": "Current Month PV Generation",
+  "todayPVNeg": "Today PV Generation",
   "alarmTotal": "Alarm Total",
   "other": "Other",
   "alarmCount": "%s Units",
@@ -574,4 +611,24 @@ const en = {
   "minute": "minute",
   "second": "second",
   "dayTitle": "day",
+  "stackInfo": "Stack Information",
+  "cluInfo": "Cluster Information",
+  "pcsInfo": "PCS Information",
+  "hotInfo": "Thermal Management Information",
+  "meterInfo": "Meter Information",
+  "didoInfo": "DI/DO",
+  "singleInfo": "Cell Information",
+  "stack": "Stack",
+  "cluster": "Cluster",
+  "demandMeter": "Demand Meter",
+  "meteringMeter": "Metering Meter",
+  "pvMeter": "PV Metering Meter",
+  "energyStorageMeter": "Energy Storage Meter",
+  "loadMeter": "Load Meter",
+  "alarmStatus": "Alarm Status",
+  "communicationStatus": "Communication Status",
+  "runStatus": "Run Status",
+  "notTriggered": "Not Triggered",
+  "triggered": "Triggered",
+  "unknown": "Unknown",
 };

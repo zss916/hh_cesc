@@ -102,6 +102,21 @@ extension AlarmLeveTime on int {
 }
 
 extension AmountFormat on num {
+  String formatNum() {
+    if ((this.toString().length - this.toString().lastIndexOf(".") - 1) < 1) {
+      //小数点后有几位小数
+      return this
+          .toStringAsFixed(1)
+          .substring(0, this.toString().lastIndexOf(".") + 1 + 1)
+          .toString();
+    } else {
+      return this
+          .toString()
+          .substring(0, this.toString().lastIndexOf(".") + 1 + 1)
+          .toString();
+    }
+  }
+
   String formatAmount() {
     if ((this.toString().length - this.toString().lastIndexOf(".") - 1) < 2) {
       //小数点后有几位小数

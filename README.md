@@ -6,6 +6,9 @@ https://codesign.qq.com/s/598224312230189
 web 端
 https://ems.cescpower.com:9088/#/login
 
+国外版本
+https://cloud.honghede.com/#/login
+
 账号：ntbkd 密码：ntbkd123!
 
 1.logo(android ok,ios ok) ，splash(android ok,ios ok) 
@@ -24,9 +27,13 @@ flutter build apk --release
 
 bug文档: https://ka1vopqysgx.feishu.cn/wiki/RgTKwjZLSiepeNkjEzmcKPzLnpe?from=from_copylink
 
-
+账号：
 Admin
 HhAdmin123#
+
+账号：
+admin
+Admin123!
 
 
 flutter build ipa --release

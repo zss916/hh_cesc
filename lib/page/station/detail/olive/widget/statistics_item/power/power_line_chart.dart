@@ -120,7 +120,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
                           space: 2,
                           meta: meta,
                           child: Text(
-                            "$value",
+                            value.formatNum(),
                             style: TextStyle(
                               color: Color(0xA8FFFFFF),
                               fontWeight: FontWeight.w400,
@@ -184,7 +184,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
   ) {
     return LineChartBarData(
       ///是否圆一点
-      isCurved: true,
+      isCurved: false,
       color: color,
       barWidth: 1,
       isStrokeCapRound: true,

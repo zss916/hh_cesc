@@ -109,6 +109,7 @@ class BuildStationOverview extends StatelessWidget {
                     TKey.energyStorageInstalledCapacity.tr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    minFontSize: 10,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
                   ),
                 ),
@@ -189,6 +190,7 @@ class BuildStationOverview extends StatelessWidget {
                     TKey.cumulativeChargingCapacity.tr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    minFontSize: 10,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
                   ),
                 ),
@@ -265,9 +267,10 @@ class BuildStationOverview extends StatelessWidget {
                 Container(
                   margin: EdgeInsetsDirectional.only(top: 2),
                   width: double.maxFinite,
-                  child: Text(
+                  child: AutoSizeText(
                     TKey.cumulativeDischargeCapacity.tr,
                     maxLines: 1,
+                    minFontSize: 10,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
                   ),
@@ -347,9 +350,10 @@ class BuildStationOverview extends StatelessWidget {
                 Container(
                   margin: EdgeInsetsDirectional.only(top: 2),
                   width: double.maxFinite,
-                  child: Text(
+                  child: AutoSizeText(
                     TKey.accumulatedPhotovoltaicPowerGeneration.tr,
                     maxLines: 1,
+                    minFontSize: 10,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
                   ),

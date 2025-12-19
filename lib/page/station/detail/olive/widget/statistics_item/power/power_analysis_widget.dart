@@ -95,9 +95,25 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      /*if (widget.logic.powerLines.isNotEmpty)
+                        Container(
+                          width: double.maxFinite,
+                          margin: EdgeInsetsDirectional.only(
+                            top: 10.h,
+                            start: 12.w,
+                          ),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "(KW)",
+                            style: TextStyle(
+                              color: Color(0x80FFFFFF),
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ),*/
                       Container(
                         color: Colors.transparent,
-                        height: 300.h,
+                        height: 320.h,
                         width: double.maxFinite,
                         child: buildBody(
                           viewState: widget.logic.powerViewStatus,
@@ -124,17 +140,21 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                       ),
                     ],
                   ),
+
+                  if (widget.logic.powerLines.isNotEmpty)
+                    PositionedDirectional(
+                      top: 10.h,
+                      start: 10.w,
+                      child: Text(
+                        "(KW)",
+                        style: TextStyle(
+                          color: Color(0x80FFFFFF),
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
                 ],
               ),
-              if (widget.logic.powerLines.isNotEmpty)
-                PositionedDirectional(
-                  start: 0.w,
-                  top: 15.h,
-                  child: Text(
-                    "(KW)",
-                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
-                  ),
-                ),
             ],
           ),
         ),

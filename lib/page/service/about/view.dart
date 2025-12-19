@@ -71,7 +71,7 @@ class AboutPage extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            "V1.0.0",
+                            "V1.0.2",
                             style: TextStyle(
                               color: Color(0xDEFFFFFF),
                               fontSize: 16.sp,

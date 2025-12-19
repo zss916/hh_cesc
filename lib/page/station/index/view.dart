@@ -83,7 +83,9 @@ class StationPage extends StatelessWidget {
 
   Widget buildBody({required int viewState, required StationLogic logic}) {
     return switch (viewState) {
-      _ when viewState == ViewStateEnum.common.index => buildList(logic: logic),
+      _ when viewState == ViewStateEnum.common.index => buildList2(
+        logic: logic,
+      ),
       _ when viewState == ViewStateEnum.empty.index => buildEmpty(logic: logic),
       _ when viewState == ViewStateEnum.loading.index => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
@@ -98,7 +100,7 @@ class StationPage extends StatelessWidget {
     height: double.maxFinite,
     child: GestureDetector(
       onTap: () {
-        logic.refreshData();
+        logic.refreshData(isLoading: true);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -120,6 +122,7 @@ class StationPage extends StatelessWidget {
     ),
   );
 
+  /*
   Widget buildList({required StationLogic logic}) {
     return EasyRefresh(
       header: MaterialHeader(),
@@ -137,8 +140,34 @@ class StationPage extends StatelessWidget {
       ),
     );
   }
+*/
 
-  Widget buildItem(SiteEntity item) {
+  Widget buildList2({required StationLogic logic}) {
+    return SmartRefresher(
+      header: MaterialClassicHeader(),
+      enablePullDown: true,
+      enablePullUp: true,
+      controller: logic.refreshCtrl,
+      onRefresh: () {
+        logic.refreshData();
+      },
+      onLoading: () {
+        logic.loadMoreData();
+      },
+      child: ListView.separated(
+        padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
+        itemCount: logic.data.length,
+        itemBuilder: (BuildContext context, int index) {
+          SiteEntity item = logic.data[index];
+          return buildItem(item, isLast: (index + 1 == logic.data.length));
+        },
+        separatorBuilder: (BuildContext context, int index) =>
+            Divider(height: 16, color: Colors.transparent),
+      ),
+    );
+  }
+
+  Widget buildItem(SiteEntity item, {bool isLast = false}) {
     return GestureDetector(
       onTap: () {
         PageTools.toStationDetail(siteId: item.id, site: item);
@@ -151,7 +180,11 @@ class StationPage extends StatelessWidget {
           top: 14.h,
           bottom: 14.h,
         ),
-        margin: EdgeInsetsDirectional.only(start: 16.w, end: 16.w),
+        margin: EdgeInsetsDirectional.only(
+          start: 16.w,
+          end: 16.w,
+          bottom: isLast ? 50.h : 0,
+        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
           color: Color(0xFF313540),

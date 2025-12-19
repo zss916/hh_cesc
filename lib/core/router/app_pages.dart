@@ -11,6 +11,7 @@ class APages {
   static const splash = '/splash';
   static const alarmDetail = '/alarmDetail';
   static const monitorDetail = '/monitorDetail';
+  static const monitorDetailV1 = '/monitorDetailV1';
   static const batteryCluster = '/batteryCluster';
   static const distributionMap = '/distributionMap';
   static const oliveSiteDetail = '/oliveSiteDetail';
@@ -46,6 +47,8 @@ class APages {
 
     ///监控详情
     GetPage(name: monitorDetail, page: () => MonitorDetailPage()),
+
+    GetPage(name: monitorDetailV1, page: () => MonitorDetailV1Page()),
 
     ///电池集群
     GetPage(name: batteryCluster, page: () => BatteryClusterPage()),

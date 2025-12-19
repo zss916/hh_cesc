@@ -51,7 +51,9 @@ class AlarmPage extends StatelessWidget {
 
   Widget buildBody({required int viewState, required AlarmLogic logic}) {
     return switch (viewState) {
-      _ when viewState == ViewStateEnum.common.index => buildList(logic: logic),
+      _ when viewState == ViewStateEnum.common.index => buildList2(
+        logic: logic,
+      ),
       _ when viewState == ViewStateEnum.empty.index => buildEmpty(logic: logic),
       _ when viewState == ViewStateEnum.loading.index => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
@@ -61,6 +63,7 @@ class AlarmPage extends StatelessWidget {
     };
   }
 
+  /*
   Widget buildList({required AlarmLogic logic}) => EasyRefresh(
     header: MaterialHeader(),
     onRefresh: () => logic.refreshData(),
@@ -70,7 +73,31 @@ class AlarmPage extends StatelessWidget {
       itemCount: logic.data.length,
       itemBuilder: (BuildContext context, int index) {
         AlarmItemEntity item = logic.data[index];
-        return AlarmItem(item: item);
+        return AlarmItem(item: item, isLast: (index + 1 == logic.data.length));
+      },
+      separatorBuilder: (BuildContext context, int index) =>
+          const Divider(height: 16, color: Colors.transparent),
+    ),
+  );
+*/
+
+  Widget buildList2({required AlarmLogic logic}) => SmartRefresher(
+    header: MaterialClassicHeader(),
+    enablePullDown: true,
+    enablePullUp: true,
+    controller: logic.refreshCtrl,
+    onRefresh: () {
+      logic.refreshData();
+    },
+    onLoading: () {
+      logic.loadMoreData();
+    },
+    child: ListView.separated(
+      padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
+      itemCount: logic.data.length,
+      itemBuilder: (BuildContext context, int index) {
+        AlarmItemEntity item = logic.data[index];
+        return AlarmItem(item: item, isLast: (index + 1 == logic.data.length));
       },
       separatorBuilder: (BuildContext context, int index) =>
           const Divider(height: 16, color: Colors.transparent),
@@ -85,7 +112,7 @@ class AlarmPage extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            logic.refreshData();
+            logic.refreshData(isLoading: true);
           },
           child: Image.asset(Assets.imgEmpty, width: 200, height: 95),
         ),

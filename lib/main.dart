@@ -11,6 +11,7 @@ import 'core/router/index.dart';
 import 'core/setting/app_setting.dart';
 import 'core/setting/global.dart';
 import 'core/translations/language.dart';
+//import 'firebase_options.dart';
 
 Future<void> main() async {
   /*FlutterError.onError = (FlutterErrorDetails details) {
@@ -33,6 +34,11 @@ class MyApp extends StatelessWidget {
       enableLoadingWhenNoData: true,
       enableRefreshVibrate: true,
       enableLoadMoreVibrate: true,
+      springDescription: SpringDescription(
+        stiffness: 170,
+        damping: 16,
+        mass: 1.9,
+      ),
       child: ScreenUtilInit(
         enableScaleText: () => false,
         designSize: const Size(375, 812),

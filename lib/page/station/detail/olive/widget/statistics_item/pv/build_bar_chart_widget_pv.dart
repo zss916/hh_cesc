@@ -274,6 +274,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                 .toList(),
             labels: widget.logic.pvLabels,
             maxY: widget.logic.pvMaxY ?? 0,
+            minY: widget.logic.pvMinY ?? 0,
           ),
           PVBarchartItemWidget(
             data: widget.logic.pvList
@@ -281,6 +282,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                 .toList(),
             labels: widget.logic.pvLabels,
             maxY: widget.logic.pvMaxY ?? 0,
+            minY: widget.logic.pvMinY ?? 0,
           ),
           PVBarchartItemWidget(
             data: widget.logic.pvList
@@ -288,6 +290,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                 .toList(),
             labels: widget.logic.pvLabels,
             maxY: widget.logic.pvMaxY ?? 0,
+            minY: widget.logic.pvMinY ?? 0,
           ),
         ],
       ),
@@ -308,9 +311,9 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
       physics: NeverScrollableScrollPhysics(),
       controller: tabCtrl,
       children: [
-        PVBarchartItemWidget(data: [], labels: [], maxY: 0),
-        PVBarchartItemWidget(data: [], labels: [], maxY: 0),
-        PVBarchartItemWidget(data: [], labels: [], maxY: 0),
+        PVBarchartItemWidget(data: [], labels: [], maxY: 0, minY: 0),
+        PVBarchartItemWidget(data: [], labels: [], maxY: 0, minY: 0),
+        PVBarchartItemWidget(data: [], labels: [], maxY: 0, minY: 0),
       ],
     ),
   );

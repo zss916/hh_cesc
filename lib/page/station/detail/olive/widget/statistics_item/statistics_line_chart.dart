@@ -73,7 +73,7 @@ class _LineChart extends StatelessWidget {
         lineBarsData: [
           LineChartBarData(
             ///是否圆一点
-            isCurved: true,
+            isCurved: false,
             color: Color(0xFF3874F2),
             barWidth: 1,
             isStrokeCapRound: true,

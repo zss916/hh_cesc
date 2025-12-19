@@ -3,6 +3,7 @@ import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/api/alarm.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class AlarmDetailLogic extends GetxController {
   int? siteId;
@@ -13,6 +14,8 @@ class AlarmDetailLogic extends GetxController {
   int? alarmLevel;
   String? alarmTitle;
   String? compType;
+
+  RefreshController refreshCtrl = RefreshController(initialRefresh: false);
 
   @override
   void onInit() {
@@ -53,13 +56,20 @@ class AlarmDetailLogic extends GetxController {
         siteId: "$siteId",
         alarmLevel: alarmLevel,
         compType: compType,
+        pageNum: pageNum,
       ).whenComplete(() => AppLoading.dismiss());
 
       if (isSuccessful) {
         if (pageNum == 1) {
           list.assignAll(value);
+          refreshCtrl.refreshCompleted();
         } else {
           list.addAll(value);
+          if (value.isEmpty) {
+            refreshCtrl.loadNoData();
+          } else {
+            refreshCtrl.loadComplete();
+          }
         }
       } else {
         pageNum -= 1;
@@ -74,6 +84,8 @@ class AlarmDetailLogic extends GetxController {
 
   @override
   void onClose() {
+    refreshCtrl.dispose();
     super.onClose();
+    AppLoading.dismiss();
   }
 }

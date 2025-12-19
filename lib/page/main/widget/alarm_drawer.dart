@@ -2,7 +2,7 @@ import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/core/service/app_info_service.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/http/bean/site_entity.dart';
+import 'package:cescpro/http/bean/site_data_entity.dart';
 import 'package:cescpro/page/alarm/index/index.dart';
 import 'package:cescpro/page/main/index.dart';
 import 'package:cescpro/page/main/sheet/alarm_select_sheet.dart';
@@ -36,12 +36,15 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
   String? alarmTitle;
   int? alarmLevel;
   CountryEntity? countryItem;
-  SiteEntity? site;
+  //SiteDataEntity? site;
+  int? siteId;
+  String? siteName;
 
   @override
   void initState() {
     super.initState();
-    site = safeFind<AlarmLogic>()?.site;
+    siteId = safeFind<AlarmLogic>()?.siteId;
+    siteName = safeFind<AlarmLogic>()?.siteName;
     countryItem = safeFind<AlarmLogic>()?.country;
     alarmTitle = (safeFind<AlarmLogic>()?.alarmLevel ?? 0).getAlarmTitle();
     int? startTimeMill = safeFind<AlarmLogic>()?.startTimeMill;
@@ -80,14 +83,15 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
 
         AlarmItemSelect(
           title: TKey.siteName.tr,
-          subTitle: site?.name,
+          subTitle: siteName,
           onTap: () {
-            List<SiteEntity> data = safeFind<MainLogic>()?.sites ?? [];
+            List<SiteDataEntity> data = safeFind<MainLogic>()?.sites ?? [];
             showSiteSelectSheet(
               sites: data,
               onSelect: (value) {
                 setState(() {
-                  site = value;
+                  siteId = value.id;
+                  siteName = value.name;
                 });
               },
             );
@@ -164,7 +168,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
                   safeFind<AlarmLogic>()?.endTimeMill = null;
                   safeFind<AlarmLogic>()?.country = null;
                   safeFind<AlarmLogic>()?.alarmLevel = null;
-                  safeFind<AlarmLogic>()?.site = null;
+                  safeFind<AlarmLogic>()?.siteId = null;
                   safeFind<AlarmLogic>()?.refreshData(isLoading: true);
                   widget.onReset.call();
                 },
@@ -194,7 +198,8 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
                       endDateTime?.millisecondsSinceEpoch;
                   safeFind<AlarmLogic>()?.country = countryItem;
                   safeFind<AlarmLogic>()?.alarmLevel = alarmLevel;
-                  safeFind<AlarmLogic>()?.site = site;
+                  safeFind<AlarmLogic>()?.siteId = siteId;
+                  safeFind<AlarmLogic>()?.siteName = siteName;
                   safeFind<AlarmLogic>()?.loadData();
                   widget.onConfirm.call();
 

@@ -6,6 +6,7 @@ import 'package:cescpro/page/station/detail/monitor/detail/widget/cool_view.dart
 import 'package:cescpro/page/station/detail/monitor/detail/widget/drier_view.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/meter_view.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/pcs_view.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/pv_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -36,6 +37,8 @@ class MonitorDetailPage extends StatelessWidget {
                 if (logic.devType == "DRIER") DrierView(logic: logic),
 
                 if (logic.devType == "DIDO") DrierView(logic: logic),
+
+                if (logic.devType == "PV") PVView(logic: logic),
               ],
             ),
           ),
@@ -45,7 +48,7 @@ class MonitorDetailPage extends StatelessWidget {
   }
 
   ///todo
-  Widget buildInfoList() => Column(
+  /* Widget buildInfoList() => Column(
     children: [
       Container(
         padding: EdgeInsetsDirectional.only(
@@ -198,9 +201,10 @@ class MonitorDetailPage extends StatelessWidget {
         ),
       ),
     ],
-  );
+  );*/
 
   /// 直测流
+  /*
   Widget buildDirectFlowMeasurement() => Container(
     margin: EdgeInsets.symmetric(horizontal: 16.w),
     padding: EdgeInsetsDirectional.all(16.r),
@@ -267,6 +271,7 @@ class MonitorDetailPage extends StatelessWidget {
       ],
     ),
   );
+*/
 
   ///交流侧
   Widget buildACSide(MonitorDetailLogic logic) => Container(

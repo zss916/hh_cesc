@@ -102,6 +102,37 @@ class HomeAPI {
   }
 
   ///获取协议支持的设备类型列表
+  static Future<(bool, List<String>)> getSupportDevTypesV1({
+    required int? siteId,
+    required int? protocolId,
+  }) async {
+    try {
+      Map<String, dynamic> map = {};
+      if (siteId != null) {
+        map["siteId"] = siteId;
+      }
+      if (protocolId != null) {
+        map["protocolId"] = protocolId;
+      }
+      var result = await Http.instance.get(
+        ApiPath.getSupportDevTypesV1,
+        query: map,
+      );
+      if (result["code"] == HttpStatus.ok) {
+        List<String> list = (result['data'] as List)
+            .map((e) => e.toString())
+            .toList();
+        return (true, list);
+      } else {
+        AppLoading.toast(result["message"]);
+        return (false, <String>[]);
+      }
+    } catch (error) {
+      return (false, <String>[]);
+    }
+  }
+
+  ///获取协议支持的设备类型列表
   static Future<(bool, List<String>)> getSupportDevTypesV2({
     required int? siteId,
     required int? protocolId,

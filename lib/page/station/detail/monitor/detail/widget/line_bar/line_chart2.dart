@@ -106,15 +106,25 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                       showTitles: true,
                       reservedSize: 35,
                       getTitlesWidget: (value, meta) {
+                        TextStyle textStyle = TextStyle(
+                          color: Color(0xA8FFFFFF),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 8.sp,
+                        );
+
+                        TextStyle textStyle2 = TextStyle(
+                          color: Color(0xFF3874F2),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 10.sp,
+                        );
+                        bool isShow =
+                            (value == widget.minY) || (value == widget.maxY);
+
                         return SideTitleWidget(
                           meta: meta,
                           child: Text(
-                            "$value",
-                            style: TextStyle(
-                              color: Color(0xA8FFFFFF),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
-                            ),
+                            value.formatNum(),
+                            style: isShow ? textStyle2 : textStyle,
                           ),
                         );
                       },
@@ -142,7 +152,22 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                   horizontalLines: [
                     HorizontalLine(
                       y: 0,
+                      // dashArray: [8, 4],
                       color: Colors.transparent, // 水平线颜色
+                      strokeWidth: 0.4, // 水平线宽度
+                    ),
+
+                    HorizontalLine(
+                      y: widget.maxY,
+                      dashArray: [8, 4],
+                      color: Color(0xFF3874F2), // 水平线颜色
+                      strokeWidth: 0.4, // 水平线宽度
+                    ),
+
+                    HorizontalLine(
+                      y: widget.minY,
+                      dashArray: [8, 4],
+                      color: Color(0xFF3874F2), // 水平线颜色
                       strokeWidth: 0.4, // 水平线宽度
                     ),
                   ],
@@ -170,7 +195,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
     return [
       LineChartBarData(
         ///是否圆一点
-        isCurved: true,
+        isCurved: false,
         color: Color(0xFF3874F2),
         barWidth: 1,
         isStrokeCapRound: true,

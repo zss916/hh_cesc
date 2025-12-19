@@ -1,9 +1,10 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/statistic_report_entity.dart';
+import 'package:cescpro/page/station/revenue/index.dart';
+
 
 StatisticReportEntity $StatisticReportEntityFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   final StatisticReportEntity statisticReportEntity = StatisticReportEntity();
   final String? siteName = jsonConvert.convert<String>(json['siteName']);
   if (siteName != null) {
@@ -13,14 +14,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
   if (siteId != null) {
     statisticReportEntity.siteId = siteId;
   }
-  final List<StatisticReportDailyElecIncomeDetail>? dailyElecIncomeDetail =
-      (json['dailyElecIncomeDetail'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                jsonConvert.convert<StatisticReportDailyElecIncomeDetail>(e)
-                    as StatisticReportDailyElecIncomeDetail,
-          )
-          .toList();
+  final List<
+      StatisticReportDailyElecIncomeDetail>? dailyElecIncomeDetail = (json['dailyElecIncomeDetail'] as List<
+      dynamic>?)?.map(
+          (e) =>
+      jsonConvert.convert<StatisticReportDailyElecIncomeDetail>(
+          e) as StatisticReportDailyElecIncomeDetail).toList();
   if (dailyElecIncomeDetail != null) {
     statisticReportEntity.dailyElecIncomeDetail = dailyElecIncomeDetail;
   }
@@ -29,14 +28,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalVerPos = totalVerPos;
   }
   final double? totalEndVerPos = jsonConvert.convert<double>(
-    json['totalEndVerPos'],
-  );
+      json['totalEndVerPos']);
   if (totalEndVerPos != null) {
     statisticReportEntity.totalEndVerPos = totalEndVerPos;
   }
   final double? totalVerPosAmount = jsonConvert.convert<double>(
-    json['totalVerPosAmount'],
-  );
+      json['totalVerPosAmount']);
   if (totalVerPosAmount != null) {
     statisticReportEntity.totalVerPosAmount = totalVerPosAmount;
   }
@@ -45,14 +42,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalHigPos = totalHigPos;
   }
   final double? totalEndHigPos = jsonConvert.convert<double>(
-    json['totalEndHigPos'],
-  );
+      json['totalEndHigPos']);
   if (totalEndHigPos != null) {
     statisticReportEntity.totalEndHigPos = totalEndHigPos;
   }
   final double? totalHigPosAmount = jsonConvert.convert<double>(
-    json['totalHigPosAmount'],
-  );
+      json['totalHigPosAmount']);
   if (totalHigPosAmount != null) {
     statisticReportEntity.totalHigPosAmount = totalHigPosAmount;
   }
@@ -61,14 +56,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalMidPos = totalMidPos;
   }
   final double? totalEndMidPos = jsonConvert.convert<double>(
-    json['totalEndMidPos'],
-  );
+      json['totalEndMidPos']);
   if (totalEndMidPos != null) {
     statisticReportEntity.totalEndMidPos = totalEndMidPos;
   }
   final double? totalMidPosAmount = jsonConvert.convert<double>(
-    json['totalMidPosAmount'],
-  );
+      json['totalMidPosAmount']);
   if (totalMidPosAmount != null) {
     statisticReportEntity.totalMidPosAmount = totalMidPosAmount;
   }
@@ -77,14 +70,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalLowPos = totalLowPos;
   }
   final double? totalEndLowPos = jsonConvert.convert<double>(
-    json['totalEndLowPos'],
-  );
+      json['totalEndLowPos']);
   if (totalEndLowPos != null) {
     statisticReportEntity.totalEndLowPos = totalEndLowPos;
   }
   final double? totalLowPosAmount = jsonConvert.convert<double>(
-    json['totalLowPosAmount'],
-  );
+      json['totalLowPosAmount']);
   if (totalLowPosAmount != null) {
     statisticReportEntity.totalLowPosAmount = totalLowPosAmount;
   }
@@ -97,8 +88,7 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalEndPos = totalEndPos;
   }
   final double? totalPosAmount = jsonConvert.convert<double>(
-    json['totalPosAmount'],
-  );
+      json['totalPosAmount']);
   if (totalPosAmount != null) {
     statisticReportEntity.totalPosAmount = totalPosAmount;
   }
@@ -107,14 +97,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalVerNeg = totalVerNeg;
   }
   final double? totalEndVerNeg = jsonConvert.convert<double>(
-    json['totalEndVerNeg'],
-  );
+      json['totalEndVerNeg']);
   if (totalEndVerNeg != null) {
     statisticReportEntity.totalEndVerNeg = totalEndVerNeg;
   }
   final double? totalVerNegAmount = jsonConvert.convert<double>(
-    json['totalVerNegAmount'],
-  );
+      json['totalVerNegAmount']);
   if (totalVerNegAmount != null) {
     statisticReportEntity.totalVerNegAmount = totalVerNegAmount;
   }
@@ -123,14 +111,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalHigNeg = totalHigNeg;
   }
   final double? totalEndHigNeg = jsonConvert.convert<double>(
-    json['totalEndHigNeg'],
-  );
+      json['totalEndHigNeg']);
   if (totalEndHigNeg != null) {
     statisticReportEntity.totalEndHigNeg = totalEndHigNeg;
   }
   final double? totalHigNegAmount = jsonConvert.convert<double>(
-    json['totalHigNegAmount'],
-  );
+      json['totalHigNegAmount']);
   if (totalHigNegAmount != null) {
     statisticReportEntity.totalHigNegAmount = totalHigNegAmount;
   }
@@ -139,14 +125,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalMidNeg = totalMidNeg;
   }
   final double? totalEndMidNeg = jsonConvert.convert<double>(
-    json['totalEndMidNeg'],
-  );
+      json['totalEndMidNeg']);
   if (totalEndMidNeg != null) {
     statisticReportEntity.totalEndMidNeg = totalEndMidNeg;
   }
   final double? totalMidNegAmount = jsonConvert.convert<double>(
-    json['totalMidNegAmount'],
-  );
+      json['totalMidNegAmount']);
   if (totalMidNegAmount != null) {
     statisticReportEntity.totalMidNegAmount = totalMidNegAmount;
   }
@@ -155,14 +139,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalLowNeg = totalLowNeg;
   }
   final double? totalEndLowNeg = jsonConvert.convert<double>(
-    json['totalEndLowNeg'],
-  );
+      json['totalEndLowNeg']);
   if (totalEndLowNeg != null) {
     statisticReportEntity.totalEndLowNeg = totalEndLowNeg;
   }
   final double? totalLowNegAmount = jsonConvert.convert<double>(
-    json['totalLowNegAmount'],
-  );
+      json['totalLowNegAmount']);
   if (totalLowNegAmount != null) {
     statisticReportEntity.totalLowNegAmount = totalLowNegAmount;
   }
@@ -175,8 +157,7 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalEndNeg = totalEndNeg;
   }
   final double? totalNegAmount = jsonConvert.convert<double>(
-    json['totalNegAmount'],
-  );
+      json['totalNegAmount']);
   if (totalNegAmount != null) {
     statisticReportEntity.totalNegAmount = totalNegAmount;
   }
@@ -185,13 +166,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
     statisticReportEntity.totalIncome = totalIncome;
   }
   final double? totalEfficiency = jsonConvert.convert<double>(
-    json['totalEfficiency'],
-  );
+      json['totalEfficiency']);
   if (totalEfficiency != null) {
     statisticReportEntity.totalEfficiency = totalEfficiency;
   }
-  final StatisticReportSubsidyDTO? subsidyDTO = jsonConvert
-      .convert<StatisticReportSubsidyDTO>(json['subsidyDTO']);
+  final StatisticReportSubsidyDTO? subsidyDTO = jsonConvert.convert<
+      StatisticReportSubsidyDTO>(json['subsidyDTO']);
   if (subsidyDTO != null) {
     statisticReportEntity.subsidyDTO = subsidyDTO;
   }
@@ -199,14 +179,12 @@ StatisticReportEntity $StatisticReportEntityFromJson(
 }
 
 Map<String, dynamic> $StatisticReportEntityToJson(
-  StatisticReportEntity entity,
-) {
+    StatisticReportEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['siteName'] = entity.siteName;
   data['siteId'] = entity.siteId;
-  data['dailyElecIncomeDetail'] = entity.dailyElecIncomeDetail
-      ?.map((v) => v.toJson())
-      .toList();
+  data['dailyElecIncomeDetail'] =
+      entity.dailyElecIncomeDetail?.map((v) => v.toJson()).toList();
   data['totalVerPos'] = entity.totalVerPos;
   data['totalEndVerPos'] = entity.totalEndVerPos;
   data['totalVerPosAmount'] = entity.totalVerPosAmount;
@@ -285,8 +263,8 @@ extension StatisticReportEntityExtension on StatisticReportEntity {
     return StatisticReportEntity()
       ..siteName = siteName ?? this.siteName
       ..siteId = siteId ?? this.siteId
-      ..dailyElecIncomeDetail =
-          dailyElecIncomeDetail ?? this.dailyElecIncomeDetail
+      ..dailyElecIncomeDetail = dailyElecIncomeDetail ??
+          this.dailyElecIncomeDetail
       ..totalVerPos = totalVerPos ?? this.totalVerPos
       ..totalEndVerPos = totalEndVerPos ?? this.totalEndVerPos
       ..totalVerPosAmount = totalVerPosAmount ?? this.totalVerPosAmount
@@ -323,10 +301,9 @@ extension StatisticReportEntityExtension on StatisticReportEntity {
   }
 }
 
-StatisticReportDailyElecIncomeDetail
-$StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
-  final StatisticReportDailyElecIncomeDetail
-  statisticReportDailyElecIncomeDetail = StatisticReportDailyElecIncomeDetail();
+StatisticReportDailyElecIncomeDetail $StatisticReportDailyElecIncomeDetailFromJson(
+    Map<String, dynamic> json) {
+  final StatisticReportDailyElecIncomeDetail statisticReportDailyElecIncomeDetail = StatisticReportDailyElecIncomeDetail();
   final int? devNo = jsonConvert.convert<int>(json['devNo']);
   if (devNo != null) {
     statisticReportDailyElecIncomeDetail.devNo = devNo;
@@ -340,8 +317,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.formatDate = formatDate;
   }
   final double? verPosAmount = jsonConvert.convert<double>(
-    json['verPosAmount'],
-  );
+      json['verPosAmount']);
   if (verPosAmount != null) {
     statisticReportDailyElecIncomeDetail.verPosAmount = verPosAmount;
   }
@@ -358,8 +334,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.verPosPri = verPosPri;
   }
   final double? higPosAmount = jsonConvert.convert<double>(
-    json['higPosAmount'],
-  );
+      json['higPosAmount']);
   if (higPosAmount != null) {
     statisticReportDailyElecIncomeDetail.higPosAmount = higPosAmount;
   }
@@ -376,8 +351,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.higPosPri = higPosPri;
   }
   final double? midPosAmount = jsonConvert.convert<double>(
-    json['midPosAmount'],
-  );
+      json['midPosAmount']);
   if (midPosAmount != null) {
     statisticReportDailyElecIncomeDetail.midPosAmount = midPosAmount;
   }
@@ -394,8 +368,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.midPosPri = midPosPri;
   }
   final double? lowPosAmount = jsonConvert.convert<double>(
-    json['lowPosAmount'],
-  );
+      json['lowPosAmount']);
   if (lowPosAmount != null) {
     statisticReportDailyElecIncomeDetail.lowPosAmount = lowPosAmount;
   }
@@ -412,8 +385,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.lowPosPri = lowPosPri;
   }
   final double? verNegAmount = jsonConvert.convert<double>(
-    json['verNegAmount'],
-  );
+      json['verNegAmount']);
   if (verNegAmount != null) {
     statisticReportDailyElecIncomeDetail.verNegAmount = verNegAmount;
   }
@@ -430,8 +402,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.verNegPri = verNegPri;
   }
   final double? higNegAmount = jsonConvert.convert<double>(
-    json['higNegAmount'],
-  );
+      json['higNegAmount']);
   if (higNegAmount != null) {
     statisticReportDailyElecIncomeDetail.higNegAmount = higNegAmount;
   }
@@ -448,8 +419,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.higNegPri = higNegPri;
   }
   final double? midNegAmount = jsonConvert.convert<double>(
-    json['midNegAmount'],
-  );
+      json['midNegAmount']);
   if (midNegAmount != null) {
     statisticReportDailyElecIncomeDetail.midNegAmount = midNegAmount;
   }
@@ -466,8 +436,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.midNegPri = midNegPri;
   }
   final double? lowNegAmount = jsonConvert.convert<double>(
-    json['lowNegAmount'],
-  );
+      json['lowNegAmount']);
   if (lowNegAmount != null) {
     statisticReportDailyElecIncomeDetail.lowNegAmount = lowNegAmount;
   }
@@ -484,45 +453,38 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
     statisticReportDailyElecIncomeDetail.lowNegPri = lowNegPri;
   }
   final double? totalPosAmount = jsonConvert.convert<double>(
-    json['totalPosAmount'],
-  );
+      json['totalPosAmount']);
   if (totalPosAmount != null) {
     statisticReportDailyElecIncomeDetail.totalPosAmount = totalPosAmount;
   }
   final double? batChargeWhSum = jsonConvert.convert<double>(
-    json['batChargeWhSum'],
-  );
+      json['batChargeWhSum']);
   if (batChargeWhSum != null) {
     statisticReportDailyElecIncomeDetail.batChargeWhSum = batChargeWhSum;
   }
   final double? endBatChargeWhSum = jsonConvert.convert<double>(
-    json['endBatChargeWhSum'],
-  );
+      json['endBatChargeWhSum']);
   if (endBatChargeWhSum != null) {
     statisticReportDailyElecIncomeDetail.endBatChargeWhSum = endBatChargeWhSum;
   }
   final double? totalNegAmount = jsonConvert.convert<double>(
-    json['totalNegAmount'],
-  );
+      json['totalNegAmount']);
   if (totalNegAmount != null) {
     statisticReportDailyElecIncomeDetail.totalNegAmount = totalNegAmount;
   }
   final double? batDisChargeWhSum = jsonConvert.convert<double>(
-    json['batDisChargeWhSum'],
-  );
+      json['batDisChargeWhSum']);
   if (batDisChargeWhSum != null) {
     statisticReportDailyElecIncomeDetail.batDisChargeWhSum = batDisChargeWhSum;
   }
   final double? endBatDisChargeWhSum = jsonConvert.convert<double>(
-    json['endBatDisChargeWhSum'],
-  );
+      json['endBatDisChargeWhSum']);
   if (endBatDisChargeWhSum != null) {
     statisticReportDailyElecIncomeDetail.endBatDisChargeWhSum =
         endBatDisChargeWhSum;
   }
   final double? totalElecIncome = jsonConvert.convert<double>(
-    json['totalElecIncome'],
-  );
+      json['totalElecIncome']);
   if (totalElecIncome != null) {
     statisticReportDailyElecIncomeDetail.totalElecIncome = totalElecIncome;
   }
@@ -538,8 +500,7 @@ $StatisticReportDailyElecIncomeDetailFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> $StatisticReportDailyElecIncomeDetailToJson(
-  StatisticReportDailyElecIncomeDetail entity,
-) {
+    StatisticReportDailyElecIncomeDetail entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['devNo'] = entity.devNo;
   data['dateTime'] = entity.dateTime;
@@ -588,8 +549,7 @@ Map<String, dynamic> $StatisticReportDailyElecIncomeDetailToJson(
   return data;
 }
 
-extension StatisticReportDailyElecIncomeDetailExtension
-    on StatisticReportDailyElecIncomeDetail {
+extension StatisticReportDailyElecIncomeDetailExtension on StatisticReportDailyElecIncomeDetail {
   StatisticReportDailyElecIncomeDetail copyWith({
     int? devNo,
     String? dateTime,
@@ -685,13 +645,10 @@ extension StatisticReportDailyElecIncomeDetailExtension
 }
 
 StatisticReportSubsidyDTO $StatisticReportSubsidyDTOFromJson(
-  Map<String, dynamic> json,
-) {
-  final StatisticReportSubsidyDTO statisticReportSubsidyDTO =
-      StatisticReportSubsidyDTO();
+    Map<String, dynamic> json) {
+  final StatisticReportSubsidyDTO statisticReportSubsidyDTO = StatisticReportSubsidyDTO();
   final double? buildSubsidy = jsonConvert.convert<double>(
-    json['buildSubsidy'],
-  );
+      json['buildSubsidy']);
   if (buildSubsidy != null) {
     statisticReportSubsidyDTO.buildSubsidy = buildSubsidy;
   }
@@ -707,8 +664,7 @@ StatisticReportSubsidyDTO $StatisticReportSubsidyDTOFromJson(
 }
 
 Map<String, dynamic> $StatisticReportSubsidyDTOToJson(
-  StatisticReportSubsidyDTO entity,
-) {
+    StatisticReportSubsidyDTO entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['buildSubsidy'] = entity.buildSubsidy;
   data['opSubsidy'] = entity.opSubsidy;

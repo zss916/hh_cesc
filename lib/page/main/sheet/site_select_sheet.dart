@@ -1,19 +1,19 @@
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/http/bean/site_entity.dart';
+import 'package:cescpro/http/bean/site_data_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 void showSiteSelectSheet({
-  required List<SiteEntity> sites,
-  Function(SiteEntity)? onSelect,
+  required List<SiteDataEntity> sites,
+  Function(SiteDataEntity)? onSelect,
 }) {
   Get.bottomSheet(SiteSelectWidget(sites: sites, onSelect: onSelect));
 }
 
 class SiteSelectWidget extends StatefulWidget {
-  final List<SiteEntity> sites;
-  final Function(SiteEntity)? onSelect;
+  final List<SiteDataEntity> sites;
+  final Function(SiteDataEntity)? onSelect;
   const SiteSelectWidget({super.key, required this.sites, this.onSelect});
 
   @override
@@ -66,7 +66,7 @@ class _SiteSelectWidgetState extends State<SiteSelectWidget> {
                 Spacer(),
                 InkWell(
                   onTap: () {
-                    SiteEntity site = widget.sites[selectIndex];
+                    SiteDataEntity site = widget.sites[selectIndex];
                     widget.onSelect?.call(site);
                     Get.back();
                   },
@@ -90,12 +90,17 @@ class _SiteSelectWidgetState extends State<SiteSelectWidget> {
           ),
           Expanded(
             child: ListView.separated(
-              padding: EdgeInsetsDirectional.zero,
+              padding: EdgeInsetsDirectional.only(
+                start: 0,
+                end: 0,
+                top: 0,
+                bottom: 50.h,
+              ),
               itemCount: widget.sites.length,
               separatorBuilder: (_, i) =>
                   Divider(height: 15.h, color: Colors.transparent),
               itemBuilder: (_, i) {
-                SiteEntity item = widget.sites[i];
+                SiteDataEntity item = widget.sites[i];
                 return InkWell(
                   onTap: () {
                     setState(() {
