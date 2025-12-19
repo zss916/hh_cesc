@@ -6,7 +6,7 @@ import 'package:cescpro/http/api/home.dart';
 import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
-import 'package:flutter/material.dart';
+import 'package:cescpro/page/station/detail/monitor/v1/helper/device_view_enum.dart';
 import 'package:get/get.dart';
 
 class MonitorModel {
@@ -78,37 +78,37 @@ class MonitorLogic extends GetxController {
       );
       if (isSuccessful) {
         for (var e in value) {
-          if (e == "ARR" || e == "CLU") {
-            bool isHas = data.any((e) => e.type == "ARR");
+          if (e == DeviceEnum.arr.value || e == DeviceEnum.clu.value) {
+            bool isHas = data.any((e) => e.type == DeviceEnum.arr.value);
             if (!isHas) {
               data.add(
                 MonitorModel(
-                  type: "ARR",
+                  type: DeviceEnum.arr.value,
                   title: TKey.batterySystem.tr,
                   isV1: isV1,
                 ),
               );
             }
-          } else if (e == "COOL") {
+          } else if (e == DeviceEnum.cool.value) {
             data.add(
               MonitorModel(
-                type: "COOL",
+                type: DeviceEnum.cool.value,
                 title: TKey.liquidCooling.tr,
                 isV1: isV1,
               ),
             );
-          } else if (e == "DRIER") {
+          } else if (e == DeviceEnum.drier.value) {
             data.add(
               MonitorModel(
-                type: "DRIER",
+                type: DeviceEnum.drier.value,
                 title: TKey.temperatureAndHumidity.tr,
                 isV1: isV1,
               ),
             );
-          } else if (e == "METER") {
+          } else if (e == DeviceEnum.meter.value) {
             data.add(
               MonitorModel(
-                type: "METER",
+                type: DeviceEnum.meter.value,
                 title: TKey.electricityMeter.tr,
                 isV1: isV1,
               ),
@@ -139,27 +139,39 @@ class MonitorLogic extends GetxController {
       if (isSuccessful) {
         //["ARR", "CLU", "PCS", "AIR_COOL", "METER", "DIDO", "CELL"]
         for (var e in value) {
-          if (e == "ARR") {
+          if (e == DeviceEnum.arr.value) {
             data.add(
               MonitorModel(type: e, title: TKey.stackInfo.tr, isV1: isV1),
             );
-          } else if (e == "CLU") {
+          } else if (e == DeviceEnum.clu.value) {
             data.add(MonitorModel(type: e, title: TKey.cluInfo.tr, isV1: isV1));
-          } else if (e == "PCS") {
+          } else if (e == DeviceEnum.pcs.value) {
             data.add(MonitorModel(type: e, title: TKey.pcsInfo.tr, isV1: isV1));
-          } else if (e == "AIR_COOL") {
+          } else if (e == DeviceEnum.airCool.value) {
             data.add(MonitorModel(type: e, title: TKey.hotInfo.tr, isV1: isV1));
-          } else if (e == "METER") {
+          } else if (e == DeviceEnum.meter.value) {
             data.add(
               MonitorModel(type: e, title: TKey.meterInfo.tr, isV1: isV1),
             );
-          } else if (e == "DIDO") {
+          } else if (e == DeviceEnum.dido.value) {
             data.add(
               MonitorModel(type: e, title: TKey.didoInfo.tr, isV1: isV1),
             );
-          } else if (e == "CELL") {
+          } else if (e == DeviceEnum.cell.value) {
             data.add(
               MonitorModel(type: e, title: TKey.singleInfo.tr, isV1: isV1),
+            );
+          } else if (e == DeviceEnum.statsMeter.value) {
+            data.add(
+              MonitorModel(type: e, title: TKey.statisticsMeter.tr, isV1: isV1),
+            );
+          } else if (e == DeviceEnum.fire.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.fireProtectionInfo.tr,
+                isV1: isV1,
+              ),
             );
           } else {
             data.add(MonitorModel(type: e, title: e, isV1: isV1));
@@ -174,7 +186,7 @@ class MonitorLogic extends GetxController {
   }
 
   void toDetail(int index) {
-    debugPrint("isV1:${data[index].isV1}");
+    // debugPrint("isV1:${data[index].isV1}");
     if (isV1 != null) {
       if (data[index].isV1 == true) {
         PageTools.toMonitorDetailV1(siteId: "${site?.id}", data: data[index]);

@@ -420,6 +420,12 @@ class TKey {
   static const String triggered = "triggered";
 
   static const String unknown = "unknown";
+
+  static const String fire = "fire";
+
+  static const String statisticsMeter = "statisticsMeter";
+
+  static const String fireProtectionInfo = "fireProtectionInfo";
 }
 
 const en = {
@@ -631,4 +637,7 @@ const en = {
   "notTriggered": "Not Triggered",
   "triggered": "Triggered",
   "unknown": "Unknown",
+  "statisticsMeter": "Statistical Meter",
+  "fireProtectionInfo": "Fire Protection Information",
+  "fire": "Fire Protection",
 };

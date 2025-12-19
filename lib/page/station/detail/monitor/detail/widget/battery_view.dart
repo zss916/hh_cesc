@@ -20,7 +20,7 @@ class BatteryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TopItemWidget(logic: logic),
+        if (logic.titles.isNotEmpty) TopItemWidget(logic: logic),
         Divider(height: 12.h, color: Colors.transparent),
 
         ///状态

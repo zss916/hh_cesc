@@ -1,12 +1,15 @@
 import 'package:cescpro/components/common_app_bar.dart';
+import 'package:cescpro/page/station/detail/monitor/v1/helper/device_view_enum.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/monitor_detail_v1_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/arr/arr_view.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/cell/cell_view.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/clu/clu_view.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/cool/air_cool_view.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/dido/dido_view.dart';
+import 'package:cescpro/page/station/detail/monitor/v1/widget/fire/fire_view.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/meter/meter_view.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/pcs/pcs_view.dart';
+import 'package:cescpro/page/station/detail/monitor/v1/widget/stats_meter/stats_meter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,19 +27,29 @@ class MonitorDetailV1Page extends StatelessWidget {
           body: Stack(
             alignment: Alignment.topCenter,
             children: [
-              if (logic.devType == "ARR") ArrView(logic: logic),
+              if (logic.devType == DeviceEnum.arr.value) ArrView(logic: logic),
 
-              if (logic.devType == "CLU") CluView(logic: logic),
+              if (logic.devType == DeviceEnum.clu.value) CluView(logic: logic),
 
-              if (logic.devType == "PCS") PcsView(logic: logic),
+              if (logic.devType == DeviceEnum.pcs.value) PcsView(logic: logic),
 
-              if (logic.devType == "AIR_COOL") AirCoolView(logic: logic),
+              if (logic.devType == DeviceEnum.airCool.value)
+                AirCoolView(logic: logic),
 
-              if (logic.devType == "METER") MeterView(logic: logic),
+              if (logic.devType == DeviceEnum.meter.value)
+                MeterView(logic: logic),
 
-              if (logic.devType == "DIDO") DidoView(logic: logic),
+              if (logic.devType == DeviceEnum.dido.value)
+                DidoView(logic: logic),
 
-              if (logic.devType == "CELL") CellView(logic: logic),
+              if (logic.devType == DeviceEnum.cell.value)
+                CellView(logic: logic),
+
+              if (logic.devType == DeviceEnum.statsMeter.value)
+                StatsMeter(logic: logic),
+
+              if (logic.devType == DeviceEnum.fire.value)
+                FireView(logic: logic),
             ],
           ),
         );

@@ -204,4 +204,7 @@ const zh = {
   "notTriggered": "未触发",
   "triggered": "已触发",
   "unknown": "未知",
+  "statisticsMeter": "统计电表",
+  "fireProtectionInfo": "消防信息",
+  "fire": "消防",
 };

@@ -32,8 +32,6 @@ class MonitorDetailLogic extends GetxController {
     super.onInit();
     if (Get.arguments != null) {
       siteId = Get.arguments["siteId"] as String?;
-      // devType = Get.arguments["devType"] as String?;
-      // title = Get.arguments["title"] as String;
       MonitorModel? data = Get.arguments["data"] as MonitorModel?;
       devType = data?.type;
       title = data?.title ?? "";

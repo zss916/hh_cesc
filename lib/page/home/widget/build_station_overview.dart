@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:flutter/material.dart';
@@ -197,7 +196,8 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "(${totalPos.formatPowerValueUnit()})",
+                    "MWh",
+                    // "(${totalPos.formatPowerValueUnit()})",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -208,7 +208,8 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    totalPos.formatPowerValue(),
+                    //totalPos.formatPowerValue(),
+                    "$totalPos",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

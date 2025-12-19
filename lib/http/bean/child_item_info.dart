@@ -9,7 +9,7 @@ class ChildItemInfo {
   int? unitSort;
   String? fieldName;
   String? name;
-  dynamic value;
+  String? value;
 
   ChildItemInfo();
 

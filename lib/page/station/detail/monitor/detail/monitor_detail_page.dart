@@ -7,6 +7,7 @@ import 'package:cescpro/page/station/detail/monitor/detail/widget/drier_view.dar
 import 'package:cescpro/page/station/detail/monitor/detail/widget/meter_view.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/pcs_view.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/pv_view.dart';
+import 'package:cescpro/page/station/detail/monitor/v1/helper/device_view_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -26,19 +27,25 @@ class MonitorDetailPage extends StatelessWidget {
             child: Stack(
               alignment: Alignment.topCenter,
               children: [
-                if (logic.devType == "ARR") BatteryView(logic: logic),
+                if (logic.devType == DeviceEnum.arr.value)
+                  BatteryView(logic: logic),
 
-                if (logic.devType == "PCS") PcsView(logic: logic),
+                if (logic.devType == DeviceEnum.pcs.value)
+                  PcsView(logic: logic),
 
-                if (logic.devType == "METER") MeterView(logic: logic),
+                if (logic.devType == DeviceEnum.meter.value)
+                  MeterView(logic: logic),
 
-                if (logic.devType == "COOL") CoolView(logic: logic),
+                if (logic.devType == DeviceEnum.cool.value)
+                  CoolView(logic: logic),
 
-                if (logic.devType == "DRIER") DrierView(logic: logic),
+                if (logic.devType == DeviceEnum.drier.value)
+                  DrierView(logic: logic),
 
-                if (logic.devType == "DIDO") DrierView(logic: logic),
+                if (logic.devType == DeviceEnum.dido.value)
+                  DrierView(logic: logic),
 
-                if (logic.devType == "PV") PVView(logic: logic),
+                if (logic.devType == DeviceEnum.pv.value) PVView(logic: logic),
               ],
             ),
           ),

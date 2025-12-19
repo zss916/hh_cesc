@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class ArrView extends StatelessWidget {
+class StatsMeter extends StatelessWidget {
   final MonitorDetailV1Logic logic;
-  const ArrView({super.key, required this.logic});
+  const StatsMeter({super.key, required this.logic});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (logic.arrValue != null) TopItemWidget2(logic: logic),
+        if (logic.statsMeterValue != null) TopItemWidget2(logic: logic),
         Divider(height: 12.h, color: Colors.transparent),
         Expanded(child: buildRealTimeData(logic)),
       ],
@@ -52,7 +52,7 @@ class ArrView extends StatelessWidget {
         width: double.maxFinite,
         child: Column(
           children: [
-            if (logic.arrValue?.alarmStatus != null)
+            if (logic.statsMeterValue?.alarmStatus != null)
               Row(
                 children: [
                   Text(
@@ -61,10 +61,10 @@ class ArrView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.arrValue?.showAlarmStatus ?? "-",
+                    logic.statsMeterValue?.showAlarmStatus ?? "-",
                     style: TextStyle(
                       fontSize: 14,
-                      color: (logic.arrValue?.alarmStatus == true)
+                      color: (logic.statsMeterValue?.alarmStatus == true)
                           ? Color(0xFFFF4C7B)
                           : Color(0xFF46F9EC),
                     ),
@@ -74,7 +74,7 @@ class ArrView extends StatelessWidget {
 
             Divider(height: 16.h, color: Colors.transparent),
 
-            if (logic.arrValue?.communicationStatus != null)
+            if (logic.statsMeterValue?.communicationStatus != null)
               Row(
                 children: [
                   Text(
@@ -83,10 +83,11 @@ class ArrView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.arrValue?.showCommunicationStatus ?? "-",
+                    logic.statsMeterValue?.showCommunicationStatus ?? "-",
                     style: TextStyle(
                       fontSize: 14,
-                      color: (logic.arrValue?.communicationStatus == true)
+                      color:
+                          (logic.statsMeterValue?.communicationStatus == true)
                           ? Color(0xFFFF4C7B)
                           : Color(0xFF46F9EC),
                     ),
@@ -96,7 +97,7 @@ class ArrView extends StatelessWidget {
 
             Divider(height: 16.h, color: Colors.transparent),
 
-            if (logic.arrValue?.statusEnNameDesc != null)
+            if (logic.statsMeterValue?.statusEnNameDesc != null)
               Row(
                 children: [
                   Text(
@@ -105,7 +106,7 @@ class ArrView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.arrValue?.showRunStatus ?? "-",
+                    logic.statsMeterValue?.showRunStatus ?? "-",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -120,12 +121,12 @@ class ArrView extends StatelessWidget {
   Widget buildRealTimeData(MonitorDetailV1Logic logic) {
     return CustomScrollView(
       slivers: [
-        if (logic.arrValue != null)
+        if (logic.statsMeterValue != null)
           SliverToBoxAdapter(child: buildStatusItem(logic)),
         SliverToBoxAdapter(
           child: Divider(height: 12.h, color: Colors.transparent),
         ),
-        if ((logic.arrValue?.childList ?? []).isNotEmpty)
+        if ((logic.statsMeterValue?.list ?? []).isNotEmpty)
           SliverToBoxAdapter(
             child: Container(
               padding: EdgeInsetsDirectional.only(
@@ -144,11 +145,11 @@ class ArrView extends StatelessWidget {
               ),
             ),
           ),
-        if ((logic.arrValue?.childList ?? []).isNotEmpty)
+        if ((logic.statsMeterValue?.list ?? []).isNotEmpty)
           SliverList.separated(
-            itemCount: (logic.arrValue?.childList ?? []).length,
+            itemCount: (logic.statsMeterValue?.list ?? []).length,
             itemBuilder: (_, i) {
-              ChildItemInfo item = (logic.arrValue?.childList ?? [])[i];
+              ChildItemInfo item = (logic.statsMeterValue?.list ?? [])[i];
               return Container(
                 width: double.maxFinite,
                 margin: EdgeInsetsDirectional.symmetric(horizontal: 18.w),
@@ -160,7 +161,10 @@ class ArrView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: Color(0xFF313540),
                 ),
-                child: RealTimeChildTime(name: item.name, value: item.value),
+                child: RealTimeChildTime(
+                  name: item.name,
+                  value: "${item.value}",
+                ),
               );
             },
             separatorBuilder: (_, int index) =>

@@ -3,10 +3,10 @@ class ApiPath {
   //"https://ems.cescpower.com:9088/api/v1"
 
   ///国外版本
-  //static const String baseUrl = "https://cloud.honghede.com/api/v1";
+  static const String baseUrl = "https://cloud.honghede.com/api/v1";
 
   ///国内版本
-  static const String baseUrl = "https://ems.cescpower.com:9088/api/v1";
+  // static const String baseUrl = "https://ems.cescpower.com:9088/api/v1";
 
   ///获取当前登录用户信息
   static const String getInfoApp = "/business/admin/infoApp";
@@ -127,4 +127,10 @@ class ApiPath {
 
   ///v1
   static const String getIdsTree = "/business/site/getIdsTree";
+
+  ///v1
+  static const String getStatsMeterInfo = "/business/device/getStatsMeterInfo";
+
+  ///v1
+  static const String getFireInfo = "/business/device/getFireInfo";
 }

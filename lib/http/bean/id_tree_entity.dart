@@ -51,7 +51,6 @@ class IdTreeEntity {
     } else if (label == "DIDO") {
       return "DI/DO";
     } else if (label == "CELL") {
-      ///todo 测试
       if (label == "ARR") {
         return TKey.stack.tr;
       } else if (label == "CLU") {
@@ -59,6 +58,8 @@ class IdTreeEntity {
       } else {
         return "CELL";
       }
+    } else if (label == "FIRE") {
+      return TKey.fire.tr;
     }
     return label ?? "";
   }

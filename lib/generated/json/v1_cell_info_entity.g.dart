@@ -107,7 +107,7 @@ V1CellInfoList $V1CellInfoListFromJson(Map<String, dynamic> json) {
   if (cluNo != null) {
     v1CellInfoList.cluNo = cluNo;
   }
-  final dynamic packNo = json['packNo'];
+  final String? packNo = jsonConvert.convert<String>(json['packNo']);
   if (packNo != null) {
     v1CellInfoList.packNo = packNo;
   }
@@ -196,7 +196,7 @@ extension V1CellInfoListExtension on V1CellInfoList {
     String? sn,
     int? arrNo,
     int? cluNo,
-    dynamic packNo,
+    String? packNo,
     int? cellNo,
     double? cellVol,
     dynamic cellCur,

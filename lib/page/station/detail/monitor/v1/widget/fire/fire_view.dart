@@ -1,68 +1,23 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/child_item_info.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/monitor_detail_v1_logic.dart';
+import 'package:cescpro/page/station/detail/monitor/v1/widget/sheet/top_item_widget2.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/widget/real_time_child_time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class AirCoolView extends StatelessWidget {
+class FireView extends StatelessWidget {
   final MonitorDetailV1Logic logic;
-  const AirCoolView({super.key, required this.logic});
+  const FireView({super.key, required this.logic});
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        if (logic.hotMgValue != null)
-          SliverToBoxAdapter(child: buildStatusItem(logic)),
-        SliverToBoxAdapter(
-          child: Divider(height: 12.h, color: Colors.transparent),
-        ),
-        if ((logic.hotMgValue?.list ?? []).isNotEmpty)
-          SliverToBoxAdapter(
-            child: Container(
-              padding: EdgeInsetsDirectional.only(
-                bottom: 16.h,
-                start: 18.w,
-                end: 18.w,
-              ),
-              alignment: AlignmentDirectional.centerStart,
-              child: Text(
-                TKey.realTimeData.tr,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-        if ((logic.hotMgValue?.list ?? []).isNotEmpty)
-          SliverList.separated(
-            itemCount: (logic.hotMgValue?.list ?? []).length,
-            itemBuilder: (_, i) {
-              ChildItemInfo item = (logic.hotMgValue?.list ?? [])[i];
-              return Container(
-                width: double.maxFinite,
-                margin: EdgeInsetsDirectional.symmetric(horizontal: 18.w),
-                padding: EdgeInsetsDirectional.symmetric(
-                  horizontal: 15,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xFF313540),
-                ),
-                child: RealTimeChildTime(name: item.name, value: item.value),
-              );
-            },
-            separatorBuilder: (_, int index) =>
-                Divider(height: 20.h, color: Colors.transparent),
-          ),
-        SliverToBoxAdapter(
-          child: Divider(height: 50.h, color: Colors.transparent),
-        ),
+    return Column(
+      children: [
+        if (logic.fireValue != null) TopItemWidget2(logic: logic),
+        Divider(height: 12.h, color: Colors.transparent),
+        Expanded(child: buildRealTimeData(logic)),
       ],
     );
   }
@@ -97,7 +52,7 @@ class AirCoolView extends StatelessWidget {
         width: double.maxFinite,
         child: Column(
           children: [
-            if (logic.hotMgValue?.alarmStatus != null)
+            if (logic.fireValue?.alarmStatus != null)
               Row(
                 children: [
                   Text(
@@ -106,10 +61,10 @@ class AirCoolView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.hotMgValue?.showAlarmStatus ?? "-",
+                    logic.fireValue?.showAlarmStatus ?? "-",
                     style: TextStyle(
                       fontSize: 14,
-                      color: (logic.hotMgValue?.alarmStatus == true)
+                      color: (logic.fireValue?.alarmStatus == true)
                           ? Color(0xFFFF4C7B)
                           : Color(0xFF46F9EC),
                     ),
@@ -119,7 +74,7 @@ class AirCoolView extends StatelessWidget {
 
             Divider(height: 16.h, color: Colors.transparent),
 
-            if (logic.hotMgValue?.communicationStatus != null)
+            if (logic.fireValue?.communicationStatus != null)
               Row(
                 children: [
                   Text(
@@ -128,10 +83,10 @@ class AirCoolView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.hotMgValue?.showCommunicationStatus ?? "-",
+                    logic.fireValue?.showCommunicationStatus ?? "-",
                     style: TextStyle(
                       fontSize: 14,
-                      color: (logic.hotMgValue?.communicationStatus == true)
+                      color: (logic.fireValue?.communicationStatus == true)
                           ? Color(0xFFFF4C7B)
                           : Color(0xFF46F9EC),
                     ),
@@ -141,7 +96,7 @@ class AirCoolView extends StatelessWidget {
 
             Divider(height: 16.h, color: Colors.transparent),
 
-            if (logic.hotMgValue?.statusEnNameDesc != null)
+            if (logic.fireValue?.statusEnNameDesc != null)
               Row(
                 children: [
                   Text(
@@ -150,7 +105,7 @@ class AirCoolView extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    logic.hotMgValue?.showRunStatus ?? "-",
+                    logic.fireValue?.showRunStatus ?? "-",
                     style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
                   ),
                 ],
@@ -160,4 +115,61 @@ class AirCoolView extends StatelessWidget {
       ),
     ],
   );
+
+  ///实时数据
+  Widget buildRealTimeData(MonitorDetailV1Logic logic) {
+    return CustomScrollView(
+      slivers: [
+        if (logic.fireValue != null)
+          SliverToBoxAdapter(child: buildStatusItem(logic)),
+        SliverToBoxAdapter(
+          child: Divider(height: 12.h, color: Colors.transparent),
+        ),
+        if ((logic.fireValue?.list ?? []).isNotEmpty)
+          SliverToBoxAdapter(
+            child: Container(
+              padding: EdgeInsetsDirectional.only(
+                bottom: 16.h,
+                start: 18.w,
+                end: 18.w,
+              ),
+              alignment: AlignmentDirectional.centerStart,
+              child: Text(
+                TKey.realTimeData.tr,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+        if ((logic.fireValue?.list ?? []).isNotEmpty)
+          SliverList.separated(
+            itemCount: (logic.fireValue?.list ?? []).length,
+            itemBuilder: (_, i) {
+              ChildItemInfo item = (logic.fireValue?.list ?? [])[i];
+              return Container(
+                width: double.maxFinite,
+                margin: EdgeInsetsDirectional.symmetric(horizontal: 18.w),
+                padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 15,
+                  vertical: 10,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color(0xFF313540),
+                ),
+                child: RealTimeChildTime(name: item.name, value: item.value),
+              );
+            },
+            separatorBuilder: (_, int index) =>
+                Divider(height: 20.h, color: Colors.transparent),
+          ),
+        SliverToBoxAdapter(
+          child: Divider(height: 50.h, color: Colors.transparent),
+        ),
+      ],
+    );
+  }
 }

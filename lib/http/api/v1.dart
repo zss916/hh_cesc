@@ -6,9 +6,11 @@ import 'package:cescpro/http/bean/v1_arr_info_entity.dart';
 import 'package:cescpro/http/bean/v1_cell_info_entity.dart';
 import 'package:cescpro/http/bean/v1_clu_info_entity.dart';
 import 'package:cescpro/http/bean/v1_dido_info_entity.dart';
+import 'package:cescpro/http/bean/v1_fire_entity.dart';
 import 'package:cescpro/http/bean/v1_hot_mg_entity.dart';
 import 'package:cescpro/http/bean/v1_meter_info_entity.dart';
 import 'package:cescpro/http/bean/v1_pcs_info_entity.dart';
+import 'package:cescpro/http/bean/v1_stats_meter_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
 import 'package:flutter/foundation.dart';
@@ -175,6 +177,47 @@ class V1API {
       );
       if (result["code"] == HttpStatus.ok) {
         return V1CellInfoEntity.fromJson(result['data']);
+      } else {
+        AppLoading.toast(result["message"]);
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static Future<V1StatsMeterEntity?> getStatsMeterInfo({
+    String? siteId,
+    int? did,
+  }) async {
+    try {
+      var result = await Http.instance.get(
+        ApiPath.getStatsMeterInfo,
+        query: {"siteId": siteId, "did": did},
+      );
+      if (result["code"] == HttpStatus.ok) {
+        return V1StatsMeterEntity.fromJson(result['data']);
+      } else {
+        AppLoading.toast(result["message"]);
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static Future<V1FireEntity?> getFireInfo({
+    String? siteId,
+    int? did,
+    int? fireId,
+  }) async {
+    try {
+      var result = await Http.instance.get(
+        ApiPath.getFireInfo,
+        query: {"siteId": siteId, "did": did, "fireId": fireId},
+      );
+      if (result["code"] == HttpStatus.ok) {
+        return V1FireEntity.fromJson(result['data']);
       } else {
         AppLoading.toast(result["message"]);
         return null;

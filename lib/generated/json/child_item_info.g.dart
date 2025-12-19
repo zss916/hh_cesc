@@ -19,7 +19,7 @@ ChildItemInfo $ChildItemInfoFromJson(Map<String, dynamic> json) {
   if (name != null) {
     childItemInfo.name = name;
   }
-  final dynamic value = json['value'];
+  final String? value = jsonConvert.convert<String>(json['value']);
   if (value != null) {
     childItemInfo.value = value;
   }
@@ -42,7 +42,7 @@ extension ChildItemInfoExtension on ChildItemInfo {
     int? unitSort,
     String? fieldName,
     String? name,
-    dynamic value,
+    String? value,
   }) {
     return ChildItemInfo()
       ..unitName = unitName ?? this.unitName
