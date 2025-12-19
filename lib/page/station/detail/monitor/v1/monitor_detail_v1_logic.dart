@@ -57,9 +57,7 @@ class MonitorDetailV1Logic extends GetxController
   Future<void> loadData() async {
     //debugPrint("isV1:$isV1,title :$title,$devType");
     AppLoading.show();
-    IdTreeEntity? value = await V1API
-        .getIdsTree(siteId: siteId, type: devType)
-        .whenComplete(() => AppLoading.dismiss());
+    IdTreeEntity? value = await V1API.getIdsTree(siteId: siteId, type: devType);
     if (value != null) {
       if (devType == DeviceEnum.arr.value) {
         List<IdTreeEntity> childList = value.child ?? [];
@@ -68,7 +66,11 @@ class MonitorDetailV1Logic extends GetxController
         deviceName = "${childList.first.showLabel}/1# ${TKey.stack.tr}";
         childDevices.assignAll((value.child ?? []));
         update();
-        getArrInfo(siteId: siteId, did: did, arrId: id);
+        await getArrInfo(
+          siteId: siteId,
+          did: did,
+          arrId: id,
+        ).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.clu.value) {
         List<IdTreeEntity> childList = value.child ?? [];
         did = childList.first.didValue;
@@ -78,7 +80,12 @@ class MonitorDetailV1Logic extends GetxController
             "${childList.first.showLabel}/1# ${TKey.stack.tr}/1# ${TKey.cluster.tr}";
         childDevices.assignAll((value.child ?? []));
         update();
-        getCluInfo(siteId: siteId, did: did, arrId: id, cluId: childId);
+        await getCluInfo(
+          siteId: siteId,
+          did: did,
+          arrId: id,
+          cluId: childId,
+        ).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.pcs.value) {
         List<IdTreeEntity> childList = value.child ?? [];
         did = childList.first.didValue;
@@ -86,9 +93,13 @@ class MonitorDetailV1Logic extends GetxController
         deviceName = "${childList.first.showLabel}/1# PCS";
         childDevices.assignAll((value.child ?? []));
         update();
-        getPcsInfo(siteId: siteId, did: did, pcsId: id);
+        await getPcsInfo(
+          siteId: siteId,
+          did: did,
+          pcsId: id,
+        ).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.airCool.value) {
-        getHotMg(siteId: siteId);
+        await getHotMg(siteId: siteId).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.meter.value) {
         List<IdTreeEntity> childList = value.child ?? [];
         did = childList.first.didValue;
@@ -96,7 +107,11 @@ class MonitorDetailV1Logic extends GetxController
         deviceName = "${childList.first.showLabel}/1# ${TKey.demandMeter.tr}";
         childDevices.assignAll((value.child ?? []));
         update();
-        getMeterInfo(siteId: siteId, did: did, meterId: id);
+        await getMeterInfo(
+          siteId: siteId,
+          did: did,
+          meterId: id,
+        ).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.dido.value) {
         List<IdTreeEntity> childList = value.child ?? [];
         did = childList.first.didValue;
@@ -104,7 +119,11 @@ class MonitorDetailV1Logic extends GetxController
         deviceName = "${childList.first.showLabel}/1# DIDO";
         childDevices.assignAll((value.child ?? []));
         update();
-        getDidoInfo(siteId: siteId, did: did, id: id);
+        await getDidoInfo(
+          siteId: siteId,
+          did: did,
+          id: id,
+        ).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.cell.value) {
         List<IdTreeEntity> childList = value.child ?? [];
         did = childList.first.didValue;
@@ -114,7 +133,12 @@ class MonitorDetailV1Logic extends GetxController
             "${childList.first.showLabel}/1# ${TKey.stack.tr}/1# ${TKey.cluster.tr}";
         childDevices.assignAll((value.child ?? []));
         update();
-        getCellInfo(siteId: siteId, did: did, arrId: id, cluId: childId);
+        await getCellInfo(
+          siteId: siteId,
+          did: did,
+          arrId: id,
+          cluId: childId,
+        ).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.statsMeter.value) {
         List<IdTreeEntity> childList = value.child ?? [];
         did = childList.first.didValue;
@@ -123,7 +147,10 @@ class MonitorDetailV1Logic extends GetxController
             "${childList.first.showLabel}/1# ${TKey.statisticsMeter.tr}/";
         childDevices.assignAll((value.child ?? []));
         update();
-        getStatsMeterInfo(siteId: siteId, did: did);
+        await getStatsMeterInfo(
+          siteId: siteId,
+          did: did,
+        ).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.fire.value) {
         List<IdTreeEntity> childList = value.child ?? [];
         did = childList.first.didValue;
@@ -132,8 +159,14 @@ class MonitorDetailV1Logic extends GetxController
         deviceName = "${childList.first.showLabel}/1# ${TKey.fire.tr}";
         childDevices.assignAll((value.child ?? []));
         update();
-        getFireInfo(siteId: siteId, did: did, fireId: childId);
+        await getFireInfo(
+          siteId: siteId,
+          did: did,
+          fireId: childId,
+        ).whenComplete(() => AppLoading.dismiss());
       }
+    } else {
+      AppLoading.dismiss();
     }
   }
 
