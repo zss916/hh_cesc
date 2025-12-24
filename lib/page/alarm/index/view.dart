@@ -130,4 +130,7 @@ class AlarmPage extends StatelessWidget {
       ],
     ),
   );
+
+  Widget buildList3({required AlarmLogic logic}) =>
+      RefresherAndLoad(logic: logic);
 }
