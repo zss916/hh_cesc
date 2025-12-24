@@ -2,6 +2,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/v1_cell_info_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/monitor_detail_v1_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/sheet/top_item_widget2.dart';
+import 'package:cescpro/page/station/detail/monitor/v1/widget/widget/interrupt_tip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -15,7 +16,9 @@ class CellView extends StatelessWidget {
     return Column(
       children: [
         if (logic.cellValue != null) TopItemWidget2(logic: logic),
-        Divider(height: 12.h, color: Colors.transparent),
+        if (logic.cellValue != null &&
+            (logic.cellValue?.isWithin30Minutes ?? false))
+          InterruptTip(value: (logic.cellValue?.statusUpdateTimeMill ?? 0)),
         Expanded(child: buildListData(logic)),
       ],
     );
@@ -119,6 +122,7 @@ class CellView extends StatelessWidget {
   Widget buildListData(MonitorDetailV1Logic logic) {
     return CustomScrollView(
       slivers: [
+        SliverPadding(padding: EdgeInsetsDirectional.only(top: 12.h)),
         if (logic.cellValue != null)
           SliverToBoxAdapter(child: buildStatusItem(logic)),
         SliverToBoxAdapter(

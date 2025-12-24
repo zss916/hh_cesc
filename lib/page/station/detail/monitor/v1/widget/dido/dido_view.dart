@@ -2,6 +2,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/child_item_info.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/monitor_detail_v1_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/sheet/top_item_widget2.dart';
+import 'package:cescpro/page/station/detail/monitor/v1/widget/widget/interrupt_tip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -15,7 +16,9 @@ class DidoView extends StatelessWidget {
     return Column(
       children: [
         if (logic.didoValue != null) TopItemWidget2(logic: logic),
-        Divider(height: 12.h, color: Colors.transparent),
+        if (logic.didoValue != null &&
+            (logic.didoValue?.isWithin30Minutes ?? false))
+          InterruptTip(value: (logic.didoValue?.statusUpdateTimeMill ?? 0)),
         Expanded(child: buildRealTimeData(logic)),
       ],
     );
@@ -119,6 +122,7 @@ class DidoView extends StatelessWidget {
   Widget buildRealTimeData(MonitorDetailV1Logic logic) {
     return CustomScrollView(
       slivers: [
+        SliverPadding(padding: EdgeInsetsDirectional.only(top: 12.h)),
         if (logic.didoValue != null)
           SliverToBoxAdapter(child: buildStatusItem(logic)),
         SliverToBoxAdapter(

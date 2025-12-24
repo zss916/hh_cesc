@@ -51,4 +51,11 @@ class V1StatsMeterEntity {
   ///运行状态
   String get showRunStatus =>
       Get.isEn ? (statusEnNameDesc ?? "") : (statusNameDesc ?? "");
+
+  ///是否超过30分钟
+  bool get isWithin30Minutes =>
+      (DateTime.now().millisecondsSinceEpoch -
+              ((statusUpdateTimeMill ?? 0) * 1000))
+          .abs() <=
+      (30 * 60 * 1000);
 }

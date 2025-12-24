@@ -40,6 +40,13 @@ class V1ArrInfoEntity {
     return jsonEncode(this);
   }
 
+  ///是否超过30分钟
+  bool get isWithin30Minutes =>
+      (DateTime.now().millisecondsSinceEpoch -
+              ((statusUpdateTimeMill ?? 0) * 1000))
+          .abs() <=
+      (30 * 60 * 1000);
+
   ///实时数据显示
   List<ChildItemInfo> get childList => (unitList ?? []).isEmpty
       ? <ChildItemInfo>[]

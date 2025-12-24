@@ -39,6 +39,10 @@ class SelectTitleChildItem2 extends StatelessWidget {
               }
               item.isChildSelected = true;
             }
+
+            item.selectTitle = item.showLabel.trim().isEmpty
+                ? ("${index + 1}# ${item.showChildLabel()}")
+                : (item.showLabel);
             onTap?.call();
           },
           child: Padding(

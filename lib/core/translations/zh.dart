@@ -207,4 +207,5 @@ const zh = {
   "statisticsMeter": "统计电表",
   "fireProtectionInfo": "消防信息",
   "fire": "消防",
+  "emsInterruptTip": "当前EMS设备与「%s」的通信状态已中断",
 };

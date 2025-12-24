@@ -1,3 +1,4 @@
+/*
 import 'package:app_settings/app_settings.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -36,3 +37,4 @@ class NotificationTools {
     AppSettings.openAppSettings(type: AppSettingsType.notification);
   }
 }
+*/

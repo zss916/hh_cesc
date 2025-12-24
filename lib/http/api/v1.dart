@@ -42,10 +42,17 @@ class V1API {
     int? arrId,
   }) async {
     try {
-      var result = await Http.instance.get(
-        ApiPath.getArrInfo,
-        query: {"siteId": siteId, "did": did, "arrId": arrId},
-      );
+      Map<String, dynamic> queryMap = {};
+      if (siteId != null) {
+        queryMap["siteId"] = siteId;
+      }
+      if (did != null) {
+        queryMap["did"] = did;
+      }
+      if (arrId != null) {
+        queryMap["arrId"] = arrId;
+      }
+      var result = await Http.instance.get(ApiPath.getArrInfo, query: queryMap);
       if (result["code"] == HttpStatus.ok) {
         return V1ArrInfoEntity.fromJson(result['data']);
       } else {
@@ -64,10 +71,20 @@ class V1API {
     int? cluId,
   }) async {
     try {
-      var result = await Http.instance.get(
-        ApiPath.getCluInfo,
-        query: {"siteId": siteId, "did": did, "arrId": arrId, "cluId": cluId},
-      );
+      Map<String, dynamic> queryMap = {};
+      if (siteId != null) {
+        queryMap["siteId"] = siteId;
+      }
+      if (did != null) {
+        queryMap["did"] = did;
+      }
+      if (arrId != null) {
+        queryMap["arrId"] = arrId;
+      }
+      if (cluId != null) {
+        queryMap["cluId"] = cluId;
+      }
+      var result = await Http.instance.get(ApiPath.getCluInfo, query: queryMap);
       if (result["code"] == HttpStatus.ok) {
         return V1CluInfoEntity.fromJson(result['data']);
       } else {
@@ -85,10 +102,17 @@ class V1API {
     int? pcsId,
   }) async {
     try {
-      var result = await Http.instance.get(
-        ApiPath.getPcsInfo,
-        query: {"siteId": siteId, "did": did, "pcsId": pcsId},
-      );
+      Map<String, dynamic> queryMap = {};
+      if (siteId != null) {
+        queryMap["siteId"] = siteId;
+      }
+      if (did != null) {
+        queryMap["did"] = did;
+      }
+      if (pcsId != null) {
+        queryMap["pcsId"] = pcsId;
+      }
+      var result = await Http.instance.get(ApiPath.getPcsInfo, query: queryMap);
       if (result["code"] == HttpStatus.ok) {
         return V1PcsInfoEntity.fromJson(result['data']);
       } else {
@@ -128,9 +152,19 @@ class V1API {
     int? meterId,
   }) async {
     try {
+      Map<String, dynamic> queryMap = {};
+      if (siteId != null) {
+        queryMap["siteId"] = siteId;
+      }
+      if (did != null) {
+        queryMap["did"] = did;
+      }
+      if (meterId != null) {
+        queryMap["meterId"] = meterId;
+      }
       var result = await Http.instance.get(
         ApiPath.getMeterInfo,
-        query: {"siteId": siteId, "did": did, "meterId": meterId},
+        query: queryMap,
       );
       if (result["code"] == HttpStatus.ok) {
         return V1MeterInfoEntity.fromJson(result['data']);
@@ -149,9 +183,19 @@ class V1API {
     int? id,
   }) async {
     try {
+      Map<String, dynamic> queryMap = {};
+      if (siteId != null) {
+        queryMap["siteId"] = siteId;
+      }
+      if (did != null) {
+        queryMap["did"] = did;
+      }
+      if (id != null) {
+        queryMap["id"] = id;
+      }
       var result = await Http.instance.get(
         ApiPath.getDidoInfo,
-        query: {"siteId": siteId, "did": did, "id": id},
+        query: queryMap,
       );
       if (result["code"] == HttpStatus.ok) {
         return V1DidoInfoEntity.fromJson(result['data']);
@@ -171,9 +215,22 @@ class V1API {
     int? cluId,
   }) async {
     try {
+      Map<String, dynamic> queryMap = {};
+      if (siteId != null) {
+        queryMap["siteId"] = siteId;
+      }
+      if (did != null) {
+        queryMap["did"] = did;
+      }
+      if (arrId != null) {
+        queryMap["arrId"] = arrId;
+      }
+      if (cluId != null) {
+        queryMap["cluId"] = cluId;
+      }
       var result = await Http.instance.get(
         ApiPath.getCellInfo,
-        query: {"siteId": siteId, "did": did, "arrId": arrId, "cluId": cluId},
+        query: queryMap,
       );
       if (result["code"] == HttpStatus.ok) {
         return V1CellInfoEntity.fromJson(result['data']);
@@ -191,9 +248,16 @@ class V1API {
     int? did,
   }) async {
     try {
+      Map<String, dynamic> queryMap = {};
+      if (siteId != null) {
+        queryMap["siteId"] = siteId;
+      }
+      if (did != null) {
+        queryMap["did"] = did;
+      }
       var result = await Http.instance.get(
         ApiPath.getStatsMeterInfo,
-        query: {"siteId": siteId, "did": did},
+        query: queryMap,
       );
       if (result["code"] == HttpStatus.ok) {
         return V1StatsMeterEntity.fromJson(result['data']);
@@ -212,9 +276,19 @@ class V1API {
     int? fireId,
   }) async {
     try {
+      Map<String, dynamic> queryMap = {};
+      if (siteId != null) {
+        queryMap["siteId"] = siteId;
+      }
+      if (did != null) {
+        queryMap["did"] = did;
+      }
+      if (fireId != null) {
+        queryMap["fireId"] = fireId;
+      }
       var result = await Http.instance.get(
         ApiPath.getFireInfo,
-        query: {"siteId": siteId, "did": did, "fireId": fireId},
+        query: queryMap,
       );
       if (result["code"] == HttpStatus.ok) {
         return V1FireEntity.fromJson(result['data']);

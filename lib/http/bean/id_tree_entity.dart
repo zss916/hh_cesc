@@ -23,6 +23,7 @@ class IdTreeEntity {
   bool? isSelected;
   bool? isChildSelected;
   bool? isChildChildSelected;
+  String? selectTitle;
 
   IdTreeEntity();
 

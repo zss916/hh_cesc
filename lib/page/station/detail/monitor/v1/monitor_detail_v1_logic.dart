@@ -61,112 +61,200 @@ class MonitorDetailV1Logic extends GetxController
     if (value != null) {
       if (devType == DeviceEnum.arr.value) {
         List<IdTreeEntity> childList = value.child ?? [];
-        did = childList.first.didValue;
-        id = childList.first.idValue;
-        deviceName = "${childList.first.showLabel}/1# ${TKey.stack.tr}";
-        childDevices.assignAll((value.child ?? []));
-        update();
-        await getArrInfo(
-          siteId: siteId,
-          did: did,
-          arrId: id,
-        ).whenComplete(() => AppLoading.dismiss());
+        if (childList.isNotEmpty) {
+          did = childList.first.didValue;
+          id = childList.first.idValue;
+          deviceName = "${childList.first.showLabel}/1# ${TKey.stack.tr}";
+          childDevices.assignAll((value.child ?? []));
+          update();
+          await getArrInfo(
+            siteId: siteId,
+            did: did,
+            arrId: id,
+          ).whenComplete(() => AppLoading.dismiss());
+        } else {
+          AppLoading.dismiss();
+        }
       } else if (devType == DeviceEnum.clu.value) {
         List<IdTreeEntity> childList = value.child ?? [];
-        did = childList.first.didValue;
-        id = childList.first.idValue;
-        childId = childList.first.child?.first.idValue;
-        deviceName =
-            "${childList.first.showLabel}/1# ${TKey.stack.tr}/1# ${TKey.cluster.tr}";
-        childDevices.assignAll((value.child ?? []));
-        update();
-        await getCluInfo(
-          siteId: siteId,
-          did: did,
-          arrId: id,
-          cluId: childId,
-        ).whenComplete(() => AppLoading.dismiss());
+        if (childList.isNotEmpty) {
+          did = childList.first.didValue;
+          id = childList.first.idValue;
+          childId = childList.first.child?.first.idValue;
+          deviceName =
+              "${childList.first.showLabel}/1# ${TKey.stack.tr}/1# ${TKey.cluster.tr}";
+          childDevices.assignAll((value.child ?? []));
+          update();
+          await getCluInfo(
+            siteId: siteId,
+            did: did,
+            arrId: id,
+            cluId: childId,
+          ).whenComplete(() => AppLoading.dismiss());
+        } else {
+          AppLoading.dismiss();
+        }
       } else if (devType == DeviceEnum.pcs.value) {
         List<IdTreeEntity> childList = value.child ?? [];
-        did = childList.first.didValue;
-        id = childList.first.idValue;
-        deviceName = "${childList.first.showLabel}/1# PCS";
-        childDevices.assignAll((value.child ?? []));
-        update();
-        await getPcsInfo(
-          siteId: siteId,
-          did: did,
-          pcsId: id,
-        ).whenComplete(() => AppLoading.dismiss());
+        if (childList.isNotEmpty) {
+          did = childList.first.didValue;
+          id = childList.first.idValue;
+          deviceName = "${childList.first.showLabel}/1# PCS";
+          childDevices.assignAll((value.child ?? []));
+          update();
+          await getPcsInfo(
+            siteId: siteId,
+            did: did,
+            pcsId: id,
+          ).whenComplete(() => AppLoading.dismiss());
+        } else {
+          AppLoading.dismiss();
+        }
       } else if (devType == DeviceEnum.airCool.value) {
         await getHotMg(siteId: siteId).whenComplete(() => AppLoading.dismiss());
       } else if (devType == DeviceEnum.meter.value) {
         List<IdTreeEntity> childList = value.child ?? [];
-        did = childList.first.didValue;
-        id = childList.first.idValue;
-        deviceName = "${childList.first.showLabel}/1# ${TKey.demandMeter.tr}";
-        childDevices.assignAll((value.child ?? []));
-        update();
-        await getMeterInfo(
-          siteId: siteId,
-          did: did,
-          meterId: id,
-        ).whenComplete(() => AppLoading.dismiss());
+        if (childList.isNotEmpty) {
+          did = childList.first.didValue;
+          id = childList.first.idValue;
+          deviceName = "${childList.first.showLabel}/1# ${TKey.demandMeter.tr}";
+          childDevices.assignAll((value.child ?? []));
+          update();
+          await getMeterInfo(
+            siteId: siteId,
+            did: did,
+            meterId: id,
+          ).whenComplete(() => AppLoading.dismiss());
+        } else {
+          AppLoading.dismiss();
+        }
       } else if (devType == DeviceEnum.dido.value) {
         List<IdTreeEntity> childList = value.child ?? [];
-        did = childList.first.didValue;
-        id = childList.first.idValue;
-        deviceName = "${childList.first.showLabel}/1# DIDO";
-        childDevices.assignAll((value.child ?? []));
-        update();
-        await getDidoInfo(
-          siteId: siteId,
-          did: did,
-          id: id,
-        ).whenComplete(() => AppLoading.dismiss());
+        if (childList.isNotEmpty) {
+          did = childList.first.didValue;
+          id = childList.first.idValue;
+          deviceName = "${childList.first.showLabel}/1# DIDO";
+          childDevices.assignAll((value.child ?? []));
+          update();
+          await getDidoInfo(
+            siteId: siteId,
+            did: did,
+            id: id,
+          ).whenComplete(() => AppLoading.dismiss());
+        } else {
+          AppLoading.dismiss();
+        }
       } else if (devType == DeviceEnum.cell.value) {
         List<IdTreeEntity> childList = value.child ?? [];
-        did = childList.first.didValue;
-        id = childList.first.idValue;
-        childId = childList.first.child?.first.idValue;
-        deviceName =
-            "${childList.first.showLabel}/1# ${TKey.stack.tr}/1# ${TKey.cluster.tr}";
-        childDevices.assignAll((value.child ?? []));
-        update();
-        await getCellInfo(
-          siteId: siteId,
-          did: did,
-          arrId: id,
-          cluId: childId,
-        ).whenComplete(() => AppLoading.dismiss());
+        if (childList.isNotEmpty) {
+          did = childList.first.didValue;
+          id = childList.first.idValue;
+          childId = childList.first.child?.first.idValue;
+          deviceName =
+              "${childList.first.showLabel}/1# ${TKey.stack.tr}/1# ${TKey.cluster.tr}";
+          childDevices.assignAll((value.child ?? []));
+          update();
+          await getCellInfo(
+            siteId: siteId,
+            did: did,
+            arrId: id,
+            cluId: childId,
+          ).whenComplete(() => AppLoading.dismiss());
+        } else {
+          AppLoading.dismiss();
+        }
       } else if (devType == DeviceEnum.statsMeter.value) {
         List<IdTreeEntity> childList = value.child ?? [];
-        did = childList.first.didValue;
-        id = childList.first.idValue;
-        deviceName =
-            "${childList.first.showLabel}/1# ${TKey.statisticsMeter.tr}/";
-        childDevices.assignAll((value.child ?? []));
-        update();
-        await getStatsMeterInfo(
-          siteId: siteId,
-          did: did,
-        ).whenComplete(() => AppLoading.dismiss());
+        if (childList.isNotEmpty) {
+          did = childList.first.didValue;
+          id = childList.first.idValue;
+          deviceName =
+              "${childList.first.showLabel}/1# ${TKey.statisticsMeter.tr}/";
+          childDevices.assignAll((value.child ?? []));
+          update();
+          await getStatsMeterInfo(
+            siteId: siteId,
+            did: did,
+          ).whenComplete(() => AppLoading.dismiss());
+        } else {
+          AppLoading.dismiss();
+        }
       } else if (devType == DeviceEnum.fire.value) {
         List<IdTreeEntity> childList = value.child ?? [];
-        did = childList.first.didValue;
-        id = childList.first.idValue;
-        childId = childList.first.child?.first.val;
-        deviceName = "${childList.first.showLabel}/1# ${TKey.fire.tr}";
-        childDevices.assignAll((value.child ?? []));
-        update();
-        await getFireInfo(
-          siteId: siteId,
-          did: did,
-          fireId: childId,
-        ).whenComplete(() => AppLoading.dismiss());
+        if (childList.isNotEmpty) {
+          did = childList.first.didValue;
+          id = childList.first.idValue;
+          childId = childList.first.child?.first.val;
+          deviceName = "${childList.first.showLabel}/1# ${TKey.fire.tr}";
+          childDevices.assignAll((value.child ?? []));
+          update();
+          await getFireInfo(
+            siteId: siteId,
+            did: did,
+            fireId: childId,
+          ).whenComplete(() => AppLoading.dismiss());
+        } else {
+          AppLoading.dismiss();
+        }
       }
     } else {
       AppLoading.dismiss();
+    }
+  }
+
+  Future<void> refreshData() async {
+    AppLoading.show();
+    if (devType == DeviceEnum.arr.value) {
+      await getArrInfo(
+        siteId: siteId,
+        did: did,
+        arrId: id,
+      ).whenComplete(() => AppLoading.dismiss());
+    } else if (devType == DeviceEnum.clu.value) {
+      await getCluInfo(
+        siteId: siteId,
+        did: did,
+        arrId: id,
+        cluId: childId,
+      ).whenComplete(() => AppLoading.dismiss());
+    } else if (devType == DeviceEnum.pcs.value) {
+      await getPcsInfo(
+        siteId: siteId,
+        did: did,
+        pcsId: id,
+      ).whenComplete(() => AppLoading.dismiss());
+    } else if (devType == DeviceEnum.airCool.value) {
+      await getHotMg(siteId: siteId).whenComplete(() => AppLoading.dismiss());
+    } else if (devType == DeviceEnum.meter.value) {
+      await getMeterInfo(
+        siteId: siteId,
+        did: did,
+        meterId: id,
+      ).whenComplete(() => AppLoading.dismiss());
+    } else if (devType == DeviceEnum.dido.value) {
+      await getDidoInfo(
+        siteId: siteId,
+        did: did,
+        id: id,
+      ).whenComplete(() => AppLoading.dismiss());
+    } else if (devType == DeviceEnum.cell.value) {
+      await getCellInfo(
+        siteId: siteId,
+        did: did,
+        arrId: id,
+        cluId: childId,
+      ).whenComplete(() => AppLoading.dismiss());
+    } else if (devType == DeviceEnum.statsMeter.value) {
+      await getStatsMeterInfo(
+        siteId: siteId,
+        did: did,
+      ).whenComplete(() => AppLoading.dismiss());
+    } else if (devType == DeviceEnum.fire.value) {
+      await getFireInfo(
+        siteId: siteId,
+        did: did,
+        fireId: childId,
+      ).whenComplete(() => AppLoading.dismiss());
     }
   }
 

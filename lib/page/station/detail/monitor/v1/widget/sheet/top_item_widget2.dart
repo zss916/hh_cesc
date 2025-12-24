@@ -17,12 +17,16 @@ class TopItemWidget2 extends StatelessWidget {
           onTap: () {
             showSelectTitleSheet2(
               logic.childDevices,
-              onSelect: (value, did, nodeNo, devNo) {
-                /*logic.compTree = value;
+              onSelect: (value, did, id, childId) {
+                logic.deviceName = value;
+                logic.update();
                 logic.did = did;
-                logic.nodeNo = nodeNo;
-                logic.devNo = devNo;
-                logic.switchTree();*/
+                logic.id = id;
+                logic.childId = childId;
+                debugPrint(
+                  "====>>>>  value:$value,did:$did,id:$id,childId:$childId",
+                );
+                logic.refreshData();
               },
             );
           },

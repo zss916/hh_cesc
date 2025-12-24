@@ -53,6 +53,10 @@ IdTreeEntity $IdTreeEntityFromJson(Map<String, dynamic> json) {
   if (isChildChildSelected != null) {
     idTreeEntity.isChildChildSelected = isChildChildSelected;
   }
+  final String? selectTitle = jsonConvert.convert<String>(json['selectTitle']);
+  if (selectTitle != null) {
+    idTreeEntity.selectTitle = selectTitle;
+  }
   return idTreeEntity;
 }
 
@@ -69,6 +73,7 @@ Map<String, dynamic> $IdTreeEntityToJson(IdTreeEntity entity) {
   data['isSelected'] = entity.isSelected;
   data['isChildSelected'] = entity.isChildSelected;
   data['isChildChildSelected'] = entity.isChildChildSelected;
+  data['selectTitle'] = entity.selectTitle;
   return data;
 }
 
@@ -85,6 +90,7 @@ extension IdTreeEntityExtension on IdTreeEntity {
     bool? isSelected,
     bool? isChildSelected,
     bool? isChildChildSelected,
+    String? selectTitle,
   }) {
     return IdTreeEntity()
       ..label = label ?? this.label
@@ -97,7 +103,7 @@ extension IdTreeEntityExtension on IdTreeEntity {
       ..child = child ?? this.child
       ..isSelected = isSelected ?? this.isSelected
       ..isChildSelected = isChildSelected ?? this.isChildSelected
-      ..isChildChildSelected =
-          isChildChildSelected ?? this.isChildChildSelected;
+      ..isChildChildSelected = isChildChildSelected ?? this.isChildChildSelected
+      ..selectTitle = selectTitle ?? this.selectTitle;
   }
 }

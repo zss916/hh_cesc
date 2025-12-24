@@ -16,7 +16,7 @@ class V1HotMgEntity {
   double? devStatus;
   String? statusNameDesc;
   String? statusEnNameDesc;
-  double? statusUpdateTimeMill;
+  int? statusUpdateTimeMill;
   String? name;
   dynamic enName;
   double? did;
@@ -38,6 +38,13 @@ class V1HotMgEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  ///是否超过30分钟
+  bool get isWithin30Minutes =>
+      (DateTime.now().millisecondsSinceEpoch -
+              ((statusUpdateTimeMill ?? 0) * 1000))
+          .abs() <=
+      (30 * 60 * 1000);
 
   ///告警状态
   String get showAlarmStatus => alarmStatus == null

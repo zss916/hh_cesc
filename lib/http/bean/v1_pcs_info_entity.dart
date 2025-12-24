@@ -72,6 +72,13 @@ class V1PcsInfoEntity {
     return jsonEncode(this);
   }
 
+  ///是否超过30分钟
+  bool get isWithin30Minutes =>
+      (DateTime.now().millisecondsSinceEpoch -
+              ((statusUpdateTimeMill ?? 0) * 1000))
+          .abs() <=
+      (30 * 60 * 1000);
+
   ///告警状态
   String get showAlarmStatus => alarmStatus == null
       ? "-"

@@ -1,3 +1,4 @@
+import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/id_tree_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/widget/sheet/select_title_item2.dart';
@@ -7,7 +8,7 @@ import 'package:get/get.dart';
 
 void showSelectTitleSheet2(
   List<IdTreeEntity> titles, {
-  Function(String, int? did, int? nodeNo, int? devNo)? onSelect,
+  Function(String, int? did, int? id, int? childId)? onSelect,
 }) {
   Get.bottomSheet(
     SelectTitle(titles: titles, onSelect: onSelect),
@@ -17,7 +18,7 @@ void showSelectTitleSheet2(
 
 class SelectTitle extends StatefulWidget {
   final List<IdTreeEntity> titles;
-  final Function(String, int? did, int? nodeNo, int? devNo)? onSelect;
+  final Function(String, int? did, int? id, int? childId)? onSelect;
   const SelectTitle({super.key, required this.titles, this.onSelect});
 
   @override
@@ -25,6 +26,8 @@ class SelectTitle extends StatefulWidget {
 }
 
 class _SelectTitleState extends State<SelectTitle> {
+  List<String> list = [];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,31 +75,40 @@ class _SelectTitleState extends State<SelectTitle> {
                 Spacer(),
                 InkWell(
                   onTap: () {
-                    /*  CompTreeEntity? title1 = widget.titles
+                    list.clear();
+                    IdTreeEntity? title1 = widget.titles
                         .where((e) => e.isSelected == true)
                         .toList()
                         .firstOrNull;
-                    CompTreeEntity? title2 = (title1?.child ?? [])
+                    if (title1?.selectTitle != null) {
+                      list.add(title1?.selectTitle ?? "");
+                    }
+                    IdTreeEntity? title2 = (title1?.child ?? [])
                         .where((e) => e.isChildSelected == true)
                         .toList()
                         .firstOrNull;
-                    CompTreeEntity? title3 = (title2?.child ?? [])
+                    if (title2?.selectTitle != null) {
+                      list.add(title2?.selectTitle ?? "");
+                    }
+                    IdTreeEntity? title3 = (title2?.child ?? [])
                         .where((e) => e.isChildChildSelected == true)
                         .toList()
-                        .firstOrNull;*/
+                        .firstOrNull;
+                    if (title3?.selectTitle != null) {
+                      list.add(title3?.selectTitle ?? "");
+                    }
 
-                    /*if (title1 != null && title2 != null && title3 != null) {
-                      String topTitle =
-                          "${title1.labelName}/${title2.labelName}/${title3.labelName}";
-                      int? did = title1.val;
-                      int? nodeNo = title2.val;
-                      int? devNO = title3.val;
+                    if (list.isNotEmpty) {
+                      String topTitle = list.join("/").toString();
+                      int? did = title1?.val;
+                      int? id = title2?.val;
+                      int? childId = title3?.val;
                       // debugPrint("topTitle ===> $topTitle");
-                      widget.onSelect?.call(topTitle, did, nodeNo, devNO);
+                      widget.onSelect?.call(topTitle, did, id, childId);
                       Get.back();
                     } else {
                       AppLoading.showError(TKey.selectHint.tr);
-                    }*/
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -135,5 +147,11 @@ class _SelectTitleState extends State<SelectTitle> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    list.clear();
+    super.dispose();
   }
 }

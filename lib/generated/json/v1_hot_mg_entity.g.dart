@@ -30,7 +30,7 @@ V1HotMgEntity $V1HotMgEntityFromJson(Map<String, dynamic> json) {
   if (statusEnNameDesc != null) {
     v1HotMgEntity.statusEnNameDesc = statusEnNameDesc;
   }
-  final double? statusUpdateTimeMill = jsonConvert.convert<double>(
+  final int? statusUpdateTimeMill = jsonConvert.convert<int>(
     json['statusUpdateTimeMill'],
   );
   if (statusUpdateTimeMill != null) {
@@ -104,7 +104,7 @@ extension V1HotMgEntityExtension on V1HotMgEntity {
     double? devStatus,
     String? statusNameDesc,
     String? statusEnNameDesc,
-    double? statusUpdateTimeMill,
+    int? statusUpdateTimeMill,
     String? name,
     dynamic enName,
     double? did,

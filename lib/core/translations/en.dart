@@ -426,6 +426,8 @@ class TKey {
   static const String statisticsMeter = "statisticsMeter";
 
   static const String fireProtectionInfo = "fireProtectionInfo";
+
+  static const String emsInterruptTip = "emsInterruptTip";
 }
 
 const en = {
@@ -640,4 +642,6 @@ const en = {
   "statisticsMeter": "Statistical Meter",
   "fireProtectionInfo": "Fire Protection Information",
   "fire": "Fire Protection",
+  "emsInterruptTip":
+      "The communication status between the current EMS device and「%s has been interrupted",
 };
