@@ -49,6 +49,7 @@ class AlarmPage extends StatelessWidget {
     );
   }
 
+  ///建立Body
   Widget buildBody({required int viewState, required AlarmLogic logic}) {
     return switch (viewState) {
       _ when viewState == ViewStateEnum.common.index => buildList2(

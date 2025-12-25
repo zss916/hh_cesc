@@ -85,5 +85,6 @@ flutter:
     - assets/gplot/
     - assets/json/
     - assets/html/
+    - assets/launcher/
 
 
