@@ -57,6 +57,7 @@ class StatisticsItemLogic extends GetxController {
   ///电量指标
   double? eleMaxY;
   int eleViewStatus = ViewType.loading.index;
+  List<String> eleLabels = [];
 
   @override
   void onInit() {
@@ -244,7 +245,7 @@ class StatisticsItemLogic extends GetxController {
     double? chargesMax = charges.reduce(max);
     double? rechargeMax = recharge.reduce(max);
     eleMaxY = (chargesMax ?? 0) > (rechargeMax ?? 0) ? chargesMax : rechargeMax;
-    labels.assignAll(eleList.map((e) => (e.dateTime ?? "")).toList());
+    eleLabels.assignAll(eleList.map((e) => (e.dateTime ?? "")).toList());
   }
 
   ///光伏发电

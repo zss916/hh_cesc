@@ -287,7 +287,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data2: widget.logic.revenueList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
-            labels: widget.logic.labels,
+            labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
           ),
 
