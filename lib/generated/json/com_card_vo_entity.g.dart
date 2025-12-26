@@ -1,5 +1,9 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/com_card_vo_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:get/get_core/src/get_main.dart';
+
 
 ComCardVoEntity $ComCardVoEntityFromJson(Map<String, dynamic> json) {
   final ComCardVoEntity comCardVoEntity = ComCardVoEntity();
@@ -12,8 +16,7 @@ ComCardVoEntity $ComCardVoEntityFromJson(Map<String, dynamic> json) {
     comCardVoEntity.cardName = cardName;
   }
   final int? componentGroupId = jsonConvert.convert<int>(
-    json['componentGroupId'],
-  );
+      json['componentGroupId']);
   if (componentGroupId != null) {
     comCardVoEntity.componentGroupId = componentGroupId;
   }
@@ -30,19 +33,18 @@ ComCardVoEntity $ComCardVoEntityFromJson(Map<String, dynamic> json) {
     comCardVoEntity.yAxis = yAxis;
   }
   final List<ComCardVoItems>? items = (json['items'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<ComCardVoItems>(e) as ComCardVoItems)
+      ?.map(
+          (e) => jsonConvert.convert<ComCardVoItems>(e) as ComCardVoItems)
       .toList();
   if (items != null) {
     comCardVoEntity.items = items;
   }
-  final List<ComCardVoDefaultList>? defaultList =
-      (json['defaultList'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                jsonConvert.convert<ComCardVoDefaultList>(e)
-                    as ComCardVoDefaultList,
-          )
-          .toList();
+  final List<ComCardVoDefaultList>? defaultList = (json['defaultList'] as List<
+      dynamic>?)
+      ?.map(
+          (e) =>
+      jsonConvert.convert<ComCardVoDefaultList>(e) as ComCardVoDefaultList)
+      .toList();
   if (defaultList != null) {
     comCardVoEntity.defaultList = defaultList;
   }
@@ -92,8 +94,7 @@ ComCardVoItems $ComCardVoItemsFromJson(Map<String, dynamic> json) {
     comCardVoItems.id = id;
   }
   final int? componentCardId = jsonConvert.convert<int>(
-    json['componentCardId'],
-  );
+      json['componentCardId']);
   if (componentCardId != null) {
     comCardVoItems.componentCardId = componentCardId;
   }

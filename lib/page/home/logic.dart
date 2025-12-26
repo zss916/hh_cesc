@@ -1,23 +1,34 @@
 part of 'index.dart';
 
 class HomeLogic extends GetxController {
-  HomeStatisticEntity? homeData;
-  // bool isExceedThousand = false;
-  num get totalIncome => (homeData?.totalIncome ?? 0.0);
-  num get todayIncome => homeData?.todayIncome ?? 0.0;
-  int get deviceNum => homeData?.deviceNum ?? 0; //设备数量
-  int get siteNum => homeData?.siteNum ?? 0; //站点数量
-  num get capacity => homeData?.capacity ?? 0.0; //站点容量
-
-  num get totalPos => homeData?.totalPos ?? 0.0; //累计充电
-  num get totalNeg => homeData?.totalNeg ?? 0.0; //累计放电
-  num get totalPvNeg => homeData?.totalPvNeg ?? 0.0; //累计光伏发电
-  num get co2 => homeData?.co2 ?? 0.0;
-  num get coal => homeData?.coal ?? 0.0;
-  int get normalNum => homeData?.normalNum ?? 0; //正常站点数
-  int get faultNum => homeData?.faultNum ?? 0; //故障站点数
-  int get alarmNum => homeData?.alarmNum ?? 0; //告警站点数
-  int get cutOffNum => homeData?.cutOffNum ?? 0; //中断告警数
+  //累计收益
+  num totalIncome = 0.0;
+  //当日收益
+  num todayIncome = 0.0;
+  //设备数量
+  int deviceNum = 0;
+  //站点数量
+  int siteNum = 0;
+  //站点容量
+  num capacity = 0.0;
+  //累计充电
+  num totalPos = 0.0;
+  //累计放电
+  num totalNeg = 0.0;
+  //累计光伏发电
+  num totalPvNeg = 0.0;
+  //co2 减排
+  num co2 = 0.0;
+  //煤炭
+  num coal = 0.0;
+  //正常站点数
+  int normalNum = 0;
+  //故障站点数
+  int faultNum = 0;
+  //告警站点数
+  int alarmNum = 0;
+  //中断告警数
+  int cutOffNum = 0;
 
   @override
   void onReady() {
@@ -33,29 +44,43 @@ class HomeLogic extends GetxController {
 
   Future<void> loadHome({bool loading = true}) async {
     if (loading) AppLoading.show();
-    HomeStatisticEntity? value = await HomeAPI.postStatisticRecord()
-        .whenComplete(() {
-          AppLoading.dismiss();
-        });
-    if (value != null) {
-      homeData = value;
+    final (HomeStatisticEntity? data, HomeData2Entity? data2) =
+        await HomeAPI.loadHomeData().whenComplete(() => AppLoading.dismiss());
+
+    if (data != null) {
+      totalIncome = data.totalIncome ?? 0.0;
+      todayIncome = data.todayIncome ?? 0.0;
+      deviceNum = data.deviceNum ?? 0;
+      siteNum = data.siteNum ?? 0;
+      capacity = data.capacity ?? 0.0;
+      totalPos = data.totalPos ?? 0.0;
+      totalNeg = data.totalNeg ?? 0.0;
+      totalPvNeg = data.totalPvNeg ?? 0.0;
+      co2 = data.co2 ?? 0.0;
+      coal = data.coal ?? 0.0;
+      normalNum = data.normalNum ?? 0;
+      faultNum = data.faultNum ?? 0;
+      alarmNum = data.alarmNum ?? 0;
+      cutOffNum = data.cutOffNum ?? 0;
       update();
     }
-  }
 
-  ///排序算法
-  List<int> interleaveSort(List<int> list) {
-    list.sort(); // 先排序
-    List<int> result = [];
-    int left = 0, right = list.length - 1;
-    while (left <= right) {
-      if (left == right) {
-        result.add(list[left]);
-      } else {
-        result.add(list[right--]);
-        result.add(list[left++]);
-      }
+    if (data2 != null) {
+      totalIncome = data2.totalIncome ?? 0.0;
+      todayIncome = data2.todayIncome ?? 0.0;
+      deviceNum = data2.deviceNum ?? 0;
+      siteNum = data2.siteNum ?? 0;
+      capacity = data2.capacity ?? 0.0;
+      totalPos = data2.totalPos ?? 0.0;
+      totalNeg = data2.totalNeg ?? 0.0;
+      totalPvNeg = data2.totalPvTotalNeg ?? 0.0;
+      co2 = data2.co2 ?? 0.0;
+      coal = data2.coal ?? 0.0;
+      normalNum = data2.normalNum ?? 0;
+      faultNum = data2.faultNum ?? 0;
+      alarmNum = data2.alarmNum ?? 0;
+      cutOffNum = data2.cutOffNum ?? 0;
+      update();
     }
-    return result;
   }
 }

@@ -1,5 +1,9 @@
-import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
+import 'package:cescpro/core/model/country_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:get/get.dart';
+
 
 CountryEntity $CountryEntityFromJson(Map<String, dynamic> json) {
   final CountryEntity countryEntity = CountryEntity();
@@ -27,7 +31,11 @@ Map<String, dynamic> $CountryEntityToJson(CountryEntity entity) {
 }
 
 extension CountryEntityExtension on CountryEntity {
-  CountryEntity copyWith({String? en, String? zh, String? code}) {
+  CountryEntity copyWith({
+    String? en,
+    String? zh,
+    String? code,
+  }) {
     return CountryEntity()
       ..en = en ?? this.en
       ..zh = zh ?? this.zh

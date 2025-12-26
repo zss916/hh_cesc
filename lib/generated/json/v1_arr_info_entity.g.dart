@@ -1,6 +1,13 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
-import 'package:cescpro/http/bean/child_item_info.dart';
 import 'package:cescpro/http/bean/v1_arr_info_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:cescpro/core/translations/en.dart';
+
+import 'package:cescpro/http/bean/child_item_info.dart';
+
+import 'package:get/get.dart';
+
 
 V1ArrInfoEntity $V1ArrInfoEntityFromJson(Map<String, dynamic> json) {
   final V1ArrInfoEntity v1ArrInfoEntity = V1ArrInfoEntity();
@@ -9,8 +16,7 @@ V1ArrInfoEntity $V1ArrInfoEntityFromJson(Map<String, dynamic> json) {
     v1ArrInfoEntity.alarmStatus = alarmStatus;
   }
   final bool? communicationStatus = jsonConvert.convert<bool>(
-    json['communicationStatus'],
-  );
+      json['communicationStatus']);
   if (communicationStatus != null) {
     v1ArrInfoEntity.communicationStatus = communicationStatus;
   }
@@ -19,20 +25,17 @@ V1ArrInfoEntity $V1ArrInfoEntityFromJson(Map<String, dynamic> json) {
     v1ArrInfoEntity.devStatus = devStatus;
   }
   final String? statusNameDesc = jsonConvert.convert<String>(
-    json['statusNameDesc'],
-  );
+      json['statusNameDesc']);
   if (statusNameDesc != null) {
     v1ArrInfoEntity.statusNameDesc = statusNameDesc;
   }
   final String? statusEnNameDesc = jsonConvert.convert<String>(
-    json['statusEnNameDesc'],
-  );
+      json['statusEnNameDesc']);
   if (statusEnNameDesc != null) {
     v1ArrInfoEntity.statusEnNameDesc = statusEnNameDesc;
   }
   final int? statusUpdateTimeMill = jsonConvert.convert<int>(
-    json['statusUpdateTimeMill'],
-  );
+      json['statusUpdateTimeMill']);
   if (statusUpdateTimeMill != null) {
     v1ArrInfoEntity.statusUpdateTimeMill = statusUpdateTimeMill;
   }
@@ -74,8 +77,7 @@ V1ArrInfoEntity $V1ArrInfoEntityFromJson(Map<String, dynamic> json) {
   }
   final List<V1ArrInfoUnitList>? unitList = (json['unitList'] as List<dynamic>?)
       ?.map(
-        (e) => jsonConvert.convert<V1ArrInfoUnitList>(e) as V1ArrInfoUnitList,
-      )
+          (e) => jsonConvert.convert<V1ArrInfoUnitList>(e) as V1ArrInfoUnitList)
       .toList();
   if (unitList != null) {
     v1ArrInfoEntity.unitList = unitList;
@@ -154,7 +156,8 @@ V1ArrInfoUnitList $V1ArrInfoUnitListFromJson(Map<String, dynamic> json) {
     v1ArrInfoUnitList.sort = sort;
   }
   final List<ChildItemInfo>? list = (json['list'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
+      ?.map(
+          (e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
       .toList();
   if (list != null) {
     v1ArrInfoUnitList.list = list;

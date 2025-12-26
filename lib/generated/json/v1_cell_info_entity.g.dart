@@ -1,5 +1,13 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/v1_cell_info_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:cescpro/core/translations/en.dart';
+
+import 'package:get/get_core/src/get_main.dart';
+
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
 
 V1CellInfoEntity $V1CellInfoEntityFromJson(Map<String, dynamic> json) {
   final V1CellInfoEntity v1CellInfoEntity = V1CellInfoEntity();
@@ -8,8 +16,7 @@ V1CellInfoEntity $V1CellInfoEntityFromJson(Map<String, dynamic> json) {
     v1CellInfoEntity.alarmStatus = alarmStatus;
   }
   final bool? communicationStatus = jsonConvert.convert<bool>(
-    json['communicationStatus'],
-  );
+      json['communicationStatus']);
   if (communicationStatus != null) {
     v1CellInfoEntity.communicationStatus = communicationStatus;
   }
@@ -18,25 +25,23 @@ V1CellInfoEntity $V1CellInfoEntityFromJson(Map<String, dynamic> json) {
     v1CellInfoEntity.devStatus = devStatus;
   }
   final String? statusNameDesc = jsonConvert.convert<String>(
-    json['statusNameDesc'],
-  );
+      json['statusNameDesc']);
   if (statusNameDesc != null) {
     v1CellInfoEntity.statusNameDesc = statusNameDesc;
   }
   final String? statusEnNameDesc = jsonConvert.convert<String>(
-    json['statusEnNameDesc'],
-  );
+      json['statusEnNameDesc']);
   if (statusEnNameDesc != null) {
     v1CellInfoEntity.statusEnNameDesc = statusEnNameDesc;
   }
   final int? statusUpdateTimeMill = jsonConvert.convert<int>(
-    json['statusUpdateTimeMill'],
-  );
+      json['statusUpdateTimeMill']);
   if (statusUpdateTimeMill != null) {
     v1CellInfoEntity.statusUpdateTimeMill = statusUpdateTimeMill;
   }
   final List<V1CellInfoList>? list = (json['list'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<V1CellInfoList>(e) as V1CellInfoList)
+      ?.map(
+          (e) => jsonConvert.convert<V1CellInfoList>(e) as V1CellInfoList)
       .toList();
   if (list != null) {
     v1CellInfoEntity.list = list;

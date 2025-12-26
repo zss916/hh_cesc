@@ -1,5 +1,6 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/api/weather.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
@@ -11,12 +12,14 @@ import 'package:get/get.dart';
 class OliveItemLogic extends GetxController {
   int? siteId;
 
+  ///天气
   WeatherEntity? weather;
 
   String get weatherData => weather == null
       ? "--"
       : "${weather?.desc ?? ""}${weather?.tempMin ?? 0}°~${weather?.tempMax ?? 0}°";
 
+  ///拓扑图
   SiteTopologyEntity? topology;
   double get pvPower => topology?.pv?.power ?? 0;
   double get gridPower => topology?.grid?.power ?? 0;
@@ -26,35 +29,32 @@ class OliveItemLogic extends GetxController {
   bool get isHasPv => topology?.hasPv ?? false;
   List<SiteTopologyLine> line = [];
 
-  SiteDetailEntity? siteDetail;
+  ///判断获取货币符号
+  String get currencyUnit => User.to.getCurrencyUnit();
 
   ///今天充电
-  String get showChargeAvg => (siteDetail?.chargeAvg ?? 0).formatPowerValue();
-  String get showChargeAvgUnit =>
-      (siteDetail?.chargeAvg ?? 0).formatPowerValueUnit();
+  String showChargeAvg = "0.00";
+  String showChargeAvgUnit = "";
 
   ///今天放电
-  String get showRechargeAvg =>
-      (siteDetail?.rechargeAvg ?? 0).formatPowerValue();
-  String get showRechargeAvgUnit =>
-      (siteDetail?.rechargeAvg ?? 0).formatPowerValueUnit();
+  String showRechargeAvg = "0.00";
+  String showRechargeAvgUnit = "";
 
-  String get workModel => siteDetail?.workModel ?? "";
-  int get status => siteDetail?.status ?? 0;
+  ///工作模式
+  String workModel = "";
 
-  StatisticRecordEntity? statisticRecord;
-  //String get showTodayIncome => "${statisticRecord?.todayIncome ?? 0}";
-  String get showLastDayIncome =>
-      (statisticRecord?.lastDayIncome ?? 0).moneyFormatted;
+  ///状态
+  int status = 0;
 
-  ///判断获取货币符号
-  String get currencyUnit => true ? "¥" : "€";
+  ///昨日收益
+  String showLastDayIncome = "0.00";
 
   ///今日光伏发电量
-  String get showTodayPvTotalNeg =>
-      (statisticRecord?.todayPvTotalNeg ?? 0).formatPowerValue();
-  String get showTodayPvTotalNegUnit =>
-      (statisticRecord?.todayPvTotalNeg ?? 0).formatPowerValueUnit();
+  String showTodayPvTotalNeg = "0.00";
+  String showTodayPvTotalNegUnit = "";
+
+  SiteDetailEntity? siteDetail;
+  StatisticRecordEntity? statisticRecord;
 
   @override
   void onInit() {
@@ -84,6 +84,7 @@ class OliveItemLogic extends GetxController {
     AppLoading.dismiss();
   }
 
+  ///天气
   Future<void> loadWeather() async {
     WeatherEntity? value = await WeatherAPI.postForecastApp(
       siteId: siteId,
@@ -95,7 +96,7 @@ class OliveItemLogic extends GetxController {
     }
   }
 
-  ///
+  ///拓扑图
   Future<void> getSiteTopology() async {
     SiteTopologyEntity? value = await SiteAPI.getSiteTopology(
       siteId: siteId ?? 0,
@@ -103,28 +104,38 @@ class OliveItemLogic extends GetxController {
     if (value != null) {
       topology = value;
       line = value.line ?? [];
-      // [{from: GRID, to: LOAD}, {from: GRID, to: STORAGE}]
-      //PV,STORAGE,LOAD,GRID
       update();
     }
   }
 
+  ///获取今天充电/今天放电
   Future<void> getPointDetails() async {
     SiteDetailEntity? value = await SiteAPI.getPointDetails(
       siteId: siteId ?? 0,
     );
     if (value != null) {
       siteDetail = value;
+      workModel = value.workModel;
+      status = value.status ?? 0;
       update();
     }
   }
 
+  ///获取昨日收益/今日光伏发电量
   Future<void> getSiteStatisticRecord() async {
-    StatisticRecordEntity? value = await SiteAPI.getSiteStatisticRecord(
+    StatisticRecordEntity? value = await SiteAPI.loadSiteStatisticRecord(
       siteId: siteId ?? 0,
     );
     if (value != null) {
       statisticRecord = value;
+      showChargeAvg = (value.todayTotalPos ?? 0).formatPowerValue();
+      showChargeAvgUnit = (value.todayTotalPos ?? 0).formatPowerValueUnit();
+      showRechargeAvg = (value.todayTotalNeg ?? 0).formatPowerValue();
+      showRechargeAvgUnit = (value.todayTotalNeg ?? 0).formatPowerValueUnit();
+      showLastDayIncome = (value.lastDayIncome ?? 0).moneyFormatted;
+      showTodayPvTotalNeg = (value.todayPvTotalNeg ?? 0).formatPowerValue();
+      showTodayPvTotalNegUnit = (value.todayPvTotalNeg ?? 0)
+          .formatPowerValueUnit();
       update();
     }
   }

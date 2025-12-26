@@ -19,15 +19,15 @@ UserInfoEntity $UserInfoEntityFromJson(Map<String, dynamic> json) {
   if (username != null) {
     userInfoEntity.username = username;
   }
-  final dynamic icon = json['icon'];
+  final String? icon = jsonConvert.convert<String>(json['icon']);
   if (icon != null) {
     userInfoEntity.icon = icon;
   }
-  final dynamic email = json['email'];
+  final String? email = jsonConvert.convert<String>(json['email']);
   if (email != null) {
     userInfoEntity.email = email;
   }
-  final dynamic nickName = json['nickName'];
+  final String? nickName = jsonConvert.convert<String>(json['nickName']);
   if (nickName != null) {
     userInfoEntity.nickName = nickName;
   }
@@ -47,11 +47,12 @@ UserInfoEntity $UserInfoEntityFromJson(Map<String, dynamic> json) {
   if (loginTime != null) {
     userInfoEntity.loginTime = loginTime;
   }
-  final dynamic logoUrl = json['logoUrl'];
+  final String? logoUrl = jsonConvert.convert<String>(json['logoUrl']);
   if (logoUrl != null) {
     userInfoEntity.logoUrl = logoUrl;
   }
-  final dynamic currencyCode = json['currencyCode'];
+  final String? currencyCode = jsonConvert.convert<String>(
+      json['currencyCode']);
   if (currencyCode != null) {
     userInfoEntity.currencyCode = currencyCode;
   }
@@ -82,15 +83,15 @@ extension UserInfoEntityExtension on UserInfoEntity {
     int? cid,
     int? id,
     String? username,
-    dynamic icon,
-    dynamic email,
-    dynamic nickName,
+    String? icon,
+    String? email,
+    String? nickName,
     int? accStatus,
     int? limitPass,
     String? userPhone,
     String? loginTime,
-    dynamic logoUrl,
-    dynamic currencyCode,
+    String? logoUrl,
+    String? currencyCode,
   }) {
     return UserInfoEntity()
       ..tenantId = tenantId ?? this.tenantId

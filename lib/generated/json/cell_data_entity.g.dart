@@ -1,5 +1,7 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/cell_data_entity.dart';
+import 'dart:math';
+
 
 CellDataEntity $CellDataEntityFromJson(Map<String, dynamic> json) {
   final CellDataEntity cellDataEntity = CellDataEntity();
@@ -20,7 +22,8 @@ CellDataEntity $CellDataEntityFromJson(Map<String, dynamic> json) {
     cellDataEntity.offest = offest;
   }
   final List<CellDataCells>? cells = (json['cells'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<CellDataCells>(e) as CellDataCells)
+      ?.map(
+          (e) => jsonConvert.convert<CellDataCells>(e) as CellDataCells)
       .toList();
   if (cells != null) {
     cellDataEntity.cells = cells;
@@ -86,7 +89,12 @@ Map<String, dynamic> $CellDataCellsToJson(CellDataCells entity) {
 }
 
 extension CellDataCellsExtension on CellDataCells {
-  CellDataCells copyWith({int? no, int? soc, double? voltage, double? temp}) {
+  CellDataCells copyWith({
+    int? no,
+    int? soc,
+    double? voltage,
+    double? temp,
+  }) {
     return CellDataCells()
       ..no = no ?? this.no
       ..soc = soc ?? this.soc

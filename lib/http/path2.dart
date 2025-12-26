@@ -1,20 +1,16 @@
-class ApiPath {
+/*
+class ApiPath2 {
+  //cloud.honghede.com/api/v1
+  //"https://ems.cescpower.com:9088/api/v1"
+
   ///国外版本
   static const String baseUrl = "https://cloud.honghede.com/api/v1";
 
-  ///站点首页信息展信(海外版本)
-  static const String postStatisticRecord2 =
-      "/business/v2/statisticRecordAbroadApp";
+  ///国内版本
+  // static const String baseUrl = "https://ems.cescpower.com:9088/api/v1";
 
-  ///站点首页信息展信(国内版本)
-  static const String postStatisticRecord = "/business/app/statisticRecord";
-
-  ///获取当前登录用户信息()
+  ///获取当前登录用户信息
   static const String getInfoApp = "/business/admin/infoApp";
-
-  static const String getInfoApp2 = "/business/admin/info";
-
-  static const String getCurrencyList = "/business/custom/getCurrencyList";
 
   ///登录
   static const String postLogin = "/admin/login";
@@ -24,10 +20,6 @@ class ApiPath {
 
   ///站点详情
   static const String getPointDetails = "/business/site/siteInfoApp";
-
-  /// 海外版本（昨日收益，今日放电量，今日冲电量，今日光伏发电量）
-  static const String getSiteStatisticRecord2 =
-      "/business/site/siteStatisticRecordAbroad";
 
   ///站点列表
   static const String postSiteList = "/business/site/listApp";
@@ -55,6 +47,9 @@ class ApiPath {
 
   ///获取组件树
   static const String getCompTree = "/business/site/compTree";
+
+  ///站点首页信息展信
+  static const String postStatisticRecord = "/business/app/statisticRecord";
 
   ///电量、止度、收益报表
   static const String postStatisticReportApp =
@@ -140,3 +135,4 @@ class ApiPath {
   ///v1
   static const String getFireInfo = "/business/device/getFireInfo";
 }
+*/

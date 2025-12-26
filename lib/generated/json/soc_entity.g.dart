@@ -27,7 +27,11 @@ Map<String, dynamic> $SocEntityToJson(SocEntity entity) {
 }
 
 extension SocEntityExtension on SocEntity {
-  SocEntity copyWith({int? time, int? soc, double? power}) {
+  SocEntity copyWith({
+    int? time,
+    int? soc,
+    double? power,
+  }) {
     return SocEntity()
       ..time = time ?? this.time
       ..soc = soc ?? this.soc

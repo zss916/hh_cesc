@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:flutter/material.dart';
@@ -196,8 +198,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "MWh",
-                    // "(${totalPos.formatPowerValueUnit()})",
+                    showTotalPosUnit,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -208,8 +209,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    //totalPos.formatPowerValue(),
-                    "$totalPos",
+                    showTotalPos,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -226,6 +226,12 @@ class BuildStationOverview extends StatelessWidget {
       ),
     );
   }
+
+  String get showTotalPos =>
+      AppSetting.isOverseas ? totalPos.formatPowerValue() : "$totalPos";
+
+  String get showTotalPosUnit =>
+      AppSetting.isOverseas ? "(${totalPos.formatPowerValueUnit()})" : "MWh";
 
   Widget buildItem3({required num totalNeg}) {
     return Container(
@@ -279,8 +285,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "MWh",
-                    // "(${totalNeg.formatPowerValueUnit()})",
+                    showTotalNegUnit,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -291,8 +296,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    "$totalNeg",
-                    //totalNeg.formatPowerValue(),
+                    showTotalNeg,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -309,6 +313,12 @@ class BuildStationOverview extends StatelessWidget {
       ),
     );
   }
+
+  String get showTotalNeg =>
+      AppSetting.isOverseas ? totalNeg.formatPowerValue() : "$totalNeg";
+
+  String get showTotalNegUnit =>
+      AppSetting.isOverseas ? "(${totalNeg.formatPowerValueUnit()})" : "MWh";
 
   Widget buildItem4({required num totalPvNeg}) {
     return Container(
@@ -362,8 +372,7 @@ class BuildStationOverview extends StatelessWidget {
                 SizedBox(
                   width: double.maxFinite,
                   child: Text(
-                    "MWh",
-                    //"(${totalPvNeg.formatPowerValueUnit()})",
+                    showTotalPvNegUnit,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
@@ -374,8 +383,7 @@ class BuildStationOverview extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0),
                   width: double.maxFinite,
                   child: AutoSizeText(
-                    "$totalPvNeg",
-                    //totalPvNeg.formatPowerValue(),
+                    showTotalPvNeg,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -392,4 +400,10 @@ class BuildStationOverview extends StatelessWidget {
       ),
     );
   }
+
+  String get showTotalPvNeg =>
+      AppSetting.isOverseas ? totalPvNeg.formatPowerValue() : "$totalPvNeg";
+
+  String get showTotalPvNegUnit =>
+      AppSetting.isOverseas ? "(${totalPvNeg.formatPowerValueUnit()})" : "MWh";
 }

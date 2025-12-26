@@ -9,15 +9,15 @@ class UserInfoEntity {
   int? cid;
   int? id;
   String? username;
-  dynamic icon;
-  dynamic email;
-  dynamic nickName;
+  String? icon;
+  String? email;
+  String? nickName;
   int? accStatus;
   int? limitPass;
   String? userPhone;
   String? loginTime;
-  dynamic logoUrl;
-  dynamic currencyCode;
+  String? logoUrl;
+  String? currencyCode;
 
   UserInfoEntity();
 

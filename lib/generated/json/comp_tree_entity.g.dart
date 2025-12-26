@@ -1,5 +1,9 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:get/get_core/src/get_main.dart';
+
 
 CompTreeEntity $CompTreeEntityFromJson(Map<String, dynamic> json) {
   final CompTreeEntity compTreeEntity = CompTreeEntity();
@@ -32,7 +36,8 @@ CompTreeEntity $CompTreeEntityFromJson(Map<String, dynamic> json) {
     compTreeEntity.labelEn = labelEn;
   }
   final List<CompTreeEntity>? child = (json['child'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<CompTreeEntity>(e) as CompTreeEntity)
+      ?.map(
+          (e) => jsonConvert.convert<CompTreeEntity>(e) as CompTreeEntity)
       .toList();
   if (child != null) {
     compTreeEntity.child = child;
@@ -42,14 +47,12 @@ CompTreeEntity $CompTreeEntityFromJson(Map<String, dynamic> json) {
     compTreeEntity.isSelected = isSelected;
   }
   final bool? isChildSelected = jsonConvert.convert<bool>(
-    json['isChildSelected'],
-  );
+      json['isChildSelected']);
   if (isChildSelected != null) {
     compTreeEntity.isChildSelected = isChildSelected;
   }
   final bool? isChildChildSelected = jsonConvert.convert<bool>(
-    json['isChildChildSelected'],
-  );
+      json['isChildChildSelected']);
   if (isChildChildSelected != null) {
     compTreeEntity.isChildChildSelected = isChildChildSelected;
   }
@@ -97,7 +100,7 @@ extension CompTreeEntityExtension on CompTreeEntity {
       ..child = child ?? this.child
       ..isSelected = isSelected ?? this.isSelected
       ..isChildSelected = isChildSelected ?? this.isChildSelected
-      ..isChildChildSelected =
-          isChildChildSelected ?? this.isChildChildSelected;
+      ..isChildChildSelected = isChildChildSelected ??
+          this.isChildChildSelected;
   }
 }

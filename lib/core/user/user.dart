@@ -10,6 +10,8 @@ class User extends GetxService {
 
   static final String tokenKey = "tokenKey";
   static final String tokenHeadKey = "tokenHeadKey";
+  static final String currencyListKey = "currencyListKey";
+  static final String currencyUnitKey = "currencyUnitKey";
 
   ///是否登录
   bool get isLogin => getToken().isNotEmpty;
@@ -32,5 +34,15 @@ class User extends GetxService {
 
   static setTokenHead({required String tokenHead}) {
     StorageService.to.setString(tokenHeadKey, tokenHead);
+  }
+
+  ///保存货币单位
+  void setCurrencyUnit({required String unit}) {
+    StorageService.to.setString(currencyUnitKey, unit);
+  }
+
+  ///获取货币单位
+  String getCurrencyUnit() {
+    return StorageService.to.getString(currencyUnitKey);
   }
 }

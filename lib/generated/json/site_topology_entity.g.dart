@@ -8,31 +8,28 @@ SiteTopologyEntity $SiteTopologyEntityFromJson(Map<String, dynamic> json) {
     siteTopologyEntity.pv = pv;
   }
   final SiteTopologyStorage? storage = jsonConvert.convert<SiteTopologyStorage>(
-    json['storage'],
-  );
+      json['storage']);
   if (storage != null) {
     siteTopologyEntity.storage = storage;
   }
   final SiteTopologyLoad? load = jsonConvert.convert<SiteTopologyLoad>(
-    json['load'],
-  );
+      json['load']);
   if (load != null) {
     siteTopologyEntity.load = load;
   }
   final SiteTopologyPcs? pcs = jsonConvert.convert<SiteTopologyPcs>(
-    json['pcs'],
-  );
+      json['pcs']);
   if (pcs != null) {
     siteTopologyEntity.pcs = pcs;
   }
   final SiteTopologyGrid? grid = jsonConvert.convert<SiteTopologyGrid>(
-    json['grid'],
-  );
+      json['grid']);
   if (grid != null) {
     siteTopologyEntity.grid = grid;
   }
   final List<SiteTopologyLine>? line = (json['line'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<SiteTopologyLine>(e) as SiteTopologyLine)
+      ?.map(
+          (e) => jsonConvert.convert<SiteTopologyLine>(e) as SiteTopologyLine)
       .toList();
   if (line != null) {
     siteTopologyEntity.line = line;
@@ -117,7 +114,11 @@ Map<String, dynamic> $SiteTopologyPvToJson(SiteTopologyPv entity) {
 }
 
 extension SiteTopologyPvExtension on SiteTopologyPv {
-  SiteTopologyPv copyWith({double? power, String? code, double? soc}) {
+  SiteTopologyPv copyWith({
+    double? power,
+    String? code,
+    double? soc,
+  }) {
     return SiteTopologyPv()
       ..power = power ?? this.power
       ..code = code ?? this.code
@@ -151,7 +152,11 @@ Map<String, dynamic> $SiteTopologyStorageToJson(SiteTopologyStorage entity) {
 }
 
 extension SiteTopologyStorageExtension on SiteTopologyStorage {
-  SiteTopologyStorage copyWith({double? power, String? code, double? soc}) {
+  SiteTopologyStorage copyWith({
+    double? power,
+    String? code,
+    double? soc,
+  }) {
     return SiteTopologyStorage()
       ..power = power ?? this.power
       ..code = code ?? this.code
@@ -185,7 +190,11 @@ Map<String, dynamic> $SiteTopologyLoadToJson(SiteTopologyLoad entity) {
 }
 
 extension SiteTopologyLoadExtension on SiteTopologyLoad {
-  SiteTopologyLoad copyWith({double? power, String? code, double? soc}) {
+  SiteTopologyLoad copyWith({
+    double? power,
+    String? code,
+    double? soc,
+  }) {
     return SiteTopologyLoad()
       ..power = power ?? this.power
       ..code = code ?? this.code
@@ -219,7 +228,11 @@ Map<String, dynamic> $SiteTopologyPcsToJson(SiteTopologyPcs entity) {
 }
 
 extension SiteTopologyPcsExtension on SiteTopologyPcs {
-  SiteTopologyPcs copyWith({double? power, String? code, double? soc}) {
+  SiteTopologyPcs copyWith({
+    double? power,
+    String? code,
+    double? soc,
+  }) {
     return SiteTopologyPcs()
       ..power = power ?? this.power
       ..code = code ?? this.code
@@ -253,7 +266,11 @@ Map<String, dynamic> $SiteTopologyGridToJson(SiteTopologyGrid entity) {
 }
 
 extension SiteTopologyGridExtension on SiteTopologyGrid {
-  SiteTopologyGrid copyWith({double? power, String? code, double? soc}) {
+  SiteTopologyGrid copyWith({
+    double? power,
+    String? code,
+    double? soc,
+  }) {
     return SiteTopologyGrid()
       ..power = power ?? this.power
       ..code = code ?? this.code
@@ -282,7 +299,10 @@ Map<String, dynamic> $SiteTopologyLineToJson(SiteTopologyLine entity) {
 }
 
 extension SiteTopologyLineExtension on SiteTopologyLine {
-  SiteTopologyLine copyWith({String? from, String? to}) {
+  SiteTopologyLine copyWith({
+    String? from,
+    String? to,
+  }) {
     return SiteTopologyLine()
       ..from = from ?? this.from
       ..to = to ?? this.to;

@@ -1,5 +1,6 @@
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/api/home.dart';
+import 'package:cescpro/http/bean/home_data2_entity.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/page/home/widget/build_device_and_site_count.dart';
 import 'package:cescpro/page/home/widget/build_environmental.dart';

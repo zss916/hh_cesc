@@ -16,8 +16,7 @@ ElecGraphEntity $ElecGraphEntityFromJson(Map<String, dynamic> json) {
     elecGraphEntity.totalCharge = totalCharge;
   }
   final double? totalRecharge = jsonConvert.convert<double>(
-    json['totalRecharge'],
-  );
+      json['totalRecharge']);
   if (totalRecharge != null) {
     elecGraphEntity.totalRecharge = totalRecharge;
   }

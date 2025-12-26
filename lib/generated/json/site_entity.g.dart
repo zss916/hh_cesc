@@ -1,5 +1,7 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
 
 SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
   final SiteEntity siteEntity = SiteEntity();
@@ -19,9 +21,8 @@ SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
   if (name != null) {
     siteEntity.name = name;
   }
-  final List<int>? types = (json['types'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<int>(e) as int)
-      .toList();
+  final List<int>? types = (json['types'] as List<dynamic>?)?.map(
+          (e) => jsonConvert.convert<int>(e) as int).toList();
   if (types != null) {
     siteEntity.types = types;
   }
@@ -54,18 +55,15 @@ SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
     siteEntity.hasDevCount = hasDevCount;
   }
   final int? operationTimeMill = jsonConvert.convert<int>(
-    json['operationTimeMill'],
-  );
+      json['operationTimeMill']);
   if (operationTimeMill != null) {
     siteEntity.operationTimeMill = operationTimeMill;
   }
-  final List<SiteDeviceDtoList>? deviceDtoList =
-      (json['deviceDtoList'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                jsonConvert.convert<SiteDeviceDtoList>(e) as SiteDeviceDtoList,
-          )
-          .toList();
+  final List<SiteDeviceDtoList>? deviceDtoList = (json['deviceDtoList'] as List<
+      dynamic>?)
+      ?.map(
+          (e) => jsonConvert.convert<SiteDeviceDtoList>(e) as SiteDeviceDtoList)
+      .toList();
   if (deviceDtoList != null) {
     siteEntity.deviceDtoList = deviceDtoList;
   }
@@ -90,8 +88,7 @@ SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
     siteEntity.activePower = activePower;
   }
   final double? reactivePower = jsonConvert.convert<double>(
-    json['reactivePower'],
-  );
+      json['reactivePower']);
   if (reactivePower != null) {
     siteEntity.reactivePower = reactivePower;
   }
@@ -132,8 +129,7 @@ SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
     siteEntity.elecSettleType = elecSettleType;
   }
   final double? elecCapacity = jsonConvert.convert<double>(
-    json['elecCapacity'],
-  );
+      json['elecCapacity']);
   if (elecCapacity != null) {
     siteEntity.elecCapacity = elecCapacity;
   }
@@ -145,22 +141,21 @@ SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
   if (elecSubType != null) {
     siteEntity.elecSubType = elecSubType;
   }
-  final List<SiteGroupInfos>? groupInfos =
-      (json['groupInfos'] as List<dynamic>?)
-          ?.map((e) => jsonConvert.convert<SiteGroupInfos>(e) as SiteGroupInfos)
-          .toList();
+  final List<SiteGroupInfos>? groupInfos = (json['groupInfos'] as List<
+      dynamic>?)
+      ?.map(
+          (e) => jsonConvert.convert<SiteGroupInfos>(e) as SiteGroupInfos)
+      .toList();
   if (groupInfos != null) {
     siteEntity.groupInfos = groupInfos;
   }
   final double? yesterdayCharge = jsonConvert.convert<double>(
-    json['yesterdayCharge'],
-  );
+      json['yesterdayCharge']);
   if (yesterdayCharge != null) {
     siteEntity.yesterdayCharge = yesterdayCharge;
   }
   final double? yesterdayRecharge = jsonConvert.convert<double>(
-    json['yesterdayRecharge'],
-  );
+      json['yesterdayRecharge']);
   if (yesterdayRecharge != null) {
     siteEntity.yesterdayRecharge = yesterdayRecharge;
   }
@@ -169,31 +164,27 @@ SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
     siteEntity.modifyTime = modifyTime;
   }
   final String? modifiedByName = jsonConvert.convert<String>(
-    json['modifiedByName'],
-  );
+      json['modifiedByName']);
   if (modifiedByName != null) {
     siteEntity.modifiedByName = modifiedByName;
   }
   final String? provinceCode = jsonConvert.convert<String>(
-    json['provinceCode'],
-  );
+      json['provinceCode']);
   if (provinceCode != null) {
     siteEntity.provinceCode = provinceCode;
   }
-  final List<SiteSiteGridDTOList>? siteGridDTOList =
-      (json['siteGridDTOList'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                jsonConvert.convert<SiteSiteGridDTOList>(e)
-                    as SiteSiteGridDTOList,
-          )
-          .toList();
+  final List<
+      SiteSiteGridDTOList>? siteGridDTOList = (json['siteGridDTOList'] as List<
+      dynamic>?)
+      ?.map(
+          (e) =>
+      jsonConvert.convert<SiteSiteGridDTOList>(e) as SiteSiteGridDTOList)
+      .toList();
   if (siteGridDTOList != null) {
     siteEntity.siteGridDTOList = siteGridDTOList;
   }
   final String? simpleLocation = jsonConvert.convert<String>(
-    json['simpleLocation'],
-  );
+      json['simpleLocation']);
   if (simpleLocation != null) {
     siteEntity.simpleLocation = simpleLocation;
   }
@@ -214,8 +205,7 @@ SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
     siteEntity.areaCode = areaCode;
   }
   final String? protocolVersion = jsonConvert.convert<String>(
-    json['protocolVersion'],
-  );
+      json['protocolVersion']);
   if (protocolVersion != null) {
     siteEntity.protocolVersion = protocolVersion;
   }
@@ -262,9 +252,8 @@ Map<String, dynamic> $SiteEntityToJson(SiteEntity entity) {
   data['modifyTime'] = entity.modifyTime;
   data['modifiedByName'] = entity.modifiedByName;
   data['provinceCode'] = entity.provinceCode;
-  data['siteGridDTOList'] = entity.siteGridDTOList
-      ?.map((v) => v.toJson())
-      .toList();
+  data['siteGridDTOList'] =
+      entity.siteGridDTOList?.map((v) => v.toJson()).toList();
   data['simpleLocation'] = entity.simpleLocation;
   data['zoneId'] = entity.zoneId;
   data['latestTimeMill'] = entity.latestTimeMill;
@@ -386,8 +375,7 @@ SiteDeviceDtoList $SiteDeviceDtoListFromJson(Map<String, dynamic> json) {
     siteDeviceDtoList.siteGridId = siteGridId;
   }
   final String? siteGridName = jsonConvert.convert<String>(
-    json['siteGridName'],
-  );
+      json['siteGridName']);
   if (siteGridName != null) {
     siteDeviceDtoList.siteGridName = siteGridName;
   }
@@ -444,8 +432,7 @@ SiteDeviceDtoList $SiteDeviceDtoListFromJson(Map<String, dynamic> json) {
     siteDeviceDtoList.remark = remark;
   }
   final String? operationTime = jsonConvert.convert<String>(
-    json['operationTime'],
-  );
+      json['operationTime']);
   if (operationTime != null) {
     siteDeviceDtoList.operationTime = operationTime;
   }
@@ -454,20 +441,17 @@ SiteDeviceDtoList $SiteDeviceDtoListFromJson(Map<String, dynamic> json) {
     siteDeviceDtoList.createTime = createTime;
   }
   final String? modifiedTime = jsonConvert.convert<String>(
-    json['modifiedTime'],
-  );
+      json['modifiedTime']);
   if (modifiedTime != null) {
     siteDeviceDtoList.modifiedTime = modifiedTime;
   }
   final String? createdByName = jsonConvert.convert<String>(
-    json['createdByName'],
-  );
+      json['createdByName']);
   if (createdByName != null) {
     siteDeviceDtoList.createdByName = createdByName;
   }
   final String? modifiedByName = jsonConvert.convert<String>(
-    json['modifiedByName'],
-  );
+      json['modifiedByName']);
   if (modifiedByName != null) {
     siteDeviceDtoList.modifiedByName = modifiedByName;
   }
@@ -488,8 +472,7 @@ SiteDeviceDtoList $SiteDeviceDtoListFromJson(Map<String, dynamic> json) {
     siteDeviceDtoList.zoneId = zoneId;
   }
   final String? emsConnectAddr = jsonConvert.convert<String>(
-    json['emsConnectAddr'],
-  );
+      json['emsConnectAddr']);
   if (emsConnectAddr != null) {
     siteDeviceDtoList.emsConnectAddr = emsConnectAddr;
   }
@@ -620,8 +603,7 @@ SiteGroupInfos $SiteGroupInfosFromJson(Map<String, dynamic> json) {
     siteGroupInfos.createTime = createTime;
   }
   final String? createdByName = jsonConvert.convert<String>(
-    json['createdByName'],
-  );
+      json['createdByName']);
   if (createdByName != null) {
     siteGroupInfos.createdByName = createdByName;
   }
@@ -630,20 +612,17 @@ SiteGroupInfos $SiteGroupInfosFromJson(Map<String, dynamic> json) {
     siteGroupInfos.modifyTime = modifyTime;
   }
   final String? modifiedByName = jsonConvert.convert<String>(
-    json['modifiedByName'],
-  );
+      json['modifiedByName']);
   if (modifiedByName != null) {
     siteGroupInfos.modifiedByName = modifiedByName;
   }
-  final List<int>? ownerIds = (json['ownerIds'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<int>(e) as int)
-      .toList();
+  final List<int>? ownerIds = (json['ownerIds'] as List<dynamic>?)?.map(
+          (e) => jsonConvert.convert<int>(e) as int).toList();
   if (ownerIds != null) {
     siteGroupInfos.ownerIds = ownerIds;
   }
-  final List<int>? siteIds = (json['siteIds'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<int>(e) as int)
-      .toList();
+  final List<int>? siteIds = (json['siteIds'] as List<dynamic>?)?.map(
+          (e) => jsonConvert.convert<int>(e) as int).toList();
   if (siteIds != null) {
     siteGroupInfos.siteIds = siteIds;
   }

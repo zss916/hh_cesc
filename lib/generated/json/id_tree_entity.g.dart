@@ -1,5 +1,11 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/id_tree_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:cescpro/core/translations/en.dart';
+
+import 'package:get/get.dart';
+
 
 IdTreeEntity $IdTreeEntityFromJson(Map<String, dynamic> json) {
   final IdTreeEntity idTreeEntity = IdTreeEntity();
@@ -31,9 +37,8 @@ IdTreeEntity $IdTreeEntityFromJson(Map<String, dynamic> json) {
   if (labelEn != null) {
     idTreeEntity.labelEn = labelEn;
   }
-  final List<IdTreeEntity>? child = (json['child'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<IdTreeEntity>(e) as IdTreeEntity)
-      .toList();
+  final List<IdTreeEntity>? child = (json['child'] as List<dynamic>?)?.map(
+          (e) => jsonConvert.convert<IdTreeEntity>(e) as IdTreeEntity).toList();
   if (child != null) {
     idTreeEntity.child = child;
   }
@@ -42,14 +47,12 @@ IdTreeEntity $IdTreeEntityFromJson(Map<String, dynamic> json) {
     idTreeEntity.isSelected = isSelected;
   }
   final bool? isChildSelected = jsonConvert.convert<bool>(
-    json['isChildSelected'],
-  );
+      json['isChildSelected']);
   if (isChildSelected != null) {
     idTreeEntity.isChildSelected = isChildSelected;
   }
   final bool? isChildChildSelected = jsonConvert.convert<bool>(
-    json['isChildChildSelected'],
-  );
+      json['isChildChildSelected']);
   if (isChildChildSelected != null) {
     idTreeEntity.isChildChildSelected = isChildChildSelected;
   }

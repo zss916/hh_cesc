@@ -24,14 +24,14 @@ PowerGraphEntity $PowerGraphEntityFromJson(Map<String, dynamic> json) {
     powerGraphEntity.title = title;
   }
   final List<PowerGraphList>? list = (json['list'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<PowerGraphList>(e) as PowerGraphList)
+      ?.map(
+          (e) => jsonConvert.convert<PowerGraphList>(e) as PowerGraphList)
       .toList();
   if (list != null) {
     powerGraphEntity.list = list;
   }
-  final List<int>? yList = (json['yList'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<int>(e) as int)
-      .toList();
+  final List<int>? yList = (json['yList'] as List<dynamic>?)?.map(
+          (e) => jsonConvert.convert<int>(e) as int).toList();
   if (yList != null) {
     powerGraphEntity.yList = yList;
   }
@@ -92,7 +92,10 @@ Map<String, dynamic> $PowerGraphListToJson(PowerGraphList entity) {
 }
 
 extension PowerGraphListExtension on PowerGraphList {
-  PowerGraphList copyWith({int? time, double? val}) {
+  PowerGraphList copyWith({
+    int? time,
+    double? val,
+  }) {
     return PowerGraphList()
       ..time = time ?? this.time
       ..val = val ?? this.val;

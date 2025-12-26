@@ -22,7 +22,10 @@ Map<String, dynamic> $AlarmGraphItemEntityToJson(AlarmGraphItemEntity entity) {
 }
 
 extension AlarmGraphItemEntityExtension on AlarmGraphItemEntity {
-  AlarmGraphItemEntity copyWith({String? dateTime, int? cnt}) {
+  AlarmGraphItemEntity copyWith({
+    String? dateTime,
+    int? cnt,
+  }) {
     return AlarmGraphItemEntity()
       ..dateTime = dateTime ?? this.dateTime
       ..cnt = cnt ?? this.cnt;

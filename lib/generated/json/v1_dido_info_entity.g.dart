@@ -1,6 +1,15 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
-import 'package:cescpro/http/bean/child_item_info.dart';
 import 'package:cescpro/http/bean/v1_dido_info_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:cescpro/core/translations/en.dart';
+
+import 'package:cescpro/http/bean/child_item_info.dart';
+
+import 'package:get/get_core/src/get_main.dart';
+
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
 
 V1DidoInfoEntity $V1DidoInfoEntityFromJson(Map<String, dynamic> json) {
   final V1DidoInfoEntity v1DidoInfoEntity = V1DidoInfoEntity();
@@ -9,8 +18,7 @@ V1DidoInfoEntity $V1DidoInfoEntityFromJson(Map<String, dynamic> json) {
     v1DidoInfoEntity.alarmStatus = alarmStatus;
   }
   final bool? communicationStatus = jsonConvert.convert<bool>(
-    json['communicationStatus'],
-  );
+      json['communicationStatus']);
   if (communicationStatus != null) {
     v1DidoInfoEntity.communicationStatus = communicationStatus;
   }
@@ -19,20 +27,17 @@ V1DidoInfoEntity $V1DidoInfoEntityFromJson(Map<String, dynamic> json) {
     v1DidoInfoEntity.devStatus = devStatus;
   }
   final String? statusNameDesc = jsonConvert.convert<String>(
-    json['statusNameDesc'],
-  );
+      json['statusNameDesc']);
   if (statusNameDesc != null) {
     v1DidoInfoEntity.statusNameDesc = statusNameDesc;
   }
   final String? statusEnNameDesc = jsonConvert.convert<String>(
-    json['statusEnNameDesc'],
-  );
+      json['statusEnNameDesc']);
   if (statusEnNameDesc != null) {
     v1DidoInfoEntity.statusEnNameDesc = statusEnNameDesc;
   }
   final int? statusUpdateTimeMill = jsonConvert.convert<int>(
-    json['statusUpdateTimeMill'],
-  );
+      json['statusUpdateTimeMill']);
   if (statusUpdateTimeMill != null) {
     v1DidoInfoEntity.statusUpdateTimeMill = statusUpdateTimeMill;
   }
@@ -65,13 +70,15 @@ V1DidoInfoEntity $V1DidoInfoEntityFromJson(Map<String, dynamic> json) {
     v1DidoInfoEntity.devNo = devNo;
   }
   final List<ChildItemInfo>? diList = (json['diList'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
+      ?.map(
+          (e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
       .toList();
   if (diList != null) {
     v1DidoInfoEntity.diList = diList;
   }
   final List<ChildItemInfo>? doList = (json['doList'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
+      ?.map(
+          (e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
       .toList();
   if (doList != null) {
     v1DidoInfoEntity.doList = doList;

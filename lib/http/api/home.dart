@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
+import 'package:cescpro/http/bean/home_data2_entity.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/statistic_report_entity.dart';
 import 'package:cescpro/http/http.dart';
@@ -8,7 +10,7 @@ import 'package:cescpro/http/path.dart';
 import 'package:flutter/foundation.dart';
 
 class HomeAPI {
-  ///站点首页信息展信
+  ///站点首页信息展信(国内版)
   static Future<HomeStatisticEntity?> postStatisticRecord({
     String? siteId,
     String? adcode,
@@ -45,6 +47,43 @@ class HomeAPI {
       }
     } catch (error) {
       return null;
+    }
+  }
+
+  ///站点首页信息展信(海外版)
+  static Future<HomeData2Entity?> postStatisticRecord2() async {
+    Map<String, dynamic> map = {};
+    try {
+      var result = await Http.instance.post(
+        ApiPath.postStatisticRecord2,
+        data: map,
+      );
+      if (result["code"] == HttpStatus.ok) {
+        return HomeData2Entity.fromJson(result["data"]);
+      } else {
+        AppLoading.toast(result["message"]);
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static Future<(HomeStatisticEntity?, HomeData2Entity?)> loadHomeData() async {
+    if (AppSetting.isOverseas) {
+      HomeData2Entity? value2 = await HomeAPI.postStatisticRecord2();
+      if (value2 != null) {
+        return (null, value2);
+      } else {
+        return (null, null);
+      }
+    } else {
+      HomeStatisticEntity? value = await HomeAPI.postStatisticRecord();
+      if (value != null) {
+        return (value, null);
+      } else {
+        return (null, null);
+      }
     }
   }
 

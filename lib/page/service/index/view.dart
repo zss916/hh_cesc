@@ -34,7 +34,7 @@ class ServicePage extends StatelessWidget {
               ),
               MessageItemWidget(
                 unReadNum: logic.unreadNum,
-                onTap: () {
+                onTap: () async {
                   PageTools.toMessageCenter();
                 },
               ),

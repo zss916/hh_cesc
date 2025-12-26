@@ -1,6 +1,15 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
-import 'package:cescpro/http/bean/child_item_info.dart';
 import 'package:cescpro/http/bean/v1_clu_info_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:cescpro/core/translations/en.dart';
+
+import 'package:cescpro/http/bean/child_item_info.dart';
+
+import 'package:get/get_core/src/get_main.dart';
+
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
 
 V1CluInfoEntity $V1CluInfoEntityFromJson(Map<String, dynamic> json) {
   final V1CluInfoEntity v1CluInfoEntity = V1CluInfoEntity();
@@ -9,8 +18,7 @@ V1CluInfoEntity $V1CluInfoEntityFromJson(Map<String, dynamic> json) {
     v1CluInfoEntity.alarmStatus = alarmStatus;
   }
   final bool? communicationStatus = jsonConvert.convert<bool>(
-    json['communicationStatus'],
-  );
+      json['communicationStatus']);
   if (communicationStatus != null) {
     v1CluInfoEntity.communicationStatus = communicationStatus;
   }
@@ -19,20 +27,17 @@ V1CluInfoEntity $V1CluInfoEntityFromJson(Map<String, dynamic> json) {
     v1CluInfoEntity.devStatus = devStatus;
   }
   final String? statusNameDesc = jsonConvert.convert<String>(
-    json['statusNameDesc'],
-  );
+      json['statusNameDesc']);
   if (statusNameDesc != null) {
     v1CluInfoEntity.statusNameDesc = statusNameDesc;
   }
   final String? statusEnNameDesc = jsonConvert.convert<String>(
-    json['statusEnNameDesc'],
-  );
+      json['statusEnNameDesc']);
   if (statusEnNameDesc != null) {
     v1CluInfoEntity.statusEnNameDesc = statusEnNameDesc;
   }
   final int? statusUpdateTimeMill = jsonConvert.convert<int>(
-    json['statusUpdateTimeMill'],
-  );
+      json['statusUpdateTimeMill']);
   if (statusUpdateTimeMill != null) {
     v1CluInfoEntity.statusUpdateTimeMill = statusUpdateTimeMill;
   }
@@ -214,8 +219,7 @@ V1CluInfoEntity $V1CluInfoEntityFromJson(Map<String, dynamic> json) {
   }
   final List<V1CluInfoUnitList>? unitList = (json['unitList'] as List<dynamic>?)
       ?.map(
-        (e) => jsonConvert.convert<V1CluInfoUnitList>(e) as V1CluInfoUnitList,
-      )
+          (e) => jsonConvert.convert<V1CluInfoUnitList>(e) as V1CluInfoUnitList)
       .toList();
   if (unitList != null) {
     v1CluInfoEntity.unitList = unitList;
@@ -377,8 +381,8 @@ extension V1CluInfoEntityExtension on V1CluInfoEntity {
       ..cluRtPower = cluRtPower ?? this.cluRtPower
       ..cluPosContactPos = cluPosContactPos ?? this.cluPosContactPos
       ..cluNegContactPos = cluNegContactPos ?? this.cluNegContactPos
-      ..cluPreChargeContactorPos =
-          cluPreChargeContactorPos ?? this.cluPreChargeContactorPos
+      ..cluPreChargeContactorPos = cluPreChargeContactorPos ??
+          this.cluPreChargeContactorPos
       ..cluPreserveSwitchPos = cluPreserveSwitchPos ?? this.cluPreserveSwitchPos
       ..cluFuseStatus = cluFuseStatus ?? this.cluFuseStatus
       ..deviceLock = deviceLock ?? this.deviceLock
@@ -400,7 +404,8 @@ V1CluInfoUnitList $V1CluInfoUnitListFromJson(Map<String, dynamic> json) {
     v1CluInfoUnitList.sort = sort;
   }
   final List<ChildItemInfo>? list = (json['list'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
+      ?.map(
+          (e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
       .toList();
   if (list != null) {
     v1CluInfoUnitList.list = list;

@@ -52,19 +52,17 @@ SiteDataEntity $SiteDataEntityFromJson(Map<String, dynamic> json) {
     siteDataEntity.hasDevCount = hasDevCount;
   }
   final int? operationTimeMill = jsonConvert.convert<int>(
-    json['operationTimeMill'],
-  );
+      json['operationTimeMill']);
   if (operationTimeMill != null) {
     siteDataEntity.operationTimeMill = operationTimeMill;
   }
-  final List<SiteDataDeviceDtoList>? deviceDtoList =
-      (json['deviceDtoList'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                jsonConvert.convert<SiteDataDeviceDtoList>(e)
-                    as SiteDataDeviceDtoList,
-          )
-          .toList();
+  final List<
+      SiteDataDeviceDtoList>? deviceDtoList = (json['deviceDtoList'] as List<
+      dynamic>?)
+      ?.map(
+          (e) =>
+      jsonConvert.convert<SiteDataDeviceDtoList>(e) as SiteDataDeviceDtoList)
+      .toList();
   if (deviceDtoList != null) {
     siteDataEntity.deviceDtoList = deviceDtoList;
   }
@@ -129,8 +127,7 @@ SiteDataEntity $SiteDataEntityFromJson(Map<String, dynamic> json) {
     siteDataEntity.elecSettleType = elecSettleType;
   }
   final double? elecCapacity = jsonConvert.convert<double>(
-    json['elecCapacity'],
-  );
+      json['elecCapacity']);
   if (elecCapacity != null) {
     siteDataEntity.elecCapacity = elecCapacity;
   }
@@ -159,8 +156,7 @@ SiteDataEntity $SiteDataEntityFromJson(Map<String, dynamic> json) {
     siteDataEntity.modifyTime = modifyTime;
   }
   final String? modifiedByName = jsonConvert.convert<String>(
-    json['modifiedByName'],
-  );
+      json['modifiedByName']);
   if (modifiedByName != null) {
     siteDataEntity.modifiedByName = modifiedByName;
   }
@@ -173,8 +169,7 @@ SiteDataEntity $SiteDataEntityFromJson(Map<String, dynamic> json) {
     siteDataEntity.siteGridDTOList = siteGridDTOList;
   }
   final String? simpleLocation = jsonConvert.convert<String>(
-    json['simpleLocation'],
-  );
+      json['simpleLocation']);
   if (simpleLocation != null) {
     siteDataEntity.simpleLocation = simpleLocation;
   }
@@ -195,8 +190,7 @@ SiteDataEntity $SiteDataEntityFromJson(Map<String, dynamic> json) {
     siteDataEntity.areaCode = areaCode;
   }
   final String? protocolVersion = jsonConvert.convert<String>(
-    json['protocolVersion'],
-  );
+      json['protocolVersion']);
   if (protocolVersion != null) {
     siteDataEntity.protocolVersion = protocolVersion;
   }
@@ -358,8 +352,7 @@ extension SiteDataEntityExtension on SiteDataEntity {
 }
 
 SiteDataDeviceDtoList $SiteDataDeviceDtoListFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   final SiteDataDeviceDtoList siteDataDeviceDtoList = SiteDataDeviceDtoList();
   final int? siteId = jsonConvert.convert<int>(json['siteId']);
   if (siteId != null) {
@@ -430,8 +423,7 @@ SiteDataDeviceDtoList $SiteDataDeviceDtoListFromJson(
     siteDataDeviceDtoList.remark = remark;
   }
   final String? operationTime = jsonConvert.convert<String>(
-    json['operationTime'],
-  );
+      json['operationTime']);
   if (operationTime != null) {
     siteDataDeviceDtoList.operationTime = operationTime;
   }
@@ -444,14 +436,12 @@ SiteDataDeviceDtoList $SiteDataDeviceDtoListFromJson(
     siteDataDeviceDtoList.modifiedTime = modifiedTime;
   }
   final String? createdByName = jsonConvert.convert<String>(
-    json['createdByName'],
-  );
+      json['createdByName']);
   if (createdByName != null) {
     siteDataDeviceDtoList.createdByName = createdByName;
   }
   final String? modifiedByName = jsonConvert.convert<String>(
-    json['modifiedByName'],
-  );
+      json['modifiedByName']);
   if (modifiedByName != null) {
     siteDataDeviceDtoList.modifiedByName = modifiedByName;
   }
@@ -476,8 +466,7 @@ SiteDataDeviceDtoList $SiteDataDeviceDtoListFromJson(
     siteDataDeviceDtoList.emsConnectAddr = emsConnectAddr;
   }
   final int? operationTimeMill = jsonConvert.convert<int>(
-    json['operationTimeMill'],
-  );
+      json['operationTimeMill']);
   if (operationTimeMill != null) {
     siteDataDeviceDtoList.operationTimeMill = operationTimeMill;
   }
@@ -485,8 +474,7 @@ SiteDataDeviceDtoList $SiteDataDeviceDtoListFromJson(
 }
 
 Map<String, dynamic> $SiteDataDeviceDtoListToJson(
-  SiteDataDeviceDtoList entity,
-) {
+    SiteDataDeviceDtoList entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['siteId'] = entity.siteId;
   data['siteName'] = entity.siteName;

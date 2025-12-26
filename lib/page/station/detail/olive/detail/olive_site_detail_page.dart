@@ -179,7 +179,7 @@ class OliveSiteDetailPage extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                "${(value?.todayIncome ?? 0).formatAmount()}${value?.currencyUnit}",
+                "${(value?.totalIncome ?? 0).formatAmount()}${value?.currencyUnit}",
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],

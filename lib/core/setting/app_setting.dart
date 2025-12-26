@@ -1,7 +1,10 @@
 import 'package:intl/intl.dart';
 
 class AppSetting {
-  static const String appName = 'Test';
+  static const String appName = 'BUGUISHOU';
+
+  ///是否是海外版本
+  static const bool isOverseas = true;
 }
 
 extension NumExtension on int {

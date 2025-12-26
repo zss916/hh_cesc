@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/statistic_record_entity.g.dart';
 
@@ -36,6 +37,17 @@ class StatisticRecordEntity {
   int? status; //状态
   List<StatisticRecordDailyStatisticVOList>? dailyStatisticVOList;
 
+  ///海外版本新增
+  int? pvPower;
+  num? pvCapacity;
+  int? siteNum;
+  int? normalNum;
+  int? faultNum;
+  int? alarmNum;
+  int? cutOffNum;
+  num? co2;
+  num? coal;
+
   StatisticRecordEntity();
 
   factory StatisticRecordEntity.fromJson(Map<String, dynamic> json) =>
@@ -66,7 +78,7 @@ class StatisticRecordEntity {
   }*/
 
   ///判断获取货币符号
-  String get currencyUnit => true ? "¥" : "€";
+  String get currencyUnit => User.to.getCurrencyUnit();
 
   ///今日光伏充电量
   /*String showTodayPVTotalNeg() {

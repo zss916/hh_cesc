@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/http/bean/alarm_graph_item_entity.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
@@ -184,6 +185,36 @@ class SiteAPI {
       }
     } catch (error) {
       return null;
+    }
+  }
+
+  ///海外版本（昨日收益，今日放电量，今日冲电量，今日光伏发电量）
+  static Future<StatisticRecordEntity?> getSiteStatisticRecord2({
+    required int siteId,
+  }) async {
+    try {
+      var result = await Http.instance.get(
+        ApiPath.getSiteStatisticRecord2,
+        query: {"siteId": siteId},
+      );
+      if (result["code"] == HttpStatus.ok) {
+        return StatisticRecordEntity.fromJson(result["data"]);
+      } else {
+        AppLoading.toast(result["message"]);
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static Future<StatisticRecordEntity?> loadSiteStatisticRecord({
+    required int siteId,
+  }) async {
+    if (AppSetting.isOverseas) {
+      return await getSiteStatisticRecord2(siteId: siteId);
+    } else {
+      return await getSiteStatisticRecord(siteId: siteId);
     }
   }
 

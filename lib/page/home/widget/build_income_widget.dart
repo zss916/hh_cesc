@@ -1,5 +1,6 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/core/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -49,9 +50,7 @@ class IncomeWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    TKey.totalRevenue.trArgs([
-                      false ? TKey.moneyWUnit.tr : TKey.moneyUnit.tr,
-                    ]),
+                    TKey.totalRevenue.trArgs([User.to.getCurrencyUnit()]),
                     style: TextStyle(fontSize: 14.sp, color: Color(0xA6FFFFFF)),
                   ),
                 ],
@@ -77,7 +76,7 @@ class IncomeWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    TKey.currentRevenue.trArgs([TKey.moneyUnit.tr]),
+                    TKey.currentRevenue.trArgs([User.to.getCurrencyUnit()]),
                     style: TextStyle(fontSize: 14.sp, color: Color(0xA6FFFFFF)),
                   ),
                 ],

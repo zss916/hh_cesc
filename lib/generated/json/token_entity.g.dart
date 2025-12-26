@@ -16,8 +16,7 @@ TokenEntity $TokenEntityFromJson(Map<String, dynamic> json) {
     tokenEntity.accessToken = accessToken;
   }
   final String? refreshToken = jsonConvert.convert<String>(
-    json['refreshToken'],
-  );
+      json['refreshToken']);
   if (refreshToken != null) {
     tokenEntity.refreshToken = refreshToken;
   }

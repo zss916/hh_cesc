@@ -1,32 +1,32 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/com_type_list_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:get/get_core/src/get_main.dart';
+
 
 ComTypeListEntity $ComTypeListEntityFromJson(Map<String, dynamic> json) {
   final ComTypeListEntity comTypeListEntity = ComTypeListEntity();
   final int? statusUpdateTimeMill = jsonConvert.convert<int>(
-    json['statusUpdateTimeMill'],
-  );
+      json['statusUpdateTimeMill']);
   if (statusUpdateTimeMill != null) {
     comTypeListEntity.statusUpdateTimeMill = statusUpdateTimeMill;
   }
   final List<ComTypeListItem>? selfList = (json['selfList'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<ComTypeListItem>(e) as ComTypeListItem)
+      ?.map(
+          (e) => jsonConvert.convert<ComTypeListItem>(e) as ComTypeListItem)
       .toList();
   if (selfList != null) {
     comTypeListEntity.selfList = selfList;
   }
-  final List<List<ComTypeListItem>>? otherList =
-      (json['otherList'] as List<dynamic>?)
-          ?.map(
-            (e) => (e as List<dynamic>)
-                .map(
+  final List<List<ComTypeListItem>>? otherList = (json['otherList'] as List<
+      dynamic>?)?.map(
+          (e) =>
+          (e as List<dynamic>)
+              .map(
                   (e) =>
-                      jsonConvert.convert<ComTypeListItem>(e)
-                          as ComTypeListItem,
-                )
-                .toList(),
-          )
-          .toList();
+              jsonConvert.convert<ComTypeListItem>(e) as ComTypeListItem)
+              .toList()).toList();
   if (otherList != null) {
     comTypeListEntity.otherList = otherList;
   }
