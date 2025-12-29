@@ -11,7 +11,7 @@ class Http {
   factory Http() => _instance;
 
   late Dio _dio;
-  CancelToken cancelToken = CancelToken();
+  CancelToken cancelTokenAll = CancelToken();
 
   Http._internal() {
     _dio = Dio(baseDioOptions);
@@ -20,8 +20,8 @@ class Http {
     _dio.interceptors.add(prettyDioLogger);
   }
 
-  void cancelRequests(CancelToken token) {
-    token.cancel("cancel request");
+  void cancelALLRequests() {
+    cancelTokenAll.cancel("cancel all request");
   }
 
   PrettyDioLogger prettyDioLogger = PrettyDioLogger(
@@ -47,7 +47,7 @@ class Http {
         data: data,
         queryParameters: queryParameters,
         //options: options,
-        cancelToken: cancelToken,
+        cancelToken: cancelToken ?? cancelTokenAll,
       );
       return response.data ?? '{}';
     } catch (error) {
@@ -69,73 +69,7 @@ class Http {
         queryParameters: query,
         data: data,
         //options: options,
-        cancelToken: cancelToken,
-      );
-      return result.data ?? '{}';
-    } catch (error) {
-      rethrow;
-    }
-  }
-
-  ///delete
-  Future<dynamic> delete(
-    String url, {
-    Map<String, dynamic>? query,
-    Object? data,
-    Options? options,
-    CancelToken? cancelToken,
-  }) async {
-    try {
-      final result = await _dio.delete(
-        url,
-        queryParameters: query,
-        data: data,
-        //options: options,
-        cancelToken: cancelToken,
-      );
-      return result.data ?? '{}';
-    } catch (error) {
-      rethrow;
-    }
-  }
-
-  ///patch
-  Future<dynamic> patch(
-    String url, {
-    Map<String, dynamic>? query,
-    Object? data,
-    Options? options,
-    CancelToken? cancelToken,
-  }) async {
-    try {
-      final result = await _dio.patch(
-        url,
-        queryParameters: query,
-        data: data,
-        //options: options,
-        cancelToken: cancelToken,
-      );
-      return result.data ?? '{}';
-    } catch (error) {
-      rethrow;
-    }
-  }
-
-  ///put
-  Future<dynamic> put(
-    String url, {
-    Map<String, dynamic>? query,
-    Object? data,
-    Options? options,
-    CancelToken? cancelToken,
-  }) async {
-    try {
-      final result = await _dio.put(
-        url,
-        queryParameters: query,
-        data: data,
-        //options: options,
-        cancelToken: cancelToken,
+        cancelToken: cancelToken ?? cancelTokenAll,
       );
       return result.data ?? '{}';
     } catch (error) {

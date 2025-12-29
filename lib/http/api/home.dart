@@ -4,6 +4,7 @@ import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/http/bean/home_data2_entity.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
+import 'package:cescpro/http/bean/report_data_entity.dart';
 import 'package:cescpro/http/bean/statistic_report_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
@@ -137,6 +138,67 @@ class HomeAPI {
       }
     } catch (error) {
       return (false, <StatisticReportEntity>[]);
+    }
+  }
+
+  ///海外版本 电量报表、收益报表
+  static Future<(bool, List<ReportDataEntity>)> postStatisticReportApp2({
+    int? type,
+    String? values,
+    int? siteId,
+    int? dataType,
+    int? startTimeStamp,
+    int? endTimeStamp,
+    String? startDay,
+    String? endDay,
+    int? date,
+  }) async {
+    Map<String, dynamic> map = {};
+    if (type != null) {
+      map['type'] = type;
+    }
+    if (values != null) {
+      map['values'] = values;
+    }
+    if (siteId != null) {
+      map['siteId'] = siteId;
+    }
+    if (dataType != null) {
+      map['dataType'] = dataType;
+    }
+    if (startTimeStamp != null) {
+      map['startTimeStamp'] = startTimeStamp;
+    }
+    if (endTimeStamp != null) {
+      map['endTimeStamp'] = endTimeStamp;
+    }
+    if (startDay != null) {
+      map['startDay'] = startDay;
+    }
+    if (endDay != null) {
+      map['endDay'] = endDay;
+    }
+    if (date != null) {
+      map['date'] = date;
+    }
+    try {
+      var result = await Http.instance.post(
+        ApiPath.postStatisticReportApp2,
+        data: map,
+      );
+      if (result["code"] == HttpStatus.ok) {
+        List<ReportDataEntity> value = await compute(
+          (List<dynamic> jsonList) =>
+              jsonList.map((e) => ReportDataEntity.fromJson(e)).toList(),
+          (result['data'] as List),
+        );
+        return (true, value);
+      } else {
+        AppLoading.toast(result["message"]);
+        return (false, <ReportDataEntity>[]);
+      }
+    } catch (error) {
+      return (false, <ReportDataEntity>[]);
     }
   }
 

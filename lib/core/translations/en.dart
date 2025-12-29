@@ -194,6 +194,9 @@ class TKey {
   static const String photovoltaicPowerGeneration =
       "photovoltaicPowerGeneration";
 
+  static const String photovoltaicPowerGeneration2 =
+      "photovoltaicPowerGeneration2";
+
   static const String deviceSerialNumber = "deviceSerialNumber";
 
   static const String alarmDevice = "alarmDevice";
@@ -428,6 +431,25 @@ class TKey {
   static const String fireProtectionInfo = "fireProtectionInfo";
 
   static const String emsInterruptTip = "emsInterruptTip";
+
+  static const String powerGeneration = "powerGeneration";
+
+  static const String allRevenue = "allRevenue";
+
+  static const String feedInRevenue = "feedInRevenue";
+
+  static const String selfGenerationRevenue = "selfGenerationRevenue";
+
+  static const String energyStoragePriceDifferenceRevenue =
+      "energyStoragePriceDifferenceRevenue";
+
+  static const String electricity = "electricity";
+
+  static const String gridEleGeneration = "gridEleGeneration";
+
+  static const String energyStorageCharge = "energyStorageCharge";
+
+  static const String energyStorageDischarge = "energyStorageDischarge";
 }
 
 const en = {
@@ -644,4 +666,15 @@ const en = {
   "fire": "Fire Protection",
   "emsInterruptTip":
       "The communication status between the current EMS device and「%s has been interrupted",
+  "powerGeneration": "Power Generation",
+  "allRevenue": "Total Revenue",
+  "feedInRevenue": "Feed-in Revenue",
+  "selfGenerationRevenue": "Self-generation Revenue",
+  "energyStoragePriceDifferenceRevenue":
+      "Energy Storage Price Difference Revenue",
+  "electricity": "Electricity",
+  "photovoltaicPowerGeneration2": "Total PV Generation",
+  "gridEleGeneration": "Grid-connected Electricity Generation",
+  "energyStorageCharge": "Energy Storage Charge",
+  "energyStorageDischarge": "Energy Storage Discharge",
 };

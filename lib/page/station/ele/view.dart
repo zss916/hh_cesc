@@ -1,13 +1,13 @@
 part of 'index.dart';
 
-class RevenuePage extends StatefulWidget {
-  const RevenuePage({super.key});
+class ElePage extends StatefulWidget {
+  const ElePage({super.key});
 
   @override
-  State<RevenuePage> createState() => _ReportDetailPageState();
+  State<ElePage> createState() => _ReportDetailPageState();
 }
 
-class _ReportDetailPageState extends State<RevenuePage> {
+class _ReportDetailPageState extends State<ElePage> {
   @override
   void initState() {
     super.initState();
@@ -20,8 +20,8 @@ class _ReportDetailPageState extends State<RevenuePage> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RevenueLogic>(
-      init: RevenueLogic(),
+    return GetBuilder<EleLogic>(
+      init: EleLogic(),
       builder: (logic) {
         return Scaffold(
           appBar: AppBar(
@@ -31,19 +31,19 @@ class _ReportDetailPageState extends State<RevenuePage> {
             ),
             centerTitle: true,
             title: Text(
-              TKey.revenue.tr,
+              TKey.electricity.tr,
               style: TextStyle(color: Colors.white, fontSize: 18.sp),
             ),
             backgroundColor: Colors.transparent,
           ),
           backgroundColor: Color(0xFF23282E),
-          body: buildRevenue(logic),
+          body: buildEle(logic),
         );
       },
     );
   }
 
-  Widget buildRevenue(RevenueLogic logic) {
+  Widget buildEle(EleLogic logic) {
     return SingleChildScrollView(
       child: Container(
         width: double.maxFinite,
@@ -75,8 +75,8 @@ class _ReportDetailPageState extends State<RevenuePage> {
                 ),
               ),
             ),
-            RevenueSelectTimeWidget(logic: logic),
-            RevenueTableWidget(logic: logic, queryType: logic.queryType),
+            EleSelectTimeWidget(logic: logic),
+            EleTableWidget(logic: logic, queryType: logic.queryType),
           ],
         ),
       ),

@@ -9,11 +9,12 @@ class ApiPath {
   ///站点首页信息展信(国内版本)
   static const String postStatisticRecord = "/business/app/statisticRecord";
 
-  ///获取当前登录用户信息()
+  ///获取当前登录用户信息
   static const String getInfoApp = "/business/admin/infoApp";
 
   static const String getInfoApp2 = "/business/admin/info";
 
+  ///货币列表
   static const String getCurrencyList = "/business/custom/getCurrencyList";
 
   ///登录
@@ -47,6 +48,9 @@ class ApiPath {
   ///查询收益，充放电统计以及效率
   static const String postElecGraph = "/business/site/elecGraph";
 
+  ///查询收益，充放电统计以及效率
+  static const String postElecGraph2 = "/business/site/elecGraphAbroad";
+
   ///功率分析
   static const String postPowerGraph = "/business/site/powerGraph";
 
@@ -59,6 +63,9 @@ class ApiPath {
   ///电量、止度、收益报表
   static const String postStatisticReportApp =
       "/business/v2/statisticReportApp";
+
+  ///海外版本 电量/收益报表
+  static const String postStatisticReportApp2 = "/business/timePrice/list";
 
   ///获取协议支持的设备类型列表
   static const String getSupportDevTypesV2 =
@@ -115,15 +122,12 @@ class ApiPath {
 
   ///v1
   static const String getPcsInfo = "/business/device/getPcsInfo";
-  //siteId=415&did=326&pcsId=0
 
   ///v1
   static const String getHotMg = "/business/device/hotmg";
-  //business/device/hotmg?siteId=415
 
   ///v1
   static const String getMeterInfo = "/business/device/getMeterInfo";
-  //siteId=415&did=326&meterId=0
 
   ///v1
   static const String getDidoInfo = "/business/device/getDidoInfo";

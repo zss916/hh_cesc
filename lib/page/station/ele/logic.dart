@@ -16,7 +16,7 @@ extension QueryTypeValue on QueryType {
   }
 }
 
-class RevenueLogic extends GetxController {
+class EleLogic extends GetxController {
   String? location;
   int? siteId;
   QueryType queryType = QueryType.daily;
@@ -24,8 +24,7 @@ class RevenueLogic extends GetxController {
   int? startTimeStamp;
   int? endTimeStamp;
 
-  List<StatisticReportDailyElecIncomeDetail> list = [];
-  List<ReportDataEntity> revenueList = [];
+  List<ReportDataEntity> eleList = [];
 
   @override
   void onInit() {
@@ -51,16 +50,11 @@ class RevenueLogic extends GetxController {
   }
 
   void loadData() {
-    if (AppSetting.isOverseas) {
-      loadRevenueList2();
-    } else {
-      loadRevenueList();
-    }
+    loadEleList();
   }
 
-  //  //{siteId: 477, dataType: 1, startTimeStamp: 1764518400000, endTimeStamp: 1767196799999, date: null}
-  Future<void> loadRevenueList2() async {
-    debugPrint("startTimeStamp:$startTimeStamp \n endTimeStamp:$endTimeStamp");
+  Future<void> loadEleList() async {
+    // debugPrint("startTimeStamp:$startTimeStamp \n endTimeStamp:$endTimeStamp");
     AppLoading.show();
     final (
       bool isSuccessful,
@@ -74,7 +68,7 @@ class RevenueLogic extends GetxController {
     ).whenComplete(() => AppLoading.dismiss());
 
     if (isSuccessful) {
-      revenueList.assignAll(value);
+      eleList.assignAll(value);
       update();
     }
   }
@@ -83,25 +77,5 @@ class RevenueLogic extends GetxController {
   void onClose() {
     super.onClose();
     AppLoading.dismiss();
-  }
-
-  Future<void> loadRevenueList() async {
-    //1.daily 2.monthly 3.yearly
-    AppLoading.show();
-    final (
-      bool isSuccessful,
-      List<StatisticReportEntity> value,
-    ) = await HomeAPI.postStatisticReportApp(
-      siteId: siteId,
-      queryType: queryType.value,
-      reportType: 3,
-      startTimeStamp: startTimeStamp,
-      endTimeStamp: endTimeStamp,
-      date: date,
-    ).whenComplete(() => AppLoading.dismiss());
-    if (isSuccessful) {
-      list.assignAll(value.first.dailyElecIncomeDetail ?? []);
-      update();
-    }
   }
 }

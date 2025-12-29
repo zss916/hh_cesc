@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
@@ -796,15 +797,24 @@ class OliveItemView extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    PageTools.toReportDetail(
-                      siteId: logic.siteId,
-                      location: logic.siteDetail?.location,
-                    );
+                    if (AppSetting.isOverseas) {
+                      PageTools.toEleReport(
+                        siteId: logic.siteId,
+                        location: logic.siteDetail?.location,
+                      );
+                    } else {
+                      PageTools.toReportDetail(
+                        siteId: logic.siteId,
+                        location: logic.siteDetail?.location,
+                      );
+                    }
                   },
                   child: Container(
                     alignment: AlignmentDirectional.center,
                     child: Text(
-                      TKey.electricityLevelLimit.tr,
+                      AppSetting.isOverseas
+                          ? TKey.electricity.tr
+                          : TKey.electricityLevelLimit.tr,
                       style: TextStyle(color: Colors.white, fontSize: 14.sp),
                     ),
                   ),

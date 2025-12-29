@@ -1,5 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/core/user/user.dart';
+import 'package:cescpro/http/bean/report_data_entity.dart';
 import 'package:cescpro/http/bean/statistic_report_entity.dart';
 import 'package:cescpro/page/station/revenue/index.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +11,293 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class RevenueTableWidget extends StatelessWidget {
-  final List<StatisticReportDailyElecIncomeDetail> data;
+  final RevenueLogic logic;
   final QueryType queryType;
   const RevenueTableWidget({
     super.key,
-    required this.data,
+    required this.logic,
     required this.queryType,
   });
 
   @override
   Widget build(BuildContext context) {
+    return AppSetting.isOverseas ? buildRevenueList2() : buildRevenueList();
+  }
+
+  ///海外版的收益报表
+  Widget buildRevenueList2() {
+    return SingleChildScrollView(
+      child: Container(
+        width: double.maxFinite,
+        clipBehavior: Clip.hardEdge,
+        margin: EdgeInsetsDirectional.only(bottom: 10.h),
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          border: Border.all(width: 1, color: Color(0xFF5A5D66)),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.maxFinite,
+              height: 80,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.maxFinite,
+                      alignment: AlignmentDirectional.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(3),
+                        ),
+                        color: Colors.white10,
+                      ),
+                      child: AutoSizeText(
+                        TKey.date.tr,
+                        textAlign: TextAlign.center,
+                        maxFontSize: 12,
+                        minFontSize: 6,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  buildVChildItemDiver(),
+                  Expanded(
+                    child: Container(
+                      alignment: AlignmentDirectional.center,
+                      decoration: BoxDecoration(color: Colors.white10),
+                      width: double.maxFinite,
+                      child: AutoSizeText(
+                        "${TKey.allRevenue.tr}\n(${User.to.getCurrencyUnit()})",
+                        textAlign: TextAlign.center,
+                        maxFontSize: 12,
+                        minFontSize: 6,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  buildVChildItemDiver(),
+                  Expanded(
+                    child: Container(
+                      alignment: AlignmentDirectional.center,
+                      decoration: BoxDecoration(color: Colors.white10),
+                      width: double.maxFinite,
+                      child: AutoSizeText(
+                        "${TKey.feedInRevenue.tr}\n(${User.to.getCurrencyUnit()})",
+                        textAlign: TextAlign.center,
+                        maxFontSize: 12,
+                        minFontSize: 6,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  buildVChildItemDiver(),
+                  Expanded(
+                    child: Container(
+                      alignment: AlignmentDirectional.center,
+                      decoration: BoxDecoration(color: Colors.white10),
+                      width: double.maxFinite,
+                      child: AutoSizeText(
+                        "${TKey.selfGenerationRevenue.tr}\n(${User.to.getCurrencyUnit()})",
+                        textAlign: TextAlign.center,
+                        maxFontSize: 12,
+                        minFontSize: 6,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  buildVChildItemDiver(),
+                  Expanded(
+                    child: Container(
+                      alignment: AlignmentDirectional.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(3),
+                        ),
+                        color: Colors.white10,
+                      ),
+                      width: double.maxFinite,
+                      child: AutoSizeText(
+                        "${TKey.energyStoragePriceDifferenceRevenue.tr}\n(${User.to.getCurrencyUnit()})",
+                        textAlign: TextAlign.center,
+                        maxFontSize: 12,
+                        minFontSize: 6,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: double.maxFinite,
+              constraints: BoxConstraints(minHeight: (66).toDouble()),
+              child: ListView.builder(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: logic.revenueList.length,
+                itemBuilder: (_, i) {
+                  ReportDataEntity item = logic.revenueList[i];
+                  return Container(
+                    width: double.maxFinite,
+                    constraints: BoxConstraints(minHeight: 66),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(width: 1, color: Color(0xFF5A5D66)),
+                      ),
+                    ),
+                    child: IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              // color: Colors.amber,
+                              padding: EdgeInsetsDirectional.all(10),
+                              width: double.maxFinite,
+                              alignment: AlignmentDirectional.center,
+                              child: Text(
+                                item.dayDate ?? "--",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: const Color(0xD9FFFFFF),
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsetsDirectional.all(0),
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    width: 1,
+                                    color: Color(0xFF5A5D66),
+                                  ),
+                                ),
+                              ),
+                              alignment: AlignmentDirectional.center,
+                              child: Text(
+                                item.allRevenue,
+                                style: TextStyle(
+                                  color: const Color(0xD9FFFFFF),
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsetsDirectional.all(0),
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    width: 1,
+                                    color: Color(0xFF5A5D66),
+                                  ),
+                                ),
+                              ),
+                              alignment: AlignmentDirectional.center,
+                              child: Text(
+                                item.isShow
+                                    ? (item.gridFeedGain ?? 0.00).formatAmount()
+                                    : "--",
+                                style: TextStyle(
+                                  color: const Color(0xD9FFFFFF),
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsetsDirectional.all(0),
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    width: 1,
+                                    color: Color(0xFF5A5D66),
+                                  ),
+                                ),
+                              ),
+                              alignment: AlignmentDirectional.center,
+                              child: Text(
+                                (item.pvSelfUseGain ?? 0.00).formatAmount(),
+                                style: TextStyle(
+                                  color: const Color(0xD9FFFFFF),
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsetsDirectional.all(10),
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    width: 1,
+                                    color: Color(0xFF5A5D66),
+                                  ),
+                                ),
+                              ),
+                              alignment: AlignmentDirectional.center,
+                              child: Text(
+                                (item.storageProfit ?? 0.00).formatAmount(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(0xD9FFFFFF),
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ///国内版的收益报表
+  Widget buildRevenueList() {
     return SingleChildScrollView(
       child: Container(
         width: double.maxFinite,
@@ -83,7 +364,7 @@ class RevenueTableWidget extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
                       child: Text(
-                        "${TKey.chargingAmount.tr}\n(￥)",
+                        "${TKey.chargingAmount.tr}\n(${User.to.getCurrencyUnit()})",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -100,7 +381,7 @@ class RevenueTableWidget extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
                       child: AutoSizeText(
-                        "${TKey.dischargingAmount.tr}\n(￥)",
+                        "${TKey.dischargingAmount.tr}\n(${User.to.getCurrencyUnit()})",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -122,7 +403,7 @@ class RevenueTableWidget extends StatelessWidget {
                       ),
                       width: double.maxFinite,
                       child: Text(
-                        "${TKey.amount.tr}\n(￥)",
+                        "${TKey.amount.tr}\n(${User.to.getCurrencyUnit()})",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -142,9 +423,9 @@ class RevenueTableWidget extends StatelessWidget {
                 shrinkWrap: true,
                 padding: EdgeInsets.zero,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: data.length,
+                itemCount: logic.list.length,
                 itemBuilder: (_, i) {
-                  StatisticReportDailyElecIncomeDetail item = data[i];
+                  StatisticReportDailyElecIncomeDetail item = logic.list[i];
                   return Container(
                     width: double.maxFinite,
                     constraints: BoxConstraints(minHeight: 66),

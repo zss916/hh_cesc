@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EleBarchartItemWidget extends StatefulWidget {
-  final List<double> data; // 数据列表
-  final List<double> data2; // 数据列表
+  final List<double> data; // 充电列表
+  final List<double> data2; // 放电列表
+  final List<double> data3; // 发电列表
   final List<String> labels; // 标签列表
   final double maxY; // Y轴的最大值
 
@@ -14,6 +15,7 @@ class EleBarchartItemWidget extends StatefulWidget {
     super.key,
     required this.data,
     required this.data2,
+    required this.data3,
     required this.labels,
     required this.maxY,
   });
@@ -271,6 +273,30 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
             toY: widget.data2[index],
             gradient: LinearGradient(
               colors: [Color(0xFFFFC08C), Color(0xFFFF8334)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.only(
+              topLeft: widget.data[index] >= 0
+                  ? Radius.circular(2.0)
+                  : Radius.zero,
+              topRight: widget.data[index] >= 0
+                  ? Radius.circular(2.0)
+                  : Radius.zero,
+              bottomLeft: widget.data[index] < 0
+                  ? Radius.circular(2.0)
+                  : Radius.zero,
+              bottomRight: widget.data[index] < 0
+                  ? Radius.circular(2.0)
+                  : Radius.zero,
+            ),
+            width: 8.w,
+          ),
+          BarChartRodData(
+            fromY: 0,
+            toY: widget.data3[index],
+            gradient: LinearGradient(
+              colors: [Color(0xFF42A5F5), Colors.blue],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),

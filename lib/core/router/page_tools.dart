@@ -117,4 +117,9 @@ class PageTools {
     APages.reportDetail,
     arguments: {"siteId": siteId, "location": location},
   );
+
+  static toEleReport({int? siteId, String? location}) => Get.toNamed(
+    APages.eleReport,
+    arguments: {"siteId": siteId, "location": location},
+  );
 }

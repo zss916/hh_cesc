@@ -19,6 +19,7 @@ class APages {
   static const main = '/main';
   static const revenue = '/revenue';
   static const web = '/web';
+  static const eleReport = '/eleReport';
 
   static final List<GetPage> routes = [
     /// 登录
@@ -61,6 +62,9 @@ class APages {
 
     ///报告详情
     GetPage(name: reportDetail, page: () => ReportDetailPage()),
+
+    ///电量报告
+    GetPage(name: eleReport, page: () => ElePage()),
 
     /// 首页
     GetPage(name: main, page: () => MainPage()),

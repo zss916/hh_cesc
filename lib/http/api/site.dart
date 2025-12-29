@@ -261,7 +261,7 @@ class SiteAPI {
   }) async {
     try {
       var result = await Http.instance.post(
-        ApiPath.postElecGraph,
+        AppSetting.isOverseas ? ApiPath.postElecGraph2 : ApiPath.postElecGraph,
         data: {
           "siteId": siteId,
           "startTimeStamp": startTimeStamp ?? 0,

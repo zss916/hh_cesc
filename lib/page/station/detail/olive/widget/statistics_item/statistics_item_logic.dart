@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
@@ -90,6 +91,8 @@ class StatisticsItemLogic extends GetxController {
       0,
     );
 
+    // debugPrint("start:${start.dateFormatted},end:${end.dateFormatted}");
+
     loadPower(startTimeStamp: powerStartTime, endTimeStamp: powerEndTime);
 
     loadRevenue(
@@ -105,6 +108,7 @@ class StatisticsItemLogic extends GetxController {
       startTimeStamp: start.millisecondsSinceEpoch,
       endTimeStamp: end.millisecondsSinceEpoch,
     );
+
     loadPVTrend(
       queryType: 0,
       startTimeStamp: start.millisecondsSinceEpoch,
@@ -181,6 +185,7 @@ class StatisticsItemLogic extends GetxController {
   List<double> minVals = [];
   List<double> lens = [];
 
+  //startTimeStamp: 1766678400000, endTimeStamp: 1766764799999
   ///收益统计和电量指标
   Future<void> loadRevenue({
     required DataType type,
@@ -238,13 +243,24 @@ class StatisticsItemLogic extends GetxController {
   }
 
   void handEleData(List<ElecGraphEntity> eleList) {
+    List<double> list = [];
     //充电
     List<double> charges = eleList.map((e) => (e.totalCharge ?? 0)).toList();
+    double chargesMax = charges.reduce(max);
+    list.add(chargesMax);
     //放电
     List<double> recharge = eleList.map((e) => (e.totalRecharge ?? 0)).toList();
-    double? chargesMax = charges.reduce(max);
-    double? rechargeMax = recharge.reduce(max);
-    eleMaxY = (chargesMax ?? 0) > (rechargeMax ?? 0) ? chargesMax : rechargeMax;
+    double rechargeMax = recharge.reduce(max);
+    list.add(rechargeMax);
+
+    ///海外版本
+    if (AppSetting.isOverseas) {
+      //发电
+      List<double> pv = eleList.map((e) => (e.pvGeneration ?? 0)).toList();
+      double pvMax = pv.reduce(max);
+      list.add(pvMax);
+    }
+    eleMaxY = list.reduce(max);
     eleLabels.assignAll(eleList.map((e) => (e.dateTime ?? "")).toList());
   }
 

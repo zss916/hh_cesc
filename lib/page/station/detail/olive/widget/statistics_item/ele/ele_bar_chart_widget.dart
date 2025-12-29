@@ -1,4 +1,5 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/widget/ele_barchart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
@@ -83,19 +84,22 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                   Divider(height: 5.h, color: Colors.transparent),
 
                   if (widget.logic.revenueList.isNotEmpty)
-                    Row(
+                    Wrap(
+                      spacing: 16.w,
                       children: [
-                        Spacer(),
                         LineTitleWidget(
                           title: TKey.charge.tr,
                           color: Color(0xFF39FFEF),
                         ),
-                        VerticalDivider(width: 16.w, color: Colors.transparent),
                         LineTitleWidget(
                           title: TKey.discharge.tr,
                           color: Color(0xFFFFC08C),
                         ),
-                        Spacer(),
+                        if (AppSetting.isOverseas)
+                          LineTitleWidget(
+                            title: TKey.powerGeneration.tr,
+                            color: Colors.blueAccent,
+                          ),
                       ],
                     ),
                 ],
@@ -287,6 +291,9 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data2: widget.logic.revenueList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
+            data3: widget.logic.revenueList
+                .map((e) => (e.pvGeneration ?? 0))
+                .toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
           ),
@@ -299,6 +306,9 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data2: widget.logic.revenueList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
+            data3: widget.logic.revenueList
+                .map((e) => (e.pvGeneration ?? 0))
+                .toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
           ),
@@ -310,6 +320,9 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                 .toList(),
             data2: widget.logic.revenueList
                 .map((e) => (e.totalRecharge ?? 0))
+                .toList(),
+            data3: widget.logic.revenueList
+                .map((e) => (e.pvGeneration ?? 0))
                 .toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
@@ -334,13 +347,31 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
       controller: tabCtrl,
       children: [
         ///周
-        EleBarchartItemWidget(data: [], data2: [], labels: [], maxY: 0),
+        EleBarchartItemWidget(
+          data: [],
+          data2: [],
+          data3: [],
+          labels: [],
+          maxY: 0,
+        ),
 
         ///月
-        EleBarchartItemWidget(data: [], data2: [], labels: [], maxY: 0),
+        EleBarchartItemWidget(
+          data: [],
+          data2: [],
+          data3: [],
+          labels: [],
+          maxY: 0,
+        ),
 
         ///年
-        EleBarchartItemWidget(data: [], data2: [], labels: [], maxY: 0),
+        EleBarchartItemWidget(
+          data: [],
+          data2: [],
+          data3: [],
+          labels: [],
+          maxY: 0,
+        ),
       ],
     ),
   );

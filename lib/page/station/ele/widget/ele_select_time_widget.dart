@@ -1,21 +1,21 @@
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/page/station/ele/index.dart';
 import 'package:cescpro/page/station/report/widget/select_date_widget.dart';
 import 'package:cescpro/page/station/report/widget/select_month_widget.dart';
 import 'package:cescpro/page/station/report/widget/select_year_widget.dart';
-import 'package:cescpro/page/station/revenue/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class RevenueSelectTimeWidget extends StatefulWidget {
-  final RevenueLogic logic;
-  const RevenueSelectTimeWidget({super.key, required this.logic});
+class EleSelectTimeWidget extends StatefulWidget {
+  final EleLogic logic;
+  const EleSelectTimeWidget({super.key, required this.logic});
 
   @override
-  State<RevenueSelectTimeWidget> createState() => _BuildSelectTimeWidgetState();
+  State<EleSelectTimeWidget> createState() => _BuildSelectTimeWidgetState();
 }
 
-class _BuildSelectTimeWidgetState extends State<RevenueSelectTimeWidget> {
+class _BuildSelectTimeWidgetState extends State<EleSelectTimeWidget> {
   int _selectedIndex = 0;
   DateTime dateTime = DateTime.now().toUtc();
 
