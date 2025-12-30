@@ -216,7 +216,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                   final style = TextStyle(
                     color: Color(0xA8FFFFFF),
                     fontWeight: FontWeight.w400,
-                    fontSize: 10.sp,
+                    fontSize: 8.sp,
                   );
                   return SideTitleWidget(
                     //axisSide: meta.axisSide,

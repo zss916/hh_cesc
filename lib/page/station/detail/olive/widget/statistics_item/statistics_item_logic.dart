@@ -57,6 +57,7 @@ class StatisticsItemLogic extends GetxController {
 
   ///电量指标
   double? eleMaxY;
+  double? eleMinY;
   int eleViewStatus = ViewType.loading.index;
   List<String> eleLabels = [];
 
@@ -244,14 +245,19 @@ class StatisticsItemLogic extends GetxController {
 
   void handEleData(List<ElecGraphEntity> eleList) {
     List<double> list = [];
+    List<double> list2 = [];
     //充电
     List<double> charges = eleList.map((e) => (e.totalCharge ?? 0)).toList();
     double chargesMax = charges.reduce(max);
     list.add(chargesMax);
+    double chargesMin = charges.reduce(min);
+    list2.add(chargesMin);
     //放电
     List<double> recharge = eleList.map((e) => (e.totalRecharge ?? 0)).toList();
     double rechargeMax = recharge.reduce(max);
     list.add(rechargeMax);
+    double rechargeMin = recharge.reduce(min);
+    list2.add(rechargeMin);
 
     ///海外版本
     if (AppSetting.isOverseas) {
@@ -259,8 +265,11 @@ class StatisticsItemLogic extends GetxController {
       List<double> pv = eleList.map((e) => (e.pvGeneration ?? 0)).toList();
       double pvMax = pv.reduce(max);
       list.add(pvMax);
+      double pvMin = pv.reduce(min);
+      list2.add(pvMin);
     }
     eleMaxY = list.reduce(max);
+    eleMinY = list2.reduce(min);
     eleLabels.assignAll(eleList.map((e) => (e.dateTime ?? "")).toList());
   }
 

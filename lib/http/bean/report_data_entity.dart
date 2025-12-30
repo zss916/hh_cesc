@@ -26,6 +26,9 @@ class ReportDataEntity {
   ///是否并网 （0-否 1-是）
   int? isGrid;
 
+  ///是否有光伏
+  bool get isHasPV => ((types ?? []).contains(2) || (types ?? []).contains(4));
+
   ///并网和光储充或者光储 才会显示上网电量/馈网收益
   bool get isShow =>
       (isGrid == 1) && ((types ?? []).contains(2) || (types ?? []).contains(4));

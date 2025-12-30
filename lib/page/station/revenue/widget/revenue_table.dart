@@ -250,7 +250,10 @@ class RevenueTableWidget extends StatelessWidget {
                               ),
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                (item.pvSelfUseGain ?? 0.00).formatAmount(),
+                                item.isHasPV
+                                    ? (item.pvSelfUseGain ?? 0.00)
+                                          .formatAmount()
+                                    : "--",
                                 style: TextStyle(
                                   color: const Color(0xD9FFFFFF),
                                   fontSize: 12.sp,

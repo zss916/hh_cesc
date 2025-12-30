@@ -199,7 +199,9 @@ class EleTableWidget extends StatelessWidget {
                               ),
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                (item.pvGeneration ?? 0).formatNum(),
+                                item.isHasPV
+                                    ? (item.pvGeneration ?? 0).formatNum()
+                                    : "--",
                                 style: TextStyle(
                                   color: const Color(0xD9FFFFFF),
                                   fontSize: 12.sp,

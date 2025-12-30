@@ -73,3 +73,13 @@ com.bujunshou.product
 
 Apple 包名:
 com.bujunshou.bjstools
+
+
+### 国内应用市场
+# 1.苹果应用市场
+# 2.小米应用市场
+# 3.腾讯应用宝 http://open.qq.com/
+# 4.华为应用市场
+# 5.荣耀应用市场
+# 6.vivo应用市场
+# 7.OPPO应用市场

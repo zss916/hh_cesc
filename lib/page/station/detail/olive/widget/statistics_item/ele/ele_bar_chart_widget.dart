@@ -296,6 +296,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                 .toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
+            minY: widget.logic.eleMinY ?? 0,
           ),
 
           ///月
@@ -311,6 +312,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                 .toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
+            minY: widget.logic.eleMinY ?? 0,
           ),
 
           ///年
@@ -326,6 +328,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                 .toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
+            minY: widget.logic.eleMinY ?? 0,
           ),
         ],
       ),
@@ -352,7 +355,8 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
           data2: [],
           data3: [],
           labels: [],
-          maxY: 0,
+          maxY: 10,
+          minY: 0,
         ),
 
         ///月
@@ -361,7 +365,8 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
           data2: [],
           data3: [],
           labels: [],
-          maxY: 0,
+          maxY: 10,
+          minY: 0,
         ),
 
         ///年
@@ -370,7 +375,8 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
           data2: [],
           data3: [],
           labels: [],
-          maxY: 0,
+          maxY: 10,
+          minY: 0,
         ),
       ],
     ),
