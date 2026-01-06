@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.2+3
+version: 1.0.3+4
 
 environment:
   sdk: ^3.9.0
@@ -22,7 +22,6 @@ dependencies:
   flutter_screenutil: 5.9.3
   pull_to_refresh_flutter3: 2.0.2
   flutter_easyloading: 3.0.5
-  #permission_handler: 12.0.1
   event_bus: ^2.0.1
   logger: 2.6.1
   url_launcher: 6.3.2
@@ -40,25 +39,26 @@ dependencies:
   timezone: ^0.10.1
   #图表
   fl_chart: 1.1.1
-  #fl_chart_flutter:
   easy_date_timeline: 2.0.9
   calendar_date_picker2: 2.0.1
-  #easy_refresh: 3.4.0
   #国家数据
   country_state_city: 0.1.6
-  #加载更多
-  #easy_load_more: 2.0.0
   collection: 1.19.1
   #时区
   time_zone_plus: 0.0.4
   #logo
   flutter_launcher_icons: 0.14.4
-  #本地存储
-  #flutter_secure_storage: ^9.2.4
   #splash
   flutter_native_splash: 2.4.7
   #fireBase
   #firebase_core: 4.3.0
+  #permission_handler: 12.0.1
+  #本地存储
+  #flutter_secure_storage: ^9.2.4
+  #加载更多
+  #easy_load_more: 2.0.0
+  #easy_refresh: 3.4.0
+  #fl_chart_flutter:
 
 
 

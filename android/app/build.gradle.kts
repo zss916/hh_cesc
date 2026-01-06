@@ -17,10 +17,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-   /* kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }*/
-
     kotlin{
         compilerOptions {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
@@ -28,8 +24,8 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.bujunshou.product"
-        //applicationId = "com.example.cescpro"
+        //applicationId = "com.bujunshou.product"
+        applicationId = "com.example.cescpro"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -38,7 +34,7 @@ android {
 
     signingConfigs {
 
-        create("release") {
+       /* create("release") {
             if (System.getenv("CI")?.isNotEmpty() ?: false) {
                 storeFile = file(System.getenv("CM_KEYSTORE_PATH") as String)
                 storePassword = System.getenv("CM_KEYSTORE_PASSWORD") as String
@@ -50,21 +46,21 @@ android {
                 keyAlias = project.property("keyAlias") as String
                 keyPassword = project.property("keyPassword") as String
             }
-        }
+        }*/
 
 
-        /*create("release") {
+        create("release") {
             storeFile = file(project.property("storeFile") as String)
             storePassword = project.property("storePassword") as String
             keyAlias = project.property("keyAlias") as String
             keyPassword = project.property("keyPassword") as String
-        }*/
+        }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
-            //signingConfig = signingConfigs.getByName("debug")
+           // signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

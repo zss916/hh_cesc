@@ -9,3 +9,8 @@ class OpenDrawerEvent {
   final int? siteStatus;
   OpenDrawerEvent(this.index, {this.siteStatus});
 }
+
+class HasPVEvent {
+  final bool hasPv;
+  HasPVEvent(this.hasPv);
+}

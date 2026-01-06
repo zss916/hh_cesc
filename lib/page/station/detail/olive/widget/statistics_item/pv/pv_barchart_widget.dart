@@ -27,7 +27,9 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToRight();
+      if (widget.labels.isNotEmpty) {
+        _scrollToRight();
+      }
     });
   }
 
@@ -43,27 +45,6 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        /* if (widget.data.isNotEmpty && widget.minY >= 0)
-          PositionedDirectional(
-            start: 0,
-            top: 3,
-            bottom: 22,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(5, (index) {
-                final style = TextStyle(
-                  color: Color(0xA8FFFFFF),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 10.sp,
-                );
-                return Text(
-                  (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(1),
-                  style: style,
-                );
-              }),
-            ),
-          ),*/
-
         // 滚动视图中的柱状图
         Container(
           margin: EdgeInsetsDirectional.only(start: 0.w), // 确保柱状图不与Y轴标签重叠
@@ -143,17 +124,6 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
       ],
     );
   }
-
-  /*  double get showInterval {
-    if (widget.maxY == 0 && widget.minY == 0) {
-      return 10;
-    } else if (widget.maxY > 0 && widget.minY > 0) {
-      return (widget.maxY) / 4;
-    } else if (widget.maxY >= 0 && widget.minY < 0) {
-      return 50;
-    }
-    return 10;
-  }*/
 
   BarTouchData buildBarTouchData() {
     return BarTouchData(

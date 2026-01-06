@@ -29,7 +29,9 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToRight();
+      if (widget.labels.isNotEmpty) {
+        _scrollToRight();
+      }
     });
   }
 

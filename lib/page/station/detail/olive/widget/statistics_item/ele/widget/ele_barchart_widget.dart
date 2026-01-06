@@ -33,7 +33,9 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollToRight();
+      if (widget.labels.isNotEmpty) {
+        _scrollToRight();
+      }
     });
   }
 

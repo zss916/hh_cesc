@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:cescpro/core/setting/app_loading.dart';
@@ -6,6 +7,7 @@ import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/http/bean/pv_trend_entity.dart';
+import 'package:cescpro/http/bean/site_topology_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,6 +49,7 @@ class StatisticsItemLogic extends GetxController {
   double? pvMaxY;
   double? pvMinY;
   int pvViewStatus = ViewType.loading.index;
+  bool hasPv = false;
 
   ///收益
   List<ElecGraphEntity> revenueList = [];
@@ -60,6 +63,7 @@ class StatisticsItemLogic extends GetxController {
   double? eleMinY;
   int eleViewStatus = ViewType.loading.index;
   List<String> eleLabels = [];
+  //late StreamSubscription<HasPVEvent> event;
 
   @override
   void onInit() {
@@ -68,11 +72,19 @@ class StatisticsItemLogic extends GetxController {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       siteId = map['siteId'] as int?;
     }
+    /*event = AppEventBus.eventBus.on<HasPVEvent>().listen((event) {
+      hasPv = event.hasPv;
+      debugPrint("hasPv===>>>>${hasPv} ");
+      update(["pv"]);
+    });*/
   }
 
   @override
   void onReady() {
     super.onReady();
+
+    debugPrint("onReady ===>>>");
+
     DateTime now = DateTime.now().toUtc();
     DateTime end = DateTime(
       now.year,
@@ -119,6 +131,7 @@ class StatisticsItemLogic extends GetxController {
 
   @override
   void onClose() {
+    //event.cancel();
     super.onClose();
     AppLoading.dismiss();
   }
@@ -280,27 +293,37 @@ class StatisticsItemLogic extends GetxController {
     int? endTimeStamp,
   }) async {
     AppLoading.show();
-    final (
-      bool isSuccessful,
-      List<PvTrendEntity> value,
-    ) = await SiteAPI.postPvTrend(
-      siteId: siteId,
-      queryType: queryType,
-      startTimeStamp: startTimeStamp,
-      endTimeStamp: endTimeStamp,
-    ).whenComplete(() => AppLoading.dismiss());
-    if (isSuccessful) {
-      pvList.assignAll(value);
-      if (pvList.isNotEmpty) {
-        handPVData(pvList);
-      }
-      pvViewStatus = pvList.isEmpty
-          ? ViewType.empty.index
-          : ViewType.common.index;
-      update(["pv"]);
+    SiteTopologyEntity? data = await SiteAPI.getSiteTopology(
+      siteId: siteId ?? 0,
+    );
+    hasPv = data?.hasPv ?? false;
+    update(["pv"]);
+    if (!hasPv) {
+      AppLoading.dismiss();
+      return;
     } else {
-      pvViewStatus = ViewType.empty.index;
-      update(["pv"]);
+      final (
+        bool isSuccessful,
+        List<PvTrendEntity> value,
+      ) = await SiteAPI.postPvTrend(
+        siteId: siteId,
+        queryType: queryType,
+        startTimeStamp: startTimeStamp,
+        endTimeStamp: endTimeStamp,
+      ).whenComplete(() => AppLoading.dismiss());
+      if (isSuccessful) {
+        pvList.assignAll(value);
+        if (pvList.isNotEmpty) {
+          handPVData(pvList);
+        }
+        pvViewStatus = pvList.isEmpty
+            ? ViewType.empty.index
+            : ViewType.common.index;
+        update(["pv"]);
+      } else {
+        pvViewStatus = ViewType.empty.index;
+        update(["pv"]);
+      }
     }
   }
 

@@ -62,19 +62,6 @@ class MyApp extends StatelessWidget {
             tabBarTheme: TabBarThemeData(dividerColor: Colors.transparent),
           ),
           initialRoute: APages.splash,
-          //home: NestedListHomePage(),
-          // home: TableWidget(),
-          //home: LineChartWidget(),
-          //home: BarChartWidget(),
-          // home: SplashPage(),
-          // home: MainPage(),
-          /*home: StatusPieChart(
-          total: 10,
-          normal: 5,
-          interrupted: 2,
-          warning: 3,
-          fault: 1,
-        ),*/
         ),
       ),
     );
