@@ -11,14 +11,6 @@ https://cloud.honghede.com/#/login
 
 账号：ntbkd 密码：ntbkd123!
 
-1.logo(android ok,ios ok) ，splash(android ok,ios ok) 
-2.协议(隐私协议 ok,服务条款 ?)
-3.英语文案( ok) 和 切换语言(ok)
-4.android 手机适配，iPhone 手机适配
-5.16kb（ok）
-6.货币问题(???)
-7.创建jks
-8.xcode 替换 Bundle ID
 
 蒲公英地址：https://www.pgyer.com
 
@@ -51,7 +43,7 @@ flutter build appbundle --release
 
 Google site 来制作隐私网站
 
-截图：flutter screenshot
+截图(不支持iphone)：flutter screenshot
 
 Apple Store
 1.创建证书：https://developer.apple.com/account/resources/certificates/list
@@ -82,7 +74,7 @@ com.bujunshou.bjstools
 # 1.腾讯应用宝 http://open.qq.com/
 
 
-
+android studio
 国际版本 https://developer.android.com/studio?hl=zh-cn
 国际版本不同版本下载 https://developer.android.com/studio/archive?hl=zh-cn
 国内版本 https://developer.android.google.cn/studio?hl=zh-cn
@@ -97,3 +89,10 @@ com.bujunshou.bjstools
 ###  RepaintBoundary(child: xxx()),
 
 https://apps.apple.com/us/app/BUJUNSHOU/6756414140
+
+
+### 点点数据
+### https://app.diandian.com/search
+
+
+

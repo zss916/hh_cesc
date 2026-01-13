@@ -3,7 +3,10 @@ class ApiPath {
   //static const String baseUrl = "https://cloud.honghede.com/api/v1";
 
   ///国内版本
-  static const String baseUrl = "https://ems.cescpower.com/api/v1";
+  //static const String baseUrl = "https://ems.cescpower.com/api/v1";
+
+  ///国内版本
+  static const String baseUrl = "https://api-cn.hhdzcesc.com/api/v1";
 
   ///站点首页信息展信(海外版本)
   static const String postStatisticRecord2 =

@@ -20,6 +20,7 @@ import 'dart:ui';
 
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:custom_navigation_bar/src/animation/beacon_painter.dart';
+import 'package:custom_navigation_bar/src/custom_navigation_bar_item.dart';
 import 'package:custom_navigation_bar/src/style/default_style.dart';
 import 'package:custom_navigation_bar/src/util/badge_text.dart';
 import 'package:flutter/material.dart';

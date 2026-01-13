@@ -27,11 +27,11 @@ class SplashPage extends StatelessWidget {
                   height: 85,
                   matchTextDirection: true,
                 ),
-                PositionedDirectional(
-                  bottom: 45.h,
+                const PositionedDirectional(
+                  bottom: 45,
                   child: Text(
                     "BU JUN SHOU",
-                    style: TextStyle(color: Colors.white, fontSize: 24.sp),
+                    style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
                 ),
               ],
