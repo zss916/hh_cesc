@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/generated/assets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class AppInfoService extends GetxService {
   static AppInfoService get to => Get.find();
@@ -14,10 +16,14 @@ class AppInfoService extends GetxService {
 
   List<CountryEntity> countryList = [];
 
+  String? appName;
+  String? appVersion;
+
   @override
   void onReady() {
     super.onReady();
     getCountry();
+    getPackageInfo();
   }
 
   Future<List<CountryEntity>> getCountry() async {
@@ -28,5 +34,14 @@ class AppInfoService extends GetxService {
         .toList();
     countryList.assignAll(lists);
     return lists;
+  }
+
+  Future<(String? appName, String? version)> getPackageInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    appName = packageInfo.appName;
+    appVersion = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+    debugPrint("appName:$appName,version:$appVersion");
+    return (appName, appVersion);
   }
 }

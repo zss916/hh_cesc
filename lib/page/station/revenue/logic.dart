@@ -23,6 +23,8 @@ class RevenueLogic extends GetxController {
   int? date;
   int? startTimeStamp;
   int? endTimeStamp;
+  //是否显示分时
+  bool? isShowTimeSlot;
 
   List<StatisticReportDailyElecIncomeDetail> list = [];
   List<ReportDataEntity> revenueList = [];
@@ -34,6 +36,7 @@ class RevenueLogic extends GetxController {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       location = map['location'] as String?;
       siteId = map['siteId'] as int?;
+      isShowTimeSlot = map['isShowTimeSlot'] as bool?;
     }
     DateTime dateTime = DateTime.now();
     date = dateTime.millisecondsSinceEpoch;
@@ -54,7 +57,12 @@ class RevenueLogic extends GetxController {
     if (AppSetting.isOverseas) {
       loadRevenueList2();
     } else {
-      loadRevenueList();
+      ///
+      if (isShowTimeSlot ?? false) {
+        loadRevenueList2();
+      } else {
+        loadRevenueList();
+      }
     }
   }
 

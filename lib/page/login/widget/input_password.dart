@@ -92,6 +92,7 @@ class _EditNameState extends State<InputPassword> {
               style: TextStyle(color: Colors.white, fontSize: 16.sp),
               decoration: InputDecoration(
                 suffixIcon: InkWell(
+                  borderRadius: BorderRadius.circular(50),
                   onTap: () {
                     setState(() {
                       obscureText = !obscureText;
@@ -100,15 +101,10 @@ class _EditNameState extends State<InputPassword> {
                   child: Stack(
                     alignment: AlignmentDirectional.center,
                     children: [
-                      SizedBox(width: 24, height: 24),
-                      /*Image.asset(
-                        obscureText
-                            ? Assets.imageEyeClose
-                            : Assets.imageEyeOpen,
-                        width: 24.r,
-                        height: 24.r,
-                        matchTextDirection: true,
-                      ),*/
+                      Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.white70,
+                      ),
                     ],
                   ),
                 ),

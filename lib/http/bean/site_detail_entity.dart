@@ -41,6 +41,10 @@ class SiteDetailEntity {
   double? pvPower; //PV功率
   bool? hasPv;
   String? protocolVersion; //协议版本
+  int? isTimeSlot; //是否分时，1用海外UI,0用原来的
+
+  ///是否显示海外版本UI
+  bool get showOverSeasUi => isTimeSlot == 1;
 
   ///v1
   bool get isV1 => protocolVersion == "v1";

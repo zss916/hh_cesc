@@ -65,12 +65,14 @@ class BuildStationStatus extends StatelessWidget {
             end: 16.w,
           ),
           padding: EdgeInsetsDirectional.all(16.r),
-          child: PieChartLineWidget(
-            total: (normalNum + faultNum + alarmNum + cutOffNum),
-            normalNum: normalNum,
-            faultNum: faultNum,
-            alarmNum: alarmNum,
-            cutOffNum: cutOffNum,
+          child: RepaintBoundary(
+            child: PieChartLineWidget(
+              total: (normalNum + faultNum + alarmNum + cutOffNum),
+              normalNum: normalNum,
+              faultNum: faultNum,
+              alarmNum: alarmNum,
+              cutOffNum: cutOffNum,
+            ),
           ),
         ),
 

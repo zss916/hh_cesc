@@ -10,7 +10,7 @@ class CommonTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: AlignmentDirectional.center,
+      alignment: .center,
       padding: EdgeInsetsDirectional.only(
         start: 8.w,
         end: 8.w,
@@ -22,7 +22,7 @@ class CommonTag extends StatelessWidget {
         borderRadius: BorderRadius.circular(50.r),
       ),
       child: Stack(
-        alignment: AlignmentDirectional.center,
+        alignment: .center,
         children: [
           ///1-纯储能；2-光储充；3-储能液冷; 4-光储
           if (type == 1)

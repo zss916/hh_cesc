@@ -54,10 +54,10 @@ class StationPage extends StatelessWidget {
                       child: Container(
                         width: 36,
                         height: 36,
-                        alignment: AlignmentDirectional.center,
+                        alignment: .center,
                         decoration: BoxDecoration(
-                          color: Color(0x99484D55),
-                          borderRadius: BorderRadius.circular(50),
+                          color:  Color(0x99484D55),
+                          borderRadius: .circular(50),
                         ),
                         child: UnconstrainedBox(
                           child: Image.asset(
@@ -155,6 +155,7 @@ class StationPage extends StatelessWidget {
         logic.loadMoreData();
       },
       child: ListView.separated(
+        cacheExtent: 170,
         padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
         itemCount: logic.data.length,
         itemBuilder: (BuildContext context, int index) {
@@ -174,6 +175,7 @@ class StationPage extends StatelessWidget {
       },
       child: Container(
         width: double.maxFinite,
+        height: 170,
         padding: EdgeInsetsDirectional.only(
           start: 8.w,
           end: 8.w,
@@ -334,16 +336,16 @@ class StationPage extends StatelessWidget {
                   ),
                   if (item.picture == null)
                     Container(
-                      width: 90.w,
-                      height: 90.h,
+                      width: 90.r,
+                      height: 90.r,
                       padding: EdgeInsetsDirectional.all(10),
                       decoration: BoxDecoration(color: Colors.white12),
                       child: Image.asset(Assets.imgLogo),
                     )
                   else
                     Container(
-                      width: 90.w,
-                      height: 90.h,
+                      width: 90.r,
+                      height: 90.r,
                       decoration: BoxDecoration(
                         color: Colors.white12,
                         image: DecorationImage(

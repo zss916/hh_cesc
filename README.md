@@ -39,6 +39,8 @@ Google：账号：maojingshu2019@gmail.com 密码：Mao33071
 
 打包命令:
 flutter build appbundle --release
+flutter build appbundle --obfuscate --split-debug-info=./obfuse
+
 
 
 Google site 来制作隐私网站
@@ -93,6 +95,9 @@ https://apps.apple.com/us/app/BUJUNSHOU/6756414140
 
 ### 点点数据
 ### https://app.diandian.com/search
+
+
+# DataTable 以行和列的形式显示数据
 
 
 

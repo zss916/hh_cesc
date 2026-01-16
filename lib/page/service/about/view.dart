@@ -44,7 +44,7 @@ class AboutPage extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 0.h, bottom: 40.h),
                   width: double.maxFinite,
                   child: Text(
-                    TKey.appName.tr,
+                    AppInfoService.to.appName ?? "",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.sp,
@@ -71,7 +71,7 @@ class AboutPage extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            "V1.0.2",
+                            AppInfoService.to.appVersion ?? "",
                             style: TextStyle(
                               color: Color(0xDEFFFFFF),
                               fontSize: 16.sp,

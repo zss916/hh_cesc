@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     event = AppEventBus.eventBus.on<OpenDrawerEvent>().listen((event) {
       openDrawer();
-      setState(() {
+      safeSetState((){
         drawerIndex = event.index;
         siteStatus = event.siteStatus;
       });
@@ -157,7 +157,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                 ),
               ],
               onTap: (i) {
-                setState(() {
+                safeSetState((){
                   select = i;
                 });
               },
@@ -220,5 +220,9 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   /// 关闭抽屉
   void closeDrawer() {
     widget.scaffoldKey.currentState!.closeEndDrawer();
+  }
+
+  void safeSetState(VoidCallback fn) {
+    if (mounted) setState(fn);
   }
 }

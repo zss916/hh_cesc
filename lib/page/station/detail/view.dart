@@ -114,10 +114,12 @@ class _StationDetailState extends State<StationDetailPage> {
             ),*/
           ],
           onTap: (i) {
-            setState(() {
-              select = i;
-              // pageCtrl.jumpToPage(i);
-            });
+            if(mounted){
+              setState(() {
+                select = i;
+                // pageCtrl.jumpToPage(i);
+              });
+            }
           },
         ),
       ),

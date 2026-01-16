@@ -803,10 +803,17 @@ class OliveItemView extends StatelessWidget {
                         location: logic.siteDetail?.location,
                       );
                     } else {
-                      PageTools.toReportDetail(
-                        siteId: logic.siteId,
-                        location: logic.siteDetail?.location,
-                      );
+                      if (logic.siteDetail?.showOverSeasUi ?? false) {
+                        PageTools.toEleReport(
+                          siteId: logic.siteId,
+                          location: logic.siteDetail?.location,
+                        );
+                      } else {
+                        PageTools.toReportDetail(
+                          siteId: logic.siteId,
+                          location: logic.siteDetail?.location,
+                        );
+                      }
                     }
                   },
                   child: Container(
@@ -867,6 +874,8 @@ class OliveItemView extends StatelessWidget {
                     PageTools.toRevenue(
                       siteId: logic.siteId,
                       location: logic.siteDetail?.location,
+                      isShowTimeSlot:
+                          (logic.siteDetail?.showOverSeasUi ?? false),
                     );
                   },
                   child: Container(

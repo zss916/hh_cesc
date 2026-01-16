@@ -32,8 +32,6 @@ class MyApp extends StatelessWidget {
       footerBuilder: () => const Footer(),
       hideFooterWhenNotFull: true,
       enableLoadingWhenNoData: true,
-      enableRefreshVibrate: true,
-      enableLoadMoreVibrate: true,
       springDescription: SpringDescription(
         stiffness: 170,
         damping: 16,
@@ -55,6 +53,8 @@ class MyApp extends StatelessWidget {
           ),
           defaultTransition: Transition.cupertino,
           theme: ThemeData(
+            ///处理中文w500,不加粗效果
+            // fontFamily: "PingFang SC",
             visualDensity: VisualDensity.adaptivePlatformDensity,
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: Colors.transparent,

@@ -107,10 +107,15 @@ class PageTools {
   static offAllNamedSplash() => Get.offAllNamed(APages.splash);
 
   ///收益
-  static toRevenue({int? siteId, String? location}) => Get.toNamed(
-    APages.revenue,
-    arguments: {"siteId": siteId, "location": location},
-  );
+  static toRevenue({int? siteId, String? location, bool? isShowTimeSlot}) =>
+      Get.toNamed(
+        APages.revenue,
+        arguments: {
+          "siteId": siteId,
+          "location": location,
+          "isShowTimeSlot": isShowTimeSlot,
+        },
+      );
 
   ///报告详情
   static toReportDetail({int? siteId, String? location}) => Get.toNamed(

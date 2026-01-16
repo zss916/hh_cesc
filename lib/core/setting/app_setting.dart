@@ -1,10 +1,11 @@
+import 'package:cescpro/core/env/env.dart';
 import 'package:intl/intl.dart';
 
 class AppSetting {
-  static const String appName = 'BUJUNSHOU';
+  static const String appName = Environment.appName;
 
   ///是否是海外版本
-  static const bool isOverseas = false;
+  static const bool isOverseas = Environment.isOverseas;
 }
 
 extension NumExtension on int {

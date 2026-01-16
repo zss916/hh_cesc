@@ -21,7 +21,11 @@ class RevenueTableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppSetting.isOverseas ? buildRevenueList2() : buildRevenueList();
+    return AppSetting.isOverseas
+        ? buildRevenueList2()
+        : (logic.isShowTimeSlot == true
+              ? buildRevenueList2()
+              : buildRevenueList());
   }
 
   ///海外版的收益报表
