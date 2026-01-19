@@ -65,4 +65,5 @@ AppBar baseAppBar({required String title}) => AppBar(
     textAlign: TextAlign.center,
     style: TextStyle(color: Color(0xDEFFFFFF), fontSize: 18.sp),
   ),
+  // systemOverlayStyle: barStyle,
 );

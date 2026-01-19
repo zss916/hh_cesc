@@ -450,6 +450,18 @@ class TKey {
   static const String energyStorageCharge = "energyStorageCharge";
 
   static const String energyStorageDischarge = "energyStorageDischarge";
+
+  static const String privacyPolicyTitle = "privacyPolicyTitle";
+  static const String privacyPolicyReadUnderstand = "privacyPolicyReadUnderstand";
+  static const String privacyPolicyAnd = "privacyPolicyAnd";
+  static const String privacyPolicyAfterUse = "privacyPolicyAfterUse";
+  static const String privacyPolicyCollectInfo = "privacyPolicyCollectInfo";
+  static const String privacyPolicyViewDetails = "privacyPolicyViewDetails";
+  static const String privacyPolicyContinueUse = "privacyPolicyContinueUse";
+  static const String privacyPolicyOrSelect = "privacyPolicyOrSelect";
+  static const String privacyPolicyExit = "privacyPolicyExit";
+  static const String privacyPolicyAgree = "privacyPolicyAgree";
+  static const String privacyPolicyDisagree = "privacyPolicyDisagree";
 }
 
 const en = {
@@ -677,4 +689,15 @@ const en = {
   "gridEleGeneration": "Grid-connected Electricity Generation",
   "energyStorageCharge": "Energy Storage Charge",
   "energyStorageDischarge": "Energy Storage Discharge",
+  "privacyPolicyTitle": "User Agreement and Privacy Policy Statement",
+  "privacyPolicyReadUnderstand": "Please read and understand fully",
+  "privacyPolicyAnd": "and",
+  "privacyPolicyAfterUse": "before using our products and services.\n\n",
+  "privacyPolicyCollectInfo": "We attach great importance to your privacy and personal information. During your use, we will collect some personal information, such as device information. You can click",
+  "privacyPolicyViewDetails": "to view detailed content. You can select",
+  "privacyPolicyContinueUse": "Agree to continue using our services,",
+  "privacyPolicyOrSelect": "or select",
+  "privacyPolicyExit": "Disagree to exit.",
+  "privacyPolicyAgree": "Agree",
+  "privacyPolicyDisagree": "Disagree",
 };

@@ -11,6 +11,7 @@ class LoginPage extends StatelessWidget {
         appBar: AppBar(
           leading: SizedBox.shrink(),
           backgroundColor: Color(0xFF23282E),
+          //systemOverlayStyle: barStyle,
         ),
         backgroundColor: Color(0xFF23282E),
         body: Container(

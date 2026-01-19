@@ -40,7 +40,7 @@ Google：账号：maojingshu2019@gmail.com 密码：Mao33071
 打包命令:
 flutter build appbundle --release
 flutter build appbundle --obfuscate --split-debug-info=./obfuse
-
+flutter build apk --release --obfuscate --split-debug-info=./obfuse
 
 
 Google site 来制作隐私网站
@@ -62,8 +62,8 @@ Apple：账号：maojingshu2019@gmail.com 密码：Mao33071!
 flutter适配鸿蒙插件库：https://gitcode.com/openharmony-tpc/flutter_packages
 
 Google 审核账号：
-cesc
-cesc123!
+账号:cesc
+密码:cesc123!
 
 Google 包名:
 com.bujunshou.product
@@ -73,7 +73,9 @@ com.bujunshou.bjstools
 
 
 ### 国内应用市场
-# 1.腾讯应用宝 http://open.qq.com/
+# 1.腾讯应用宝 https://app.open.qq.com/
+账号：3651780554
+密码：hhdzcesc123
 
 
 android studio
@@ -97,7 +99,7 @@ https://apps.apple.com/us/app/BUJUNSHOU/6756414140
 ### https://app.diandian.com/search
 
 
-# DataTable 以行和列的形式显示数据
+
 
 
 

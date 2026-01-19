@@ -9,6 +9,7 @@ class SplashPage extends StatelessWidget {
       appBar: AppBar(
         leading: SizedBox.shrink(),
         backgroundColor: Color(0xFF23282E),
+        //systemOverlayStyle: barStyle,
       ),
       extendBodyBehindAppBar: true,
       backgroundColor: Color(0xFF23282E),
