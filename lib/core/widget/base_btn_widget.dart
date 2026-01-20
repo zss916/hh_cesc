@@ -5,9 +5,11 @@ class BaseBtnWidget extends StatelessWidget {
   final String title;
   final Function onTap;
   final EdgeInsetsGeometry? margin;
+  final Decoration? decoration;
   const BaseBtnWidget({
     super.key,
     this.margin,
+    this.decoration,
     required this.title,
     required this.onTap,
   });
@@ -20,12 +22,14 @@ class BaseBtnWidget extends StatelessWidget {
       },
       child: Container(
         height: 48,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF43FFFF), Color(0xFF0978E9)],
-          ),
-          borderRadius: BorderRadius.circular(100),
-        ),
+        decoration:
+            decoration ??
+            BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF43FFFF), Color(0xFF0978E9)],
+              ),
+              borderRadius: BorderRadius.circular(100),
+            ),
         alignment: AlignmentDirectional.center,
         margin:
             margin ??

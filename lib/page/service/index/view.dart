@@ -28,7 +28,9 @@ class ServicePage extends StatelessWidget {
                 ),
                 width: double.maxFinite,
                 child: Text(
-                  TKey.accountCode.trArgs([logic.userName]),
+                  User.to.getIsGuest()
+                      ? TKey.accountCode.trArgs(["Guest"])
+                      : TKey.accountCode.trArgs([logic.userName]),
                   style: TextStyle(color: Colors.white, fontSize: 12.sp),
                 ),
               ),
@@ -98,12 +100,31 @@ class ServicePage extends StatelessWidget {
                 margin: EdgeInsetsDirectional.only(
                   start: 16.w,
                   end: 16.w,
-                  top: 58.h,
+                  top: 40.h,
                 ),
                 onTap: () {
                   logic.toLogOut();
                 },
               ),
+
+              if (GetPlatform.isAndroid && !AppSetting.isOverseas)
+                BaseBtnWidget(
+                  title: TKey.removeAccount.tr,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.white24, Colors.white24],
+                    ),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  margin: EdgeInsetsDirectional.only(
+                    start: 16.w,
+                    end: 16.w,
+                    top: 20.h,
+                  ),
+                  onTap: () {
+                    logic.toRemoveAccount();
+                  },
+                ),
             ],
           );
         },

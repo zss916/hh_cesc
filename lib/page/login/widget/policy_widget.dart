@@ -58,7 +58,7 @@ class PolicyWidget extends StatelessWidget {
           ),
         ],
       ),
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
       maxLines: 3,
     );
   }

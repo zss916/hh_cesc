@@ -36,6 +36,13 @@ class ServiceLogic extends GetxController {
     PageTools.offAllNamedSplash();
   }
 
+  ///注销账号
+  void toRemoveAccount() {
+    User.to.setPrivacyAgreed(isAgree: false);
+    User.removeToken();
+    PageTools.offAllNamedSplash();
+  }
+
   @override
   void onClose() {
     super.onClose();

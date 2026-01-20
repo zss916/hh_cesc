@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/generated/assets.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -41,7 +40,7 @@ class AppInfoService extends GetxService {
     appName = packageInfo.appName;
     appVersion = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
-    debugPrint("appName:$appName,version:$appVersion");
+    //debugPrint("appName:$appName,version:$appVersion");
     return (appName, appVersion);
   }
 }

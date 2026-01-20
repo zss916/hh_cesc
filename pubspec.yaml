@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.5+6
+version: 2.0.0+8
 
 environment:
   sdk: ^3.10.0
@@ -47,9 +47,9 @@ dependencies:
   #时区
   time_zone_plus: 0.0.4
   #logo
-  flutter_launcher_icons: 0.14.4
+  #flutter_launcher_icons: 0.14.4
   #splash
-  flutter_native_splash: 2.4.7
+  #flutter_native_splash: 2.4.7
   #fireBase
   #firebase_core: 4.3.0
   #permission_handler: 12.0.1

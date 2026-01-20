@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
-import 'package:cescpro/core/storage/storage.dart';
+import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -158,6 +159,7 @@ class PrivacyDialog {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
+                      AppEventBus.eventBus.fire(CheckPolicy(false));
                       Get.back(closeOverlays: true);
                       exit(0);
                     },
@@ -185,7 +187,7 @@ class PrivacyDialog {
                   child: TextButton(
                     onPressed: () async {
                       // 同意，保存状态
-                      StorageService.to.setBool('privacy_agreed', true);
+                      User.to.setPrivacyAgreed(isAgree: true);
                       Get.back();
                       onNext?.call();
                     },

@@ -69,7 +69,11 @@ Google 包名:
 com.bujunshou.product
 
 Apple 包名:
+///国内
 com.bujunshou.bjstools
+
+//海外
+com.hhdzteam.hhtools
 
 
 ### 国内应用市场

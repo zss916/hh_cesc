@@ -9,16 +9,21 @@ class SplashLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    checkPrivacyAgreement();
+    /*if (GetPlatform.isAndroid && !AppSetting.isOverseas) {
+      checkPrivacyAgreement();
+    } else {
+      toNext();
+    }*/
+    toNext();
   }
 
   Future<void> checkPrivacyAgreement() async {
-    final agreed = StorageService.to.getBool('privacy_agreed');
+    bool agreed = User.to.getPrivacyAgreed();
     if (!agreed) {
       // 首次打开或未同意，显示隐私弹窗
       PrivacyDialog.showPrivacyPolicyDialog(
         onNext: () {
-          toNext();
+          toNext(seconds: 1);
         },
       );
     } else {
@@ -26,8 +31,8 @@ class SplashLogic extends GetxController {
     }
   }
 
-  void toNext() {
-    Future.delayed(Duration(seconds: 2), () {
+  void toNext({int seconds = 2}) {
+    Future.delayed(Duration(seconds: seconds), () {
       if (User.to.isLogin) {
         PageTools.offAllNamedMain();
       } else {

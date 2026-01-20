@@ -5,8 +5,14 @@ class CommonBtn extends StatelessWidget {
   final String title;
 
   final Function onTap;
+  final Decoration? decoration;
 
-  const CommonBtn({super.key, required this.title, required this.onTap});
+  const CommonBtn({
+    super.key,
+    required this.title,
+    required this.onTap,
+    this.decoration,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +24,14 @@ class CommonBtn extends StatelessWidget {
         alignment: AlignmentDirectional.center,
         width: double.maxFinite,
         height: 48,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF43FFFF), Color(0xFF0978E9)],
-          ),
-          borderRadius: BorderRadiusDirectional.all(Radius.circular(50.r)),
-        ),
+        decoration:
+            decoration ??
+            BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF43FFFF), Color(0xFF0978E9)],
+              ),
+              borderRadius: BorderRadiusDirectional.all(Radius.circular(50.r)),
+            ),
         child: Text(
           title,
           textAlign: TextAlign.center,

@@ -30,6 +30,7 @@ class AuthInterceptor extends Interceptor {
   ) async {
     if (response.statusCode == HttpStatus.ok) {
       Map<String, dynamic> map = response.data as Map<String, dynamic>;
+      // debugPrint("map:${map}");
       if (map["code"] == 99999) {
         await _handleUnauthorized(msg: "${map["message"]}");
       } else {

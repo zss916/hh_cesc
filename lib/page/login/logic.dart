@@ -1,9 +1,18 @@
 part of 'index.dart';
 
 class LoginLogic extends GetxController {
+  String account = '';
+  String password = '';
+
   @override
   void onInit() {
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    checkPrivacyAgreement();
   }
 
   @override
@@ -11,10 +20,36 @@ class LoginLogic extends GetxController {
     super.onClose();
   }
 
-  String account = '';
-  String password = '';
+  Future<void> checkPrivacyAgreement() async {
+    bool agreed = User.to.getPrivacyAgreed();
+    if (!agreed) {
+      // 首次打开或未同意，显示隐私弹窗
+      PrivacyDialog.showPrivacyPolicyDialog(
+        onNext: () {
+          // toNext(seconds: 1);
+          AppEventBus.eventBus.fire(CheckPolicy(true));
+        },
+      );
+    } else {
+      // toNext();
+    }
+  }
 
   Future<void> toLogin() async {
+    if (!User.to.getPrivacyAgreed()) {
+      AppLoading.toast(TKey.privacyAgreementRequired.tr);
+      return;
+    }
+    if (account.trim().isEmpty) {
+      AppLoading.toast(TKey.accountRequired.tr);
+      return;
+    }
+
+    if (password.trim().isEmpty) {
+      AppLoading.toast(TKey.passwordRequired.tr);
+      return;
+    }
+
     AppLoading.show();
     TokenEntity? value =
         await AdminAPI.login(
@@ -24,10 +59,33 @@ class LoginLogic extends GetxController {
           AppLoading.dismiss();
         });
     if (value != null) {
+      User.to.setIsGuest(isGuest: false);
       User.setTokenHead(tokenHead: value.tokenHeadValue);
       User.setToken(token: value.tokenValue);
       await loadCurrencyList();
       //PageTools.toMain();
+      PageTools.offAllNamedMain();
+    }
+  }
+
+  Future<void> toGuestLogin() async {
+    if (!User.to.getPrivacyAgreed()) {
+      AppLoading.toast(TKey.privacyAgreementRequired.tr);
+      return;
+    }
+    AppLoading.show();
+    TokenEntity? value =
+        await AdminAPI.login(
+          username: "cesc",
+          password: "cesc123!",
+        ).whenComplete(() {
+          AppLoading.dismiss();
+        });
+    if (value != null) {
+      User.to.setIsGuest(isGuest: true);
+      User.setTokenHead(tokenHead: value.tokenHeadValue);
+      User.setToken(token: value.tokenValue);
+      await loadCurrencyList();
       PageTools.offAllNamedMain();
     }
   }

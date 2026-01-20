@@ -14,3 +14,8 @@ class HasPVEvent {
   final bool hasPv;
   HasPVEvent(this.hasPv);
 }
+
+class CheckPolicy {
+  final bool isCheck;
+  CheckPolicy(this.isCheck);
+}

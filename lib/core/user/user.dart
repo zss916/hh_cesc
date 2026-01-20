@@ -12,6 +12,14 @@ class User extends GetxService {
   static final String tokenHeadKey = "tokenHeadKey";
   static final String currencyListKey = "currencyListKey";
   static final String currencyUnitKey = "currencyUnitKey";
+  static final String privacyAgreed = "privacy_agreed";
+  static final String isGuestKey = "isGuestKey";
+
+  ///是否同意隐私
+  setPrivacyAgreed({required bool isAgree}) =>
+      StorageService.to.setBool(privacyAgreed, isAgree);
+
+  bool getPrivacyAgreed() => StorageService.to.getBool(privacyAgreed);
 
   ///是否登录
   bool get isLogin => getToken().isNotEmpty;
@@ -45,4 +53,10 @@ class User extends GetxService {
   String getCurrencyUnit() {
     return StorageService.to.getString(currencyUnitKey);
   }
+
+  ///是否是游客
+  void setIsGuest({required bool isGuest}) =>
+      StorageService.to.setBool(isGuestKey, isGuest);
+
+  bool getIsGuest() => StorageService.to.getBool(isGuestKey);
 }

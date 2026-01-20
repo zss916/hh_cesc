@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
                     margin: EdgeInsetsDirectional.only(top: 20.h, bottom: 40.h),
                     width: double.maxFinite,
                     child: Text(
-                      TKey.loginTitle.tr,
+                      TKey.loginTitle.trArgs([AppSetting.appName]),
                       style: TextStyle(color: Colors.white, fontSize: 28.sp),
                     ),
                   ),
@@ -43,8 +43,6 @@ class LoginPage extends StatelessWidget {
                     },
                   ),
 
-                  SizedBox(height: 18.h),
-
                   CommonBtn(
                     title: TKey.login.tr,
                     onTap: () {
@@ -52,26 +50,49 @@ class LoginPage extends StatelessWidget {
                     },
                   ),
 
-                  SizedBox(height: 20.h),
+                  if (GetPlatform.isAndroid && !AppSetting.isOverseas)
+                    Column(
+                      children: [
+                        SizedBox(height: 15.h),
+                        CommonBtn(
+                          title: TKey.guestLogin.tr,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.white24, Colors.white24],
+                            ),
+                            borderRadius: BorderRadiusDirectional.all(
+                              Radius.circular(50.r),
+                            ),
+                          ),
+                          onTap: () {
+                            logic.toGuestLogin();
+                          },
+                        ),
+                      ],
+                    ),
 
-                  PolicyWidget(
-                    onPrivacyTap: () {
-                      PageTools.toWeb(
-                        title: TKey.privacyPolicy.tr,
-                        url: Get.isEn
-                            ? Assets.htmlUserPolicyEn
-                            : Assets.htmlUserPolicyZh,
-                      );
-                    },
-                    onServiceTap: () {
-                      PageTools.toWeb(
-                        title: TKey.userAgreement.tr,
-                        url: Get.isEn
-                            ? Assets.htmlUserPolicyEn
-                            : Assets.htmlUserPolicyZh,
-                      );
-                    },
-                  ),
+                  SizedBox(height: 20.h),
+                  if (GetPlatform.isAndroid && !AppSetting.isOverseas)
+                    CheckWidget()
+                  else
+                    PolicyWidget(
+                      onPrivacyTap: () {
+                        PageTools.toWeb(
+                          title: TKey.privacyPolicy.tr,
+                          url: Get.isEn
+                              ? Assets.htmlUserPolicyEn
+                              : Assets.htmlUserPolicyZh,
+                        );
+                      },
+                      onServiceTap: () {
+                        PageTools.toWeb(
+                          title: TKey.userAgreement.tr,
+                          url: Get.isEn
+                              ? Assets.htmlUserPolicyEn
+                              : Assets.htmlUserPolicyZh,
+                        );
+                      },
+                    ),
                   Spacer(),
                   Container(
                     margin: EdgeInsetsDirectional.only(
