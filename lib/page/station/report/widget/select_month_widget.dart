@@ -81,6 +81,7 @@ class _SelectMonthWidgetState extends State<SelectMonthWidget> {
           });
         },
       ),
+      ignoreSafeArea: false,
     );
   }
 }

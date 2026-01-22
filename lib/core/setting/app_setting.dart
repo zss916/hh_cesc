@@ -1,4 +1,7 @@
 import 'package:cescpro/core/env/env.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/generated/assets.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class AppSetting {
@@ -6,6 +9,11 @@ class AppSetting {
 
   ///是否是海外版本
   static const bool isOverseas = Environment.isOverseas;
+
+  ///用户协议
+  static String policy = Environment.isPro
+      ? (Get.isEn ? Assets.htmlUserPolicyEn2 : Assets.htmlUserPolicyZh2)
+      : (Get.isEn ? Assets.htmlUserPolicyEn : Assets.htmlUserPolicyZh);
 }
 
 extension NumExtension on int {

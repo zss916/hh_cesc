@@ -8,7 +8,10 @@ void showSiteSelectSheet({
   required List<SiteDataEntity> sites,
   Function(SiteDataEntity)? onSelect,
 }) {
-  Get.bottomSheet(SiteSelectWidget(sites: sites, onSelect: onSelect));
+  Get.bottomSheet(
+    SiteSelectWidget(sites: sites, onSelect: onSelect),
+    ignoreSafeArea: false,
+  );
 }
 
 class SiteSelectWidget extends StatefulWidget {

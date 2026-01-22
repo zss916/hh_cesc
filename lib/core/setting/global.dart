@@ -31,6 +31,7 @@ class Global {
       systemNavigationBarIconBrightness: Brightness.light,
     );
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   }
 }
 

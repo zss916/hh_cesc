@@ -8,4 +8,6 @@ class Environment {
     'appName',
     defaultValue: 'BUJUNSHOU',
   );
+
+  static const bool isPro = bool.fromEnvironment('isPro', defaultValue: false);
 }

@@ -88,9 +88,7 @@ class AboutPage extends StatelessWidget {
                     onTap: () {
                       PageTools.toWeb(
                         title: TKey.privacyPolicy.tr,
-                        url: Get.isEn
-                            ? Assets.htmlUserPolicyEn
-                            : Assets.htmlUserPolicyZh,
+                        url: AppSetting.policy,
                       );
                     },
                     child: Container(
@@ -123,9 +121,7 @@ class AboutPage extends StatelessWidget {
                     onTap: () {
                       PageTools.toWeb(
                         title: TKey.privacyPolicy.tr,
-                        url: Get.isEn
-                            ? Assets.htmlUserPolicyEn
-                            : Assets.htmlUserPolicyZh,
+                        url: AppSetting.policy,
                       );
                     },
                     child: Container(

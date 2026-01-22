@@ -24,8 +24,8 @@ android {
     }
 
     defaultConfig {
-        //applicationId = "com.bujunshou.product"
-        applicationId = "com.example.cescpro"
+        applicationId = "com.bujunshou.product"
+        //applicationId = "com.example.cescpro"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -59,8 +59,8 @@ android {
 
     buildTypes {
         release {
-            //signingConfig = signingConfigs.getByName("release")
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
+            //signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

@@ -23,9 +23,9 @@ class TopItemWidget2 extends StatelessWidget {
                 logic.did = did;
                 logic.id = id;
                 logic.childId = childId;
-                debugPrint(
+                /*debugPrint(
                   "====>>>>  value:$value,did:$did,id:$id,childId:$childId",
-                );
+                );*/
                 logic.refreshData();
               },
             );

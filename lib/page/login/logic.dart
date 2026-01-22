@@ -53,8 +53,8 @@ class LoginLogic extends GetxController {
     AppLoading.show();
     TokenEntity? value =
         await AdminAPI.login(
-          username: account,
-          password: password,
+          username: (account.trim()),
+          password: (password.trim()),
         ).whenComplete(() {
           AppLoading.dismiss();
         });

@@ -13,6 +13,7 @@ void showSelectTitleSheet2(
   Get.bottomSheet(
     SelectTitle(titles: titles, onSelect: onSelect),
     isScrollControlled: true,
+    ignoreSafeArea: false,
   );
 }
 

@@ -5,18 +5,22 @@ class MessageCenterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: baseAppBar(title: TKey.messageCenter.tr),
-      backgroundColor: Color(0xFF23282E),
-      body: GetBuilder<MessageCenterLogic>(
-        init: MessageCenterLogic(),
-        builder: (logic) {
-          return SizedBox(
-            width: double.maxFinite,
-            height: double.maxFinite,
-            child: buildBody(viewState: logic.viewState, logic: logic),
-          );
-        },
+    return SafeArea(
+      top: false,
+      bottom: AppInfoService.to.isBottomPadding,
+      child: Scaffold(
+        appBar: baseAppBar(title: TKey.messageCenter.tr),
+        backgroundColor: Color(0xFF23282E),
+        body: GetBuilder<MessageCenterLogic>(
+          init: MessageCenterLogic(),
+          builder: (logic) {
+            return SizedBox(
+              width: double.maxFinite,
+              height: double.maxFinite,
+              child: buildBody(viewState: logic.viewState, logic: logic),
+            );
+          },
+        ),
       ),
     );
   }

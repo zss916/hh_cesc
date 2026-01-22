@@ -1,11 +1,10 @@
 import 'dart:io';
 
-import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
-import 'package:cescpro/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -40,9 +39,7 @@ class PrivacyDialog {
                       onTap: () {
                         PageTools.toWeb(
                           title: TKey.userAgreement.tr,
-                          url: Get.isEn
-                              ? Assets.htmlUserPolicyEn
-                              : Assets.htmlUserPolicyZh,
+                          url: AppSetting.policy,
                         );
                       },
                       child: Text(
@@ -64,9 +61,7 @@ class PrivacyDialog {
                       onTap: () {
                         PageTools.toWeb(
                           title: TKey.privacyPolicy.tr,
-                          url: Get.isEn
-                              ? Assets.htmlUserPolicyEn
-                              : Assets.htmlUserPolicyZh,
+                          url: AppSetting.policy,
                         );
                       },
                       child: Text(
@@ -92,9 +87,7 @@ class PrivacyDialog {
                       onTap: () {
                         PageTools.toWeb(
                           title: TKey.userAgreement.tr,
-                          url: Get.isEn
-                              ? Assets.htmlUserPolicyEn
-                              : Assets.htmlUserPolicyZh,
+                          url: AppSetting.policy,
                         );
                       },
                       child: Text(
@@ -116,9 +109,7 @@ class PrivacyDialog {
                       onTap: () {
                         PageTools.toWeb(
                           title: TKey.privacyPolicy.tr,
-                          url: Get.isEn
-                              ? Assets.htmlUserPolicyEn
-                              : Assets.htmlUserPolicyZh,
+                          url: AppSetting.policy,
                         );
                       },
                       child: Text(

@@ -10,6 +10,7 @@ void showDeviceLevelSheet({
 }) {
   Get.bottomSheet(
     DeviceSelectSheetWidget(deviceType: deviceType, onSelect: onSelect),
+    ignoreSafeArea: false,
   );
 }
 

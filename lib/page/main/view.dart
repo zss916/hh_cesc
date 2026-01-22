@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     event = AppEventBus.eventBus.on<OpenDrawerEvent>().listen((event) {
       openDrawer();
-      safeSetState((){
+      safeSetState(() {
         drawerIndex = event.index;
         siteStatus = event.siteStatus;
       });
@@ -63,104 +63,141 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     return GetBuilder<MainLogic>(
       init: MainLogic(),
       builder: (logic) {
-        return Scaffold(
-          key: widget.scaffoldKey,
-          backgroundColor: Color(0xFF23282E),
-          endDrawer: buildEndDrawer(index: drawerIndex),
-          extendBody: true,
-          body: IndexedStack(
-            index: select,
-            children: [HomePage(), StationPage(), AlarmPage(), ServicePage()],
-          ),
-          bottomNavigationBar: Container(
-            clipBehavior: Clip.hardEdge,
-            constraints: BoxConstraints(maxHeight: 65.h),
-            margin: EdgeInsetsDirectional.only(bottom: 20, start: 20, end: 20),
-            decoration: BoxDecoration(
-              color: Color(0xFF474F59),
-              border: Border.all(width: 1.5, color: Color(0x59666B73)),
-              borderRadius: BorderRadiusDirectional.all(Radius.circular(50)),
-            ),
-            child: CustomNavigationBar(
-              currentIndex: select,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              strokeColor: Colors.transparent,
-              scaleFactor: 0.01,
-              iconSize: 34,
-              items: [
-                CustomNavigationBarItem(
-                  icon: Image.asset(Assets.imgHome, matchTextDirection: true),
-                  selectedIcon: Image.asset(
-                    Assets.imgHomeS,
-                    matchTextDirection: true,
-                  ),
-                  title: Text(
-                    TKey.home.tr,
-                    style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                  ),
-                  selectedTitle: Text(
-                    TKey.home.tr,
-                    style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
+        return MediaQuery.removePadding(
+          context: context,
+          removeBottom: true,
+          child: SafeArea(
+            top: false,
+            bottom: AppInfoService.to.isBottomPadding,
+            child: Scaffold(
+              key: widget.scaffoldKey,
+              backgroundColor: Color(0xFF23282E),
+              endDrawer: buildEndDrawer(index: drawerIndex),
+              extendBody: true,
+              body: IndexedStack(
+                index: select,
+                children: [
+                  HomePage(),
+                  StationPage(),
+                  AlarmPage(),
+                  ServicePage(),
+                ],
+              ),
+              bottomNavigationBar: Container(
+                clipBehavior: Clip.hardEdge,
+                constraints: BoxConstraints(maxHeight: 65.h),
+                margin: EdgeInsetsDirectional.only(
+                  bottom: 20,
+                  start: 20,
+                  end: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xFF474F59),
+                  border: Border.all(width: 1.5, color: Color(0x59666B73)),
+                  borderRadius: BorderRadiusDirectional.all(
+                    Radius.circular(50),
                   ),
                 ),
-                CustomNavigationBarItem(
-                  icon: Image.asset(
-                    Assets.imgStation,
-                    matchTextDirection: true,
-                  ),
-                  selectedIcon: Image.asset(
-                    Assets.imgStationS,
-                    matchTextDirection: true,
-                  ),
-                  title: Text(
-                    TKey.station.tr,
-                    style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                  ),
-                  selectedTitle: Text(
-                    TKey.station.tr,
-                    style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
-                  ),
+                child: CustomNavigationBar(
+                  currentIndex: select,
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  strokeColor: Colors.transparent,
+                  scaleFactor: 0.01,
+                  iconSize: 34,
+                  items: [
+                    CustomNavigationBarItem(
+                      icon: Image.asset(
+                        Assets.imgHome,
+                        matchTextDirection: true,
+                      ),
+                      selectedIcon: Image.asset(
+                        Assets.imgHomeS,
+                        matchTextDirection: true,
+                      ),
+                      title: Text(
+                        TKey.home.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                      ),
+                      selectedTitle: Text(
+                        TKey.home.tr,
+                        style: TextStyle(
+                          color: Color(0xFF52D5F9),
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ),
+                    CustomNavigationBarItem(
+                      icon: Image.asset(
+                        Assets.imgStation,
+                        matchTextDirection: true,
+                      ),
+                      selectedIcon: Image.asset(
+                        Assets.imgStationS,
+                        matchTextDirection: true,
+                      ),
+                      title: Text(
+                        TKey.station.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                      ),
+                      selectedTitle: Text(
+                        TKey.station.tr,
+                        style: TextStyle(
+                          color: Color(0xFF52D5F9),
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ),
+                    CustomNavigationBarItem(
+                      icon: Image.asset(
+                        Assets.imgAlarm,
+                        matchTextDirection: true,
+                      ),
+                      selectedIcon: Image.asset(
+                        Assets.imgAlarmS,
+                        matchTextDirection: true,
+                      ),
+                      title: Text(
+                        TKey.alarm.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                      ),
+                      selectedTitle: Text(
+                        TKey.alarm.tr,
+                        style: TextStyle(
+                          color: Color(0xFF52D5F9),
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ),
+                    CustomNavigationBarItem(
+                      icon: Image.asset(
+                        Assets.imgService,
+                        matchTextDirection: true,
+                      ),
+                      selectedIcon: Image.asset(
+                        Assets.imgServiceS,
+                        matchTextDirection: true,
+                      ),
+                      title: Text(
+                        TKey.service.tr,
+                        style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                      ),
+                      selectedTitle: Text(
+                        TKey.service.tr,
+                        style: TextStyle(
+                          color: Color(0xFF52D5F9),
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                  onTap: (i) {
+                    safeSetState(() {
+                      select = i;
+                    });
+                  },
                 ),
-                CustomNavigationBarItem(
-                  icon: Image.asset(Assets.imgAlarm, matchTextDirection: true),
-                  selectedIcon: Image.asset(
-                    Assets.imgAlarmS,
-                    matchTextDirection: true,
-                  ),
-                  title: Text(
-                    TKey.alarm.tr,
-                    style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                  ),
-                  selectedTitle: Text(
-                    TKey.alarm.tr,
-                    style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
-                  ),
-                ),
-                CustomNavigationBarItem(
-                  icon: Image.asset(
-                    Assets.imgService,
-                    matchTextDirection: true,
-                  ),
-                  selectedIcon: Image.asset(
-                    Assets.imgServiceS,
-                    matchTextDirection: true,
-                  ),
-                  title: Text(
-                    TKey.service.tr,
-                    style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                  ),
-                  selectedTitle: Text(
-                    TKey.service.tr,
-                    style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
-                  ),
-                ),
-              ],
-              onTap: (i) {
-                safeSetState((){
-                  select = i;
-                });
-              },
+              ),
             ),
           ),
         );

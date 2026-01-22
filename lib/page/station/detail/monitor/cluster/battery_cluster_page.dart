@@ -18,30 +18,33 @@ class BatteryClusterPage extends StatelessWidget {
   //电池集群
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: baseAppBar(title: TKey.batteryCluster.tr),
-      backgroundColor: Color(0xFF23282E),
-      body: SingleChildScrollView(
-        child: GetBuilder<BatteryClusterLogic>(
-          init: BatteryClusterLogic(),
-          builder: (logic) {
-            return Column(
-              children: [
-                buildSatusItem(logic),
-                Divider(height: 12.h, color: Colors.transparent),
-                buildBaseInfoItem(logic),
-                Divider(height: 12.h, color: Colors.transparent),
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: baseAppBar(title: TKey.batteryCluster.tr),
+        backgroundColor: Color(0xFF23282E),
+        body: SingleChildScrollView(
+          child: GetBuilder<BatteryClusterLogic>(
+            init: BatteryClusterLogic(),
+            builder: (logic) {
+              return Column(
+                children: [
+                  buildSatusItem(logic),
+                  Divider(height: 12.h, color: Colors.transparent),
+                  buildBaseInfoItem(logic),
+                  Divider(height: 12.h, color: Colors.transparent),
 
-                ///todo
-                buildLineChartWidget(),
-                Divider(height: 12.h, color: Colors.transparent),
-                buildDistributionMap(logic),
-                Divider(height: 12.h, color: Colors.transparent),
-                RealTimeDataWidget(comCardVoList: logic.comCardVoList),
-                Divider(height: 120.h, color: Colors.transparent),
-              ],
-            );
-          },
+                  ///todo
+                  buildLineChartWidget(),
+                  Divider(height: 12.h, color: Colors.transparent),
+                  buildDistributionMap(logic),
+                  Divider(height: 12.h, color: Colors.transparent),
+                  RealTimeDataWidget(comCardVoList: logic.comCardVoList),
+                  Divider(height: 120.h, color: Colors.transparent),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

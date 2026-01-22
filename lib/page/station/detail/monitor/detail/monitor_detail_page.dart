@@ -17,40 +17,44 @@ class MonitorDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MonitorDetailLogic>(
-      init: MonitorDetailLogic(),
-      builder: (logic) {
-        return Scaffold(
-          appBar: baseAppBar(title: logic.title),
-          backgroundColor: Color(0xFF23282E),
-          body: SingleChildScrollView(
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                if (logic.devType == DeviceEnum.arr.value)
-                  BatteryView(logic: logic),
+    return SafeArea(
+      top: false,
+      child: GetBuilder<MonitorDetailLogic>(
+        init: MonitorDetailLogic(),
+        builder: (logic) {
+          return Scaffold(
+            appBar: baseAppBar(title: logic.title),
+            backgroundColor: Color(0xFF23282E),
+            body: SingleChildScrollView(
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  if (logic.devType == DeviceEnum.arr.value)
+                    BatteryView(logic: logic),
 
-                if (logic.devType == DeviceEnum.pcs.value)
-                  PcsView(logic: logic),
+                  if (logic.devType == DeviceEnum.pcs.value)
+                    PcsView(logic: logic),
 
-                if (logic.devType == DeviceEnum.meter.value)
-                  MeterView(logic: logic),
+                  if (logic.devType == DeviceEnum.meter.value)
+                    MeterView(logic: logic),
 
-                if (logic.devType == DeviceEnum.cool.value)
-                  CoolView(logic: logic),
+                  if (logic.devType == DeviceEnum.cool.value)
+                    CoolView(logic: logic),
 
-                if (logic.devType == DeviceEnum.drier.value)
-                  DrierView(logic: logic),
+                  if (logic.devType == DeviceEnum.drier.value)
+                    DrierView(logic: logic),
 
-                if (logic.devType == DeviceEnum.dido.value)
-                  DrierView(logic: logic),
+                  if (logic.devType == DeviceEnum.dido.value)
+                    DrierView(logic: logic),
 
-                if (logic.devType == DeviceEnum.pv.value) PVView(logic: logic),
-              ],
+                  if (logic.devType == DeviceEnum.pv.value)
+                    PVView(logic: logic),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 

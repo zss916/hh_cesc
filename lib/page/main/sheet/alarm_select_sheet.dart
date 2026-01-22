@@ -10,6 +10,7 @@ void showAlarmLevelSheet({
 }) {
   Get.bottomSheet(
     AlarmSelectSheetWidget(selectLevel: selectLevel, onSelect: onSelect),
+    ignoreSafeArea: false,
   );
 }
 

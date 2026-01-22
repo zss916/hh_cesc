@@ -55,6 +55,18 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             ///处理中文w500,不加粗效果
             // fontFamily: "PingFang SC",
+            ///最底层绘制颜色
+            canvasColor: Color(0xFF23282E),
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: Colors.transparent,
+            ),
+            tabBarTheme: TabBarThemeData(dividerColor: Colors.transparent),
+          ),
+          // themeMode: ThemeMode.dark,
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            canvasColor: Color(0xFF23282E),
             visualDensity: VisualDensity.adaptivePlatformDensity,
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: Colors.transparent,

@@ -15,6 +15,7 @@ void showSelectCountrySheet(
       country: country,
       onSelectItem: onSelectItem,
     ),
+    ignoreSafeArea: false,
     isScrollControlled: true,
   );
 }

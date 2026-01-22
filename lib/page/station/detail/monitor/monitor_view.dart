@@ -12,14 +12,17 @@ class MonitorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: baseAppBar(title: TKey.monitor.tr),
-      backgroundColor: Color(0xFF23282E),
-      body: GetBuilder<MonitorLogic>(
-        init: MonitorLogic(),
-        builder: (logic) {
-          return buildBody(viewState: logic.viewState, logic: logic);
-        },
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: baseAppBar(title: TKey.monitor.tr),
+        backgroundColor: Color(0xFF23282E),
+        body: GetBuilder<MonitorLogic>(
+          init: MonitorLogic(),
+          builder: (logic) {
+            return buildBody(viewState: logic.viewState, logic: logic);
+          },
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/report/widget/custom_year_picker.dart';
@@ -26,6 +27,21 @@ class CustomMonthPicker extends StatefulWidget {
 
 class _CustomMonthPickerState extends State<CustomMonthPicker> {
   DateTime currentDate = DateTime.now();
+
+  List<String> monthsList = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   @override
   void initState() {
@@ -220,7 +236,9 @@ class _CustomMonthPickerState extends State<CustomMonthPicker> {
                     ),
                     child: Center(
                       child: Text(
-                        '$month月',
+                        Get.isZh
+                            ? '$month${TKey.month.tr}'
+                            : monthsList[month - 1],
                         style: TextStyle(
                           color: isSelected
                               ? Colors.white
@@ -251,6 +269,7 @@ class _CustomMonthPickerState extends State<CustomMonthPicker> {
           onSelect.call(value);
         },
       ),
+      ignoreSafeArea: false,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:cescpro/components/common_app_bar.dart';
+import 'package:cescpro/core/service/app_info_service.dart';
 import 'package:cescpro/http/bean/cell_data_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/distribution/distribution_map_logic.dart';
 import 'package:flutter/material.dart';
@@ -10,43 +11,47 @@ class DistributionMapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DistributionMapLogic>(
-      init: DistributionMapLogic(),
-      builder: (logic) {
-        return Scaffold(
-          appBar: baseAppBar(title: logic.title ?? ""),
-          backgroundColor: Color(0xFF23282E),
-          body: Column(
-            children: [
-              if ((logic.content ?? "").isNotEmpty)
-                Container(
-                  margin: EdgeInsetsDirectional.only(
-                    start: 20.w,
-                    end: 20.w,
-                    top: 12.h,
-                    bottom: 15.h,
+    return SafeArea(
+      top: false,
+      bottom: AppInfoService.to.isBottomPadding,
+      child: GetBuilder<DistributionMapLogic>(
+        init: DistributionMapLogic(),
+        builder: (logic) {
+          return Scaffold(
+            appBar: baseAppBar(title: logic.title ?? ""),
+            backgroundColor: Color(0xFF23282E),
+            body: Column(
+              children: [
+                if ((logic.content ?? "").isNotEmpty)
+                  Container(
+                    margin: EdgeInsetsDirectional.only(
+                      start: 20.w,
+                      end: 20.w,
+                      top: 12.h,
+                      bottom: 15.h,
+                    ),
+                    width: double.maxFinite,
+                    child: Text(
+                      logic.content ?? "",
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
                   ),
-                  width: double.maxFinite,
-                  child: Text(
-                    logic.content ?? "",
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                ),
 
-              Expanded(
-                child: Stack(
-                  alignment: Alignment.topCenter,
-                  children: [
-                    if (logic.type == 1) buildTemp(logic),
-                    if (logic.type == 2) buildSoc(logic),
-                    if (logic.type == 3) buildV(logic),
-                  ],
+                Expanded(
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      if (logic.type == 1) buildTemp(logic),
+                      if (logic.type == 2) buildSoc(logic),
+                      if (logic.type == 3) buildV(logic),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 

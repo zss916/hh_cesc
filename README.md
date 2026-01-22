@@ -33,6 +33,7 @@ flutter build ipa --release
 CI/CD:https://flutterci.com
 
 
+
 Google console
 网址:https://play.google.com/console/u/0/developers/8414414680712895296/app-list
 Google：账号：maojingshu2019@gmail.com 密码：Mao33071
@@ -101,6 +102,8 @@ https://apps.apple.com/us/app/BUJUNSHOU/6756414140
 
 ### 点点数据
 ### https://app.diandian.com/search
+
+## 获取唯一ID  persistent_device_id
 
 
 

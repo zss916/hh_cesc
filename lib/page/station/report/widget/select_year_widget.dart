@@ -81,6 +81,7 @@ class _SelectYearWidgetState extends State<SelectYearWidget> {
           });
         },
       ),
+      ignoreSafeArea: false,
     );
   }
 }
