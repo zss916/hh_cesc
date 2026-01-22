@@ -9,7 +9,7 @@ class LoginPage extends StatelessWidget {
       canPop: true,
       child: SafeArea(
         top: false,
-        bottom: AppInfoService.to.isBottomPadding,
+        bottom: DeviceService.to.isBottomPadding,
         child: Scaffold(
           appBar: AppBar(
             leading: SizedBox.shrink(),

@@ -26,7 +26,7 @@ class _StationDetailState extends State<StationDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      bottom: AppInfoService.to.isBottomPadding,
+      bottom: DeviceService.to.isBottomPadding,
       child: Scaffold(
         backgroundColor: Color(0xFF23282E),
         extendBody: true,

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cescpro/components/blur_widget.dart';
 import 'package:cescpro/core/enum/app_enum.dart';
-import 'package:cescpro/core/service/app_info_service.dart';
+import 'package:cescpro/core/service/device_service.dart';
 import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';

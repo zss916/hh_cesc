@@ -7,7 +7,7 @@ class MessageCenterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      bottom: AppInfoService.to.isBottomPadding,
+      bottom: DeviceService.to.isBottomPadding,
       child: Scaffold(
         appBar: baseAppBar(title: TKey.messageCenter.tr),
         backgroundColor: Color(0xFF23282E),

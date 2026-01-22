@@ -1,5 +1,5 @@
 import 'package:cescpro/core/router/index.dart';
-import 'package:cescpro/core/service/app_info_service.dart';
+import 'package:cescpro/core/service/device_service.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/storage/app_event_bus.dart';

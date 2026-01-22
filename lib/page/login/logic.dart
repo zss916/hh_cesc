@@ -12,7 +12,9 @@ class LoginLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    checkPrivacyAgreement();
+    if (GetPlatform.isAndroid && !AppSetting.isOverseas) {
+      checkPrivacyAgreement();
+    }
   }
 
   @override
