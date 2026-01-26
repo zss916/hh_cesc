@@ -38,10 +38,13 @@ class LoginLogic extends GetxController {
   }
 
   Future<void> toLogin() async {
-    if (!User.to.getPrivacyAgreed()) {
-      AppLoading.toast(TKey.privacyAgreementRequired.tr);
-      return;
+    if (GetPlatform.isAndroid && !AppSetting.isOverseas) {
+      if (!User.to.getPrivacyAgreed()) {
+        AppLoading.toast(TKey.privacyAgreementRequired.tr);
+        return;
+      }
     }
+
     if (account.trim().isEmpty) {
       AppLoading.toast(TKey.accountRequired.tr);
       return;

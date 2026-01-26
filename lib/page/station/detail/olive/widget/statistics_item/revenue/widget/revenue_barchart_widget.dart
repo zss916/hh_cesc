@@ -70,14 +70,12 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                 );
                 if (index == 5) {
                   return Text(
-                    (widget.minY).toDouble().toStringAsFixed(2),
+                    (widget.minY).toDouble().formatAmount(),
                     style: style,
                   );
                 } else {
                   return Text(
-                    (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(
-                      2,
-                    ),
+                    (widget.maxY * (4 - index) / 4).toDouble().formatAmount(),
                     style: style,
                   );
                 }

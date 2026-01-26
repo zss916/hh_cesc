@@ -50,7 +50,6 @@ Google site 来制作隐私网站
 
 Apple Store
 1.创建证书：https://developer.apple.com/account/resources/certificates/list
-
 网址：https://developer.apple.com/account/resources/certificates/list
 网址：https://idmsa.apple.com/IDMSWebAuth/signin?appIdKey=891bd3417a7776362562d2197f89480a8547b108fd934911bcbea0110d07f757&path=%2Faccount%2F&rv=1
 Apple：账号：maojingshu2019@gmail.com 密码：Mao33071!

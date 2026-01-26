@@ -10,9 +10,9 @@ extension MoneyExtension on double {
   ///元 => 万元
   String get moneyFormatted {
     if (this >= 10000) {
-      return (this / 10000).toStringAsFixed(2);
+      return (this / 10000).formatAmount();
     } else {
-      return toStringAsFixed(2);
+      return formatAmount();
     }
   }
 }
@@ -102,6 +102,7 @@ extension AlarmLeveTime on int {
 }
 
 extension AmountFormat on num {
+  ///截取小数点后一位
   String formatNum() {
     if ((this.toString().length - this.toString().lastIndexOf(".") - 1) < 1) {
       //小数点后有几位小数
@@ -117,6 +118,7 @@ extension AmountFormat on num {
     }
   }
 
+  ///截取小数点后两位
   String formatAmount() {
     if ((this.toString().length - this.toString().lastIndexOf(".") - 1) < 2) {
       //小数点后有几位小数
@@ -216,13 +218,4 @@ extension AmountFormat on num {
 
   ///排量等单位
   String get weightUnit => (this >= 1000) ? " t" : " kg";
-
-  ///(充电/放电)转化
-  /*
-  String get formatPower =>
-      (this >= 1000) ? (this / 1000).formatMWh() : formatKWh();
-*/
-
-  ///(充电/放电)单位 转化
-  /*String get formatPowerUnit => (this >= 1000) ? "MWh" : "kWh";*/
 }
