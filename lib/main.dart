@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
           ),
           defaultTransition: Transition.cupertino,
           theme: ThemeData(
+            // scaffoldBackgroundColor: Colors.white,
             ///处理中文w500,不加粗效果
             // fontFamily: "PingFang SC",
             ///最底层绘制颜色

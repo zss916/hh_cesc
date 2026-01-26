@@ -53,55 +53,6 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
         ? Stack(
             alignment: Alignment.center,
             children: [
-              /* PositionedDirectional(
-            start: 0,
-            top: 3,
-            bottom: 22,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(5, (index) {
-                final style = TextStyle(
-                  color: Color(0xA8FFFFFF),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 10.sp,
-                );
-                return Text(
-                  (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(1),
-                  style: style,
-                );
-              }),
-            ),
-          ),*/
-              /*if (widget.data.isNotEmpty)
-          PositionedDirectional(
-            start: 0,
-            top: 5,
-            bottom: 0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(6, (index) {
-                final style = TextStyle(
-                  color: Color(0xA8FFFFFF),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 10.sp,
-                );
-                if (index == 5) {
-                  return Text(
-                    (widget.minY).toDouble().toStringAsFixed(2),
-                    style: style,
-                  );
-                } else {
-                  return Text(
-                    (widget.maxY * (4 - index) / 4).toDouble().toStringAsFixed(
-                      2,
-                    ),
-                    style: style,
-                  );
-                }
-              }),
-            ),
-          ),*/
-
               // 滚动视图中的柱状图
               if (widget.data.isNotEmpty)
                 Container(

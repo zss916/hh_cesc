@@ -56,7 +56,7 @@ class StationPage extends StatelessWidget {
                         height: 36,
                         alignment: .center,
                         decoration: BoxDecoration(
-                          color:  Color(0x99484D55),
+                          color: Color(0x99484D55),
                           borderRadius: .circular(50),
                         ),
                         child: UnconstrainedBox(
@@ -155,7 +155,7 @@ class StationPage extends StatelessWidget {
         logic.loadMoreData();
       },
       child: ListView.separated(
-        cacheExtent: 170,
+        cacheExtent: 175,
         padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
         itemCount: logic.data.length,
         itemBuilder: (BuildContext context, int index) {
@@ -163,7 +163,7 @@ class StationPage extends StatelessWidget {
           return buildItem(item, isLast: (index + 1 == logic.data.length));
         },
         separatorBuilder: (BuildContext context, int index) =>
-            Divider(height: 16, color: Colors.transparent),
+            Divider(height: 16.h, color: Colors.transparent),
       ),
     );
   }
@@ -175,7 +175,7 @@ class StationPage extends StatelessWidget {
       },
       child: Container(
         width: double.maxFinite,
-        height: 170,
+        height: 170.h,
         padding: EdgeInsetsDirectional.only(
           start: 8.w,
           end: 8.w,

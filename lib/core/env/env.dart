@@ -1,7 +1,7 @@
 class Environment {
   static const bool isOverseas = bool.fromEnvironment(
     'isOverseas',
-    defaultValue: true,
+    defaultValue: false,
   );
 
   static const String appName = String.fromEnvironment(
