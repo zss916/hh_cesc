@@ -1,12 +1,12 @@
 class Environment {
   static const bool isOverseas = bool.fromEnvironment(
     'isOverseas',
-    defaultValue: false,
+    defaultValue: true,
   );
 
   static const String appName = String.fromEnvironment(
     'appName',
-    defaultValue: 'BUJUNSHOU',
+    defaultValue: 'CESC Energy',
   );
 
   static const bool isPro = bool.fromEnvironment('isPro', defaultValue: false);

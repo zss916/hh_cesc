@@ -175,7 +175,7 @@ class StationPage extends StatelessWidget {
       },
       child: Container(
         width: double.maxFinite,
-        height: 170.h,
+        height: 175.h,
         padding: EdgeInsetsDirectional.only(
           start: 8.w,
           end: 8.w,

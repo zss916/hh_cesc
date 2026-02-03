@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.6+7
+version: 1.0.8+9
 
 environment:
   sdk: ^3.10.0
@@ -61,6 +61,12 @@ dependencies:
   #fl_chart_flutter:
   package_info_plus: ^9.0.0
   device_info_plus: 12.3.0
+
+
+
+
+
+
 
 
 

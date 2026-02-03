@@ -104,6 +104,8 @@ https://apps.apple.com/us/app/BUJUNSHOU/6756414140
 
 ## 获取唯一ID  persistent_device_id
 
+web 接口：
+
 
 
 
