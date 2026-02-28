@@ -1,9 +1,13 @@
 class TKey {
+  static const String languageEs = "languageEs";
+
   static const String loginTitle = "loginTitle";
 
   static const String account = "account";
 
   static const String password = "password";
+
+  static const String languageDe = "languageDe";
 
   static const String passwordError = "passwordError";
 
@@ -715,4 +719,6 @@ const en = {
   "privacyPolicyExit": "Disagree to exit.",
   "privacyPolicyAgree": "Agree",
   "privacyPolicyDisagree": "Disagree",
+  "languageDe": "German",
+  "languageEs": "Spanish",
 };

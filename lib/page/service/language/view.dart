@@ -83,6 +83,63 @@ class ChangeLanguagePage extends StatelessWidget {
                     ),
                   ),
                 ),
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () async {
+                      await Get.updateLocale(Locale('de', 'DE'));
+                      await LanTools.setLocal();
+                      // PageTools.offAndToNamedMain();
+                    },
+                    child: Container(
+                      padding: EdgeInsetsDirectional.symmetric(
+                        horizontal: 16.w,
+                        vertical: 14.h,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            TKey.languageDe.tr,
+                            style: TextStyle(
+                              color: Color(0xDEFFFFFF),
+                              fontSize: 16,
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // if(false)
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () async {
+                      await Get.updateLocale(Locale('es', 'DE'));
+                      await LanTools.setLocal();
+                      // PageTools.offAndToNamedMain();
+                    },
+                    child: Container(
+                      padding: EdgeInsetsDirectional.symmetric(
+                        horizontal: 16.w,
+                        vertical: 14.h,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            TKey.languageEs.tr,
+                            style: TextStyle(
+                              color: Color(0xDEFFFFFF),
+                              fontSize: 16,
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

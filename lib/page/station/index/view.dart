@@ -155,7 +155,7 @@ class StationPage extends StatelessWidget {
         logic.loadMoreData();
       },
       child: ListView.separated(
-        cacheExtent: 175,
+        // cacheExtent: 175,
         padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
         itemCount: logic.data.length,
         itemBuilder: (BuildContext context, int index) {
@@ -175,7 +175,150 @@ class StationPage extends StatelessWidget {
       },
       child: Container(
         width: double.maxFinite,
-        height: 175.h,
+        // height: 175.h,
+        constraints: BoxConstraints(minHeight: 175.h),
+        padding: EdgeInsetsDirectional.only(
+          start: 8.w,
+          end: 8.w,
+          top: 14.h,
+          bottom: 14.h,
+        ),
+        margin: EdgeInsetsDirectional.only(
+          start: 16.w,
+          end: 16.w,
+          bottom: isLast ? 50.h : 0,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          color: Color(0xFF313540),
+        ),
+        child: Column(
+          children: [
+            Container(
+              width: double.maxFinite,
+              margin: EdgeInsetsDirectional.only(
+                bottom: 12.h,
+                start: 8.w,
+                end: 8.w,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 150.w),
+                    child: Text(
+                      item.showSiteName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                    ),
+                  ),
+                  Spacer(),
+                  Wrap(
+                    spacing: 5.w,
+                    children: [
+                      //if ((item.types ?? []).isNotEmpty)
+                      // CommonTag(type: (item.types ?? []).first),
+                      if (item.status != null)
+                        StatusTag(status: item.status ?? 99),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Divider(height: 1, color: Color(0x14EEF2F8)),
+            Container(
+              margin: EdgeInsetsDirectional.only(
+                top: 10.h,
+                start: 8.w,
+                end: 8.w,
+              ),
+              width: double.maxFinite,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox.shrink(),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "SOC: ",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xA6FFFFFF),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                item.showSoc,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFFFFFFFF),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(height: 8.h, color: Colors.transparent),
+                        TextRichWidget(
+                          title: "${TKey.energyStoragePower.tr}: ",
+                          value: item.showPower,
+                        ),
+                        Divider(height: 8.h, color: Colors.transparent),
+                        TextRichWidget(
+                          title: "${TKey.photovoltaicPower.tr}: ",
+                          value: item.showPvPower,
+                        ),
+                        Divider(height: 8.h, color: Colors.transparent),
+                        TextRichWidget(
+                          title: "${TKey.chargeAndDischarge.tr}: ",
+                          value: item.chargeAndRecharge,
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (item.picture == null)
+                    Container(
+                      width: 90.r,
+                      height: 90.r,
+                      padding: EdgeInsetsDirectional.all(10),
+                      decoration: BoxDecoration(color: Colors.white12),
+                      child: Image.asset(Assets.imgLogo),
+                    )
+                  else
+                    Container(
+                      width: 90.r,
+                      height: 90.r,
+                      decoration: BoxDecoration(
+                        color: Colors.white12,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: CachedNetworkImageProvider(item.picture ?? ""),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildItem2(SiteEntity item, {bool isLast = false}) {
+    return GestureDetector(
+      onTap: () {
+        PageTools.toStationDetail(siteId: item.id, site: item);
+      },
+      child: Container(
+        width: double.maxFinite,
+        // height: 175.h,
+        constraints: BoxConstraints(minHeight: 175.h),
         padding: EdgeInsetsDirectional.only(
           start: 8.w,
           end: 8.w,

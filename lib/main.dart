@@ -1,4 +1,3 @@
-import 'package:cescpro/core/translations/lan_tools.dart';
 import 'package:cescpro/core/widget/footer.dart';
 import 'package:cescpro/core/widget/header.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'core/router/index.dart';
 import 'core/setting/app_setting.dart';
 import 'core/setting/global.dart';
+import 'core/translations/lan_tools.dart';
 import 'core/translations/language.dart';
 //import 'firebase_options.dart';
 
@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => GetMaterialApp(
           title: AppSetting.appName,
           debugShowCheckedModeBanner: false,
+          //locale: Get.deviceLocale,
           locale: LanTools.getLocale() ?? Get.deviceLocale,
           translations: AppTranslations(),
           fallbackLocale: const Locale("en"),

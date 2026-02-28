@@ -3,6 +3,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/page/alarm/index/widget/alarm_level.dart';
 import 'package:cescpro/page/alarm/index/widget/alarm_status.dart';
+import 'package:cescpro/page/station/index/widget/text_rich_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -67,6 +68,27 @@ class AlarmItem extends StatelessWidget {
                   indent: 10.w,
                   endIndent: 10.w,
                 ),
+
+                if (false)
+                  Container(
+                    padding: EdgeInsetsDirectional.symmetric(
+                      vertical: 8,
+                      horizontal: 14,
+                    ),
+                    width: double.maxFinite,
+                    child: TextRichWidget(
+                      title: TKey.deviceSerialNumber.tr,
+                      value: item.sn ?? "",
+                      titleStyle: TextStyle(
+                        color: Color(0xA6FFFFFF),
+                        fontSize: 14,
+                      ),
+                      valueStyle: TextStyle(
+                        color: Color(0xFFFFFFFF),
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
 
                 Container(
                   padding: EdgeInsetsDirectional.symmetric(

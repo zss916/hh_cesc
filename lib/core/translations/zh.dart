@@ -234,4 +234,6 @@ const zh = {
   "privacyPolicyAgree": "同意",
   "privacyPolicyDisagree": "不同意",
   "removeAccount": "注销账号",
+  "languageDe": "德语",
+  "languageEs": "西班牙语",
 };

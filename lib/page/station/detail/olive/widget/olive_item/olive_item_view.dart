@@ -1013,7 +1013,7 @@ class OliveItemView extends StatelessWidget {
               ),
             ),
             Divider(height: 8.h, color: Colors.transparent),
-            if (Get.isEn)
+            if (!Get.isZh)
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

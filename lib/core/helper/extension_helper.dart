@@ -41,11 +41,15 @@ extension TimestampExtension on int {
   ).format(DateTime.fromMillisecondsSinceEpoch(this));
 }
 
+///目前根据手机语言判断
 extension CheckLancode on GetInterface {
   bool get isZh => Get.locale?.languageCode == "zh";
 
-  ///目前根据手机语言判断
   bool get isEn => Get.locale?.languageCode == "en";
+
+  bool get isDe => Get.locale?.languageCode == "de";
+
+  bool get isEs => Get.locale?.languageCode == "es";
 }
 
 S? safeFind<S>() {
