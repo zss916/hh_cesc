@@ -3,7 +3,7 @@ const de = {
   "userAgreement": "Nutzungsbedingungen",
   "loginAgreement":
       "Indem Sie sich anmelden, bestätigen Sie, dass Sie die Bedingungen gelesen, verstanden und akzeptiert haben",
-  "loginTitle": "Hallo,\nWillkommen bei \"BUJUNSHOU\"",
+  "loginTitle": "Hallo,\nWillkommen bei \"%s\"",
   "account": "Benutzerkonto",
   "password": "Passwort",
   "passwordError": "Falsches Konto oder Passwort",

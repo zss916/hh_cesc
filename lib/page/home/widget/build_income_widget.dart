@@ -19,6 +19,7 @@ class IncomeWidget extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       height: 125,
+      //constraints: BoxConstraints(minHeight: 125),
       padding: EdgeInsetsDirectional.all(15),
       margin: EdgeInsetsDirectional.only(
         start: 16.w,
@@ -30,60 +31,72 @@ class IncomeWidget extends StatelessWidget {
         color: Color(0xFF313540),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              //color: Colors.amber,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FittedBox(
-                    child: Text(
-                      totalIncome.toDouble().formatAmount(),
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontSize: 36.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
+      child: IntrinsicHeight(
+        child: Row(
+          //mainAxisAlignment: MainAxisAlignment.end,
+          //crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: Container(
+                //color: Colors.amber,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(
+                      child: Text(
+                        totalIncome.toDouble().formatAmount(),
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 36.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    TKey.totalRevenue.trArgs([User.to.getCurrencyUnit()]),
-                    style: TextStyle(fontSize: 14.sp, color: Color(0xA6FFFFFF)),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          VerticalDivider(width: 10, color: Colors.transparent),
-          Expanded(
-            child: Container(
-              //color: Colors.blue,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FittedBox(
-                    child: Text(
-                      todayIncome.toDouble().formatAmount(),
-                      maxLines: 1,
+                    Text(
+                      TKey.totalRevenue.trArgs([User.to.getCurrencyUnit()]),
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 36.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        fontSize: 14.sp,
+                        color: Color(0xA6FFFFFF),
                       ),
                     ),
-                  ),
-                  Text(
-                    TKey.currentRevenue.trArgs([User.to.getCurrencyUnit()]),
-                    style: TextStyle(fontSize: 14.sp, color: Color(0xA6FFFFFF)),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+            VerticalDivider(width: 10, color: Colors.transparent),
+            Expanded(
+              child: Container(
+                //color: Colors.blue,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(
+                      child: Text(
+                        todayIncome.toDouble().formatAmount(),
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 36.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      TKey.currentRevenue.trArgs([User.to.getCurrencyUnit()]),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: Color(0xA6FFFFFF),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

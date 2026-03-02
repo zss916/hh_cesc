@@ -12,8 +12,8 @@ class AppSetting {
 
   ///用户协议
   static String policy = Environment.isPro
-      ? (Get.isEn ? Assets.htmlUserPolicyEn2 : Assets.htmlUserPolicyZh2)
-      : (Get.isEn ? Assets.htmlUserPolicyEn : Assets.htmlUserPolicyZh);
+      ? (Get.isZh ? Assets.htmlUserPolicyZh2 : Assets.htmlUserPolicyEn2)
+      : (Get.isZh ? Assets.htmlUserPolicyZh : Assets.htmlUserPolicyEn);
 }
 
 extension NumExtension on int {
