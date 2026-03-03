@@ -182,6 +182,15 @@ extension AmountFormat on num {
         ///mwh
         return mValue.toStringAsFixed(3);
       }
+    } else if (this <= -10000) {
+      num mValue = this / 1000;
+      if (mValue <= -10000) {
+        ///gwh
+        return (mValue / 1000).toStringAsFixed(3);
+      } else {
+        ///mwh
+        return mValue.toStringAsFixed(3);
+      }
     } else {
       ///kwh
       return toStringAsFixed(2);
@@ -197,6 +206,13 @@ extension AmountFormat on num {
         return "GWh";
       } else {
         ///mwh
+        return "MWh";
+      }
+    } else if (this <= -10000) {
+      num mValue = this / 1000;
+      if (mValue <= -10000) {
+        return "GWh";
+      } else {
         return "MWh";
       }
     } else {

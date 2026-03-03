@@ -82,7 +82,7 @@ class PowerLevelTableWidget extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
                       child: Text(
-                        "${TKey.chargingData.tr}\n(kwh)",
+                        "${TKey.chargingData.tr}\n(kWh)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -99,7 +99,7 @@ class PowerLevelTableWidget extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
                       child: Text(
-                        "${TKey.neg.tr}\n(kwh)",
+                        "${TKey.neg.tr}\n(kWh)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,

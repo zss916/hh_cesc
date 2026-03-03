@@ -69,7 +69,7 @@ class EleTableWidget extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.white10),
                     width: double.maxFinite,
                     child: AutoSizeText(
-                      "${TKey.photovoltaicPowerGeneration2.tr}\n(kwh)",
+                      "${TKey.photovoltaicPowerGeneration2.tr}\n(kWh)",
                       textAlign: TextAlign.center,
                       maxFontSize: 12,
                       minFontSize: 6,
@@ -88,7 +88,7 @@ class EleTableWidget extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.white10),
                     width: double.maxFinite,
                     child: AutoSizeText(
-                      "${TKey.gridEleGeneration.tr}\n(kwh)",
+                      "${TKey.gridEleGeneration.tr}\n(kWh)",
                       textAlign: TextAlign.center,
                       maxFontSize: 12,
                       minFontSize: 6,

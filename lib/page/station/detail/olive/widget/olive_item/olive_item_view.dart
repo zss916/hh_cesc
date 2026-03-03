@@ -287,7 +287,7 @@ class OliveItemView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${logic.storagePower}KW",
+                                "${logic.storagePower}kW",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 13.sp,
@@ -343,7 +343,7 @@ class OliveItemView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${logic.loadPower}KW",
+                          "${logic.loadPower}kW",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 13.sp,
@@ -391,7 +391,7 @@ class OliveItemView extends StatelessWidget {
                             ),
                           ),
                           AutoSizeText(
-                            "${logic.gridPower}KW",
+                            "${logic.gridPower}kW",
                             minFontSize: 10,
                             maxLines: 1,
                             style: TextStyle(
@@ -433,7 +433,7 @@ class OliveItemView extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "${logic.pvPower}KW",
+                                  "${logic.pvPower}kW",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 13.sp,
@@ -611,7 +611,7 @@ class OliveItemView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${logic.storagePower}KW",
+                                "${logic.storagePower}kW",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 13.sp,
@@ -666,7 +666,7 @@ class OliveItemView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${logic.loadPower}KW",
+                          "${logic.loadPower}kW",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 13.sp,
@@ -714,7 +714,7 @@ class OliveItemView extends StatelessWidget {
                             ),
                           ),
                           AutoSizeText(
-                            "${logic.gridPower}KW",
+                            "${logic.gridPower}kW",
                             minFontSize: 10,
                             maxLines: 1,
                             style: TextStyle(
@@ -1031,7 +1031,7 @@ class OliveItemView extends StatelessWidget {
                                   fontSize: 12.sp,
                                   color: Color(0xFFFFFFFF),
                                 ),
-                                text: "${siteDetail?.power ?? 0}kw",
+                                text: "${siteDetail?.power ?? 0}kW",
                               ),
                             ],
                             style: TextStyle(
@@ -1059,7 +1059,7 @@ class OliveItemView extends StatelessWidget {
                                   fontSize: 12.sp,
                                   color: Color(0xFFFFFFFF),
                                 ),
-                                text: "${siteDetail?.capacity ?? 0}kwh",
+                                text: "${siteDetail?.capacity ?? 0}kWh",
                               ),
                             ],
                             style: TextStyle(
@@ -1089,7 +1089,7 @@ class OliveItemView extends StatelessWidget {
                         ),
                         Expanded(
                           child: Text(
-                            "${siteDetail?.power ?? 0}kw",
+                            "${siteDetail?.power ?? 0}kW",
                             style: TextStyle(
                               fontSize: 12.sp,
                               color: Color(0xFFFFFFFF),
@@ -1113,7 +1113,7 @@ class OliveItemView extends StatelessWidget {
 
                         Expanded(
                           child: Text(
-                            "${siteDetail?.capacity ?? 0}kwh",
+                            "${siteDetail?.capacity ?? 0}kWh",
                             style: TextStyle(
                               fontSize: 12.sp,
                               color: Color(0xFFFFFFFF),
@@ -1195,7 +1195,7 @@ class OliveItemView extends StatelessWidget {
                                   fontSize: 12.sp,
                                   color: Color(0xFFFFFFFF),
                                 ),
-                                text: "${siteDetail?.pvPower ?? 0}kw",
+                                text: "${siteDetail?.pvPower ?? 0}kW",
                               ),
                             ],
                             style: TextStyle(
@@ -1223,7 +1223,7 @@ class OliveItemView extends StatelessWidget {
                                   fontSize: 12.sp,
                                   color: Color(0xFFFFFFFF),
                                 ),
-                                text: "${siteDetail?.pvCapacity ?? 0}kwh",
+                                text: "${siteDetail?.pvCapacity ?? 0}kWh",
                               ),
                             ],
                             style: TextStyle(

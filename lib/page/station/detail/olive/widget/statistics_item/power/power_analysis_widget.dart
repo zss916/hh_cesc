@@ -104,7 +104,7 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                           ),
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "(KW)",
+                            "(kW)",
                             style: TextStyle(
                               color: Color(0x80FFFFFF),
                               fontSize: 12.sp,
@@ -146,7 +146,7 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                       top: 10.h,
                       start: 10.w,
                       child: Text(
-                        "(KW)",
+                        "(kW)",
                         style: TextStyle(
                           color: Color(0x80FFFFFF),
                           fontSize: 12.sp,
