@@ -1,5 +1,6 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/widget/revenue_barchart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
@@ -235,12 +236,13 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                   ),
                 ),
               ),
-              if (widget.logic.labels.isNotEmpty)
+              if (widget.logic.labels.isNotEmpty &&
+                  User.to.getCurrencyUnit().isNotEmpty)
                 PositionedDirectional(
                   start: 0.w,
                   top: 50.h,
                   child: Text(
-                    "(¥)",
+                    "(${User.to.getCurrencyUnit()})",
                     style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                   ),
                 ),

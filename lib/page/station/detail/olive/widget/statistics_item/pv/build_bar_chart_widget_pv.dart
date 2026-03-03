@@ -240,7 +240,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                         start: 0.w,
                         top: 50.h,
                         child: Text(
-                          "(kW)",
+                          "(kWh)",
                           style: TextStyle(
                             color: Color(0x80FFFFFF),
                             fontSize: 12.sp,
