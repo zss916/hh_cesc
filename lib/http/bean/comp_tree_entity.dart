@@ -21,7 +21,7 @@ class CompTreeEntity {
   bool? isChildSelected;
   bool? isChildChildSelected;
 
-  String get labelName => Get.isEn ? (labelEn ?? "") : (labelCn ?? "");
+  String get labelName => Get.isZh ? (labelCn ?? "") : (labelEn ?? "");
 
   CompTreeEntity();
 

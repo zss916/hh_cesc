@@ -65,7 +65,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
       children: [
         AlarmItemSelect(
           title: TKey.affiliatedArea.tr,
-          subTitle: countryItem?.name,
+          subTitle: countryItem?.getLocaleName(),
           onTap: () {
             showSelectCountrySheet(
               country: countryItem,
@@ -242,7 +242,8 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
       minTime: DateTime(2010, 1, 1),
       maxTime: DateTime.now(),
       //currentTime: DateTime.parse(currentTime),
-      locale: Get.isEn ? LocaleType.en : LocaleType.zh,
+      // locale: Get.isZh ? LocaleType.zh : LocaleType.en,
+      locale: LocaleUtils.fromLanguageCode(Get.locale?.languageCode),
       theme: DatePickerTheme(
         backgroundColor: Color(0xFF23282E),
         itemStyle: TextStyle(

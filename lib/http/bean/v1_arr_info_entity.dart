@@ -64,7 +64,7 @@ class V1ArrInfoEntity {
 
   ///运行状态
   String get showRunStatus =>
-      Get.isEn ? (statusEnNameDesc ?? "") : (statusNameDesc ?? "");
+      Get.isZh ? (statusNameDesc ?? "") : (statusEnNameDesc ?? "");
 
   ///当前EMS设备与「堆」的通信状态已中断
 }

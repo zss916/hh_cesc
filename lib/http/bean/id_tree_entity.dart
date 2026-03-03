@@ -27,7 +27,7 @@ class IdTreeEntity {
 
   IdTreeEntity();
 
-  String get showLabel => Get.isEn ? (labelEn ?? "") : (labelCn ?? "");
+  String get showLabel => Get.isZh ? (labelCn ?? "") : (labelEn ?? "");
 
   //["ARR", "CLU", "PCS", "AIR_COOL", "METER", "DIDO", "CELL"]
   String showChildLabel({int index = 0}) {

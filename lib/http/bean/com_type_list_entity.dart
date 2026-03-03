@@ -171,9 +171,9 @@ class ComTypeListItem {
   }
 
   String get showFieldName =>
-      Get.isEn ? (fieldNameEn ?? "") : (fieldNameCn ?? "");
+      Get.isZh ? (fieldNameCn ?? "") : (fieldNameEn ?? "");
 
-  String get showValue => Get.isEn ? (enValue ?? "") : (value ?? "");
+  String get showValue => Get.isZh ? (value ?? "") : (enValue ?? "");
 
   // String? get currentValue => (fieldName == "current") ? showValue : "";
 

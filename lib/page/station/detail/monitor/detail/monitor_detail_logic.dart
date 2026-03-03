@@ -116,7 +116,7 @@ class MonitorDetailLogic extends GetxController {
 
     void traverse(Map<String, dynamic> node) {
       if (node['labelCn'] != null && node['labelEn'] != null) {
-        pathSegments.add(Get.isEn ? node['labelEn'] : node['labelCn']);
+        pathSegments.add(Get.isZh ? node['labelCn'] : node['labelEn']);
       }
 
       if (node['child'] != null && node['child'] is List) {

@@ -485,7 +485,7 @@ class BatteryView extends StatelessWidget {
                 .where((e) => e.fieldName == "voltage")
                 .firstOrNull;
             return AspectRatio(
-              aspectRatio: Get.isEn ? (200 / 186) : (140 / 186),
+              aspectRatio: Get.isZh ? (140 / 186) : (200 / 186),
               //aspectRatio: ,
               child: Container(
                 width: double.maxFinite,

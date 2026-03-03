@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 2.0.3+11
+version: 2.0.4+12
 
 environment:
   sdk: ^3.10.0
@@ -14,7 +14,7 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   get: 4.7.3
-  dio: 5.9.0
+  dio: 5.9.1
   pretty_dio_logger: 1.4.0
   auto_size_text: 3.0.0
   shared_preferences: 2.5.3

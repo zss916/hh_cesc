@@ -196,7 +196,8 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
       minTime: DateTime(2010, 1, 1),
       maxTime: DateTime.now(),
       currentTime: DateTime.parse(currentTime),
-      locale: Get.isEn ? LocaleType.en : LocaleType.zh,
+      locale: LocaleUtils.fromLanguageCode(Get.locale?.languageCode),
+      //locale: Get.isEn ? LocaleType.en : LocaleType.zh,
       theme: DatePickerTheme(
         backgroundColor: Color(0xFF23282E),
         itemStyle: TextStyle(

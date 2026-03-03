@@ -55,10 +55,10 @@ class ComCardVoItems {
     return jsonEncode(this);
   }
 
-  String get showValue => Get.isEn ? (enValue ?? "") : (value ?? "");
+  String get showValue => Get.isZh ? (value ?? "") : (enValue ?? "");
 
   String get showFieldName =>
-      Get.isEn ? (fieldNameEn ?? "") : (fieldNameCn ?? "");
+      Get.isZh ? (fieldNameCn ?? "") : (fieldNameEn ?? "");
 }
 
 @JsonSerializable()
@@ -83,8 +83,8 @@ class ComCardVoDefaultList {
     return jsonEncode(this);
   }
 
-  String get showValue => Get.isEn ? (enValue ?? "") : (value ?? "");
+  String get showValue => Get.isZh ? (value ?? "") : (enValue ?? "");
 
   String get showFieldName =>
-      Get.isEn ? (fieldNameEn ?? "") : (fieldNameCn ?? "");
+      Get.isZh ? (fieldNameCn ?? "") : (fieldNameEn ?? "");
 }

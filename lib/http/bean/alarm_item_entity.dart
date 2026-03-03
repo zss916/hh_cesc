@@ -31,7 +31,7 @@ class AlarmItemEntity {
   String? label;
 
   String get deviceName =>
-      "${label ?? ''}${Get.isEn ? (enName ?? "") : (name ?? "")}";
+      "${label ?? ''}${Get.isZh ? (name ?? "") : (enName ?? "")}";
 
   AlarmItemEntity();
 
@@ -63,7 +63,7 @@ class AlarmItemEntity {
     }
   }
 
-  String get showName => Get.isEn ? (enName ?? "") : (name ?? "");
+  String get showName => Get.isZh ? (name ?? "") : (enName ?? "");
 
   ///持续时间
   Duration get dif => DateTime.fromMillisecondsSinceEpoch(

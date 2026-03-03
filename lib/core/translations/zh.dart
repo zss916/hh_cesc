@@ -236,4 +236,7 @@ const zh = {
   "removeAccount": "注销账号",
   "languageDe": "德语",
   "languageEs": "西班牙语",
+  "localEMS": "本地EMS",
+  "monomer": "单体",
+  "temperature": "温度",
 };

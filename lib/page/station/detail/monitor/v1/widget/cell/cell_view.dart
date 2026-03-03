@@ -169,7 +169,7 @@ class CellView extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "本地EMS",
+                          TKey.localEMS.tr,
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                         Spacer(),
@@ -195,7 +195,7 @@ class CellView extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "单体",
+                          TKey.monomer.tr,
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                         Spacer(),
@@ -208,7 +208,7 @@ class CellView extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "电压(V)",
+                          "${TKey.voltage.tr}(V)",
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                         Spacer(),
@@ -221,7 +221,7 @@ class CellView extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "温度(°C)",
+                          "${TKey.temperature.tr}(°C)",
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                         Spacer(),

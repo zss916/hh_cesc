@@ -249,4 +249,7 @@ const es = {
   "removeAccount": "Eliminar cuenta",
   "languageDe": "Alemán",
   "languageEs": "Spanish",
+  "localEMS": "EMS",
+  "monomer": "monómero",
+  "temperature": "temperatura",
 };

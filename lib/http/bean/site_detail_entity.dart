@@ -61,7 +61,7 @@ class SiteDetailEntity {
     return jsonEncode(this);
   }
 
-  String get showName => Get.isEn ? (name ?? "") : (cname ?? "");
+  String get showName => Get.isZh ? (cname ?? "") : (name ?? "");
 
   String get workModel {
     if (status == 99) {

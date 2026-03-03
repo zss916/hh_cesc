@@ -122,11 +122,11 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    /*Icon(
+                    Icon(
                       Icons.arrow_drop_down_rounded,
                       size: 20,
                       color: Color(0xD9FFFFFF),
-                    ),*/
+                    ),
                   ],
                 ),
               ),
@@ -195,7 +195,8 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
       minTime: DateTime(2015, 1, 1),
       maxTime: DateTime.now(),
       currentTime: initDateTime,
-      locale: Get.isEn ? LocaleType.en : LocaleType.zh,
+      //locale: Get.isEn ? LocaleType.en : LocaleType.zh,
+      locale: LocaleUtils.fromLanguageCode(Get.locale?.languageCode),
       theme: DatePickerTheme(
         backgroundColor: Color(0xFF23282E),
         itemStyle: TextStyle(

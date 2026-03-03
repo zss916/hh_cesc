@@ -123,6 +123,7 @@ class _SelectCountryWidgetState extends State<SelectCountryWidget> {
                 CountryEntity country = widget.data[i];
                 return InkWell(
                   onTap: () {
+                    //  debugPrint("LocaleUtils ==>${Get.locale?.countryCode}");
                     setState(() {
                       if (selectIndex == i) {
                         selectIndex = -1;
@@ -144,7 +145,7 @@ class _SelectCountryWidgetState extends State<SelectCountryWidget> {
                     ),
                     width: double.maxFinite,
                     child: Text(
-                      "${country.en}",
+                      "${country.getLocaleName()}",
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),

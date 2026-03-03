@@ -100,7 +100,7 @@ class V1CluInfoEntity {
 
   ///运行状态
   String get showRunStatus =>
-      Get.isEn ? (statusEnNameDesc ?? "") : (statusNameDesc ?? "");
+      Get.isZh ? (statusNameDesc ?? "") : (statusEnNameDesc ?? "");
 }
 
 @JsonSerializable()

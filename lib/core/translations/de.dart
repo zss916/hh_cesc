@@ -10,10 +10,10 @@ const de = {
   "login": "Anmelden",
   "appTip":
       "Diese Anwendung ist nur für Unternehmenskunden und Partner bestimmt, Konten werden vom Administrator zugewiesen",
-  "home": "Home",
-  "station": "Station",
+  "home": "Startseite",
+  "station": "Bahnhof",
   "alarm": "Alarm",
-  "service": "Service",
+  "service": "Dienstleistungen",
   "currentRevenue": "Heutige Einnahmen(%s)",
   "totalRevenue": "Gesamteinnahmen(%s)",
   "moneyUnit": "€",
@@ -227,4 +227,7 @@ const de = {
   "todayChargeAndDischarge": "Chg/Dchg",
   "chargeAndDischarge": "Chg/Dchg",
   "languageEs": "Spanisch",
+  "localEMS": "EMS",
+  "monomer": "monomer",
+  "temperature": "temperatur",
 };

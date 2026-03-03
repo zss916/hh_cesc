@@ -475,6 +475,9 @@ class TKey {
   static const String privacyPolicyDisagree = "privacyPolicyDisagree";
 
   static const String removeAccount = "removeAccount";
+  static const String monomer = "monomer";
+  static const String temperature = "temperature";
+  static const String localEMS = "localEMS";
 }
 
 const en = {
@@ -721,4 +724,7 @@ const en = {
   "privacyPolicyDisagree": "Disagree",
   "languageDe": "German",
   "languageEs": "Spanish",
+  "localEMS": "Local EMS",
+  "monomer": "monomer",
+  "temperature": "temperature",
 };

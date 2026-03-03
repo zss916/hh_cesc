@@ -84,7 +84,7 @@ class _StationDetailState extends State<StationDetailPage> {
                   style: TextStyle(color: Colors.white, fontSize: 10.sp),
                 ),
                 selectedTitle: Text(
-                  TKey.station.tr,
+                  TKey.monitor.tr,
                   style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
                 ),
               ),

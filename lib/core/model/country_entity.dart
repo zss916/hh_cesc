@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/country_entity.g.dart';
 import 'package:get/get.dart';
@@ -11,6 +10,8 @@ export 'package:cescpro/generated/json/country_entity.g.dart';
 class CountryEntity {
   String? en;
   String? zh;
+  String? de;
+  String? es;
   String? code;
 
   CountryEntity();
@@ -25,5 +26,18 @@ class CountryEntity {
     return jsonEncode(this);
   }
 
-  String get name => Get.isEn ? (en ?? "") : (zh ?? "");
+  String? getLocaleName() {
+    switch (Get.locale?.languageCode) {
+      case 'en':
+        return en;
+      case 'de':
+        return de;
+      case 'es':
+        return es;
+      case 'zh':
+        return zh;
+      default:
+        return en;
+    }
+  }
 }

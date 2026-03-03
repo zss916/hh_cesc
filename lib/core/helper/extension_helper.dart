@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:cescpro/core/translations/en.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -222,4 +223,21 @@ extension AmountFormat on num {
 
   ///排量等单位
   String get weightUnit => (this >= 1000) ? " t" : " kg";
+}
+
+class LocaleUtils {
+  static LocaleType fromLanguageCode(String? languageCode) {
+    switch (languageCode) {
+      case 'en':
+        return LocaleType.en;
+      case 'de':
+        return LocaleType.de;
+      case 'es':
+        return LocaleType.es;
+      case 'zh':
+        return LocaleType.zh;
+      default:
+        return LocaleType.en;
+    }
+  }
 }
