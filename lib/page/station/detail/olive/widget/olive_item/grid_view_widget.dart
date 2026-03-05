@@ -3,6 +3,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
+import 'package:cescpro/page/station/index/widget/text_rich_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -108,6 +109,7 @@ class GridViewWidget extends StatelessWidget {
                 ),
 
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: double.maxFinite,
@@ -115,11 +117,12 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.todayCharging.tr}($todayChargingUnit)",
+                              //"${TKey.todayCharging.tr}($todayChargingUnit)",
+                              TKey.todayCharging.tr,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 14.sp,
+                                fontSize: 12.sp,
                                 color: Color(0xA6FFFFFF),
                               ),
                             ),
@@ -134,14 +137,29 @@ class GridViewWidget extends StatelessWidget {
                     ),
                     SizedBox(
                       width: double.maxFinite,
-                      child: Text(
+                      child: TextRichWidget(
+                        title: "$todayCharging ",
+                        titleStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 24.sp,
+                          color: Colors.white,
+                        ),
+                        value: todayChargingUnit,
+                        valueStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12.sp,
+                          color: Colors.white,
+                        ),
+                      ),
+
+                      /* child: Text(
                         todayCharging,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 24.sp,
                           color: Colors.white,
                         ),
-                      ),
+                      ),*/
                     ),
                   ],
                 ),
@@ -191,6 +209,7 @@ class GridViewWidget extends StatelessWidget {
                 ),
 
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: double.maxFinite,
@@ -198,11 +217,12 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.todayDischarge.tr}($todayDischargeUnit)",
+                              // "${TKey.todayDischarge.tr}($todayDischargeUnit)",
+                              TKey.todayDischarge.tr,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 14.sp,
+                                fontSize: 12.sp,
                                 color: Color(0xA6FFFFFF),
                               ),
                             ),
@@ -215,16 +235,32 @@ class GridViewWidget extends StatelessWidget {
                         ],
                       ),
                     ),
+
                     SizedBox(
                       width: double.maxFinite,
-                      child: Text(
-                        todayDischarge,
+                      child: TextRichWidget(
+                        title: "$todayDischarge ",
+                        titleStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 24.sp,
+                          color: Colors.white,
+                        ),
+                        value: todayDischargeUnit,
+                        valueStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12.sp,
+                          color: Colors.white,
+                        ),
+                      ),
+
+                      /* child: Text(
+                        todayCharging,
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 24.sp,
                           color: Colors.white,
                         ),
-                      ),
+                      ),*/
                     ),
                   ],
                 ),
@@ -274,6 +310,7 @@ class GridViewWidget extends StatelessWidget {
                 ),
 
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: double.maxFinite,
@@ -281,11 +318,12 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.lastDayIncome.tr}($currencyUnit)",
+                              // "${TKey.lastDayIncome.tr}($currencyUnit)",
+                              TKey.lastDayIncome.tr,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 14.sp,
+                                fontSize: 12.sp,
                                 color: Color(0xA6FFFFFF),
                               ),
                             ),
@@ -298,7 +336,26 @@ class GridViewWidget extends StatelessWidget {
                         ],
                       ),
                     ),
+
                     SizedBox(
+                      width: double.maxFinite,
+                      child: TextRichWidget(
+                        title: "$currencyUnit$showTodayIncome",
+                        titleStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 24.sp,
+                          color: Colors.white,
+                        ),
+                        value: "",
+                        valueStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12.sp,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+
+                    /* SizedBox(
                       width: double.maxFinite,
                       child: Text(
                         showTodayIncome,
@@ -308,7 +365,7 @@ class GridViewWidget extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ],
@@ -357,6 +414,7 @@ class GridViewWidget extends StatelessWidget {
                 ),
 
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: double.maxFinite,
@@ -364,11 +422,12 @@ class GridViewWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              "${TKey.todayPVPowerEarnings.tr}($todayPVPowerEarningsUnit)",
+                              TKey.todayPVNeg.tr,
+                              //  "${TKey.todayPVPowerEarnings.tr}($todayPVPowerEarningsUnit)",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 14.sp,
+                                fontSize: 12.sp,
                                 color: Color(0xA6FFFFFF),
                               ),
                             ),
@@ -381,7 +440,35 @@ class GridViewWidget extends StatelessWidget {
                         ],
                       ),
                     ),
+
                     SizedBox(
+                      width: double.maxFinite,
+                      child: TextRichWidget(
+                        title: "$todayPVPowerEarnings ",
+                        titleStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 24.sp,
+                          color: Colors.white,
+                        ),
+                        value: todayPVPowerEarningsUnit,
+                        valueStyle: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12.sp,
+                          color: Colors.white,
+                        ),
+                      ),
+
+                      /* child: Text(
+                        todayCharging,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 24.sp,
+                          color: Colors.white,
+                        ),
+                      ),*/
+                    ),
+
+                    /*  SizedBox(
                       width: double.maxFinite,
                       child: Text(
                         todayPVPowerEarnings,
@@ -391,7 +478,7 @@ class GridViewWidget extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ],

@@ -152,7 +152,7 @@ const es = {
   "totalPVNeg": "Generación fotovoltaica acumulada",
   "currentYearPVNeg": "Generación fotovoltaica del año actual",
   "currentMonthPVNeg": "Generación fotovoltaica del mes actual",
-  "todayPVNeg": "Generación fotovoltaica de hoy",
+  "todayPVNeg": "Generación PV de hoy",
   "alarmTotal": "Total de alarmas",
   "other": "Otros",
   "alarmCount": "%s",
