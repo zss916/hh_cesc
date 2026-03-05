@@ -13,7 +13,7 @@ const de = {
   "home": "Startseite",
   "station": "Bahnhof",
   "alarm": "Alarm",
-  "service": "Dienstleistungen",
+  "service": "Dienst",
   "currentRevenue": "Heutige Einnahmen(%s)",
   "totalRevenue": "Gesamteinnahmen(%s)",
   "moneyUnit": "€",
