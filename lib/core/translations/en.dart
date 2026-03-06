@@ -487,7 +487,7 @@ const en = {
   "loginAgreement":
       "By logging in, you acknowledge that you have read, understood, and agreed to the terms",
   "loginTitle": "Hello,\nWelcome to \"%s\"",
-  "account": "Account",
+  "account": "Account/Email",
   "password": "Password",
   "passwordError": "Incorrect account or password",
   "login": "Login",

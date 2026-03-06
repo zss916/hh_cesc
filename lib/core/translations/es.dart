@@ -6,7 +6,7 @@ const es = {
   "loginAgreement":
       "Al iniciar sesión, confirma que ha leído, entendido y aceptado",
   "loginTitle": "Hola,\nBienvenido a \"%s\"",
-  "account": "Cuenta",
+  "account": "Cuenta/Email",
   "password": "Contraseña",
   "passwordError": "Cuenta o contraseña incorrecta",
   "login": "Iniciar sesión",

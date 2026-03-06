@@ -5,7 +5,7 @@ const zh = {
   "privatePolicy": "隐私协议",
   "loginAgreement": "登录即表示您已阅读，理解并同意",
   "loginTitle": "你好，\n欢迎使用「%s」",
-  "account": "账号",
+  "account": "账号/邮箱",
   "password": "密码",
   "passwordError": "账号或密码错误",
   "login": "登录",

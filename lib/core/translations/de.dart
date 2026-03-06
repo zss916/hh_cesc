@@ -4,7 +4,7 @@ const de = {
   "loginAgreement":
       "Indem Sie sich anmelden, bestätigen Sie, dass Sie die Bedingungen gelesen, verstanden und akzeptiert haben",
   "loginTitle": "Hallo,\nWillkommen bei \"%s\"",
-  "account": "Benutzerkonto",
+  "account": "Benutzerkonto/E-Mail",
   "password": "Passwort",
   "passwordError": "Falsches Konto oder Passwort",
   "login": "Anmelden",
