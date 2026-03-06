@@ -107,7 +107,7 @@ class EleTableWidget extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.white10),
                     width: double.maxFinite,
                     child: AutoSizeText(
-                      "${TKey.energyStorageCharge.tr}\n(kwh)",
+                      "${TKey.energyStorageCharge.tr}\n(kWh)",
                       textAlign: TextAlign.center,
                       maxFontSize: 12,
                       minFontSize: 6,
@@ -131,7 +131,7 @@ class EleTableWidget extends StatelessWidget {
                     ),
                     width: double.maxFinite,
                     child: AutoSizeText(
-                      "${TKey.energyStorageDischarge.tr}\n(kwh)",
+                      "${TKey.energyStorageDischarge.tr}\n(kWh)",
                       textAlign: TextAlign.center,
                       maxFontSize: 12,
                       minFontSize: 6,

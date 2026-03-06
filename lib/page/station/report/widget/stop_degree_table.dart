@@ -82,7 +82,7 @@ class StopDegreeTableWidget extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.white10),
                       width: double.maxFinite,
                       child: Text(
-                        "${TKey.forwardActiveEnergy.tr}\n(kwh)",
+                        "${TKey.forwardActiveEnergy.tr}\n(kWh)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
