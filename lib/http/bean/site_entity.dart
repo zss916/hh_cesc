@@ -70,13 +70,13 @@ class SiteEntity {
   String get showSiteName => (name ?? "");
 
   ///储能装机功率
-  String get showPower => "${power ?? 0}kw";
+  String get showPower => "${power ?? 0}kW";
 
   ///soc
   String get showSoc => "${soc ?? 0}%";
 
   ///光伏功率
-  String get showPvPower => "${pvPower ?? 0}kw";
+  String get showPvPower => "${pvPower ?? 0}kW";
 
   ///今日充放电
   String get chargeAndRecharge =>

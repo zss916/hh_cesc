@@ -16,7 +16,8 @@ class RealAlarmView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: baseAppBar(title: TKey.realTimeData.tr),
+      appBar: baseAppBar(title: TKey.alarm.tr),
+      //appBar: baseAppBar(title: TKey.realTimeData.tr),
       backgroundColor: Color(0xFF23282E),
       body: GetBuilder<RealAlarmLogic>(
         init: RealAlarmLogic(),

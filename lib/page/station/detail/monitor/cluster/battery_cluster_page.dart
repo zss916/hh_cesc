@@ -493,7 +493,7 @@ class BatteryClusterPage extends StatelessWidget {
                 start: 0.w,
                 top: 15.h,
                 child: Text(
-                  "(KW)",
+                  "(kW)",
                   style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                 ),
               ),

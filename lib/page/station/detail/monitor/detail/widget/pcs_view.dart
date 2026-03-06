@@ -2,7 +2,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/top_item_widget.dart';
-import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart2.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -725,7 +725,7 @@ class PcsView extends StatelessWidget {
                     builder: (logic) {
                       return Container(
                         color: Colors.transparent,
-                        height: 270.h,
+                        height: 285.h,
                         width: double.maxFinite,
                         child: logic.powerList.isEmpty
                             ? Center(
@@ -733,7 +733,7 @@ class PcsView extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               )
-                            : MonitorLineChartWidget2(
+                            : MonitorLineChartWidget3(
                                 powerList: logic.powerList,
                                 maxY: logic.powerMaxY,
                                 minY: logic.powerMinY,
@@ -775,7 +775,7 @@ class PcsView extends StatelessWidget {
                 start: 0.w,
                 top: 15.h,
                 child: Text(
-                  "(KW)",
+                  "(kW)",
                   style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                 ),
               ),
