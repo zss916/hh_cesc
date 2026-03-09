@@ -60,7 +60,7 @@ const de = {
   "siteName": "Standortname",
   "noDataAvailable": "Keine Daten verfügbar",
   "noDataAvailableTip": "Noch keine Daten",
-  "oliveView": "Olive-Ansicht",
+  "oliveView": "Übersicht",
   "statistics": "Statistiken",
   "monitor": "Überwachen",
   "control": "Steuern",

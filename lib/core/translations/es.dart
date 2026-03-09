@@ -64,7 +64,7 @@ const es = {
   "siteName": "Nombre del sitio",
   "noDataAvailable": "No hay datos disponibles",
   "noDataAvailableTip": "Aún no hay datos",
-  "oliveView": "Resumen",
+  "oliveView": "Descripción general",
   "statistics": "Estadísticas",
   "monitor": "Monitorear",
   "control": "Controlar",

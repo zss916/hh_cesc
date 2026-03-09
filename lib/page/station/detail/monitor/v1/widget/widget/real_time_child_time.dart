@@ -9,11 +9,14 @@ class RealTimeChildTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 10.h,
+      spacing: 8.h,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(name ?? "-", style: TextStyle(color: Colors.white, fontSize: 14)),
-        Text(value ?? '-', style: TextStyle(color: Colors.white, fontSize: 14)),
+        Text(
+          name ?? "-",
+          style: TextStyle(color: Color(0x8CFFFFFF), fontSize: 14),
+        ),
+        Text(value ?? '-', style: TextStyle(color: Colors.white, fontSize: 16)),
       ],
     );
   }

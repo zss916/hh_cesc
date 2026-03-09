@@ -161,7 +161,7 @@ class ArrView extends StatelessWidget {
                   vertical: 10,
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(12),
                   color: Color(0xFF313540),
                 ),
                 child: RealTimeChildTime(name: item.name, value: item.value),

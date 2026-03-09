@@ -546,7 +546,7 @@ const en = {
   "siteName": "Site Name",
   "noDataAvailable": "No Data Available",
   "noDataAvailableTip": "No data yet",
-  "oliveView": "Olive View",
+  "oliveView": "Overview",
   "statistics": "Statistics",
   "monitor": "Monitor",
   "control": "Control",

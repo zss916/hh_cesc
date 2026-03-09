@@ -170,12 +170,15 @@ class CellView extends StatelessWidget {
                       children: [
                         Text(
                           TKey.localEMS.tr,
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(
+                            color: Color(0xA6FFFFFF),
+                            fontSize: 14,
+                          ),
                         ),
                         Spacer(),
                         Text(
                           "${item.sn}",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ],
                     ),
@@ -183,12 +186,15 @@ class CellView extends StatelessWidget {
                       children: [
                         Text(
                           "PACK",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(
+                            color: Color(0xA6FFFFFF),
+                            fontSize: 14,
+                          ),
                         ),
                         Spacer(),
                         Text(
                           item.packNo ?? "-",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ],
                     ),
@@ -196,12 +202,15 @@ class CellView extends StatelessWidget {
                       children: [
                         Text(
                           TKey.monomer.tr,
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(
+                            color: Color(0xA6FFFFFF),
+                            fontSize: 14,
+                          ),
                         ),
                         Spacer(),
                         Text(
                           "${item.cellNo}",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ],
                     ),
@@ -209,12 +218,15 @@ class CellView extends StatelessWidget {
                       children: [
                         Text(
                           "${TKey.voltage.tr}(V)",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(
+                            color: Color(0xA6FFFFFF),
+                            fontSize: 14,
+                          ),
                         ),
                         Spacer(),
                         Text(
                           "${item.cellVol}",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ],
                     ),
@@ -222,12 +234,15 @@ class CellView extends StatelessWidget {
                       children: [
                         Text(
                           "${TKey.temperature.tr}(°C)",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(
+                            color: Color(0xA6FFFFFF),
+                            fontSize: 14,
+                          ),
                         ),
                         Spacer(),
                         Text(
                           "${item.cellTemp}",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ],
                     ),
@@ -235,12 +250,15 @@ class CellView extends StatelessWidget {
                       children: [
                         Text(
                           "SOC(%)",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(
+                            color: Color(0xA6FFFFFF),
+                            fontSize: 14,
+                          ),
                         ),
                         Spacer(),
                         Text(
                           "${item.cellSoc}",
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ],
                     ),
