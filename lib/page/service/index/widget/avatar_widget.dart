@@ -28,11 +28,11 @@ class AvatarWidget extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               color: Color(0xFF313540),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: ExactAssetImage(Assets.imgLogo),
+              ),
               borderRadius: BorderRadius.circular(100),
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [Image.asset(Assets.imgLogo, width: 60, height: 60)],
             ),
           );
   }

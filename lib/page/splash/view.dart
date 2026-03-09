@@ -26,18 +26,18 @@ class SplashPage extends StatelessWidget {
                 alignment: AlignmentDirectional.center,
                 children: [
                   Image.asset(
-                    Assets.imgLogo,
-                    width: 77,
-                    height: 85,
+                    Assets.imgLogoText,
+                    width: 250,
+                    height: 250,
                     matchTextDirection: true,
                   ),
-                  PositionedDirectional(
+                  /*  PositionedDirectional(
                     bottom: 45,
                     child: Text(
                       AppSetting.appName,
                       style: TextStyle(color: Colors.white, fontSize: 24),
                     ),
-                  ),
+                  ),*/
                 ],
               ),
             );

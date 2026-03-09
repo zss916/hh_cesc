@@ -31,6 +31,8 @@ class Assets {
   static const String imgHome = 'assets/img/home.png';
   static const String imgHomeS = 'assets/img/home_s.png';
   static const String imgLogo = 'assets/img/logo.png';
+  static const String imgLogoText = 'assets/img/logo_text.png';
+  static const String imgLogoRound = 'assets/img/logo_round.webp';
   static const String imgMonitor = 'assets/img/monitor.png';
   static const String imgMonitorS = 'assets/img/monitor_s.png';
   static const String imgOliveView = 'assets/img/oliveView.png';
@@ -43,5 +45,4 @@ class Assets {
   static const String imgTodayRecharge = 'assets/img/today_recharge.png';
   static const String jsonCountryAndArea = 'assets/json/country_and_area.json';
   static const String jsonPcaCode = 'assets/json/pca-code.json';
-  static const String launcherAppLogo = 'assets/launcher/app_logo.jpg';
 }

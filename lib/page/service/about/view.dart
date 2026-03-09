@@ -29,14 +29,18 @@ class AboutPage extends StatelessWidget {
                   margin: EdgeInsetsDirectional.only(top: 50.h, bottom: 15.h),
                   alignment: AlignmentDirectional.center,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
+                    /*gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [Color(0xFF1CC4FC), Color(0xFF2323E2)],
+                    ),*/
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: ExactAssetImage(Assets.imgLogo),
                     ),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Image.asset(Assets.imgLogo, width: 48, height: 48),
+                  //child: Image.asset(Assets.imgLogo, width: 48, height: 48),
                 ),
 
                 Container(

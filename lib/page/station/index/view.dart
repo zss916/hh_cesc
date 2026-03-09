@@ -285,9 +285,13 @@ class StationPage extends StatelessWidget {
                     Container(
                       width: 90.r,
                       height: 90.r,
-                      padding: EdgeInsetsDirectional.all(10),
+                      //padding: EdgeInsetsDirectional.all(10),
                       decoration: BoxDecoration(color: Colors.white12),
-                      child: Image.asset(Assets.imgLogo),
+                      child: Image.asset(
+                        Assets.imgLogoText,
+                        scale: 2,
+                        color: Colors.white54,
+                      ),
                     )
                   else
                     Container(
@@ -295,10 +299,33 @@ class StationPage extends StatelessWidget {
                       height: 90.r,
                       decoration: BoxDecoration(
                         color: Colors.white12,
-                        image: DecorationImage(
+                        /*image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: CachedNetworkImageProvider(item.picture ?? ""),
-                        ),
+                          image: CachedNetworkImageProvider(
+                            item.picture ?? "",
+                            errorListener: (_) {
+
+                            },
+                          ),
+                        ),*/
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: item.picture ?? "",
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) {
+                          return Image.asset(
+                            Assets.imgLogoText,
+                            scale: 2,
+                            color: Colors.white54,
+                          );
+                        },
+                        errorWidget: (context, url, error) {
+                          return Image.asset(
+                            Assets.imgLogoText,
+                            scale: 2,
+                            color: Colors.white54,
+                          );
+                        },
                       ),
                     ),
                 ],
@@ -310,7 +337,7 @@ class StationPage extends StatelessWidget {
     );
   }
 
-  Widget buildItem2(SiteEntity item, {bool isLast = false}) {
+  /*  Widget buildItem2(SiteEntity item, {bool isLast = false}) {
     return GestureDetector(
       onTap: () {
         PageTools.toStationDetail(siteId: item.id, site: item);
@@ -504,5 +531,5 @@ class StationPage extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 }
