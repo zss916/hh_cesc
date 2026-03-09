@@ -31,14 +31,20 @@ class SplashLogic extends GetxController {
     }
   }
 
-  void toNext({int seconds = 2}) {
-    Future.delayed(Duration(seconds: seconds), () {
-      if (User.to.isLogin) {
-        PageTools.offAllNamedMain();
+  Future<void> toNext({int seconds = 2}) async {
+    if (User.to.isLogin) {
+      final (bool isSuccessful, List<SiteEntity> list) =
+          await SiteAPI.postSiteList(pageNum: 1, name: null, status: null);
+      if (list.length == 1) {
+        PageTools.offAllNamedStation(siteId: list.first.id, site: list.first);
       } else {
-        PageTools.offAndToNamedLogin();
+        PageTools.offAllNamedMain();
       }
-    });
+    } else {
+      Future.delayed(Duration(seconds: seconds), () {
+        PageTools.offAndToNamedLogin();
+      });
+    }
   }
 
   @override

@@ -52,10 +52,16 @@ SystemUiOverlayStyle barStyle = const SystemUiOverlayStyle(
 );
 
 ///baseAppBar
-AppBar baseAppBar({required String title}) => AppBar(
+AppBar baseAppBar({required String title, VoidCallback? onBack}) => AppBar(
   leading: IconButton(
     icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-    onPressed: () => Get.back(),
+    onPressed: () {
+      if (onBack != null) {
+        onBack.call();
+      } else {
+        Get.back();
+      }
+    },
   ),
   backgroundColor: Color(0xFF23282E),
   surfaceTintColor: Colors.transparent,

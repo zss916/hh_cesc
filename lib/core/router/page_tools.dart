@@ -7,15 +7,9 @@ class PageTools {
   ///登录
   static toLogin() => Get.toNamed(APages.login);
 
-  static offAndToNamedMain() => Get.offAndToNamed(APages.main);
+  // static offAndToNamedMain() => Get.offAndToNamed(APages.main);
 
   static offAndToNamedLogin() => Get.offAndToNamed(APages.login);
-
-  ///站点详情
-  static toStationDetail({int? siteId, SiteEntity? site}) => Get.toNamed(
-    APages.stationDetail,
-    arguments: {"siteId": siteId, "site": site},
-  );
 
   ///告警详情
   static toAlarmDetail({int? siteId}) =>
@@ -98,9 +92,23 @@ class PageTools {
   );
 
   ///首页
-  static toMain() => Get.toNamed(APages.main);
+  // static toMain() => Get.toNamed(APages.main);
 
   static offAllNamedMain() => Get.offAllNamed(APages.main);
+
+  static offAndToNamedMain() => Get.offAndToNamed(APages.main);
+
+  ///直接到站点详情
+  static offAllNamedStation({int? siteId, SiteEntity? site}) => Get.offAllNamed(
+    APages.stationDetail,
+    arguments: {"siteId": siteId, "site": site, "toMain": true},
+  );
+
+  ///站点详情
+  static toStationDetail({int? siteId, SiteEntity? site}) => Get.toNamed(
+    APages.stationDetail,
+    arguments: {"siteId": siteId, "site": site, "toMain": false},
+  );
 
   ///跳到登录
   static offAllNamedSplash() => Get.offAllNamed(APages.splash);

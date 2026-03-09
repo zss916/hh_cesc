@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/core/translations/lan_tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
@@ -51,6 +52,8 @@ extension CheckLancode on GetInterface {
   bool get isDe => Get.locale?.languageCode == "de";
 
   bool get isEs => Get.locale?.languageCode == "es";
+
+  bool get isZH => LanTools.isZh();
 }
 
 S? safeFind<S>() {

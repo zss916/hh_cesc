@@ -18,7 +18,7 @@ class RealAlarmLogic extends GetxController {
   AnalysisAttentionAlarmData? get attentionAlarmData =>
       analysis?.attentionAlarmData;
 
-  List get list => [
+  List<Map<String, dynamic>> get list => [
     {
       "title": TKey.alarmLevel1.tr,
       "number": totalAlarmData?.firstCnt ?? 0,
@@ -41,9 +41,9 @@ class RealAlarmLogic extends GetxController {
     },
   ];
 
-  List list2 = [];
+  List<Map<String, dynamic>> list2 = [];
 
-  List list3 = [];
+  List<Map<String, dynamic>> list3 = [];
 
   String contents = "";
 

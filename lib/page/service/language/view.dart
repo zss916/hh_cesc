@@ -31,7 +31,7 @@ class ChangeLanguagePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () async {
                       await Get.updateLocale(Locale('zh', 'CN'));
-                      await LanTools.setLocal();
+                      LanTools.setLocal();
                       //PageTools.offAndToNamedMain();
                     },
                     child: Container(
@@ -60,8 +60,9 @@ class ChangeLanguagePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () async {
                       await Get.updateLocale(Locale('en', 'US'));
-                      await LanTools.setLocal();
+                      LanTools.setLocal();
                       // PageTools.offAndToNamedMain();
+                      // LanTools.isZh();
                     },
                     child: Container(
                       padding: EdgeInsetsDirectional.symmetric(
@@ -88,7 +89,7 @@ class ChangeLanguagePage extends StatelessWidget {
                   child: InkWell(
                     onTap: () async {
                       await Get.updateLocale(Locale('de', 'DE'));
-                      await LanTools.setLocal();
+                      LanTools.setLocal();
                       // PageTools.offAndToNamedMain();
                     },
                     child: Container(
@@ -117,7 +118,7 @@ class ChangeLanguagePage extends StatelessWidget {
                     child: InkWell(
                       onTap: () async {
                         await Get.updateLocale(Locale('es', 'DE'));
-                        await LanTools.setLocal();
+                        LanTools.setLocal();
                         // PageTools.offAndToNamedMain();
                       },
                       child: Container(

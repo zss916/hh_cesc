@@ -16,7 +16,18 @@ class RealAlarmView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: baseAppBar(title: TKey.alarm.tr),
+      appBar: baseAppBar(
+        title: TKey.alarm.tr,
+        onBack: () {
+          Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
+          bool? toMain = map['toMain'] as bool?;
+          if (toMain == true) {
+            PageTools.offAndToNamedMain();
+          } else {
+            Get.back();
+          }
+        },
+      ),
       //appBar: baseAppBar(title: TKey.realTimeData.tr),
       backgroundColor: Color(0xFF23282E),
       body: GetBuilder<RealAlarmLogic>(
@@ -95,6 +106,7 @@ class RealAlarmView extends StatelessWidget {
           size: Size(140.w, 140.w),
           title: TKey.alarmTotal.tr,
           count: "${value.totalCnt ?? 0}",
+          totalCount: (value.totalCnt ?? 0),
           list: logic.list,
         ),
         VerticalDivider(color: Colors.transparent, width: 20.w),
@@ -214,6 +226,7 @@ class RealAlarmView extends StatelessWidget {
           size: Size(140.w, 140.w),
           title: TKey.highLevel.tr,
           count: "${logic.highestAlarmData?.totalCnt ?? 0}",
+          totalCount: (logic.highestAlarmData?.totalCnt ?? 0),
           list: logic.list2,
         ),
         VerticalDivider(color: Colors.transparent, width: 20.w),
@@ -267,6 +280,7 @@ class RealAlarmView extends StatelessWidget {
           size: Size(140.w, 140.w),
           title: TKey.focusOn.tr,
           count: "${logic.attentionAlarmData?.totalCnt ?? 0}",
+          totalCount: (logic.attentionAlarmData?.totalCnt ?? 0),
           list: logic.list3,
         ),
         VerticalDivider(color: Colors.transparent, width: 20.w),

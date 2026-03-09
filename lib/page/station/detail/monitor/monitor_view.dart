@@ -1,5 +1,6 @@
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/enum/app_enum.dart';
+import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/page/station/detail/monitor/monitor_logic.dart';
@@ -15,7 +16,18 @@ class MonitorView extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Scaffold(
-        appBar: baseAppBar(title: TKey.monitor.tr),
+        appBar: baseAppBar(
+          title: TKey.monitor.tr,
+          onBack: () {
+            Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
+            bool? toMain = map['toMain'] as bool?;
+            if (toMain == true) {
+              PageTools.offAndToNamedMain();
+            } else {
+              Get.back();
+            }
+          },
+        ),
         backgroundColor: Color(0xFF23282E),
         body: GetBuilder<MonitorLogic>(
           init: MonitorLogic(),

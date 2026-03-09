@@ -54,7 +54,6 @@ class LoginLogic extends GetxController {
       AppLoading.toast(TKey.passwordRequired.tr);
       return;
     }
-
     AppLoading.show();
     TokenEntity? value =
         await AdminAPI.login(
@@ -68,8 +67,13 @@ class LoginLogic extends GetxController {
       User.setTokenHead(tokenHead: value.tokenHeadValue);
       User.setToken(token: value.tokenValue);
       await loadCurrencyList();
-      //PageTools.toMain();
-      PageTools.offAllNamedMain();
+      final (bool isSuccessful, List<SiteEntity> list) =
+          await SiteAPI.postSiteList(pageNum: 1, name: null, status: null);
+      if (list.length == 1) {
+        PageTools.offAllNamedStation(siteId: list.first.id, site: list.first);
+      } else {
+        PageTools.offAllNamedMain();
+      }
     }
   }
 

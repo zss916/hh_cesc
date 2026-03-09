@@ -11,9 +11,9 @@ class AppSetting {
   static const bool isOverseas = Environment.isOverseas;
 
   ///用户协议
-  static String policy = Environment.isPro
-      ? (Get.isZh ? Assets.htmlUserPolicyZh2 : Assets.htmlUserPolicyEn2)
-      : (Get.isZh ? Assets.htmlUserPolicyZh : Assets.htmlUserPolicyEn);
+  static String get policy => Environment.isPro
+      ? (Get.isZH ? Assets.htmlUserPolicyZh2 : Assets.htmlUserPolicyEn2)
+      : (Get.isZH ? Assets.htmlUserPolicyZh : Assets.htmlUserPolicyEn);
 }
 
 extension NumExtension on int {

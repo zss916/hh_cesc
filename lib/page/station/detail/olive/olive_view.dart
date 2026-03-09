@@ -1,5 +1,6 @@
 import 'package:cescpro/components/tab/kugou_tabbar.dart';
 import 'package:cescpro/components/tab/rrect_indicator.dart';
+import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/olive_item_view.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_view.dart';
@@ -35,7 +36,15 @@ class _OliveViewState extends State<OliveView>
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-          onPressed: () => Get.back(),
+          onPressed: () {
+            Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
+            bool? toMain = map['toMain'] as bool?;
+            if (toMain == true) {
+              PageTools.offAndToNamedMain();
+            } else {
+              Get.back();
+            }
+          },
         ),
         centerTitle: true,
         title: KuGouTabBar(

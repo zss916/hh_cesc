@@ -13,6 +13,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   int select = 0;
 
   late StreamSubscription<OpenDrawerEvent> event;
+  late StreamSubscription<MainPageEvent> mainEvent;
   int drawerIndex = DrawerTypeEnum.site.index;
   int? siteStatus;
 
@@ -25,6 +26,11 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       safeSetState(() {
         drawerIndex = event.index;
         siteStatus = event.siteStatus;
+      });
+    });
+    mainEvent = AppEventBus.eventBus.on<MainPageEvent>().listen((event) {
+      safeSetState(() {
+        select = event.select;
       });
     });
   }
@@ -56,6 +62,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
     super.dispose();
     WidgetsBinding.instance.removeObserver(this);
     event.cancel();
+    mainEvent.cancel();
   }
 
   @override

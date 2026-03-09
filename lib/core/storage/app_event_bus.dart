@@ -19,3 +19,8 @@ class CheckPolicy {
   final bool isCheck;
   CheckPolicy(this.isCheck);
 }
+
+class MainPageEvent {
+  final int select;
+  MainPageEvent({required this.select});
+}
