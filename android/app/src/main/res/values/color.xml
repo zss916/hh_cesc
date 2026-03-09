@@ -2,5 +2,6 @@
 <resources>
     <color name="transparent">#00000000</color> <!-- 完全透明 -->
 
+    <color name="ic_launcher_background">#FF23282E</color>
 
 </resources>
