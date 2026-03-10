@@ -36,7 +36,7 @@ class OverviewItemWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.r),
       ),
       padding: EdgeInsetsDirectional.all(12.r),
-      width: 167.w,
+      width: 170.w,
       height: 120.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
