@@ -1,9 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
-import 'package:cescpro/page/station/index/widget/text_rich_widget.dart';
+import 'package:cescpro/page/home/widget/overview_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -40,25 +39,45 @@ class BuildStationOverview2 extends StatelessWidget {
         ),
         Container(
           width: double.maxFinite,
-          height: 126.h,
-          margin: EdgeInsetsDirectional.only(top: 10.h, bottom: 10.h),
+          height: 120.h,
+          margin: EdgeInsetsDirectional.only(top: 5.h, bottom: 10.h),
           child: ListView(
             padding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
             scrollDirection: Axis.horizontal,
             children: [
-              buildItem(capacity: capacity),
+              OverviewItemWidget(
+                icon: Assets.imgEnergyStorage2,
+                value: '$capacity ',
+                unit: "kWh",
+                title: TKey.energyStorageInstalledCapacity.tr,
+              ),
 
               VerticalDivider(width: 8.w, color: Colors.transparent),
 
-              buildItem2(totalPos: totalPos),
+              OverviewItemWidget(
+                icon: Assets.imgCumulativeCharging2,
+                value: '$showTotalPos ',
+                unit: showTotalPosUnit,
+                title: TKey.cumulativeChargingCapacity.tr,
+              ),
 
               VerticalDivider(width: 8.w, color: Colors.transparent),
 
-              buildItem3(totalNeg: totalNeg),
+              OverviewItemWidget(
+                icon: Assets.imgCumulativeDischarge2,
+                value: '$showTotalNeg ',
+                unit: showTotalNegUnit,
+                title: TKey.cumulativeDischargeCapacity.tr,
+              ),
 
               VerticalDivider(width: 8.w, color: Colors.transparent),
 
-              buildItem4(totalPvNeg: totalPvNeg),
+              OverviewItemWidget(
+                icon: Assets.imgAccumulatedPhotovoltaic2,
+                value: '$showTotalPvNeg ',
+                unit: showTotalPvNegUnit,
+                title: TKey.accumulatedPhotovoltaicPowerGeneration.tr,
+              ),
             ],
           ),
         ),
@@ -66,371 +85,21 @@ class BuildStationOverview2 extends StatelessWidget {
     );
   }
 
-  Widget buildItem({required num capacity}) {
-    return Container(
-      margin: EdgeInsetsDirectional.only(top: 6.h, bottom: 6.h),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: AlignmentDirectional.topStart,
-          end: AlignmentDirectional.bottomEnd,
-          colors: [Color(0xFFE35B02), Color(0xFFD77401)],
-        ),
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFFFD7821),
-            offset: Offset(0.1, 0.1),
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      width: 163,
-      height: 120.h,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          PositionedDirectional(
-            bottom: -8,
-            end: -5,
-            child: Image.asset(
-              Assets.imgEnergyStorage,
-              width: 78,
-              height: 79,
-              matchTextDirection: true,
-            ),
-          ),
-
-          Container(
-            padding: EdgeInsetsDirectional.all(12),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 0.h),
-                  width: double.maxFinite,
-                  child: TextRichWidget(
-                    title: "$capacity ",
-                    titleStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 24.sp,
-                    ),
-                    value: "kWh",
-                    valueStyle: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12.sp,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 0),
-                  width: double.maxFinite,
-                  child: Text(
-                    //TKey.energyStorageInstalledCapacity.tr,
-                    "ES Installed Capacity",
-                    // "Energiespeicherkapazität",
-                    // "Cap. Almac. Energía",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Color(0xD9FFFFFF), fontSize: 12.sp),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildItem2({required num totalPos}) {
-    return Container(
-      margin: EdgeInsetsDirectional.only(top: 6.h, bottom: 6.h),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: AlignmentDirectional.topStart,
-          end: AlignmentDirectional.bottomEnd,
-          colors: [Color(0xFF1788FA), Color(0xFF33BDFD)],
-        ),
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFF1788FA),
-            offset: Offset(0.1, 0.1),
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      width: 163,
-      height: 120.h,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          PositionedDirectional(
-            bottom: -8,
-            end: -5,
-            child: Image.asset(
-              Assets.imgCumulativeCharging,
-              width: 78,
-              height: 79,
-              matchTextDirection: true,
-            ),
-          ),
-
-          Container(
-            padding: EdgeInsetsDirectional.all(12),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                /*Container(
-                  margin: EdgeInsetsDirectional.only(top: 2),
-                  width: double.maxFinite,
-                  child: AutoSizeText(
-                    TKey.cumulativeChargingCapacity.tr,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    minFontSize: 10,
-                    style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
-                  ),
-                ),
-                SizedBox(
-                  width: double.maxFinite,
-                  child: Text(
-                    showTotalPosUnit,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 0),
-                  width: double.maxFinite,
-                  child: AutoSizeText(
-                    showTotalPos,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 25.sp,
-                    ),
-                  ),
-                ),*/
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 0.h),
-                  width: double.maxFinite,
-                  child: TextRichWidget(
-                    title: "$showTotalPos ",
-                    titleStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 24.sp,
-                    ),
-                    value: showTotalPosUnit,
-                    valueStyle: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontWeight: FontWeight.normal,
-                      fontSize: 12.sp,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 0),
-                  width: double.maxFinite,
-                  child: Text(
-                    //TKey.cumulativeChargingCapacity.tr,
-                    "Carga acumulada",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Color(0xD9FFFFFF), fontSize: 12.sp),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   String get showTotalPos =>
       AppSetting.isOverseas ? totalPos.formatPowerValue() : "$totalPos";
 
   String get showTotalPosUnit =>
-      AppSetting.isOverseas ? "(${totalPos.formatPowerValueUnit()})" : "MWh";
-
-  Widget buildItem3({required num totalNeg}) {
-    return Container(
-      margin: EdgeInsetsDirectional.only(top: 6.h, bottom: 6.h),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: AlignmentDirectional.topStart,
-          end: AlignmentDirectional.bottomEnd,
-          colors: [Color(0xFF2FC4AF), Color(0xFF1EFBC2)],
-        ),
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFF2FC4AF),
-            offset: Offset(0.1, 0.1),
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      width: 148.w,
-      height: 126.h,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          PositionedDirectional(
-            bottom: -8,
-            end: -5,
-            child: Image.asset(
-              Assets.imgCumulativeDischarge,
-              width: 78,
-              height: 79,
-              matchTextDirection: true,
-            ),
-          ),
-
-          Container(
-            padding: EdgeInsetsDirectional.all(14),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 2),
-                  width: double.maxFinite,
-                  child: AutoSizeText(
-                    TKey.cumulativeDischargeCapacity.tr,
-                    maxLines: 1,
-                    minFontSize: 10,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
-                  ),
-                ),
-                SizedBox(
-                  width: double.maxFinite,
-                  child: Text(
-                    showTotalNegUnit,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
-                  ),
-                ),
-                Spacer(),
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 0),
-                  width: double.maxFinite,
-                  child: AutoSizeText(
-                    showTotalNeg,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 25.sp,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+      AppSetting.isOverseas ? totalPos.formatPowerValueUnit() : "MWh";
 
   String get showTotalNeg =>
       AppSetting.isOverseas ? totalNeg.formatPowerValue() : "$totalNeg";
 
   String get showTotalNegUnit =>
-      AppSetting.isOverseas ? "(${totalNeg.formatPowerValueUnit()})" : "MWh";
-
-  Widget buildItem4({required num totalPvNeg}) {
-    return Container(
-      margin: EdgeInsetsDirectional.only(top: 6.h, bottom: 6.h),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: AlignmentDirectional.topStart,
-          end: AlignmentDirectional.bottomEnd,
-          colors: [Color(0xFFFFB22A), Color(0xFFF6D961)],
-        ),
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFFFFB22A),
-            offset: Offset(0.1, 0.1),
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      width: 148.w,
-      height: 126.h,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          PositionedDirectional(
-            bottom: -8,
-            end: -5,
-            child: Image.asset(
-              Assets.imgAccumulatedPhotovoltaic,
-              width: 78,
-              height: 79,
-              matchTextDirection: true,
-            ),
-          ),
-
-          Container(
-            padding: EdgeInsetsDirectional.all(14),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 2),
-                  width: double.maxFinite,
-                  child: AutoSizeText(
-                    TKey.accumulatedPhotovoltaicPowerGeneration.tr,
-                    maxLines: 1,
-                    minFontSize: 10,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
-                  ),
-                ),
-                SizedBox(
-                  width: double.maxFinite,
-                  child: Text(
-                    showTotalPvNegUnit,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
-                  ),
-                ),
-                Spacer(),
-                Container(
-                  margin: EdgeInsetsDirectional.only(top: 0),
-                  width: double.maxFinite,
-                  child: AutoSizeText(
-                    showTotalPvNeg,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 25.sp,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+      AppSetting.isOverseas ? totalNeg.formatPowerValueUnit() : "MWh";
 
   String get showTotalPvNeg =>
       AppSetting.isOverseas ? totalPvNeg.formatPowerValue() : "$totalPvNeg";
 
   String get showTotalPvNegUnit =>
-      AppSetting.isOverseas ? "(${totalPvNeg.formatPowerValueUnit()})" : "MWh";
+      AppSetting.isOverseas ? totalPvNeg.formatPowerValueUnit() : "MWh";
 }

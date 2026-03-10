@@ -15,6 +15,8 @@ class Assets {
   static const String htmlUserPolicyZh2 = 'assets/html/user-policy-zh2.html';
   static const String imgAccumulatedPhotovoltaic =
       'assets/img/accumulated_photovoltaic.png';
+  static const String imgAccumulatedPhotovoltaic2 =
+      'assets/img/accumulated_photovoltaic2.png';
   static const String imgAlarm = 'assets/img/alarm.png';
   static const String imgAlarm1 = 'assets/img/alarm1.png';
   static const String imgAlarm2 = 'assets/img/alarm2.png';
@@ -25,10 +27,15 @@ class Assets {
   static const String imgControlS = 'assets/img/control_s.png';
   static const String imgCumulativeCharging =
       'assets/img/cumulative_charging.png';
+  static const String imgCumulativeCharging2 =
+      'assets/img/cumulative_charging2.png';
   static const String imgCumulativeDischarge =
       'assets/img/cumulative_discharge.png';
+  static const String imgCumulativeDischarge2 =
+      'assets/img/cumulative_discharge2.png';
   static const String imgEmpty = 'assets/img/empty.png';
   static const String imgEnergyStorage = 'assets/img/energy_storage.png';
+  static const String imgEnergyStorage2 = 'assets/img/energy_storage2.png';
   static const String imgFilter = 'assets/img/filter.png';
   static const String imgHome = 'assets/img/home.png';
   static const String imgHomeS = 'assets/img/home_s.png';
