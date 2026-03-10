@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
 
+  static const String imgOverviewBg1 = 'assets/img/overview_bg1.png';
+  static const String imgOverviewBg2 = 'assets/img/overview_bg2.png';
+  static const String imgOverviewBg3 = 'assets/img/overview_bg3.png';
+  static const String imgOverviewBg4 = 'assets/img/overview_bg4.png';
   static const String imgFilterIcon = 'assets/img/filter_icon.png';
   static const String imgSearchIcon = 'assets/img/search_icon.png';
   static const String gplotBattery = 'assets/gplot/battery.png';

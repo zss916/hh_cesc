@@ -1,25 +1,28 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/page/station/index/widget/text_rich_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:get/get.dart';
 
 class OverviewItemWidget extends StatelessWidget {
   final String icon;
   final String value;
   final String unit;
   final String title;
+  final String image;
   const OverviewItemWidget({
     super.key,
     required this.icon,
     required this.value,
     required this.unit,
     required this.title,
+    required this.image,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      /* decoration: BoxDecoration(
         border: const GradientBoxBorder(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -34,6 +37,9 @@ class OverviewItemWidget extends StatelessWidget {
           colors: [Color(0xFF282C31), Color(0xFF4F5C6C)],
         ),
         borderRadius: BorderRadius.circular(8.r),
+      ),*/
+      decoration: BoxDecoration(
+        image: DecorationImage(image: ExactAssetImage(image)),
       ),
       padding: EdgeInsetsDirectional.all(12.r),
       width: 170.w,
@@ -77,7 +83,10 @@ class OverviewItemWidget extends StatelessWidget {
               title,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Color(0xD9FFFFFF), fontSize: 12.sp),
+              style: TextStyle(
+                color: Color(0xD9FFFFFF),
+                fontSize: Get.isDe ? 11.sp : 12.sp,
+              ),
             ),
           ),
         ],

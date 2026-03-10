@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class BuildStationOverview2 extends StatelessWidget {
+class BuildStationOverview3 extends StatelessWidget {
   final num capacity; //站点容量
   final num totalPos; //累计充电
   final num totalNeg; //累计放电
   final num totalPvNeg; //累计光伏发电
 
-  const BuildStationOverview2({
+  const BuildStationOverview3({
     super.key,
     required this.capacity,
     required this.totalPos,
@@ -37,7 +37,74 @@ class BuildStationOverview2 extends StatelessWidget {
             ),
           ),
         ),
-        Container(
+
+        Divider(height: 5.w, color: Colors.transparent),
+
+        Row(
+          children: [
+            VerticalDivider(width: 16.w, color: Colors.transparent),
+
+            Expanded(
+              child: OverviewItemWidget(
+                icon: Assets.imgEnergyStorage2,
+                value: '$capacity ',
+                unit: "kWh",
+                title: TKey.energyStorageInstalledCapacity.tr,
+                image: Assets.imgOverviewBg1,
+              ),
+            ),
+
+            VerticalDivider(width: 8.w, color: Colors.transparent),
+
+            Expanded(
+              child: OverviewItemWidget(
+                icon: Assets.imgCumulativeCharging2,
+                value: '$showTotalPos ',
+                unit: showTotalPosUnit,
+                title: TKey.cumulativeChargingCapacity.tr,
+                image: Assets.imgOverviewBg2,
+              ),
+            ),
+
+            VerticalDivider(width: 16.w, color: Colors.transparent),
+          ],
+        ),
+
+        Divider(height: 8.w, color: Colors.transparent),
+
+        Row(
+          children: [
+            VerticalDivider(width: 16.w, color: Colors.transparent),
+
+            Expanded(
+              child: OverviewItemWidget(
+                icon: Assets.imgCumulativeDischarge2,
+                value: '$showTotalNeg ',
+                unit: showTotalNegUnit,
+                title: TKey.cumulativeDischargeCapacity.tr,
+                image: Assets.imgOverviewBg3,
+              ),
+            ),
+
+            VerticalDivider(width: 8.w, color: Colors.transparent),
+
+            Expanded(
+              child: OverviewItemWidget(
+                icon: Assets.imgAccumulatedPhotovoltaic2,
+                value: '$showTotalPvNeg ',
+                unit: showTotalPvNegUnit,
+                title: TKey.accumulatedPhotovoltaicPowerGeneration.tr,
+                image: Assets.imgOverviewBg4,
+              ),
+            ),
+
+            VerticalDivider(width: 16.w, color: Colors.transparent),
+          ],
+        ),
+
+        Divider(height: 10.h, color: Colors.transparent),
+
+        /* Container(
           width: double.maxFinite,
           height: 120.h,
           margin: EdgeInsetsDirectional.only(top: 5.h, bottom: 10.h),
@@ -50,7 +117,6 @@ class BuildStationOverview2 extends StatelessWidget {
                 value: '$capacity ',
                 unit: "kWh",
                 title: TKey.energyStorageInstalledCapacity.tr,
-                image: Assets.imgOverviewBg1,
               ),
 
               VerticalDivider(width: 8.w, color: Colors.transparent),
@@ -60,7 +126,6 @@ class BuildStationOverview2 extends StatelessWidget {
                 value: '$showTotalPos ',
                 unit: showTotalPosUnit,
                 title: TKey.cumulativeChargingCapacity.tr,
-                image: Assets.imgOverviewBg2,
               ),
 
               VerticalDivider(width: 8.w, color: Colors.transparent),
@@ -70,7 +135,6 @@ class BuildStationOverview2 extends StatelessWidget {
                 value: '$showTotalNeg ',
                 unit: showTotalNegUnit,
                 title: TKey.cumulativeDischargeCapacity.tr,
-                image: Assets.imgOverviewBg3,
               ),
 
               VerticalDivider(width: 8.w, color: Colors.transparent),
@@ -80,11 +144,10 @@ class BuildStationOverview2 extends StatelessWidget {
                 value: '$showTotalPvNeg ',
                 unit: showTotalPvNegUnit,
                 title: TKey.accumulatedPhotovoltaicPowerGeneration.tr,
-                image: Assets.imgOverviewBg4,
               ),
             ],
           ),
-        ),
+        ),*/
       ],
     );
   }
