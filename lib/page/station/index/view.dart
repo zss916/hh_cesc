@@ -78,14 +78,7 @@ class StationPage extends StatelessWidget {
                 margin: EdgeInsetsDirectional.only(bottom: 6, start: 8),
                 child: Row(
                   children: [
-                    Expanded(
-                      child: SelectStatusWidget(
-                        onSelectItem: (int? value) {
-                          logic.statusParam = value;
-                          logic.toSearch();
-                        },
-                      ),
-                    ),
+                    Expanded(child: SelectStatusWidget(logic: logic)),
                     FilterWidget(siteStatus: logic.statusParam),
                   ],
                 ),

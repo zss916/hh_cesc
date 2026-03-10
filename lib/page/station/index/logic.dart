@@ -14,6 +14,17 @@ class StationLogic extends GetxController {
     initialLoadStatus: LoadStatus.canLoading,
   );
 
+  ///站点状态数据
+  List<Map<String, dynamic>> get stationStatus => [
+    {"title": TKey.common.tr, "value": 99},
+    {"title": TKey.alarm.tr, "value": -2},
+    {"title": TKey.fault.tr, "value": 4},
+    {"title": TKey.interrupt.tr, "value": -3},
+    {"title": TKey.charge.tr, "value": 1},
+    {"title": TKey.discharge.tr, "value": 2},
+    {"title": TKey.standby.tr, "value": 3},
+  ];
+
   @override
   void onInit() {
     super.onInit();

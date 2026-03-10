@@ -260,14 +260,3 @@ class LocaleUtils {
     }
   }
 }
-
-///站点状态数据
-List<Map<String, dynamic>> stationStatus = [
-  {"title": TKey.common.tr, "value": 99, "selected": false},
-  {"title": TKey.alarm.tr, "value": -2, "selected": false},
-  {"title": TKey.fault.tr, "value": 4, "selected": false},
-  {"title": TKey.interrupt.tr, "value": -3, "selected": false},
-  {"title": TKey.charge.tr, "value": 1, "selected": false},
-  {"title": TKey.discharge.tr, "value": 2, "selected": false},
-  {"title": TKey.standby.tr, "value": 3, "selected": false},
-];
