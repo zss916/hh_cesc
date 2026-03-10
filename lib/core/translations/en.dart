@@ -729,6 +729,6 @@ const en = {
   "localEMS": "Local EMS",
   "monomer": "monomer",
   "temperature": "temperature",
-  "searchHint": "Search for power station name",
+  "searchHint": "Search for station name",
   "filter": "Filter",
 };

@@ -251,6 +251,6 @@ const es = {
   "localEMS": "EMS",
   "monomer": "monómero",
   "temperature": "temperatura",
-  "searchHint": "Buscar el nombre de la central eléctrica",
+  "searchHint": "Nombre de la central eléctrica",
   "filter": "filtro",
 };

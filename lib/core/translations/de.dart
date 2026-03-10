@@ -230,6 +230,6 @@ const de = {
   "localEMS": "EMS",
   "monomer": "monomer",
   "temperature": "temperatur",
-  "searchHint": "Suche nach Kraftwerksnamen",
+  "searchHint": "Kraftwerksnamen",
   "filter": "Filter",
 };
