@@ -877,10 +877,15 @@ class OliveItemView extends StatelessWidget {
           color: Color(0xFF313540),
           borderRadius: BorderRadius.circular(8),
         ),
-        padding: EdgeInsetsDirectional.all(5.r),
+        padding: EdgeInsetsDirectional.only(
+          start: 5.r,
+          end: 5.r,
+          top: 0,
+          bottom: 8.r,
+        ),
         margin: EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
         width: double.maxFinite,
-        height: Get.width,
+        height: (Get.width - 110.w),
         child: Stack(
           alignment: Alignment.center,
           children: [
