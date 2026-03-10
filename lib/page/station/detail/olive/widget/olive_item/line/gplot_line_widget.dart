@@ -19,7 +19,7 @@ class GplotLineWidget extends StatelessWidget {
   }
 
   Widget _buildGplotWidget() {
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: Stack(
