@@ -125,6 +125,9 @@ class _StationDetailState extends State<StationDetailPage> {
                   select = i;
                   // pageCtrl.jumpToPage(i);
                 });
+                if (select == 0) {
+                  safeFind<OliveItemLogic>()?.loadSiteTopologyDelayed();
+                }
               }
             },
           ),

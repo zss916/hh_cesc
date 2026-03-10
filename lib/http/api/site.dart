@@ -14,6 +14,7 @@ import 'package:cescpro/http/bean/site_topology_entity.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class SiteAPI {
@@ -152,11 +153,13 @@ class SiteAPI {
   ///站点拓扑图
   static Future<SiteTopologyEntity?> getSiteTopology({
     required int siteId,
+    CancelToken? cancelToken,
   }) async {
     try {
       var result = await Http.instance.get(
         ApiPath.getSiteTopology,
         query: {"siteId": siteId},
+        cancelToken: cancelToken,
       );
       if (result["code"] == HttpStatus.ok) {
         return SiteTopologyEntity.fromJson(result["data"]);

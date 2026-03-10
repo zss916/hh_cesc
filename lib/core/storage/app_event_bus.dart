@@ -24,3 +24,7 @@ class MainPageEvent {
   final int select;
   MainPageEvent({required this.select});
 }
+
+class TopologyEvent {
+  TopologyEvent();
+}
