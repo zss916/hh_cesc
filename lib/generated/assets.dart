@@ -2,6 +2,8 @@
 class Assets {
   Assets._();
 
+  static const String imgFilterIcon = 'assets/img/filter_icon.png';
+  static const String imgSearchIcon = 'assets/img/search_icon.png';
   static const String gplotBattery = 'assets/gplot/battery.png';
   static const String gplotInverter = 'assets/gplot/inverter.png';
   static const String gplotLoad = 'assets/gplot/load.png';

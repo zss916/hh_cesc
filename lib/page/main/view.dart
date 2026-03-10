@@ -74,7 +74,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
           top: false,
           bottom: DeviceService.to.isBottomPadding,
           child: Scaffold(
-            ///todo 解决ios侧滑冲突
+            ///解决ios侧滑冲突
             drawerEnableOpenDragGesture: false,
             endDrawerEnableOpenDragGesture: false,
             key: widget.scaffoldKey,

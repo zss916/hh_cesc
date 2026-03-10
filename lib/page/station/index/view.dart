@@ -28,7 +28,7 @@ class StationPage extends StatelessWidget {
                 margin: EdgeInsetsDirectional.only(
                   start: 16,
                   end: 11,
-                  bottom: 12,
+                  bottom: 6,
                 ),
                 child: Row(
                   children: [
@@ -40,8 +40,9 @@ class StationPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    VerticalDivider(width: 9, color: Colors.transparent),
-                    InkWell(
+                    SizedBox.shrink(),
+                    // VerticalDivider(width: 9, color: Colors.transparent),
+                    /* InkWell(
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
                         AppEventBus.eventBus.fire(
@@ -67,10 +68,29 @@ class StationPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
+
+              Container(
+                height: 42,
+                margin: EdgeInsetsDirectional.only(bottom: 6, start: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SelectStatusWidget(
+                        onSelectItem: (int? value) {
+                          logic.statusParam = value;
+                          logic.toSearch();
+                        },
+                      ),
+                    ),
+                    FilterWidget(siteStatus: logic.statusParam),
+                  ],
+                ),
+              ),
+
               Expanded(
                 child: buildBody(viewState: logic.viewState, logic: logic),
               ),

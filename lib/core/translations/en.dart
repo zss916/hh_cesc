@@ -478,6 +478,8 @@ class TKey {
   static const String monomer = "monomer";
   static const String temperature = "temperature";
   static const String localEMS = "localEMS";
+  static const String searchHint = "searchHint";
+  static const String filter = "filter";
 }
 
 const en = {
@@ -727,4 +729,6 @@ const en = {
   "localEMS": "Local EMS",
   "monomer": "monomer",
   "temperature": "temperature",
+  "searchHint": "Search for power station name",
+  "filter": "Filter",
 };

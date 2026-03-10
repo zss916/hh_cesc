@@ -1,4 +1,5 @@
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/page/station/index/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +43,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 37,
+      height: 40,
       color: Colors.transparent,
       width: double.maxFinite,
       child: Row(
@@ -58,18 +59,55 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               style: TextStyle(color: Colors.white, fontSize: 12.sp),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(top: 0.5, left: 0, right: 10),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Color(0xFFC8C9CC),
-                  size: 20,
+                prefixIcon: Container(
+                  margin: EdgeInsetsDirectional.only(start: 16),
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Image.asset(Assets.imgSearchIcon, width: 26, height: 26),
+                    ],
+                  ),
                 ),
-                fillColor: Color(0x99484D55),
+                prefixIconConstraints: BoxConstraints(
+                  maxWidth: 24 + 16,
+                  maxHeight: 24,
+                ),
+                fillColor: Color(0xFF2B3139),
                 filled: true,
-                hintText: "",
+                hintText: TKey.searchHint.tr,
+                hintMaxLines: 1,
+                alignLabelWithHint: true,
                 hintStyle: TextStyle(
                   color: const Color(0xFFA4A4A4),
-                  fontSize: 12.sp,
+                  fontSize: 12,
                 ),
+                suffixIcon: Stack(
+                  alignment: AlignmentDirectional.centerEnd,
+                  children: [
+                    InkWell(
+                      child: Container(
+                        margin: EdgeInsetsDirectional.only(end: 16),
+                        padding: EdgeInsetsDirectional.symmetric(
+                          horizontal: 10.w,
+                          vertical: 5.h,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.r),
+                          color: Colors.blue,
+                        ),
+                        child: Text(
+                          TKey.search.tr,
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      ),
+                      onTap: () {
+                        _hideKeyboard();
+                        widget.onInput.call();
+                      },
+                    ),
+                  ],
+                ),
+
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50.r),
                   borderSide: BorderSide(color: Colors.transparent),
@@ -99,27 +137,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               },
             ),
           ),
-          SizedBox(width: 5.w),
-          InkWell(
-            child: Container(
-              padding: EdgeInsetsDirectional.symmetric(
-                horizontal: 10.w,
-                vertical: 5.h,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.r),
-                color: Colors.blue,
-              ),
-              child: Text(
-                TKey.search.tr,
-                style: TextStyle(color: Colors.white, fontSize: 12),
-              ),
-            ),
-            onTap: () {
-              _hideKeyboard();
-              widget.onInput.call();
-            },
-          ),
+          SizedBox.shrink(),
         ],
       ),
     );

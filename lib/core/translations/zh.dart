@@ -239,4 +239,6 @@ const zh = {
   "localEMS": "本地EMS",
   "monomer": "单体",
   "temperature": "温度",
+  "searchHint": "搜索电站名称",
+  "filter": "筛选",
 };

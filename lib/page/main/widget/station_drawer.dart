@@ -141,6 +141,10 @@ class _StationDrawerState extends State<StationDrawer> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
+                  for (int i = 0; i < (stationStatus.length); i++) {
+                    stationStatus[i]["selected"] = false;
+                  }
+
                   if (safeFind<StationLogic>()?.statusParam == null) {
                     select = null;
                   } else {
@@ -174,6 +178,10 @@ class _StationDrawerState extends State<StationDrawer> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
+                  for (int i = 0; i < (stationStatus.length); i++) {
+                    stationStatus[i]["selected"] =
+                        stationStatus[i]["value"] == select;
+                  }
                   safeFind<StationLogic>()?.statusParam = select;
                   safeFind<StationLogic>()?.toSearch();
                   widget.onConfirm.call();
