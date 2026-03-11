@@ -2,16 +2,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Theme applied to the Android Window while the process is starting when the OS's Dark Mode setting is off -->
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
-        <!--启动页隐藏logo-->
-        <!--      <item name="android:windowSplashScreenBackground">#23282E</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/android12splash</item>
-        <item name="android:windowSplashScreenIconBackgroundColor">#23282E</item>-->
         <item name="android:forceDarkAllowed">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:windowSplashScreenBackground">#23282E</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <!--logo隐藏掉-->
+        <!--<item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>-->
+        <item name="android:windowSplashScreenAnimatedIcon">@color/ic_launcher_background</item>
         <item name="android:windowSplashScreenIconBackgroundColor">#23282E</item>
     </style>
     <!-- Theme applied to the Android Window as soon as the process has started.
