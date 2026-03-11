@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
         init: HomeLogic(),
         builder: (logic) {
           return RefreshIndicator(
+            backgroundColor: Colors.white,
             onRefresh: () => refresh(logic),
             child: SingleChildScrollView(
               child: Column(
