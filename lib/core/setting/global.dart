@@ -17,9 +17,8 @@ class Global {
     ]).whenComplete(() async {
       AppLoading();
       Get.putAsync<AppInfoService>(() => AppInfoService().init());
+      await Get.putAsync<User>(() => User().init());
     });
-
-    await Get.putAsync<User>(() => User().init());
   }
 
   static void setSystemUi() {

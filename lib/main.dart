@@ -43,7 +43,6 @@ class MyApp extends StatelessWidget {
         builder: (context, child) => GetMaterialApp(
           title: AppSetting.appName,
           debugShowCheckedModeBanner: false,
-          //locale: Get.deviceLocale,
           locale: LanTools.getLocale() ?? Get.deviceLocale,
           translations: AppTranslations(),
           fallbackLocale: const Locale("en"),
