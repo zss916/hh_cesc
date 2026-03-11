@@ -13,13 +13,19 @@ class FilterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(5),
       onTap: () {
         AppEventBus.eventBus.fire(
           OpenDrawerEvent(DrawerTypeEnum.site.index, siteStatus: siteStatus),
         );
       },
       child: Container(
-        padding: EdgeInsetsDirectional.only(start: 8, end: 8),
+        padding: EdgeInsetsDirectional.only(
+          start: 8,
+          end: 8,
+          top: 3,
+          bottom: 3,
+        ),
         child: Row(
           spacing: 8.w,
           children: [

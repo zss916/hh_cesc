@@ -75,7 +75,7 @@ class StationPage extends StatelessWidget {
 
               Container(
                 height: 42,
-                margin: EdgeInsetsDirectional.only(bottom: 6, start: 8),
+                margin: EdgeInsetsDirectional.only(bottom: 3, start: 5),
                 child: Row(
                   children: [
                     Expanded(child: SelectStatusWidget(logic: logic)),

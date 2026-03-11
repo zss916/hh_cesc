@@ -9,7 +9,7 @@ class SelectStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       scrollDirection: Axis.horizontal,
-      padding: EdgeInsetsDirectional.only(start: 8),
+      padding: EdgeInsetsDirectional.only(start: 8, top: 3, bottom: 3),
       itemCount: logic.stationStatus.length,
       itemBuilder: (BuildContext context, int index) {
         Map<String, dynamic> item = logic.stationStatus[index];
