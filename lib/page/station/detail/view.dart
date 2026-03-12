@@ -126,7 +126,15 @@ class _StationDetailState extends State<StationDetailPage> {
                   // pageCtrl.jumpToPage(i);
                 });
                 if (select == 0) {
-                  safeFind<OliveItemLogic>()?.loadSiteTopologyDelayed();
+                  Throttle.run1(
+                    () {
+                      safeFind<OliveItemLogic>()?.loadSiteTopologyDelayed();
+                      debugPrint('${DateTime.now()} ---  操作被执行');
+                    },
+                    repeatCallback: () {
+                      debugPrint('${DateTime.now()} ---  重复点击');
+                    },
+                  );
                 }
               }
             },

@@ -66,7 +66,8 @@ dependencies:
   #custom_pie_chart_label: ^1.0.0
   #液态玻璃效果
   #liquid_glass: ^0.0.2
-  gradient_borders: 1.0.2
+  #gradient_borders: 1.0.2
+  #flutter_debounce: 2.0.0
 
 
 
