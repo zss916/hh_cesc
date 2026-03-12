@@ -54,7 +54,7 @@ class IncomeWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      User.to.getCurrencyUnit().isNotEmpty
+                      User.to.getCurrencyUnit().isEmpty
                           ? TKey.totalRevenue2.tr
                           : TKey.totalRevenue.trArgs([
                               User.to.getCurrencyUnit(),
@@ -88,7 +88,7 @@ class IncomeWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      User.to.getCurrencyUnit().isNotEmpty
+                      User.to.getCurrencyUnit().isEmpty
                           ? TKey.currentRevenue2.tr
                           : TKey.currentRevenue.trArgs([
                               User.to.getCurrencyUnit(),

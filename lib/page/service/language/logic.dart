@@ -17,13 +17,14 @@ class ChangeLanguageLogic extends GetxController {
       "locale": Locale('de', 'DE'),
       "isCheck": false,
     },
-    {
+    /*{
       "title": TKey.languageEs.tr,
       "locale": Locale('es', 'DE'),
       "isCheck": false,
-    },
+    },*/
   ];
 
+  List<Map<String, dynamic>> _sortList = [];
   List<Map<String, dynamic>> list = [];
 
   //Locale? selectLocale;
@@ -32,7 +33,7 @@ class ChangeLanguageLogic extends GetxController {
   void onInit() {
     super.onInit();
     Locale? locale = LanTools.getLocale() ?? Get.deviceLocale;
-    setData(locale);
+    initData(locale);
   }
 
   @override
@@ -40,11 +41,28 @@ class ChangeLanguageLogic extends GetxController {
     super.onClose();
   }
 
-  void setData(Locale? locale) {
-    list.assignAll(
-      _data.map((e) => e..['isCheck'] = (e['locale'] == locale)).toList(),
+  void initData(Locale? locale) {
+    List<Map<String, dynamic>> mapList = _data
+        .map((e) => e..['isCheck'] = (e['locale'] == locale))
+        .toList();
+
+    mapList.sort(
+      (a, b) => (b['isCheck'] == true ? 1 : 0).compareTo(
+        (a['isCheck'] == true ? 1 : 0),
+      ),
     );
+    _sortList.assignAll(mapList);
+    list.assignAll(mapList);
     update();
+  }
+
+  void setData(Locale? locale) {
+    if (_sortList.isNotEmpty) {
+      list.assignAll(
+        _sortList.map((e) => e..['isCheck'] = (e['locale'] == locale)).toList(),
+      );
+      update();
+    }
   }
 
   Future<void> switchLocale(Locale? locale) async {
