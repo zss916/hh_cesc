@@ -16,6 +16,8 @@ const de = {
   "service": "Dienst",
   "currentRevenue": "Heutige Einnahmen(%s)",
   "totalRevenue": "Gesamteinnahmen(%s)",
+  "totalRevenue2": "Gesamteinnahmen",
+  "currentRevenue2": "Heutige Einnahmen",
   "moneyUnit": "€",
   "moneyKUnit": "Tausend (€)",
   "moneyWUnit": "Zehn Tausend (€)",

@@ -39,6 +39,10 @@ class TKey {
 
   static const String totalRevenue = "totalRevenue";
 
+  static const String currentRevenue2 = "currentRevenue2";
+
+  static const String totalRevenue2 = "totalRevenue2";
+
   static const String moneyUnit = "moneyUnit";
 
   static const String moneyKUnit = "moneyKUnit";
@@ -506,6 +510,8 @@ const en = {
   "service": "Service",
   "currentRevenue": "Today's Revenue(%s)",
   "totalRevenue": "Total Revenue(%s)",
+  "totalRevenue2": "Total Revenue",
+  "currentRevenue2": "Today's Revenue",
   "moneyUnit": "\$",
   "moneyKUnit": "Thousand (\$)",
   "moneyWUnit": "Ten Thousand (\$)",
@@ -567,8 +573,8 @@ const en = {
   "powerStationInformation": "Power Station Information",
   "powerSiteName": "Power Station Name",
   "affiliatedCustomer": "Affiliated Customer",
-  "energyStorageDevicesCount": "Energy Storage Devices Count",
-  "energyStorageInstalledPower": "Energy Storage Installed Power",
+  "energyStorageDevicesCount": "ES Devices Count",
+  "energyStorageInstalledPower": "ES Installed Power",
   "photovoltaicInstalledCapacity": "Photovoltaic Installed Capacity",
   "photovoltaicInstalledPower": "Photovoltaic Installed Power",
   "oliveSiteDetails": "Details",

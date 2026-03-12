@@ -203,7 +203,7 @@ class OliveItemView extends StatelessWidget {
                                     ),
                                   },
                               ],
-                            if (logic.isHasPv)
+                            if (logic.isHasPv && logic.pvPower != 0)
                               [
                                 ///pv -> ems
                                 {
@@ -260,13 +260,16 @@ class OliveItemView extends StatelessWidget {
                         ),
                         PositionedDirectional(
                           bottom: 0,
-                          child: Text(
-                            "EMS",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold,
+                          child: Container(
+                            margin: EdgeInsetsDirectional.only(end: 6),
+                            child: Text(
+                              "EMS",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -324,7 +327,7 @@ class OliveItemView extends StatelessWidget {
                                 ),
                                 WidgetSpan(child: SizedBox(width: 10.w)),
                                 TextSpan(
-                                  text: "Soc: ",
+                                  text: "SOC: ",
                                   children: [
                                     TextSpan(
                                       style: TextStyle(
@@ -662,12 +665,15 @@ class OliveItemView extends StatelessWidget {
                       ),
                       PositionedDirectional(
                         bottom: 0,
-                        child: Text(
-                          "EMS",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
+                        child: Container(
+                          margin: EdgeInsetsDirectional.only(end: 6),
+                          child: Text(
+                            "EMS",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -725,7 +731,7 @@ class OliveItemView extends StatelessWidget {
                                 ),
                                 WidgetSpan(child: SizedBox(width: 10.w)),
                                 TextSpan(
-                                  text: "Soc: ",
+                                  text: "SOC: ",
                                   children: [
                                     TextSpan(
                                       style: TextStyle(

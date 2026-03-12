@@ -23,6 +23,8 @@ const es = {
   "service": "Servicio",
   "currentRevenue": "Ingresos del día(%s)",
   "totalRevenue": "Ingresos acumulados(%s)",
+  "totalRevenue2": "Ingresos acumulados",
+  "currentRevenue2": "Ingresos del día",
   "moneyUnit": "€",
   "moneyKUnit": "Mil (€)",
   "moneyWUnit": "Diez mil (€)",

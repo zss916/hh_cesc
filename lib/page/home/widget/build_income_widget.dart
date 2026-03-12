@@ -54,7 +54,11 @@ class IncomeWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      TKey.totalRevenue.trArgs([User.to.getCurrencyUnit()]),
+                      User.to.getCurrencyUnit().isNotEmpty
+                          ? TKey.totalRevenue2.tr
+                          : TKey.totalRevenue.trArgs([
+                              User.to.getCurrencyUnit(),
+                            ]),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14.sp,
@@ -84,7 +88,11 @@ class IncomeWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      TKey.currentRevenue.trArgs([User.to.getCurrencyUnit()]),
+                      User.to.getCurrencyUnit().isNotEmpty
+                          ? TKey.currentRevenue2.tr
+                          : TKey.currentRevenue.trArgs([
+                              User.to.getCurrencyUnit(),
+                            ]),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14.sp,

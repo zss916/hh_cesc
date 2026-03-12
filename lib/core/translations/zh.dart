@@ -20,6 +20,8 @@ const zh = {
   "service": "服务",
   "currentRevenue": "当日收益(%s)",
   "totalRevenue": "累计收益(%s)",
+  "totalRevenue2": "累计收益",
+  "currentRevenue2": "当日收益",
   "moneyUnit": "元",
   "moneyKUnit": "千元",
   "moneyWUnit": "万元",
