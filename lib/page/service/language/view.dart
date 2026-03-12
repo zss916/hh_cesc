@@ -23,128 +23,63 @@ class ChangeLanguagePage extends StatelessWidget {
               top: 10.h,
             ),
             width: double.maxFinite,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () async {
-                      await Get.updateLocale(Locale('zh', 'CN'));
-                      LanTools.setLocal();
-                      //PageTools.offAndToNamedMain();
-                    },
-                    child: Container(
-                      padding: EdgeInsetsDirectional.symmetric(
-                        horizontal: 16.w,
-                        vertical: 14.h,
-                      ),
-                      height: 50,
-                      child: Row(
-                        children: [
-                          Text(
-                            TKey.languageZh.tr,
-                            style: TextStyle(
-                              color: Color(0xDEFFFFFF),
-                              fontSize: 16,
-                            ),
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () async {
-                      await Get.updateLocale(Locale('en', 'US'));
-                      LanTools.setLocal();
-                      // PageTools.offAndToNamedMain();
-                      // LanTools.isZh();
-                    },
-                    child: Container(
-                      padding: EdgeInsetsDirectional.symmetric(
-                        horizontal: 16.w,
-                        vertical: 14.h,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            TKey.languageEn.tr,
-                            style: TextStyle(
-                              color: Color(0xDEFFFFFF),
-                              fontSize: 16,
-                            ),
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: () async {
-                      await Get.updateLocale(Locale('de', 'DE'));
-                      LanTools.setLocal();
-                      // PageTools.offAndToNamedMain();
-                    },
-                    child: Container(
-                      padding: EdgeInsetsDirectional.symmetric(
-                        horizontal: 16.w,
-                        vertical: 14.h,
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            TKey.languageDe.tr,
-                            style: TextStyle(
-                              color: Color(0xDEFFFFFF),
-                              fontSize: 16,
-                            ),
-                          ),
-                          Spacer(),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                if (false)
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () async {
-                        await Get.updateLocale(Locale('es', 'DE'));
-                        LanTools.setLocal();
-                        // PageTools.offAndToNamedMain();
-                      },
-                      child: Container(
-                        padding: EdgeInsetsDirectional.symmetric(
-                          horizontal: 16.w,
-                          vertical: 14.h,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              TKey.languageEs.tr,
-                              style: TextStyle(
-                                color: Color(0xDEFFFFFF),
-                                fontSize: 16,
-                              ),
-                            ),
-                            Spacer(),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
+            child: GetBuilder<ChangeLanguageLogic>(
+              init: ChangeLanguageLogic(),
+              builder: (logic) {
+                return ListView.builder(
+                  itemCount: logic.list.length,
+                  shrinkWrap: true,
+                  itemExtent: 50,
+                  itemBuilder: (BuildContext context, int index) {
+                    Map<String, dynamic> item = logic.list[index];
+                    return buildSwitchLanguage(
+                      title: item['title'],
+                      locale: item['locale'],
+                      isCheck: item['isCheck'],
+                      logic: logic,
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildSwitchLanguage({
+    required String title,
+    required Locale? locale,
+    required bool isCheck,
+    required ChangeLanguageLogic logic,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () async {
+          logic.switchLocale(locale);
+        },
+        child: Container(
+          padding: EdgeInsetsDirectional.symmetric(
+            horizontal: 16.w,
+            vertical: 14.h,
+          ),
+          height: 50,
+          child: Row(
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: isCheck ? Color(0xFF43FFFF) : Color(0xDEFFFFFF),
+                  fontSize: 16,
+                ),
+              ),
+              Spacer(),
+              if (isCheck) Image.asset(Assets.imgGou),
+            ],
+          ),
+        ),
       ),
     );
   }
