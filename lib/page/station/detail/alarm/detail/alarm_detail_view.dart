@@ -39,9 +39,6 @@ class AlarmDetailPage extends StatelessWidget {
                           context: context,
                           selectLevel: logic.alarmLevel,
                           onSelect: (String? alarmLevelTitle, int? level) {
-                            debugPrint(
-                              "alarmLevelTitle ===>> $alarmLevelTitle",
-                            );
                             logic.alarmTitle = alarmLevelTitle;
                             logic.update();
                             logic.alarmLevel = level;

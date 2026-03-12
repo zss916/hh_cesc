@@ -6,7 +6,9 @@ import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/base/header/authorization_header.dart';
 import 'package:cescpro/http/base/header/locale_header.dart';
 import 'package:cescpro/http/base/header/timezone_header.dart';
+import 'package:cescpro/http/path.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class AuthInterceptor extends Interceptor {
@@ -30,9 +32,14 @@ class AuthInterceptor extends Interceptor {
   ) async {
     if (response.statusCode == HttpStatus.ok) {
       Map<String, dynamic> map = response.data as Map<String, dynamic>;
-      // debugPrint("map:${map}");
+      debugPrint("map:${map}");
       if (map["code"] == 99999) {
-        await _handleUnauthorized(msg: "${map["message"]}");
+        //登录接口
+        if (response.realUri.path.contains(ApiPath.postLogin)) {
+          super.onResponse(response, handler);
+        } else {
+          await _handleUnauthorized(msg: "${map["message"]}");
+        }
       } else {
         super.onResponse(response, handler);
       }
