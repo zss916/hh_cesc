@@ -46,6 +46,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
     siteId = safeFind<AlarmLogic>()?.siteId;
     siteName = safeFind<AlarmLogic>()?.siteName;
     countryItem = safeFind<AlarmLogic>()?.country;
+    alarmLevel = safeFind<AlarmLogic>()?.alarmLevel;
     alarmTitle = (safeFind<AlarmLogic>()?.alarmLevel ?? 0).getAlarmTitle();
     int? startTimeMill = safeFind<AlarmLogic>()?.startTimeMill;
     if (startTimeMill != null) {
@@ -109,7 +110,8 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
           onTap: () {
             showAlarmLevelSheet(
               context: context,
-              onSelect: (String alarmLevelTitle, int level) {
+              selectLevel: alarmLevel,
+              onSelect: (String? alarmLevelTitle, int? level) {
                 setState(() {
                   alarmTitle = alarmLevelTitle;
                   alarmLevel = level;

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 void showAlarmLevelSheet({
   required BuildContext context,
-  Function(String, int)? onSelect,
+  Function(String?, int?)? onSelect,
   int? selectLevel,
 }) {
   Get.bottomSheet(
@@ -15,7 +15,7 @@ void showAlarmLevelSheet({
 }
 
 class AlarmSelectSheetWidget extends StatefulWidget {
-  final Function(String, int)? onSelect;
+  final Function(String?, int?)? onSelect;
   final int? selectLevel;
   const AlarmSelectSheetWidget({super.key, this.onSelect, this.selectLevel});
 
@@ -58,7 +58,7 @@ class _AlarmSelectSheetWidgetState extends State<AlarmSelectSheetWidget> {
             onTap: () {
               setState(() {
                 select = (select == 1) ? null : 1;
-                selectTitle = TKey.alarmLevel1.tr;
+                selectTitle = (select == null) ? null : TKey.alarmLevel1.tr;
               });
             },
             child: Container(
@@ -84,7 +84,7 @@ class _AlarmSelectSheetWidgetState extends State<AlarmSelectSheetWidget> {
             onTap: () {
               setState(() {
                 select = (select == 2) ? null : 2;
-                selectTitle = TKey.alarmLevel2.tr;
+                selectTitle = (select == null) ? null : TKey.alarmLevel2.tr;
               });
             },
             child: Container(
@@ -110,7 +110,7 @@ class _AlarmSelectSheetWidgetState extends State<AlarmSelectSheetWidget> {
             onTap: () {
               setState(() {
                 select = (select == 3) ? null : 3;
-                selectTitle = TKey.alarmLevel3.tr;
+                selectTitle = (select == null) ? null : TKey.alarmLevel3.tr;
               });
             },
             child: Container(
@@ -161,9 +161,7 @@ class _AlarmSelectSheetWidgetState extends State<AlarmSelectSheetWidget> {
                   borderRadius: BorderRadius.circular(50),
                   onTap: () {
                     Get.back();
-                    if (select != null) {
-                      widget.onSelect?.call(selectTitle ?? "", select!);
-                    }
+                    widget.onSelect?.call(selectTitle, select);
                     // widget.onConfirm.call();
                   },
                   child: Container(
