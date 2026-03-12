@@ -1,25 +1,5 @@
 [
-  {
-    "en": "China",
-    "zh": "中国",
-    "code": "CHN",
-    "de": "China",
-    "es": "China"
-  },
-  {
-    "en": "United States of America",
-    "zh": "美国",
-    "code": "USA",
-    "de": "Vereinigte Staaten von Amerika",
-    "es": "Estados Unidos"
-  },
-  {
-    "en": "India",
-    "zh": "印度",
-    "code": "IND",
-    "de": "Indien",
-    "es": "India"
-  },
+
   {
     "en": "Afghanistan",
     "zh": "阿富汗",
@@ -278,6 +258,13 @@
     "code": "BDI",
     "de": "Burundi",
     "es": "Burundi"
+  },
+  {
+    "en": "China",
+    "zh": "中国",
+    "code": "CHN",
+    "de": "China",
+    "es": "China"
   },
   {
     "en": "Cabo Verde",
@@ -733,6 +720,13 @@
     "code": "ISL",
     "de": "Island",
     "es": "Islandia"
+  },
+  {
+    "en": "India",
+    "zh": "印度",
+    "code": "IND",
+    "de": "Indien",
+    "es": "India"
   },
   {
     "en": "Indonesia",
@@ -1630,6 +1624,15 @@
     "de": "Uganda",
     "es": "Uganda"
   },
+
+  {
+    "en": "United States of America",
+    "zh": "美国",
+    "code": "USA",
+    "de": "Vereinigte Staaten von Amerika",
+    "es": "Estados Unidos"
+  },
+
   {
     "en": "Ukraine",
     "zh": "乌克兰",

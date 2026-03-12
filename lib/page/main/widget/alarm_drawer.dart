@@ -18,6 +18,7 @@ import 'package:intl/intl.dart';
 class AlarmDrawer extends StatefulWidget {
   final Function onReset;
   final Function onConfirm;
+
   const AlarmDrawer({
     super.key,
     required this.onReset,
@@ -89,10 +90,11 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
             List<SiteDataEntity> data = safeFind<MainLogic>()?.sites ?? [];
             showSiteSelectSheet(
               sites: data,
+              siteName: siteName,
               onSelect: (value) {
                 setState(() {
-                  siteId = value.id;
-                  siteName = value.name;
+                  siteId = value?.id;
+                  siteName = value?.name;
                 });
               },
             );
@@ -171,6 +173,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
                   safeFind<AlarmLogic>()?.country = null;
                   safeFind<AlarmLogic>()?.alarmLevel = null;
                   safeFind<AlarmLogic>()?.siteId = null;
+                  safeFind<AlarmLogic>()?.siteName = null;
                   safeFind<AlarmLogic>()?.refreshData(isLoading: true);
                   widget.onReset.call();
                 },

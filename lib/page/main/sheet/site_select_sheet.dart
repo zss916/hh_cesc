@@ -6,18 +6,25 @@ import 'package:get/get.dart';
 
 void showSiteSelectSheet({
   required List<SiteDataEntity> sites,
-  Function(SiteDataEntity)? onSelect,
+  required String? siteName,
+  Function(SiteDataEntity? item)? onSelect,
 }) {
   Get.bottomSheet(
-    SiteSelectWidget(sites: sites, onSelect: onSelect),
+    SiteSelectWidget(sites: sites, onSelect: onSelect, siteName: siteName),
     ignoreSafeArea: false,
   );
 }
 
 class SiteSelectWidget extends StatefulWidget {
   final List<SiteDataEntity> sites;
-  final Function(SiteDataEntity)? onSelect;
-  const SiteSelectWidget({super.key, required this.sites, this.onSelect});
+  final Function(SiteDataEntity? item)? onSelect;
+  final String? siteName;
+  const SiteSelectWidget({
+    super.key,
+    required this.sites,
+    this.onSelect,
+    this.siteName,
+  });
 
   @override
   State<SiteSelectWidget> createState() => _SiteSelectWidgetState();
@@ -25,6 +32,16 @@ class SiteSelectWidget extends StatefulWidget {
 
 class _SiteSelectWidgetState extends State<SiteSelectWidget> {
   int selectIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    if (mounted) {
+      setState(() {
+        selectIndex = widget.sites.indexWhere((e) => e.name == widget.siteName);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +86,12 @@ class _SiteSelectWidgetState extends State<SiteSelectWidget> {
                 Spacer(),
                 InkWell(
                   onTap: () {
-                    SiteDataEntity site = widget.sites[selectIndex];
-                    widget.onSelect?.call(site);
+                    if (selectIndex != -1) {
+                      SiteDataEntity site = widget.sites[selectIndex];
+                      widget.onSelect?.call(site);
+                    } else {
+                      widget.onSelect?.call(null);
+                    }
                     Get.back();
                   },
                   child: Container(
