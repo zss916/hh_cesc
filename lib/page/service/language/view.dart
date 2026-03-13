@@ -28,6 +28,7 @@ class ChangeLanguagePage extends StatelessWidget {
               builder: (logic) {
                 return ListView.builder(
                   itemCount: logic.list.length,
+                  padding: EdgeInsetsDirectional.zero,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     Map<String, dynamic> item = logic.list[index];

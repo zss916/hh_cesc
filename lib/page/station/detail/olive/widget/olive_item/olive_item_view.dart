@@ -6,10 +6,10 @@ import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
-import 'package:cescpro/page/station/detail/olive/widget/olive_item/grid_view_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/line/gplot_line_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/line_status_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/olive_item_logic.dart';
+import 'package:cescpro/page/station/detail/olive/widget/olive_item/widget/grid_view_widget2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -31,7 +31,7 @@ class OliveItemView extends StatelessWidget {
 
                 buildTopology(logic),
 
-                GridViewWidget(
+                GridViewWidget2(
                   todayCharging: logic.showChargeAvg,
                   todayChargingUnit: logic.showChargeAvgUnit,
                   todayDischarge: logic.showRechargeAvg,

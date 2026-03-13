@@ -57,6 +57,11 @@ class Assets {
   static const String imgStation = 'assets/img/station.png';
   static const String imgStationS = 'assets/img/station_s.png';
   static const String imgTodayRecharge = 'assets/img/today_recharge.png';
+  static const String imgTodayDisCharging2 = 'assets/img/today_discharge2.png';
+  static const String imgTodayCharging2 = 'assets/img/today_charging2.png';
+  static const String lastDayIncome2 = 'assets/img/last_day_income2.png';
+  static const String todayPvGeneration2 =
+      'assets/img/today_pv_generation2.png';
   static const String jsonCountryAndArea = 'assets/json/country_and_area.json';
   static const String jsonPcaCode = 'assets/json/pca-code.json';
 }
