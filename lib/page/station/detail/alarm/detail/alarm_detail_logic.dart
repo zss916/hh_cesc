@@ -3,7 +3,8 @@ import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/api/alarm.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
+//import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class AlarmDetailLogic extends GetxController {
   int? siteId;

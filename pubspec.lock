@@ -755,14 +755,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.4.0"
-  pull_to_refresh_flutter3:
+  pull_to_refresh_simple:
     dependency: "direct main"
     description:
-      name: pull_to_refresh_flutter3
-      sha256: "37a88d901cca9a46dbdd46523de8e7b35a3e58634a0e775b1a5904981f69b353"
+      name: pull_to_refresh_simple
+      sha256: dd6439f77b5dcdc7f272ec630bbedb85f34dba92aeb7a82eadfdbcffaf18684c
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.2"
+    version: "3.0.3"
   rxdart:
     dependency: transitive
     description:

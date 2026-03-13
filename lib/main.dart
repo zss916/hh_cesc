@@ -1,10 +1,7 @@
-import 'package:cescpro/core/widget/footer.dart';
-import 'package:cescpro/core/widget/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 import 'core/router/index.dart';
 import 'core/setting/app_setting.dart';
@@ -27,55 +24,44 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshConfiguration(
-      headerBuilder: () => const Header(),
-      footerBuilder: () => const Footer(),
-      hideFooterWhenNotFull: true,
-      enableLoadingWhenNoData: true,
-      springDescription: SpringDescription(
-        stiffness: 170,
-        damping: 16,
-        mass: 1.9,
-      ),
-      child: ScreenUtilInit(
-        enableScaleText: () => false,
-        designSize: const Size(375, 812),
-        builder: (context, child) => GetMaterialApp(
-          title: AppSetting.appName,
-          debugShowCheckedModeBanner: false,
-          locale: LanTools.getLocale() ?? Get.deviceLocale,
-          translations: AppTranslations(),
-          fallbackLocale: const Locale("en"),
-          getPages: APages.routes,
-          navigatorObservers: [appRouteObserver],
-          builder: (context, child) => MediaQuery.withNoTextScaling(
-            child: EasyLoading.init()(context, child!),
-          ),
-          defaultTransition: Transition.cupertino,
-          theme: ThemeData(
-            // scaffoldBackgroundColor: Colors.white,
-            ///处理中文w500,不加粗效果
-            // fontFamily: "PingFang SC",
-            ///最底层绘制颜色
-            canvasColor: Color(0xFF23282E),
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              backgroundColor: Colors.transparent,
-            ),
-            tabBarTheme: TabBarThemeData(dividerColor: Colors.transparent),
-          ),
-          // themeMode: ThemeMode.dark,
-          darkTheme: ThemeData(
-            brightness: Brightness.dark,
-            canvasColor: Color(0xFF23282E),
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-              backgroundColor: Colors.transparent,
-            ),
-            tabBarTheme: TabBarThemeData(dividerColor: Colors.transparent),
-          ),
-          initialRoute: APages.splash,
+    return ScreenUtilInit(
+      enableScaleText: () => false,
+      designSize: const Size(375, 812),
+      builder: (context, child) => GetMaterialApp(
+        title: AppSetting.appName,
+        debugShowCheckedModeBanner: false,
+        locale: LanTools.getLocale() ?? Get.deviceLocale,
+        translations: AppTranslations(),
+        fallbackLocale: const Locale("en"),
+        getPages: APages.routes,
+        navigatorObservers: [appRouteObserver],
+        builder: (context, child) => MediaQuery.withNoTextScaling(
+          child: EasyLoading.init()(context, child!),
         ),
+        defaultTransition: Transition.cupertino,
+        theme: ThemeData(
+          // scaffoldBackgroundColor: Colors.white,
+          ///处理中文w500,不加粗效果
+          // fontFamily: "PingFang SC",
+          ///最底层绘制颜色
+          canvasColor: Color(0xFF23282E),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.transparent,
+          ),
+          tabBarTheme: TabBarThemeData(dividerColor: Colors.transparent),
+        ),
+        // themeMode: ThemeMode.dark,
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          canvasColor: Color(0xFF23282E),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.transparent,
+          ),
+          tabBarTheme: TabBarThemeData(dividerColor: Colors.transparent),
+        ),
+        initialRoute: APages.splash,
       ),
     );
   }

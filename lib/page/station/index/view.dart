@@ -135,29 +135,10 @@ class StationPage extends StatelessWidget {
     ),
   );
 
-  /*
-  Widget buildList({required StationLogic logic}) {
-    return EasyRefresh(
-      header: MaterialHeader(),
-      onRefresh: () => logic.refreshData(),
-      onLoad: () => logic.loadMoreData(),
-      child: ListView.separated(
-        padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
-        itemCount: logic.data.length,
-        itemBuilder: (BuildContext context, int index) {
-          SiteEntity item = logic.data[index];
-          return buildItem(item);
-        },
-        separatorBuilder: (BuildContext context, int index) =>
-            const Divider(height: 16, color: Colors.transparent),
-      ),
-    );
-  }
-*/
-
   Widget buildList2({required StationLogic logic}) {
     return SmartRefresher(
       header: MaterialClassicHeader(),
+      enableSmartPreload: true,
       enablePullDown: true,
       enablePullUp: true,
       controller: logic.refreshCtrl,

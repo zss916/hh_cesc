@@ -64,28 +64,11 @@ class AlarmPage extends StatelessWidget {
     };
   }
 
-  /*
-  Widget buildList({required AlarmLogic logic}) => EasyRefresh(
-    header: MaterialHeader(),
-    onRefresh: () => logic.refreshData(),
-    onLoad: () => logic.loadMoreData(),
-    child: ListView.separated(
-      padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
-      itemCount: logic.data.length,
-      itemBuilder: (BuildContext context, int index) {
-        AlarmItemEntity item = logic.data[index];
-        return AlarmItem(item: item, isLast: (index + 1 == logic.data.length));
-      },
-      separatorBuilder: (BuildContext context, int index) =>
-          const Divider(height: 16, color: Colors.transparent),
-    ),
-  );
-*/
-
   Widget buildList2({required AlarmLogic logic}) => SmartRefresher(
     header: MaterialClassicHeader(),
     enablePullDown: true,
     enablePullUp: true,
+    enableSmartPreload: true,
     controller: logic.refreshCtrl,
     onRefresh: () {
       logic.refreshData();

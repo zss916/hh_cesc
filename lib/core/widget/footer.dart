@@ -1,6 +1,6 @@
 import 'package:cescpro/core/widget/app_ball_beat.dart';
 import 'package:flutter/material.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});

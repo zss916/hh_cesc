@@ -8,11 +8,10 @@ import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/page/main/sheet/alarm_select_sheet.dart';
 import 'package:cescpro/page/station/detail/alarm/detail/alarm_detail_logic.dart';
 import 'package:cescpro/page/station/detail/alarm/detail/sheet/device_select_sheet.dart';
-//import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
+import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
 
 class AlarmDetailPage extends StatelessWidget {
   AlarmDetailPage({super.key});
@@ -138,145 +137,7 @@ class AlarmDetailPage extends StatelessWidget {
     };
   }
 
-  /* Widget buildList({required AlarmDetailLogic logic}) => EasyRefresh(
-    header: MaterialHeader(),
-    onRefresh: () => logic.refreshData(),
-    onLoad: () => logic.loadMoreData(),
-    child: ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-      itemCount: logic.list.length,
-      itemBuilder: (BuildContext context, int index) {
-        AlarmItemEntity item = logic.list[index];
-        return Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Color(0xFF313540),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    TKey.alarmDevice.tr,
-                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                  ),
-                  Spacer(),
-                  Text(
-                    item.showName,
-                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                  ),
-                ],
-              ),
-              Divider(height: 16.h, color: Colors.transparent),
-              Row(
-                children: [
-                  Text(
-                    TKey.deviceSerialNumber.tr,
-                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                  ),
-                  Spacer(),
-                  Text(
-                    item.sn ?? "",
-                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                  ),
-                ],
-              ),
-              Divider(height: 16.h, color: Colors.transparent),
-              Row(
-                children: [
-                  Text(
-                    "${TKey.alarmLevel.tr}:",
-                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                  ),
-                  Spacer(),
-                  if (item.alarmLevel != null)
-                    AlarmLevelStatusWidget(level: item.alarmLevel ?? -1),
-                  VerticalDivider(width: 2.w, color: Colors.transparent),
-                  Text(
-                    item.alarmLevelType ?? "",
-                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                  ),
-                ],
-              ),
-              Divider(height: 16.h, color: Colors.transparent),
-              SizedBox(
-                width: double.maxFinite,
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: TKey.alarmContent.tr,
-                        children: [
-                          WidgetSpan(child: SizedBox(width: 20.w)),
-                          TextSpan(
-                            style: TextStyle(
-                              color: const Color(0xFFFFFFFF),
-                              fontSize: 14,
-                            ),
-                            text: item.content ?? "",
-                          ),
-                        ],
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xA6FFFFFF),
-                        ),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-
-              */ /*SizedBox(
-                width: double.maxFinite,
-                child: Wrap(
-                  children: [
-                    Container(
-                      margin: EdgeInsetsDirectional.only(end: 20.w),
-                      child: Text(
-                        TKey.alarmContent.tr,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xA6FFFFFF),
-                        ),
-                      ),
-                    ),
-                    // Spacer(),
-                    Text(
-
-                      item.content ?? "",
-                      style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                    ),
-                  ],
-                ),
-              ),*/ /*
-              Divider(height: 16.h, color: Colors.transparent),
-              Row(
-                children: [
-                  Text(
-                    "${TKey.timeOfOccurrence.tr}:",
-                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
-                  ),
-                  Spacer(),
-                  Text(
-                    (item.startTimeMill ?? 0).timestampFormat,
-                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) =>
-          Divider(height: 12.h, color: Colors.transparent),
-    ),
-  );
-*/
   Widget buildList2({required AlarmDetailLogic logic}) => SmartRefresher(
-    // header: WaterDropMaterialHeader(),
     header: MaterialClassicHeader(),
     enablePullDown: true,
     enablePullUp: true,
