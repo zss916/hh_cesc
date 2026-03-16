@@ -18,6 +18,10 @@ class Assets {
   static const String htmlUserPolicyZh = 'assets/html/user-policy-zh.html';
   static const String htmlUserPolicyEn2 = 'assets/html/user-policy-en2.html';
   static const String htmlUserPolicyZh2 = 'assets/html/user-policy-zh2.html';
+  static const String htmlPrivacyPolicyE = 'assets/html/privacy-policy-e.html';
+  static const String htmlPrivacyPolicyZ = 'assets/html/privacy-policy-z.html';
+  static const String htmlUserPolicyE = 'assets/html/user-policy-e.html';
+  static const String htmlUserPolicyZ = 'assets/html/user-policy-z.html';
   static const String imgAccumulatedPhotovoltaic =
       'assets/img/accumulated_photovoltaic.png';
   static const String imgAccumulatedPhotovoltaic2 =

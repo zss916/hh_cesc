@@ -66,13 +66,13 @@ class _CheckWidgetState extends State<CheckWidget> {
             onPrivacyTap: () {
               PageTools.toWeb(
                 title: TKey.privacyPolicy.tr,
-                url: AppSetting.policy,
+                url: AppSetting.privacyPolicy,
               );
             },
             onServiceTap: () {
               PageTools.toWeb(
                 title: TKey.userAgreement.tr,
-                url: AppSetting.policy,
+                url: AppSetting.userPolicy,
               );
             },
           ),

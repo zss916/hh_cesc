@@ -39,7 +39,7 @@ class PrivacyDialog {
                       onTap: () {
                         PageTools.toWeb(
                           title: TKey.userAgreement.tr,
-                          url: AppSetting.policy,
+                          url: AppSetting.userPolicy,
                         );
                       },
                       child: Text(
@@ -61,7 +61,7 @@ class PrivacyDialog {
                       onTap: () {
                         PageTools.toWeb(
                           title: TKey.privacyPolicy.tr,
-                          url: AppSetting.policy,
+                          url: AppSetting.privacyPolicy,
                         );
                       },
                       child: Text(
@@ -87,7 +87,7 @@ class PrivacyDialog {
                       onTap: () {
                         PageTools.toWeb(
                           title: TKey.userAgreement.tr,
-                          url: AppSetting.policy,
+                          url: AppSetting.userPolicy,
                         );
                       },
                       child: Text(
@@ -109,7 +109,7 @@ class PrivacyDialog {
                       onTap: () {
                         PageTools.toWeb(
                           title: TKey.privacyPolicy.tr,
-                          url: AppSetting.policy,
+                          url: AppSetting.privacyPolicy,
                         );
                       },
                       child: Text(

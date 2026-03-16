@@ -91,8 +91,8 @@ class AboutPage extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       PageTools.toWeb(
-                        title: TKey.privacyPolicy.tr,
-                        url: AppSetting.policy,
+                        title: TKey.userTerms.tr,
+                        url: AppSetting.userPolicy,
                       );
                     },
                     child: Container(
@@ -125,7 +125,7 @@ class AboutPage extends StatelessWidget {
                     onTap: () {
                       PageTools.toWeb(
                         title: TKey.privacyPolicy.tr,
-                        url: AppSetting.policy,
+                        url: AppSetting.privacyPolicy,
                       );
                     },
                     child: Container(

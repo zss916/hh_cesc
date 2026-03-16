@@ -11,9 +11,15 @@ class AppSetting {
   static const bool isOverseas = Environment.isOverseas;
 
   ///用户协议
-  static String get policy => Environment.isPro
+  /*  static String get policy => Environment.isPro
       ? (Get.isZH ? Assets.htmlUserPolicyZh2 : Assets.htmlUserPolicyEn2)
-      : (Get.isZH ? Assets.htmlUserPolicyZh : Assets.htmlUserPolicyEn);
+      : (Get.isZH ? Assets.htmlUserPolicyZh : Assets.htmlUserPolicyEn);*/
+
+  static String get privacyPolicy =>
+      Get.isZH ? Assets.htmlPrivacyPolicyZ : Assets.htmlPrivacyPolicyE;
+
+  static String get userPolicy =>
+      Get.isZH ? Assets.htmlUserPolicyZ : Assets.htmlUserPolicyE;
 }
 
 extension NumExtension on int {
