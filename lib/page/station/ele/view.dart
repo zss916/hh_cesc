@@ -63,7 +63,7 @@ class _ReportDetailPageState extends State<ElePage> {
         ),
         child: Column(
           children: [
-            Container(
+            /*Container(
               margin: EdgeInsetsDirectional.only(bottom: 15.h),
               width: double.maxFinite,
               child: Text(
@@ -74,7 +74,7 @@ class _ReportDetailPageState extends State<ElePage> {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-            ),
+            ),*/
             EleSelectTimeWidget(logic: logic),
             EleTableWidget(logic: logic, queryType: logic.queryType),
           ],

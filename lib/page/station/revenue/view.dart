@@ -63,7 +63,7 @@ class _ReportDetailPageState extends State<RevenuePage> {
         ),
         child: Column(
           children: [
-            Container(
+            /*Container(
               margin: EdgeInsetsDirectional.only(bottom: 15.h),
               width: double.maxFinite,
               child: Text(
@@ -74,7 +74,7 @@ class _ReportDetailPageState extends State<RevenuePage> {
                   fontWeight: FontWeight.normal,
                 ),
               ),
-            ),
+            ),*/
             RevenueSelectTimeWidget(logic: logic),
             RevenueTableWidget(logic: logic, queryType: logic.queryType),
           ],

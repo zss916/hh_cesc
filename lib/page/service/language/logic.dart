@@ -17,11 +17,11 @@ class ChangeLanguageLogic extends GetxController {
       "locale": Locale('de', 'DE'),
       "isCheck": false,
     },
-    /*{
+    {
       "title": TKey.languageEs.tr,
       "locale": Locale('es', 'DE'),
       "isCheck": false,
-    },*/
+    },
   ];
 
   List<Map<String, dynamic>> _sortList = [];
