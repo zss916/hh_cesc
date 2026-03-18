@@ -40,6 +40,7 @@ class Http {
     bool showLoading = false,
     bool showToast = true,
     CancelToken? cancelToken,
+    Function(int count, int total)? onSendProgress,
   }) async {
     try {
       final response = await _dio.post(
@@ -48,6 +49,7 @@ class Http {
         queryParameters: queryParameters,
         //options: options,
         cancelToken: cancelToken ?? cancelTokenAll,
+        onSendProgress: onSendProgress,
       );
       return response.data ?? '{}';
     } catch (error) {

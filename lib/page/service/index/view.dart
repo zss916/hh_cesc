@@ -18,7 +18,19 @@ class ServicePage extends StatelessWidget {
           return Column(
             children: [
               Divider(height: 28.h, color: Colors.transparent),
-              AvatarWidget(url: logic.icon),
+              GestureDetector(
+                onTap: () {
+                  showPhotoSheet(
+                    onAlbum: () {
+                      logic.editImage(camera: false);
+                    },
+                    onTakePhoto: () {
+                      logic.editImage(camera: true);
+                    },
+                  );
+                },
+                child: AvatarWidget(url: logic.icon),
+              ),
               Container(
                 alignment: AlignmentDirectional.center,
                 margin: EdgeInsetsDirectional.only(

@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.12+13
+version: 2.0.7+15
 
 environment:
   sdk: ^3.10.0
@@ -26,8 +26,9 @@ dependencies:
   event_bus: ^2.0.1
   logger: 2.6.1
   url_launcher: 6.3.2
-  image_picker: 1.2.0
+  image_picker: 1.2.1
   path_provider: 2.1.5
+  flutter_image_compress: 2.4.0
   webview_flutter: 4.13.0
   keyboard_visibility_pro: 1.0.0
   app_settings: 6.1.1

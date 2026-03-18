@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/bean/currency_entity.dart';
@@ -6,6 +7,7 @@ import 'package:cescpro/http/bean/token_entity.dart';
 import 'package:cescpro/http/bean/user_info_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 ///admin
@@ -90,6 +92,56 @@ abstract class AdminAPI {
       }
     } catch (error) {
       return <CurrencyEntity>[];
+    }
+  }
+
+  ///上传图片
+  static Future<String?> uploadImage(String path) async {
+    try {
+      // 生成随机数文件名
+      String name =
+          Random().nextInt(10000).toString() +
+          DateTime.now().millisecondsSinceEpoch.toString() +
+          path.substring((path).lastIndexOf("."));
+
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(path, filename: name),
+      });
+
+      var result = await Http.instance.post(
+        ApiPath.uploadImage,
+        data: formData,
+        onSendProgress: (int sent, int total) {
+          debugPrint("uploading image: $sent/$total"); // 打印上传进度信息
+        },
+      );
+      if (result["code"] == HttpStatus.ok) {
+        return result["data"];
+      } else {
+        AppLoading.toast(result["message"]);
+        return null;
+      }
+    } catch (e) {
+      debugPrint("Error uploading image: $e"); // 打印错误信息
+      return null;
+    }
+  }
+
+  ///编辑用户
+  static Future<bool> editUser({
+    required String id,
+    required Map<String, dynamic> map,
+  }) async {
+    try {
+      var result = await Http.instance.post(ApiPath.uploadUser + id, data: map);
+      if (result["code"] == HttpStatus.ok) {
+        return true;
+      } else {
+        AppLoading.toast(result["message"]);
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
   }
 }

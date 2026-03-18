@@ -243,4 +243,6 @@ const zh = {
   "temperature": "温度",
   "searchHint": "搜索电站名称",
   "filter": "筛选",
+  "takePhoto": "拍摄",
+  "album": "相册",
 };

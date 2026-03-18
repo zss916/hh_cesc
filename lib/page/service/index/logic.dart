@@ -5,6 +5,7 @@ class ServiceLogic extends GetxController {
 
   String get userName => value?.username ?? '';
   String get icon => value?.icon ?? '';
+  int? get id => value?.id;
 
   int unreadNum = 0;
 
@@ -45,6 +46,26 @@ class ServiceLogic extends GetxController {
 
   @override
   void onClose() {
+    AppLoading.dismiss();
     super.onClose();
+  }
+
+  ///编辑头像
+  void editImage({bool camera = true}) {
+    PhotoUtils.chooseImage(camera: camera).then((xFile) {
+      PhotoUtils.compressImageAndGetFile(File(xFile?.path ?? "")).then((
+        path,
+      ) async {
+        AppLoading.show();
+        String? icon = await AdminAPI.uploadImage(path).whenComplete(() {
+          AppLoading.dismiss();
+        });
+        value?.icon = icon;
+        update();
+        if (value != null) {
+          await AdminAPI.editUser(id: id.toString(), map: value!.toJson());
+        }
+      });
+    });
   }
 }

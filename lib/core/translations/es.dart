@@ -253,4 +253,6 @@ const es = {
   "temperature": "temperatura",
   "searchHint": "Nombre de la central eléctrica",
   "filter": "filtro",
+  "takePhoto": "Tome una foto",
+  "album": "Seleccionar desde el álbum",
 };

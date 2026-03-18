@@ -484,6 +484,8 @@ class TKey {
   static const String localEMS = "localEMS";
   static const String searchHint = "searchHint";
   static const String filter = "filter";
+  static const String takePhoto = "takePhoto";
+  static const String album = "album";
 }
 
 const en = {
@@ -737,4 +739,6 @@ const en = {
   "temperature": "temperature",
   "searchHint": "Search for station name",
   "filter": "Filter",
+  "takePhoto": "Take Photo",
+  "album": "Select from Album",
 };

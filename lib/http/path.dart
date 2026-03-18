@@ -156,4 +156,10 @@ class ApiPath {
 
   ///v1
   static const String getFireInfo = "/business/device/getFireInfo";
+
+  ///上传图片
+  static const String uploadImage = "/business/attachment/file";
+
+  ///编辑用户
+  static const String uploadUser = "/business/admin/update/";
 }

@@ -234,4 +234,6 @@ const de = {
   "temperature": "temperatur",
   "searchHint": "Kraftwerksnamen",
   "filter": "Filter",
+  "takePhoto": "Foto machen",
+  "album": "Auswahl aus Album",
 };

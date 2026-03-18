@@ -450,7 +450,7 @@ class PcsView extends StatelessWidget {
                   width: double.maxFinite,
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    "${TKey.voltage.tr}(${logic.comTypeList?.voltageA?.unit ?? ""})",
+                    "${TKey.voltage.tr}\n(${logic.comTypeList?.voltageA?.unit ?? ""})",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,
@@ -466,7 +466,7 @@ class PcsView extends StatelessWidget {
                   width: double.maxFinite,
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    "${TKey.current.tr}(${logic.comTypeList?.currentA?.unit ?? ""})",
+                    "${TKey.current.tr}\n(${logic.comTypeList?.currentA?.unit ?? ""})",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,
@@ -482,7 +482,7 @@ class PcsView extends StatelessWidget {
                   width: double.maxFinite,
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    "${TKey.power.tr}(${logic.comTypeList?.activePowerA?.unit ?? ""})",
+                    "${TKey.power.tr}\n(${logic.comTypeList?.activePowerA?.unit ?? ""})",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,
