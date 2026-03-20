@@ -2,7 +2,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/top_item_widget.dart';
-import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart3.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -159,7 +159,9 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.dcPower?.showFieldName ?? "--"}:",
+                    (logic.comTypeList?.dcPower?.showFieldName ?? "").isNotEmpty
+                        ? "${logic.comTypeList?.dcPower?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -176,7 +178,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.dcVoltage?.showFieldName ?? "--",
+                    (logic.comTypeList?.dcVoltage?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.dcVoltage?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -193,7 +198,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.dcCurrent?.showFieldName ?? "--",
+                    (logic.comTypeList?.dcCurrent?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.dcCurrent?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -210,8 +218,11 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.totalChargeElectric?.showFieldName ??
-                        "--",
+                    (logic.comTypeList?.totalChargeElectric?.showFieldName ??
+                                "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.totalChargeElectric?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -226,7 +237,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.totalOutElectric?.showFieldName ?? "--",
+                    (logic.comTypeList?.totalOutElectric?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.totalOutElectric?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -242,7 +256,9 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.hz?.showFieldName ?? "--",
+                    (logic.comTypeList?.hz?.showFieldName ?? "").isNotEmpty
+                        ? "${logic.comTypeList?.hz?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -258,7 +274,9 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.temp?.showFieldName ?? "--",
+                    (logic.comTypeList?.temp?.showFieldName ?? "").isNotEmpty
+                        ? "${logic.comTypeList?.temp?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -274,7 +292,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.activePowerT?.showFieldName ?? "--",
+                    (logic.comTypeList?.activePowerT?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.activePowerT?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -290,7 +311,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.reactivePowerT?.showFieldName ?? "--",
+                    (logic.comTypeList?.reactivePowerT?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.reactivePowerT?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -306,7 +330,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.powerTFactor?.showFieldName ?? "--",
+                    (logic.comTypeList?.powerTFactor?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.powerTFactor?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -322,7 +349,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.apparentPowerT?.showFieldName ?? "--",
+                    (logic.comTypeList?.apparentPowerT?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.apparentPowerT?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -338,7 +368,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.powerAFactor?.showFieldName ?? "--",
+                    (logic.comTypeList?.powerAFactor?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.powerAFactor?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -354,7 +387,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.powerBFactor?.showFieldName ?? "--",
+                    (logic.comTypeList?.powerBFactor?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.powerBFactor?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -370,7 +406,10 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    logic.comTypeList?.powerCFactor?.showFieldName ?? "--",
+                    (logic.comTypeList?.powerCFactor?.showFieldName ?? "")
+                            .isNotEmpty
+                        ? "${logic.comTypeList?.powerCFactor?.showFieldName ?? ""}:"
+                        : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -733,7 +772,7 @@ class PcsView extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                               )
-                            : MonitorLineChartWidget3(
+                            : MonitorLineChartWidget4(
                                 powerList: logic.powerList,
                                 maxY: logic.powerMaxY,
                                 minY: logic.powerMinY,

@@ -44,6 +44,7 @@ class Assets {
       'assets/img/cumulative_discharge.png';
   static const String imgCumulativeDischarge2 =
       'assets/img/cumulative_discharge2.png';
+  static const String imgLastDayRecharge = 'assets/img/lastday_recharge.png';
   static const String imgEmpty = 'assets/img/empty.png';
   static const String imgEnergyStorage = 'assets/img/energy_storage.png';
   static const String imgEnergyStorage2 = 'assets/img/energy_storage2.png';

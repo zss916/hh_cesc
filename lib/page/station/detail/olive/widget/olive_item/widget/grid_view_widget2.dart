@@ -107,7 +107,7 @@ class GridViewWidget2 extends StatelessWidget {
                   }
                 },
                 child: StationOverviewItemWidget(
-                  icon: Assets.imgCumulativeDischarge2,
+                  icon: Assets.imgLastDayRecharge,
                   value: "$currencyUnit$showTodayIncome",
                   unit: '',
                   title: TKey.lastDayIncome.tr,

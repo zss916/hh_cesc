@@ -74,7 +74,9 @@ class RealTimeDataWidget extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                item.showFieldName.trim(),
+                                item.showFieldName.trim().isNotEmpty
+                                    ? "${item.showFieldName.trim()}:"
+                                    : "",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Color(0xA6FFFFFF),
@@ -82,7 +84,7 @@ class RealTimeDataWidget extends StatelessWidget {
                               ),
                               Spacer(),
                               Text(
-                                "${item.showValue}${item.unit}",
+                                "${item.showValue}${(item.unit ?? "")}",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Color(0xFFFFFFFF),
@@ -142,7 +144,9 @@ class RealTimeDataWidget extends StatelessWidget {
                               return Row(
                                 children: [
                                   Text(
-                                    comItem.showFieldName,
+                                    comItem.showFieldName.isNotEmpty
+                                        ? "${comItem.showFieldName}:"
+                                        : "",
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Color(0xA6FFFFFF),
@@ -152,7 +156,7 @@ class RealTimeDataWidget extends StatelessWidget {
                                   Text(
                                     comItem.showValue.isEmpty
                                         ? "-"
-                                        : "${comItem.showValue}${comItem.unit}",
+                                        : "${comItem.showValue}${(comItem.unit ?? "")}",
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Color(0xFFFFFFFF),
