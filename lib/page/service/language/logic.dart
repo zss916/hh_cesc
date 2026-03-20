@@ -2,32 +2,14 @@ part of 'index.dart';
 
 class ChangeLanguageLogic extends GetxController {
   List<Map<String, dynamic>> get _data => [
-    {
-      "title": TKey.languageZh.tr,
-      "locale": Locale('zh', 'CN'),
-      "isCheck": false,
-    },
-    {
-      "title": TKey.languageEn.tr,
-      "locale": Locale('en', 'US'),
-      "isCheck": false,
-    },
-    {
-      "title": TKey.languageDe.tr,
-      "locale": Locale('de', 'DE'),
-      "isCheck": false,
-    },
-    {
-      "title": TKey.languageEs.tr,
-      "locale": Locale('es', 'DE'),
-      "isCheck": false,
-    },
+    {"title": TKey.languageZh, "locale": Locale('zh', 'CN'), "isCheck": false},
+    {"title": TKey.languageEn, "locale": Locale('en', 'US'), "isCheck": false},
+    {"title": TKey.languageDe, "locale": Locale('de', 'DE'), "isCheck": false},
+    {"title": TKey.languageEs, "locale": Locale('es', 'DE'), "isCheck": false},
   ];
 
   List<Map<String, dynamic>> _sortList = [];
   List<Map<String, dynamic>> list = [];
-
-  //Locale? selectLocale;
 
   @override
   void onInit() {

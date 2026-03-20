@@ -55,7 +55,7 @@ class GridViewWidget2 extends StatelessWidget {
                   }
                 },
                 child: StationOverviewItemWidget(
-                  icon: Assets.imgEnergyStorage2,
+                  icon: Assets.imgCumulativeCharging2,
                   value: '$todayCharging ',
                   unit: todayChargingUnit,
                   title: TKey.todayCharging.tr,
@@ -77,7 +77,7 @@ class GridViewWidget2 extends StatelessWidget {
                   }
                 },
                 child: StationOverviewItemWidget(
-                  icon: Assets.imgCumulativeCharging2,
+                  icon: Assets.imgCumulativeDischarge2,
                   value: "$todayDischarge ",
                   unit: todayDischargeUnit,
                   title: TKey.todayDischarge.tr,

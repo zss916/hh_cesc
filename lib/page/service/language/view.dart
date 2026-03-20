@@ -33,7 +33,7 @@ class ChangeLanguagePage extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     Map<String, dynamic> item = logic.list[index];
                     return buildSwitchLanguage(
-                      title: item['title'],
+                      title: "${item['title']}".tr,
                       locale: item['locale'],
                       isCheck: item['isCheck'],
                       logic: logic,
