@@ -1,5 +1,6 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/home/widget/pie_chart_line_widget.dart';
+import 'package:cescpro/page/station/index/widget/text_rich_widget2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_echart/flutter_echart.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,7 +53,8 @@ class BuildStationStatus extends StatelessWidget {
         ),
         Container(
           width: double.maxFinite,
-          height: 220.h,
+          // height: 220.h,
+          constraints: BoxConstraints(minHeight: 220.h),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             color: Color(0xFF313540),
@@ -65,14 +67,102 @@ class BuildStationStatus extends StatelessWidget {
             end: 16.w,
           ),
           padding: EdgeInsetsDirectional.all(16.r),
-          child: RepaintBoundary(
-            child: PieChartLineWidget(
-              total: (normalNum + faultNum + alarmNum + cutOffNum),
-              normalNum: normalNum,
-              faultNum: faultNum,
-              alarmNum: alarmNum,
-              cutOffNum: cutOffNum,
-            ),
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.maxFinite,
+                height: 150.h,
+                child: RepaintBoundary(
+                  child: PieChartLineWidget(
+                    total: (normalNum + faultNum + alarmNum + cutOffNum),
+                    normalNum: normalNum,
+                    faultNum: faultNum,
+                    alarmNum: alarmNum,
+                    cutOffNum: cutOffNum,
+                  ),
+                ),
+              ),
+
+              Divider(color: Colors.transparent, height: 8.h),
+
+              SizedBox(
+                width: double.maxFinite,
+                child: Wrap(
+                  spacing: 20.w,
+                  runSpacing: 8.h,
+                  children: [
+                    if (normalNum != 0)
+                      TextRichWidget2(
+                        pointColor: Color(0xFF3BFFC5),
+                        interval: 8.w,
+                        title: "${TKey.common.tr}:",
+                        titleStyle: TextStyle(
+                          color: Color(0xFF3BFFC5),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                        value: "$normalNum",
+                        valueStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                        ),
+                      ),
+                    if (faultNum != 0)
+                      TextRichWidget2(
+                        pointColor: Color(0xFFF8D834),
+                        interval: 8.w,
+                        title: "${TKey.fault.tr}:",
+                        titleStyle: TextStyle(
+                          color: Color(0xFFF8D834),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                        value: "$faultNum",
+                        valueStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                        ),
+                      ),
+                    if (alarmNum != 0)
+                      TextRichWidget2(
+                        pointColor: Color(0xFFFF9C4A),
+                        interval: 8.w,
+                        title: "${TKey.alarm.tr}:",
+                        titleStyle: TextStyle(
+                          color: Color(0xFFFF9C4A),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                        value: "$alarmNum",
+                        valueStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                        ),
+                      ),
+                    if (cutOffNum != 0)
+                      TextRichWidget2(
+                        pointColor: Color(0xFF44A7FF),
+                        interval: 8.w,
+                        title: "${TKey.interrupt.tr}:",
+                        titleStyle: TextStyle(
+                          color: Color(0xFF44A7FF),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                        value: "$cutOffNum",
+                        valueStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
 

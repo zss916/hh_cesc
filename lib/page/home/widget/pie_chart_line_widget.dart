@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +30,7 @@ class PieChartLineWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CustomPaint(
-        size: Size(Get.isDe ? 170.w : 220.w, 0),
+        size: Size(220.w, 0),
         painter: PieChartPainter(
           total: total,
           models: [
@@ -202,7 +201,8 @@ class PieChartPainter extends CustomPainter {
     var ratio = (sweepAngle / 360.0 * 100).toStringAsFixed(1);
     // 处理名称超长问题，最多2行，超出部分以省略号显示
     // 10 -> 最多10个字位数,20
-    var top = Text(_getWrappedText("${model.name} ${model.data}", 20));
+    // String content = Get.isZh ? "${model.name} ${model.data}" : "${model.data}";
+    var top = Text(_getWrappedText("${model.data}", 20));
     //var top = Text(_getWrappedText("${model.data}", 20));
     var topTextPainter = getTextPainter(top, color: model.color);
     // 百分比显示

@@ -144,7 +144,7 @@ const es = {
   "currentMonthIncome": "Ingresos del mes actual",
   "lastDayIncome": "Ingresos de ayer",
   "totalNeg": "Descarga total",
-  "currentYearNeg": "Ejecución del año actual",
+  "currentYearNeg": "Descarga del año actual",
   "currentMonthNeg": "Descarga del mes actual",
   "neg": "Capacidad de descarga",
   "todayNeg": "Descarga de hoy",
