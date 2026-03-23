@@ -27,7 +27,7 @@ const es = {
   "moneyKUnit": "Mil (€)",
   "moneyWUnit": "Diez mil (€)",
   "stationOverview": "Resumen de estación",
-  "energyStorageInstalledCapacity": "Cap. Almac. Energía",
+  "energyStorageInstalledCapacity": "Capacidad instalada",
   "cumulativeChargingCapacity": "Carga acumulada",
   "deviceNum": "Dispositivo",
   "stationNum": "Estación",
@@ -82,10 +82,8 @@ const es = {
   "powerStationInformation": "Información de la estación de energía",
   "powerSiteName": "Nombre de la central eléctrica",
   "affiliatedCustomer": "Cliente afiliado",
-  "energyStorageDevicesCount":
-      "Número de dispositivos de almacenamiento de energía",
-  "energyStorageInstalledPower":
-      "Potencia instalada de almacenamiento de energía",
+  "energyStorageDevicesCount": "Dispositivos de almacenamiento de energía",
+  "energyStorageInstalledPower": "Almacenamiento de energía instalado",
   "photovoltaicInstalledCapacity": "Capacidad fotovoltaica instalada",
   "photovoltaicInstalledPower": "Potencia fotovoltaica instalada",
   "oliveSiteDetails": "Detalles",

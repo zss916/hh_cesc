@@ -18,11 +18,11 @@ class EleTableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildEleList();
+    return buildEleList(queryType);
   }
 
   ///海外版的收益报表
-  Widget buildEleList() {
+  Widget buildEleList(QueryType queryType) {
     return Container(
       width: double.maxFinite,
       clipBehavior: Clip.hardEdge,
@@ -174,7 +174,8 @@ class EleTableWidget extends StatelessWidget {
                             width: double.maxFinite,
                             alignment: AlignmentDirectional.center,
                             child: Text(
-                              item.dayDate ?? "--",
+                              item.showDayDate(queryType),
+                              //item.dayDate ?? "--",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: const Color(0xD9FFFFFF),

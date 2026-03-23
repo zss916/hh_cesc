@@ -28,7 +28,7 @@ class CustomMonthPicker extends StatefulWidget {
 class _CustomMonthPickerState extends State<CustomMonthPicker> {
   DateTime currentDate = DateTime.now();
 
-  List<String> monthsList = [
+  /*List<String> monthsList = [
     "Jan",
     "Feb",
     "Mar",
@@ -41,6 +41,21 @@ class _CustomMonthPickerState extends State<CustomMonthPicker> {
     "Oct",
     "Nov",
     "Dec",
+  ];*/
+
+  List<String> monthsList = [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
   ];
 
   @override
