@@ -61,6 +61,7 @@ class AlarmLogic extends GetxController with RefresherAndLoadLogic {
     ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       if (pageNum == 1) {
+        //data.where((e) => (e.status ?? 0) == 0).toList().assignAll(value);
         data.assignAll(value);
         refreshCtrl.refreshCompleted();
       } else {

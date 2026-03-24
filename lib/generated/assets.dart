@@ -29,6 +29,7 @@ class Assets {
   static const String imgAccumulatedPhotovoltaic2 =
       'assets/img/accumulated_photovoltaic2.png';
   static const String imgAlarm = 'assets/img/alarm.png';
+  static const String imgAlarm0 = 'assets/img/alarm0.png';
   static const String imgAlarm1 = 'assets/img/alarm1.png';
   static const String imgAlarm2 = 'assets/img/alarm2.png';
   static const String imgAlarm3 = 'assets/img/alarm3.png';

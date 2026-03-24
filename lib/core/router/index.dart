@@ -1,5 +1,7 @@
+import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
+import 'package:cescpro/page/alarm/detail/view.dart';
 import 'package:cescpro/page/login/index.dart';
 import 'package:cescpro/page/main/index.dart';
 import 'package:cescpro/page/service/about/index.dart';

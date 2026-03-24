@@ -134,4 +134,8 @@ class PageTools {
     APages.eleReport,
     arguments: {"siteId": siteId, "location": location},
   );
+
+  ///首页告警详情
+  static toAlarmDetails(AlarmItemEntity item) =>
+      Get.toNamed(APages.alarmDetails, arguments: item);
 }
