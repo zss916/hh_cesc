@@ -3,6 +3,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/page/alarm/index/widget/alarm_level.dart';
 import 'package:cescpro/page/alarm/index/widget/alarm_status.dart';
+import 'package:cescpro/page/alarm/tab/view/widget/tooltip_widget.dart';
 import 'package:cescpro/page/station/index/widget/text_rich_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,12 +16,14 @@ class AlarmItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return buildItem();
+
+    /*return GestureDetector(
       onTap: () {
         // PageTools.toAlarmDetails(item);
       },
       child: buildItem(),
-    );
+    );*/
   }
 
   Widget buildItem() {
@@ -44,15 +47,17 @@ class AlarmItem extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsetsDirectional.only(end: 0),
-                    margin: EdgeInsetsDirectional.only(start: 0.w, end: 5.w),
-                    child: Text(
-                      item.siteName ?? "",
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white, fontSize: 15.sp),
+                  child: TooltipWidget(
+                    child: Container(
+                      width: double.maxFinite,
+                      padding: EdgeInsetsDirectional.only(end: 0),
+                      margin: EdgeInsetsDirectional.only(start: 0.w, end: 5.w),
+                      child: Text(
+                        item.siteName ?? "",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: Colors.white, fontSize: 15.sp),
+                      ),
                     ),
                   ),
                 ),
@@ -112,28 +117,39 @@ class AlarmItem extends StatelessWidget {
             ),
           ),
 
-          Container(
-            padding: EdgeInsetsDirectional.symmetric(
-              vertical: 8,
-              horizontal: 14,
+          ///Tooltip
+          TooltipWidget(
+            content: Text(
+              item.content ?? "",
+              style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
             ),
-            width: double.maxFinite,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  TKey.alarmContent.tr,
-                  style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
-                ),
-
-                Expanded(
-                  child: Text(
-                    item.content ?? "",
-                    textAlign: TextAlign.right,
-                    style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+            child: Container(
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: 8,
+                horizontal: 14,
+              ),
+              width: double.maxFinite,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: EdgeInsetsDirectional.only(end: 15.w),
+                    child: Text(
+                      TKey.alarmContent.tr,
+                      style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
+                    ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: Text(
+                      item.content ?? "",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 

@@ -70,6 +70,9 @@ dependencies:
   #liquid_glass: ^0.0.2
   #gradient_borders: 1.0.2
   #flutter_debounce: 2.0.0
+  #tooltip
+  super_tooltip: 2.1.1
+
 
 
 
