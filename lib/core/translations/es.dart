@@ -253,4 +253,6 @@ const es = {
   "filter": "filtro",
   "takePhoto": "Tome una foto",
   "album": "Seleccionar desde el álbum",
+  "realTimeAlarms": "Alarma real",
+  "historyAlarms": " Historial alarmas",
 };

@@ -87,9 +87,13 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                         //strokeWidth: 1, // 水平线宽度
                       );
                     },
+                    /*checkToShowHorizontalLine: (value) {
+                      return true;
+                    },*/
                   ), // 网格数据
                   alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
                   extraLinesData: ExtraLinesData(
+                    //extraLinesOnTop: true,
                     horizontalLines: [
                       HorizontalLine(
                         y: 0,
@@ -193,6 +197,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
         sideTitles: SideTitles(
           showTitles: true,
           reservedSize: 40,
+          // maxIncluded: false,
           getTitlesWidget: (value, meta) {
             final style = TextStyle(
               color: Colors.white,
@@ -206,6 +211,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
             );
 
             bool isShow = (value == widget.minY) || (value == widget.maxY);
+            // debugPrint("meta ===>>> ${meta.appliedInterval}");
             return SideTitleWidget(
               space: 1,
               meta: meta,

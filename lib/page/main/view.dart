@@ -16,6 +16,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   late StreamSubscription<MainPageEvent> mainEvent;
   int drawerIndex = DrawerTypeEnum.site.index;
   int? siteStatus;
+  int? alarmLevel;
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
       safeSetState(() {
         drawerIndex = event.index;
         siteStatus = event.siteStatus;
+        alarmLevel = event.alarmLevel;
       });
     });
     mainEvent = AppEventBus.eventBus.on<MainPageEvent>().listen((event) {
@@ -83,7 +85,13 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
             extendBody: true,
             body: IndexedStack(
               index: select,
-              children: [HomePage(), StationPage(), AlarmPage(), ServicePage()],
+              children: [
+                HomePage(),
+                StationPage(),
+                AlarmTabPage(),
+                //AlarmPage(),
+                ServicePage(),
+              ],
             ),
             bottomNavigationBar: Container(
               clipBehavior: Clip.hardEdge,
@@ -231,6 +239,29 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                 ),
               if (index == DrawerTypeEnum.alarm.index)
                 AlarmDrawer(
+                  alarmLevel: alarmLevel,
+                  onReset: () {
+                    closeDrawer();
+                  },
+                  onConfirm: () {
+                    closeDrawer();
+                  },
+                ),
+
+              if (index == DrawerTypeEnum.realTimeAlarm.index)
+                RealTimeAlarmDrawer(
+                  alarmLevel: alarmLevel,
+                  onReset: () {
+                    closeDrawer();
+                  },
+                  onConfirm: () {
+                    closeDrawer();
+                  },
+                ),
+
+              if (index == DrawerTypeEnum.historyAlarm.index)
+                HistoryAlarmDrawer(
+                  alarmLevel: alarmLevel,
                   onReset: () {
                     closeDrawer();
                   },

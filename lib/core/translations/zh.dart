@@ -245,4 +245,6 @@ const zh = {
   "filter": "筛选",
   "takePhoto": "拍摄",
   "album": "相册",
+  "realTimeAlarms": "实时告警",
+  "historyAlarms": "历史告警",
 };

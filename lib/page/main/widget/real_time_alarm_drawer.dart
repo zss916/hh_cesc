@@ -3,7 +3,7 @@ import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/core/service/app_info_service.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/site_data_entity.dart';
-import 'package:cescpro/page/alarm/index/index.dart';
+import 'package:cescpro/page/alarm/tab/view/realTime/real_time_alarm_logic.dart';
 import 'package:cescpro/page/main/index.dart';
 import 'package:cescpro/page/main/sheet/alarm_select_sheet.dart';
 import 'package:cescpro/page/main/sheet/select_country_sheet.dart';
@@ -15,12 +15,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class AlarmDrawer extends StatefulWidget {
+class RealTimeAlarmDrawer extends StatefulWidget {
   final Function onReset;
   final Function onConfirm;
   final int? alarmLevel;
 
-  const AlarmDrawer({
+  const RealTimeAlarmDrawer({
     super.key,
     this.alarmLevel,
     required this.onReset,
@@ -28,10 +28,10 @@ class AlarmDrawer extends StatefulWidget {
   });
 
   @override
-  State<AlarmDrawer> createState() => _AlarmDrawerState();
+  State<RealTimeAlarmDrawer> createState() => _RealTimeAlarmDrawerState();
 }
 
-class _AlarmDrawerState extends State<AlarmDrawer> {
+class _RealTimeAlarmDrawerState extends State<RealTimeAlarmDrawer> {
   String? startTime;
   DateTime? startDateTime;
   String? endTime;
@@ -46,17 +46,18 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
   @override
   void initState() {
     super.initState();
-    siteId = safeFind<AlarmLogic>()?.siteId;
-    siteName = safeFind<AlarmLogic>()?.siteName;
-    countryItem = safeFind<AlarmLogic>()?.country;
-    alarmLevel = safeFind<AlarmLogic>()?.alarmLevel;
-    alarmTitle = (safeFind<AlarmLogic>()?.alarmLevel ?? 0).getAlarmTitle();
-    int? startTimeMill = safeFind<AlarmLogic>()?.startTimeMill;
+    siteId = safeFind<RealTimeAlarmLogic>()?.siteId;
+    siteName = safeFind<RealTimeAlarmLogic>()?.siteName;
+    countryItem = safeFind<RealTimeAlarmLogic>()?.country;
+    alarmLevel = safeFind<RealTimeAlarmLogic>()?.alarmLevel;
+    alarmTitle = (safeFind<RealTimeAlarmLogic>()?.alarmLevel ?? 0)
+        .getAlarmTitle();
+    int? startTimeMill = safeFind<RealTimeAlarmLogic>()?.startTimeMill;
     if (startTimeMill != null) {
       startDateTime = DateTime.fromMillisecondsSinceEpoch(startTimeMill);
       startTime = DateFormat('yyyy-MM-dd').format(startDateTime!);
     }
-    int? endTimeMill = safeFind<AlarmLogic>()?.endTimeMill;
+    int? endTimeMill = safeFind<RealTimeAlarmLogic>()?.endTimeMill;
     if (endTimeMill != null) {
       endDateTime = DateTime.fromMillisecondsSinceEpoch(endTimeMill);
       endTime = DateFormat('yyyy-MM-dd').format(endDateTime!);
@@ -170,13 +171,13 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  safeFind<AlarmLogic>()?.startTimeMill = null;
-                  safeFind<AlarmLogic>()?.endTimeMill = null;
-                  safeFind<AlarmLogic>()?.country = null;
-                  safeFind<AlarmLogic>()?.alarmLevel = null;
-                  safeFind<AlarmLogic>()?.siteId = null;
-                  safeFind<AlarmLogic>()?.siteName = null;
-                  safeFind<AlarmLogic>()?.refreshData(isLoading: true);
+                  safeFind<RealTimeAlarmLogic>()?.startTimeMill = null;
+                  safeFind<RealTimeAlarmLogic>()?.endTimeMill = null;
+                  safeFind<RealTimeAlarmLogic>()?.country = null;
+                  safeFind<RealTimeAlarmLogic>()?.alarmLevel = null;
+                  safeFind<RealTimeAlarmLogic>()?.siteId = null;
+                  safeFind<RealTimeAlarmLogic>()?.siteName = null;
+                  safeFind<RealTimeAlarmLogic>()?.toFilter();
                   widget.onReset.call();
                 },
                 child: Container(
@@ -199,15 +200,15 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  safeFind<AlarmLogic>()?.startTimeMill =
+                  safeFind<RealTimeAlarmLogic>()?.startTimeMill =
                       startDateTime?.millisecondsSinceEpoch;
-                  safeFind<AlarmLogic>()?.endTimeMill =
+                  safeFind<RealTimeAlarmLogic>()?.endTimeMill =
                       endDateTime?.millisecondsSinceEpoch;
-                  safeFind<AlarmLogic>()?.country = countryItem;
-                  safeFind<AlarmLogic>()?.alarmLevel = alarmLevel;
-                  safeFind<AlarmLogic>()?.siteId = siteId;
-                  safeFind<AlarmLogic>()?.siteName = siteName;
-                  safeFind<AlarmLogic>()?.loadData();
+                  safeFind<RealTimeAlarmLogic>()?.country = countryItem;
+                  safeFind<RealTimeAlarmLogic>()?.alarmLevel = alarmLevel;
+                  safeFind<RealTimeAlarmLogic>()?.siteId = siteId;
+                  safeFind<RealTimeAlarmLogic>()?.siteName = siteName;
+                  safeFind<RealTimeAlarmLogic>()?.toFilter();
                   widget.onConfirm.call();
 
                   /* debugPrint(

@@ -236,4 +236,6 @@ const de = {
   "filter": "Filter",
   "takePhoto": "Foto machen",
   "album": "Auswahl aus Album",
+  "realTimeAlarms": "Echtzeit-Alarme",
+  "historyAlarms": "Geschichte Alarme",
 };

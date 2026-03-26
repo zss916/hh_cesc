@@ -486,6 +486,8 @@ class TKey {
   static const String filter = "filter";
   static const String takePhoto = "takePhoto";
   static const String album = "album";
+  static const String realTimeAlarms = "realTimeAlarms";
+  static const String historyAlarms = "historyAlarms";
 }
 
 const en = {
@@ -741,4 +743,6 @@ const en = {
   "filter": "Filter",
   "takePhoto": "Take Photo",
   "album": "Select from Album",
+  "realTimeAlarms": "Real-time Alarms",
+  "historyAlarms": "History Alarms",
 };

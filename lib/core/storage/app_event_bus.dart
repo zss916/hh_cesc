@@ -7,7 +7,8 @@ class AppEventBus {
 class OpenDrawerEvent {
   final int index;
   final int? siteStatus;
-  OpenDrawerEvent(this.index, {this.siteStatus});
+  final int? alarmLevel;
+  OpenDrawerEvent(this.index, {this.siteStatus, this.alarmLevel});
 }
 
 class HasPVEvent {
