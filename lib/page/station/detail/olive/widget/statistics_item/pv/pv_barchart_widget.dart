@@ -56,7 +56,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
               padding: const EdgeInsetsDirectional.only(
                 start: 12,
                 end: 12,
-                top: 12,
+                top: 18,
                 bottom: 0,
               ),
               // padding: const EdgeInsets.all(12.0),
@@ -100,23 +100,26 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                         color: Colors.white, // 水平线颜色
                         strokeWidth: 1, // 水平线宽度
                       ),
-                      /* HorizontalLine(
+                      HorizontalLine(
                         y: widget.maxY,
+                        label: HorizontalLineLabel(show: true),
                         // color: Colors.transparent, // 水平线颜色
                         // strokeWidth: 1, // 水平线宽度
                         color: Color(0xFFFEDB65),
                         strokeWidth: 0.4,
                         dashArray: [8, 4],
-                      ),*/
+                      ),
 
-                      /* HorizontalLine(
-                        y: widget.minY,
-                        // color: Colors.transparent, // 水平线颜色
-                        // strokeWidth: 1, // 水平线宽度
-                        color: Color(0xFFFEDB65),
-                        strokeWidth: 0.4,
-                        dashArray: [8, 4],
-                      ),*/
+                      if (widget.minY != 0)
+                        HorizontalLine(
+                          y: widget.minY,
+                          label: HorizontalLineLabel(show: true),
+                          // color: Colors.transparent, // 水平线颜色
+                          // strokeWidth: 1, // 水平线宽度
+                          color: Color(0xFFFEDB65),
+                          strokeWidth: 0.4,
+                          dashArray: [8, 4],
+                        ),
                     ],
                   ),
                   // 额外线条数据
@@ -198,6 +201,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
           showTitles: true,
           reservedSize: 40,
           maxIncluded: false,
+          minIncluded: true,
           getTitlesWidget: (value, meta) {
             final style = TextStyle(
               color: Colors.white,
@@ -210,7 +214,8 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
               fontSize: 10.sp,
             );
 
-            bool isShow = (value == widget.minY) || (value == widget.maxY);
+            //bool isShow = (value == widget.minY) || (value == widget.maxY);
+            bool isShow = false;
             // debugPrint("meta ===>>> ${meta.appliedInterval}");
             return SideTitleWidget(
               space: 1,

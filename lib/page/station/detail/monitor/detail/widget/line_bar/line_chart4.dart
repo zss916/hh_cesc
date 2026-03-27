@@ -107,6 +107,8 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
                     sideTitles: SideTitles(
                       showTitles: true,
                       reservedSize: 35,
+                      maxIncluded: false,
+                      minIncluded: widget.minY == 0,
                       getTitlesWidget: (value, meta) {
                         TextStyle textStyle = TextStyle(
                           color: Color(0xA8FFFFFF),
