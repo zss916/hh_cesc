@@ -593,7 +593,7 @@ const en = {
   "cancel": "Cancel",
   "selectTime": "Select Time",
   "total": "Total",
-  "deviceSerialNumber": "Device Serial Number:",
+  "deviceSerialNumber": "Device SN:",
   "alarmDevice": "Alarm Device:",
   "alarmContent": "Alarm Content:",
   "startTime": "Start Time:",

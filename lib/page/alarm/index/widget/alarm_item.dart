@@ -46,7 +46,7 @@ class AlarmItem extends StatelessWidget {
             width: double.maxFinite,
             child: Row(
               children: [
-                Expanded(
+                /*Expanded(
                   child: TooltipWidget(
                     child: Container(
                       width: double.maxFinite,
@@ -60,8 +60,26 @@ class AlarmItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
+                ),*/
                 AlarmLevel(level: item.alarmLevel ?? 0, status: item.status),
+
+                SizedBox(width: 20.w),
+
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      TKey.deviceSerialNumber.tr,
+                      style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
+                    ),
+                    SizedBox(width: 10.w),
+
+                    Text(
+                      item.sn ?? "",
+                      style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -73,7 +91,7 @@ class AlarmItem extends StatelessWidget {
             endIndent: 10.w,
           ),
 
-          Container(
+          /*Container(
             padding: EdgeInsetsDirectional.symmetric(
               vertical: 8,
               horizontal: 14,
@@ -92,6 +110,40 @@ class AlarmItem extends StatelessWidget {
                   style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
                 ),
               ],
+            ),
+          ),*/
+          TooltipWidget(
+            content: Text(
+              item.siteName ?? "",
+              style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+            ),
+            child: Container(
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: 8,
+                horizontal: 14,
+              ),
+              width: double.maxFinite,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: EdgeInsetsDirectional.only(end: 15.w),
+                    child: Text(
+                      "${TKey.siteName.tr}:",
+                      style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      item.siteName ?? "",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
 
@@ -153,53 +205,55 @@ class AlarmItem extends StatelessWidget {
             ),
           ),
 
-          Container(
-            padding: EdgeInsetsDirectional.symmetric(
-              vertical: 8,
-              horizontal: 14,
-            ),
-            width: double.maxFinite,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  TKey.startTime.tr,
-                  style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
-                ),
+          if (item.startTimeMill != null)
+            Container(
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: 8,
+                horizontal: 14,
+              ),
+              width: double.maxFinite,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    TKey.startTime.tr,
+                    style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
+                  ),
 
-                Text(
-                  item.startTimeMill == null
-                      ? "--"
-                      : (item.startTimeMill ?? 0).timestampFormat,
-                  style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
-                ),
-              ],
+                  Text(
+                    item.startTimeMill == null
+                        ? "--"
+                        : (item.startTimeMill ?? 0).timestampFormat,
+                    style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          Container(
-            padding: EdgeInsetsDirectional.symmetric(
-              vertical: 8,
-              horizontal: 14,
-            ),
-            width: double.maxFinite,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  TKey.endTime.tr,
-                  style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
-                ),
+          if (item.endTimeMill != null)
+            Container(
+              padding: EdgeInsetsDirectional.symmetric(
+                vertical: 8,
+                horizontal: 14,
+              ),
+              width: double.maxFinite,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    TKey.endTime.tr,
+                    style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
+                  ),
 
-                Text(
-                  item.endTimeMill == null
-                      ? "--"
-                      : (item.endTimeMill ?? 0).timestampFormat,
-                  style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
-                ),
-              ],
+                  Text(
+                    item.endTimeMill == null
+                        ? "--"
+                        : (item.endTimeMill ?? 0).timestampFormat,
+                    style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
+                  ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
@@ -349,53 +403,67 @@ class AlarmItem extends StatelessWidget {
                 ),
               ),
 
-              Container(
-                padding: EdgeInsetsDirectional.symmetric(
-                  vertical: 8,
-                  horizontal: 14,
-                ),
-                width: double.maxFinite,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      TKey.startTime.tr,
-                      style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
-                    ),
+              if (item.startTimeMill != null)
+                Container(
+                  padding: EdgeInsetsDirectional.symmetric(
+                    vertical: 8,
+                    horizontal: 14,
+                  ),
+                  width: double.maxFinite,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        TKey.startTime.tr,
+                        style: TextStyle(
+                          color: Color(0xA6FFFFFF),
+                          fontSize: 14,
+                        ),
+                      ),
 
-                    Text(
-                      item.startTimeMill == null
-                          ? "--"
-                          : (item.startTimeMill ?? 0).timestampFormat,
-                      style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
-                    ),
-                  ],
+                      Text(
+                        item.startTimeMill == null
+                            ? "--"
+                            : (item.startTimeMill ?? 0).timestampFormat,
+                        style: TextStyle(
+                          color: Color(0xFFFFFFFF),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
 
-              Container(
-                padding: EdgeInsetsDirectional.symmetric(
-                  vertical: 8,
-                  horizontal: 14,
-                ),
-                width: double.maxFinite,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      TKey.endTime.tr,
-                      style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
-                    ),
+              if (item.endTimeMill != null)
+                Container(
+                  padding: EdgeInsetsDirectional.symmetric(
+                    vertical: 8,
+                    horizontal: 14,
+                  ),
+                  width: double.maxFinite,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        TKey.endTime.tr,
+                        style: TextStyle(
+                          color: Color(0xA6FFFFFF),
+                          fontSize: 14,
+                        ),
+                      ),
 
-                    Text(
-                      item.endTimeMill == null
-                          ? "--"
-                          : (item.endTimeMill ?? 0).timestampFormat,
-                      style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
-                    ),
-                  ],
+                      Text(
+                        item.endTimeMill == null
+                            ? "--"
+                            : (item.endTimeMill ?? 0).timestampFormat,
+                        style: TextStyle(
+                          color: Color(0xFFFFFFFF),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ),
