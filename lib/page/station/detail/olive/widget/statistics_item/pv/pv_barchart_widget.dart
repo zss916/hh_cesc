@@ -100,23 +100,23 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                         color: Colors.white, // 水平线颜色
                         strokeWidth: 1, // 水平线宽度
                       ),
-                      HorizontalLine(
+                      /* HorizontalLine(
                         y: widget.maxY,
                         // color: Colors.transparent, // 水平线颜色
                         // strokeWidth: 1, // 水平线宽度
                         color: Color(0xFFFEDB65),
                         strokeWidth: 0.4,
                         dashArray: [8, 4],
-                      ),
+                      ),*/
 
-                      HorizontalLine(
+                      /* HorizontalLine(
                         y: widget.minY,
                         // color: Colors.transparent, // 水平线颜色
                         // strokeWidth: 1, // 水平线宽度
                         color: Color(0xFFFEDB65),
                         strokeWidth: 0.4,
                         dashArray: [8, 4],
-                      ),
+                      ),*/
                     ],
                   ),
                   // 额外线条数据
@@ -197,7 +197,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
         sideTitles: SideTitles(
           showTitles: true,
           reservedSize: 40,
-          // maxIncluded: false,
+          maxIncluded: false,
           getTitlesWidget: (value, meta) {
             final style = TextStyle(
               color: Colors.white,

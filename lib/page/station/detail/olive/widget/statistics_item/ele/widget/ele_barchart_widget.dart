@@ -161,19 +161,19 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                                 strokeWidth: 0.4, // 水平线宽度
                               ),
 
-                              HorizontalLine(
+                              /* HorizontalLine(
                                 y: widget.maxY,
                                 color: Colors.transparent,
                                 strokeWidth: 0.4,
                                 dashArray: [8, 4],
-                              ),
+                              ),*/
 
-                              HorizontalLine(
+                              /* HorizontalLine(
                                 y: widget.minY,
                                 color: Colors.transparent, // 水平线颜色
                                 strokeWidth: 0.4,
                                 dashArray: [8, 4],
-                              ),
+                              ),*/
                             ],
                           ),
                           // 额外线条数据
