@@ -97,7 +97,7 @@ const de = {
   "cancel": "Abbrechen",
   "selectTime": "Zeit auswählen",
   "total": "Gesamt",
-  "deviceSerialNumber": "Geräteseriennummer:",
+  "deviceSerialNumber": "SN:",
   "alarmDevice": "Alarmgerät:",
   "alarmContent": "Alarminhalt:",
   "startTime": "Startzeit:",

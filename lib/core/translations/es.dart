@@ -99,7 +99,7 @@ const es = {
   "cancel": "Cancelar",
   "selectTime": "Seleccionar tiempo",
   "total": "Acumulado",
-  "deviceSerialNumber": "N° de serie del dispositivo:",
+  "deviceSerialNumber": "SN:",
   "alarmDevice": "Dispositvo alarmado:",
   "alarmContent": "Contenido de la Alarma:",
   "startTime": "Hora de inicio:",
