@@ -58,7 +58,6 @@ class _AlarmTabPageState extends State<AlarmTabPage>
               fontWeight: FontWeight.w500,
             ),
             isScrollable: false,
-            padding: EdgeInsetsDirectional.only(end: 35),
             labelColor: Color(0xFF43FFFF),
             unselectedLabelColor: Colors.white,
             indicator: const RRecTabIndicator(
