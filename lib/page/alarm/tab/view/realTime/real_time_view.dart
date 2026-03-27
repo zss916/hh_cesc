@@ -1,4 +1,5 @@
 import 'package:cescpro/core/enum/app_enum.dart';
+import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
@@ -34,7 +35,17 @@ class RealTimeAlarmView extends StatelessWidget {
                     },
                   ),
                 ),
-                AlarmFilterWidget(alarmLevel: logic.alarmLevel),
+                AlarmFilterWidget(
+                  alarmLevel: logic.alarmLevel,
+                  onFilter: () {
+                    AppEventBus.eventBus.fire(
+                      OpenDrawerEvent(
+                        DrawerTypeEnum.realTimeAlarm.index,
+                        alarmLevel: logic.alarmLevel,
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),

@@ -1,5 +1,3 @@
-import 'package:cescpro/core/enum/app_enum.dart';
-import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +6,15 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class AlarmFilterWidget extends StatelessWidget {
   final int? alarmLevel;
-  const AlarmFilterWidget({super.key, this.alarmLevel});
+  final Function? onFilter;
+  const AlarmFilterWidget({super.key, this.alarmLevel, this.onFilter});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(5),
       onTap: () {
-        AppEventBus.eventBus.fire(
-          OpenDrawerEvent(
-            DrawerTypeEnum.historyAlarm.index,
-            alarmLevel: alarmLevel,
-          ),
-        );
+        onFilter?.call();
       },
       child: Container(
         padding: EdgeInsetsDirectional.only(
