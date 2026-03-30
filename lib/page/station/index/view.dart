@@ -238,7 +238,7 @@ class StationPage extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              "SOC: ",
+                              "SOC  ",
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontSize: 12,
@@ -259,17 +259,17 @@ class StationPage extends StatelessWidget {
                         ),
                         Divider(height: 8.h, color: Colors.transparent),
                         TextRichWidget(
-                          title: "${TKey.energyStoragePower.tr}: ",
+                          title: "${TKey.energyStoragePower.tr}  ",
                           value: item.showPower,
                         ),
                         Divider(height: 8.h, color: Colors.transparent),
                         TextRichWidget(
-                          title: "${TKey.photovoltaicPower.tr}: ",
+                          title: "${TKey.photovoltaicPower.tr}  ",
                           value: item.showPvPower,
                         ),
                         Divider(height: 8.h, color: Colors.transparent),
                         TextRichWidget(
-                          title: "${TKey.chargeAndDischarge.tr}: ",
+                          title: "${TKey.chargeAndDischarge.tr}  ",
                           value: item.chargeAndRecharge,
                         ),
                       ],
