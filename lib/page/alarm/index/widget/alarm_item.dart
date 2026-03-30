@@ -129,7 +129,7 @@ class AlarmItem extends StatelessWidget {
                   Container(
                     margin: EdgeInsetsDirectional.only(end: 15.w),
                     child: Text(
-                      "${TKey.siteName.tr}:",
+                      TKey.siteName.tr,
                       style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
                     ),
                   ),

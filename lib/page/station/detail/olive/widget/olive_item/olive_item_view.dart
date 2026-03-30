@@ -1748,7 +1748,7 @@ class OliveItemView extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "${TKey.powerSiteName.tr}: ",
+                      text: TKey.powerSiteName.tr,
                       children: [
                         TextSpan(
                           style: TextStyle(
