@@ -61,16 +61,12 @@ class AlarmItem extends StatelessWidget {
                     ),
                   ),
                 ),*/
-                AlarmLevel(level: item.alarmLevel ?? 0, status: item.status),
-
-                SizedBox(width: 20.w),
-
                 Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       TKey.deviceSerialNumber.tr,
-                      style: TextStyle(color: Color(0xA6FFFFFF), fontSize: 14),
+                      style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 14),
                     ),
                     SizedBox(width: 10.w),
 
@@ -80,6 +76,9 @@ class AlarmItem extends StatelessWidget {
                     ),
                   ],
                 ),
+                Spacer(),
+
+                AlarmLevel(level: item.alarmLevel ?? 0, status: item.status),
               ],
             ),
           ),

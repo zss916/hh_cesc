@@ -25,13 +25,16 @@ class AlarmLevel extends StatelessWidget {
   }
 
   Widget buildLevelTemp() => Container(
+    alignment: AlignmentDirectional.center,
     padding: EdgeInsetsDirectional.symmetric(horizontal: 5.w, vertical: 2.h),
     decoration: BoxDecoration(
-      border: Border.all(width: 1, color: Color(0xFF908E8D)),
+      // border: Border.all(width: 1, color: Color(0xFF908E8D)),
       borderRadius: BorderRadius.circular(30),
       color: Color(0xFF908E8D),
     ),
     child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           margin: EdgeInsetsDirectional.only(end: 4.w),
@@ -62,13 +65,16 @@ class AlarmLevel extends StatelessWidget {
   );
 
   Widget buildLevel1() => Container(
+    alignment: AlignmentDirectional.center,
     padding: EdgeInsetsDirectional.symmetric(horizontal: 5.w, vertical: 2.h),
     decoration: BoxDecoration(
-      border: Border.all(width: 1, color: Color(0xFFEB5757)),
+      // border: Border.all(width: 1, color: Color(0xFFEB5757)),
       borderRadius: BorderRadius.circular(30),
       color: Color(0xFFFEF0EC),
     ),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           margin: EdgeInsetsDirectional.only(end: 4.w),
@@ -83,13 +89,16 @@ class AlarmLevel extends StatelessWidget {
   );
 
   Widget buildLevel2() => Container(
+    alignment: AlignmentDirectional.center,
     padding: EdgeInsetsDirectional.symmetric(horizontal: 5.w, vertical: 2.h),
     decoration: BoxDecoration(
-      border: Border.all(width: 1, color: Color(0xFFD7870A)),
+      //  border: Border.all(width: 1, color: Color(0xFFD7870A)),
       borderRadius: BorderRadius.circular(30),
       color: Color(0xFFF7F1E3),
     ),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           margin: EdgeInsetsDirectional.only(end: 4.w),
@@ -105,13 +114,16 @@ class AlarmLevel extends StatelessWidget {
 
   Widget buildLevel3() => Container(
     clipBehavior: Clip.hardEdge,
+    alignment: AlignmentDirectional.center,
     padding: EdgeInsetsDirectional.symmetric(horizontal: 5.w, vertical: 2.h),
     decoration: BoxDecoration(
-      border: Border.all(width: 1, color: Color(0xFFC4A82D)),
+      // border: Border.all(width: 1, color: Color(0xFFC4A82D)),
       borderRadius: BorderRadius.circular(30),
       color: Color(0xFFF0ECDB),
     ),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           margin: EdgeInsetsDirectional.only(end: 4.w),
@@ -119,7 +131,11 @@ class AlarmLevel extends StatelessWidget {
         ),
         Text(
           TKey.alarm3.tr,
-          style: TextStyle(fontSize: 12, color: Color(0xFFC4A82D)),
+          style: TextStyle(
+            //textBaseline: TextBaseline.ideographic,
+            fontSize: 12,
+            color: Color(0xFFC4A82D),
+          ),
         ),
       ],
     ),
