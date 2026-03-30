@@ -27,8 +27,8 @@ class AlarmLevel extends StatelessWidget {
   Widget buildLevelTemp() => Container(
     alignment: AlignmentDirectional.center,
     padding: EdgeInsetsDirectional.only(
-      start: 5.w,
-      end: 5.w,
+      start: 8.w,
+      end: 8.w,
       top: 2,
       bottom: 3,
     ),
@@ -72,8 +72,8 @@ class AlarmLevel extends StatelessWidget {
   Widget buildLevel1() => Container(
     alignment: AlignmentDirectional.center,
     padding: EdgeInsetsDirectional.only(
-      start: 5.w,
-      end: 5.w,
+      start: 8.w,
+      end: 8.w,
       top: 2,
       bottom: 3,
     ),
@@ -101,8 +101,8 @@ class AlarmLevel extends StatelessWidget {
   Widget buildLevel2() => Container(
     alignment: AlignmentDirectional.center,
     padding: EdgeInsetsDirectional.only(
-      start: 5.w,
-      end: 5.w,
+      start: 8.w,
+      end: 8.w,
       top: 2,
       bottom: 3,
     ),
@@ -131,8 +131,8 @@ class AlarmLevel extends StatelessWidget {
     clipBehavior: Clip.hardEdge,
     alignment: AlignmentDirectional.center,
     padding: EdgeInsetsDirectional.only(
-      start: 5.w,
-      end: 5.w,
+      start: 8.w,
+      end: 8.w,
       top: 2,
       bottom: 3,
     ),
