@@ -26,7 +26,12 @@ class AlarmLevel extends StatelessWidget {
 
   Widget buildLevelTemp() => Container(
     alignment: AlignmentDirectional.center,
-    padding: EdgeInsetsDirectional.symmetric(horizontal: 5.w, vertical: 2.h),
+    padding: EdgeInsetsDirectional.only(
+      start: 5.w,
+      end: 5.w,
+      top: 2,
+      bottom: 3,
+    ),
     decoration: BoxDecoration(
       // border: Border.all(width: 1, color: Color(0xFF908E8D)),
       borderRadius: BorderRadius.circular(30),
@@ -66,7 +71,12 @@ class AlarmLevel extends StatelessWidget {
 
   Widget buildLevel1() => Container(
     alignment: AlignmentDirectional.center,
-    padding: EdgeInsetsDirectional.symmetric(horizontal: 5.w, vertical: 2.h),
+    padding: EdgeInsetsDirectional.only(
+      start: 5.w,
+      end: 5.w,
+      top: 2,
+      bottom: 3,
+    ),
     decoration: BoxDecoration(
       // border: Border.all(width: 1, color: Color(0xFFEB5757)),
       borderRadius: BorderRadius.circular(30),
@@ -90,7 +100,12 @@ class AlarmLevel extends StatelessWidget {
 
   Widget buildLevel2() => Container(
     alignment: AlignmentDirectional.center,
-    padding: EdgeInsetsDirectional.symmetric(horizontal: 5.w, vertical: 2.h),
+    padding: EdgeInsetsDirectional.only(
+      start: 5.w,
+      end: 5.w,
+      top: 2,
+      bottom: 3,
+    ),
     decoration: BoxDecoration(
       //  border: Border.all(width: 1, color: Color(0xFFD7870A)),
       borderRadius: BorderRadius.circular(30),
@@ -115,7 +130,12 @@ class AlarmLevel extends StatelessWidget {
   Widget buildLevel3() => Container(
     clipBehavior: Clip.hardEdge,
     alignment: AlignmentDirectional.center,
-    padding: EdgeInsetsDirectional.symmetric(horizontal: 5.w, vertical: 2.h),
+    padding: EdgeInsetsDirectional.only(
+      start: 5.w,
+      end: 5.w,
+      top: 2,
+      bottom: 3,
+    ),
     decoration: BoxDecoration(
       // border: Border.all(width: 1, color: Color(0xFFC4A82D)),
       borderRadius: BorderRadius.circular(30),
