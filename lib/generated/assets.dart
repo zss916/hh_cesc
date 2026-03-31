@@ -28,6 +28,7 @@ class Assets {
       'assets/img/accumulated_photovoltaic.png';
   static const String imgAccumulatedPhotovoltaic2 =
       'assets/img/accumulated_photovoltaic2.png';
+  static const String imgPvBg = 'assets/img/pv_bg.png';
   static const String imgAlarm = 'assets/img/alarm.png';
   static const String imgAlarm0 = 'assets/img/alarm0.png';
   static const String imgAlarm1 = 'assets/img/alarm1.png';

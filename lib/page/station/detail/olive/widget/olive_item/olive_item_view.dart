@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cescpro/core/env/env.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
@@ -44,7 +45,10 @@ class OliveItemView extends StatelessWidget {
                   currencyUnit: logic.currencyUnit,
                 ),
 
-                buildReport(logic),
+                if (Environment.isShowRevenue) buildReport(logic),
+
+                if (!Environment.isShowRevenue) buildReport2(logic),
+
                 buildSiteInfo(siteDetail: logic.siteDetail),
 
                 SizedBox(height: 200.h),
@@ -1592,7 +1596,6 @@ class OliveItemView extends StatelessWidget {
           ),
         ),
       ),
-
       Row(
         children: [
           VerticalDivider(width: 16.w, color: Colors.transparent),
@@ -1705,6 +1708,62 @@ class OliveItemView extends StatelessWidget {
         ],
       ),
     ],
+  );
+
+  Widget buildReport2(OliveItemLogic logic) => Container(
+    width: double.maxFinite,
+    height: 48,
+    margin: EdgeInsetsDirectional.only(start: 18.w, end: 18.w, top: 14.h),
+    clipBehavior: Clip.hardEdge,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8.r),
+      color: Color(0xFF313540),
+    ),
+    child: Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          if (AppSetting.isOverseas) {
+            PageTools.toEleReport(
+              siteId: logic.siteId,
+              location: logic.siteDetail?.location,
+            );
+          } else {
+            if (logic.siteDetail?.showOverSeasUi ?? false) {
+              PageTools.toEleReport(
+                siteId: logic.siteId,
+                location: logic.siteDetail?.location,
+              );
+            } else {
+              PageTools.toReportDetail(
+                siteId: logic.siteId,
+                location: logic.siteDetail?.location,
+              );
+            }
+          }
+        },
+        child: Container(
+          padding: EdgeInsetsDirectional.only(start: 10.w, end: 10.w),
+          alignment: AlignmentDirectional.center,
+          child: Row(
+            children: [
+              Text(
+                AppSetting.isOverseas
+                    ? TKey.electricity.tr
+                    : TKey.electricityLevelLimit.tr,
+                style: TextStyle(color: Colors.white, fontSize: 14.sp),
+              ),
+              Spacer(),
+              Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: 14.r,
+                color: Color(0xA6FFFFFF),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
   );
 
   Widget buildSiteInfo({SiteDetailEntity? siteDetail}) => Column(

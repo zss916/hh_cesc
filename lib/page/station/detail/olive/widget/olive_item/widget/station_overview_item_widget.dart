@@ -10,6 +10,7 @@ class StationOverviewItemWidget extends StatelessWidget {
   final String unit;
   final String title;
   final String image;
+  final Rect? centerSlice;
   const StationOverviewItemWidget({
     super.key,
     required this.icon,
@@ -17,13 +18,17 @@ class StationOverviewItemWidget extends StatelessWidget {
     required this.unit,
     required this.title,
     required this.image,
+    this.centerSlice,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: ExactAssetImage(image)),
+        image: DecorationImage(
+          centerSlice: centerSlice,
+          image: ExactAssetImage(image),
+        ),
       ),
       padding: EdgeInsetsDirectional.all(8),
       height: 116.h,

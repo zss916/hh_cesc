@@ -1,3 +1,4 @@
+import 'package:cescpro/core/env/env.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
@@ -92,58 +93,88 @@ class GridViewWidget2 extends StatelessWidget {
 
         Divider(height: 8.h, color: Colors.transparent),
 
-        Row(
-          children: [
-            VerticalDivider(width: 16.w, color: Colors.transparent),
+        if (Environment.isShowRevenue)
+          Row(
+            children: [
+              VerticalDivider(width: 16.w, color: Colors.transparent),
 
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  if (siteDetail != null && statisticRecord != null) {
-                    PageTools.toOliveSiteDetail(
-                      index: 2,
-                      statisticRecord: statisticRecord!,
-                    );
-                  }
-                },
-                child: StationOverviewItemWidget(
-                  icon: Assets.imgLastDayRecharge,
-                  value: "$currencyUnit$showTodayIncome",
-                  unit: '',
-                  title: TKey.lastDayIncome.tr,
-                  image: Assets.lastDayIncome2,
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (siteDetail != null && statisticRecord != null) {
+                      PageTools.toOliveSiteDetail(
+                        index: 2,
+                        statisticRecord: statisticRecord!,
+                      );
+                    }
+                  },
+                  child: StationOverviewItemWidget(
+                    icon: Assets.imgLastDayRecharge,
+                    value: "$currencyUnit$showTodayIncome",
+                    unit: '',
+                    title: TKey.lastDayIncome.tr,
+                    image: Assets.lastDayIncome2,
+                  ),
                 ),
               ),
-            ),
 
-            VerticalDivider(width: 2.w, color: Colors.transparent),
+              VerticalDivider(width: 2.w, color: Colors.transparent),
 
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  if (siteDetail != null && statisticRecord != null) {
-                    PageTools.toOliveSiteDetail(
-                      index: 3,
-                      statisticRecord: statisticRecord!,
-                    );
-                  }
-                },
-                child: StationOverviewItemWidget(
-                  icon: Assets.imgAccumulatedPhotovoltaic2,
-                  value: "$todayPVPowerEarnings ",
-                  unit: todayPVPowerEarningsUnit,
-                  title: TKey.todayPVNeg.tr,
-                  image: Assets.todayPvGeneration2,
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (siteDetail != null && statisticRecord != null) {
+                      PageTools.toOliveSiteDetail(
+                        index: 3,
+                        statisticRecord: statisticRecord!,
+                      );
+                    }
+                  },
+                  child: StationOverviewItemWidget(
+                    icon: Assets.imgAccumulatedPhotovoltaic2,
+                    value: "$todayPVPowerEarnings ",
+                    unit: todayPVPowerEarningsUnit,
+                    title: TKey.todayPVNeg.tr,
+                    image: Assets.todayPvGeneration2,
+                  ),
                 ),
               ),
-            ),
 
-            VerticalDivider(width: 16.w, color: Colors.transparent),
-          ],
-        ),
+              VerticalDivider(width: 16.w, color: Colors.transparent),
+            ],
+          ),
+
+        if (!Environment.isShowRevenue)
+          Row(
+            children: [
+              VerticalDivider(width: 16.w, color: Colors.transparent),
+              Expanded(child: buildPV()),
+              VerticalDivider(width: 16.w, color: Colors.transparent),
+            ],
+          ),
 
         Divider(height: 10.h, color: Colors.transparent),
       ],
+    );
+  }
+
+  Widget buildPV() {
+    return GestureDetector(
+      onTap: () {
+        if (siteDetail != null && statisticRecord != null) {
+          PageTools.toOliveSiteDetail(
+            index: 3,
+            statisticRecord: statisticRecord!,
+          );
+        }
+      },
+      child: StationOverviewItemWidget(
+        icon: Assets.imgAccumulatedPhotovoltaic2,
+        value: "$todayPVPowerEarnings ",
+        unit: todayPVPowerEarningsUnit,
+        title: TKey.todayPVNeg.tr,
+        image: Assets.imgPvBg,
+      ),
     );
   }
 

@@ -21,16 +21,18 @@ class HomePage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  IncomeWidget(
-                    totalIncome: logic.totalIncome,
-                    todayIncome: logic.todayIncome,
-                  ),
+                  if (Environment.isShowRevenue)
+                    IncomeWidget(
+                      totalIncome: logic.totalIncome,
+                      todayIncome: logic.todayIncome,
+                    ),
                   BuildStationOverview3(
                     capacity: logic.capacity,
                     totalPos: logic.totalPos,
                     totalNeg: logic.totalNeg,
                     totalPvNeg: logic.totalPvNeg,
                   ),
+                  Divider(height: 10.h, color: Colors.transparent),
                   BuildDeviceAndSiteCount(
                     deviceNum: logic.deviceNum,
                     siteNum: logic.siteNum,

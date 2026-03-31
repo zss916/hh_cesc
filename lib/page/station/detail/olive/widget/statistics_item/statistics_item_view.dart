@@ -1,3 +1,4 @@
+import 'package:cescpro/core/env/env.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/ele_bar_chart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_analysis_widget.dart';
@@ -25,17 +26,18 @@ class StatisticsItemView extends StatelessWidget {
             },
           ),
 
-          ///收益统计
-          GetBuilder<StatisticsItemLogic>(
-            id: 'revenue',
-            init: StatisticsItemLogic(),
-            builder: (logic) {
-              return RevenueBarChartWidget(
-                title: TKey.revenueStatistics.tr,
-                logic: logic,
-              );
-            },
-          ),
+          if (Environment.isShowRevenue)
+            ///收益统计
+            GetBuilder<StatisticsItemLogic>(
+              id: 'revenue',
+              init: StatisticsItemLogic(),
+              builder: (logic) {
+                return RevenueBarChartWidget(
+                  title: TKey.revenueStatistics.tr,
+                  logic: logic,
+                );
+              },
+            ),
 
           ///电量
           GetBuilder<StatisticsItemLogic>(

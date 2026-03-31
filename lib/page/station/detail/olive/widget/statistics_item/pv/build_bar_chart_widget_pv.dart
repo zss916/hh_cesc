@@ -238,7 +238,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                     if (widget.logic.pvList.isNotEmpty)
                       PositionedDirectional(
                         start: 0.w,
-                        top: 50.h,
+                        top: 45.h,
                         child: Text(
                           "(kWh)",
                           style: TextStyle(

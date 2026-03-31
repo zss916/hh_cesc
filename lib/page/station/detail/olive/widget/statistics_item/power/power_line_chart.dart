@@ -115,6 +115,8 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
                     sideTitles: SideTitles(
                       showTitles: true,
                       reservedSize: 25,
+                      maxIncluded: false,
+                      minIncluded: false,
                       getTitlesWidget: (value, meta) {
                         return SideTitleWidget(
                           space: 2,
