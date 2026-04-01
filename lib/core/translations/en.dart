@@ -645,7 +645,7 @@ const en = {
   "todayPVNeg": "Today PV Generation",
   "alarmTotal": "Alarm Total",
   "other": "Other",
-  "alarmCount": "%s Units",
+  "alarmCount": "%s",
   "highLevel": "Highest Level",
   "timeOfOccurrence": "Time of Occurrence",
   "batterySystem": "Battery System",
