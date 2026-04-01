@@ -193,7 +193,7 @@ class AlarmDetailPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${TKey.alarmLevel.tr}:",
+                    TKey.alarmLevel.tr,
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -262,7 +262,7 @@ class AlarmDetailPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${TKey.timeOfOccurrence.tr}:",
+                    TKey.timeOfOccurrence.tr,
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),

@@ -75,7 +75,7 @@ class RealTimeDataWidget extends StatelessWidget {
                             children: [
                               Text(
                                 item.showFieldName.trim().isNotEmpty
-                                    ? "${item.showFieldName.trim()}:"
+                                    ? item.showFieldName.trim()
                                     : "",
                                 style: TextStyle(
                                   fontSize: 14,
@@ -145,7 +145,7 @@ class RealTimeDataWidget extends StatelessWidget {
                                 children: [
                                   Text(
                                     comItem.showFieldName.isNotEmpty
-                                        ? "${comItem.showFieldName}:"
+                                        ? comItem.showFieldName
                                         : "",
                                     style: TextStyle(
                                       fontSize: 14,
