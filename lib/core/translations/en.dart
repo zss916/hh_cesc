@@ -488,6 +488,16 @@ class TKey {
   static const String album = "album";
   static const String realTimeAlarms = "realTimeAlarms";
   static const String historyAlarms = "historyAlarms";
+  static const String canLoadingText = "canLoadingText";
+  static const String canRefreshText = "canRefreshText";
+  static const String idleLoadingText = "idleLoadingText";
+  static const String idleRefreshText = "idleRefreshText";
+  static const String loadFailedText = "loadFailedText";
+  static const String loadingText = "loadingText";
+  static const String noMoreText = "noMoreText";
+  static const String refreshCompleteText = "refreshCompleteText";
+  static const String refreshFailedText = "refreshFailedText";
+  static const String refreshingText = "refreshingText";
 }
 
 const en = {
@@ -745,4 +755,14 @@ const en = {
   "album": "Select from Album",
   "realTimeAlarms": "Real-time Alarms",
   "historyAlarms": "History Alarms",
+  "canLoadingText": "Release to load more",
+  "canRefreshText": "Release to refresh",
+  "idleLoadingText": "Pull up Load more",
+  "idleRefreshText": "Pull down Refresh",
+  "loadFailedText": "Load Failed",
+  "loadingText": "Loading…",
+  "noMoreText": "No more data",
+  "refreshCompleteText": "Refresh completed",
+  "refreshFailedText": "Refresh failed",
+  "refreshingText": "Refreshing…",
 };

@@ -66,6 +66,13 @@ class AlarmPage extends StatelessWidget {
 
   Widget buildList2({required AlarmLogic logic}) => SmartRefresher(
     header: MaterialClassicHeader(),
+    footer: ClassicFooter(
+      idleText: TKey.idleLoadingText.tr,
+      canLoadingText: TKey.canLoadingText.tr,
+      loadingText: TKey.loadingText.tr,
+      noDataText: TKey.noMoreText.tr,
+      failedText: TKey.loadFailedText.tr,
+    ),
     enablePullDown: true,
     enablePullUp: true,
     enableSmartPreload: true,

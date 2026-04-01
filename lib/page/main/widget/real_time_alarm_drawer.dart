@@ -171,14 +171,35 @@ class _RealTimeAlarmDrawerState extends State<RealTimeAlarmDrawer> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  safeFind<RealTimeAlarmLogic>()?.startTimeMill = null;
-                  safeFind<RealTimeAlarmLogic>()?.endTimeMill = null;
-                  safeFind<RealTimeAlarmLogic>()?.country = null;
-                  safeFind<RealTimeAlarmLogic>()?.alarmLevel = null;
-                  safeFind<RealTimeAlarmLogic>()?.siteId = null;
-                  safeFind<RealTimeAlarmLogic>()?.siteName = null;
-                  safeFind<RealTimeAlarmLogic>()?.toFilter();
-                  widget.onReset.call();
+                  if ((countryItem != null) ||
+                      (siteName != null) ||
+                      (siteId != null) ||
+                      (alarmTitle != null) ||
+                      (alarmLevel != null) ||
+                      (startTime != null) ||
+                      (startDateTime != null) ||
+                      (endTime != null) ||
+                      (endDateTime != null)) {
+                    setState(() {
+                      countryItem = null;
+                      siteName = null;
+                      siteId = null;
+                      alarmTitle = null;
+                      alarmLevel = null;
+                      startTime = null;
+                      startDateTime = null;
+                      endTime = null;
+                      endDateTime = null;
+                    });
+                    safeFind<RealTimeAlarmLogic>()?.startTimeMill = null;
+                    safeFind<RealTimeAlarmLogic>()?.endTimeMill = null;
+                    safeFind<RealTimeAlarmLogic>()?.country = null;
+                    safeFind<RealTimeAlarmLogic>()?.alarmLevel = null;
+                    safeFind<RealTimeAlarmLogic>()?.siteId = null;
+                    safeFind<RealTimeAlarmLogic>()?.siteName = null;
+                    safeFind<RealTimeAlarmLogic>()?.toFilter();
+                    widget.onReset.call();
+                  }
                 },
                 child: Container(
                   width: double.maxFinite,

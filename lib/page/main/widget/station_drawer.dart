@@ -142,7 +142,9 @@ class _StationDrawerState extends State<StationDrawer> {
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
                   if (safeFind<StationLogic>()?.statusParam == null) {
-                    select = null;
+                    setState(() {
+                      select = null;
+                    });
                   } else {
                     if (select != null) {
                       setState(() {

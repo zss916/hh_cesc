@@ -231,7 +231,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                 StationDrawer(
                   status: siteStatus,
                   onReset: () {
-                    closeDrawer();
+                    // closeDrawer();
                   },
                   onConfirm: () {
                     closeDrawer();
@@ -241,7 +241,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                 AlarmDrawer(
                   alarmLevel: alarmLevel,
                   onReset: () {
-                    closeDrawer();
+                    // closeDrawer();
                   },
                   onConfirm: () {
                     closeDrawer();
@@ -252,7 +252,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                 RealTimeAlarmDrawer(
                   alarmLevel: alarmLevel,
                   onReset: () {
-                    closeDrawer();
+                    //  closeDrawer();
                   },
                   onConfirm: () {
                     closeDrawer();
@@ -263,7 +263,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                 HistoryAlarmDrawer(
                   alarmLevel: alarmLevel,
                   onReset: () {
-                    closeDrawer();
+                    // closeDrawer();
                   },
                   onConfirm: () {
                     closeDrawer();

@@ -171,14 +171,35 @@ class _HistoryAlarmDrawerState extends State<HistoryAlarmDrawer> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  safeFind<HistoryAlarmLogic>()?.startTimeMill = null;
-                  safeFind<HistoryAlarmLogic>()?.endTimeMill = null;
-                  safeFind<HistoryAlarmLogic>()?.country = null;
-                  safeFind<HistoryAlarmLogic>()?.alarmLevel = null;
-                  safeFind<HistoryAlarmLogic>()?.siteId = null;
-                  safeFind<HistoryAlarmLogic>()?.siteName = null;
-                  safeFind<HistoryAlarmLogic>()?.toFilter();
-                  widget.onReset.call();
+                  if ((countryItem != null) ||
+                      (siteName != null) ||
+                      (siteId != null) ||
+                      (alarmTitle != null) ||
+                      (alarmLevel != null) ||
+                      (startTime != null) ||
+                      (startDateTime != null) ||
+                      (endTime != null) ||
+                      (endDateTime != null)) {
+                    setState(() {
+                      countryItem = null;
+                      siteName = null;
+                      siteId = null;
+                      alarmTitle = null;
+                      alarmLevel = null;
+                      startTime = null;
+                      startDateTime = null;
+                      endTime = null;
+                      endDateTime = null;
+                    });
+                    safeFind<HistoryAlarmLogic>()?.startTimeMill = null;
+                    safeFind<HistoryAlarmLogic>()?.endTimeMill = null;
+                    safeFind<HistoryAlarmLogic>()?.country = null;
+                    safeFind<HistoryAlarmLogic>()?.alarmLevel = null;
+                    safeFind<HistoryAlarmLogic>()?.siteId = null;
+                    safeFind<HistoryAlarmLogic>()?.siteName = null;
+                    safeFind<HistoryAlarmLogic>()?.toFilter();
+                    widget.onReset.call();
+                  }
                 },
                 child: Container(
                   width: double.maxFinite,

@@ -75,6 +75,13 @@ class RealTimeAlarmView extends StatelessWidget {
 
   Widget buildList({required RealTimeAlarmLogic logic}) => SmartRefresher(
     header: MaterialClassicHeader(),
+    footer: ClassicFooter(
+      idleText: TKey.idleLoadingText.tr,
+      canLoadingText: TKey.canLoadingText.tr,
+      loadingText: TKey.loadingText.tr,
+      noDataText: TKey.noMoreText.tr,
+      failedText: TKey.loadFailedText.tr,
+    ),
     enablePullDown: true,
     enablePullUp: true,
     enableSmartPreload: true,

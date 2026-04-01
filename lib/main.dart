@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
 
 import 'core/router/index.dart';
 import 'core/setting/app_setting.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => GetMaterialApp(
         title: AppSetting.appName,
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: [RefreshLocalizations.delegate],
         locale: LanTools.getLocale() ?? Get.deviceLocale,
         translations: AppTranslations(),
         fallbackLocale: const Locale("en"),

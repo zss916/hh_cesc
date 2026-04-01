@@ -177,6 +177,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
                   safeFind<AlarmLogic>()?.siteId = null;
                   safeFind<AlarmLogic>()?.siteName = null;
                   safeFind<AlarmLogic>()?.refreshData(isLoading: true);
+                  setState(() {});
                   widget.onReset.call();
                 },
                 child: Container(
