@@ -106,6 +106,8 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget3> {
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
+                      minIncluded: false,
+                      maxIncluded: false,
                       reservedSize: 35,
                       getTitlesWidget: (value, meta) {
                         TextStyle textStyle = TextStyle(

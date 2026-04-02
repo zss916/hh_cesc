@@ -94,6 +94,8 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                       rightTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
+                          minIncluded: false,
+                          maxIncluded: false,
                           reservedSize: 30,
                           getTitlesWidget: (value, meta) {
                             bool isShow =
@@ -145,6 +147,8 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                       leftTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
+                          minIncluded: false,
+                          maxIncluded: false,
                           reservedSize: 30,
                           getTitlesWidget: (value, meta) {
                             return SideTitleWidget(
