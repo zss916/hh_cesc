@@ -216,7 +216,6 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                   ),
                   duration: const Duration(milliseconds: 2000),
                 ),
-
                 LineChart(
                   LineChartData(
                     lineTouchData: lineTouchData,
