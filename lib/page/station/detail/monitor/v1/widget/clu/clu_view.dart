@@ -59,7 +59,7 @@ class CluView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${TKey.alarmStatus.tr}:",
+                    "${TKey.alarmStatus.tr} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -81,7 +81,7 @@ class CluView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${TKey.communicationStatus.tr}:",
+                    "${TKey.communicationStatus.tr} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -103,7 +103,7 @@ class CluView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${TKey.runStatus.tr}:",
+                    "${TKey.runStatus.tr} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),

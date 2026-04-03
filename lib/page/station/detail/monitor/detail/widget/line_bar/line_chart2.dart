@@ -159,19 +159,19 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget2> {
                       strokeWidth: 0.4, // 水平线宽度
                     ),
 
-                    HorizontalLine(
+                    /* HorizontalLine(
                       y: widget.maxY,
                       dashArray: [8, 4],
                       color: Color(0xFF3874F2), // 水平线颜色
                       strokeWidth: 0.4, // 水平线宽度
-                    ),
+                    ),*/
 
-                    HorizontalLine(
+                    /*HorizontalLine(
                       y: widget.minY,
                       dashArray: [8, 4],
                       color: Color(0xFF3874F2), // 水平线颜色
                       strokeWidth: 0.4, // 水平线宽度
-                    ),
+                    ),*/
                   ],
                 ),
               ),

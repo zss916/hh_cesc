@@ -67,7 +67,7 @@ class MeterView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
+                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -83,7 +83,7 @@ class MeterView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.activePowerT?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.activePowerT?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -99,7 +99,7 @@ class MeterView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.reactivePowerT?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.reactivePowerT?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -115,7 +115,7 @@ class MeterView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.powerTFactor?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.powerTFactor?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),

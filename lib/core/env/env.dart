@@ -14,6 +14,6 @@ class Environment {
   ///是否显示收益
   static const bool isShowRevenue = bool.fromEnvironment(
     'isShowRevenue',
-    defaultValue: false,
+    defaultValue: true,
   );
 }

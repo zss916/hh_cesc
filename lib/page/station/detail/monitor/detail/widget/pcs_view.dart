@@ -75,7 +75,7 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
+                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -92,7 +92,7 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.runStatus?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.runStatus?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -109,7 +109,7 @@ class PcsView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.gridStatus?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.gridStatus?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -160,7 +160,7 @@ class PcsView extends StatelessWidget {
                 children: [
                   Text(
                     (logic.comTypeList?.dcPower?.showFieldName ?? "").isNotEmpty
-                        ? "${logic.comTypeList?.dcPower?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.dcPower?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -180,7 +180,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.dcVoltage?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.dcVoltage?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.dcVoltage?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -200,7 +200,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.dcCurrent?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.dcCurrent?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.dcCurrent?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -221,7 +221,7 @@ class PcsView extends StatelessWidget {
                     (logic.comTypeList?.totalChargeElectric?.showFieldName ??
                                 "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.totalChargeElectric?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.totalChargeElectric?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -239,7 +239,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.totalOutElectric?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.totalOutElectric?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.totalOutElectric?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -257,7 +257,7 @@ class PcsView extends StatelessWidget {
                 children: [
                   Text(
                     (logic.comTypeList?.hz?.showFieldName ?? "").isNotEmpty
-                        ? "${logic.comTypeList?.hz?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.hz?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -275,7 +275,7 @@ class PcsView extends StatelessWidget {
                 children: [
                   Text(
                     (logic.comTypeList?.temp?.showFieldName ?? "").isNotEmpty
-                        ? "${logic.comTypeList?.temp?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.temp?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -294,7 +294,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.activePowerT?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.activePowerT?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.activePowerT?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -313,7 +313,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.reactivePowerT?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.reactivePowerT?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.reactivePowerT?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -332,7 +332,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.powerTFactor?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.powerTFactor?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.powerTFactor?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -351,7 +351,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.apparentPowerT?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.apparentPowerT?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.apparentPowerT?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -370,7 +370,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.powerAFactor?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.powerAFactor?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.powerAFactor?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -389,7 +389,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.powerBFactor?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.powerBFactor?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.powerBFactor?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -408,7 +408,7 @@ class PcsView extends StatelessWidget {
                   Text(
                     (logic.comTypeList?.powerCFactor?.showFieldName ?? "")
                             .isNotEmpty
-                        ? "${logic.comTypeList?.powerCFactor?.showFieldName ?? ""}:"
+                        ? "${logic.comTypeList?.powerCFactor?.showFieldName ?? ""} "
                         : "",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
@@ -489,7 +489,7 @@ class PcsView extends StatelessWidget {
                   width: double.maxFinite,
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    "${TKey.voltage.tr}\n(${logic.comTypeList?.voltageA?.unit ?? ""})",
+                    "${TKey.voltage.tr}\n(${logic.comTypeList?.voltageA?.unit ?? "-"})",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,
@@ -505,7 +505,7 @@ class PcsView extends StatelessWidget {
                   width: double.maxFinite,
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    "${TKey.current.tr}\n(${logic.comTypeList?.currentA?.unit ?? ""})",
+                    "${TKey.current.tr}\n(${logic.comTypeList?.currentA?.unit ?? "-"})",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,
@@ -521,7 +521,7 @@ class PcsView extends StatelessWidget {
                   width: double.maxFinite,
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    "${TKey.power.tr}\n(${logic.comTypeList?.activePowerA?.unit ?? ""})",
+                    "${TKey.power.tr}\n(${logic.comTypeList?.activePowerA?.unit ?? "-"})",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,

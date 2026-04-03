@@ -149,7 +149,7 @@ const zh = {
   "todayPVNeg": "今日光伏发电量",
   "alarmTotal": "告警总数",
   "other": "其他",
-  "alarmCount": "%s台",
+  "alarmCount": "%s",
   "highLevel": "最高等级",
   "timeOfOccurrence": "发生时间",
   "batterySystem": "电池系统",

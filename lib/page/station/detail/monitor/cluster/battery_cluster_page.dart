@@ -83,7 +83,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"}:",
+                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -100,7 +100,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.runStatus?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.runStatus?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -117,7 +117,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.alarmStatus?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.alarmStatus?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -166,7 +166,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.soc?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.soc?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -181,7 +181,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.voltage?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.voltage?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -196,7 +196,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.current?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.current?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -211,7 +211,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.singleMaxVoltage?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.singleMaxVoltage?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -226,7 +226,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.singleMinVoltage?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.singleMinVoltage?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -241,7 +241,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.singleMaxTemp?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.singleMaxTemp?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -256,7 +256,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.singleMinTemp?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.singleMinTemp?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -271,7 +271,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.maxChargePower?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.maxChargePower?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),
@@ -286,7 +286,7 @@ class BatteryClusterPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${logic.comTypeList?.maxOutPower?.showFieldName ?? ""}:",
+                    "${logic.comTypeList?.maxOutPower?.showFieldName ?? ""} ",
                     style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
                   ),
                   Spacer(),

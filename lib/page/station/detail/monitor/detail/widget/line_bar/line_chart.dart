@@ -81,14 +81,14 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                       show: true,
                       drawHorizontalLine: true,
                       drawVerticalLine: false,
-                      getDrawingHorizontalLine: (value) => FlLine(
+                      /*getDrawingHorizontalLine: (value) => FlLine(
                         color:
                             ((value == widget.maxYR) || (value == widget.minYR))
                             ? Colors.cyanAccent
                             : Color(0x800BC3C4),
                         strokeWidth: 0.4,
                         dashArray: [8, 4],
-                      ),
+                      ),*/
                     ),
                     titlesData: FlTitlesData(
                       rightTitles: AxisTitles(
@@ -192,25 +192,25 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                     minY: widget.minYR,
                     extraLinesData: ExtraLinesData(
                       horizontalLines: [
-                        /*  HorizontalLine(
-                          y: 0,
-                          color: Colors.transparent, // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),
-*/
                         HorizontalLine(
-                          y: widget.maxYR,
-                          dashArray: [8, 4],
+                          y: 0,
                           color: Colors.cyanAccent, // 水平线颜色
                           strokeWidth: 0.4, // 水平线宽度
                         ),
 
-                        HorizontalLine(
+                        /*HorizontalLine(
+                          y: widget.maxYR,
+                          dashArray: [8, 4],
+                          color: Colors.cyanAccent, // 水平线颜色
+                          strokeWidth: 0.4, // 水平线宽度
+                        ),*/
+
+                        /*HorizontalLine(
                           y: widget.minYR,
                           dashArray: [8, 4],
                           color: Colors.cyanAccent, // 水平线颜色
                           strokeWidth: 0.4, // 水平线宽度
-                        ),
+                        ),*/
                       ],
                     ),
                   ),
@@ -229,6 +229,8 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                         sideTitles: SideTitles(
                           showTitles: true,
                           reservedSize: 30,
+                          minIncluded: false,
+                          maxIncluded: false,
                           getTitlesWidget: (value, meta) {
                             return SideTitleWidget(
                               space: 2,
@@ -273,6 +275,8 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                       leftTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
+                          minIncluded: false,
+                          maxIncluded: false,
                           reservedSize: 30,
                           getTitlesWidget: (value, meta) {
                             return switch (value) {
@@ -342,7 +346,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                     minY: widget.minY,
                     extraLinesData: ExtraLinesData(
                       horizontalLines: [
-                        HorizontalLine(
+                        /* HorizontalLine(
                           y: widget.maxY,
                           dashArray: [8, 4],
                           color: Color(0xFF3874F2), // 水平线颜色
@@ -354,8 +358,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                           dashArray: [8, 4],
                           color: Color(0xFF3874F2), // 水平线颜色
                           strokeWidth: 0.4, // 水平线宽度
-                        ),
-
+                        ),*/
                         HorizontalLine(
                           y: 0,
                           color: Colors.transparent, // 水平线颜色
