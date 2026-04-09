@@ -33,6 +33,8 @@ class Global {
     );
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    // 启用 Edge-to-Edge 支持
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 }
 

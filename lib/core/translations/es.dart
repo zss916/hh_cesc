@@ -106,7 +106,7 @@ const es = {
   "endTime": "Hora de finalización",
   "inProgress": "En progreso",
   "ended": "Finalizado",
-  "energyStoragePower": "Potencia de almacenamiento de energía",
+  "energyStoragePower": "Potencia de almacenamiento",
   "photovoltaicPower": "Potencia fotovoltaica",
   "todayChargeAndDischarge": "Carga/Descarga",
   "chargeAndDischarge": "Carga/Descarga",

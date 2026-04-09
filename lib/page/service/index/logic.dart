@@ -3,7 +3,7 @@ part of 'index.dart';
 class ServiceLogic extends GetxController {
   UserInfoEntity? value;
 
-  String get userName => value?.username ?? '';
+  String get userName => value?.username ?? '--';
   String get icon => value?.icon ?? '';
   int? get id => value?.id;
 

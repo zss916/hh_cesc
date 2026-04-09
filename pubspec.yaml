@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 2.0.10+18
+version: 2.0.11+19
 
 environment:
   sdk: ^3.10.0
@@ -72,12 +72,6 @@ dependencies:
   #flutter_debounce: 2.0.0
   #tooltip
   super_tooltip: 2.1.1
-
-
-
-
-
-
 
 
 
