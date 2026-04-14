@@ -105,6 +105,21 @@ https://apps.apple.com/us/app/BUJUNSHOU/6756414140
 
 web 接口：
 
+###
+easy_pie_chart: ^1.0.2
+circlify: ^2.1.0
+animated_pie_chart: ^0.0.2
+## 有间隔带倒角的饼图
+pie_chart_sz: ^1.1.1
+## 有间隔不带倒角的饼图
+outline_pie_chart: ^0.0.1
+## 有边框的饼图
+flutter_animated_circle: ^0.1.1
+## 带折线的饼图
+custom_pie_chart_label: ^1.0.0
+## 触摸显示折线的饼图
+donut_chart: ^0.0.1
+
 
 
 
