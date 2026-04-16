@@ -18,6 +18,9 @@ class UserInfoEntity {
   String? loginTime;
   String? logoUrl;
   String? currencyCode;
+  int? revenueShowType;
+
+  ///1:所有站点，2:计算收益的站点 3:不展示
 
   UserInfoEntity();
 
@@ -30,4 +33,7 @@ class UserInfoEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  ///是否显示收益
+  bool get isShowRevenue => (revenueShowType != 3 && revenueShowType != null);
 }

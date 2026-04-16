@@ -53,6 +53,7 @@ class SiteEntity {
   String? cityCode;
   String? areaCode;
   String? protocolVersion; //协议版本
+  bool? calculateRevenue; //是否计算收入
 
   SiteEntity();
 

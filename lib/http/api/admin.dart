@@ -34,6 +34,7 @@ abstract class AdminAPI {
   }
 
   ///获取当前登录用户信息
+  /*
   static Future<UserInfoEntity?> getUserInfo({String? id}) async {
     try {
       Map<String, dynamic> params = {};
@@ -54,6 +55,7 @@ abstract class AdminAPI {
       return null;
     }
   }
+*/
 
   static Future<UserInfoEntity?> getUserInfo2({String? id}) async {
     try {

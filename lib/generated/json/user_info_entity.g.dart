@@ -52,9 +52,16 @@ UserInfoEntity $UserInfoEntityFromJson(Map<String, dynamic> json) {
     userInfoEntity.logoUrl = logoUrl;
   }
   final String? currencyCode = jsonConvert.convert<String>(
-      json['currencyCode']);
+    json['currencyCode'],
+  );
   if (currencyCode != null) {
     userInfoEntity.currencyCode = currencyCode;
+  }
+  final int? revenueShowType = jsonConvert.convert<int>(
+    json['revenueShowType'],
+  );
+  if (revenueShowType != null) {
+    userInfoEntity.revenueShowType = revenueShowType;
   }
   return userInfoEntity;
 }
@@ -74,6 +81,7 @@ Map<String, dynamic> $UserInfoEntityToJson(UserInfoEntity entity) {
   data['loginTime'] = entity.loginTime;
   data['logoUrl'] = entity.logoUrl;
   data['currencyCode'] = entity.currencyCode;
+  data['revenueShowType'] = entity.revenueShowType;
   return data;
 }
 
@@ -92,6 +100,7 @@ extension UserInfoEntityExtension on UserInfoEntity {
     String? loginTime,
     String? logoUrl,
     String? currencyCode,
+    int? revenueShowType,
   }) {
     return UserInfoEntity()
       ..tenantId = tenantId ?? this.tenantId
@@ -106,6 +115,7 @@ extension UserInfoEntityExtension on UserInfoEntity {
       ..userPhone = userPhone ?? this.userPhone
       ..loginTime = loginTime ?? this.loginTime
       ..logoUrl = logoUrl ?? this.logoUrl
-      ..currencyCode = currencyCode ?? this.currencyCode;
+      ..currencyCode = currencyCode ?? this.currencyCode
+      ..revenueShowType = revenueShowType ?? this.revenueShowType;
   }
 }

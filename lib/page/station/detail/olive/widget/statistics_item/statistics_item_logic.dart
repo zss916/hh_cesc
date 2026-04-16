@@ -65,12 +65,16 @@ class StatisticsItemLogic extends GetxController {
   List<String> eleLabels = [];
   //late StreamSubscription<HasPVEvent> event;
 
+  //bool revenueShow = false;
+
   @override
   void onInit() {
     super.onInit();
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       siteId = map['siteId'] as int?;
+      /* SiteEntity? site = map['site'] as SiteEntity?;
+      revenueShow = site?.calculateRevenue??false;*/
     }
     /*event = AppEventBus.eventBus.on<HasPVEvent>().listen((event) {
       hasPv = event.hasPv;

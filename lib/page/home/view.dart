@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  if (Environment.isShowRevenue)
+                  if (AppState.instance.isShowRevenue())
                     IncomeWidget(
                       totalIncome: logic.totalIncome,
                       todayIncome: logic.todayIncome,

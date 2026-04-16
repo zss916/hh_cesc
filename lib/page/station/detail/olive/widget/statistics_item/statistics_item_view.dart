@@ -1,5 +1,6 @@
-import 'package:cescpro/core/env/env.dart';
+import 'package:cescpro/core/tools/state.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/ele_bar_chart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_analysis_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/build_bar_chart_widget_pv.dart';
@@ -11,6 +12,11 @@ import 'package:get/get.dart';
 
 class StatisticsItemView extends StatelessWidget {
   const StatisticsItemView({super.key});
+
+  bool get revenueShow =>
+      ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?)
+          ?.calculateRevenue ??
+      false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +32,7 @@ class StatisticsItemView extends StatelessWidget {
             },
           ),
 
-          if (Environment.isShowRevenue)
+          if (AppState.instance.isShowRevenue() && revenueShow)
             ///收益统计
             GetBuilder<StatisticsItemLogic>(
               id: 'revenue',

@@ -14,6 +14,12 @@ class User extends GetxService {
   static final String currencyUnitKey = "currencyUnitKey";
   static final String privacyAgreed = "privacy_agreed";
   static final String isGuestKey = "isGuestKey";
+  static final String isShowRevenueKey = "isShowRevenueKey";
+
+  void setIsShowRevenue({required bool isShowRevenue}) =>
+      StorageService.to.setBool(isShowRevenueKey, isShowRevenue);
+
+  bool getIsShowRevenue() => StorageService.to.getBool(isShowRevenueKey);
 
   ///是否同意隐私
   setPrivacyAgreed({required bool isAgree}) =>

@@ -26,6 +26,9 @@ class MainLogic extends GetxController {
   Future<String> loadCurrencyList() async {
     List<CurrencyEntity> list = await AdminAPI.getCurrencyList();
     UserInfoEntity? userInfo = await AdminAPI.getUserInfo2();
+    if (userInfo != null) {
+      User.to.setIsShowRevenue(isShowRevenue: userInfo.isShowRevenue);
+    }
     if (list.isNotEmpty) {
       List<CurrencyEntity> value = list
           .where((e) => e.code == userInfo?.currencyCode)

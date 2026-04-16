@@ -1,5 +1,5 @@
-import 'package:cescpro/core/env/env.dart';
 import 'package:cescpro/core/router/index.dart';
+import 'package:cescpro/core/tools/state.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
@@ -93,7 +93,7 @@ class GridViewWidget2 extends StatelessWidget {
 
         Divider(height: 8.h, color: Colors.transparent),
 
-        if (Environment.isShowRevenue)
+        if (AppState.instance.isShowRevenue())
           Row(
             children: [
               VerticalDivider(width: 16.w, color: Colors.transparent),
@@ -144,7 +144,7 @@ class GridViewWidget2 extends StatelessWidget {
             ],
           ),
 
-        if (!Environment.isShowRevenue)
+        if (!AppState.instance.isShowRevenue())
           Row(
             children: [
               VerticalDivider(width: 16.w, color: Colors.transparent),

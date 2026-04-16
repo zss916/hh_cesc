@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cescpro/core/env/env.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
+import 'package:cescpro/core/tools/state.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
@@ -45,9 +45,9 @@ class OliveItemView extends StatelessWidget {
                   currencyUnit: logic.currencyUnit,
                 ),
 
-                if (Environment.isShowRevenue) buildReport(logic),
+                if (AppState.instance.isShowRevenue()) buildReport(logic),
 
-                if (!Environment.isShowRevenue) buildReport2(logic),
+                if (!AppState.instance.isShowRevenue()) buildReport2(logic),
 
                 buildSiteInfo(siteDetail: logic.siteDetail),
 
