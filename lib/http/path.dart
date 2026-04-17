@@ -1,9 +1,11 @@
+import 'package:cescpro/core/env/env.dart';
+
 class ApiPath {
   ///国外版本
   static const String baseUrlEn = "https://cloud.honghede.com/api/v1";
 
   ///国内版本
-  static const String baseUrl = "https://ems.cescpower.com/api/v1";
+  // static const String baseUrl = "https://ems.cescpower.com/api/v1";
 
   ///国内版本
   static const String baseUrlZh = "https://api-cn.hhdzcesc.com/api/v1";
@@ -11,7 +13,7 @@ class ApiPath {
   ///测试host
   //static const String baseUrl = "http://192.168.8.35:9088/api/v1";
 
-  //static const String baseUrl = Environment.isOverseas ? baseUrlEn : baseUrlZh;
+  static const String baseUrl = Environment.isOverseas ? baseUrlEn : baseUrlZh;
 
   ///站点首页信息展信(海外版本)
   static const String postStatisticRecord2 =
