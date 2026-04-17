@@ -7,6 +7,7 @@ import 'package:cescpro/core/tools/state.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
+import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/line/gplot_line_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/line_status_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/olive_item_logic.dart';
@@ -17,6 +18,11 @@ import 'package:get/get.dart';
 
 class OliveItemView extends StatelessWidget {
   const OliveItemView({super.key});
+
+  bool get revenueShow =>
+      ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?)
+          ?.calculateRevenue ??
+      false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +39,7 @@ class OliveItemView extends StatelessWidget {
                 buildTopology(logic),
 
                 GridViewWidget2(
+                  isShow: (AppState.instance.isShowRevenue() && revenueShow),
                   todayCharging: logic.showChargeAvg,
                   todayChargingUnit: logic.showChargeAvgUnit,
                   todayDischarge: logic.showRechargeAvg,
@@ -45,9 +52,10 @@ class OliveItemView extends StatelessWidget {
                   currencyUnit: logic.currencyUnit,
                 ),
 
-                if (AppState.instance.isShowRevenue()) buildReport(logic),
-
-                if (!AppState.instance.isShowRevenue()) buildReport2(logic),
+                if (AppState.instance.isShowRevenue() && revenueShow)
+                  buildReport(logic)
+                else
+                  buildReport2(logic),
 
                 buildSiteInfo(siteDetail: logic.siteDetail),
 

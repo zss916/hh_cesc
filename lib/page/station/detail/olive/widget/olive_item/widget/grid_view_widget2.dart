@@ -1,5 +1,4 @@
 import 'package:cescpro/core/router/index.dart';
-import 'package:cescpro/core/tools/state.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
@@ -20,6 +19,7 @@ class GridViewWidget2 extends StatelessWidget {
   final SiteDetailEntity? siteDetail;
   final StatisticRecordEntity? statisticRecord;
   final String currencyUnit;
+  final bool isShow;
 
   const GridViewWidget2({
     super.key,
@@ -31,6 +31,7 @@ class GridViewWidget2 extends StatelessWidget {
     required this.currencyUnit,
     required this.todayPVPowerEarnings,
     required this.todayPVPowerEarningsUnit,
+    required this.isShow,
     this.siteDetail,
     this.statisticRecord,
   });
@@ -93,7 +94,7 @@ class GridViewWidget2 extends StatelessWidget {
 
         Divider(height: 8.h, color: Colors.transparent),
 
-        if (AppState.instance.isShowRevenue())
+        if (isShow)
           Row(
             children: [
               VerticalDivider(width: 16.w, color: Colors.transparent),
@@ -142,9 +143,8 @@ class GridViewWidget2 extends StatelessWidget {
 
               VerticalDivider(width: 16.w, color: Colors.transparent),
             ],
-          ),
-
-        if (!AppState.instance.isShowRevenue())
+          )
+        else
           Row(
             children: [
               VerticalDivider(width: 16.w, color: Colors.transparent),
