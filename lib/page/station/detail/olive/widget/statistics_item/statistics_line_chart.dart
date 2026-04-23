@@ -1,3 +1,4 @@
+/*
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -88,9 +89,11 @@ class _LineChart extends StatelessWidget {
             ),
             spots: [
               // ...(powerList ?? []).map((e) => e.mFlSpot),
-              /*...(list[0].list??[])
+              */
+/*...(list[0].list??[])
             .map((e) => FlSpot(0,0)),
-        */
+        */ /*
+
               ///点坐标
               // FlSpot(1, 1),
               // FlSpot(3, 1.5),
@@ -300,3 +303,4 @@ class _LineChart extends StatelessWidget {
     ],
   );
 }
+*/

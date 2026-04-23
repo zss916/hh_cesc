@@ -1,3 +1,4 @@
+/*
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/http/bean/soc_entity.dart';
 import 'package:collection/collection.dart';
@@ -41,10 +42,12 @@ class _RealTimeDataLineState extends State<RealTimeDataLine> {
   @override
   void initState() {
     super.initState();
-    /*SystemChrome.setPreferredOrientations([
+    */
+/*SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
-    ]);*/
+    ]);*/ /*
+
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToRight();
@@ -88,9 +91,11 @@ class _RealTimeDataLineState extends State<RealTimeDataLine> {
               // width: MediaQuery.of(context).size.width,
               width: widget.arrList.length * 1.0,
               child: LineChart(
-                /* transformationConfig: FlTransformationConfig(
+                */
+/* transformationConfig: FlTransformationConfig(
                     trackpadScrollCausesScale: true,
-                  ),*/
+                  ),*/ /*
+
                 LineChartData(
                   lineTouchData: LineTouchData(enabled: false),
                   gridData: FlGridData(
@@ -179,27 +184,31 @@ class _RealTimeDataLineState extends State<RealTimeDataLine> {
                   minY: widget.minY,
                   extraLinesData: ExtraLinesData(
                     horizontalLines: [
-                      /* HorizontalLine(
+                      */
+/* HorizontalLine(
                       y: widget.logic.minY,
                       // color: Colors.transparent, // 水平线颜色
                       // strokeWidth: 1, // 水平线宽度
                       color: Color(0xA8FFFFFF),
                       strokeWidth: 0.4,
                       dashArray: [8, 4],
-                    ),*/
+                    ),*/ /*
+
                       HorizontalLine(
                         y: 0,
                         color: Colors.transparent, // 水平线颜色
                         strokeWidth: 0.4, // 水平线宽度
                       ),
-                      /*HorizontalLine(
+                      */
+/*HorizontalLine(
                       y: widget.logic.maxY,
                       // color: Colors.transparent, // 水平线颜色
                       // strokeWidth: 1, // 水平线宽度
                       color: Color(0xA8FFFFFF),
                       strokeWidth: 0.4,
                       dashArray: [8, 4],
-                    ),*/
+                    ),*/ /*
+
                     ],
                   ),
                 ),
@@ -252,3 +261,4 @@ class _RealTimeDataLineState extends State<RealTimeDataLine> {
     ];
   }
 }
+*/

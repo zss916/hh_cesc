@@ -1,3 +1,4 @@
+/*
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/http/bean/power_entity.dart';
 import 'package:collection/collection.dart';
@@ -65,6 +66,11 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget3> {
             height: double.maxFinite,
             width: MediaQuery.of(context).size.width,
             child: LineChart(
+              transformationConfig: FlTransformationConfig(
+                scaleAxis: FlScaleAxis.horizontal,
+                minScale: 1,
+                maxScale: 4,
+              ),
               LineChartData(
                 lineTouchData: lineTouchData,
                 gridData: FlGridData(
@@ -218,3 +224,4 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget3> {
     ];
   }
 }
+*/
