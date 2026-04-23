@@ -56,6 +56,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               onTapOutside: (_) {
                 FocusManager.instance.primaryFocus?.unfocus();
               },
+              textInputAction: TextInputAction.search,
               style: TextStyle(color: Colors.white, fontSize: 12.sp),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(top: 0.5, left: 0, right: 10),
@@ -81,33 +82,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   color: const Color(0xFFA4A4A4),
                   fontSize: 12,
                 ),
-                suffixIcon: Stack(
-                  alignment: AlignmentDirectional.centerEnd,
-                  children: [
-                    InkWell(
-                      child: Container(
-                        margin: EdgeInsetsDirectional.only(end: 16),
-                        padding: EdgeInsetsDirectional.symmetric(
-                          horizontal: 10.w,
-                          vertical: 5.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: Colors.blue,
-                        ),
-                        child: Text(
-                          TKey.search.tr,
-                          style: TextStyle(color: Colors.white, fontSize: 12),
-                        ),
-                      ),
-                      onTap: () {
-                        _hideKeyboard();
-                        widget.onInput.call();
-                      },
-                    ),
-                  ],
-                ),
-
+                // suffixIcon: buildSearch,
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50.r),
                   borderSide: BorderSide(color: Colors.transparent),
@@ -142,4 +117,32 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       ),
     );
   }
+
+  ///搜索
+  Widget buildSearch() => Stack(
+    alignment: AlignmentDirectional.centerEnd,
+    children: [
+      InkWell(
+        child: Container(
+          margin: EdgeInsetsDirectional.only(end: 16),
+          padding: EdgeInsetsDirectional.symmetric(
+            horizontal: 10.w,
+            vertical: 5.h,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5.r),
+            color: Colors.blue,
+          ),
+          child: Text(
+            TKey.search.tr,
+            style: TextStyle(color: Colors.white, fontSize: 12),
+          ),
+        ),
+        onTap: () {
+          _hideKeyboard();
+          widget.onInput.call();
+        },
+      ),
+    ],
+  );
 }
