@@ -26,15 +26,6 @@ class BuildStationStatus extends StatelessWidget {
     required this.cutOffNum,
   });
 
-  ///饼状图
-  /*List<EChartPieBean> _dataList = [
-    EChartPieBean(title: "生活费", number: 100, color: Colors.lightBlueAccent),
-    EChartPieBean(title: "游玩费", number: 100, color: Colors.deepOrangeAccent),
-    EChartPieBean(title: "交通费", number: 100, color: Colors.green),
-    EChartPieBean(title: "贷款费", number: 100, color: Colors.amber),
-    EChartPieBean(title: "电话费", number: 600, color: Colors.orange),
-  ];*/
-
   @override
   Widget build(BuildContext context) {
     return Column(

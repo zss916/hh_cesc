@@ -122,6 +122,7 @@ donut_chart: ^0.0.1
 
 
 
-
-
+# Unicode
+℃ :\u2103
+CO2: CO\u2082
 
