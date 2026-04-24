@@ -74,6 +74,7 @@ dependencies:
   #tooltip
   super_tooltip: 2.1.1
   #timeago:
+  #gal: ^2.1.0
 
 
 

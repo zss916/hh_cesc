@@ -33,6 +33,12 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
     });
   }
 
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   void _scrollToRight() {
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
@@ -65,6 +71,11 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                   ? MediaQuery.of(context).size.width - 80
                   : widget.data.length * 80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
               child: BarChart(
+                /* transformationConfig: FlTransformationConfig(
+                  scaleAxis: FlScaleAxis.horizontal,
+                  minScale: 1,
+                  maxScale: 4,
+                ),*/
                 BarChartData(
                   maxY: widget.maxY,
                   minY: (widget.minY >= 0) ? 0 : widget.minY,
