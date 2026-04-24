@@ -5,6 +5,7 @@ import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/api/weather.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
+import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
 import 'package:cescpro/http/bean/weather_entity.dart';
@@ -57,6 +58,7 @@ class OliveItemLogic extends GetxController {
 
   SiteDetailEntity? siteDetail;
   StatisticRecordEntity? statisticRecord;
+  bool revenueShow = false;
 
   @override
   void onInit() {
@@ -64,6 +66,10 @@ class OliveItemLogic extends GetxController {
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       siteId = map['siteId'] as int?;
+      revenueShow =
+          ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?)
+              ?.calculateRevenue ??
+          false;
     }
   }
 

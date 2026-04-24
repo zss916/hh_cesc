@@ -21,8 +21,17 @@ class APages {
   static const web = '/web';
   static const eleReport = '/eleReport';
   static const alarmDetails = '/alarmDetails';
+  static const hPowerGraphChart = '/hPowerGraphChart';
+  static const hMeterChart = '/hMeterChart';
+  static const hPCSChart = '/hPCSChart';
 
   static final List<GetPage> routes = [
+    GetPage(name: hPowerGraphChart, page: () => PowerGraphChartPage()),
+
+    GetPage(name: hMeterChart, page: () => MeterChartPage()),
+
+    GetPage(name: hPCSChart, page: () => PCSChartPage()),
+
     /// 登录
     GetPage(name: login, page: () => LoginPage()),
 

@@ -1,5 +1,6 @@
 import 'package:cescpro/core/color/colors.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart.dart';
@@ -71,38 +72,78 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                   ),
                 ),
               ),
+              /*     VerticalDivider(width: 15.w, color: Colors.transparent),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(APages.horizontalChart);
+                },
+                child: Icon(
+                  Icons.zoom_out_map_rounded,
+                  size: 18.r,
+                  color: Colors.white,
+                ),
+              ),
+              VerticalDivider(width: 5.w, color: Colors.transparent),*/
             ],
           ),
         ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w),
-          padding: EdgeInsetsDirectional.only(
-            start: 5.w,
-            end: 10.w,
-            bottom: 15.h,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Color(0xFF313540),
-          ),
-          width: double.maxFinite,
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: [
-              Stack(
-                alignment: Alignment.center,
+        Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsetsDirectional.only(
+                start: 5.w,
+                end: 10.w,
+                bottom: 15.h,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xFF313540),
+              ),
+              width: double.maxFinite,
+              child: Stack(
+                alignment: AlignmentDirectional.topCenter,
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
+                  Stack(
+                    alignment: Alignment.center,
                     children: [
-                      /*if (widget.logic.powerLines.isNotEmpty)
-                        Container(
-                          width: double.maxFinite,
-                          margin: EdgeInsetsDirectional.only(
-                            top: 10.h,
-                            start: 12.w,
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            color: Colors.transparent,
+                            height: 320.h,
+                            width: double.maxFinite,
+                            child: buildBody(
+                              viewState: widget.logic.powerViewStatus,
+                            ),
                           ),
-                          alignment: Alignment.centerLeft,
+                          Divider(height: 5.h, color: Colors.transparent),
+                          Container(
+                            padding: EdgeInsetsDirectional.symmetric(
+                              horizontal: 15.w,
+                            ),
+                            width: double.maxFinite,
+                            child: Wrap(
+                              spacing: 15.w,
+                              runSpacing: 8.h,
+                              children: [
+                                ...widget.logic.titles.mapIndexed(
+                                  (i, e) => LineTitleWidget(
+                                    color: AppColors.colorList[i],
+                                    title: e,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (widget.logic.powerLines.isNotEmpty)
+                        PositionedDirectional(
+                          top: 10.h,
+                          start: 10.w,
                           child: Text(
                             "(kW)",
                             style: TextStyle(
@@ -110,53 +151,28 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                               fontSize: 12.sp,
                             ),
                           ),
-                        ),*/
-                      Container(
-                        color: Colors.transparent,
-                        height: 320.h,
-                        width: double.maxFinite,
-                        child: buildBody(
-                          viewState: widget.logic.powerViewStatus,
                         ),
-                      ),
-                      Divider(height: 5.h, color: Colors.transparent),
-                      Container(
-                        padding: EdgeInsetsDirectional.symmetric(
-                          horizontal: 15.w,
-                        ),
-                        width: double.maxFinite,
-                        child: Wrap(
-                          spacing: 15.w,
-                          runSpacing: 8.h,
-                          children: [
-                            ...widget.logic.titles.mapIndexed(
-                              (i, e) => LineTitleWidget(
-                                color: AppColors.colorList[i],
-                                title: e,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
-
-                  if (widget.logic.powerLines.isNotEmpty)
-                    PositionedDirectional(
-                      top: 10.h,
-                      start: 10.w,
-                      child: Text(
-                        "(kW)",
-                        style: TextStyle(
-                          color: Color(0x80FFFFFF),
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                    ),
                 ],
               ),
-            ],
-          ),
+            ),
+
+            PositionedDirectional(
+              top: 5,
+              end: 5 + 16.w,
+              child: InkWell(
+                onTap: () {
+                  Get.toNamed(APages.hPowerGraphChart);
+                },
+                child: Icon(
+                  Icons.zoom_out_map_rounded,
+                  size: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

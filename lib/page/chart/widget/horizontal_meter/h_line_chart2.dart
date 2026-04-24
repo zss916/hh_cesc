@@ -4,16 +4,15 @@ import 'package:cescpro/http/bean/power_entity.dart';
 import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-///pcs
-class MonitorLineChartWidget4 extends StatefulWidget {
+///MeterView 的
+class HMonitorLineChartWidget2 extends StatefulWidget {
   final List<PowerEntity> powerList;
   final double maxX;
   final double maxY;
   final double minY;
 
-  const MonitorLineChartWidget4({
+  const HMonitorLineChartWidget2({
     super.key,
     required this.powerList,
     required this.maxX,
@@ -25,14 +24,14 @@ class MonitorLineChartWidget4 extends StatefulWidget {
   State<StatefulWidget> createState() => MonitorLineChartWidgetState();
 }
 
-class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
+class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget2> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.only(
         start: 12,
         end: 12,
-        top: 12 + 18,
+        top: 30,
         bottom: 0,
       ),
       height: double.maxFinite,
@@ -62,8 +61,6 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
                 getTitlesWidget: (value, meta) {
                   return SideTitleWidget(
                     meta: meta,
-                    //angle: 1,
-                    space: 10,
                     child: value.toInt() >= widget.powerList.length
                         ? SizedBox.shrink()
                         : Text(
@@ -71,7 +68,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
                             style: TextStyle(
                               color: Color(0xA8FFFFFF),
                               fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
+                              fontSize: 10,
                             ),
                           ),
                   );
@@ -82,20 +79,19 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
               sideTitles: SideTitles(
                 showTitles: true,
                 reservedSize: 35,
-                maxIncluded: false,
                 minIncluded: false,
+                maxIncluded: false,
                 getTitlesWidget: (value, meta) {
                   TextStyle textStyle = TextStyle(
                     color: Color(0xA8FFFFFF),
                     fontWeight: FontWeight.w400,
-                    fontSize: 8.sp,
+                    fontSize: 8,
                   );
 
                   TextStyle textStyle2 = TextStyle(
                     color: Color(0xFF3874F2),
-                    // color: Colors.transparent,
                     fontWeight: FontWeight.w400,
-                    fontSize: 10.sp,
+                    fontSize: 10,
                   );
                   bool isShow =
                       (value == widget.minY) || (value == widget.maxY);
@@ -134,7 +130,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
                 strokeWidth: 0.4, // 水平线宽度
               ),
 
-              /*HorizontalLine(
+              /* HorizontalLine(
                       y: widget.maxY,
                       dashArray: [8, 4],
                       color: Color(0xFF3874F2), // 水平线颜色

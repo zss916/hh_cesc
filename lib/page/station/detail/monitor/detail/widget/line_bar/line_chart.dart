@@ -44,7 +44,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
         children: [
           LineChart(
             LineChartData(
-              //lineTouchData: lineTouchData,
+              lineTouchData: lineTouchData,
               gridData: flGridData,
               titlesData: FlTitlesData(
                 topTitles: axisTitles,
@@ -88,7 +88,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
           ),
           LineChart(
             LineChartData(
-              //lineTouchData: lineTouchData,
+              lineTouchData: lineTouchData,
               gridData: flGridData,
               titlesData: FlTitlesData(
                 topTitles: axisTitles,

@@ -1,3 +1,4 @@
+import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
@@ -140,97 +141,135 @@ class MeterView extends StatelessWidget {
             end: 18.w,
             bottom: 16.h,
           ),
-          alignment: AlignmentDirectional.centerStart,
-          child: Text(
-            TKey.realTimeSoc.tr,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-            ),
+          //alignment: AlignmentDirectional.centerStart,
+          child: Row(
+            children: [
+              Text(
+                TKey.realTimeSoc.tr,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              Spacer(),
+              /*   VerticalDivider(width: 15.w, color: Colors.transparent),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(APages.horizontalChart);
+                },
+                child: Icon(
+                  Icons.zoom_out_map_rounded,
+                  size: 18.r,
+                  color: Colors.white,
+                ),
+              ),*/
+            ],
           ),
         ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w),
-          padding: EdgeInsetsDirectional.only(
-            start: 5.w,
-            end: 10.w,
-            bottom: 15.h,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Color(0xFF313540),
-          ),
-          width: double.maxFinite,
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
+        Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsetsDirectional.only(
+                start: 5.w,
+                end: 10.w,
+                bottom: 15.h,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xFF313540),
+              ),
+              width: double.maxFinite,
+              child: Stack(
+                alignment: AlignmentDirectional.topCenter,
                 children: [
-                  Divider(height: 5.h, color: Colors.transparent),
-                  GetBuilder<MonitorDetailLogic>(
-                    id: "realTimeData",
-                    init: MonitorDetailLogic(),
-                    builder: (logic) {
-                      return Container(
-                        color: Colors.transparent,
-                        height: 270.h,
-                        width: double.maxFinite,
-                        child: logic.powerList.isEmpty
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                ),
-                              )
-                            : MonitorLineChartWidget2(
-                                powerList: logic.powerList,
-                                maxY: logic.powerMaxY,
-                                minY: logic.powerMinY,
-                                maxX: logic.powerMaxX,
-                              ),
-                      );
-                    },
-                  ),
-                  Divider(height: 5.h, color: Colors.transparent),
-                  Row(
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Spacer(),
+                      Divider(height: 5.h, color: Colors.transparent),
+                      GetBuilder<MonitorDetailLogic>(
+                        id: "realTimeData",
+                        init: MonitorDetailLogic(),
+                        builder: (logic) {
+                          return Container(
+                            color: Colors.transparent,
+                            height: 270.h,
+                            width: double.maxFinite,
+                            child: logic.powerList.isEmpty
+                                ? Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : MonitorLineChartWidget2(
+                                    powerList: logic.powerList,
+                                    maxY: logic.powerMaxY,
+                                    minY: logic.powerMinY,
+                                    maxX: logic.powerMaxX,
+                                  ),
+                          );
+                        },
+                      ),
+                      Divider(height: 5.h, color: Colors.transparent),
                       Row(
                         children: [
-                          Container(
-                            width: 7,
-                            height: 7,
-                            margin: EdgeInsets.only(right: 5.w),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF3874F2),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
+                          Spacer(),
+                          Row(
+                            children: [
+                              Container(
+                                width: 7,
+                                height: 7,
+                                margin: EdgeInsets.only(right: 5.w),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF3874F2),
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
+                              ),
+                              Text(
+                                TKey.power.tr,
+                                style: TextStyle(
+                                  color: Color(0xD9FFFFFF),
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            TKey.power.tr,
-                            style: TextStyle(
-                              color: Color(0xD9FFFFFF),
-                              fontSize: 12.sp,
-                            ),
-                          ),
+                          Spacer(),
                         ],
                       ),
-                      Spacer(),
                     ],
+                  ),
+                  PositionedDirectional(
+                    start: 0.w,
+                    top: 15.h,
+                    child: Text(
+                      "(kW)",
+                      style: TextStyle(
+                        color: Color(0x80FFFFFF),
+                        fontSize: 12.sp,
+                      ),
+                    ),
                   ),
                 ],
               ),
-              PositionedDirectional(
-                start: 0.w,
-                top: 15.h,
-                child: Text(
-                  "(kW)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+            ),
+            PositionedDirectional(
+              top: 5,
+              end: 5 + 16.w,
+              child: InkWell(
+                onTap: () {
+                  Get.toNamed(APages.hMeterChart);
+                },
+                child: Icon(
+                  Icons.zoom_out_map_rounded,
+                  size: 20,
+                  color: Colors.white,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );

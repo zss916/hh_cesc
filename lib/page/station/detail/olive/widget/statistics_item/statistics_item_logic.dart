@@ -7,6 +7,7 @@ import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/http/bean/pv_trend_entity.dart';
+import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -64,8 +65,7 @@ class StatisticsItemLogic extends GetxController {
   int eleViewStatus = ViewType.loading.index;
   List<String> eleLabels = [];
   //late StreamSubscription<HasPVEvent> event;
-
-  //bool revenueShow = false;
+  bool revenueShow = false;
 
   @override
   void onInit() {
@@ -73,8 +73,10 @@ class StatisticsItemLogic extends GetxController {
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       siteId = map['siteId'] as int?;
-      /* SiteEntity? site = map['site'] as SiteEntity?;
-      revenueShow = site?.calculateRevenue??false;*/
+      revenueShow =
+          ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?)
+              ?.calculateRevenue ??
+          false;
     }
     /*event = AppEventBus.eventBus.on<HasPVEvent>().listen((event) {
       hasPv = event.hasPv;

@@ -4,16 +4,15 @@ import 'package:cescpro/http/bean/power_entity.dart';
 import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///pcs
-class MonitorLineChartWidget4 extends StatefulWidget {
+class HMonitorLineChartWidget4 extends StatefulWidget {
   final List<PowerEntity> powerList;
   final double maxX;
   final double maxY;
   final double minY;
 
-  const MonitorLineChartWidget4({
+  const HMonitorLineChartWidget4({
     super.key,
     required this.powerList,
     required this.maxX,
@@ -25,7 +24,7 @@ class MonitorLineChartWidget4 extends StatefulWidget {
   State<StatefulWidget> createState() => MonitorLineChartWidgetState();
 }
 
-class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
+class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget4> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,6 +48,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
             show: true,
             drawHorizontalLine: true,
             drawVerticalLine: false,
+            // horizontalInterval: 10,
           ),
           titlesData: FlTitlesData(
             rightTitles: const AxisTitles(
@@ -71,7 +71,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
                             style: TextStyle(
                               color: Color(0xA8FFFFFF),
                               fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
+                              fontSize: 8,
                             ),
                           ),
                   );
@@ -82,20 +82,21 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
               sideTitles: SideTitles(
                 showTitles: true,
                 reservedSize: 35,
+                //interval: 20,
                 maxIncluded: false,
                 minIncluded: false,
                 getTitlesWidget: (value, meta) {
                   TextStyle textStyle = TextStyle(
                     color: Color(0xA8FFFFFF),
                     fontWeight: FontWeight.w400,
-                    fontSize: 8.sp,
+                    fontSize: 8,
                   );
 
                   TextStyle textStyle2 = TextStyle(
                     color: Color(0xFF3874F2),
                     // color: Colors.transparent,
                     fontWeight: FontWeight.w400,
-                    fontSize: 10.sp,
+                    fontSize: 10,
                   );
                   bool isShow =
                       (value == widget.minY) || (value == widget.maxY);
