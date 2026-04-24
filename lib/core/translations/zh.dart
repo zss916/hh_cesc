@@ -97,7 +97,7 @@ const zh = {
   "cancel": "取消",
   "selectTime": "选择时间",
   "total": "累计",
-  "deviceSerialNumber": "设备序列号",
+  "deviceSerialNumber": "SN号",
   "alarmDevice": "告警设备",
   "alarmContent": "告警内容",
   "startTime": "开始时间",
