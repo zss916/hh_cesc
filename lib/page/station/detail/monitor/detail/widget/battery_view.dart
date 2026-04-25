@@ -310,13 +310,28 @@ class BatteryView extends StatelessWidget {
             bottom: 16.h,
           ),
           alignment: AlignmentDirectional.centerStart,
-          child: Text(
-            TKey.realTimeSoc.tr,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-            ),
+          child: Row(
+            children: [
+              Text(
+                TKey.realTimeSoc.tr,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              Spacer(),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(APages.hBatteryChart);
+                },
+                child: Icon(
+                  Icons.zoom_out_map_rounded,
+                  size: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
         ),
         Container(
@@ -422,7 +437,6 @@ class BatteryView extends StatelessWidget {
                   style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                 ),
               ),
-
               PositionedDirectional(
                 end: 0.w,
                 top: 15.h,

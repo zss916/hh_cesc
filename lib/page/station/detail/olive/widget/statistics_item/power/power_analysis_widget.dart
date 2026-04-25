@@ -157,21 +157,21 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                 ],
               ),
             ),
-
-            PositionedDirectional(
-              top: 5,
-              end: 5 + 16.w,
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed(APages.hPowerGraphChart);
-                },
-                child: Icon(
-                  Icons.zoom_out_map_rounded,
-                  size: 20,
-                  color: Colors.white,
+            if (widget.logic.powerLines.isNotEmpty)
+              PositionedDirectional(
+                top: 5,
+                end: 5 + 16.w,
+                child: InkWell(
+                  onTap: () {
+                    Get.toNamed(APages.hPowerGraphChart);
+                  },
+                  child: Icon(
+                    Icons.zoom_out_map_rounded,
+                    size: 20,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       ],

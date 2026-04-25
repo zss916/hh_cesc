@@ -3,9 +3,8 @@ import 'package:cescpro/http/bean/soc_entity.dart';
 import 'package:collection/collection.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MonitorLineChartWidget extends StatefulWidget {
+class HMonitorLineChartWidget extends StatefulWidget {
   final List<SocEntity> arrList;
   final double maxX;
   final double maxY;
@@ -13,7 +12,7 @@ class MonitorLineChartWidget extends StatefulWidget {
   final double maxYR;
   final double minYR;
 
-  const MonitorLineChartWidget({
+  const HMonitorLineChartWidget({
     super.key,
     required this.arrList,
     required this.maxX,
@@ -27,7 +26,7 @@ class MonitorLineChartWidget extends StatefulWidget {
   State<StatefulWidget> createState() => MonitorLineChartWidgetState();
 }
 
-class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
+class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +37,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
         bottom: 0,
       ),
       height: double.maxFinite,
-      width: MediaQuery.of(context).size.width - 32.w - 15.w,
+      // width: MediaQuery.of(context).size.width - 32.w - 15.w,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -69,7 +68,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                                 ? Colors.cyanAccent
                                 : Color(0x800BC3C4),
                             fontWeight: FontWeight.w400,
-                            fontSize: 8.sp,
+                            fontSize: 8,
                           ),
                         ),
                       );
@@ -110,7 +109,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                             style: TextStyle(
                               color: Color(0xFF3874F2),
                               fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
+                              fontSize: 8,
                             ),
                           ),
                         ),
@@ -122,7 +121,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                             style: TextStyle(
                               color: Color(0xFF3874F2),
                               fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
+                              fontSize: 8,
                             ),
                           ),
                         ),
@@ -134,7 +133,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                             style: TextStyle(
                               color: Color(0xA8FFFFFF),
                               fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
+                              fontSize: 8,
                             ),
                           ),
                         ),
@@ -173,7 +172,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
             style: TextStyle(
               color: Colors.transparent,
               fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
+              fontSize: 8,
             ),
           ),
         );
@@ -209,46 +208,6 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
     ),
   );
 
-  ///折现数据列表
-  /* List<LineChartBarData> lineBarsData(List<SocEntity> lines) {
-    return [
-      LineChartBarData(
-        ///是否圆一点
-        isCurved: true,
-        color: Color(0xFF3874F2),
-        barWidth: 1,
-        isStrokeCapRound: true,
-
-        ///点数据
-        dotData: const FlDotData(show: false),
-
-        ///线下面的区域(true)
-        belowBarData: BarAreaData(show: false),
-        spots: [
-          ...lines.mapIndexed(
-            (i, e) => FlSpot(i.toDouble(), (e.power ?? 0).toDouble()),
-          ),
-        ],
-      ),
-      LineChartBarData(
-        isCurved: true,
-        color: Color(0xFF0BC3C4),
-        barWidth: 1,
-        isStrokeCapRound: true,
-        dotData: const FlDotData(show: false),
-        belowBarData: BarAreaData(
-          show: false,
-          color: Colors.pink.withValues(alpha: 0),
-        ),
-        spots: [
-          ...lines.mapIndexed(
-            (i, e) => FlSpot(i.toDouble(), (e.soc ?? 0).toDouble()),
-          ),
-        ],
-      ),
-    ];
-  }*/
-
   ///底部titles
   AxisTitles get bottomTitles => AxisTitles(
     sideTitles: SideTitles(
@@ -264,7 +223,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
                   style: TextStyle(
                     color: Color(0xA8FFFFFF),
                     fontWeight: FontWeight.w400,
-                    fontSize: 10.sp,
+                    fontSize: 10,
                   ),
                 ),
         );
@@ -301,20 +260,6 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
         color: Colors.cyanAccent, // 水平线颜色
         strokeWidth: 0.4, // 水平线宽度
       ),
-
-      /*HorizontalLine(
-                          y: widget.maxYR,
-                          dashArray: [8, 4],
-                          color: Colors.cyanAccent, // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),*/
-
-      /*HorizontalLine(
-                          y: widget.minYR,
-                          dashArray: [8, 4],
-                          color: Colors.cyanAccent, // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),*/
     ],
   );
 
@@ -344,19 +289,6 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
   ///extraLinesData3
   ExtraLinesData get extraLinesData3 => ExtraLinesData(
     horizontalLines: [
-      /* HorizontalLine(
-                          y: widget.maxY,
-                          dashArray: [8, 4],
-                          color: Color(0xFF3874F2), // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),
-
-                        HorizontalLine(
-                          y: widget.minY,
-                          dashArray: [8, 4],
-                          color: Color(0xFF3874F2), // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),*/
       HorizontalLine(
         y: 0,
         color: Colors.transparent, // 水平线颜色

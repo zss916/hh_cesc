@@ -24,6 +24,8 @@ class APages {
   static const hPowerGraphChart = '/hPowerGraphChart';
   static const hMeterChart = '/hMeterChart';
   static const hPCSChart = '/hPCSChart';
+  static const hBatteryChart = '/hBatteryChart';
+  static const hClusterChart = '/hClusterChart';
 
   static final List<GetPage> routes = [
     GetPage(name: hPowerGraphChart, page: () => PowerGraphChartPage()),
@@ -31,6 +33,10 @@ class APages {
     GetPage(name: hMeterChart, page: () => MeterChartPage()),
 
     GetPage(name: hPCSChart, page: () => PCSChartPage()),
+
+    GetPage(name: hBatteryChart, page: () => BatteryChartPage()),
+
+    GetPage(name: hClusterChart, page: () => ClusterChartPage()),
 
     /// 登录
     GetPage(name: login, page: () => LoginPage()),

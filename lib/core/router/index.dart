@@ -2,6 +2,8 @@ import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
 import 'package:cescpro/page/alarm/detail/view.dart';
+import 'package:cescpro/page/chart/battery_chart_page.dart';
+import 'package:cescpro/page/chart/cluster_chart_page.dart';
 import 'package:cescpro/page/chart/meter_chart_page.dart';
 import 'package:cescpro/page/chart/pcs_chart_page.dart';
 import 'package:cescpro/page/chart/power_graph_chart_page.dart';
