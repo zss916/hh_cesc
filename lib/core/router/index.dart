@@ -7,6 +7,7 @@ import 'package:cescpro/page/chart/cluster_chart_page.dart';
 import 'package:cescpro/page/chart/meter_chart_page.dart';
 import 'package:cescpro/page/chart/pcs_chart_page.dart';
 import 'package:cescpro/page/chart/power_graph_chart_page.dart';
+import 'package:cescpro/page/chart/revenue_chart_page.dart';
 import 'package:cescpro/page/login/index.dart';
 import 'package:cescpro/page/main/index.dart';
 import 'package:cescpro/page/service/about/index.dart';

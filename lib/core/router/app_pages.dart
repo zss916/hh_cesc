@@ -26,8 +26,11 @@ class APages {
   static const hPCSChart = '/hPCSChart';
   static const hBatteryChart = '/hBatteryChart';
   static const hClusterChart = '/hClusterChart';
+  static const hRevenueChart = '/hRevenueChart';
 
   static final List<GetPage> routes = [
+    GetPage(name: hRevenueChart, page: () => RevenueChartPage()),
+
     GetPage(name: hPowerGraphChart, page: () => PowerGraphChartPage()),
 
     GetPage(name: hMeterChart, page: () => MeterChartPage()),
