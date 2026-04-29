@@ -9,7 +9,7 @@ const es = {
   "password": "Contraseña",
   "passwordError": "Cuenta o contraseña incorrecta",
   "login": "Iniciar sesión",
-  "guestLogin": "Iniciar sesión como invitado",
+  "guestLogin": "Acceso de invitado",
   "accountRequired": "Por favor, complete la cuenta",
   "passwordRequired": "Por favor, complete la contraseña",
   "privacyAgreementRequired":

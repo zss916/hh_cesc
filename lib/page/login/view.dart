@@ -56,26 +56,26 @@ class LoginPage extends StatelessWidget {
                       },
                     ),
 
-                    if (GetPlatform.isAndroid && !AppSetting.isOverseas)
-                      Column(
-                        children: [
-                          SizedBox(height: 15.h),
-                          CommonBtn(
-                            title: TKey.guestLogin.tr,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Colors.white24, Colors.white24],
-                              ),
-                              borderRadius: BorderRadiusDirectional.all(
-                                Radius.circular(50.r),
-                              ),
+                    //if (GetPlatform.isAndroid && !AppSetting.isOverseas)
+                    Column(
+                      children: [
+                        SizedBox(height: 15.h),
+                        CommonBtn(
+                          title: TKey.guestLogin.tr,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.white24, Colors.white24],
                             ),
-                            onTap: () {
-                              logic.toGuestLogin();
-                            },
+                            borderRadius: BorderRadiusDirectional.all(
+                              Radius.circular(50.r),
+                            ),
                           ),
-                        ],
-                      ),
+                          onTap: () {
+                            logic.toGuestLogin();
+                          },
+                        ),
+                      ],
+                    ),
 
                     SizedBox(height: 20.h),
                     if (GetPlatform.isAndroid && !AppSetting.isOverseas)

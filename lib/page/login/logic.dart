@@ -78,6 +78,24 @@ class LoginLogic extends GetxController {
   }
 
   Future<void> toGuestLogin() async {
+    AppLoading.show();
+    TokenEntity? value =
+        await AdminAPI.login(
+          username: "cesc",
+          password: "cesc123!",
+        ).whenComplete(() {
+          AppLoading.dismiss();
+        });
+    if (value != null) {
+      User.to.setIsGuest(isGuest: true);
+      User.setTokenHead(tokenHead: value.tokenHeadValue);
+      User.setToken(token: value.tokenValue);
+      await loadCurrencyList();
+      PageTools.offAllNamedMain();
+    }
+  }
+
+  Future<void> toGuestLogin2() async {
     if (!User.to.getPrivacyAgreed()) {
       AppLoading.toast(TKey.privacyAgreementRequired.tr);
       return;
