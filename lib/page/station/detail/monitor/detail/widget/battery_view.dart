@@ -323,6 +323,7 @@ class BatteryView extends StatelessWidget {
               Spacer(),
               InkWell(
                 onTap: () {
+                  ///电池系统 MonitorDetailLogic
                   Get.toNamed(APages.hBatteryChart);
                 },
                 child: Icon(

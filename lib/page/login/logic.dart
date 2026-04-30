@@ -83,6 +83,8 @@ class LoginLogic extends GetxController {
         await AdminAPI.login(
           username: "cesc",
           password: "cesc123!",
+          //username: "ntbkd",
+          //password: "ntbkd123!",
         ).whenComplete(() {
           AppLoading.dismiss();
         });

@@ -8,7 +8,7 @@
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
         <item name="android:windowSplashScreenBackground">#23282E</item>
         <!--logo隐藏掉-->
-        <!--<item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>-->
+        <!--<item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item>-->
         <item name="android:windowSplashScreenAnimatedIcon">@color/ic_launcher_background</item>
         <item name="android:windowSplashScreenIconBackgroundColor">#23282E</item>
     </style>

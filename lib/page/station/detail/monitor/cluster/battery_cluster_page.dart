@@ -394,6 +394,7 @@ class BatteryClusterPage extends StatelessWidget {
               Spacer(),
               InkWell(
                 onTap: () {
+                  ///电池集群 BatteryClusterLogic
                   Get.toNamed(APages.hClusterChart);
                 },
                 child: Icon(

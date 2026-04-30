@@ -1,7 +1,7 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/chart/widget/battery/h_line_chart.dart';
 import 'package:cescpro/page/chart/widget/horizontal_chart_view.dart';
-import 'package:cescpro/page/station/detail/monitor/cluster/battery_cluster_logic.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,9 +37,9 @@ class BatteryChartPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Divider(height: 5, color: Colors.transparent),
-                    GetBuilder<BatteryClusterLogic>(
+                    GetBuilder<MonitorDetailLogic>(
                       id: "realTimeData",
-                      init: BatteryClusterLogic(),
+                      init: MonitorDetailLogic(),
                       builder: (logic) {
                         return Container(
                           color: Colors.transparent,
