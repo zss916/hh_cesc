@@ -352,7 +352,10 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                     //axisSide: meta.axisSide,
                     space: 4,
                     meta: meta,
-                    child: Text(widget.labels[value.toInt()], style: style),
+                    child: Text(
+                      (widget.data.isEmpty) ? "" : widget.labels[value.toInt()],
+                      style: style,
+                    ),
                   );
                 },
               ),

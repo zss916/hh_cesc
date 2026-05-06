@@ -88,9 +88,6 @@ class StatisticsItemLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-
-    debugPrint("onReady ===>>>");
-
     DateTime now = DateTime.now().toUtc();
     DateTime end = DateTime(
       now.year,
@@ -205,7 +202,6 @@ class StatisticsItemLogic extends GetxController {
   List<double> minVals = [];
   List<double> lens = [];
 
-  //startTimeStamp: 1766678400000, endTimeStamp: 1766764799999
   ///收益统计和电量指标
   Future<void> loadRevenue({
     required DataType type,

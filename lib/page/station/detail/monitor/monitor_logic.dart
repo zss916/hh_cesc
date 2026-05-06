@@ -48,7 +48,11 @@ class MonitorLogic extends GetxController {
   }
 
   ///isV1
-  Future<void> getPointDetails() async {
+  Future<void> getPointDetails({bool isLoading = false}) async {
+    if (isLoading) {
+      viewState = ViewStateEnum.loading.index;
+      update();
+    }
     SiteDetailEntity? value = await SiteAPI.getPointDetails(
       siteId: site?.id ?? 0,
     );
@@ -62,6 +66,8 @@ class MonitorLogic extends GetxController {
         loadData(isV1: false);
       }
     } else {
+      viewState = ViewStateEnum.error.index;
+      update();
       AppLoading.toast("data is null");
     }
   }

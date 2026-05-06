@@ -47,6 +47,7 @@ class MonitorView extends StatelessWidget {
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CircularProgressIndicator()),
       ),
+      _ when viewState == ViewStateEnum.error.index => buildError(logic: logic),
       _ => SizedBox.shrink(),
     };
   }
@@ -115,6 +116,27 @@ class MonitorView extends StatelessWidget {
           ),
         ),
       ],
+    ),
+  );
+
+  Widget buildError({required MonitorLogic logic}) => SizedBox(
+    width: double.maxFinite,
+    height: double.maxFinite,
+    child: GestureDetector(
+      onTap: () {
+        logic.getPointDetails(isLoading: true);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(Assets.imgEmpty2, width: 200, height: 95),
+          SizedBox(height: 20),
+          Text(
+            TKey.refresh.tr,
+            style: TextStyle(fontSize: 16, color: Color(0xFF909399)),
+          ),
+        ],
+      ),
     ),
   );
 }

@@ -354,7 +354,6 @@ class BatteryView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Divider(height: 5.h, color: Colors.transparent),
-
                   GetBuilder<MonitorDetailLogic>(
                     id: "realTimeData",
                     init: MonitorDetailLogic(),
@@ -543,25 +542,26 @@ class BatteryView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                "${soc?.showFieldName ?? ""} ",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Color(0xA6FFFFFF),
+                          if (soc != null)
+                            Row(
+                              children: [
+                                Text(
+                                  "${soc?.showFieldName ?? ""} ",
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: Color(0xA6FFFFFF),
+                                  ),
                                 ),
-                              ),
-                              Spacer(),
-                              Text(
-                                "${soc?.showValue ?? ""}${soc?.unit ?? ""}",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Color(0xFFFFFFFF),
+                                Spacer(),
+                                Text(
+                                  "${soc?.showValue ?? ""}${soc?.unit ?? ""}",
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
                           Row(
                             children: [
                               Text(

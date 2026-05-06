@@ -498,6 +498,7 @@ class TKey {
   static const String refreshCompleteText = "refreshCompleteText";
   static const String refreshFailedText = "refreshFailedText";
   static const String refreshingText = "refreshingText";
+  static const String refresh = "refresh";
 }
 
 const en = {
@@ -765,4 +766,5 @@ const en = {
   "refreshCompleteText": "Refresh completed",
   "refreshFailedText": "Refresh failed",
   "refreshingText": "Refreshing…",
+  "refresh": "Refresh",
 };

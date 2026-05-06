@@ -265,4 +265,5 @@ const es = {
   "refreshCompleteText": "Actualización completada",
   "refreshFailedText": "Error al actualizar",
   "refreshingText": "Actualizando…",
+  "refresh": "Refrescar",
 };

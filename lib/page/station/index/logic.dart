@@ -92,8 +92,10 @@ class StationLogic extends GetxController {
     if (isSuccessful) {
       if (pageNumber == 1) {
         data = value;
+        //update();
       } else {
         data.addAll(value);
+        //update();
       }
       refreshAndLoadCtl(pageNumber == 1, value.length);
       viewState = data.isEmpty

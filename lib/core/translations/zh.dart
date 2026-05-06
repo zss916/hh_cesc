@@ -257,4 +257,5 @@ const zh = {
   "refreshCompleteText": "刷新成功",
   "refreshFailedText": "刷新失败",
   "refreshingText": "刷新中…",
+  "refresh": "刷新",
 };

@@ -69,10 +69,11 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
                         bottom: 0,
                       ),
                       height: double.maxFinite,
-                      width: widget.data.length <= 3
-                          ? MediaQuery.of(context).size.width - 80
-                          : widget.data.length *
-                                80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
+                      width:
+                          ((widget.data.length * 80.0) <=
+                              (MediaQuery.of(context).size.width - 60))
+                          ? (MediaQuery.of(context).size.width - 60)
+                          : widget.data.length * 80.0,
                       child: BarChart(
                         BarChartData(
                           maxY: widget.maxY,
@@ -225,10 +226,11 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
                         bottom: 0,
                       ),
                       height: double.maxFinite,
-                      width: widget.data.length <= 4
-                          ? MediaQuery.of(context).size.width - 20
-                          : widget.data.length *
-                                80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
+                      width:
+                          ((widget.data.length * 80.0) <=
+                              (MediaQuery.of(context).size.width - 60))
+                          ? (MediaQuery.of(context).size.width - 60)
+                          : widget.data.length * 80.0,
                       child: BarChart(
                         BarChartData(
                           maxY: widget.maxY,

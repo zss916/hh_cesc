@@ -249,4 +249,5 @@ const de = {
   "refreshFailedText": "Aktualisierung fehlgeschlagen",
   "refreshingText": "Aktualisiere…",
   "guestLogin": "Gast-Login",
+  "refresh": "Aktualisieren",
 };

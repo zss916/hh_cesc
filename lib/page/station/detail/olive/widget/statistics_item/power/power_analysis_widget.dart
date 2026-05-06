@@ -72,18 +72,6 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                   ),
                 ),
               ),
-              /*     VerticalDivider(width: 15.w, color: Colors.transparent),
-              InkWell(
-                onTap: () {
-                  Get.toNamed(APages.horizontalChart);
-                },
-                child: Icon(
-                  Icons.zoom_out_map_rounded,
-                  size: 18.r,
-                  color: Colors.white,
-                ),
-              ),
-              VerticalDivider(width: 5.w, color: Colors.transparent),*/
             ],
           ),
         ),
@@ -157,7 +145,8 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                 ],
               ),
             ),
-            if (widget.logic.powerLines.isNotEmpty)
+            if (widget.logic.powerLines.isNotEmpty &&
+                ViewType.common.index == widget.logic.powerViewStatus)
               PositionedDirectional(
                 top: 5,
                 end: 5 + 16.w,

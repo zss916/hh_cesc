@@ -53,12 +53,19 @@ class MonitorDetailLogic extends GetxController {
 
   Future<void> loadData() async {
     AppLoading.show();
-    await getCompTree();
-    Future.wait([
-      loadComType(),
-      loadComponentListByDev(),
-    ]).whenComplete(() => AppLoading.dismiss());
-    loadSocGraph();
+    getCompTree().then((isOK) {
+      if (isOK) {
+        Future.wait([
+          loadComType(),
+          loadComponentListByDev(),
+        ]).whenComplete(() => AppLoading.dismiss());
+
+        ///ARR,PCS,METER
+        loadSocGraph();
+      } else {
+        AppLoading.dismiss();
+      }
+    });
   }
 
   void switchTree() {
@@ -70,7 +77,7 @@ class MonitorDetailLogic extends GetxController {
     loadSocGraph();
   }
 
-  Future<void> getCompTree() async {
+  Future<bool> getCompTree() async {
     final (bool isSuccessful, List<CompTreeEntity> value) =
         await SiteAPI.getCompTree(siteId: siteId, type: devType);
     if (isSuccessful) {
@@ -82,6 +89,9 @@ class MonitorDetailLogic extends GetxController {
       nodeNo = value.first.child?.first.val;
       devNo = value.first.child?.first.child?.first.val;
       update();
+      return true;
+    } else {
+      return false;
     }
   }
 
