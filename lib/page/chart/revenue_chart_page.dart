@@ -10,40 +10,25 @@ class RevenueChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HorizontalChartView(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-            onPressed: () => Get.back(),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsetsDirectional.only(start: 5, end: 10, bottom: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFF313540),
         ),
-        backgroundColor: Color(0xFF23282E),
-        body: SafeArea(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            padding: EdgeInsetsDirectional.only(start: 5, end: 10, bottom: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Color(0xFF313540),
-            ),
-            width: double.maxFinite,
-            child: GetBuilder<StatisticsItemLogic>(
-              id: 'revenue',
-              init: StatisticsItemLogic(),
-              builder: (logic) {
-                return HRevenueBarchartWidget(
-                  data: logic.revenueList
-                      .map((e) => (e.totalIncome ?? 0))
-                      .toList(),
-                  labels: logic.labels,
-                  maxY: logic.revenueMaxY ?? 0,
-                  minY: logic.revenueMinY ?? 0,
-                );
-              },
-            ),
-          ),
+        width: double.maxFinite,
+        child: GetBuilder<StatisticsItemLogic>(
+          id: 'revenue',
+          init: StatisticsItemLogic(),
+          builder: (logic) {
+            return HRevenueBarchartWidget(
+              data: logic.revenueList.map((e) => (e.totalIncome ?? 0)).toList(),
+              labels: logic.labels,
+              maxY: logic.revenueMaxY ?? 0,
+              minY: logic.revenueMinY ?? 0,
+            );
+          },
         ),
       ),
     );

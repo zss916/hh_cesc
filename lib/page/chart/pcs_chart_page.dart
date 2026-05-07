@@ -11,95 +11,82 @@ class PCSChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HorizontalChartView(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-            onPressed: () => Get.back(),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsetsDirectional.only(start: 5, end: 5, bottom: 15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFF313540),
         ),
-        backgroundColor: Color(0xFF23282E),
-        body: SafeArea(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            padding: EdgeInsetsDirectional.only(start: 5, end: 5, bottom: 15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Color(0xFF313540),
-            ),
-            width: double.maxFinite,
-            child: Stack(
-              alignment: AlignmentDirectional.topCenter,
+        width: double.maxFinite,
+        child: Stack(
+          alignment: AlignmentDirectional.topCenter,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
+                Divider(height: 5, color: Colors.transparent),
+                GetBuilder<MonitorDetailLogic>(
+                  id: "realTimeData",
+                  init: MonitorDetailLogic(),
+                  builder: (logic) {
+                    return Container(
+                      color: Colors.transparent,
+                      height: 210,
+                      width: double.maxFinite,
+                      child: logic.powerList.isEmpty
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : HMonitorLineChartWidget4(
+                              powerList: logic.powerList,
+                              maxY: logic.powerMaxY,
+                              minY: logic.powerMinY,
+                              maxX: logic.powerMaxX,
+                            ),
+                    );
+                  },
+                ),
+                Divider(height: 5, color: Colors.transparent),
+                Row(
                   children: [
-                    Divider(height: 5, color: Colors.transparent),
-                    GetBuilder<MonitorDetailLogic>(
-                      id: "realTimeData",
-                      init: MonitorDetailLogic(),
-                      builder: (logic) {
-                        return Container(
-                          color: Colors.transparent,
-                          height: 210,
-                          width: double.maxFinite,
-                          child: logic.powerList.isEmpty
-                              ? Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                  ),
-                                )
-                              : HMonitorLineChartWidget4(
-                                  powerList: logic.powerList,
-                                  maxY: logic.powerMaxY,
-                                  minY: logic.powerMinY,
-                                  maxX: logic.powerMaxX,
-                                ),
-                        );
-                      },
-                    ),
-                    Divider(height: 5, color: Colors.transparent),
+                    Spacer(),
                     Row(
                       children: [
-                        Spacer(),
-                        Row(
-                          children: [
-                            Container(
-                              width: 7,
-                              height: 7,
-                              margin: EdgeInsets.only(right: 5),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF3874F2),
-                                borderRadius: BorderRadius.circular(2),
-                              ),
-                            ),
-                            Text(
-                              TKey.power.tr,
-                              style: TextStyle(
-                                color: Color(0xD9FFFFFF),
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
+                        Container(
+                          width: 7,
+                          height: 7,
+                          margin: EdgeInsets.only(right: 5),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF3874F2),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
                         ),
-                        Spacer(),
+                        Text(
+                          TKey.power.tr,
+                          style: TextStyle(
+                            color: Color(0xD9FFFFFF),
+                            fontSize: 12,
+                          ),
+                        ),
                       ],
                     ),
+                    Spacer(),
                   ],
-                ),
-                PositionedDirectional(
-                  start: 0,
-                  top: 15,
-                  child: Text(
-                    "(kW)",
-                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
-                  ),
                 ),
               ],
             ),
-          ),
+            PositionedDirectional(
+              start: 0,
+              top: 15,
+              child: Text(
+                "(kW)",
+                style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
+              ),
+            ),
+          ],
         ),
       ),
     );

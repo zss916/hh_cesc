@@ -10,69 +10,53 @@ class HPVChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HorizontalChartView(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-            onPressed: () => Get.back(),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsetsDirectional.only(
+          start: 10,
+          end: 10,
+          top: 10,
+          bottom: 10,
         ),
-        backgroundColor: Color(0xFF23282E),
-        body: SafeArea(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            padding: EdgeInsetsDirectional.only(
-              start: 10,
-              end: 10,
-              top: 10,
-              bottom: 10,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Color(0xFF313540),
-            ),
-            width: double.maxFinite,
-            child: Stack(
-              alignment: AlignmentDirectional.topCenter,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFF313540),
+        ),
+        width: double.maxFinite,
+        child: Stack(
+          alignment: AlignmentDirectional.topCenter,
+          children: [
+            Column(
               children: [
-                Column(
-                  children: [
-                    Align(
-                      alignment: AlignmentDirectional.topStart,
-                      child: Text(
-                        "(kWh)",
-                        style: TextStyle(
-                          color: Color(0x80FFFFFF),
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      color: Colors.transparent,
-                      height: 200,
-                      width: double.maxFinite,
-                      child: GetBuilder<StatisticsItemLogic>(
-                        id: "pv",
-                        init: StatisticsItemLogic(),
-                        builder: (logic) {
-                          return HPVBarchartItemWidget(
-                            data: logic.pvList
-                                .map((e) => (e.summaryValue ?? 0))
-                                .toList(),
-                            labels: logic.pvLabels,
-                            maxY: logic.pvMaxY ?? 0,
-                            minY: logic.pvMinY ?? 0,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: Text(
+                    "(kWh)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
+                  ),
+                ),
+                Container(
+                  color: Colors.transparent,
+                  height: 200,
+                  width: double.maxFinite,
+                  child: GetBuilder<StatisticsItemLogic>(
+                    id: "pv",
+                    init: StatisticsItemLogic(),
+                    builder: (logic) {
+                      return HPVBarchartItemWidget(
+                        data: logic.pvList
+                            .map((e) => (e.summaryValue ?? 0))
+                            .toList(),
+                        labels: logic.pvLabels,
+                        maxY: logic.pvMaxY ?? 0,
+                        minY: logic.pvMinY ?? 0,
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
-          ),
+          ],
         ),
       ),
     );

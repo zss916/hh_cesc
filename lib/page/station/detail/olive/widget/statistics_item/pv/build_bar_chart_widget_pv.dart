@@ -50,18 +50,14 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
                   bottom: 16.h,
                 ),
                 alignment: AlignmentDirectional.centerStart,
-                child: Row(
-                  children: [
-                    Text(
-                      widget.title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16.sp,
-                      ),
-                    ),
-                    Spacer(),
-                  ],
+                child: Text(
+                  widget.title,
+                  softWrap: true,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.sp,
+                  ),
                 ),
               ),
               Container(

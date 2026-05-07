@@ -82,6 +82,8 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
             ),
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
+                maxIncluded: false,
+                minIncluded: false,
                 showTitles: true,
                 reservedSize: 28,
                 getTitlesWidget: (value, meta) {

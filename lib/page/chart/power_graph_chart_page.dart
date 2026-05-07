@@ -10,25 +10,12 @@ class PowerGraphChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HorizontalChartView(
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-            onPressed: () => Get.back(),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-        ),
-        backgroundColor: Color(0xFF23282E),
-        body: SafeArea(
-          child: GetBuilder<StatisticsItemLogic>(
-            id: "powerGraph",
-            init: StatisticsItemLogic(),
-            builder: (logic) {
-              return HPowerAnalysisWidget(logic: logic);
-            },
-          ),
-        ),
+      child: GetBuilder<StatisticsItemLogic>(
+        id: "powerGraph",
+        init: StatisticsItemLogic(),
+        builder: (logic) {
+          return HPowerAnalysisWidget(logic: logic);
+        },
       ),
     );
   }
