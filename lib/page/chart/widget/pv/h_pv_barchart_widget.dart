@@ -1,7 +1,6 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HPVBarchartItemWidget extends StatefulWidget {
   final List<double> data; // 数据列表
@@ -28,7 +27,7 @@ class _BarChartWidgetState extends State<HPVBarchartItemWidget> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.labels.isNotEmpty) {
-        _scrollToRight();
+        // _scrollToRight();
       }
     });
   }
@@ -162,7 +161,7 @@ class _BarChartWidgetState extends State<HPVBarchartItemWidget> {
                       style: TextStyle(
                         color: Color(0xFFFEDB65),
                         fontWeight: FontWeight.w500,
-                        fontSize: 10.sp,
+                        fontSize: 10,
                       ),
                     ),
                   ],

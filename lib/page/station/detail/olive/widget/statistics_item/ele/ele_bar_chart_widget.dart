@@ -218,7 +218,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                       },
                     ),
                   ),
-                  Divider(height: 40.h, color: Colors.transparent),
+                  Divider(height: 30.h, color: Colors.transparent),
                   buildBody(viewState: widget.logic.eleViewStatus),
                   Divider(height: 5.h, color: Colors.transparent),
                   if (widget.logic.revenueList.isNotEmpty)

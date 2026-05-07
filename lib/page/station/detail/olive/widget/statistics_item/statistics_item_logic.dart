@@ -157,16 +157,21 @@ class StatisticsItemLogic extends GetxController {
       endTimeStamp: endTimeStamp,
     );
     if (isSuccessful) {
+      List<PowerGraphEntity> perData = normalizeChartData(
+        value.map((e) => e.toJson()).toList(),
+      ).map((e) => PowerGraphEntity.fromJson(e)).toList();
       powerLines.assignAll(
-        value
+        perData
             .where(((a) => (a.list ?? []).isNotEmpty))
             .map((e) => (e.list ?? [])),
       );
+
       titles.assignAll(
         value
             .where(((a) => (a.list ?? []).isNotEmpty))
             .map((w) => w.title ?? ""),
       );
+
       handPowerData(value);
       powerViewStatus = powerLines.isEmpty
           ? ViewType.empty.index
@@ -176,6 +181,38 @@ class StatisticsItemLogic extends GetxController {
       powerViewStatus = ViewType.empty.index;
       update(["powerGraph"]);
     }
+  }
+
+  ///预处理数据
+  List<Map<String, dynamic>> normalizeChartData(
+    List<Map<String, dynamic>> data,
+  ) {
+    // 找出所有出现过的 time
+    final Set<int> allTimes = {};
+
+    for (final item in data) {
+      final list = item['list'] as List;
+      for (final point in list) {
+        allTimes.add(point['time'] as int);
+      }
+    }
+
+    final sortedTimes = allTimes.toList()..sort();
+
+    // 每个 list 按统一横坐标补齐
+    for (final item in data) {
+      final list = item['list'] as List;
+
+      final Map<int, dynamic> timeMap = {
+        for (final point in list) point['time'] as int: point,
+      };
+
+      item['list'] = sortedTimes.map((time) {
+        return timeMap[time] ?? {'time': time, 'val': 0};
+      }).toList();
+    }
+
+    return data;
   }
 
   ///处理数据

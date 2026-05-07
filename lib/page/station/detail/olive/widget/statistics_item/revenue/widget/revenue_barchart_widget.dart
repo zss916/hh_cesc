@@ -30,7 +30,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.labels.isNotEmpty) {
-        _scrollToRight();
+        // _scrollToRight();
       }
     });
   }
@@ -51,6 +51,127 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        // 滚动视图中的柱状图
+        if (widget.data.isNotEmpty)
+          SizedBox(
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                padding: const EdgeInsetsDirectional.only(
+                  start: 6,
+                  end: 10,
+                  top: 18,
+                  bottom: 0,
+                ),
+                height: double.maxFinite,
+                width: widget.data.length <= 3
+                    ? MediaQuery.of(context).size.width - 80
+                    : widget.data.length * 80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
+                child: BarChart(
+                  BarChartData(
+                    maxY: widget.maxY,
+                    minY: widget.minY,
+                    barTouchData: widget.labels.isEmpty
+                        ? null
+                        : BarTouchData(
+                            enabled: true,
+                            touchTooltipData: BarTouchTooltipData(
+                              getTooltipColor: (_) => Color(0x66000000),
+                              tooltipHorizontalAlignment:
+                                  FLHorizontalAlignment.right,
+                              tooltipMargin: -30,
+                              getTooltipItem:
+                                  (group, groupIndex, rod, rodIndex) {
+                                    return BarTooltipItem(
+                                      '${widget.labels[groupIndex]}\n',
+                                      TextStyle(
+                                        color: Color(0xFF0978E9),
+                                        fontSize: 8.sp,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: (rod.toY)
+                                              .toDouble()
+                                              .formatAmount(),
+                                          style: TextStyle(
+                                            color: Color(0xFF0978E9),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 10.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                            ),
+                            touchCallback:
+                                (FlTouchEvent event, barTouchResponse) {
+                                  setState(() {
+                                    if (!event.isInterestedForInteractions ||
+                                        barTouchResponse == null ||
+                                        barTouchResponse.spot == null) {
+                                      return;
+                                    }
+                                  });
+                                },
+                          ),
+                    titlesData: _buildTitlesData(isShowLeft: true), // 构建标题数据
+                    borderData: FlBorderData(show: false), // 边框数据
+                    barGroups: _buildBarGroups(), // 构建柱状图组
+                    gridData: FlGridData(
+                      show: true,
+                      drawHorizontalLine: true,
+                      drawVerticalLine: false,
+                      getDrawingHorizontalLine: (value) {
+                        return FlLine(
+                          strokeWidth: 0.4,
+                          dashArray: [8, 4],
+                          color: Color(0xA8FFFFFF), // 水平线颜色
+                          //strokeWidth: 1, // 水平线宽度
+                        );
+                      },
+                    ), // 网格数据
+                    alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+                    extraLinesData: ExtraLinesData(
+                      horizontalLines: [
+                        HorizontalLine(
+                          y: 0,
+                          color: Colors.white, // 水平线颜色
+                          strokeWidth: 0.4, // 水平线宽度
+                        ),
+
+                        HorizontalLine(
+                          y: widget.maxY,
+                          label: HorizontalLineLabel(show: true),
+                          color: Color(0xFF0978E9),
+                          strokeWidth: 0.4,
+                          dashArray: [8, 4],
+                        ),
+
+                        HorizontalLine(
+                          y: widget.minY,
+                          label: HorizontalLineLabel(show: true),
+                          color: Color(0xFF0978E9), // 水平线颜色
+                          strokeWidth: 0.4,
+                          dashArray: [8, 4],
+                        ),
+                      ],
+                    ),
+                    // 额外线条数据
+                  ),
+                ),
+              ),
+            ),
+          )
+        else
+          Image.asset(Assets.imgEmpty, width: 100, height: 100),
+      ],
+    );
+
     return (widget.minY < 0)
         ? Stack(
             alignment: Alignment.center,
@@ -337,9 +458,18 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
     return FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
+        /*axisNameWidget: Text(
+          "",
+          style: TextStyle(
+            color: Color(0xA8FFFFFF),
+            fontWeight: FontWeight.w400,
+            fontSize: 12.sp,
+          ),
+        ),*/
         sideTitles: widget.labels.isEmpty
             ? SideTitles(showTitles: false)
             : SideTitles(
+                //interval: 20,
                 showTitles: true,
                 reservedSize: 15,
                 getTitlesWidget: (value, meta) {
@@ -349,6 +479,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                     fontSize: 8.sp,
                   );
                   return SideTitleWidget(
+                    angle: 0,
                     //axisSide: meta.axisSide,
                     space: 4,
                     meta: meta,
@@ -375,7 +506,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
               //axisSide: meta.axisSide,x
               space: 4,
               meta: meta,
-              child: Text(isHide ? "" : "$value", style: style),
+              child: Text(isHide ? "" : formatNumber(value), style: style),
             );
           },
         ), // 左边Y轴标签禁用，手动创建
@@ -383,6 +514,18 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
     );
+  }
+
+  String formatNumber(num value) {
+    if (value >= 1000000) {
+      return '${(value / 1000000).toStringAsFixed(1)}M';
+    } else if (value >= 10000) {
+      return '${(value / 10000).toStringAsFixed(1)}W';
+    } else if (value >= 1000) {
+      return '${(value / 1000).toStringAsFixed(1)}K';
+    } else {
+      return value.toString();
+    }
   }
 
   // 构建柱状图组

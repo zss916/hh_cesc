@@ -20,14 +20,16 @@ class ServicePage extends StatelessWidget {
               Divider(height: 28.h, color: Colors.transparent),
               GestureDetector(
                 onTap: () {
-                  showPhotoSheet(
-                    onAlbum: () {
-                      logic.editImage(camera: false);
-                    },
-                    onTakePhoto: () {
-                      logic.editImage(camera: true);
-                    },
-                  );
+                  if (!User.to.getIsGuest()) {
+                    showPhotoSheet(
+                      onAlbum: () {
+                        logic.editImage(camera: false);
+                      },
+                      onTakePhoto: () {
+                        logic.editImage(camera: true);
+                      },
+                    );
+                  }
                 },
                 child: AvatarWidget(url: logic.icon),
               ),

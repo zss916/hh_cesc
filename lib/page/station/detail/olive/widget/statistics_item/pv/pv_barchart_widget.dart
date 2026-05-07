@@ -28,7 +28,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.labels.isNotEmpty) {
-        _scrollToRight();
+        //  _scrollToRight();
       }
     });
   }
@@ -49,97 +49,92 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // 滚动视图中的柱状图
-        Container(
-          margin: EdgeInsetsDirectional.only(start: 0.w), // 确保柱状图不与Y轴标签重叠
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            scrollDirection: Axis.horizontal,
-            child: Container(
-              //color: Colors.green,
-              padding: const EdgeInsetsDirectional.only(
-                start: 12,
-                end: 12,
-                top: 18,
-                bottom: 0,
-              ),
-              // padding: const EdgeInsets.all(12.0),
-              height: double.maxFinite,
-              width: widget.data.length <= 3
-                  ? MediaQuery.of(context).size.width - 80
-                  : widget.data.length * 80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
-              child: BarChart(
-                /* transformationConfig: FlTransformationConfig(
+    return Container(
+      margin: EdgeInsetsDirectional.only(start: 0.w), // 确保柱状图不与Y轴标签重叠
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          //color: Colors.green,
+          padding: const EdgeInsetsDirectional.only(
+            start: 12,
+            end: 12,
+            top: 18,
+            bottom: 0,
+          ),
+          // padding: const EdgeInsets.all(12.0),
+          height: double.maxFinite,
+          width: widget.data.length <= 3
+              ? MediaQuery.of(context).size.width - 80
+              : widget.data.length * 80.0, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
+          child: BarChart(
+            /* transformationConfig: FlTransformationConfig(
                   scaleAxis: FlScaleAxis.horizontal,
                   minScale: 1,
                   maxScale: 4,
                 ),*/
-                BarChartData(
-                  maxY: widget.maxY,
-                  minY: (widget.minY >= 0) ? 0 : widget.minY,
-                  barTouchData: widget.labels.isEmpty
-                      ? BarTouchData(enabled: false)
-                      : buildBarTouchData(),
-                  titlesData: _buildTitlesData(), // 构建标题数据
-                  borderData: FlBorderData(show: false), // 边框数据
-                  barGroups: _buildBarGroups(), // 构建柱状图组
-                  gridData: FlGridData(
-                    show: true,
-                    drawHorizontalLine: true,
-                    drawVerticalLine: false,
-                    //horizontalInterval: showInterval, // 确保水平线间隔与 Y 轴标签一致
-                    getDrawingHorizontalLine: (value) {
-                      return FlLine(
-                        strokeWidth: 0.4,
-                        dashArray: [8, 4],
-                        color: Color(0xA8FFFFFF), // 水平线颜色
-                        //strokeWidth: 1, // 水平线宽度
-                      );
-                    },
-                    /*checkToShowHorizontalLine: (value) {
+            BarChartData(
+              maxY: widget.maxY,
+              minY: (widget.minY >= 0) ? 0 : widget.minY,
+              barTouchData: widget.labels.isEmpty
+                  ? BarTouchData(enabled: false)
+                  : buildBarTouchData(),
+              titlesData: _buildTitlesData(), // 构建标题数据
+              borderData: FlBorderData(show: false), // 边框数据
+              barGroups: _buildBarGroups(), // 构建柱状图组
+              gridData: FlGridData(
+                show: true,
+                drawHorizontalLine: true,
+                drawVerticalLine: false,
+                //horizontalInterval: showInterval, // 确保水平线间隔与 Y 轴标签一致
+                getDrawingHorizontalLine: (value) {
+                  return FlLine(
+                    strokeWidth: 0.4,
+                    dashArray: [8, 4],
+                    color: Color(0xA8FFFFFF), // 水平线颜色
+                    //strokeWidth: 1, // 水平线宽度
+                  );
+                },
+                /*checkToShowHorizontalLine: (value) {
                       return true;
                     },*/
-                  ), // 网格数据
-                  alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                  extraLinesData: ExtraLinesData(
-                    //extraLinesOnTop: true,
-                    horizontalLines: [
-                      HorizontalLine(
-                        y: 0,
-                        color: Colors.white, // 水平线颜色
-                        strokeWidth: 1, // 水平线宽度
-                      ),
-                      HorizontalLine(
-                        y: widget.maxY,
-                        label: HorizontalLineLabel(show: true),
-                        // color: Colors.transparent, // 水平线颜色
-                        // strokeWidth: 1, // 水平线宽度
-                        color: Color(0xFFFEDB65),
-                        strokeWidth: 0.4,
-                        dashArray: [8, 4],
-                      ),
-
-                      if (widget.minY != 0)
-                        HorizontalLine(
-                          y: widget.minY,
-                          label: HorizontalLineLabel(show: true),
-                          // color: Colors.transparent, // 水平线颜色
-                          // strokeWidth: 1, // 水平线宽度
-                          color: Color(0xFFFEDB65),
-                          strokeWidth: 0.4,
-                          dashArray: [8, 4],
-                        ),
-                    ],
+              ), // 网格数据
+              alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+              extraLinesData: ExtraLinesData(
+                //extraLinesOnTop: true,
+                horizontalLines: [
+                  HorizontalLine(
+                    y: 0,
+                    color: Colors.white, // 水平线颜色
+                    strokeWidth: 1, // 水平线宽度
                   ),
-                  // 额外线条数据
-                ),
+                  HorizontalLine(
+                    y: widget.maxY,
+                    label: HorizontalLineLabel(show: true),
+                    // color: Colors.transparent, // 水平线颜色
+                    // strokeWidth: 1, // 水平线宽度
+                    color: Color(0xFFFEDB65),
+                    strokeWidth: 0.4,
+                    dashArray: [8, 4],
+                  ),
+
+                  if (widget.minY != 0)
+                    HorizontalLine(
+                      y: widget.minY,
+                      label: HorizontalLineLabel(show: true),
+                      // color: Colors.transparent, // 水平线颜色
+                      // strokeWidth: 1, // 水平线宽度
+                      color: Color(0xFFFEDB65),
+                      strokeWidth: 0.4,
+                      dashArray: [8, 4],
+                    ),
+                ],
               ),
+              // 额外线条数据
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 

@@ -40,7 +40,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
       child: LineChart(
         transformationConfig: FlTransformationConfig(
           scaleAxis: FlScaleAxis.horizontal,
-          minScale: 1,
+          minScale: 2,
           maxScale: 4,
         ),
         LineChartData(
