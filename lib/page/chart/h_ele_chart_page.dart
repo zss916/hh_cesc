@@ -38,29 +38,30 @@ class HEleChartPage extends StatelessWidget {
                     style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
                   ),
                 ),
-                Container(
-                  color: Colors.transparent,
-                  height: 200,
-                  width: double.maxFinite,
-                  child: GetBuilder<StatisticsItemLogic>(
-                    id: 'ele',
-                    init: StatisticsItemLogic(),
-                    builder: (logic) {
-                      return HEleBarchartItemWidget(
-                        data: logic.eleList
-                            .map((e) => (e.totalCharge ?? 0))
-                            .toList(),
-                        data2: logic.eleList
-                            .map((e) => (e.totalRecharge ?? 0))
-                            .toList(),
-                        data3: logic.eleList
-                            .map((e) => (e.pvGeneration ?? 0))
-                            .toList(),
-                        labels: logic.eleLabels,
-                        maxY: logic.eleMaxY ?? 0,
-                        minY: logic.eleMinY ?? 0,
-                      );
-                    },
+                Expanded(
+                  child: Container(
+                    color: Colors.transparent,
+                    width: double.maxFinite,
+                    child: GetBuilder<StatisticsItemLogic>(
+                      id: 'ele',
+                      init: StatisticsItemLogic(),
+                      builder: (logic) {
+                        return HEleBarchartItemWidget(
+                          data: logic.eleList
+                              .map((e) => (e.totalCharge ?? 0))
+                              .toList(),
+                          data2: logic.eleList
+                              .map((e) => (e.totalRecharge ?? 0))
+                              .toList(),
+                          data3: logic.eleList
+                              .map((e) => (e.pvGeneration ?? 0))
+                              .toList(),
+                          labels: logic.eleLabels,
+                          maxY: logic.eleMaxY ?? 0,
+                          minY: logic.eleMinY ?? 0,
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Wrap(

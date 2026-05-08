@@ -62,12 +62,12 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
         sideTitles: widget.list.isEmpty
             ? SideTitles(
                 showTitles: true,
-                reservedSize: 25,
+                reservedSize: 20,
                 getTitlesWidget: (value, meta) => SizedBox(height: 10),
               )
             : SideTitles(
                 showTitles: true,
-                reservedSize: 25,
+                reservedSize: 20,
                 getTitlesWidget: (value, meta) {
                   return SideTitleWidget(
                     meta: meta,

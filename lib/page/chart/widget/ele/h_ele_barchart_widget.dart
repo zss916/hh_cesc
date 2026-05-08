@@ -54,19 +54,19 @@ class _BarChartWidgetState extends State<HEleBarchartItemWidget> {
         // 滚动视图中的柱状图
         if (widget.data.isNotEmpty)
           Container(
+            width: double.maxFinite,
+            height: double.maxFinite,
             margin: EdgeInsetsDirectional.only(start: 0), // 确保柱状图不与Y轴标签重叠
             child: SingleChildScrollView(
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
               child: Container(
-                //color: Colors.green,
                 padding: const EdgeInsetsDirectional.only(
                   start: 12,
                   end: 12,
                   top: 12,
                   bottom: 0,
                 ),
-                // padding: const EdgeInsets.all(12.0),
                 height: double.maxFinite,
                 width: screenWidth,
                 child: BarChart(
@@ -79,8 +79,7 @@ class _BarChartWidgetState extends State<HEleBarchartItemWidget> {
                     borderData: FlBorderData(show: false), // 边框数据
                     gridData: buildFlGridData, // 网格数据
                     alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                    extraLinesData: buildExtraLinesData,
-                    // 额外线条数据
+                    extraLinesData: buildExtraLinesData, // 额外线条数据
                   ),
                 ),
               ),
@@ -202,7 +201,7 @@ class _BarChartWidgetState extends State<HEleBarchartItemWidget> {
       bottomTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
-          reservedSize: 25,
+          reservedSize: 18,
           getTitlesWidget: (value, meta) {
             final style = TextStyle(
               color: Color(0xA8FFFFFF),

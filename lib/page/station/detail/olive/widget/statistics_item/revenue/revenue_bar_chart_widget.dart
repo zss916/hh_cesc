@@ -243,7 +243,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                   ),
                 ),
               if (widget.logic.labels.isNotEmpty &&
-                  ViewType.common.index == widget.logic.eleViewStatus)
+                  ViewType.common.index == widget.logic.revenueViewStatus)
                 PositionedDirectional(
                   end: 0.w,
                   top: 55.h,

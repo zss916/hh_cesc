@@ -1,4 +1,5 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/generated/assets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -49,37 +50,42 @@ class _BarChartWidgetState extends State<HPVBarchartItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: AlignmentDirectional.center,
       children: [
-        Container(
-          margin: EdgeInsetsDirectional.only(start: 0), // 确保柱状图不与Y轴标签重叠
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            scrollDirection: Axis.horizontal,
-            child: Container(
-              padding: const EdgeInsetsDirectional.only(
-                start: 0,
-                end: 12,
-                top: 18,
-                bottom: 0,
-              ),
-              height: double.maxFinite,
-              width: screenWidth,
-              child: BarChart(
-                BarChartData(
-                  maxY: widget.maxY,
-                  minY: (widget.minY >= 0) ? 0 : widget.minY,
-                  barTouchData: buildBarTouchData(),
-                  titlesData: _buildTitlesData(), // 构建标题数据
-                  borderData: FlBorderData(show: false), // 边框数据
-                  barGroups: _buildBarGroups(), // 构建柱状图组
-                  gridData: buildFlGridData, // 网格数据
-                  alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                  extraLinesData: buildExtraLinesData, // 额外线条数据
+        if (widget.data.isNotEmpty)
+          SizedBox(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                padding: const EdgeInsetsDirectional.only(
+                  start: 0,
+                  end: 12,
+                  top: 18,
+                  bottom: 0,
+                ),
+                width: screenWidth,
+                height: double.maxFinite,
+                child: BarChart(
+                  BarChartData(
+                    maxY: widget.maxY,
+                    minY: (widget.minY >= 0) ? 0 : widget.minY,
+                    barTouchData: buildBarTouchData(),
+                    titlesData: _buildTitlesData(), // 构建标题数据
+                    borderData: FlBorderData(show: false), // 边框数据
+                    barGroups: _buildBarGroups(), // 构建柱状图组
+                    gridData: buildFlGridData, // 网格数据
+                    alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+                    extraLinesData: buildExtraLinesData, // 额外线条数据
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          )
+        else
+          Image.asset(Assets.imgEmpty, width: 100, height: 100),
       ],
     );
   }

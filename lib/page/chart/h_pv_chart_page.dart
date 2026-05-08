@@ -16,45 +16,42 @@ class HPVChartPage extends StatelessWidget {
           start: 10,
           end: 10,
           top: 10,
-          bottom: 10,
+          bottom: 0,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Color(0xFF313540),
         ),
         width: double.maxFinite,
-        child: Stack(
-          alignment: AlignmentDirectional.topCenter,
+        height: double.maxFinite,
+        child: Column(
           children: [
-            Column(
-              children: [
-                Align(
-                  alignment: AlignmentDirectional.topStart,
-                  child: Text(
-                    "(kWh)",
-                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
-                  ),
+            Align(
+              alignment: AlignmentDirectional.topStart,
+              child: Text(
+                "(kWh)",
+                style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.transparent,
+                width: double.maxFinite,
+                child: GetBuilder<StatisticsItemLogic>(
+                  id: "pv",
+                  init: StatisticsItemLogic(),
+                  builder: (logic) {
+                    return HPVBarchartItemWidget(
+                      data: logic.pvList
+                          .map((e) => (e.summaryValue ?? 0))
+                          .toList(),
+                      labels: logic.pvLabels,
+                      maxY: logic.pvMaxY ?? 0,
+                      minY: logic.pvMinY ?? 0,
+                    );
+                  },
                 ),
-                Container(
-                  color: Colors.transparent,
-                  height: 200,
-                  width: double.maxFinite,
-                  child: GetBuilder<StatisticsItemLogic>(
-                    id: "pv",
-                    init: StatisticsItemLogic(),
-                    builder: (logic) {
-                      return HPVBarchartItemWidget(
-                        data: logic.pvList
-                            .map((e) => (e.summaryValue ?? 0))
-                            .toList(),
-                        labels: logic.pvLabels,
-                        maxY: logic.pvMaxY ?? 0,
-                        minY: logic.pvMinY ?? 0,
-                      );
-                    },
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),

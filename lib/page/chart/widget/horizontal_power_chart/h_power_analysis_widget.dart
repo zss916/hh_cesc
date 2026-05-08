@@ -37,11 +37,13 @@ class _PowerAnalysisWidgetState extends State<HPowerAnalysisWidget> {
                 ),
               ),
             ),
-          Container(
-            color: Colors.transparent,
-            height: 200,
-            width: double.maxFinite,
-            child: buildBody(viewState: widget.logic.powerViewStatus),
+          Expanded(
+            child: Container(
+              color: Colors.transparent,
+              height: double.maxFinite,
+              width: double.maxFinite,
+              child: buildBody(viewState: widget.logic.powerViewStatus),
+            ),
           ),
           Divider(height: 5, color: Colors.transparent),
           SizedBox(

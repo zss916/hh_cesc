@@ -61,13 +61,14 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
               child: Stack(
-                alignment: AlignmentDirectional.center,
+                alignment: AlignmentDirectional.centerStart,
                 children: [
                   Container(
+                    margin: EdgeInsetsDirectional.only(top: 15),
                     padding: const EdgeInsetsDirectional.only(
                       start: 12,
                       end: 12,
-                      top: 18,
+                      top: 15,
                       bottom: 0,
                     ),
                     height: double.maxFinite,
@@ -91,7 +92,7 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
                   ),
                   PositionedDirectional(
                     start: 20,
-                    top: 12,
+                    top: 5,
                     child: Text(
                       "(${User.to.getCurrencyUnit()})",
                       style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
