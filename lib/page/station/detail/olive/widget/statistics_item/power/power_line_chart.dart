@@ -36,85 +36,15 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
         bottom: 0,
       ),
       height: double.maxFinite,
-      width: MediaQuery.of(context).size.width,
+      width: double.maxFinite,
       child: LineChart(
-        transformationConfig: FlTransformationConfig(
-          scaleAxis: FlScaleAxis.horizontal,
-          minScale: 2,
-          maxScale: 4,
-        ),
+        transformationConfig: buildFlTransformationConfig,
         LineChartData(
-          lineTouchData: lineTouchData,
-          gridData: FlGridData(
-            show: true,
-            drawHorizontalLine: true,
-            drawVerticalLine: false,
-          ),
-          titlesData: FlTitlesData(
-            rightTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            bottomTitles: AxisTitles(
-              sideTitles: widget.list.isEmpty
-                  ? SideTitles(
-                      showTitles: true,
-                      reservedSize: 25,
-                      getTitlesWidget: (value, meta) => SizedBox(height: 10),
-                    )
-                  : SideTitles(
-                      showTitles: true,
-                      reservedSize: 25,
-                      getTitlesWidget: (value, meta) {
-                        return SideTitleWidget(
-                          meta: meta,
-                          child: value.toInt() >= (widget.list.first).length
-                              ? SizedBox.shrink()
-                              : Text(
-                                  ((widget.list.first)[value.toInt()].time).hm,
-                                  style: TextStyle(
-                                    color: Color(0xA8FFFFFF),
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10.sp,
-                                  ),
-                                ),
-                        );
-                      },
-                    ),
-            ),
-            leftTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                reservedSize: 25,
-                maxIncluded: false,
-                minIncluded: false,
-                getTitlesWidget: (value, meta) {
-                  return SideTitleWidget(
-                    space: 2,
-                    meta: meta,
-                    child: Text(
-                      value.formatNum(),
-                      style: TextStyle(
-                        color: Color(0xA8FFFFFF),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 8.sp,
-                      ),
-                    ),
-                  );
-                },
-              ), // 左边Y轴标签禁用，手动创建
-            ),
-          ),
-          borderData: FlBorderData(
-            show: true,
-            border: Border(
-              bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-              left: const BorderSide(color: Colors.transparent, width: 0),
-              right: const BorderSide(color: Colors.transparent, width: 0),
-              top: const BorderSide(color: Colors.transparent, width: 0),
-            ),
-          ),
+          titlesData: buildFlTitlesData(),
           lineBarsData: lineBarsData(widget.list),
+          lineTouchData: lineTouchData,
+          gridData: buildFlGridData,
+          borderData: buildFlBorderData,
           minX: 0,
           maxX: widget.maxX.toDouble(),
           maxY: widget.maxY,
@@ -124,6 +54,86 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
       ),
     );
   }
+
+  /// title
+  FlTitlesData buildFlTitlesData() {
+    return FlTitlesData(
+      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      bottomTitles: AxisTitles(
+        sideTitles: widget.list.isEmpty
+            ? SideTitles(
+                showTitles: true,
+                reservedSize: 25,
+                getTitlesWidget: (value, meta) => SizedBox(height: 10),
+              )
+            : SideTitles(
+                showTitles: true,
+                reservedSize: 25,
+                getTitlesWidget: (value, meta) {
+                  return SideTitleWidget(
+                    meta: meta,
+                    child: value.toInt() >= (widget.list.first).length
+                        ? SizedBox.shrink()
+                        : Text(
+                            ((widget.list.first)[value.toInt()].time).hm,
+                            style: TextStyle(
+                              color: Color(0xA8FFFFFF),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 9.sp,
+                            ),
+                          ),
+                  );
+                },
+              ),
+      ),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 25,
+          maxIncluded: false,
+          minIncluded: false,
+          getTitlesWidget: (value, meta) {
+            return SideTitleWidget(
+              space: 2,
+              meta: meta,
+              child: Text(
+                value.formatNum(),
+                style: TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8.sp,
+                ),
+              ),
+            );
+          },
+        ), // 左边Y轴标签禁用，手动创建
+      ),
+    );
+  }
+
+  ///边界
+  FlBorderData get buildFlBorderData => FlBorderData(
+    show: true,
+    border: Border(
+      bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
+      left: const BorderSide(color: Colors.transparent, width: 0),
+      right: const BorderSide(color: Colors.transparent, width: 0),
+      top: const BorderSide(color: Colors.transparent, width: 0),
+    ),
+  );
+
+  ///网格
+  FlGridData get buildFlGridData =>
+      FlGridData(show: true, drawHorizontalLine: true, drawVerticalLine: false);
+
+  ///转化设置
+  FlTransformationConfig get buildFlTransformationConfig =>
+      FlTransformationConfig(
+        scaleAxis: FlScaleAxis.horizontal,
+        minScale: 2,
+        maxScale: 4,
+      );
 
   ///触摸
   LineTouchData get lineTouchData => LineTouchData(

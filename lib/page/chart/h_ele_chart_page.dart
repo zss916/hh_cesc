@@ -47,13 +47,13 @@ class HEleChartPage extends StatelessWidget {
                     init: StatisticsItemLogic(),
                     builder: (logic) {
                       return HEleBarchartItemWidget(
-                        data: logic.revenueList
+                        data: logic.eleList
                             .map((e) => (e.totalCharge ?? 0))
                             .toList(),
-                        data2: logic.revenueList
+                        data2: logic.eleList
                             .map((e) => (e.totalRecharge ?? 0))
                             .toList(),
-                        data3: logic.revenueList
+                        data3: logic.eleList
                             .map((e) => (e.pvGeneration ?? 0))
                             .toList(),
                         labels: logic.eleLabels,

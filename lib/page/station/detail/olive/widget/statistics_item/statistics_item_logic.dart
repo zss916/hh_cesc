@@ -60,11 +60,11 @@ class StatisticsItemLogic extends GetxController {
   int revenueViewStatus = ViewType.loading.index;
 
   ///电量指标
+  List<ElecGraphEntity> eleList = [];
   double? eleMaxY;
   double? eleMinY;
   int eleViewStatus = ViewType.loading.index;
   List<String> eleLabels = [];
-  //late StreamSubscription<HasPVEvent> event;
   bool revenueShow = false;
 
   @override
@@ -118,7 +118,7 @@ class StatisticsItemLogic extends GetxController {
       endTimeStamp: end.millisecondsSinceEpoch,
     );
 
-    loadRevenue(
+    loadEle(
       type: DataType.ele,
       queryType: 0,
       startTimeStamp: start.millisecondsSinceEpoch,
@@ -239,7 +239,7 @@ class StatisticsItemLogic extends GetxController {
   List<double> minVals = [];
   List<double> lens = [];
 
-  ///收益统计和电量指标
+  ///收益统计
   Future<void> loadRevenue({
     required DataType type,
     int queryType = 0,
@@ -266,20 +266,44 @@ class StatisticsItemLogic extends GetxController {
             ? ViewType.empty.index
             : ViewType.common.index;
         update(["revenue"]);
-      } else if (type == DataType.ele) {
-        if (revenueList.isNotEmpty) {
-          handEleData(revenueList);
-        }
-        eleViewStatus = revenueList.isEmpty
-            ? ViewType.empty.index
-            : ViewType.common.index;
-        update(["ele"]);
       }
     } else {
       if (type == DataType.revenue) {
         revenueViewStatus = ViewType.empty.index;
         update(["revenue"]);
       }
+    }
+  }
+
+  ///电量指标
+  Future<void> loadEle({
+    required DataType type,
+    int queryType = 0,
+    int? startTimeStamp,
+    int? endTimeStamp,
+  }) async {
+    AppLoading.show();
+    final (
+      bool isSuccessful,
+      List<ElecGraphEntity> value,
+    ) = await SiteAPI.postElecGraph(
+      siteId: siteId,
+      startTimeStamp: startTimeStamp,
+      endTimeStamp: endTimeStamp,
+      queryType: queryType,
+    ).whenComplete(() => AppLoading.dismiss());
+    if (isSuccessful) {
+      eleList.assignAll(value);
+      if (type == DataType.ele) {
+        if (eleList.isNotEmpty) {
+          handEleData(eleList);
+        }
+        eleViewStatus = eleList.isEmpty
+            ? ViewType.empty.index
+            : ViewType.common.index;
+        update(["ele"]);
+      }
+    } else {
       if (type == DataType.ele) {
         eleViewStatus = ViewType.empty.index;
         update(["ele"]);

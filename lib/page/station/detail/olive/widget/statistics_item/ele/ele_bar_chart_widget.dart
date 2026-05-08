@@ -169,7 +169,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                             0,
                             0,
                           );
-                          widget.logic.loadRevenue(
+                          widget.logic.loadEle(
                             type: DataType.ele,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
@@ -187,7 +187,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                             0,
                             0,
                           ).subtract(Duration(microseconds: 1));
-                          widget.logic.loadRevenue(
+                          widget.logic.loadEle(
                             type: DataType.ele,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
@@ -208,7 +208,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                           debugPrint(
                             "start:${start.timestampFormat},end:${end.timestampFormat}",
                           );
-                          widget.logic.loadRevenue(
+                          widget.logic.loadEle(
                             type: DataType.ele,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
@@ -221,7 +221,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                   Divider(height: 30.h, color: Colors.transparent),
                   buildBody(viewState: widget.logic.eleViewStatus),
                   Divider(height: 5.h, color: Colors.transparent),
-                  if (widget.logic.revenueList.isNotEmpty)
+                  if (widget.logic.eleList.isNotEmpty)
                     Wrap(
                       spacing: 16.w,
                       children: [
@@ -243,7 +243,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                 ],
               ),
 
-              if (widget.logic.revenueList.isNotEmpty)
+              if (widget.logic.eleList.isNotEmpty)
                 PositionedDirectional(
                   start: 0.w,
                   top: 55.h,
@@ -253,7 +253,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                   ),
                 ),
 
-              if (widget.logic.revenueList.isNotEmpty &&
+              if (widget.logic.eleList.isNotEmpty &&
                   ViewType.common.index == widget.logic.eleViewStatus)
                 PositionedDirectional(
                   end: 0.w,
@@ -296,13 +296,13 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
         children: [
           ///周
           EleBarchartItemWidget(
-            data: widget.logic.revenueList
+            data: widget.logic.eleList
                 .map((e) => (e.totalCharge ?? 0))
                 .toList(),
-            data2: widget.logic.revenueList
+            data2: widget.logic.eleList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
-            data3: widget.logic.revenueList
+            data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
                 .toList(),
             labels: widget.logic.eleLabels,
@@ -312,13 +312,13 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
 
           ///月
           EleBarchartItemWidget(
-            data: widget.logic.revenueList
+            data: widget.logic.eleList
                 .map((e) => (e.totalCharge ?? 0))
                 .toList(),
-            data2: widget.logic.revenueList
+            data2: widget.logic.eleList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
-            data3: widget.logic.revenueList
+            data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
                 .toList(),
             labels: widget.logic.eleLabels,
@@ -328,13 +328,13 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
 
           ///年
           EleBarchartItemWidget(
-            data: widget.logic.revenueList
+            data: widget.logic.eleList
                 .map((e) => (e.totalCharge ?? 0))
                 .toList(),
-            data2: widget.logic.revenueList
+            data2: widget.logic.eleList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
-            data3: widget.logic.revenueList
+            data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
                 .toList(),
             labels: widget.logic.eleLabels,

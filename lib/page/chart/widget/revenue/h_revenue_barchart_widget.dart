@@ -1,3 +1,4 @@
+import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -59,29 +60,44 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
             child: SingleChildScrollView(
               controller: _scrollController,
               scrollDirection: Axis.horizontal,
-              child: Container(
-                padding: const EdgeInsetsDirectional.only(
-                  start: 12,
-                  end: 12,
-                  top: 18,
-                  bottom: 0,
-                ),
-                height: double.maxFinite,
-                width: screenWidth,
-                child: BarChart(
-                  BarChartData(
-                    maxY: widget.maxY,
-                    minY: widget.minY,
-                    barTouchData: buildBarTouchData(),
-                    titlesData: _buildTitlesData(isShowLeft: true), // 构建标题数据
-                    borderData: FlBorderData(show: false), // 边框数据
-                    barGroups: _buildBarGroups(), // 构建柱状图组
-                    gridData: buildGridData, // 网格数据
-                    alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                    extraLinesData: buildExtraLinesData,
-                    // 额外线条数据
+              child: Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 12,
+                      end: 12,
+                      top: 18,
+                      bottom: 0,
+                    ),
+                    height: double.maxFinite,
+                    width: screenWidth,
+                    child: BarChart(
+                      BarChartData(
+                        maxY: widget.maxY,
+                        minY: widget.minY,
+                        barTouchData: buildBarTouchData(),
+                        titlesData: _buildTitlesData(
+                          isShowLeft: true,
+                        ), // 构建标题数据
+                        borderData: FlBorderData(show: false), // 边框数据
+                        barGroups: _buildBarGroups(), // 构建柱状图组
+                        gridData: buildGridData, // 网格数据
+                        alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+                        extraLinesData: buildExtraLinesData,
+                        // 额外线条数据
+                      ),
+                    ),
                   ),
-                ),
+                  PositionedDirectional(
+                    start: 20,
+                    top: 12,
+                    child: Text(
+                      "(${User.to.getCurrencyUnit()})",
+                      style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
+                    ),
+                  ),
+                ],
               ),
             ),
           )
@@ -159,20 +175,23 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
+          maxIncluded: false,
+          minIncluded: true,
           showTitles: isShowLeft,
           reservedSize: 35,
           getTitlesWidget: (value, meta) {
-            bool isHide = (meta.min == value) || (meta.max == value);
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 8,
-            );
             return SideTitleWidget(
               //axisSide: meta.axisSide,x
               space: 4,
               meta: meta,
-              child: Text(isHide ? "" : formatNumber(value), style: style),
+              child: Text(
+                formatNumber(value),
+                style: TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8,
+                ),
+              ),
             );
           },
         ), // 左边Y轴标签禁用，手动创建

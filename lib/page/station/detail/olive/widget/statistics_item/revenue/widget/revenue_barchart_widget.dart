@@ -42,6 +42,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("data ===> ${widget.data.toString()}");
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -88,15 +89,6 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
     return FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
-        //drawBelowEverything: false,
-        /*axisNameWidget: Text(
-          "",
-          style: TextStyle(
-            color: Color(0xA8FFFFFF),
-            fontWeight: FontWeight.w400,
-            fontSize: 12.sp,
-          ),
-        ),*/
         sideTitles: widget.labels.isEmpty
             ? SideTitles(showTitles: false)
             : SideTitles(
@@ -104,11 +96,6 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                 showTitles: true,
                 reservedSize: 15,
                 getTitlesWidget: (value, meta) {
-                  final style = TextStyle(
-                    color: Color(0xA8FFFFFF),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 8.sp,
-                  );
                   return SideTitleWidget(
                     angle: 0,
                     //axisSide: meta.axisSide,
@@ -116,7 +103,11 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                     meta: meta,
                     child: Text(
                       (widget.data.isEmpty) ? "" : widget.labels[value.toInt()],
-                      style: style,
+                      style: TextStyle(
+                        color: Color(0xA8FFFFFF),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 8.sp,
+                      ),
                     ),
                   );
                 },
@@ -124,20 +115,22 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
+          maxIncluded: false,
+          minIncluded: true,
           showTitles: isShowLeft,
           reservedSize: 35,
           getTitlesWidget: (value, meta) {
-            bool isHide = (meta.min == value) || (meta.max == value);
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
-            //debugPrint("value===>$value");
             return SideTitleWidget(
               space: 4,
               meta: meta,
-              child: Text(isHide ? "" : formatNumber(value), style: style),
+              child: Text(
+                formatNumber(value),
+                style: TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8.sp,
+                ),
+              ),
             );
           },
         ), // 左边Y轴标签禁用，手动创建
