@@ -58,6 +58,7 @@ class StatisticsItemLogic extends GetxController {
   double? revenueMinY;
   List<String> labels = [];
   int revenueViewStatus = ViewType.loading.index;
+  bool isDiff = false;
 
   ///电量指标
   List<ElecGraphEntity> eleList = [];
@@ -313,10 +314,28 @@ class StatisticsItemLogic extends GetxController {
 
   void handRevenueData(List<ElecGraphEntity> eleList) {
     List<double> incomes = eleList.map((e) => (e.totalIncome ?? 0)).toList();
-    revenueMaxY = incomes.reduce(max);
+    revenueMaxY = incomes.reduce(max) ?? 0;
     revenueMinY = incomes.reduce(min);
     debugPrint("revenueMaxY:$revenueMaxY,revenueMinY:$revenueMinY");
     labels.assignAll(eleList.map((e) => (e.dateTime ?? "")).toList());
+
+    ///max = min
+    double maxY = revenueMaxY ?? 0;
+    double minY = revenueMinY ?? 0;
+    isDiff = !(maxY == minY);
+    if (maxY == minY) {
+      if (maxY == 0) {
+        revenueMinY = 0;
+        revenueMaxY = 100;
+      } else if (maxY > 0) {
+        revenueMinY = 0;
+        revenueMaxY = maxY;
+      } else {
+        ///maxY < 0
+        revenueMaxY = 0;
+        revenueMinY = minY;
+      }
+    }
   }
 
   void handEleData(List<ElecGraphEntity> eleList) {

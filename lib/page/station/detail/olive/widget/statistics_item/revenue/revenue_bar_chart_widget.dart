@@ -291,6 +291,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
             labels: widget.logic.labels,
             maxY: widget.logic.revenueMaxY ?? 0,
             minY: widget.logic.revenueMinY ?? 0,
+            isDiff: widget.logic.isDiff,
           ),
 
           ///月
@@ -301,6 +302,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
             labels: widget.logic.labels,
             maxY: widget.logic.revenueMaxY ?? 0,
             minY: widget.logic.revenueMinY ?? 0,
+            isDiff: widget.logic.isDiff,
           ),
 
           ///年
@@ -311,6 +313,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
             labels: widget.logic.labels,
             maxY: widget.logic.revenueMaxY ?? 0,
             minY: widget.logic.revenueMinY ?? 0,
+            isDiff: widget.logic.isDiff,
           ),
         ],
       ),
@@ -332,13 +335,31 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
       controller: tabCtrl,
       children: [
         ///周
-        RevenueBarchartWidget(data: [], labels: [], maxY: 0, minY: 0),
+        RevenueBarchartWidget(
+          data: [],
+          labels: [],
+          maxY: 0,
+          minY: 0,
+          isDiff: widget.logic.isDiff,
+        ),
 
         ///月
-        RevenueBarchartWidget(data: [], labels: [], maxY: 0, minY: 0),
+        RevenueBarchartWidget(
+          data: [],
+          labels: [],
+          maxY: 0,
+          minY: 0,
+          isDiff: widget.logic.isDiff,
+        ),
 
         ///年
-        RevenueBarchartWidget(data: [], labels: [], maxY: 0, minY: 0),
+        RevenueBarchartWidget(
+          data: [],
+          labels: [],
+          maxY: 0,
+          minY: 0,
+          isDiff: widget.logic.isDiff,
+        ),
       ],
     ),
   );

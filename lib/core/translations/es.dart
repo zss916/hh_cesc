@@ -266,4 +266,5 @@ const es = {
   "refreshFailedText": "Error al actualizar",
   "refreshingText": "Actualizando…",
   "refresh": "Refrescar",
+  "cluInformation": "Información CLU",
 };

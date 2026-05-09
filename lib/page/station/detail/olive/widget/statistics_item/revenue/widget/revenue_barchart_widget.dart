@@ -8,6 +8,7 @@ class RevenueBarchartWidget extends StatefulWidget {
   final List<String> labels; // 标签列表
   final double maxY; // Y轴的最大值
   final double minY;
+  final bool isDiff;
 
   const RevenueBarchartWidget({
     super.key,
@@ -15,6 +16,7 @@ class RevenueBarchartWidget extends StatefulWidget {
     required this.labels,
     required this.maxY,
     required this.minY,
+    required this.isDiff,
   });
 
   @override
@@ -42,7 +44,6 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("data ===> ${widget.data.toString()}");
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -67,12 +68,17 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
                     maxY: widget.maxY,
                     minY: widget.minY,
                     barTouchData: buildBarTouchData(),
-                    titlesData: _buildTitlesData(isShowLeft: true), // 构建标题数据
+                    titlesData: _buildTitlesData(
+                      isShowLeft: true,
+                      isDiff: widget.isDiff,
+                    ), // 构建标题数据
                     borderData: FlBorderData(show: false), // 边框数据
                     barGroups: _buildBarGroups(), // 构建柱状图组
                     gridData: buildGridData, // 网格数据
                     alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                    extraLinesData: buildExtraLinesData, // 额外线条数据
+                    extraLinesData: buildExtraLinesData(
+                      widget.isDiff,
+                    ), // 额外线条数据
                   ),
                 ),
               ),
@@ -85,7 +91,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
   }
 
   /// 构建标题数据，包括X轴和Y轴（X轴优化一下）
-  FlTitlesData _buildTitlesData({bool isShowLeft = false}) {
+  FlTitlesData _buildTitlesData({bool isShowLeft = false, bool isDiff = true}) {
     return FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
@@ -115,7 +121,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
-          maxIncluded: false,
+          maxIncluded: isDiff ? false : true,
           minIncluded: true,
           showTitles: isShowLeft,
           reservedSize: 35,
@@ -196,31 +202,34 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
   );
 
   ///额外线
-  ExtraLinesData? get buildExtraLinesData => ExtraLinesData(
-    horizontalLines: [
-      HorizontalLine(
-        y: 0,
-        color: Colors.white, // 水平线颜色
-        strokeWidth: 0.4, // 水平线宽度
-      ),
+  ExtraLinesData? buildExtraLinesData(bool isDiff) {
+    return ExtraLinesData(
+      horizontalLines: [
+        HorizontalLine(
+          y: 0,
+          color: Colors.white, // 水平线颜色
+          strokeWidth: 0.4, // 水平线宽度
+        ),
 
-      HorizontalLine(
-        y: widget.maxY,
-        label: HorizontalLineLabel(show: true),
-        color: Color(0xFF0978E9),
-        strokeWidth: 0.4,
-        dashArray: [8, 4],
-      ),
+        HorizontalLine(
+          y: widget.maxY,
+          label: HorizontalLineLabel(show: isDiff),
+          color: isDiff ? Color(0xFF0978E9) : Color(0xA8FFFFFF),
+          strokeWidth: 0.4,
+          dashArray: [8, 4],
+        ),
 
-      HorizontalLine(
-        y: widget.minY,
-        label: HorizontalLineLabel(show: true),
-        color: Color(0xFF0978E9), // 水平线颜色
-        strokeWidth: 0.4,
-        dashArray: [8, 4],
-      ),
-    ],
-  );
+        if (isDiff)
+          HorizontalLine(
+            y: widget.minY,
+            label: HorizontalLineLabel(show: true),
+            color: Color(0xFF0978E9), // 水平线颜色
+            strokeWidth: 0.4,
+            dashArray: [8, 4],
+          ),
+      ],
+    );
+  }
 
   ///触摸数据
   BarTouchData buildBarTouchData() {

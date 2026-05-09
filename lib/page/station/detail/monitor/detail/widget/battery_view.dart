@@ -462,7 +462,7 @@ class BatteryView extends StatelessWidget {
         ),
         alignment: AlignmentDirectional.centerStart,
         child: Text(
-          TKey.basicInformation.tr,
+          TKey.cluInformation.tr,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w500,
@@ -500,7 +500,6 @@ class BatteryView extends StatelessWidget {
                 .firstOrNull;
             return AspectRatio(
               aspectRatio: Get.isZh ? (140 / 186) : (200 / 186),
-              //aspectRatio: ,
               child: Container(
                 width: double.maxFinite,
                 height: double.maxFinite,
@@ -528,7 +527,7 @@ class BatteryView extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "CLU",
+                                "CLU${index + 1}",
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   color: Color(0xFFFFFFFF),

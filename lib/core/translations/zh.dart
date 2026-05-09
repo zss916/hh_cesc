@@ -258,4 +258,5 @@ const zh = {
   "refreshFailedText": "刷新失败",
   "refreshingText": "刷新中…",
   "refresh": "刷新",
+  "cluInformation": "CLU 信息",
 };

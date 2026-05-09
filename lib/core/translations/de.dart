@@ -250,4 +250,5 @@ const de = {
   "refreshingText": "Aktualisiere…",
   "guestLogin": "Gast-Login",
   "refresh": "Aktualisieren",
+  "cluInformation": "CLU",
 };

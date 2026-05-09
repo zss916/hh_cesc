@@ -27,6 +27,7 @@ class RevenueChartPage extends StatelessWidget {
               labels: logic.labels,
               maxY: logic.revenueMaxY ?? 0,
               minY: logic.revenueMinY ?? 0,
+              isDiff: logic.isDiff,
             );
           },
         ),

@@ -343,6 +343,8 @@ class TKey {
 
   static const String basicInformation = "basicInformation";
 
+  static const String cluInformation = "cluInformation";
+
   static const String powerLevel = "powerLevel";
 
   static const String stopDegree = "stopDegree";
@@ -767,4 +769,5 @@ const en = {
   "refreshFailedText": "Refresh failed",
   "refreshingText": "Refreshing…",
   "refresh": "Refresh",
+  "cluInformation": "Cluster Information",
 };
