@@ -104,8 +104,6 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
         HorizontalLine(
           y: widget.minY,
           label: HorizontalLineLabel(show: true),
-          // color: Colors.transparent, // 水平线颜色
-          // strokeWidth: 1, // 水平线宽度
           color: Color(0xFFFEDB65),
           strokeWidth: 0.4,
           dashArray: [8, 4],
@@ -118,24 +116,19 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
     show: true,
     drawHorizontalLine: true,
     drawVerticalLine: false,
-    //horizontalInterval: showInterval, // 确保水平线间隔与 Y 轴标签一致
     getDrawingHorizontalLine: (value) {
       return FlLine(
         strokeWidth: 0.4,
         dashArray: [8, 4],
         color: Color(0xA8FFFFFF), // 水平线颜色
-        //strokeWidth: 1, // 水平线宽度
       );
     },
-    /*checkToShowHorizontalLine: (value) {
-                      return true;
-                    },*/
   );
 
   ///屏幕宽度
   double get screenWidth => widget.data.length <= 3
       ? MediaQuery.of(context).size.width - 80
-      : widget.data.length * 80.0;
+      : widget.data.length * 65.0;
 
   ///触摸数据
   BarTouchData buildBarTouchData() {

@@ -178,7 +178,7 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
   ///屏幕宽度
   double get screenWith => widget.data.length <= 3
       ? MediaQuery.of(context).size.width - 80
-      : widget.data.length * 80.0;
+      : widget.data.length * 70.0;
 
   /// 构建标题数据，包括X轴和Y轴
   FlTitlesData _buildTitlesData() {

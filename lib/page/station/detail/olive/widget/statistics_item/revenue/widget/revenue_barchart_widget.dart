@@ -176,7 +176,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
   ///屏幕宽度
   double get screenWidth => widget.data.length <= 3
       ? MediaQuery.of(context).size.width - 80
-      : widget.data.length * 80.0;
+      : widget.data.length * 65.0;
 
   ///网格线
   FlGridData get buildGridData => FlGridData(

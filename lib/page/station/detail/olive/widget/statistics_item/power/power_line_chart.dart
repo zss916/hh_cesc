@@ -99,6 +99,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
         sideTitles: SideTitles(
           showTitles: true,
           reservedSize: 25,
+          //interval: 100,
           getTitlesWidget: (value, meta) {
             return (widget.list.isEmpty || widget.isEmptyView)
                 ? SizedBox(height: 10)
