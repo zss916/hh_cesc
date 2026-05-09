@@ -134,12 +134,11 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
   ///额外的线
   ExtraLinesData get buildExtraLinesData => ExtraLinesData(
     horizontalLines: [
-      HorizontalLine(
+      /*HorizontalLine(
         y: 0,
-        color: Colors.white, // 水平线颜色
+        color: widget.isEmptyView ? Colors.transparent : Colors.white, // 水平线颜色
         strokeWidth: 0.4, // 水平线宽度
-      ),
-
+      ),*/
       if (widget.isEmptyView)
         HorizontalLine(
           y: widget.maxY,
@@ -212,13 +211,13 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
           showTitles: true,
           maxIncluded: widget.isEmptyView,
           minIncluded: true,
-          reservedSize: 40,
+          reservedSize: 30,
           getTitlesWidget: (value, meta) {
             return SideTitleWidget(
               space: 1,
               meta: meta,
               child: Text(
-                "$value",
+                value.titleL,
                 style: TextStyle(
                   color: Color(0xA8FFFFFF),
                   fontWeight: FontWeight.w400,

@@ -1,5 +1,5 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/user/user.dart';
-import 'package:cescpro/generated/assets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -52,69 +52,66 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // 滚动视图中的柱状图
-        if (widget.data.isNotEmpty)
-          SizedBox(
-            width: double.maxFinite,
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              child: Stack(
-                alignment: AlignmentDirectional.centerStart,
-                children: [
-                  Container(
-                    margin: EdgeInsetsDirectional.only(top: 15),
-                    padding: const EdgeInsetsDirectional.only(
-                      start: 12,
-                      end: 12,
-                      top: 15,
-                      bottom: 0,
-                    ),
-                    height: double.maxFinite,
-                    width: screenWidth,
-                    child: BarChart(
-                      BarChartData(
-                        maxY: widget.maxY,
-                        minY: widget.minY,
-                        barTouchData: buildBarTouchData(),
-                        titlesData: _buildTitlesData(
-                          isShowLeft: true,
-                          isDiff: widget.isDiff,
-                        ), // 构建标题数据
-                        borderData: FlBorderData(show: false), // 边框数据
-                        barGroups: _buildBarGroups(), // 构建柱状图组
-                        gridData: buildGridData, // 网格数据
-                        alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                        extraLinesData: buildExtraLinesData(widget.isDiff),
-                        // 额外线条数据
-                      ),
-                    ),
-                  ),
-                  PositionedDirectional(
-                    start: 20,
-                    top: 5,
-                    child: Text(
-                      "(${User.to.getCurrencyUnit()})",
-                      style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
-                    ),
-                  ),
-                ],
+    return SizedBox(
+      width: double.maxFinite,
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        child: Stack(
+          alignment: AlignmentDirectional.centerStart,
+          children: [
+            Container(
+              margin: EdgeInsetsDirectional.only(top: 15),
+              padding: const EdgeInsetsDirectional.only(
+                start: 12,
+                end: 12,
+                top: 15,
+                bottom: 0,
+              ),
+              height: double.maxFinite,
+              width: screenWidth,
+              child: BarChart(
+                BarChartData(
+                  maxY: widget.maxY,
+                  minY: widget.minY >= 0 ? 0 : widget.minY,
+                  barTouchData: buildBarTouchData(),
+                  titlesData: _buildTitlesData(
+                    isShowLeft: true,
+                    isDiff: widget.isDiff,
+                  ), // 构建标题数据
+                  borderData: buildFlBorderData, // 边框数据
+                  barGroups: _buildBarGroups(), // 构建柱状图组
+                  gridData: buildGridData, // 网格数据
+                  alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+                  extraLinesData: buildExtraLinesData(widget.isDiff),
+                  // 额外线条数据
+                ),
               ),
             ),
-          )
-        else
-          Image.asset(Assets.imgEmpty, width: 100, height: 100),
-      ],
+            PositionedDirectional(
+              start: 20,
+              top: 5,
+              child: Text(
+                "(${User.to.getCurrencyUnit()})",
+                style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
+  ///边框线
+  FlBorderData get buildFlBorderData => FlBorderData(
+    show: true,
+    border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+  );
+
   /// 屏幕宽度
   double get screenWidth =>
-      ((widget.data.length * 80.0) <= (MediaQuery.of(context).size.width - 60))
-      ? (MediaQuery.of(context).size.width - 60)
+      ((widget.data.length * 80.0) <= (MediaQuery.of(context).size.width - 80))
+      ? (MediaQuery.of(context).size.width - 80)
       : widget.data.length * 80.0;
 
   /// 构建柱状图组
@@ -189,7 +186,7 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
               space: 4,
               meta: meta,
               child: Text(
-                formatNumber(value),
+                value.titleL,
                 style: TextStyle(
                   color: Color(0xA8FFFFFF),
                   fontWeight: FontWeight.w400,
@@ -288,17 +285,5 @@ class _BarChartWidgetState extends State<HRevenueBarchartWidget> {
           ),
       ],
     );
-  }
-
-  String formatNumber(num value) {
-    if (value >= 1000000) {
-      return '${(value / 1000000).toStringAsFixed(1)}M';
-    } else if (value >= 10000) {
-      return '${(value / 10000).toStringAsFixed(1)}W';
-    } else if (value >= 1000) {
-      return '${(value / 1000).toStringAsFixed(1)}K';
-    } else {
-      return value.toStringAsFixed(1).toString();
-    }
   }
 }

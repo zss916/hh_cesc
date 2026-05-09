@@ -19,6 +19,24 @@ extension MoneyExtension on double {
   }
 }
 
+extension YAxis on num {
+  String get titleL {
+    if (this >= 1000000000) {
+      return '${(this / 1000000000).toStringAsFixed(1)}M';
+    } else if (this >= 1000000) {
+      return '${(this / 1000000).toStringAsFixed(1)}M';
+    } else if (this >= 10000) {
+      return Get.isZH
+          ? '${(this / 10000).toStringAsFixed(1)}W'
+          : '${(this / 1000).toStringAsFixed(1)}K';
+    } else if (this >= 1000) {
+      return '${(this / 1000).toStringAsFixed(1)}K';
+    } else {
+      return toStringAsFixed(1).toString();
+    }
+  }
+}
+
 extension TimesExtension on DateTime {
   String get timestampFormat => DateFormat('yyyy-MM-dd').format(this);
 }

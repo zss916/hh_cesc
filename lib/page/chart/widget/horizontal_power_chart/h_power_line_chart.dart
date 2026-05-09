@@ -46,7 +46,7 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
           minX: 0,
           maxX: widget.maxX.toDouble(),
           maxY: widget.maxY,
-          minY: widget.minY,
+          minY: widget.minY >= 0 ? 0 : widget.minY,
         ),
         duration: const Duration(seconds: 2),
       ),
@@ -59,17 +59,13 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
       bottomTitles: AxisTitles(
-        sideTitles: widget.list.isEmpty
-            ? SideTitles(
-                showTitles: true,
-                reservedSize: 20,
-                getTitlesWidget: (value, meta) => SizedBox(height: 10),
-              )
-            : SideTitles(
-                showTitles: true,
-                reservedSize: 20,
-                getTitlesWidget: (value, meta) {
-                  return SideTitleWidget(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 20,
+          getTitlesWidget: (value, meta) {
+            return widget.list.isEmpty
+                ? SizedBox(height: 10)
+                : SideTitleWidget(
                     meta: meta,
                     child: value.toInt() >= (widget.list.first).length
                         ? SizedBox.shrink()
@@ -82,21 +78,21 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
                             ),
                           ),
                   );
-                },
-              ),
+          },
+        ),
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
           maxIncluded: false,
           minIncluded: false,
           showTitles: true,
-          reservedSize: 28,
+          reservedSize: 30,
           getTitlesWidget: (value, meta) {
             return SideTitleWidget(
               space: 2,
               meta: meta,
               child: Text(
-                value.formatNum(),
+                value.titleL,
                 style: TextStyle(
                   color: Color(0xA8FFFFFF),
                   fontWeight: FontWeight.w400,
@@ -112,12 +108,7 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
 
   FlBorderData get buildFlBorderData => FlBorderData(
     show: true,
-    border: Border(
-      bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-      left: const BorderSide(color: Colors.transparent, width: 0),
-      right: const BorderSide(color: Colors.transparent, width: 0),
-      top: const BorderSide(color: Colors.transparent, width: 0),
-    ),
+    border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
   );
 
   ///网格

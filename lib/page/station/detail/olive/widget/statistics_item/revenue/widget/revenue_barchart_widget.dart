@@ -1,3 +1,4 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +61,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
           child: BarChart(
             BarChartData(
               maxY: widget.maxY,
-              minY: widget.minY,
+              minY: widget.minY >= 0 ? 0 : widget.minY,
               barTouchData: buildBarTouchData(),
               titlesData: _buildTitlesData(
                 isShowLeft: true,
@@ -122,7 +123,7 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
               space: 4,
               meta: meta,
               child: Text(
-                formatNumber(value),
+                value.titleL,
                 style: TextStyle(
                   color: Color(0xA8FFFFFF),
                   fontWeight: FontWeight.w400,
@@ -197,12 +198,11 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
   ExtraLinesData? buildExtraLinesData(bool isDiff) {
     return ExtraLinesData(
       horizontalLines: [
-        HorizontalLine(
+        /*HorizontalLine(
           y: 0,
           color: Colors.white, // 水平线颜色
           strokeWidth: 0.4, // 水平线宽度
-        ),
-
+        ),*/
         HorizontalLine(
           y: widget.maxY,
           label: HorizontalLineLabel(show: isDiff),
@@ -261,18 +261,6 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
         });
       },
     );
-  }
-
-  String formatNumber(num value) {
-    if (value >= 1000000) {
-      return '${(value / 1000000).toStringAsFixed(1)}M';
-    } else if (value >= 10000) {
-      return '${(value / 10000).toStringAsFixed(1)}W';
-    } else if (value >= 1000) {
-      return '${(value / 1000).toStringAsFixed(1)}K';
-    } else {
-      return value.toStringAsFixed(1).toString();
-    }
   }
 
   void _scrollToRight() {

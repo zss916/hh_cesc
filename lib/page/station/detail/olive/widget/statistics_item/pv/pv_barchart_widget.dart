@@ -8,12 +8,15 @@ class PVBarchartItemWidget extends StatefulWidget {
   final List<String> labels; // 标签列表
   final double maxY; // Y轴的最大值
   final double minY; // Y轴的最大值
+  final bool isEmptyView;
+
   const PVBarchartItemWidget({
     super.key,
     required this.data,
     required this.labels,
     required this.maxY,
     required this.minY,
+    required this.isEmptyView,
   });
 
   @override
@@ -69,7 +72,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
               minY: (widget.minY >= 0) ? 0 : widget.minY,
               barTouchData: buildBarTouchData(),
               titlesData: _buildTitlesData(), // 构建标题数据
-              borderData: FlBorderData(show: false), // 边框数据
+              borderData: buildFlBorderData, // 边框数据
               barGroups: _buildBarGroups(), // 构建柱状图组
               gridData: buildFlGridData, // 网格数据
               alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
@@ -81,21 +84,24 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
     );
   }
 
+  ///边框线
+  FlBorderData get buildFlBorderData => FlBorderData(
+    show: true,
+    border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+  );
+
   ///额外线
   ExtraLinesData get buildExtraLinesData => ExtraLinesData(
-    //extraLinesOnTop: true,
     horizontalLines: [
-      HorizontalLine(
+      /*HorizontalLine(
         y: 0,
-        color: Colors.white, // 水平线颜色
+        color: widget.isEmptyView ? Colors.transparent : Colors.white, // 水平线颜色
         strokeWidth: 1, // 水平线宽度
-      ),
+      ),*/
       HorizontalLine(
         y: widget.maxY,
-        label: HorizontalLineLabel(show: true),
-        // color: Colors.transparent, // 水平线颜色
-        // strokeWidth: 1, // 水平线宽度
-        color: Color(0xFFFEDB65),
+        label: HorizontalLineLabel(show: !widget.isEmptyView),
+        color: widget.isEmptyView ? Color(0xA8FFFFFF) : Color(0xFFFEDB65),
         strokeWidth: 0.4,
         dashArray: [8, 4],
       ),
@@ -135,7 +141,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
     return widget.labels.isEmpty
         ? BarTouchData(enabled: false)
         : BarTouchData(
-            enabled: true,
+            enabled: widget.labels.isEmpty,
             touchTooltipData: widget.labels.isEmpty
                 ? null
                 : BarTouchTooltipData(
@@ -177,40 +183,42 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
     return FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
-        sideTitles: widget.labels.isEmpty
-            ? SideTitles(showTitles: false)
-            : SideTitles(
-                showTitles: true,
-                reservedSize: 25,
-                getTitlesWidget: (value, meta) {
-                  final style = TextStyle(
-                    color: Color(0xA8FFFFFF),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 8.sp,
-                  );
-                  return SideTitleWidget(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 25,
+          getTitlesWidget: (value, meta) {
+            return widget.labels.isEmpty
+                ? SizedBox(height: 8)
+                : SideTitleWidget(
                     //axisSide: meta.axisSide,
                     space: 4,
                     meta: meta,
-                    child: Text(widget.labels[value.toInt()], style: style),
+                    child: Text(
+                      widget.labels[value.toInt()],
+                      style: TextStyle(
+                        color: Color(0xA8FFFFFF),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 8.sp,
+                      ),
+                    ),
                   );
-                },
-              ),
+          },
+        ),
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
-          reservedSize: 40,
-          maxIncluded: false,
+          reservedSize: 30,
+          maxIncluded: widget.isEmptyView ? true : false,
           minIncluded: true,
           getTitlesWidget: (value, meta) {
             return SideTitleWidget(
               space: 1,
               meta: meta,
               child: Text(
-                "$value",
+                value.titleL,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xA8FFFFFF),
                   fontWeight: FontWeight.w400,
                   fontSize: 8.sp,
                 ),

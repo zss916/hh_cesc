@@ -1,5 +1,4 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
-import 'package:cescpro/generated/assets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -49,56 +48,53 @@ class _BarChartWidgetState extends State<HPVBarchartItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        if (widget.data.isNotEmpty)
-          SizedBox(
-            width: double.maxFinite,
-            height: double.maxFinite,
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                padding: const EdgeInsetsDirectional.only(
-                  start: 0,
-                  end: 12,
-                  top: 18,
-                  bottom: 0,
-                ),
-                width: screenWidth,
-                height: double.maxFinite,
-                child: BarChart(
-                  BarChartData(
-                    maxY: widget.maxY,
-                    minY: (widget.minY >= 0) ? 0 : widget.minY,
-                    barTouchData: buildBarTouchData(),
-                    titlesData: _buildTitlesData(), // 构建标题数据
-                    borderData: FlBorderData(show: false), // 边框数据
-                    barGroups: _buildBarGroups(), // 构建柱状图组
-                    gridData: buildFlGridData, // 网格数据
-                    alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                    extraLinesData: buildExtraLinesData, // 额外线条数据
-                  ),
-                ),
-              ),
+    return SizedBox(
+      width: double.maxFinite,
+      height: double.maxFinite,
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          padding: const EdgeInsetsDirectional.only(
+            start: 0,
+            end: 12,
+            top: 18,
+            bottom: 0,
+          ),
+          width: screenWidth,
+          height: double.maxFinite,
+          child: BarChart(
+            BarChartData(
+              maxY: widget.maxY,
+              minY: (widget.minY >= 0) ? 0 : widget.minY,
+              barTouchData: buildBarTouchData(),
+              titlesData: _buildTitlesData(), // 构建标题数据
+              borderData: buildFlBorderData, // 边框数据
+              barGroups: _buildBarGroups(), // 构建柱状图组
+              gridData: buildFlGridData, // 网格数据
+              alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+              extraLinesData: buildExtraLinesData, // 额外线条数据
             ),
-          )
-        else
-          Image.asset(Assets.imgEmpty, width: 100, height: 100),
-      ],
+          ),
+        ),
+      ),
     );
   }
 
+  ///边框线
+  FlBorderData get buildFlBorderData => FlBorderData(
+    show: true,
+    border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+  );
+
   ///额外线
   ExtraLinesData get buildExtraLinesData => ExtraLinesData(
-    //extraLinesOnTop: true,
     horizontalLines: [
-      HorizontalLine(
+      /*HorizontalLine(
         y: 0,
         color: Colors.white, // 水平线颜色
         strokeWidth: 1, // 水平线宽度
-      ),
+      ),*/
       HorizontalLine(
         y: widget.maxY,
         label: HorizontalLineLabel(show: true),
@@ -140,8 +136,8 @@ class _BarChartWidgetState extends State<HPVBarchartItemWidget> {
 
   ///宽度
   double get screenWidth =>
-      ((widget.data.length * 80.0) <= (MediaQuery.of(context).size.width - 60))
-      ? (MediaQuery.of(context).size.width - 60)
+      ((widget.data.length * 80.0) <= (MediaQuery.of(context).size.width - 80))
+      ? (MediaQuery.of(context).size.width - 80)
       : widget.data.length * 80.0;
 
   ///触摸数据
@@ -214,27 +210,21 @@ class _BarChartWidgetState extends State<HPVBarchartItemWidget> {
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
-          reservedSize: 40,
+          reservedSize: 30,
           maxIncluded: false,
           minIncluded: true,
           getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-              fontSize: 8,
-            );
-            final style2 = TextStyle(
-              color: Color(0xFFFEDB65),
-              fontWeight: FontWeight.w400,
-              fontSize: 10,
-            );
-
-            //bool isShow = (value == widget.minY) || (value == widget.maxY);
-            bool isShow = false;
             return SideTitleWidget(
               space: 1,
               meta: meta,
-              child: Text("$value", style: isShow ? style2 : style),
+              child: Text(
+                value.titleL,
+                style: TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8,
+                ),
+              ),
             );
           },
         ), // 左边Y轴标签禁用，手动创建
