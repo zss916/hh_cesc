@@ -1,5 +1,4 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
-import 'package:cescpro/generated/assets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +10,7 @@ class EleBarchartItemWidget extends StatefulWidget {
   final List<String> labels; // 标签列表
   final double maxY; // Y轴的最大值
   final double minY; // Y轴的最小值
+  final bool isEmptyView;
 
   const EleBarchartItemWidget({
     super.key,
@@ -20,6 +20,7 @@ class EleBarchartItemWidget extends StatefulWidget {
     required this.labels,
     required this.maxY,
     required this.minY,
+    required this.isEmptyView,
   });
 
   @override
@@ -41,47 +42,44 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // 滚动视图中的柱状图
-        if (widget.data.isNotEmpty)
-          Container(
-            margin: EdgeInsetsDirectional.only(start: 0.w), // 确保柱状图不与Y轴标签重叠
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                padding: const EdgeInsetsDirectional.only(
-                  start: 0,
-                  end: 12,
-                  top: 12,
-                  bottom: 0,
-                ),
-                height: double.maxFinite,
-                width: screenWith, // 当数据少于4个时，使用屏幕宽度，确保所有标签展示
-                child: BarChart(
-                  BarChartData(
-                    titlesData: _buildTitlesData(), // 构建标题数据
-                    barGroups: _buildBarGroups(), // 构建柱状图组
-                    maxY: widget.maxY,
-                    minY: (widget.minY >= 0) ? 0 : widget.minY,
-                    barTouchData: buildBarTouchData(),
-                    borderData: FlBorderData(show: false), // 边框数据
-                    gridData: buildFlGridData, // 网格数据
-                    alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                    extraLinesData: buildExtraLinesData,
-                    // 额外线条数据
-                  ),
-                ),
-              ),
+    return SizedBox(
+      width: double.maxFinite,
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          padding: const EdgeInsetsDirectional.only(
+            start: 0,
+            end: 12,
+            top: 12,
+            bottom: 0,
+          ),
+          height: double.maxFinite,
+          width: screenWith,
+          child: BarChart(
+            BarChartData(
+              titlesData: _buildTitlesData(), // 构建标题数据
+              barGroups: _buildBarGroups(), // 构建柱状图组
+              maxY: widget.maxY,
+              minY: (widget.minY >= 0) ? 0 : widget.minY,
+              barTouchData: buildBarTouchData(),
+              borderData: buildFlBorderData, // 边框数据
+              gridData: buildFlGridData, // 网格数据
+              alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+              extraLinesData: buildExtraLinesData,
+              // 额外线条数据
             ),
-          )
-        else
-          Image.asset(Assets.imgEmpty, width: 100, height: 100),
-      ],
+          ),
+        ),
+      ),
     );
   }
+
+  ///边框线
+  FlBorderData get buildFlBorderData => FlBorderData(
+    show: true,
+    border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+  );
 
   ///触摸数据
   BarTouchData? buildBarTouchData() {
@@ -142,21 +140,23 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
         strokeWidth: 0.4, // 水平线宽度
       ),
 
-      HorizontalLine(
-        y: widget.maxY,
-        label: HorizontalLineLabel(show: true),
-        color: Colors.transparent,
-        strokeWidth: 0.4,
-        dashArray: [8, 4],
-      ),
+      if (widget.isEmptyView)
+        HorizontalLine(
+          y: widget.maxY,
+          label: HorizontalLineLabel(show: false),
+          color: Color(0xA8FFFFFF),
+          strokeWidth: 0.4,
+          dashArray: [8, 4],
+        ),
 
-      HorizontalLine(
-        y: widget.minY,
-        // label: HorizontalLineLabel(show: true),
-        color: Colors.transparent, // 水平线颜色
-        strokeWidth: 0.4,
-        dashArray: [8, 4],
-      ),
+      if (widget.isEmptyView)
+        HorizontalLine(
+          y: widget.minY,
+          label: HorizontalLineLabel(show: false),
+          color: Color(0xA8FFFFFF), // 水平线颜色
+          strokeWidth: 0.4,
+          dashArray: [8, 4],
+        ),
     ],
   );
 
@@ -171,7 +171,6 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
         strokeWidth: 0.4,
         dashArray: [8, 4],
         color: Color(0xA8FFFFFF), // 水平线颜色
-        //strokeWidth: 1, // 水平线宽度
       );
     },
   );
@@ -190,11 +189,6 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
           showTitles: true,
           reservedSize: 25,
           getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
             return SideTitleWidget(
               //axisSide: meta.axisSide,
               space: 4,
@@ -203,7 +197,11 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                 value.toInt() < widget.labels.length
                     ? widget.labels[value.toInt()]
                     : "",
-                style: style,
+                style: TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8.sp,
+                ),
               ),
             );
           },
@@ -212,118 +210,31 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
-          maxIncluded: false,
+          maxIncluded: widget.isEmptyView,
           minIncluded: true,
           reservedSize: 40,
           getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
-            // bool isShow = (value == widget.minY) || (value == widget.maxY);
             return SideTitleWidget(
               space: 1,
               meta: meta,
-              child: Text("$value", style: style),
+              child: Text(
+                "$value",
+                style: TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8.sp,
+                ),
+              ),
             );
           },
         ),
-
-        /*sideTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 30,
-          getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
-            return SideTitleWidget(
-              //axisSide: meta.axisSide,
-              space: 4,
-              meta: meta,
-              child: Text("$value", style: style),
-            );
-          },
-        ),*/
       ),
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
     );
   }
 
-  FlTitlesData _buildTitlesData2() {
-    return FlTitlesData(
-      show: true,
-      bottomTitles: AxisTitles(
-        sideTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 25,
-          getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
-            return SideTitleWidget(
-              //axisSide: meta.axisSide,
-              space: 4,
-              meta: meta,
-              child: Text(widget.labels[value.toInt()], style: style),
-            );
-          },
-        ),
-      ),
-      leftTitles: AxisTitles(
-        sideTitles: SideTitles(
-          showTitles: false,
-          reservedSize: 40,
-          getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
-            final style2 = TextStyle(
-              color: Colors.transparent,
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
-
-            bool isShow = (value == widget.minY) || (value == widget.maxY);
-            return SideTitleWidget(
-              space: 1,
-              meta: meta,
-              child: Text("$value", style: isShow ? style2 : style),
-            );
-          },
-        ),
-
-        /*sideTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 30,
-          getTitlesWidget: (value, meta) {
-            final style = TextStyle(
-              color: Color(0xA8FFFFFF),
-              fontWeight: FontWeight.w400,
-              fontSize: 8.sp,
-            );
-            return SideTitleWidget(
-              //axisSide: meta.axisSide,
-              space: 4,
-              meta: meta,
-              child: Text("$value", style: style),
-            );
-          },
-        ),*/
-      ),
-      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-    );
-  }
-
-  // 构建柱状图组
+  /// 构建柱状图组
   List<BarChartGroupData> _buildBarGroups() {
     return List.generate(widget.data.length, (index) {
       return BarChartGroupData(
@@ -412,6 +323,76 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
       _scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeOut,
+    );
+  }
+
+  FlTitlesData _buildTitlesData2() {
+    return FlTitlesData(
+      show: true,
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 25,
+          getTitlesWidget: (value, meta) {
+            final style = TextStyle(
+              color: Color(0xA8FFFFFF),
+              fontWeight: FontWeight.w400,
+              fontSize: 8.sp,
+            );
+            return SideTitleWidget(
+              //axisSide: meta.axisSide,
+              space: 4,
+              meta: meta,
+              child: Text(widget.labels[value.toInt()], style: style),
+            );
+          },
+        ),
+      ),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: false,
+          reservedSize: 40,
+          getTitlesWidget: (value, meta) {
+            final style = TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+              fontSize: 8.sp,
+            );
+            final style2 = TextStyle(
+              color: Colors.transparent,
+              fontWeight: FontWeight.w400,
+              fontSize: 8.sp,
+            );
+
+            bool isShow = (value == widget.minY) || (value == widget.maxY);
+            return SideTitleWidget(
+              space: 1,
+              meta: meta,
+              child: Text("$value", style: isShow ? style2 : style),
+            );
+          },
+        ),
+
+        /*sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 30,
+          getTitlesWidget: (value, meta) {
+            final style = TextStyle(
+              color: Color(0xA8FFFFFF),
+              fontWeight: FontWeight.w400,
+              fontSize: 8.sp,
+            );
+            return SideTitleWidget(
+              //axisSide: meta.axisSide,
+              space: 4,
+              meta: meta,
+              child: Text("$value", style: style),
+            );
+          },
+        ),*/
+      ),
+      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
     );
   }
 }

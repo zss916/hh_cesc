@@ -2,6 +2,7 @@ import 'package:cescpro/core/color/colors.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
@@ -187,12 +188,39 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
       maxX: widget.logic.maxX,
       minY: widget.logic.minY,
       maxY: widget.logic.maxY,
+      isEmptyView: false,
     );
   }
 
   ///empty
-  Widget buildEmpty() =>
-      PowerLineChart(list: [], maxX: 0.0, minY: 0.0, maxY: 100.0);
+  Widget buildEmpty() => PowerLineChart(
+    list: [
+      [
+        PowerGraphList()
+          ..time = 0
+          ..val = 0.0,
+      ],
+      [
+        PowerGraphList()
+          ..time = 0
+          ..val = 0.0,
+      ],
+      [
+        PowerGraphList()
+          ..time = 0
+          ..val = 0.0,
+      ],
+      [
+        PowerGraphList()
+          ..time = 0
+          ..val = 0.0,
+      ],
+    ],
+    maxX: 0.0,
+    minY: 0.0,
+    maxY: 100.0,
+    isEmptyView: true,
+  );
 
   void showDateTimePicker(StatisticsItemLogic logic) {
     DatePicker.showDatePicker(

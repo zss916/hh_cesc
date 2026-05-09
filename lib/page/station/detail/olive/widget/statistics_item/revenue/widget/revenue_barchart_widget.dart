@@ -1,4 +1,3 @@
-import 'package:cescpro/generated/assets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,84 +43,77 @@ class _BarChartWidgetState extends State<RevenueBarchartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // 滚动视图中的柱状图
-        if (widget.data.isNotEmpty)
-          SizedBox(
-            width: double.maxFinite,
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                padding: const EdgeInsetsDirectional.only(
-                  start: 0,
-                  end: 10,
-                  top: 18,
-                  bottom: 0,
-                ),
-                height: double.maxFinite,
-                width: screenWidth,
-                child: BarChart(
-                  BarChartData(
-                    maxY: widget.maxY,
-                    minY: widget.minY,
-                    barTouchData: buildBarTouchData(),
-                    titlesData: _buildTitlesData(
-                      isShowLeft: true,
-                      isDiff: widget.isDiff,
-                    ), // 构建标题数据
-                    borderData: FlBorderData(show: false), // 边框数据
-                    barGroups: _buildBarGroups(), // 构建柱状图组
-                    gridData: buildGridData, // 网格数据
-                    alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
-                    extraLinesData: buildExtraLinesData(
-                      widget.isDiff,
-                    ), // 额外线条数据
-                  ),
-                ),
-              ),
+    return SizedBox(
+      width: double.maxFinite,
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        child: Container(
+          padding: EdgeInsetsDirectional.only(
+            start: 0,
+            end: 10,
+            top: 18,
+            bottom: 0,
+          ),
+          height: double.maxFinite,
+          width: screenWidth,
+          child: BarChart(
+            BarChartData(
+              maxY: widget.maxY,
+              minY: widget.minY,
+              barTouchData: buildBarTouchData(),
+              titlesData: _buildTitlesData(
+                isShowLeft: true,
+                isDiff: widget.isDiff,
+              ), // 构建标题数据
+              borderData: buildFlBorderData, // 边框数据
+              barGroups: _buildBarGroups(), // 构建柱状图组
+              gridData: buildGridData, // 网格数据
+              alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+              extraLinesData: buildExtraLinesData(widget.isDiff), // 额外线条数据
             ),
-          )
-        else
-          Image.asset(Assets.imgEmpty, width: 100, height: 100),
-      ],
+          ),
+        ),
+      ),
     );
   }
+
+  ///边框线
+  FlBorderData get buildFlBorderData => FlBorderData(
+    show: true,
+    border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
+  );
 
   /// 构建标题数据，包括X轴和Y轴（X轴优化一下）
   FlTitlesData _buildTitlesData({bool isShowLeft = false, bool isDiff = true}) {
     return FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
-        sideTitles: widget.labels.isEmpty
-            ? SideTitles(showTitles: false)
-            : SideTitles(
-                //interval: 20,
-                showTitles: true,
-                reservedSize: 15,
-                getTitlesWidget: (value, meta) {
-                  return SideTitleWidget(
-                    angle: 0,
-                    //axisSide: meta.axisSide,
-                    space: 4,
-                    meta: meta,
-                    child: Text(
-                      (widget.data.isEmpty) ? "" : widget.labels[value.toInt()],
-                      style: TextStyle(
-                        color: Color(0xA8FFFFFF),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 8.sp,
-                      ),
-                    ),
-                  );
-                },
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 15,
+          getTitlesWidget: (value, meta) {
+            return SideTitleWidget(
+              angle: 0,
+              space: 4,
+              meta: meta,
+              child: Text(
+                (widget.labels.isEmpty || widget.data.isEmpty)
+                    ? ""
+                    : widget.labels[value.toInt()],
+                style: TextStyle(
+                  color: Color(0xA8FFFFFF),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8.sp,
+                ),
               ),
+            );
+          },
+        ),
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
-          maxIncluded: isDiff ? false : true,
+          maxIncluded: !isDiff,
           minIncluded: true,
           showTitles: isShowLeft,
           reservedSize: 35,

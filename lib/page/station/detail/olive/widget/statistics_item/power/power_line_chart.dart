@@ -12,6 +12,7 @@ class PowerLineChart extends StatefulWidget {
   final double maxX;
   final double minY;
   final double maxY;
+  final bool isEmptyView;
 
   const PowerLineChart({
     super.key,
@@ -19,6 +20,7 @@ class PowerLineChart extends StatefulWidget {
     required this.maxX,
     required this.maxY,
     required this.minY,
+    required this.isEmptyView,
   });
 
   @override
@@ -31,7 +33,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
     return Container(
       padding: const EdgeInsetsDirectional.only(
         start: 12,
-        end: 12,
+        end: 10,
         top: 40,
         bottom: 0,
       ),
@@ -45,6 +47,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
           lineTouchData: lineTouchData,
           gridData: buildFlGridData,
           borderData: buildFlBorderData,
+          extraLinesData: buildExtraLinesData(),
           minX: 0,
           maxX: widget.maxX.toDouble(),
           maxY: widget.maxY,
@@ -55,23 +58,51 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
     );
   }
 
+  ///网格
+  FlGridData get buildFlGridData => FlGridData(
+    show: true,
+    drawHorizontalLine: true,
+    drawVerticalLine: false,
+    getDrawingHorizontalLine: (value) {
+      return FlLine(
+        strokeWidth: 0.4,
+        dashArray: [8, 4],
+        color: Color(0xA8FFFFFF), // 水平线颜色
+        //strokeWidth: 1, // 水平线宽度
+      );
+    },
+  );
+
+  ///额外线
+  ExtraLinesData? buildExtraLinesData() {
+    return widget.isEmptyView
+        ? ExtraLinesData(
+            horizontalLines: [
+              HorizontalLine(
+                y: widget.maxY,
+                label: HorizontalLineLabel(show: false),
+                color: Color(0xA8FFFFFF),
+                strokeWidth: 0.4,
+                dashArray: [8, 4],
+              ),
+            ],
+          )
+        : null;
+  }
+
   /// title
   FlTitlesData buildFlTitlesData() {
     return FlTitlesData(
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
       bottomTitles: AxisTitles(
-        sideTitles: widget.list.isEmpty
-            ? SideTitles(
-                showTitles: true,
-                reservedSize: 25,
-                getTitlesWidget: (value, meta) => SizedBox(height: 10),
-              )
-            : SideTitles(
-                showTitles: true,
-                reservedSize: 25,
-                getTitlesWidget: (value, meta) {
-                  return SideTitleWidget(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 25,
+          getTitlesWidget: (value, meta) {
+            return (widget.list.isEmpty || widget.isEmptyView)
+                ? SizedBox(height: 10)
+                : SideTitleWidget(
                     meta: meta,
                     child: value.toInt() >= (widget.list.first).length
                         ? SizedBox.shrink()
@@ -84,15 +115,15 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
                             ),
                           ),
                   );
-                },
-              ),
+          },
+        ),
       ),
       leftTitles: AxisTitles(
         sideTitles: SideTitles(
           showTitles: true,
           reservedSize: 25,
-          maxIncluded: false,
-          minIncluded: false,
+          maxIncluded: widget.isEmptyView ? true : widget.list.isEmpty,
+          minIncluded: widget.isEmptyView ? true : widget.list.isEmpty,
           getTitlesWidget: (value, meta) {
             return SideTitleWidget(
               space: 2,
@@ -115,17 +146,8 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
   ///边界
   FlBorderData get buildFlBorderData => FlBorderData(
     show: true,
-    border: Border(
-      bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-      left: const BorderSide(color: Colors.transparent, width: 0),
-      right: const BorderSide(color: Colors.transparent, width: 0),
-      top: const BorderSide(color: Colors.transparent, width: 0),
-    ),
+    border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
   );
-
-  ///网格
-  FlGridData get buildFlGridData =>
-      FlGridData(show: true, drawHorizontalLine: true, drawVerticalLine: false);
 
   ///转化设置
   FlTransformationConfig get buildFlTransformationConfig =>
@@ -145,6 +167,46 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
     ),
   );
 
+  ///折现数据列表
+  List<LineChartBarData> lineBarsData(List<List<PowerGraphList>> lines) {
+    return lines.isEmpty
+        ? <LineChartBarData>[]
+        : [
+            ...lines.mapIndexed(
+              (i, e) => buildLineChartBarData(AppColors.colorList[i], e),
+            ),
+          ];
+  }
+
+  ///柱状数据
+  LineChartBarData buildLineChartBarData(
+    Color color,
+    List<PowerGraphList> lines,
+  ) {
+    return LineChartBarData(
+      ///是否圆一点
+      isCurved: false,
+      color: color,
+      barWidth: 1,
+      isStrokeCapRound: true,
+
+      ///点数据
+      dotData: const FlDotData(show: false),
+
+      ///线下面的区域(true)
+      belowBarData: BarAreaData(
+        show: true,
+        color: color.withValues(alpha: 0.1),
+      ),
+      spots: [
+        ...lines.mapIndexed(
+          (i, e) => FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),
+        ),
+      ],
+    );
+  }
+
+  @Deprecated("delete")
   Color lerpGradient(List<Color> colors, List<double> stops, double t) {
     final length = colors.length;
     if (stops.length != length) {
@@ -167,43 +229,5 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
       }
     }
     return colors.last;
-  }
-
-  ///折现数据列表
-  List<LineChartBarData> lineBarsData(List<List<PowerGraphList>> lines) {
-    return lines.isEmpty
-        ? <LineChartBarData>[]
-        : [
-            ...lines.mapIndexed(
-              (i, e) => buildLineChartBarData(AppColors.colorList[i], e),
-            ),
-          ];
-  }
-
-  LineChartBarData buildLineChartBarData(
-    Color color,
-    List<PowerGraphList> lines,
-  ) {
-    return LineChartBarData(
-      ///是否圆一点
-      isCurved: true,
-      color: color,
-      barWidth: 1,
-      isStrokeCapRound: true,
-
-      ///点数据
-      dotData: const FlDotData(show: false),
-
-      ///线下面的区域(true)
-      belowBarData: BarAreaData(
-        show: true,
-        color: color.withValues(alpha: 0.1),
-      ),
-      spots: [
-        ...lines.mapIndexed(
-          (i, e) => FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),
-        ),
-      ],
-    );
   }
 }

@@ -308,6 +308,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
             minY: widget.logic.eleMinY ?? 0,
+            isEmptyView: false,
           ),
 
           ///月
@@ -324,6 +325,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
             minY: widget.logic.eleMinY ?? 0,
+            isEmptyView: false,
           ),
 
           ///年
@@ -340,6 +342,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
             minY: widget.logic.eleMinY ?? 0,
+            isEmptyView: false,
           ),
         ],
       ),
@@ -362,32 +365,35 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
       children: [
         ///周
         EleBarchartItemWidget(
-          data: [],
-          data2: [],
-          data3: [],
+          data: [0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0],
           labels: [],
-          maxY: 10,
+          maxY: 100.0,
           minY: 0,
+          isEmptyView: true,
         ),
 
         ///月
         EleBarchartItemWidget(
-          data: [],
-          data2: [],
-          data3: [],
+          data: [0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0],
           labels: [],
-          maxY: 10,
+          maxY: 100.0,
           minY: 0,
+          isEmptyView: true,
         ),
 
         ///年
         EleBarchartItemWidget(
-          data: [],
-          data2: [],
-          data3: [],
+          data: [0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0],
           labels: [],
-          maxY: 10,
+          maxY: 100.0,
           minY: 0,
+          isEmptyView: true,
         ),
       ],
     ),

@@ -336,27 +336,27 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
       children: [
         ///周
         RevenueBarchartWidget(
-          data: [],
+          data: [0.0, 0.0, 0.0, 0.0],
           labels: [],
-          maxY: 0,
+          maxY: 100,
           minY: 0,
           isDiff: widget.logic.isDiff,
         ),
 
         ///月
         RevenueBarchartWidget(
-          data: [],
+          data: [0.0, 0.0, 0.0, 0.0],
           labels: [],
-          maxY: 0,
+          maxY: 100,
           minY: 0,
           isDiff: widget.logic.isDiff,
         ),
 
         ///年
         RevenueBarchartWidget(
-          data: [],
+          data: [0.0, 0.0, 0.0, 0.0],
           labels: [],
-          maxY: 0,
+          maxY: 100,
           minY: 0,
           isDiff: widget.logic.isDiff,
         ),

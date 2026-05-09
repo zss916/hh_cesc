@@ -161,23 +161,28 @@ class StatisticsItemLogic extends GetxController {
       List<PowerGraphEntity> perData = normalizeChartData(
         value.map((e) => e.toJson()).toList(),
       ).map((e) => PowerGraphEntity.fromJson(e)).toList();
-      powerLines.assignAll(
-        perData
-            .where(((a) => (a.list ?? []).isNotEmpty))
-            .map((e) => (e.list ?? [])),
-      );
+      bool isHasData = perData.any((e) => (e.list ?? []).isNotEmpty);
+      if (isHasData) {
+        powerLines.assignAll(
+          perData
+              .where(((a) => (a.list ?? []).isNotEmpty))
+              .map((e) => (e.list ?? [])),
+        );
+        titles.assignAll(
+          value
+              .where(((a) => (a.list ?? []).isNotEmpty))
+              .map((w) => w.title ?? ""),
+        );
 
-      titles.assignAll(
-        value
-            .where(((a) => (a.list ?? []).isNotEmpty))
-            .map((w) => w.title ?? ""),
-      );
-
-      handPowerData(value);
-      powerViewStatus = powerLines.isEmpty
-          ? ViewType.empty.index
-          : ViewType.common.index;
-      update(["powerGraph"]);
+        handPowerData(value);
+        powerViewStatus = powerLines.isEmpty
+            ? ViewType.empty.index
+            : ViewType.common.index;
+        update(["powerGraph"]);
+      } else {
+        powerViewStatus = ViewType.empty.index;
+        update(["powerGraph"]);
+      }
     } else {
       powerViewStatus = ViewType.empty.index;
       update(["powerGraph"]);
