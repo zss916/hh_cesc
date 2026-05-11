@@ -446,6 +446,8 @@ class BatteryClusterPage extends StatelessWidget {
                                 minY: logic.arrMinY,
                                 maxYR: logic.arrMaxYR,
                                 minYR: logic.arrMinYR,
+                                isDiffR: false,
+                                isDiffL: false,
                               ),
                       );
                     },

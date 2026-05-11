@@ -353,14 +353,14 @@ class BatteryView extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Divider(height: 5.h, color: Colors.transparent),
+                  Divider(height: 15.h, color: Colors.transparent),
                   GetBuilder<MonitorDetailLogic>(
                     id: "realTimeData",
                     init: MonitorDetailLogic(),
                     builder: (logic) {
                       return Container(
                         color: Colors.transparent,
-                        height: 270.h,
+                        height: 280.h,
                         width: double.maxFinite,
                         child: logic.arrList.isEmpty
                             ? Center(
@@ -375,6 +375,8 @@ class BatteryView extends StatelessWidget {
                                 minY: logic.arrMinY,
                                 maxYR: logic.arrMaxYR,
                                 minYR: logic.arrMinYR,
+                                isDiffL: logic.isDiffL,
+                                isDiffR: logic.isDiffR,
                               ),
                       );
                     },
@@ -431,7 +433,7 @@ class BatteryView extends StatelessWidget {
               ),
               PositionedDirectional(
                 start: 0.w,
-                top: 15.h,
+                top: 10.h,
                 child: Text(
                   "(kW)",
                   style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
@@ -439,7 +441,7 @@ class BatteryView extends StatelessWidget {
               ),
               PositionedDirectional(
                 end: 0.w,
-                top: 15.h,
+                top: 10.h,
                 child: Text(
                   "(%)",
                   style: TextStyle(color: Color(0xFF0BC3C4), fontSize: 12.sp),
@@ -498,6 +500,11 @@ class BatteryView extends StatelessWidget {
             ComTypeListItem? voltage = items
                 .where((e) => e.fieldName == "voltage")
                 .firstOrNull;
+
+            ComTypeListItem? label = items
+                .where((e) => e.fieldName == "label")
+                .firstOrNull;
+
             return AspectRatio(
               aspectRatio: Get.isZh ? (140 / 186) : (200 / 186),
               child: Container(
@@ -527,7 +534,7 @@ class BatteryView extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "CLU${index + 1}",
+                                "CLU${label?.value ?? ""}",
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   color: Color(0xFFFFFFFF),

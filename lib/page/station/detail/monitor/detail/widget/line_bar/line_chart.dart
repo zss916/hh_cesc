@@ -12,6 +12,8 @@ class MonitorLineChartWidget extends StatefulWidget {
   final double minY;
   final double maxYR;
   final double minYR;
+  final bool isDiffL;
+  final bool isDiffR;
 
   const MonitorLineChartWidget({
     super.key,
@@ -21,6 +23,8 @@ class MonitorLineChartWidget extends StatefulWidget {
     required this.minY,
     required this.maxYR,
     required this.minYR,
+    required this.isDiffL,
+    required this.isDiffR,
   });
 
   @override
@@ -45,114 +49,93 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
           LineChart(
             LineChartData(
               lineTouchData: lineTouchData,
-              gridData: flGridData,
-              titlesData: FlTitlesData(
-                topTitles: axisTitles,
-                bottomTitles: bottomTitles,
-                leftTitles: mAxisTitles,
-                rightTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    minIncluded: false,
-                    maxIncluded: false,
-                    reservedSize: 30,
-                    getTitlesWidget: (value, meta) {
-                      bool isShow =
-                          (value == widget.maxYR) || (value == widget.minYR);
-                      return SideTitleWidget(
-                        space: 2,
-                        meta: meta,
-                        child: Text(
-                          value.formatNum(),
-                          style: TextStyle(
-                            color: isShow
-                                ? Colors.cyanAccent
-                                : Color(0x800BC3C4),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 8.sp,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
+              gridData: flGridDataR,
+              titlesData: buildFlTitlesDataSoc(),
               borderData: flBorderData,
               lineBarsData: lineBarsData2(widget.arrList),
               minX: 0,
               maxX: widget.maxX.toDouble(),
               maxY: widget.maxYR,
-              minY: widget.minYR,
+              minY: widget.minYR >= 0 ? 0 : widget.minYR,
             ),
             duration: const Duration(milliseconds: 2000),
           ),
           LineChart(
             LineChartData(
               lineTouchData: lineTouchData,
-              gridData: flGridData,
-              titlesData: FlTitlesData(
-                topTitles: axisTitles,
-                bottomTitles: bottomTitles,
-                rightTitles: mAxisTitles,
-                leftTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    minIncluded: false,
-                    maxIncluded: false,
-                    reservedSize: 30,
-                    getTitlesWidget: (value, meta) {
-                      return switch (value) {
-                        _ when value == meta.max => SideTitleWidget(
-                          space: 2,
-                          meta: meta,
-                          child: Text(
-                            value.formatNum(),
-                            style: TextStyle(
-                              color: Color(0xFF3874F2),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
-                            ),
-                          ),
-                        ),
-                        _ when value == meta.min => SideTitleWidget(
-                          space: 2,
-                          meta: meta,
-                          child: Text(
-                            value.formatNum(),
-                            style: TextStyle(
-                              color: Color(0xFF3874F2),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
-                            ),
-                          ),
-                        ),
-                        _ => SideTitleWidget(
-                          space: 2,
-                          meta: meta,
-                          child: Text(
-                            value.formatNum(),
-                            style: TextStyle(
-                              color: Color(0xA8FFFFFF),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8.sp,
-                            ),
-                          ),
-                        ),
-                      };
-                    },
-                  ), // 左边Y轴标签禁用，手动创建
-                ),
-              ),
+              gridData: flGridDataL,
+              titlesData: buildFlTitlesDataPower(),
               borderData: flBorderData,
               lineBarsData: lineBarsData3(widget.arrList),
               minX: 0,
               maxX: widget.maxX.toDouble(),
               maxY: widget.maxY,
-              minY: widget.minY,
+              minY: widget.minY >= 0 ? 0 : widget.minY,
             ),
             duration: const Duration(milliseconds: 2000),
           ),
         ],
+      ),
+    );
+  }
+
+  FlTitlesData buildFlTitlesDataPower() {
+    return FlTitlesData(
+      topTitles: axisTitles,
+      bottomTitles: bottomTitles,
+      rightTitles: mAxisTitles,
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          minIncluded: true,
+          maxIncluded: !widget.isDiffL,
+          reservedSize: 30,
+          getTitlesWidget: (value, meta) {
+            return SideTitleWidget(
+              space: 2,
+              meta: meta,
+              child: Text(
+                value.titleL,
+                style: TextStyle(
+                  color: Color(0x803874F2),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8.sp,
+                ),
+              ),
+            );
+          },
+        ), // 左边Y轴标签禁用，手动创建
+      ),
+    );
+  }
+
+  ///soc
+  FlTitlesData buildFlTitlesDataSoc() {
+    return FlTitlesData(
+      topTitles: axisTitles,
+      bottomTitles: bottomTitles,
+      leftTitles: mAxisTitles,
+      rightTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          minIncluded: true,
+          maxIncluded: !widget.isDiffR,
+          reservedSize: 30,
+          getTitlesWidget: (value, meta) {
+            return SideTitleWidget(
+              space: 2,
+              meta: meta,
+              child: Text(
+                value.titleL,
+                style: TextStyle(
+                  color: Color(0x800BC3C4),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8.sp,
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -186,18 +169,32 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
       AxisTitles(sideTitles: SideTitles(showTitles: false));
 
   ///flGridData
-  FlGridData get flGridData =>
-      FlGridData(show: true, drawHorizontalLine: true, drawVerticalLine: false);
+  FlGridData get flGridDataL => FlGridData(
+    show: true,
+    drawHorizontalLine: true,
+    drawVerticalLine: false,
+    getDrawingHorizontalLine: (_) => const FlLine(
+      color: Color(0x803874F2),
+      strokeWidth: 0.4,
+      dashArray: [8, 4],
+    ),
+  );
+
+  FlGridData get flGridDataR => FlGridData(
+    show: true,
+    drawHorizontalLine: true,
+    drawVerticalLine: false,
+    getDrawingHorizontalLine: (_) => const FlLine(
+      color: Color(0x800BC3C4),
+      strokeWidth: 0.4,
+      dashArray: [8, 4],
+    ),
+  );
 
   ///flBorderData
   FlBorderData get flBorderData => FlBorderData(
     show: true,
-    border: Border(
-      bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-      left: const BorderSide(color: Colors.transparent, width: 0),
-      right: const BorderSide(color: Colors.transparent, width: 0),
-      top: const BorderSide(color: Colors.transparent, width: 0),
-    ),
+    border: Border(bottom: BorderSide(color: Colors.white10, width: 1)),
   );
 
   ///触摸
