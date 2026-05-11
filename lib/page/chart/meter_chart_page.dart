@@ -46,6 +46,7 @@ class MeterChartPage extends StatelessWidget {
                               maxY: logic.powerMaxY,
                               minY: logic.powerMinY,
                               maxX: logic.powerMaxX,
+                              isDiff: logic.isDiff,
                             ),
                     );
                   },

@@ -11,6 +11,7 @@ class HMonitorLineChartWidget4 extends StatefulWidget {
   final double maxX;
   final double maxY;
   final double minY;
+  final bool isDiff;
 
   const HMonitorLineChartWidget4({
     super.key,
@@ -18,6 +19,7 @@ class HMonitorLineChartWidget4 extends StatefulWidget {
     required this.maxX,
     required this.maxY,
     required this.minY,
+    required this.isDiff,
   });
 
   @override
@@ -29,13 +31,13 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget4> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.only(
-        start: 12,
-        end: 12,
-        top: 12 + 18,
+        start: 0,
+        end: 10,
+        top: 30,
         bottom: 0,
       ),
       height: double.maxFinite,
-      width: MediaQuery.of(context).size.width,
+      width: double.maxFinite,
       child: LineChart(
         transformationConfig: FlTransformationConfig(
           scaleAxis: FlScaleAxis.horizontal,
@@ -48,7 +50,6 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget4> {
             show: true,
             drawHorizontalLine: true,
             drawVerticalLine: false,
-            // horizontalInterval: 10,
           ),
           titlesData: FlTitlesData(
             rightTitles: const AxisTitles(
@@ -81,31 +82,19 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget4> {
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: 35,
-                //interval: 20,
+                reservedSize: 30,
                 maxIncluded: false,
-                minIncluded: false,
+                minIncluded: true,
                 getTitlesWidget: (value, meta) {
-                  TextStyle textStyle = TextStyle(
-                    color: Color(0xA8FFFFFF),
-                    fontWeight: FontWeight.w400,
-                    fontSize: 8,
-                  );
-
-                  TextStyle textStyle2 = TextStyle(
-                    color: Color(0xFF3874F2),
-                    // color: Colors.transparent,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 10,
-                  );
-                  bool isShow =
-                      (value == widget.minY) || (value == widget.maxY);
-
                   return SideTitleWidget(
                     meta: meta,
                     child: Text(
-                      value.formatNum(),
-                      style: isShow ? textStyle2 : textStyle,
+                      value.titleL,
+                      style: TextStyle(
+                        color: Color(0xA8FFFFFF),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 8,
+                      ),
                     ),
                   );
                 },
@@ -116,9 +105,6 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget4> {
             show: true,
             border: Border(
               bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-              left: const BorderSide(color: Colors.transparent, width: 0),
-              right: const BorderSide(color: Colors.transparent, width: 0),
-              top: const BorderSide(color: Colors.transparent, width: 0),
             ),
           ),
           lineBarsData: lineBarsData(widget.powerList),
@@ -129,25 +115,14 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget4> {
           extraLinesData: ExtraLinesData(
             horizontalLines: [
               HorizontalLine(
-                y: 0,
-                // dashArray: [8, 4],
-                color: Colors.transparent, // 水平线颜色
+                y: widget.maxY,
+                label: HorizontalLineLabel(show: widget.isDiff),
+                dashArray: [8, 4],
+                color: !widget.isDiff
+                    ? Colors.blueGrey
+                    : Color(0xFF3874F2), // 水平线颜色
                 strokeWidth: 0.4, // 水平线宽度
               ),
-
-              /*HorizontalLine(
-                      y: widget.maxY,
-                      dashArray: [8, 4],
-                      color: Color(0xFF3874F2), // 水平线颜色
-                      strokeWidth: 0.4, // 水平线宽度
-                    ),*/
-
-              /*HorizontalLine(
-                      y: widget.minY,
-                      dashArray: [8, 4],
-                      color: Color(0xFF3874F2), // 水平线颜色
-                      strokeWidth: 0.4, // 水平线宽度
-                    ),*/
             ],
           ),
         ),

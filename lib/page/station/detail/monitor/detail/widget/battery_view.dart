@@ -321,16 +321,24 @@ class BatteryView extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              InkWell(
-                onTap: () {
-                  ///电池系统 MonitorDetailLogic
-                  Get.toNamed(APages.hBatteryChart);
+              GetBuilder<MonitorDetailLogic>(
+                id: "realTimeData",
+                init: MonitorDetailLogic(),
+                builder: (logic) {
+                  return logic.arrList.isEmpty
+                      ? SizedBox.shrink()
+                      : InkWell(
+                          onTap: () {
+                            ///电池系统 MonitorDetailLogic
+                            Get.toNamed(APages.hBatteryChart);
+                          },
+                          child: Icon(
+                            Icons.zoom_out_map_rounded,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        );
                 },
-                child: Icon(
-                  Icons.zoom_out_map_rounded,
-                  size: 20,
-                  color: Colors.white,
-                ),
               ),
             ],
           ),
@@ -339,9 +347,10 @@ class BatteryView extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 16.w),
           padding: EdgeInsetsDirectional.only(
             start: 5.w,
-            end: 10.w,
+            end: 5.w,
             bottom: 15.h,
           ),
+          alignment: AlignmentDirectional.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Color(0xFF313540),
@@ -362,22 +371,7 @@ class BatteryView extends StatelessWidget {
                         color: Colors.transparent,
                         height: 280.h,
                         width: double.maxFinite,
-                        child: logic.arrList.isEmpty
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                ),
-                              )
-                            : MonitorLineChartWidget(
-                                arrList: logic.arrList,
-                                maxX: logic.arrMaxX.toDouble(),
-                                maxY: logic.arrMaxY,
-                                minY: logic.arrMinY,
-                                maxYR: logic.arrMaxYR,
-                                minYR: logic.arrMinYR,
-                                isDiffL: logic.isDiffL,
-                                isDiffR: logic.isDiffR,
-                              ),
+                        child: buildContent(logic.realTimeViewStatus),
                       );
                     },
                   ),
@@ -637,4 +631,42 @@ class BatteryView extends StatelessWidget {
       ),
     ],
   );
+
+  Widget buildContent(ViewType viewState) {
+    return switch (viewState) {
+      _ when viewState == ViewType.loading => buildLoading(),
+      _ when viewState == ViewType.common => buildLineChart(),
+      _ when viewState == ViewType.empty => buildEmpty(),
+      _ => buildEmpty(),
+    };
+  }
+
+  Widget buildLoading() =>
+      Center(child: CircularProgressIndicator(color: Colors.white));
+
+  Widget buildEmpty() {
+    return MonitorLineChartWidget(
+      arrList: [],
+      maxX: 0,
+      maxY: 100,
+      minY: 0,
+      maxYR: 100,
+      minYR: 0,
+      isDiffL: false,
+      isDiffR: false,
+    );
+  }
+
+  Widget buildLineChart() {
+    return MonitorLineChartWidget(
+      arrList: logic.arrList,
+      maxX: logic.arrMaxX.toDouble(),
+      maxY: logic.arrMaxY,
+      minY: logic.arrMinY,
+      maxYR: logic.arrMaxYR,
+      minYR: logic.arrMinYR,
+      isDiffL: logic.isDiffL,
+      isDiffR: logic.isDiffR,
+    );
+  }
 }

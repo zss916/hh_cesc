@@ -13,7 +13,7 @@ class ClusterChartPage extends StatelessWidget {
     return HorizontalChartView(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
-        padding: EdgeInsetsDirectional.only(start: 5, end: 10, bottom: 10),
+        padding: EdgeInsetsDirectional.only(start: 5, end: 5, bottom: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Color(0xFF313540),
@@ -22,100 +22,96 @@ class ClusterChartPage extends StatelessWidget {
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Divider(height: 5, color: Colors.transparent),
-                GetBuilder<BatteryClusterLogic>(
-                  id: "realTimeData",
-                  init: BatteryClusterLogic(),
-                  builder: (logic) {
-                    return Container(
-                      color: Colors.transparent,
-                      height: 210,
-                      width: double.maxFinite,
-                      child: logic.arrList.isEmpty
-                          ? Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                              ),
-                            )
-                          : HMonitorLineChartWidget(
-                              arrList: logic.arrList,
-                              maxX: logic.arrMaxX.toDouble(),
-                              maxY: logic.arrMaxY,
-                              minY: logic.arrMinY,
-                              maxYR: logic.arrMaxYR,
-                              minYR: logic.arrMinYR,
-                            ),
-                    );
-                  },
-                ),
-                Divider(height: 5, color: Colors.transparent),
-                Row(
+            GetBuilder<BatteryClusterLogic>(
+              id: "realTimeData",
+              init: BatteryClusterLogic(),
+              builder: (logic) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Spacer(),
+                    Divider(height: 5, color: Colors.transparent),
                     Row(
                       children: [
-                        Container(
-                          width: 7,
-                          height: 7,
-                          margin: EdgeInsets.only(right: 5),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF3874F2),
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        ),
                         Text(
-                          TKey.power.tr,
+                          "(kW)",
                           style: TextStyle(
-                            color: Color(0xD9FFFFFF),
+                            color: Color(0x80FFFFFF),
                             fontSize: 12,
                           ),
                         ),
-                      ],
-                    ),
-                    VerticalDivider(width: 16, color: Colors.transparent),
-                    Row(
-                      children: [
-                        Container(
-                          width: 7,
-                          height: 7,
-                          margin: EdgeInsets.only(right: 5),
-                          decoration: BoxDecoration(
+                        Spacer(),
+                        Text(
+                          "(%)",
+                          style: TextStyle(
                             color: Color(0xFF0BC3C4),
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        ),
-                        Text(
-                          "SOC",
-                          style: TextStyle(
-                            color: Color(0xD9FFFFFF),
                             fontSize: 12,
                           ),
                         ),
                       ],
                     ),
-                    Spacer(),
+                    Expanded(
+                      child: HMonitorLineChartWidget(
+                        arrList: logic.arrList,
+                        maxX: logic.arrMaxX.toDouble(),
+                        maxY: logic.arrMaxY,
+                        minY: logic.arrMinY,
+                        maxYR: logic.arrMaxYR,
+                        minYR: logic.arrMinYR,
+                        isDiffL: logic.isDiffL,
+                        isDiffR: logic.isDiffR,
+                      ),
+                    ),
+                    Divider(height: 5, color: Colors.transparent),
+                    Row(
+                      children: [
+                        Spacer(),
+                        Row(
+                          children: [
+                            Container(
+                              width: 7,
+                              height: 7,
+                              margin: EdgeInsets.only(right: 5),
+                              decoration: BoxDecoration(
+                                color: Color(0xFF3874F2),
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                            ),
+                            Text(
+                              TKey.power.tr,
+                              style: TextStyle(
+                                color: Color(0xD9FFFFFF),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                        VerticalDivider(width: 16, color: Colors.transparent),
+                        Row(
+                          children: [
+                            Container(
+                              width: 7,
+                              height: 7,
+                              margin: EdgeInsets.only(right: 5),
+                              decoration: BoxDecoration(
+                                color: Color(0xFF0BC3C4),
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                            ),
+                            Text(
+                              "SOC",
+                              style: TextStyle(
+                                color: Color(0xD9FFFFFF),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                      ],
+                    ),
                   ],
-                ),
-              ],
-            ),
-            PositionedDirectional(
-              start: 0,
-              top: 15,
-              child: Text(
-                "(kW)",
-                style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
-              ),
-            ),
-            PositionedDirectional(
-              end: 0,
-              top: 15,
-              child: Text(
-                "(%)",
-                style: TextStyle(color: Color(0xFF0BC3C4), fontSize: 12),
-              ),
+                );
+              },
             ),
           ],
         ),

@@ -13,12 +13,13 @@ class PCSChartPage extends StatelessWidget {
     return HorizontalChartView(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
-        padding: EdgeInsetsDirectional.only(start: 5, end: 5, bottom: 15),
+        padding: EdgeInsetsDirectional.only(start: 5, end: 5, bottom: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Color(0xFF313540),
         ),
         width: double.maxFinite,
+        height: double.maxFinite,
         child: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: [
@@ -26,28 +27,31 @@ class PCSChartPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Divider(height: 5, color: Colors.transparent),
-                GetBuilder<MonitorDetailLogic>(
-                  id: "realTimeData",
-                  init: MonitorDetailLogic(),
-                  builder: (logic) {
-                    return Container(
-                      color: Colors.transparent,
-                      height: 210,
-                      width: double.maxFinite,
-                      child: logic.powerList.isEmpty
-                          ? Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
+                Expanded(
+                  child: GetBuilder<MonitorDetailLogic>(
+                    id: "realTimeData",
+                    init: MonitorDetailLogic(),
+                    builder: (logic) {
+                      return Container(
+                        color: Colors.transparent,
+                        height: double.maxFinite,
+                        width: double.maxFinite,
+                        child: logic.powerList.isEmpty
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : HMonitorLineChartWidget4(
+                                powerList: logic.powerList,
+                                maxY: logic.powerMaxY,
+                                minY: logic.powerMinY,
+                                maxX: logic.powerMaxX,
+                                isDiff: logic.isDiff,
                               ),
-                            )
-                          : HMonitorLineChartWidget4(
-                              powerList: logic.powerList,
-                              maxY: logic.powerMaxY,
-                              minY: logic.powerMinY,
-                              maxX: logic.powerMaxX,
-                            ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
                 Divider(height: 5, color: Colors.transparent),
                 Row(
@@ -80,7 +84,7 @@ class PCSChartPage extends StatelessWidget {
             ),
             PositionedDirectional(
               start: 0,
-              top: 15,
+              top: 10,
               child: Text(
                 "(kW)",
                 style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),

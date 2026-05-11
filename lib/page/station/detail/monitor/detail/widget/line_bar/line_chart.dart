@@ -36,13 +36,13 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.only(
-        start: 12,
+        start: 0,
         end: 0,
         top: 25,
         bottom: 0,
       ),
       height: double.maxFinite,
-      width: MediaQuery.of(context).size.width - 32.w - 15.w,
+      width: double.maxFinite,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -53,6 +53,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
               titlesData: buildFlTitlesDataSoc(),
               borderData: flBorderData,
               lineBarsData: lineBarsData2(widget.arrList),
+              extraLinesData: buildExtraLinesDataR(),
               minX: 0,
               maxX: widget.maxX.toDouble(),
               maxY: widget.maxYR,
@@ -67,6 +68,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
               titlesData: buildFlTitlesDataPower(),
               borderData: flBorderData,
               lineBarsData: lineBarsData3(widget.arrList),
+              extraLinesData: buildExtraLinesDataL(),
               minX: 0,
               maxX: widget.maxX.toDouble(),
               maxY: widget.maxY,
@@ -76,6 +78,35 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
           ),
         ],
       ),
+    );
+  }
+
+  ///额外线
+  ExtraLinesData? buildExtraLinesDataR() {
+    return ExtraLinesData(
+      horizontalLines: [
+        HorizontalLine(
+          y: widget.maxY,
+          label: HorizontalLineLabel(show: false),
+          color: Color(0x800BC3C4),
+          strokeWidth: 0.4,
+          dashArray: [8, 4],
+        ),
+      ],
+    );
+  }
+
+  ExtraLinesData? buildExtraLinesDataL() {
+    return ExtraLinesData(
+      horizontalLines: [
+        HorizontalLine(
+          y: widget.maxY,
+          label: HorizontalLineLabel(show: false),
+          color: Color(0x803874F2),
+          strokeWidth: 0.4,
+          dashArray: [8, 4],
+        ),
+      ],
     );
   }
 
@@ -97,7 +128,8 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
               child: Text(
                 value.titleL,
                 style: TextStyle(
-                  color: Color(0x803874F2),
+                  color: Color(0x80FFFFFF),
+                  //color: Color(0xFF3874F2),
                   fontWeight: FontWeight.w400,
                   fontSize: 8.sp,
                 ),
@@ -128,7 +160,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
               child: Text(
                 value.titleL,
                 style: TextStyle(
-                  color: Color(0x800BC3C4),
+                  color: Color(0xFF0BC3C4),
                   fontWeight: FontWeight.w400,
                   fontSize: 8.sp,
                 ),

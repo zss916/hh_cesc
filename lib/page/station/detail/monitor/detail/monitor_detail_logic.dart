@@ -13,6 +13,8 @@ import 'package:cescpro/page/station/detail/monitor/monitor_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+enum ViewType { loading, common, empty }
+
 class MonitorDetailLogic extends GetxController {
   String title = "";
   String? devType;
@@ -26,6 +28,24 @@ class MonitorDetailLogic extends GetxController {
   List<ComCardVoEntity> comCardVoList = [];
   String compTree = "";
   bool isV1 = false;
+
+  ///实时数据
+  ViewType realTimeViewStatus = ViewType.loading;
+  List<SocEntity> arrList = [];
+  double arrMaxY = 100.0;
+  double arrMaxYR = 100.0;
+  double arrMinY = 0.0;
+  double arrMinYR = 0.0;
+  double arrMaxX = 0.0;
+  bool isDiffR = false;
+  bool isDiffL = false;
+
+  ViewType powerViewStatus = ViewType.loading;
+  List<PowerEntity> powerList = [];
+  double powerMaxY = 100.0;
+  double powerMinY = 0.0;
+  double powerMaxX = 0.0;
+  bool isDiff = false;
 
   @override
   void onInit() {
@@ -144,21 +164,6 @@ class MonitorDetailLogic extends GetxController {
     return pathSegments.join('/');
   }
 
-  ///实时数据
-  List<SocEntity> arrList = [];
-  double arrMaxY = 100.0;
-  double arrMaxYR = 100.0;
-  double arrMinY = 0.0;
-  double arrMinYR = 0.0;
-  double arrMaxX = 0.0;
-  bool isDiffR = false;
-  bool isDiffL = false;
-
-  List<PowerEntity> powerList = [];
-  double powerMaxY = 0.0;
-  double powerMinY = 0.0;
-  double powerMaxX = 0.0;
-
   Future<void> loadSocGraph() async {
     DateTime now = DateTime.now();
     DateTime startOfDay = DateTime(now.year, now.month, now.day, 0, 0, 0);
@@ -240,11 +245,15 @@ class MonitorDetailLogic extends GetxController {
               arrMinY = minYL;
             }
           }
+          realTimeViewStatus = ViewType.common;
         } else {
-          ///eror
+          realTimeViewStatus = ViewType.empty;
         }
         update(["realTimeData"]);
         debugPrint("maxY:$arrMaxY, minY:$arrMinY，len：${arrList.length}");
+      } else {
+        realTimeViewStatus = ViewType.empty;
+        update(["realTimeData"]);
       }
     } else if (devType == "PCS" || devType == "METER") {
       final (
@@ -266,9 +275,34 @@ class MonitorDetailLogic extends GetxController {
           powerMaxY = powers.reduce(max);
           powerMinY = powers.reduce(min);
           powerMaxX = powerList.length.toDouble();
+          powerViewStatus = ViewType.common;
+
+          ///max = min
+          double maxY = powerMaxY ?? 0;
+          double minY = powerMinY ?? 0;
+          debugPrint("maxY===>>> $maxY,minY===>> $minY");
+          isDiff = !(maxY == minY);
+          if (maxY == minY) {
+            if (maxY.toDouble() == 0.toDouble()) {
+              powerMinY = 0;
+              powerMaxY = 100;
+            } else if (maxY > 0) {
+              powerMinY = 0;
+              powerMaxY = maxY;
+            } else {
+              ///maxY < 0
+              powerMaxY = 0;
+              powerMinY = minY;
+            }
+          }
+        } else {
+          powerViewStatus = ViewType.empty;
         }
         update(["realTimeData"]);
         debugPrint("maxY:$powerMaxX, minY:$powerMinY,maxY:$powerMaxY");
+      } else {
+        powerViewStatus = ViewType.empty;
+        update(["realTimeData"]);
       }
     }
   }

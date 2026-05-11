@@ -365,9 +365,9 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
       children: [
         ///周
         EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0],
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
           labels: [],
           maxY: 100.0,
           minY: 0,
@@ -376,9 +376,9 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
 
         ///月
         EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0],
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
           labels: [],
           maxY: 100.0,
           minY: 0,
@@ -387,9 +387,9 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
 
         ///年
         EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0],
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
           labels: [],
           maxY: 100.0,
           minY: 0,

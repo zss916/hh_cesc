@@ -9,6 +9,8 @@ import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:cescpro/http/bean/soc_entity.dart';
 import 'package:get/get.dart';
 
+enum ViewType { loading, common, empty }
+
 class BatteryClusterLogic extends GetxController {
   String? devType;
   String? siteId;
@@ -20,6 +22,17 @@ class BatteryClusterLogic extends GetxController {
   ComTypeListEntity? comTypeList;
   List<ComCardVoEntity> comCardVoList = [];
   String compTree = "--";
+
+  ///实时数据
+  ViewType viewStatus = ViewType.loading;
+  List<SocEntity> arrList = [];
+  double arrMaxY = 100.0;
+  double arrMaxYR = 100.0;
+  double arrMinY = 0.0;
+  double arrMinYR = 0.0;
+  double arrMaxX = 0.0;
+  bool isDiffR = false;
+  bool isDiffL = false;
 
   @override
   void onInit() {
@@ -91,14 +104,6 @@ class BatteryClusterLogic extends GetxController {
     update();
   }
 
-  ///实时数据
-  List<SocEntity> arrList = [];
-  double arrMaxY = 0.0;
-  double arrMaxYR = 0.0;
-  double arrMinY = 0.0;
-  double arrMinYR = 0.0;
-  double arrMaxX = 0.0;
-
   Future<void> loadSocGraph() async {
     DateTime now = DateTime.now();
     DateTime startOfDay = DateTime(now.year, now.month, now.day, 0, 0, 0);
@@ -143,9 +148,51 @@ class BatteryClusterLogic extends GetxController {
             ? socListMin.toDouble()
             : powerListMin;*/
         arrMaxX = arrList.length.toDouble();
+
+        ///max = min
+        double maxYR = arrMaxYR ?? 0;
+        double minYR = arrMinYR ?? 0;
+        isDiffR = !(maxYR == minYR);
+        if (maxYR == minYR) {
+          if (maxYR == 0) {
+            arrMinYR = 0;
+            arrMaxYR = 100;
+          } else if (maxYR > 0) {
+            arrMinYR = 0;
+            arrMaxYR = maxYR;
+          } else {
+            ///maxY < 0
+            arrMaxYR = 0;
+            arrMinYR = minYR;
+          }
+        }
+
+        ///max = min
+        double maxYL = arrMaxY ?? 0;
+        double minYL = arrMinY ?? 0;
+        isDiffL = !(maxYL == minYL);
+        if (maxYL == minYL) {
+          if (maxYL.toDouble() == 0.toDouble()) {
+            arrMinY = 0;
+            arrMaxY = 100;
+          } else if (maxYL > 0) {
+            arrMinY = 0;
+            arrMaxY = maxYL;
+          } else {
+            ///maxY < 0
+            arrMaxY = 0;
+            arrMinY = minYL;
+          }
+        }
+        viewStatus = ViewType.common;
+      } else {
+        viewStatus = ViewType.empty;
       }
       update(["realTimeData"]);
       //debugPrint("maxY:$maxY, minY:$minY,maxY:$maxX");
+    } else {
+      viewStatus = ViewType.empty;
+      update(["realTimeData"]);
     }
   }
 }

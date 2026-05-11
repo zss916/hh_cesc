@@ -11,6 +11,8 @@ class HMonitorLineChartWidget extends StatefulWidget {
   final double minY;
   final double maxYR;
   final double minYR;
+  final bool isDiffL;
+  final bool isDiffR;
 
   const HMonitorLineChartWidget({
     super.key,
@@ -20,6 +22,8 @@ class HMonitorLineChartWidget extends StatefulWidget {
     required this.minY,
     required this.maxYR,
     required this.minYR,
+    required this.isDiffL,
+    required this.isDiffR,
   });
 
   @override
@@ -31,13 +35,12 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.only(
-        start: 12,
+        start: 0,
         end: 0,
-        top: 25,
+        top: 12,
         bottom: 0,
       ),
       height: double.maxFinite,
-      // width: MediaQuery.of(context).size.width - 32.w - 15.w,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -52,21 +55,18 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
                 rightTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
-                    minIncluded: false,
-                    maxIncluded: false,
+                    minIncluded: true,
+                    //maxIncluded: true,
+                    maxIncluded: !widget.isDiffR,
                     reservedSize: 30,
                     getTitlesWidget: (value, meta) {
-                      bool isShow =
-                          (value == widget.maxYR) || (value == widget.minYR);
                       return SideTitleWidget(
                         space: 2,
                         meta: meta,
                         child: Text(
-                          value.formatNum(),
+                          value.titleL,
                           style: TextStyle(
-                            color: isShow
-                                ? Colors.cyanAccent
-                                : Color(0x800BC3C4),
+                            color: Color(0xFF0BC3C4),
                             fontWeight: FontWeight.w400,
                             fontSize: 8,
                           ),
@@ -96,48 +96,23 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
                 leftTitles: AxisTitles(
                   sideTitles: SideTitles(
                     showTitles: true,
-                    minIncluded: false,
-                    maxIncluded: false,
+                    minIncluded: true,
+                    maxIncluded: !widget.isDiffL,
+                    //maxIncluded: true,
                     reservedSize: 30,
                     getTitlesWidget: (value, meta) {
-                      return switch (value) {
-                        _ when value == meta.max => SideTitleWidget(
-                          space: 2,
-                          meta: meta,
-                          child: Text(
-                            value.formatNum(),
-                            style: TextStyle(
-                              color: Color(0xFF3874F2),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8,
-                            ),
+                      return SideTitleWidget(
+                        space: 2,
+                        meta: meta,
+                        child: Text(
+                          value.titleL,
+                          style: TextStyle(
+                            color: Color(0xA8FFFFFF),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 8,
                           ),
                         ),
-                        _ when value == meta.min => SideTitleWidget(
-                          space: 2,
-                          meta: meta,
-                          child: Text(
-                            value.formatNum(),
-                            style: TextStyle(
-                              color: Color(0xFF3874F2),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8,
-                            ),
-                          ),
-                        ),
-                        _ => SideTitleWidget(
-                          space: 2,
-                          meta: meta,
-                          child: Text(
-                            value.formatNum(),
-                            style: TextStyle(
-                              color: Color(0xA8FFFFFF),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 8,
-                            ),
-                          ),
-                        ),
-                      };
+                      );
                     },
                   ), // 左边Y轴标签禁用，手动创建
                 ),
@@ -164,18 +139,7 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
       minIncluded: false,
       maxIncluded: false,
       getTitlesWidget: (value, meta) {
-        return SideTitleWidget(
-          space: 2,
-          meta: meta,
-          child: Text(
-            "",
-            style: TextStyle(
-              color: Colors.transparent,
-              fontWeight: FontWeight.w400,
-              fontSize: 8,
-            ),
-          ),
-        );
+        return SizedBox();
       },
     ),
   );
@@ -191,12 +155,7 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
   ///flBorderData
   FlBorderData get flBorderData => FlBorderData(
     show: true,
-    border: Border(
-      bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-      left: const BorderSide(color: Colors.transparent, width: 0),
-      right: const BorderSide(color: Colors.transparent, width: 0),
-      top: const BorderSide(color: Colors.transparent, width: 0),
-    ),
+    border: Border(bottom: BorderSide(color: Color(0x33FFFFFF), width: 1)),
   );
 
   ///触摸
@@ -252,70 +211,8 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
     ];
   }
 
-  ///extraLinesData2
-  ExtraLinesData get extraLinesData2 => ExtraLinesData(
-    horizontalLines: [
-      HorizontalLine(
-        y: 0,
-        color: Colors.cyanAccent, // 水平线颜色
-        strokeWidth: 0.4, // 水平线宽度
-      ),
-    ],
-  );
-
   List<LineChartBarData> lineBarsData3(List<SocEntity> lines) {
     return [
-      LineChartBarData(
-        ///是否圆一点
-        isCurved: false,
-        color: Color(0xFF3874F2),
-        barWidth: 1,
-        isStrokeCapRound: true,
-
-        ///点数据
-        dotData: const FlDotData(show: false),
-
-        ///线下面的区域(true)
-        belowBarData: BarAreaData(show: false),
-        spots: [
-          ...lines.mapIndexed(
-            (i, e) => FlSpot(i.toDouble(), (e.power ?? 0).toDouble()),
-          ),
-        ],
-      ),
-    ];
-  }
-
-  ///extraLinesData3
-  ExtraLinesData get extraLinesData3 => ExtraLinesData(
-    horizontalLines: [
-      HorizontalLine(
-        y: 0,
-        color: Colors.transparent, // 水平线颜色
-        strokeWidth: 0.4, // 水平线宽度
-      ),
-    ],
-  );
-
-  ///mLineBarsData
-  List<LineChartBarData> mLineBarsData(List<SocEntity> lines) {
-    return [
-      LineChartBarData(
-        isCurved: false,
-        color: Color(0xFF0BC3C4),
-        barWidth: 1,
-        isStrokeCapRound: true,
-        dotData: const FlDotData(show: false),
-        belowBarData: BarAreaData(
-          show: false,
-          color: Colors.pink.withValues(alpha: 0),
-        ),
-        spots: [
-          ...lines.mapIndexed(
-            (i, e) => FlSpot(i.toDouble(), (e.soc ?? 0).toDouble()),
-          ),
-        ],
-      ),
       LineChartBarData(
         ///是否圆一点
         isCurved: false,

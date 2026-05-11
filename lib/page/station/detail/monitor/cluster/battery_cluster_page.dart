@@ -298,79 +298,6 @@ class BatteryClusterPage extends StatelessWidget {
     ],
   );
 
-  /* Widget buildLineChartWidget2() {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsetsDirectional.only(
-            start: 18.w,
-            end: 18.w,
-            bottom: 16.h,
-          ),
-          alignment: AlignmentDirectional.centerStart,
-          child: Text(
-            TKey.realTimeSoc.tr,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w),
-          padding: EdgeInsetsDirectional.only(
-            start: 5.w,
-            end: 10.w,
-            bottom: 15.h,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Color(0xFF313540),
-          ),
-          width: double.maxFinite,
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    color: Colors.transparent,
-                    height: 270,
-                    width: double.maxFinite,
-                    child: LineChartWidget(),
-                  ),
-                  Divider(height: 5.h, color: Colors.transparent),
-                  Row(
-                    children: [
-                      Spacer(),
-                      LineTitleWidget(
-                        title: TKey.power.tr,
-                        color: Color(0xFF3874F2),
-                      ),
-                      VerticalDivider(width: 16.w, color: Colors.transparent),
-                      LineTitleWidget(title: "SOC", color: Color(0xFF0BC3C4)),
-                      Spacer(),
-                    ],
-                  ),
-                ],
-              ),
-              PositionedDirectional(
-                start: 0.w,
-                top: 15.h,
-                child: Text(
-                  "(kW)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }*/
-
   Widget buildLineChartWidget() {
     return Column(
       children: [
@@ -392,16 +319,24 @@ class BatteryClusterPage extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              InkWell(
-                onTap: () {
-                  ///电池集群 BatteryClusterLogic
-                  Get.toNamed(APages.hClusterChart);
+              GetBuilder<BatteryClusterLogic>(
+                id: "realTimeData",
+                init: BatteryClusterLogic(),
+                builder: (logic) {
+                  return logic.arrList.isEmpty
+                      ? SizedBox.shrink()
+                      : InkWell(
+                          onTap: () {
+                            ///电池集群 BatteryClusterLogic
+                            Get.toNamed(APages.hClusterChart);
+                          },
+                          child: Icon(
+                            Icons.zoom_out_map_rounded,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        );
                 },
-                child: Icon(
-                  Icons.zoom_out_map_rounded,
-                  size: 20,
-                  color: Colors.white,
-                ),
               ),
             ],
           ),
@@ -410,7 +345,7 @@ class BatteryClusterPage extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 16.w),
           padding: EdgeInsetsDirectional.only(
             start: 5.w,
-            end: 10.w,
+            end: 5.w,
             bottom: 15.h,
           ),
           decoration: BoxDecoration(
@@ -424,31 +359,16 @@ class BatteryClusterPage extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Divider(height: 5.h, color: Colors.transparent),
+                  Divider(height: 15.h, color: Colors.transparent),
                   GetBuilder<BatteryClusterLogic>(
                     id: "realTimeData",
                     init: BatteryClusterLogic(),
                     builder: (logic) {
                       return Container(
                         color: Colors.transparent,
-                        height: 270.h,
+                        height: 280.h,
                         width: double.maxFinite,
-                        child: logic.arrList.isEmpty
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                ),
-                              )
-                            : MonitorLineChartWidget(
-                                arrList: logic.arrList,
-                                maxX: logic.arrMaxX.toDouble(),
-                                maxY: logic.arrMaxY,
-                                minY: logic.arrMinY,
-                                maxYR: logic.arrMaxYR,
-                                minYR: logic.arrMinYR,
-                                isDiffR: false,
-                                isDiffL: false,
-                              ),
+                        child: buildContent(logic.viewStatus, logic),
                       );
                     },
                   ),
@@ -504,7 +424,7 @@ class BatteryClusterPage extends StatelessWidget {
               ),
               PositionedDirectional(
                 start: 0.w,
-                top: 15.h,
+                top: 10.h,
                 child: Text(
                   "(kW)",
                   style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
@@ -512,7 +432,7 @@ class BatteryClusterPage extends StatelessWidget {
               ),
               PositionedDirectional(
                 end: 0.w,
-                top: 15.h,
+                top: 10.h,
                 child: Text(
                   "(%)",
                   style: TextStyle(color: Color(0xFF0BC3C4), fontSize: 12.sp),
@@ -668,4 +588,42 @@ class BatteryClusterPage extends StatelessWidget {
       ),
     ],
   );
+
+  Widget buildContent(ViewType viewState, BatteryClusterLogic logic) {
+    return switch (viewState) {
+      _ when viewState == ViewType.loading => buildLoading(),
+      _ when viewState == ViewType.common => buildLineChart(logic),
+      _ when viewState == ViewType.empty => buildEmpty(),
+      _ => buildEmpty(),
+    };
+  }
+
+  Widget buildLoading() =>
+      Center(child: CircularProgressIndicator(color: Colors.white));
+
+  Widget buildEmpty() {
+    return MonitorLineChartWidget(
+      arrList: [],
+      maxX: 0,
+      maxY: 100,
+      minY: 0,
+      maxYR: 100,
+      minYR: 0,
+      isDiffL: false,
+      isDiffR: false,
+    );
+  }
+
+  Widget buildLineChart(BatteryClusterLogic logic) {
+    return MonitorLineChartWidget(
+      arrList: logic.arrList,
+      maxX: logic.arrMaxX.toDouble(),
+      maxY: logic.arrMaxY,
+      minY: logic.arrMinY,
+      maxYR: logic.arrMaxYR,
+      minYR: logic.arrMinYR,
+      isDiffR: logic.isDiffR,
+      isDiffL: logic.isDiffL,
+    );
+  }
 }

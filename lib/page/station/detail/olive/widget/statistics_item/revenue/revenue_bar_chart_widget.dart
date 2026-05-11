@@ -336,7 +336,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
       children: [
         ///周
         RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0],
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
           labels: [],
           maxY: 100,
           minY: 0,
@@ -345,7 +345,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
 
         ///月
         RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0],
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
           labels: [],
           maxY: 100,
           minY: 0,
@@ -354,7 +354,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
 
         ///年
         RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0],
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
           labels: [],
           maxY: 100,
           minY: 0,

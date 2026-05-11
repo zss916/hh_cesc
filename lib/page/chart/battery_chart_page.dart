@@ -25,7 +25,7 @@ class BatteryChartPage extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Divider(height: 5, color: Colors.transparent),
+                Divider(height: 15, color: Colors.transparent),
                 GetBuilder<MonitorDetailLogic>(
                   id: "realTimeData",
                   init: MonitorDetailLogic(),
@@ -47,6 +47,8 @@ class BatteryChartPage extends StatelessWidget {
                               minY: logic.arrMinY,
                               maxYR: logic.arrMaxYR,
                               minYR: logic.arrMinYR,
+                              isDiffL: logic.isDiffL,
+                              isDiffR: logic.isDiffR,
                             ),
                     );
                   },
@@ -103,7 +105,7 @@ class BatteryChartPage extends StatelessWidget {
             ),
             PositionedDirectional(
               start: 0,
-              top: 15,
+              top: 10,
               child: Text(
                 "(kW)",
                 style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
@@ -111,7 +113,7 @@ class BatteryChartPage extends StatelessWidget {
             ),
             PositionedDirectional(
               end: 0,
-              top: 15,
+              top: 10,
               child: Text(
                 "(%)",
                 style: TextStyle(color: Color(0xFF0BC3C4), fontSize: 12),

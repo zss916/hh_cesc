@@ -12,6 +12,8 @@ class MonitorLineChartWidget4 extends StatefulWidget {
   final double maxX;
   final double maxY;
   final double minY;
+  final bool isEmpty;
+  final bool isDiff;
 
   const MonitorLineChartWidget4({
     super.key,
@@ -19,6 +21,8 @@ class MonitorLineChartWidget4 extends StatefulWidget {
     required this.maxX,
     required this.maxY,
     required this.minY,
+    required this.isEmpty,
+    required this.isDiff,
   });
 
   @override
@@ -82,8 +86,8 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
               sideTitles: SideTitles(
                 showTitles: true,
                 reservedSize: 35,
-                maxIncluded: false,
-                minIncluded: false,
+                maxIncluded: !widget.isDiff,
+                minIncluded: true,
                 getTitlesWidget: (value, meta) {
                   TextStyle textStyle = TextStyle(
                     color: Color(0xA8FFFFFF),
@@ -102,10 +106,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
 
                   return SideTitleWidget(
                     meta: meta,
-                    child: Text(
-                      value.formatNum(),
-                      style: isShow ? textStyle2 : textStyle,
-                    ),
+                    child: Text(value.formatNum(), style: textStyle),
                   );
                 },
               ), // 左边Y轴标签禁用，手动创建
@@ -115,9 +116,6 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
             show: true,
             border: Border(
               bottom: BorderSide(color: Color(0x33FFFFFF), width: 1),
-              left: const BorderSide(color: Colors.transparent, width: 0),
-              right: const BorderSide(color: Colors.transparent, width: 0),
-              top: const BorderSide(color: Colors.transparent, width: 0),
             ),
           ),
           lineBarsData: lineBarsData(widget.powerList),
@@ -127,19 +125,21 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
           minY: widget.minY,
           extraLinesData: ExtraLinesData(
             horizontalLines: [
-              HorizontalLine(
+              /*HorizontalLine(
                 y: 0,
                 // dashArray: [8, 4],
                 color: Colors.transparent, // 水平线颜色
                 strokeWidth: 0.4, // 水平线宽度
+              ),*/
+              HorizontalLine(
+                y: widget.maxY,
+                label: HorizontalLineLabel(show: widget.isDiff),
+                dashArray: [8, 4],
+                color: !widget.isDiff
+                    ? Colors.blueGrey
+                    : Color(0xFF3874F2), // 水平线颜色
+                strokeWidth: 0.4, // 水平线宽度
               ),
-
-              /*HorizontalLine(
-                      y: widget.maxY,
-                      dashArray: [8, 4],
-                      color: Color(0xFF3874F2), // 水平线颜色
-                      strokeWidth: 0.4, // 水平线宽度
-                    ),*/
 
               /*HorizontalLine(
                       y: widget.minY,
