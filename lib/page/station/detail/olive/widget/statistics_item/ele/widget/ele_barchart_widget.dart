@@ -59,7 +59,7 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
           child: BarChart(
             BarChartData(
               titlesData: _buildTitlesData(), // 构建标题数据
-              barGroups: _buildBarGroups(), // 构建柱状图组
+              barGroups: _buildBarGroups(8.w, 4), // 构建柱状图组
               maxY: widget.maxY,
               minY: (widget.minY >= 0) ? 0 : widget.minY,
               barTouchData: buildBarTouchData(),
@@ -70,6 +70,32 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
               // 额外线条数据
             ),
           ),
+        ),
+      ),
+    );
+
+    return Container(
+      padding: const EdgeInsetsDirectional.only(
+        start: 0,
+        end: 12,
+        top: 12,
+        bottom: 0,
+      ),
+      height: double.maxFinite,
+      width: double.maxFinite,
+      child: BarChart(
+        transformationConfig: buildFlTransformationConfig,
+        BarChartData(
+          titlesData: _buildTitlesData(), // 构建标题数据
+          barGroups: _buildBarGroups(4, 1), // 构建柱状图组
+          maxY: widget.maxY,
+          minY: (widget.minY >= 0) ? 0 : widget.minY,
+          barTouchData: buildBarTouchData(),
+          borderData: buildFlBorderData, // 边框数据
+          gridData: buildFlGridData, // 网格数据
+          alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+          extraLinesData: buildExtraLinesData,
+          // 额外线条数据
         ),
       ),
     );
@@ -130,6 +156,13 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
             },
           );
   }
+
+  FlTransformationConfig get buildFlTransformationConfig =>
+      FlTransformationConfig(
+        scaleAxis: FlScaleAxis.horizontal,
+        minScale: 2,
+        maxScale: 4,
+      );
 
   ///额外的线
   ExtraLinesData get buildExtraLinesData => ExtraLinesData(
@@ -234,11 +267,11 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
   }
 
   /// 构建柱状图组
-  List<BarChartGroupData> _buildBarGroups() {
+  List<BarChartGroupData> _buildBarGroups(double w, double space) {
     return List.generate(widget.data.length, (index) {
       return BarChartGroupData(
         x: index,
-        barsSpace: 4,
+        barsSpace: space,
         barRods: [
           BarChartRodData(
             fromY: 0,
@@ -262,7 +295,7 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                   ? Radius.circular(2.0)
                   : Radius.zero,
             ),
-            width: 8.w,
+            width: w,
           ),
           BarChartRodData(
             fromY: 0,
@@ -286,7 +319,7 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                   ? Radius.circular(2.0)
                   : Radius.zero,
             ),
-            width: 8.w,
+            width: w,
           ),
           BarChartRodData(
             fromY: 0,
@@ -310,7 +343,7 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                   ? Radius.circular(2.0)
                   : Radius.zero,
             ),
-            width: 8.w,
+            width: w,
           ),
         ],
       );

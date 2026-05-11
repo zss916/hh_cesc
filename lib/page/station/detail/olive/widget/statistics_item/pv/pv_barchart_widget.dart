@@ -70,12 +70,12 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
             BarChartData(
               maxY: widget.maxY,
               minY: (widget.minY >= 0) ? 0 : widget.minY,
-              barTouchData: buildBarTouchData(),
-              titlesData: _buildTitlesData(), // 构建标题数据
               borderData: buildFlBorderData, // 边框数据
-              barGroups: _buildBarGroups(), // 构建柱状图组
               gridData: buildFlGridData, // 网格数据
               alignment: BarChartAlignment.spaceEvenly, // 确保间距均匀
+              barTouchData: buildBarTouchData(labels: widget.labels),
+              titlesData: _buildTitlesData(titles: widget.labels), // 构建标题数据
+              barGroups: _buildBarGroups(data: widget.data), // 构建柱状图组
               extraLinesData: buildExtraLinesData, // 额外线条数据
             ),
           ),
@@ -93,11 +93,6 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
   ///额外线
   ExtraLinesData get buildExtraLinesData => ExtraLinesData(
     horizontalLines: [
-      /*HorizontalLine(
-        y: 0,
-        color: widget.isEmptyView ? Colors.transparent : Colors.white, // 水平线颜色
-        strokeWidth: 1, // 水平线宽度
-      ),*/
       HorizontalLine(
         y: widget.maxY,
         label: HorizontalLineLabel(show: !widget.isEmptyView),
@@ -137,12 +132,12 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
       : widget.data.length * 65.0;
 
   ///触摸数据
-  BarTouchData buildBarTouchData() {
-    return widget.labels.isEmpty
+  BarTouchData buildBarTouchData({required List<String> labels}) {
+    return labels.isEmpty
         ? BarTouchData(enabled: false)
         : BarTouchData(
-            enabled: widget.labels.isEmpty,
-            touchTooltipData: widget.labels.isEmpty
+            enabled: true,
+            touchTooltipData: labels.isEmpty
                 ? null
                 : BarTouchTooltipData(
                     getTooltipColor: (_) => Color(0x66000000),
@@ -151,15 +146,15 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
                     direction: TooltipDirection.auto,
                     getTooltipItem: (group, groupIndex, rod, rodIndex) {
                       return BarTooltipItem(
-                        '${widget.labels[groupIndex]}\n',
-                        TextStyle(color: Color(0xFFFEDB65), fontSize: 8.sp),
+                        '${labels[groupIndex]}\n',
+                        TextStyle(color: Color(0xFFFEDB65), fontSize: 8),
                         children: <TextSpan>[
                           TextSpan(
                             text: (rod.toY).toDouble().formatAmount(),
                             style: TextStyle(
                               color: Color(0xFFFEDB65),
                               fontWeight: FontWeight.w500,
-                              fontSize: 10.sp,
+                              fontSize: 10,
                             ),
                           ),
                         ],
@@ -179,7 +174,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
   }
 
   /// 构建标题数据，包括X轴和Y轴
-  FlTitlesData _buildTitlesData() {
+  FlTitlesData _buildTitlesData({required List<String> titles}) {
     return FlTitlesData(
       show: true,
       bottomTitles: AxisTitles(
@@ -187,14 +182,13 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
           showTitles: true,
           reservedSize: 25,
           getTitlesWidget: (value, meta) {
-            return widget.labels.isEmpty
+            return titles.isEmpty
                 ? SizedBox(height: 8)
                 : SideTitleWidget(
-                    //axisSide: meta.axisSide,
                     space: 4,
                     meta: meta,
                     child: Text(
-                      widget.labels[value.toInt()],
+                      titles[value.toInt()],
                       style: TextStyle(
                         color: Color(0xA8FFFFFF),
                         fontWeight: FontWeight.w400,
@@ -233,33 +227,24 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
   }
 
   /// 构建柱状图组
-  List<BarChartGroupData> _buildBarGroups() {
-    return List.generate(widget.data.length, (index) {
+  List<BarChartGroupData> _buildBarGroups({required List<double> data}) {
+    return List.generate(data.length, (index) {
       return BarChartGroupData(
         x: index,
-        barsSpace: 4,
         barRods: [
           BarChartRodData(
             fromY: 0,
-            toY: widget.data[index],
+            toY: data[index],
             gradient: LinearGradient(
               colors: [Color(0xFFFEDB65), Color(0xFFFFA600)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
             borderRadius: BorderRadius.only(
-              topLeft: widget.data[index] >= 0
-                  ? Radius.circular(2.0)
-                  : Radius.zero,
-              topRight: widget.data[index] >= 0
-                  ? Radius.circular(2.0)
-                  : Radius.zero,
-              bottomLeft: widget.data[index] < 0
-                  ? Radius.circular(2.0)
-                  : Radius.zero,
-              bottomRight: widget.data[index] < 0
-                  ? Radius.circular(2.0)
-                  : Radius.zero,
+              topLeft: toCircular(isCircular: (data[index] >= 0)),
+              topRight: toCircular(isCircular: (data[index] >= 0)),
+              bottomLeft: toCircular(isCircular: (data[index] < 0)),
+              bottomRight: toCircular(isCircular: (data[index] < 0)),
             ),
             width: 8.w,
           ),
@@ -267,4 +252,7 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
       );
     });
   }
+
+  Radius toCircular({required bool isCircular}) =>
+      isCircular ? Radius.circular(2.0) : Radius.zero;
 }

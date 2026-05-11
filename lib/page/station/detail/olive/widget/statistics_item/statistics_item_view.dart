@@ -63,6 +63,7 @@ class StatisticsItemView extends StatelessWidget {
               );
             },
           ),
+
           SizedBox(height: 200.h),
         ],
       ),
