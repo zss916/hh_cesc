@@ -82,8 +82,8 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget4> {
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                reservedSize: 30,
-                maxIncluded: false,
+                reservedSize: 35,
+                maxIncluded: !widget.isDiff,
                 minIncluded: true,
                 getTitlesWidget: (value, meta) {
                   return SideTitleWidget(

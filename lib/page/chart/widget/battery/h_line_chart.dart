@@ -58,7 +58,7 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
                     minIncluded: true,
                     //maxIncluded: true,
                     maxIncluded: !widget.isDiffR,
-                    reservedSize: 30,
+                    reservedSize: 35,
                     getTitlesWidget: (value, meta) {
                       return SideTitleWidget(
                         space: 2,
@@ -99,7 +99,7 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
                     minIncluded: true,
                     maxIncluded: !widget.isDiffL,
                     //maxIncluded: true,
-                    reservedSize: 30,
+                    reservedSize: 35,
                     getTitlesWidget: (value, meta) {
                       return SideTitleWidget(
                         space: 2,
