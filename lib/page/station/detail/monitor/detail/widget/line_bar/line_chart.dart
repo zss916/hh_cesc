@@ -110,6 +110,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
     );
   }
 
+  ///power
   FlTitlesData buildFlTitlesDataPower() {
     return FlTitlesData(
       topTitles: axisTitles,

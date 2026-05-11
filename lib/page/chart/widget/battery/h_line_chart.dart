@@ -48,34 +48,7 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
             LineChartData(
               lineTouchData: lineTouchData,
               gridData: flGridData,
-              titlesData: FlTitlesData(
-                topTitles: axisTitles,
-                bottomTitles: bottomTitles,
-                leftTitles: mAxisTitles,
-                rightTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    minIncluded: true,
-                    //maxIncluded: true,
-                    maxIncluded: !widget.isDiffR,
-                    reservedSize: 35,
-                    getTitlesWidget: (value, meta) {
-                      return SideTitleWidget(
-                        space: 2,
-                        meta: meta,
-                        child: Text(
-                          value.titleL,
-                          style: TextStyle(
-                            color: Color(0xFF0BC3C4),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 8,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
+              titlesData: buildFlTitlesDataSoc(),
               borderData: flBorderData,
               lineBarsData: lineBarsData2(widget.arrList),
               minX: 0,
@@ -89,34 +62,7 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
             LineChartData(
               lineTouchData: lineTouchData,
               gridData: flGridData,
-              titlesData: FlTitlesData(
-                topTitles: axisTitles,
-                bottomTitles: bottomTitles,
-                rightTitles: mAxisTitles,
-                leftTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    minIncluded: true,
-                    maxIncluded: !widget.isDiffL,
-                    //maxIncluded: true,
-                    reservedSize: 35,
-                    getTitlesWidget: (value, meta) {
-                      return SideTitleWidget(
-                        space: 2,
-                        meta: meta,
-                        child: Text(
-                          value.titleL,
-                          style: TextStyle(
-                            color: Color(0xA8FFFFFF),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 8,
-                          ),
-                        ),
-                      );
-                    },
-                  ), // 左边Y轴标签禁用，手动创建
-                ),
-              ),
+              titlesData: buildFlTitlesDataPower(),
               borderData: flBorderData,
               lineBarsData: lineBarsData3(widget.arrList),
               minX: 0,
@@ -127,6 +73,69 @@ class MonitorLineChartWidgetState extends State<HMonitorLineChartWidget> {
             duration: const Duration(milliseconds: 2000),
           ),
         ],
+      ),
+    );
+  }
+
+  ///power
+  FlTitlesData buildFlTitlesDataPower() {
+    return FlTitlesData(
+      topTitles: axisTitles,
+      bottomTitles: bottomTitles,
+      rightTitles: mAxisTitles,
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          minIncluded: true,
+          maxIncluded: !widget.isDiffL,
+          reservedSize: 30,
+          getTitlesWidget: (value, meta) {
+            return SideTitleWidget(
+              space: 2,
+              meta: meta,
+              child: Text(
+                value.titleL,
+                style: TextStyle(
+                  color: Color(0x80FFFFFF),
+                  //color: Color(0xFF3874F2),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8,
+                ),
+              ),
+            );
+          },
+        ), // 左边Y轴标签禁用，手动创建
+      ),
+    );
+  }
+
+  ///soc
+  FlTitlesData buildFlTitlesDataSoc() {
+    return FlTitlesData(
+      topTitles: axisTitles,
+      bottomTitles: bottomTitles,
+      leftTitles: mAxisTitles,
+      rightTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          minIncluded: true,
+          maxIncluded: !widget.isDiffR,
+          reservedSize: 30,
+          getTitlesWidget: (value, meta) {
+            return SideTitleWidget(
+              space: 2,
+              meta: meta,
+              child: Text(
+                value.titleL,
+                style: TextStyle(
+                  color: Color(0xFF0BC3C4),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 8,
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
