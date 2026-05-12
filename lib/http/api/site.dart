@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
+import 'package:cescpro/http/api/mock/mock.dart';
 import 'package:cescpro/http/bean/alarm_graph_item_entity.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
@@ -49,6 +50,10 @@ class SiteAPI {
   static Future<SiteDetailEntity?> getPointDetails({
     required int siteId,
   }) async {
+    if (Mock.isGuest) {
+      return Mock.siteDetail(siteId);
+    }
+
     try {
       var result = await Http.instance.get(
         ApiPath.getPointDetails,
@@ -79,6 +84,10 @@ class SiteAPI {
     String? adcode,
     int? total,
   }) async {
+    if (Mock.isGuest) {
+      return (true, Mock.site(pageNum == 1));
+    }
+
     try {
       Map<String, dynamic> map = {};
       map["pageNum"] = pageNum;
@@ -161,6 +170,9 @@ class SiteAPI {
     required int siteId,
     CancelToken? cancelToken,
   }) async {
+    if (Mock.isGuest) {
+      return Mock.topology(siteId);
+    }
     try {
       var result = await Http.instance.get(
         ApiPath.getSiteTopology,

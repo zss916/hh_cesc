@@ -2,9 +2,7 @@ import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/page/alarm/index/widget/alarm_level.dart';
-import 'package:cescpro/page/alarm/index/widget/alarm_status.dart';
 import 'package:cescpro/page/alarm/tab/view/widget/tooltip_widget.dart';
-import 'package:cescpro/page/station/index/widget/text_rich_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -258,7 +256,7 @@ class AlarmItem extends StatelessWidget {
     );
   }
 
-  Widget buildItem2() {
+  /* Widget buildItem2() {
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
@@ -474,5 +472,5 @@ class AlarmItem extends StatelessWidget {
         ),
       ],
     );
-  }
+  }*/
 }

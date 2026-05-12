@@ -31,7 +31,7 @@ class ServicePage extends StatelessWidget {
                     );
                   }
                 },
-                child: AvatarWidget(url: logic.icon),
+                child: AvatarWidget(url: Mock.avatarUrl(logic.icon)),
               ),
               Container(
                 alignment: AlignmentDirectional.center,
@@ -42,9 +42,7 @@ class ServicePage extends StatelessWidget {
                 ),
                 width: double.maxFinite,
                 child: Text(
-                  User.to.getIsGuest()
-                      ? TKey.accountCode.trArgs(["Guest"])
-                      : TKey.accountCode.trArgs([logic.userName]),
+                  Mock.accountName(logic.userName),
                   style: TextStyle(color: Colors.white, fontSize: 12.sp),
                 ),
               ),

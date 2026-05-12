@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/http/api/mock/mock.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/http/bean/analysis_entity.dart';
 import 'package:cescpro/http/http.dart';
@@ -63,6 +64,10 @@ class AlarmAPI {
     int? startTimeMill,
     int? endTimeMill,
   }) async {
+    if (Mock.isGuest) {
+      return (true, Mock.alarm(pageNum == 1));
+    }
+
     try {
       Map<String, dynamic> params = {};
 
