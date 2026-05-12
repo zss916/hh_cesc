@@ -112,14 +112,4 @@ class StationLogic extends GetxController {
       // AppLoading.toast("Fail");
     }
   }
-
-  /*Future<void> loadData({String? name}) async {
-    final (bool isSuccessful, List<SiteEntity> value) =
-        await SiteAPI.postPointList(name: name);
-    if (isSuccessful) {
-      data = value;
-      viewState = data.isEmpty ? 1 : 0;
-      update();
-    }
-  }*/
 }

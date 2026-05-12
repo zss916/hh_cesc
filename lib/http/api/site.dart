@@ -65,7 +65,7 @@ class SiteAPI {
     }
   }
 
-  ///todo
+  ///站点列表
   static Future<(bool, List<SiteEntity>)> postSiteList({
     required int pageNum,
     int? cid,
@@ -129,6 +129,12 @@ class SiteAPI {
       return (false, <SiteEntity>[]);
     }
   }
+
+  ///
+  void fetchLogin() {}
+
+  ///
+  void mockLogin() {}
 
   ///站点列表
   static Future<(bool, List<SiteDataEntity>)> postSites() async {
