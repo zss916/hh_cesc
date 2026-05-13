@@ -1,6 +1,8 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
+import 'package:cescpro/http/bean/home_data2_entity.dart';
+import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
@@ -9,6 +11,29 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 class Mock {
   ///是否是游客
   static bool get isGuest => User.to.getIsGuest();
+
+  ///首页数据
+  static (HomeStatisticEntity?, HomeData2Entity?) homeData() {
+    Map<String, dynamic> json = {
+      "totalIncome": 1000.0,
+      "todayIncome": 20,
+      "siteNum": 2,
+      "deviceNum": 2,
+      "capacity": 3029,
+      "totalPos": 12647082.507,
+      "totalNeg": 11583229.005,
+      "totalPvTotalNeg": 463073.2895,
+      "co2": 8729.32,
+      "coal": 1366.67,
+      "normalNum": 4,
+      "faultNum": 0,
+      "alarmNum": 0,
+      "cutOffNum": 1,
+    };
+    HomeStatisticEntity data = HomeStatisticEntity.fromJson(json);
+    HomeData2Entity data2 = HomeData2Entity.fromJson(json);
+    return (data, data2);
+  }
 
   /// 账户名称
   static String accountName(String name) => isGuest

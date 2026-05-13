@@ -114,7 +114,7 @@ class AlarmLogic extends GetxController with RefresherAndLoadLogic {
     if (isLoadingMore) {
       return;
     }
-    debugPrint("加载更多");
+    //debugPrint("加载更多");
     isLoadingMore = true;
     currentPage++;
     final (
@@ -128,7 +128,7 @@ class AlarmLogic extends GetxController with RefresherAndLoadLogic {
       startTimeMill: startTimeMill,
       endTimeMill: endTimeMill,
     );
-    debugPrint("请求完成");
+    // debugPrint("请求完成");
     if (data.isEmpty) {
       currentPage--;
       hasMoreData = false;

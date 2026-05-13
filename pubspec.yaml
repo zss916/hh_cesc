@@ -39,7 +39,7 @@ dependencies:
   flutter_datetime_picker_plus: 2.2.0
   intl: 0.20.2
   #时区
-  timezone: ^0.10.1
+  #timezone: ^0.10.1
   #图表
   fl_chart: 1.1.1
   easy_date_timeline: 2.0.9

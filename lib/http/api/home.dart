@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
+import 'package:cescpro/http/api/mock/mock.dart';
 import 'package:cescpro/http/bean/home_data2_entity.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/report_data_entity.dart';
@@ -71,6 +72,10 @@ class HomeAPI {
   }
 
   static Future<(HomeStatisticEntity?, HomeData2Entity?)> loadHomeData() async {
+    if (Mock.isGuest) {
+      return Mock.homeData();
+    }
+
     if (AppSetting.isOverseas) {
       HomeData2Entity? value2 = await HomeAPI.postStatisticRecord2();
       if (value2 != null) {
