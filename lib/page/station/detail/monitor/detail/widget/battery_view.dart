@@ -518,6 +518,7 @@ class BatteryView extends StatelessWidget {
                         did: logic.did,
                         nodeNo: logic.nodeNo,
                         devNo: logic.devNo,
+                        labelName: label?.value ?? "",
                       );
                     },
                     child: Container(

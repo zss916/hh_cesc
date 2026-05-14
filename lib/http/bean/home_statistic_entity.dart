@@ -7,8 +7,9 @@ export 'package:cescpro/generated/json/home_statistic_entity.g.dart';
 
 @JsonSerializable()
 class HomeStatisticEntity {
-  num? totalIncome; //累计收益
-  num? todayIncome; //今日收益
+  String? totalIncome; //累计收益
+  String? todayIncome; //今日收益
+  String? lastDayIncome;
   num? capacity; //站点容量
   num? totalPos; //累计充电
   num? totalNeg; //累计放电

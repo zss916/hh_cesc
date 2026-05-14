@@ -9,13 +9,13 @@ export 'package:cescpro/generated/json/home_data2_entity.g.dart';
 class HomeData2Entity {
   int? groupId;
   String? groupName;
-  double? totalIncome;
+  String? totalIncome;
+  String? todayIncome;
+  String? lastDayIncome;
   double? totalPos;
   double? totalNeg;
-  double? todayIncome;
   double? todayTotalPos;
   double? todayTotalNeg;
-  double? lastDayIncome;
   double? lastDayTotalPos;
   double? lastDayTotalNeg;
   double? currentMonthIncome;

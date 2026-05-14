@@ -34,12 +34,15 @@ class BatteryClusterLogic extends GetxController {
   bool isDiffR = false;
   bool isDiffL = false;
 
+  String? labelName;
+
   @override
   void onInit() {
     super.onInit();
     if (Get.arguments != null) {
       devType = Get.arguments["devType"] as String?;
       siteId = Get.arguments["siteId"] as String?;
+      labelName = Get.arguments["labelName"] as String?;
     }
   }
 

@@ -49,6 +49,7 @@ class PageTools {
     int? did,
     int? nodeNo,
     int? devNo,
+    String? labelName,
   }) => Get.toNamed(
     APages.batteryCluster,
     arguments: {
@@ -57,6 +58,7 @@ class PageTools {
       "did": did,
       "nodeNo": nodeNo,
       "devNo": devNo,
+      "labelName": labelName,
     },
   );
 

@@ -278,3 +278,119 @@ class LocaleUtils {
     }
   }
 }
+
+/*extension AmountFormatString on String {
+  String get moneyFormatSimple => NumberFormat.compactCurrency(
+    symbol: "",
+    decimalDigits: 1,
+  ).format((num.tryParse(this ?? '0.0') ?? 0));
+
+  String get moneyFormatFull => (num.tryParse(this ?? '0.0') ?? 0).toString();
+
+  String get moneyFormat {
+    num value = (num.tryParse(this ?? '0.0') ?? 0);
+    if (value >= 1000000000) {
+      return '${dynamicDecimal(value / 1000000000)}B';
+    } else if (value >= 1000000) {
+      return '${dynamicDecimal(value / 1000000)}M';
+    } else if (value >= 10000) {
+      return Get.isZH
+          ? '${dynamicDecimal(value / 10000)}W'
+          : '${dynamicDecimal(value / 1000)}K';
+    } else if (value >= 1000) {
+      return '${dynamicDecimal(value / 1000)}K';
+    } else {
+      return dynamicDecimal(value);
+    }
+  }
+
+  ///截取小数点后2位
+  String truncateMoney(num value) =>
+      ((value * 100).truncate() / 100).toStringAsFixed(2);
+
+  String dynamicDecimal(num value) {
+    final truncated = ((value * 100).truncate() / 100);
+
+    if (truncated % 1 == 0) {
+      return truncated.toStringAsFixed(0);
+    }
+
+    if ((truncated * 10) % 1 == 0) {
+      return truncated.toStringAsFixed(1);
+    }
+
+    return truncated.toStringAsFixed(2);
+  }
+}*/
+
+extension MoneyExt on String? {
+  String moneyFormat({String? locale}) {
+    final value = num.tryParse(this ?? '0') ?? 0;
+
+    final currentLocale = locale ?? Get.locale?.languageCode ?? 'en';
+
+    // 中文
+    if (currentLocale.startsWith('zh')) {
+      if (value >= 100000000) {
+        return '${_dynamicDecimal(value / 100000000, currentLocale)}亿';
+      }
+
+      if (value >= 10000) {
+        return '${_dynamicDecimal(value / 10000, currentLocale)}万';
+      }
+
+      return _dynamicDecimal(value, currentLocale);
+    }
+
+    // 德语
+    if (currentLocale.startsWith('de')) {
+      if (value >= 1000000000) {
+        return '${_dynamicDecimal(value / 1000000000, currentLocale)} Mrd';
+      }
+
+      if (value >= 1000000) {
+        return '${_dynamicDecimal(value / 1000000, currentLocale)} Mio';
+      }
+
+      if (value >= 1000) {
+        return '${_dynamicDecimal(value / 1000, currentLocale)} Tsd';
+      }
+
+      return _dynamicDecimal(value, currentLocale);
+    }
+
+    // 默认国际化（英语/西班牙语等）
+    if (value >= 1000000000) {
+      return '${_dynamicDecimal(value / 1000000000, currentLocale)}B';
+    }
+
+    if (value >= 1000000) {
+      return '${_dynamicDecimal(value / 1000000, currentLocale)}M';
+    }
+
+    if (value >= 1000) {
+      return '${_dynamicDecimal(value / 1000, currentLocale)}K';
+    }
+
+    return _dynamicDecimal(value, currentLocale);
+  }
+}
+
+String _dynamicDecimal(num value, String locale) {
+  final truncated = ((value * 100).truncate() / 100);
+
+  int digits;
+
+  if (truncated % 1 == 0) {
+    digits = 0;
+  } else if ((truncated * 10) % 1 == 0) {
+    digits = 1;
+  } else {
+    digits = 2;
+  }
+
+  return NumberFormat.decimalPatternDigits(
+    locale: locale,
+    decimalDigits: digits,
+  ).format(truncated);
+}

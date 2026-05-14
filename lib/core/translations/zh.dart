@@ -259,4 +259,6 @@ const zh = {
   "refreshingText": "刷新中…",
   "refresh": "刷新",
   "cluInformation": "CLU 信息",
+  "revenueYesterday": "昨日收益",
+  "revenueYesterday2": "昨日收益(%s)",
 };

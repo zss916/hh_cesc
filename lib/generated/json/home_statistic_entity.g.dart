@@ -3,13 +3,19 @@ import 'package:cescpro/http/bean/home_statistic_entity.dart';
 
 HomeStatisticEntity $HomeStatisticEntityFromJson(Map<String, dynamic> json) {
   final HomeStatisticEntity homeStatisticEntity = HomeStatisticEntity();
-  final num? totalIncome = jsonConvert.convert<num>(json['totalIncome']);
+  final String? totalIncome = jsonConvert.convert<String>(json['totalIncome']);
   if (totalIncome != null) {
     homeStatisticEntity.totalIncome = totalIncome;
   }
-  final num? todayIncome = jsonConvert.convert<num>(json['todayIncome']);
+  final String? todayIncome = jsonConvert.convert<String>(json['todayIncome']);
   if (todayIncome != null) {
     homeStatisticEntity.todayIncome = todayIncome;
+  }
+  final String? lastDayIncome = jsonConvert.convert<String>(
+    json['lastDayIncome'],
+  );
+  if (lastDayIncome != null) {
+    homeStatisticEntity.lastDayIncome = lastDayIncome;
   }
   final num? capacity = jsonConvert.convert<num>(json['capacity']);
   if (capacity != null) {
@@ -66,6 +72,7 @@ Map<String, dynamic> $HomeStatisticEntityToJson(HomeStatisticEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['totalIncome'] = entity.totalIncome;
   data['todayIncome'] = entity.todayIncome;
+  data['lastDayIncome'] = entity.lastDayIncome;
   data['capacity'] = entity.capacity;
   data['totalPos'] = entity.totalPos;
   data['totalNeg'] = entity.totalNeg;
@@ -83,8 +90,9 @@ Map<String, dynamic> $HomeStatisticEntityToJson(HomeStatisticEntity entity) {
 
 extension HomeStatisticEntityExtension on HomeStatisticEntity {
   HomeStatisticEntity copyWith({
-    num? totalIncome,
-    num? todayIncome,
+    String? totalIncome,
+    String? todayIncome,
+    String? lastDayIncome,
     num? capacity,
     num? totalPos,
     num? totalNeg,
@@ -101,6 +109,7 @@ extension HomeStatisticEntityExtension on HomeStatisticEntity {
     return HomeStatisticEntity()
       ..totalIncome = totalIncome ?? this.totalIncome
       ..todayIncome = todayIncome ?? this.todayIncome
+      ..lastDayIncome = lastDayIncome ?? this.lastDayIncome
       ..capacity = capacity ?? this.capacity
       ..totalPos = totalPos ?? this.totalPos
       ..totalNeg = totalNeg ?? this.totalNeg

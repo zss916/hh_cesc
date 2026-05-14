@@ -25,10 +25,10 @@ class Mock {
       "totalPvTotalNeg": 463073.2895,
       "co2": 8729.32,
       "coal": 1366.67,
-      "normalNum": 4,
+      "normalNum": 2,
       "faultNum": 0,
       "alarmNum": 0,
-      "cutOffNum": 1,
+      "cutOffNum": 0,
     };
     HomeStatisticEntity data = HomeStatisticEntity.fromJson(json);
     HomeData2Entity data2 = HomeData2Entity.fromJson(json);
@@ -159,19 +159,19 @@ class Mock {
     if (isRefresh) {
       return [
         AlarmItemEntity()
-          ..sn = "0001"
+          ..sn = "****0001"
           ..alarmLevel = 1
-          ..status = 1
-          ..siteName = "Site A"
+          ..status = 0
+          ..siteName = "***Site A"
           ..name = "Device 1"
           ..enName = "Device 1"
           ..content = "fault"
           ..startTimeMill = DateTime.now().millisecondsSinceEpoch,
         AlarmItemEntity()
-          ..sn = "0002"
+          ..sn = "****0002"
           ..alarmLevel = 3
-          ..status = 1
-          ..siteName = "Site B"
+          ..status = 0
+          ..siteName = "***Site B"
           ..name = "Device 2"
           ..enName = "Device 2"
           ..content = "fault"

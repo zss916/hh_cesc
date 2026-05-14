@@ -501,6 +501,8 @@ class TKey {
   static const String refreshFailedText = "refreshFailedText";
   static const String refreshingText = "refreshingText";
   static const String refresh = "refresh";
+  static const String revenueYesterday = "revenueYesterday";
+  static const String revenueYesterday2 = "revenueYesterday2";
 }
 
 const en = {
@@ -770,4 +772,6 @@ const en = {
   "refreshingText": "Refreshing…",
   "refresh": "Refresh",
   "cluInformation": "Cluster Information",
+  "revenueYesterday": "Revenue yesterday",
+  "revenueYesterday2": "Revenue yesterday(%s)",
 };

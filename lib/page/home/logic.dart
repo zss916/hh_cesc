@@ -2,9 +2,11 @@ part of 'index.dart';
 
 class HomeLogic extends GetxController {
   //累计收益
-  num totalIncome = 0.0;
+  String totalIncome = "0.0";
   //当日收益
-  num todayIncome = 0.0;
+  String todayIncome = "0.0";
+  //昨日收益
+  String lastDayIncome = "0.0";
   //设备数量
   int deviceNum = 0;
   //站点数量
@@ -48,8 +50,9 @@ class HomeLogic extends GetxController {
         await HomeAPI.loadHomeData().whenComplete(() => AppLoading.dismiss());
 
     if (data != null) {
-      totalIncome = data.totalIncome ?? 0.0;
-      todayIncome = data.todayIncome ?? 0.0;
+      totalIncome = data.totalIncome ?? "0.0";
+      todayIncome = data.todayIncome ?? "0.0";
+      lastDayIncome = data.lastDayIncome ?? "0.0";
       deviceNum = data.deviceNum ?? 0;
       siteNum = data.siteNum ?? 0;
       capacity = data.capacity ?? 0.0;
@@ -66,8 +69,9 @@ class HomeLogic extends GetxController {
     }
 
     if (data2 != null) {
-      totalIncome = data2.totalIncome ?? 0.0;
-      todayIncome = data2.todayIncome ?? 0.0;
+      totalIncome = data2.totalIncome ?? "0.0";
+      todayIncome = data2.todayIncome ?? "0.0";
+      lastDayIncome = data2.lastDayIncome ?? "0.0";
       deviceNum = data2.deviceNum ?? 0;
       siteNum = data2.siteNum ?? 0;
       capacity = data2.capacity ?? 0.0;

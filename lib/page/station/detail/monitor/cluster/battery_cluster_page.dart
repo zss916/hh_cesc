@@ -18,14 +18,16 @@ class BatteryClusterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      child: Scaffold(
-        appBar: baseAppBar(title: TKey.batteryCluster.tr),
-        backgroundColor: Color(0xFF23282E),
-        body: SingleChildScrollView(
-          child: GetBuilder<BatteryClusterLogic>(
-            init: BatteryClusterLogic(),
-            builder: (logic) {
-              return Column(
+      child: GetBuilder<BatteryClusterLogic>(
+        init: BatteryClusterLogic(),
+        builder: (logic) {
+          return Scaffold(
+            appBar: baseAppBar(
+              title: "${TKey.batteryCluster.tr}${logic.labelName ?? ""}",
+            ),
+            backgroundColor: Color(0xFF23282E),
+            body: SingleChildScrollView(
+              child: Column(
                 children: [
                   buildSatusItem(logic),
                   Divider(height: 12.h, color: Colors.transparent),
@@ -38,10 +40,10 @@ class BatteryClusterPage extends StatelessWidget {
                   RealTimeDataWidget(comCardVoList: logic.comCardVoList),
                   Divider(height: 120.h, color: Colors.transparent),
                 ],
-              );
-            },
-          ),
-        ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

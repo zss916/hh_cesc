@@ -251,4 +251,6 @@ const de = {
   "guestLogin": "Gast-Login",
   "refresh": "Aktualisieren",
   "cluInformation": "CLU",
+  "revenueYesterday": "Ertrag gestern",
+  "revenueYesterday2": "Ertrag gestern(%s)",
 };

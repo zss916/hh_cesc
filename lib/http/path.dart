@@ -5,7 +5,7 @@ class ApiPath {
   static const String baseUrlEn = "https://cloud.honghede.com/api/v1";
 
   ///国内版本
-  // static const String baseUrl = "https://ems.cescpower.com/api/v1";
+  // static const String baseUrlZh = "https://ems.cescpower.com/api/v1";
 
   ///国内版本
   static const String baseUrlZh = "https://api-cn.hhdzcesc.com/api/v1";

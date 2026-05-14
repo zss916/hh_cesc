@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
                     IncomeWidget(
                       totalIncome: logic.totalIncome,
                       todayIncome: logic.todayIncome,
+                      lastDayIncome: logic.lastDayIncome,
                     ),
                   BuildStationOverview3(
                     capacity: logic.capacity,

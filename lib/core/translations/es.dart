@@ -267,4 +267,6 @@ const es = {
   "refreshingText": "Actualizando…",
   "refresh": "Refrescar",
   "cluInformation": "Información CLU",
+  "revenueYesterday": "Ganancias de ayer",
+  "revenueYesterday2": "Ganancias de ayer(%s)",
 };
