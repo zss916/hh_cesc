@@ -162,4 +162,7 @@ class ApiPath {
 
   ///编辑用户
   static const String uploadUser = "/business/admin/update/";
+
+  ///更新密码
+  static const String updatePs = "/business/admin/updatePassword";
 }

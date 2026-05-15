@@ -14,6 +14,7 @@ class UserInfoEntity {
   String? nickName;
   int? accStatus;
   int? limitPass;
+  /**未修改过密码限制通行，默认1-限制，0-不限 */
   String? userPhone;
   String? loginTime;
   String? logoUrl;
@@ -36,4 +37,7 @@ class UserInfoEntity {
 
   ///是否显示收益
   bool get isShowRevenue => (revenueShowType != 3 && revenueShowType != null);
+
+  ///是否能够登录
+  bool get canLogin => limitPass == 0;
 }

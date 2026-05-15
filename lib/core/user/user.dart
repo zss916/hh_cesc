@@ -15,6 +15,7 @@ class User extends GetxService {
   static final String privacyAgreed = "privacy_agreed";
   static final String isGuestKey = "isGuestKey";
   static final String isShowRevenueKey = "isShowRevenueKey";
+  static final String isLimitLoginKey = "isLimitLoginKey";
 
   void setIsShowRevenue({required bool isShowRevenue}) =>
       StorageService.to.setBool(isShowRevenueKey, isShowRevenue);
@@ -28,11 +29,13 @@ class User extends GetxService {
   bool getPrivacyAgreed() => StorageService.to.getBool(privacyAgreed);
 
   ///是否登录
-  bool get isLogin => getToken().isNotEmpty;
+  bool get isLogin => hasToken && !isLimit;
 
   static String getToken() {
     return StorageService.to.getString(tokenKey);
   }
+
+  static bool get hasToken => getToken().isNotEmpty;
 
   static removeToken() {
     StorageService.to.remove(tokenKey);
@@ -41,6 +44,13 @@ class User extends GetxService {
   static setToken({required String token}) {
     StorageService.to.setString(tokenKey, token);
   }
+
+  static setLimitLogin({required bool limit}) {
+    StorageService.to.setBool(isLimitLoginKey, limit);
+  }
+
+  ///是否限制
+  static bool get isLimit => StorageService.to.getBool(isLimitLoginKey);
 
   static String getTokenHead() {
     return StorageService.to.getString(tokenHeadKey);

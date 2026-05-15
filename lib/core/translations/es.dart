@@ -269,4 +269,14 @@ const es = {
   "cluInformation": "Información CLU",
   "revenueYesterday": "Ganancias de ayer",
   "revenueYesterday2": "Ganancias de ayer(%s)",
+  "changePassword": "Modificar la contraseña",
+  "inputNewPsd": "Introducir la contraseña",
+  "reInputNewPsd": "Volver a introducir",
+  "inputNewPsdTip": "Por favor, introduzca una nueva contraseña",
+  "reInputNewPsdTip": "Por favor, vuelva a introducir la contraseña",
+  "inputPsdErrorTip":
+      "La contraseña de entrada es diferente dos veces, vuelva a ingresar",
+  "newPsdLogin": "Introduzca una nueva contraseña para iniciar sesión",
+  "psdMatchTip":
+      "La contraseña requiere 8 - 18 dígitos y contiene letras, números, caracteres especiales",
 };

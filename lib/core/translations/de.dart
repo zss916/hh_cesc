@@ -253,4 +253,14 @@ const de = {
   "cluInformation": "CLU",
   "revenueYesterday": "Ertrag gestern",
   "revenueYesterday2": "Ertrag gestern(%s)",
+  "changePassword": "Passwort ändern",
+  "inputNewPsd": "Passwort eingeben",
+  "reInputNewPsd": "Passwort erneut eingeben",
+  "inputNewPsdTip": "Bitte geben Sie ein neues Passwort ein.",
+  "reInputNewPsdTip": "Bitte geben Sie Ihr Passwort erneut ein.",
+  "inputPsdErrorTip":
+      "Geben Sie das Passwort zweimal ein, bitte geben Sie es erneut ein.",
+  "newPsdLogin": "Bitte geben Sie ein neues Passwort ein",
+  "psdMatchTip":
+      "Das Passwort muss 8 bis 18 Stellen sein und enthält Buchstaben, Zahlen und Sonderzeichen.",
 };

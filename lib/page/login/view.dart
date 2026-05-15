@@ -1,7 +1,30 @@
 part of 'index.dart';
 
-class LoginPage extends StatelessWidget {
+/*class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ;
+  }
+}*/
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController textEditCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    textEditCtrl.clear();
+    textEditCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +66,7 @@ class LoginPage extends StatelessWidget {
                     ),
 
                     InputPassword(
+                      textEditCtrl: textEditCtrl,
                       isShowError: false,
                       onInput: (value) {
                         logic.password = value;
@@ -52,7 +76,15 @@ class LoginPage extends StatelessWidget {
                     CommonBtn(
                       title: TKey.login.tr,
                       onTap: () {
-                        logic.toLogin();
+                        logic.toLogin(
+                          onUpdatePsd: (value) {
+                            setState(() {
+                              textEditCtrl.clear();
+                            });
+                            logic.password = "";
+                            logic.update();
+                          },
+                        );
                       },
                     ),
 

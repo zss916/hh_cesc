@@ -146,4 +146,34 @@ abstract class AdminAPI {
       return false;
     }
   }
+
+  ///更新密码
+  static Future<bool> updatePs({
+    String? username,
+    String? oldPassword,
+    String? newPassword,
+  }) async {
+    try {
+      Map<String, dynamic> map = {};
+      if (username != null) {
+        map["username"] = username;
+      }
+      if (oldPassword != null) {
+        map["oldPassword"] = oldPassword;
+      }
+      if (newPassword != null) {
+        map["newPassword"] = newPassword;
+        map["rePassword"] = newPassword;
+      }
+      var result = await Http.instance.post(ApiPath.updatePs, data: map);
+      if (result["code"] == HttpStatus.ok) {
+        return true;
+      } else {
+        AppLoading.toast(result["message"]);
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 }

@@ -36,6 +36,14 @@ class AppLoading {
     return EasyLoading.showToast(text, duration: duration);
   }
 
+  static Future<void> toastBottom(String text, {Duration? duration}) {
+    return EasyLoading.showToast(
+      text,
+      duration: duration,
+      toastPosition: EasyLoadingToastPosition.bottom,
+    );
+  }
+
   static void showSuccess(String text) {
     EasyLoading.showSuccess(text);
   }

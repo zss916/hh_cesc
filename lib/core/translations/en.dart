@@ -13,6 +13,8 @@ class TKey {
 
   static const String login = "login";
 
+  static const String newPsdLogin = "newPsdLogin";
+
   static const String guestLogin = "guestLogin";
 
   static const String accountRequired = "accountRequired";
@@ -503,6 +505,13 @@ class TKey {
   static const String refresh = "refresh";
   static const String revenueYesterday = "revenueYesterday";
   static const String revenueYesterday2 = "revenueYesterday2";
+  static const String changePassword = "changePassword";
+  static const String inputNewPsd = "inputNewPsd";
+  static const String reInputNewPsd = "reInputNewPsd";
+  static const String inputNewPsdTip = "inputNewPsdTip";
+  static const String reInputNewPsdTip = "reInputNewPsdTip";
+  static const String inputPsdErrorTip = "inputPsdErrorTip";
+  static const String psdMatchTip = "psdMatchTip";
 }
 
 const en = {
@@ -774,4 +783,14 @@ const en = {
   "cluInformation": "Cluster Information",
   "revenueYesterday": "Revenue yesterday",
   "revenueYesterday2": "Revenue yesterday(%s)",
+  "changePassword": "Change Password",
+  "inputNewPsd": "Please enter a new password",
+  "reInputNewPsd": "Re enter new password",
+  "inputNewPsdTip": "Please enter a new password",
+  "reInputNewPsdTip": "Please re-enter your password",
+  "inputPsdErrorTip":
+      "The password entered twice is different, please re-enter",
+  "newPsdLogin": "Please enter a new password to log in",
+  "psdMatchTip":
+      "The password should be 8-18 characters long and contain letters, numbers, and special characters",
 };

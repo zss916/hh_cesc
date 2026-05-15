@@ -261,4 +261,12 @@ const zh = {
   "cluInformation": "CLU 信息",
   "revenueYesterday": "昨日收益",
   "revenueYesterday2": "昨日收益(%s)",
+  "changePassword": "修改密码",
+  "inputNewPsd": "请输入新密码",
+  "reInputNewPsd": "请重新输入新密码",
+  "inputNewPsdTip": "请输入新密码",
+  "reInputNewPsdTip": "请重新输入密码",
+  "inputPsdErrorTip": "两次输入密码不同,请重新输入",
+  "newPsdLogin": "请输入新密码登录",
+  "psdMatchTip": "密码需8-18位，并包含字母、数字、特殊字符",
 };

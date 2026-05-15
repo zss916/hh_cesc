@@ -75,7 +75,7 @@ dependencies:
   super_tooltip: 2.1.1
   #timeago:
   #gal: ^2.1.0
-  animated_flip_counter: 0.3.4
+  #animated_flip_counter: 0.3.4
 
 
 

@@ -8,11 +8,13 @@ class InputPassword extends StatefulWidget {
   final Function(String) onInput;
   final bool isShowError;
   final String? pwd;
+  final TextEditingController textEditCtrl;
 
   const InputPassword({
     super.key,
     required this.isShowError,
     required this.onInput,
+    required this.textEditCtrl,
     this.pwd,
   });
 
@@ -21,7 +23,7 @@ class InputPassword extends StatefulWidget {
 }
 
 class _EditNameState extends State<InputPassword> {
-  TextEditingController textEditCtrl = TextEditingController();
+  // TextEditingController textEditCtrl = TextEditingController();
   FocusNode focusNode = FocusNode();
   bool isError = false;
 
@@ -36,7 +38,7 @@ class _EditNameState extends State<InputPassword> {
   void dispose() {
     focusNode.removeListener(_onFocusChange);
     focusNode.dispose();
-    textEditCtrl.dispose();
+    widget.textEditCtrl.dispose();
     super.dispose();
   }
 
@@ -53,7 +55,7 @@ class _EditNameState extends State<InputPassword> {
 
   void _valid() {
     setState(() {
-      String psd = textEditCtrl.text.trim();
+      String psd = widget.textEditCtrl.text.trim();
       isError = !isValidPassword(psd);
     });
   }
@@ -69,7 +71,7 @@ class _EditNameState extends State<InputPassword> {
     return KeyboardVisibility(
       onChanged: (bool isKeyboardVisible) {
         if (!isKeyboardVisible) {
-          if (textEditCtrl.text.isNotEmpty) {
+          if (widget.textEditCtrl.text.isNotEmpty) {
             _valid();
           }
         }
@@ -83,7 +85,7 @@ class _EditNameState extends State<InputPassword> {
             width: double.maxFinite,
             child: TextField(
               cursorColor: Colors.white,
-              controller: textEditCtrl,
+              controller: widget.textEditCtrl,
               focusNode: focusNode,
               obscureText: obscureText,
               onTapOutside: (_) {
