@@ -248,7 +248,7 @@ const de = {
   "refreshCompleteText": "Aktualisierung fertig",
   "refreshFailedText": "Aktualisierung fehlgeschlagen",
   "refreshingText": "Aktualisiere…",
-  "guestLogin": "Gast-Login",
+  "guestLogin": "Demo Besucher",
   "refresh": "Aktualisieren",
   "cluInformation": "CLU",
   "revenueYesterday": "Ertrag gestern",

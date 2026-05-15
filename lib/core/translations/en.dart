@@ -516,7 +516,7 @@ const en = {
   "password": "Password",
   "passwordError": "Incorrect account or password",
   "login": "Login",
-  "guestLogin": "Guest Login",
+  "guestLogin": "Demo site",
   "accountRequired": "Please enter your account",
   "passwordRequired": "Please enter your password",
   "privacyAgreementRequired":

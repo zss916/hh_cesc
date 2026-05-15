@@ -9,7 +9,7 @@ const zh = {
   "password": "密码",
   "passwordError": "账号或密码错误",
   "login": "登录",
-  "guestLogin": "游客登录",
+  "guestLogin": "体验电站",
   "accountRequired": "请填写账号",
   "passwordRequired": "请填写密码",
   "privacyAgreementRequired": "请勾选《用户协议》&《隐私协议》",
