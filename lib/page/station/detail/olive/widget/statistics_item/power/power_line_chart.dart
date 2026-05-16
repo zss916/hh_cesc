@@ -123,7 +123,8 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
           showTitles: true,
           reservedSize: 25,
           maxIncluded: widget.isEmptyView ? true : widget.list.isEmpty,
-          minIncluded: widget.isEmptyView ? true : widget.list.isEmpty,
+          // minIncluded: true,
+          minIncluded: widget.isEmptyView ? true : (widget.list.isEmpty),
           getTitlesWidget: (value, meta) {
             return SideTitleWidget(
               space: 2,

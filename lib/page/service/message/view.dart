@@ -131,7 +131,7 @@ class MessageCenterPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "${TKey.sendTime.tr}${item.sendTime ?? ""}",
+                    "${TKey.sendTime.tr}${(item.sendTime ?? 0).timestampFormat}",
                     style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                   ),
                 ),

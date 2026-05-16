@@ -7,7 +7,7 @@ class LanTools {
 
   static bool isZh() {
     Locale? locale = LanTools.getLocale() ?? Get.deviceLocale;
-    debugPrint("locale ===>> ${locale?.languageCode}");
+    //debugPrint("locale ===>> ${locale?.languageCode}");
     return locale?.languageCode == "zh";
   }
 

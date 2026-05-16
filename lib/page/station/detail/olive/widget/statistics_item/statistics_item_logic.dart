@@ -165,13 +165,13 @@ class StatisticsItemLogic extends GetxController {
       if (isHasData) {
         powerLines.assignAll(
           perData
-              .where(((a) => (a.list ?? []).isNotEmpty))
-              .map((e) => (e.list ?? [])),
+          //.where(((a) => (a.list ?? []).isNotEmpty))
+          .map((e) => (e.list ?? [])),
         );
         titles.assignAll(
           value
-              .where(((a) => (a.list ?? []).isNotEmpty))
-              .map((w) => w.title ?? ""),
+          //.where(((a) => (a.list ?? []).isNotEmpty))
+          .map((w) => w.title ?? ""),
         );
 
         handPowerData(value);

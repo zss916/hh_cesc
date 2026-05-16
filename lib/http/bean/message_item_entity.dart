@@ -16,8 +16,8 @@ class MessageItemEntity {
   int? channelDestination; //1-悬浮窗；2-弹窗；3-通知中心
   int? sendUserId; //消息推送人ID
   String? senderName; //消息推送人名称
-  String? sendTime; //发送消息时间
-  String? expirationTime; //消息过期时间
+  int? sendTime; //发送消息时间
+  int? expirationTime; //消息过期时间
   int? businessType; //消息业务类型：1-系统用户发送；2-设备告警；3-工单信息变更
   int? status; //签收状态：0-未读；1-已读
   int? receiverType; //消息接收者类型

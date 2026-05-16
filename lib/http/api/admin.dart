@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/bean/currency_entity.dart';
 import 'package:cescpro/http/bean/token_entity.dart';
 import 'package:cescpro/http/bean/user_info_entity.dart';
@@ -18,6 +19,7 @@ abstract class AdminAPI {
     required String password,
   }) async {
     try {
+      User.removeToken();
       var result = await Http.instance.post(
         ApiPath.postLogin,
         data: {"username": username, "password": password},
