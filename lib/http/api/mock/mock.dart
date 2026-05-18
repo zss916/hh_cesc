@@ -162,7 +162,7 @@ class Mock {
           ..sn = "****0001"
           ..alarmLevel = 1
           ..status = 0
-          ..siteName = "***Site A"
+          ..siteName = "Site A"
           ..name = "Device 1"
           ..enName = "Device 1"
           ..content = "fault"
@@ -171,7 +171,7 @@ class Mock {
           ..sn = "****0002"
           ..alarmLevel = 3
           ..status = 0
-          ..siteName = "***Site B"
+          ..siteName = "Site B"
           ..name = "Device 2"
           ..enName = "Device 2"
           ..content = "fault"

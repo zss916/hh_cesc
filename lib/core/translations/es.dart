@@ -98,7 +98,7 @@ const es = {
   "photovoltaicPowerGeneration": "Generación de energía fotovoltaica",
   "cancel": "Cancelar",
   "selectTime": "Seleccionar tiempo",
-  "total": "Acumulado",
+  "total": "Total",
   "deviceSerialNumber": "SN",
   "alarmDevice": "Dispositvo alarmado",
   "alarmContent": "Contenido de la Alarma",

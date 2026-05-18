@@ -96,7 +96,7 @@ const de = {
   "photovoltaicPowerGeneration": "Photovoltaik-Leistungsgenerierung",
   "cancel": "Abbrechen",
   "selectTime": "Zeit auswählen",
-  "total": "Gesamt",
+  "total": "Insgesamt",
   "deviceSerialNumber": "SN",
   "alarmDevice": "Alarmgerät",
   "alarmContent": "Alarminhalt",

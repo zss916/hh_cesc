@@ -96,7 +96,7 @@ const zh = {
   "photovoltaicPowerGeneration": "光伏发电量",
   "cancel": "取消",
   "selectTime": "选择时间",
-  "total": "累计",
+  "total": "总计",
   "deviceSerialNumber": "SN号",
   "alarmDevice": "告警设备",
   "alarmContent": "告警内容",

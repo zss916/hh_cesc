@@ -3,7 +3,6 @@ part of 'index.dart';
 class LoginLogic extends GetxController {
   String account = '';
   String password = '';
-  bool isClickButton = true;
 
   @override
   void onInit() {
@@ -56,7 +55,6 @@ class LoginLogic extends GetxController {
       AppLoading.toast(TKey.passwordRequired.tr);
       return;
     }
-    isClickButton = false;
     AppLoading.show();
     TokenEntity? value = await AdminAPI.login(
       username: (account.trim()),
@@ -72,7 +70,6 @@ class LoginLogic extends GetxController {
         await loadCurrencyList(userInfo);
         final (bool isSuccessful, List<SiteEntity> list) =
             await SiteAPI.postSiteList(pageNum: 1, name: null, status: null);
-        isClickButton = true;
         AppLoading.dismiss();
         if (list.length == 1) {
           PageTools.offAllNamedStation(siteId: list.first.id, site: list.first);
@@ -81,7 +78,6 @@ class LoginLogic extends GetxController {
         }
       } else {
         AppLoading.dismiss();
-        isClickButton = true;
         updatePassWord(
           onConfirm: (value) {
             updatePsd(
