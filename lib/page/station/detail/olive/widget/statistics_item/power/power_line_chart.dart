@@ -51,6 +51,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
           minX: 0,
           maxX: widget.maxX.toDouble(),
           maxY: widget.maxY,
+          //minY: widget.minY,
           minY: widget.minY >= 0 ? 0 : widget.minY,
         ),
         duration: const Duration(seconds: 2),
@@ -123,14 +124,13 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
           showTitles: true,
           reservedSize: 25,
           maxIncluded: widget.isEmptyView ? true : widget.list.isEmpty,
-          // minIncluded: true,
+          //minIncluded: true,
           minIncluded: widget.isEmptyView ? true : (widget.list.isEmpty),
           getTitlesWidget: (value, meta) {
             return SideTitleWidget(
               space: 2,
               meta: meta,
               child: Text(
-                //value.formatNum(),
                 value.titleL,
                 style: TextStyle(
                   color: Color(0xA8FFFFFF),

@@ -76,15 +76,17 @@ class _LoginPageState extends State<LoginPage> {
                     CommonBtn(
                       title: TKey.login.tr,
                       onTap: () {
-                        logic.toLogin(
-                          onUpdatePsd: (value) {
-                            setState(() {
-                              textEditCtrl.clear();
-                            });
-                            logic.password = "";
-                            logic.update();
-                          },
-                        );
+                        if (logic.isClickButton) {
+                          logic.toLogin(
+                            onUpdatePsd: (value) {
+                              setState(() {
+                                textEditCtrl.clear();
+                              });
+                              logic.password = "";
+                              logic.update();
+                            },
+                          );
+                        }
                       },
                     ),
 

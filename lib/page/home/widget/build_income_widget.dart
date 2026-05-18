@@ -38,7 +38,7 @@ class IncomeWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           onTap: () {
             showRevenueDialog(
-              totalIncome: todayIncome,
+              totalIncome: totalIncome,
               lastDayIncome: lastDayIncome,
             );
           },

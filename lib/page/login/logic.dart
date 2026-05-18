@@ -56,12 +56,12 @@ class LoginLogic extends GetxController {
       AppLoading.toast(TKey.passwordRequired.tr);
       return;
     }
-    AppLoading.show();
     isClickButton = false;
+    AppLoading.show();
     TokenEntity? value = await AdminAPI.login(
       username: (account.trim()),
       password: (password.trim()),
-    ).whenComplete(() => AppLoading.dismiss());
+    );
     if (value != null) {
       User.to.setIsGuest(isGuest: false);
       User.setTokenHead(tokenHead: value.tokenHeadValue);
@@ -72,12 +72,15 @@ class LoginLogic extends GetxController {
         await loadCurrencyList(userInfo);
         final (bool isSuccessful, List<SiteEntity> list) =
             await SiteAPI.postSiteList(pageNum: 1, name: null, status: null);
+        isClickButton = true;
+        AppLoading.dismiss();
         if (list.length == 1) {
           PageTools.offAllNamedStation(siteId: list.first.id, site: list.first);
         } else {
           PageTools.offAllNamedMain();
         }
       } else {
+        AppLoading.dismiss();
         isClickButton = true;
         updatePassWord(
           onConfirm: (value) {
