@@ -85,7 +85,7 @@ class SiteAPI {
     int? total,
   }) async {
     if (Mock.isGuest) {
-      return (true, Mock.site(pageNum == 1));
+      return (true, Mock.site(pageNum == 1, status));
     }
 
     try {

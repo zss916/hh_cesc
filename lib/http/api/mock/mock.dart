@@ -46,7 +46,7 @@ class Mock {
   static String avatarUrl(String url) => User.to.getIsGuest() ? "" : url;
 
   ///站点
-  static List<SiteEntity> site(bool isRefresh) {
+  static List<SiteEntity> site(bool isRefresh, int? status) {
     Map<String, dynamic> json = {
       "cid": 1190,
       "cname": null,
@@ -150,35 +150,45 @@ class Mock {
       "calculateRevenue": false,
     };
     if (isRefresh) {
-      return [SiteEntity.fromJson(json), SiteEntity.fromJson(json2)];
+      if (status == 1 || status == null || status == 99) {
+        return [SiteEntity.fromJson(json), SiteEntity.fromJson(json2)];
+      } else {
+        return [];
+      }
     } else {
       return [];
     }
   }
 
   ///告警
-  static List<AlarmItemEntity> alarm(bool isRefresh) {
+  static List<AlarmItemEntity> alarm(bool isRefresh, int? alarmLevel) {
+    List<AlarmItemEntity> data = [
+      AlarmItemEntity()
+        ..sn = "****0001"
+        ..alarmLevel = 1
+        ..status = 0
+        ..siteName = "Site A"
+        ..name = "Device 1"
+        ..enName = "Device 1"
+        ..content = "fault"
+        ..startTimeMill = DateTime.now().millisecondsSinceEpoch,
+      AlarmItemEntity()
+        ..sn = "****0002"
+        ..alarmLevel = 3
+        ..status = 0
+        ..siteName = "Site B"
+        ..name = "Device 2"
+        ..enName = "Device 2"
+        ..content = "fault"
+        ..startTimeMill = DateTime.now().millisecondsSinceEpoch,
+    ];
+
     if (isRefresh) {
-      return [
-        AlarmItemEntity()
-          ..sn = "****0001"
-          ..alarmLevel = 1
-          ..status = 0
-          ..siteName = "Site A"
-          ..name = "Device 1"
-          ..enName = "Device 1"
-          ..content = "fault"
-          ..startTimeMill = DateTime.now().millisecondsSinceEpoch,
-        AlarmItemEntity()
-          ..sn = "****0002"
-          ..alarmLevel = 3
-          ..status = 0
-          ..siteName = "Site B"
-          ..name = "Device 2"
-          ..enName = "Device 2"
-          ..content = "fault"
-          ..startTimeMill = DateTime.now().millisecondsSinceEpoch,
-      ];
+      if (alarmLevel == null) {
+        return data;
+      } else {
+        return data.where((e) => e.alarmLevel == alarmLevel).toList();
+      }
     } else {
       return [];
     }

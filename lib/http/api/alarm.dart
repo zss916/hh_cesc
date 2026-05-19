@@ -65,7 +65,7 @@ class AlarmAPI {
     int? endTimeMill,
   }) async {
     if (Mock.isGuest && status == 0) {
-      return (true, Mock.alarm(pageNum == 1));
+      return (true, Mock.alarm(pageNum == 1, alarmLevel));
     }
 
     try {
