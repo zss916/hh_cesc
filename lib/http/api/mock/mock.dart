@@ -1,13 +1,11 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
-import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:cescpro/http/bean/home_data2_entity.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class Mock {
@@ -204,9 +202,9 @@ class Mock {
       "lng": null,
       "lat": null,
       "remark": null,
-      "hasDevCount": 2,
+      "hasDevCount": 1,
       "operationTimeMill": 1755914841000,
-      "capacity": 466,
+      "capacity": 210,
       "power": 466,
       "activePower": null,
       "reactivePower": null,
@@ -220,7 +218,7 @@ class Mock {
       "rechargeAvg": 0.2,
       "chargeAvg": 299.1,
       "cid": 1190,
-      "cname": "Site A",
+      "cname": "Customer A",
       "elecVolLevel": 1,
       "elecSubType": 1,
       "protocolId": 231,
@@ -256,14 +254,14 @@ class Mock {
       "rechargeAvg": 0.1,
       "chargeAvg": 37.4,
       "cid": 1191,
-      "cname": "**********",
+      "cname": "Customer B",
       "elecVolLevel": 1,
       "elecSubType": 1,
       "protocolId": 231,
       "latestTimeMill": null,
       "pvCapacity": null,
-      "pvPower": null,
-      "hasPv": false,
+      "pvPower": 233.0,
+      "hasPv": true,
       "protocolVersion": "v2",
       "isTimeSlot": 1,
       "calculateRevenue": false,
@@ -281,10 +279,10 @@ class Mock {
   static SiteTopologyEntity topology(int siteId) {
     Map<String, dynamic> json = {
       "pv": {"power": 206.7, "code": "PV", "soc": null},
-      "storage": {"power": 0.70, "code": "STORAGE", "soc": 72},
-      "load": {"power": 1.0, "code": "LOAD", "soc": null},
+      "storage": {"power": 1.70, "code": "STORAGE", "soc": 72},
+      "load": {"power": 200.0, "code": "LOAD", "soc": null},
       "pcs": null,
-      "grid": {"power": -205.0, "code": "GRID", "soc": null},
+      "grid": {"power": -5.0, "code": "GRID", "soc": null},
       "line": [
         {"from": "PV", "to": "STORAGE"},
         {"from": "PV", "to": "GRID"},
@@ -319,12 +317,12 @@ class Mock {
   }
 
   ///compTree
-  static Future<(bool, List<CompTreeEntity>)> compTree({String? siteId}) async {
+  /* static Future<(bool, List<CompTreeEntity>)> compTree({String? siteId}) async {
     List<Map<String, dynamic>> json = [
       {
         "label": "DEV",
         "key": "did",
-        "val": 479,
+        "val": 484,
         "type": null,
         "labelVal": null,
         "labelCn": "1-1",
@@ -426,10 +424,10 @@ class Mock {
           jsonList.map((e) => CompTreeEntity.fromJson(e)).toList(),
       (value as List),
     );
-  }
+  }*/
 
   ///设备类型
-  static List<String> supportDevTypesV2() {
+  /*static List<String> supportDevTypesV2() {
     return ["ARR", "CLU", "PCS", "METER", "COOL", "DRIER", "DIDO"];
-  }
+  }*/
 }

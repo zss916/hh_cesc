@@ -790,7 +790,7 @@ const en = {
   "reInputNewPsdTip": "Please re-enter your password",
   "inputPsdErrorTip":
       "The password entered twice is different, please re-enter",
-  "newPsdLogin": "Please enter a new password to log in",
+  "newPsdLogin": "Please enter the new password to login",
   "psdMatchTip":
       "The password should be 8-18 characters long and contain letters, numbers, and special characters",
 };

@@ -382,9 +382,9 @@ class SiteAPI {
     String? did,
     String? type,
   }) async {
-    if (Mock.isGuest) {
+    /*if (Mock.isGuest) {
       return Mock.compTree(siteId: siteId);
-    }
+    }*/
     try {
       Map<String, dynamic> map = {};
       if (siteId != null) {
@@ -403,6 +403,18 @@ class SiteAPI {
               jsonList.map((e) => CompTreeEntity.fromJson(e)).toList(),
           (result['data'] as List),
         );
+
+        if (Mock.isGuest) {
+          if (siteId == "480") {
+            return (
+              true,
+              value
+                ..first.labelCn = "2-1"
+                ..first.labelEn = "2-1",
+            );
+          }
+        }
+
         return (true, value);
       } else {
         AppLoading.toast(result["message"]);
