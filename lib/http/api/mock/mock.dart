@@ -1,11 +1,13 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
+import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:cescpro/http/bean/home_data2_entity.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class Mock {
@@ -15,8 +17,8 @@ class Mock {
   ///首页数据
   static (HomeStatisticEntity?, HomeData2Entity?) homeData() {
     Map<String, dynamic> json = {
-      "totalIncome": 1000.0,
-      "todayIncome": 20,
+      "totalIncome": 5000.0,
+      "todayIncome": 100,
       "siteNum": 2,
       "deviceNum": 2,
       "capacity": 3029,
@@ -52,7 +54,7 @@ class Mock {
       "name": "Site A",
       "types": [4],
       "picture": null,
-      "location": "Israel 12",
+      "location": "*****srael",
       "adcode": "ISR",
       "lng": null,
       "lat": null,
@@ -64,14 +66,14 @@ class Mock {
       "power": 466,
       "pvCapacity": null,
       "pvPower": 233.0,
-      "activePower": -50.1,
+      "activePower": -49.9,
       "reactivePower": 0.0,
       "alarmNum": 0,
       "status": 1,
-      "soc": 29.0,
-      "charge": 87880.3,
-      "recharge": 79114.8,
-      "efficiency": 90.0,
+      "soc": 72.0,
+      "charge": 90656.4,
+      "recharge": 81427.5,
+      "efficiency": 89.8,
       "protocolId": 231,
       "elecVolLevel": 1,
       "elecSettleType": 2,
@@ -82,7 +84,7 @@ class Mock {
       "yesterdayCharge": null,
       "yesterdayRecharge": null,
       "modifyTime": "2025-12-16 06:14:04",
-      "modifiedByName": "ysladmin",
+      "modifiedByName": "",
       "siteGridDTOList": null,
       "simpleLocation": "12",
       "zoneId": "Asia/Jerusalem",
@@ -119,7 +121,7 @@ class Mock {
       "reactivePower": 0.0,
       "alarmNum": 0,
       "status": 1,
-      "soc": 17.0,
+      "soc": 28.0,
       "charge": 45953.1,
       "recharge": 41385.9,
       "efficiency": 90.1,
@@ -145,7 +147,7 @@ class Mock {
       "cityCode": "",
       "areaCode": "",
       "isTimeSlot": 1,
-      "calculateRevenue": true,
+      "calculateRevenue": false,
     };
     if (isRefresh) {
       return [SiteEntity.fromJson(json), SiteEntity.fromJson(json2)];
@@ -188,7 +190,7 @@ class Mock {
       "id": 479,
       "name": "Site A",
       "picture": null,
-      "location": "Israel 12",
+      "location": "*****srael",
       "lng": null,
       "lat": null,
       "remark": null,
@@ -201,14 +203,14 @@ class Mock {
       "alarmNum": 0,
       "status": 5,
       "soc": null,
-      "charge": 87910.1,
-      "recharge": 79114.8,
-      "efficiency": 90.0,
+      "charge": 90657.7,
+      "recharge": 81427.5,
+      "efficiency": 89.82,
       "totalIncome": 0.0,
       "rechargeAvg": 0.2,
-      "chargeAvg": 116.8,
+      "chargeAvg": 299.1,
       "cid": 1190,
-      "cname": "*************",
+      "cname": "Site A",
       "elecVolLevel": 1,
       "elecSubType": 1,
       "protocolId": 231,
@@ -254,7 +256,7 @@ class Mock {
       "hasPv": false,
       "protocolVersion": "v2",
       "isTimeSlot": 1,
-      "calculateRevenue": true,
+      "calculateRevenue": false,
     };
     SiteDetailEntity entity = SiteDetailEntity.fromJson(json);
     SiteDetailEntity entity2 = SiteDetailEntity.fromJson(json2);
@@ -268,14 +270,15 @@ class Mock {
   ///拓扑图
   static SiteTopologyEntity topology(int siteId) {
     Map<String, dynamic> json = {
-      "pv": {"power": 76.4, "code": "PV", "soc": null},
-      "storage": {"power": 49.6, "code": "STORAGE", "soc": 39.0},
-      "load": {"power": 0.0, "code": "LOAD", "soc": null},
+      "pv": {"power": 206.7, "code": "PV", "soc": null},
+      "storage": {"power": 0.70, "code": "STORAGE", "soc": 72},
+      "load": {"power": 1.0, "code": "LOAD", "soc": null},
       "pcs": null,
-      "grid": {"power": -105.0, "code": "GRID", "soc": null},
+      "grid": {"power": -205.0, "code": "GRID", "soc": null},
       "line": [
         {"from": "PV", "to": "STORAGE"},
         {"from": "PV", "to": "GRID"},
+        {"from": "PV", "to": "LOAD"},
       ],
       "siteId": 479,
       "did": null,
@@ -294,7 +297,7 @@ class Mock {
       ],
       "siteId": 480,
       "did": null,
-      "hasPv": false,
+      "hasPv": true,
     };
     SiteTopologyEntity entity = SiteTopologyEntity.fromJson(json);
     SiteTopologyEntity entity2 = SiteTopologyEntity.fromJson(json2);
@@ -303,5 +306,120 @@ class Mock {
     } else {
       return entity2;
     }
+  }
+
+  ///compTree
+  static Future<(bool, List<CompTreeEntity>)> compTree({String? siteId}) async {
+    List<Map<String, dynamic>> json = [
+      {
+        "label": "DEV",
+        "key": "did",
+        "val": 479,
+        "type": null,
+        "labelVal": null,
+        "labelCn": "1-1",
+        "labelEn": "1-1",
+        "child": [
+          {
+            "label": "NODE_NO",
+            "key": "nodeNo",
+            "val": 4,
+            "type": "ARR",
+            "labelVal": null,
+            "labelCn": "1#并网点",
+            "labelEn": "1#PCC",
+            "child": [
+              {
+                "label": null,
+                "key": "devNo",
+                "val": 2,
+                "type": "ARR",
+                "labelVal": null,
+                "labelCn": "1#堆",
+                "labelEn": "1#STACK",
+                "child": null,
+              },
+            ],
+          },
+          {
+            "label": "NODE_NO",
+            "key": "nodeNo",
+            "val": 5,
+            "type": "ARR",
+            "labelVal": null,
+            "labelCn": "2#并网点",
+            "labelEn": "2#PCC",
+            "child": [
+              {
+                "label": null,
+                "key": "devNo",
+                "val": 12,
+                "type": "ARR",
+                "labelVal": null,
+                "labelCn": "1#堆",
+                "labelEn": "1#STACK",
+                "child": null,
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    List<Map<String, dynamic>> json2 = [
+      {
+        "label": "DEV",
+        "key": "did",
+        "val": 480,
+        "type": null,
+        "labelVal": null,
+        "labelCn": "2-1",
+        "labelEn": "2-1",
+        "child": [
+          {
+            "label": "NODE_NO",
+            "key": "nodeNo",
+            "val": 4,
+            "type": "ARR",
+            "labelVal": null,
+            "labelCn": "1#并网点",
+            "labelEn": "1#PCC",
+            "child": [
+              {
+                "label": null,
+                "key": "devNo",
+                "val": 2,
+                "type": "ARR",
+                "labelVal": null,
+                "labelCn": "1#堆",
+                "labelEn": "1#STACK",
+                "child": null,
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    List<CompTreeEntity> list = await getList(json);
+    List<CompTreeEntity> list2 = await getList(json2);
+    if (siteId == json.first['val']) {
+      return (true, list);
+    } else {
+      return (true, list2);
+    }
+  }
+
+  static Future<List<CompTreeEntity>> getList(
+    List<Map<String, dynamic>> value,
+  ) async {
+    return await compute(
+      (List<dynamic> jsonList) =>
+          jsonList.map((e) => CompTreeEntity.fromJson(e)).toList(),
+      (value as List),
+    );
+  }
+
+  ///设备类型
+  static List<String> supportDevTypesV2() {
+    return ["ARR", "CLU", "PCS", "METER", "COOL", "DRIER", "DIDO"];
   }
 }

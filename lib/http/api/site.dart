@@ -382,6 +382,9 @@ class SiteAPI {
     String? did,
     String? type,
   }) async {
+    if (Mock.isGuest) {
+      return Mock.compTree(siteId: siteId);
+    }
     try {
       Map<String, dynamic> map = {};
       if (siteId != null) {

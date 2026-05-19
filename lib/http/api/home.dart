@@ -243,6 +243,10 @@ class HomeAPI {
     required int? siteId,
     required int? protocolId,
   }) async {
+    /* if (Mock.isGuest) {
+      return (true, Mock.supportDevTypesV2());
+    }*/
+
     try {
       Map<String, dynamic> map = {};
       if (siteId != null) {
