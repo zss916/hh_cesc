@@ -19,7 +19,7 @@ class Mock {
       "todayIncome": 100,
       "siteNum": 2,
       "deviceNum": 2,
-      "capacity": 3029,
+      "capacity": 466,
       "totalPos": 12647082.507,
       "totalNeg": 11583229.005,
       "totalPvTotalNeg": 463073.2895,
