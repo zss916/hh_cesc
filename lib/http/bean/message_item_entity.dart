@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/message_item_entity.g.dart';
+import 'package:cescpro/page/service/message/index.dart';
 
 export 'package:cescpro/generated/json/message_item_entity.g.dart';
 
 @JsonSerializable()
 class MessageItemEntity {
-  int? id;
+  String? id;
   String? title; //消息标题
   String? digest; //消息摘要
   String? content; //消息内容
@@ -41,4 +42,10 @@ class MessageItemEntity {
   }
 
   String get showContent => (content) ?? (digest ?? "");
+
+  MessageStatus get msgStatus => switch (status) {
+    0 => MessageStatus.unRead,
+    1 => MessageStatus.read,
+    _ => MessageStatus.other,
+  };
 }

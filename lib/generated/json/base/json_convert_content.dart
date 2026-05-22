@@ -16,6 +16,7 @@ import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:cescpro/http/bean/home_data2_entity.dart';
 import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/id_tree_entity.dart';
+import 'package:cescpro/http/bean/message_content_entity.dart';
 import 'package:cescpro/http/bean/message_item_entity.dart';
 import 'package:cescpro/http/bean/power_entity.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
@@ -393,6 +394,14 @@ class JsonConvert {
       return data
               .map<IdTreeEntity>(
                 (Map<String, dynamic> e) => IdTreeEntity.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<MessageContentEntity>[] is M) {
+      return data
+              .map<MessageContentEntity>(
+                (Map<String, dynamic> e) => MessageContentEntity.fromJson(e),
               )
               .toList()
           as M;
@@ -819,6 +828,7 @@ class JsonConvertClassCollection {
         HomeData2DailyStatisticVOListDeviceList.fromJson,
     (HomeStatisticEntity).toString(): HomeStatisticEntity.fromJson,
     (IdTreeEntity).toString(): IdTreeEntity.fromJson,
+    (MessageContentEntity).toString(): MessageContentEntity.fromJson,
     (MessageItemEntity).toString(): MessageItemEntity.fromJson,
     (PowerEntity).toString(): PowerEntity.fromJson,
     (PowerGraphEntity).toString(): PowerGraphEntity.fromJson,

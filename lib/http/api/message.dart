@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/http/bean/message_content_entity.dart';
 import 'package:cescpro/http/bean/message_item_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
@@ -14,6 +15,8 @@ class MessageAPI {
     String? sendTimeEnd,
   }) async {
     Map<String, dynamic> map = {};
+    //map["pageNum"] = 1;
+    // map["pageSize"] = 10;
     map["channelType"] = 1;
     if (sendTimeStart != null) {
       map["sendTimeStart"] = sendTimeStart;
@@ -54,6 +57,41 @@ class MessageAPI {
       }
     } catch (error) {
       return 0;
+    }
+  }
+
+  ///签到消息
+  static Future<bool> signMessage(List<String> ids) async {
+    try {
+      var result = await Http.instance.post(ApiPath.signMessage, data: ids);
+      if (result["code"] == HttpStatus.ok) {
+        return true;
+      } else {
+        AppLoading.toast(result["message"]);
+        return false;
+      }
+    } catch (error) {
+      return false;
+    }
+  }
+
+  ///获取消息内容
+  static Future<MessageContentEntity?> postQueryMsgContent({
+    required String msgId,
+  }) async {
+    try {
+      var result = await Http.instance.post(
+        ApiPath.postQueryMsgContent,
+        queryParameters: {"msgId": msgId},
+      );
+      if (result["code"] == HttpStatus.ok) {
+        return MessageContentEntity.fromJson(result['data']);
+      } else {
+        AppLoading.toast(result["message"]);
+        return null;
+      }
+    } catch (error) {
+      return null;
     }
   }
 }

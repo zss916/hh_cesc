@@ -29,3 +29,7 @@ class MainPageEvent {
 class TopologyEvent {
   TopologyEvent();
 }
+
+class MessageEvent {
+  MessageEvent();
+}

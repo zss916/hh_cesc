@@ -124,6 +124,11 @@ class ApiPath {
   ///查询用户消息列表
   static const String postQueryMessage = "/business/message/queryMessage";
 
+  static const String postQueryMsgContent = "/business/message/queryContent";
+
+  ///阅读消息
+  static const String signMessage = "/business/message/signMessage";
+
   ///查询用户某个渠道的指定位置的未读消息
   static const String getUnreadNum = "/business/message/unreadNum";
 

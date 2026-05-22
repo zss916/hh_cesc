@@ -52,14 +52,12 @@ UserInfoEntity $UserInfoEntityFromJson(Map<String, dynamic> json) {
     userInfoEntity.logoUrl = logoUrl;
   }
   final String? currencyCode = jsonConvert.convert<String>(
-    json['currencyCode'],
-  );
+      json['currencyCode']);
   if (currencyCode != null) {
     userInfoEntity.currencyCode = currencyCode;
   }
   final int? revenueShowType = jsonConvert.convert<int>(
-    json['revenueShowType'],
-  );
+      json['revenueShowType']);
   if (revenueShowType != null) {
     userInfoEntity.revenueShowType = revenueShowType;
   }

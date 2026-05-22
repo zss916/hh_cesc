@@ -3,7 +3,7 @@ import 'package:cescpro/http/bean/message_item_entity.dart';
 
 MessageItemEntity $MessageItemEntityFromJson(Map<String, dynamic> json) {
   final MessageItemEntity messageItemEntity = MessageItemEntity();
-  final int? id = jsonConvert.convert<int>(json['id']);
+  final String? id = jsonConvert.convert<String>(json['id']);
   if (id != null) {
     messageItemEntity.id = id;
   }
@@ -115,7 +115,7 @@ Map<String, dynamic> $MessageItemEntityToJson(MessageItemEntity entity) {
 
 extension MessageItemEntityExtension on MessageItemEntity {
   MessageItemEntity copyWith({
-    int? id,
+    String? id,
     String? title,
     String? digest,
     String? content,

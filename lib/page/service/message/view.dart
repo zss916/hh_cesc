@@ -46,106 +46,120 @@ class MessageCenterPage extends StatelessWidget {
       itemCount: logic.data.length,
       itemBuilder: (_, int index) {
         MessageItemEntity item = logic.data[index];
-        return buildMessageItem(item: item);
+        return buildMessageItem(item: item, logic: logic);
       },
       separatorBuilder: (_, int index) =>
           Divider(height: 16.h, color: Colors.transparent),
     );
   }
 
-  Widget buildMessageItem({required MessageItemEntity item}) {
-    return Container(
-      width: double.maxFinite,
-      padding: EdgeInsetsDirectional.symmetric(
-        horizontal: 16.w,
-        vertical: 15.h,
-      ),
-      margin: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
-      decoration: BoxDecoration(
-        color: Color(0xFF313540),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsetsDirectional.only(bottom: 13.h),
-            alignment: AlignmentDirectional.centerStart,
-            width: double.maxFinite,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    item.title ?? "",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15.sp,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 5.w),
-                  child: Stack(
-                    alignment: AlignmentDirectional.center,
-                    children: [
-                      if (item.status == 0)
-                        Text(
-                          TKey.unRead.tr,
-                          style: TextStyle(
-                            color: Color(0x80FFFFFF),
-                            fontSize: 12.sp,
-                          ),
-                        ),
-
-                      if (item.status == 1)
-                        Text(
-                          TKey.read.tr,
-                          style: TextStyle(
-                            color: Color(0x80FFFFFF),
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Divider(height: 1, color: Color(0x14EEF2F8)),
-          if (item.showContent.isNotEmpty)
+  Widget buildMessageItem({
+    required MessageItemEntity item,
+    MessageCenterLogic? logic,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        logic?.postQueryMsgContent(msgId: item.id, item: item);
+      },
+      child: Container(
+        width: double.maxFinite,
+        padding: EdgeInsetsDirectional.symmetric(
+          horizontal: 16.w,
+          vertical: 15.h,
+        ),
+        margin: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
+        decoration: BoxDecoration(
+          color: Color(0xFF313540),
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        child: Column(
+          children: [
             Container(
-              margin: EdgeInsetsDirectional.only(top: 12.h, bottom: 13.h),
+              margin: EdgeInsetsDirectional.only(bottom: 13.h),
               alignment: AlignmentDirectional.centerStart,
               width: double.maxFinite,
-              child: Text(
-                item.showContent,
-                style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      item.title ?? "",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15.sp,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 5.w),
+                    child: Stack(
+                      alignment: AlignmentDirectional.center,
+                      children: [
+                        if (item.msgStatus == MessageStatus.unRead)
+                          Text(
+                            TKey.unRead.tr,
+                            style: TextStyle(
+                              color: Color(0x80FFFFFF),
+                              fontSize: 12.sp,
+                            ),
+                          ),
+
+                        if (item.msgStatus == MessageStatus.read)
+                          Text(
+                            TKey.read.tr,
+                            style: TextStyle(
+                              color: Color(0x80FFFFFF),
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-          if (item.showContent.isNotEmpty)
             Divider(height: 1, color: Color(0x14EEF2F8)),
-          Container(
-            margin: EdgeInsetsDirectional.only(top: 13.h),
-            width: double.maxFinite,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    "${TKey.sendTime.tr}${(item.sendTime ?? 0).timestampFormat}",
-                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
-                  ),
+            if (item.showContent.isNotEmpty)
+              Container(
+                margin: EdgeInsetsDirectional.only(top: 12.h, bottom: 13.h),
+                alignment: AlignmentDirectional.centerStart,
+                width: double.maxFinite,
+                child: Text(
+                  item.showContent,
+                  style: TextStyle(color: Color(0xCCFFFFFF), fontSize: 14.sp),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 5.w),
-                  child: Text(
-                    "${TKey.sender.tr}${item.senderName}",
-                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+              ),
+            if (item.showContent.isNotEmpty)
+              Divider(height: 1, color: Color(0x14EEF2F8)),
+            Container(
+              margin: EdgeInsetsDirectional.only(top: 13.h),
+              width: double.maxFinite,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      "${TKey.sendTime.tr}${(item.sendTime ?? 0).timestampFormat}",
+                      style: TextStyle(
+                        color: Color(0x80FFFFFF),
+                        fontSize: 12.sp,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  /*Container(
+                    margin: EdgeInsets.only(left: 5.w),
+                    child: Text(
+                      "${TKey.sender.tr}${item.senderName}",
+                      style: TextStyle(
+                        color: Color(0x80FFFFFF),
+                        fontSize: 12.sp,
+                      ),
+                    ),
+                  ),*/
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

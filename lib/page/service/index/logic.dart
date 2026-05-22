@@ -9,9 +9,14 @@ class ServiceLogic extends GetxController {
 
   int unreadNum = 0;
 
+  late StreamSubscription<MessageEvent> messageEvent;
+
   @override
   void onInit() {
     super.onInit();
+    messageEvent = AppEventBus.eventBus.on<MessageEvent>().listen((event) {
+      getUnreadNum();
+    });
   }
 
   @override
@@ -46,6 +51,7 @@ class ServiceLogic extends GetxController {
 
   @override
   void onClose() {
+    messageEvent.cancel();
     AppLoading.dismiss();
     super.onClose();
   }
