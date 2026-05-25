@@ -29,6 +29,24 @@ class RevenueLogic extends GetxController {
   List<StatisticReportDailyElecIncomeDetail> list = [];
   List<ReportDataEntity> revenueList = [];
 
+  List<String> get headersRevenue => [
+    TKey.date.tr,
+    "${TKey.allRevenue.tr}(${User.to.getCurrencyUnit()})",
+    "${TKey.feedInRevenue.tr}(${User.to.getCurrencyUnit()})",
+    "${TKey.selfGenerationRevenue.tr}(${User.to.getCurrencyUnit()})",
+    "${TKey.energyStoragePriceDifferenceRevenue.tr}(${User.to.getCurrencyUnit()})",
+  ];
+
+  List<String> get headersList => [
+    TKey.date.tr,
+    TKey.duration.tr,
+    "${TKey.chargingAmount.tr}(${User.to.getCurrencyUnit()})",
+    "${TKey.dischargingAmount.tr}(${User.to.getCurrencyUnit()})",
+    "${TKey.amount.tr}(${User.to.getCurrencyUnit()})",
+  ];
+
+  List<List<String>> rows = [];
+
   @override
   void onInit() {
     super.onInit();
@@ -45,6 +63,8 @@ class RevenueLogic extends GetxController {
 
     DateTime end = DateTime(dateTime.year, dateTime.month, dateTime.day + 1);
     endTimeStamp = end.millisecondsSinceEpoch;
+
+    rows.clear();
   }
 
   @override
@@ -80,9 +100,11 @@ class RevenueLogic extends GetxController {
       endTimeStamp: endTimeStamp,
       date: date,
     ).whenComplete(() => AppLoading.dismiss());
-
     if (isSuccessful) {
       revenueList.assignAll(value);
+      rows.clear();
+      rows.add(headersRevenue);
+      rows.addAll(valueToList2(revenueList));
       update();
     }
   }
@@ -111,5 +133,19 @@ class RevenueLogic extends GetxController {
       list.assignAll(value.first.dailyElecIncomeDetail ?? []);
       update();
     }
+  }
+
+  List<List<String>> valueToList2(List<ReportDataEntity> value) {
+    return value
+        .map(
+          (e) => [
+            "${e.dayDate}",
+            e.allRevenue,
+            e.isShow ? (e.gridFeedGain ?? 0.00).formatAmount() : "--",
+            e.isHasPV ? (e.pvSelfUseGain ?? 0.00).formatAmount() : "--",
+            (e.storageProfit ?? 0.00).formatAmount(),
+          ],
+        )
+        .toList();
   }
 }

@@ -269,4 +269,7 @@ const zh = {
   "inputPsdErrorTip": "两次输入密码不同,请重新输入",
   "newPsdLogin": "请输入新密码登录",
   "psdMatchTip": "密码需8-18位，并包含字母、数字、特殊字符",
+  "exportSuccessful": "导出成功",
+  "exportContent": "文件已导出，可在分享面板中保存",
+  "exportSaved": "文件已保存至:%s",
 };

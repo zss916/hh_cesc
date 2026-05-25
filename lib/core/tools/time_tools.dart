@@ -9,7 +9,7 @@ class TimeTools {
   Timer? _timer;
 
   void start({Function? onCall}) {
-    _timer = Timer.periodic(const Duration(seconds: 12), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 30), (timer) {
       onCall?.call();
     });
   }

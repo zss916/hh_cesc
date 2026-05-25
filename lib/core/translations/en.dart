@@ -512,6 +512,9 @@ class TKey {
   static const String reInputNewPsdTip = "reInputNewPsdTip";
   static const String inputPsdErrorTip = "inputPsdErrorTip";
   static const String psdMatchTip = "psdMatchTip";
+  static const String exportSuccessful = "exportSuccessful";
+  static const String exportContent = "exportContent";
+  static const String exportSaved = "exportSaved";
 }
 
 const en = {
@@ -793,4 +796,8 @@ const en = {
   "newPsdLogin": "Please enter the new password to login",
   "psdMatchTip":
       "The password should be 8-18 characters long and contain letters, numbers, and special characters",
+  "exportSuccessful": "Export Successful!",
+  "exportContent":
+      "The file has been exported and can be saved in the sharing panel",
+  "exportSaved": "The file has been saved to:%s",
 };

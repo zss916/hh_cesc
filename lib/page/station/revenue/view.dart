@@ -35,6 +35,23 @@ class _ReportDetailPageState extends State<RevenuePage> {
               style: TextStyle(color: Colors.white, fontSize: 18.sp),
             ),
             backgroundColor: Colors.transparent,
+            actions: [
+              if (Environment.isOverseas)
+                ExportButton(
+                  data: logic.rows,
+                  fileNamePrefix: TKey.revenue.tr,
+                  onExported: (path) {
+                    if (path != null) {
+                      debugPrint('导出成功: $path');
+                    }
+                  },
+                ),
+              /*ToCsvButton(
+                  title: TKey.revenue.tr,
+                  headers: logic.headers,
+                  rows: logic.rows,
+                ),*/
+            ],
           ),
           backgroundColor: Color(0xFF23282E),
           body: buildRevenue(logic),

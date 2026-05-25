@@ -26,6 +26,16 @@ class EleLogic extends GetxController {
 
   List<ReportDataEntity> eleList = [];
 
+  List<String> get headers => [
+    TKey.date.tr,
+    "${TKey.photovoltaicPowerGeneration2.tr}(kWh)",
+    "${TKey.gridEleGeneration.tr}(kWh)",
+    "${TKey.energyStorageCharge.tr}(kWh)",
+    "${TKey.energyStorageDischarge.tr}(kWh)",
+  ];
+
+  List<List<String>> rows = [];
+
   @override
   void onInit() {
     super.onInit();
@@ -69,8 +79,25 @@ class EleLogic extends GetxController {
 
     if (isSuccessful) {
       eleList.assignAll(value);
+      rows.clear();
+      rows.add(headers);
+      rows.addAll(valueToList(eleList));
       update();
     }
+  }
+
+  List<List<String>> valueToList(List<ReportDataEntity> value) {
+    return value
+        .map(
+          (e) => [
+            "${e.dayDate}",
+            e.isHasPV ? (e.pvGeneration ?? 0).formatNum() : "--",
+            e.isShow ? (e.gridFeed ?? 0).formatNum() : "--",
+            (e.pos ?? 0).formatNum(),
+            (e.neg ?? 0).formatNum(),
+          ],
+        )
+        .toList();
   }
 
   @override

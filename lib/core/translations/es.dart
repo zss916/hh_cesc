@@ -279,4 +279,8 @@ const es = {
   "newPsdLogin": "Introduzca una nueva contraseña para iniciar sesión",
   "psdMatchTip":
       "La contraseña requiere 8 - 18 dígitos y contiene letras, números, caracteres especiales",
+  "exportSuccessful": "Exportación Exitosa",
+  "exportContent":
+      "El archivo se exporta y se puede guardar en el panel de compartir",
+  "exportSaved": "El archivo se ha guardado en:%s",
 };

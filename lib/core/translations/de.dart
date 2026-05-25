@@ -263,4 +263,8 @@ const de = {
   "newPsdLogin": "Bitte geben Sie ein neues Passwort ein",
   "psdMatchTip":
       "Das Passwort muss 8 bis 18 Stellen sein und enthält Buchstaben, Zahlen und Sonderzeichen.",
+  "exportSuccessful": "Export Erfolgreich",
+  "exportContent":
+      "Datei exportiert und kann im Freigabefeld gespeichert werden",
+  "exportSaved": "Datei gespeichert unter:%s",
 };

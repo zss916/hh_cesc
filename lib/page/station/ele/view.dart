@@ -35,6 +35,22 @@ class _ReportDetailPageState extends State<ElePage> {
               style: TextStyle(color: Colors.white, fontSize: 18.sp),
             ),
             backgroundColor: Colors.transparent,
+            actions: [
+              /* ToCsvButton(
+                title: TKey.electricity.tr,
+                headers: logic.headers,
+                rows: logic.rows,
+              ),*/
+              ExportButton(
+                data: logic.rows,
+                fileNamePrefix: TKey.electricity.tr,
+                onExported: (path) {
+                  if (path != null) {
+                    debugPrint('导出成功: $path');
+                  }
+                },
+              ),
+            ],
           ),
           backgroundColor: Color(0xFF23282E),
           body: buildEle(logic),
