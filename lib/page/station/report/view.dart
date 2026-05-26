@@ -11,13 +11,22 @@ class _ReportDetailPageState extends State<ReportDetailPage>
     with SingleTickerProviderStateMixin {
   late final TabController tabCtrl;
 
+  List<String> get titles => [TKey.powerLevel.tr, TKey.stopDegree.tr];
+
+  int titleIndex = 0;
+
   @override
   void initState() {
     super.initState();
     tabCtrl = TabController(length: 2, vsync: this);
     tabCtrl.addListener(() {
       if (tabCtrl.index == tabCtrl.animation?.value) {
-        int reportType = (tabCtrl.index + 1);
+        //int reportType = (tabCtrl.index + 1);
+        if (mounted) {
+          setState(() {
+            titleIndex = tabCtrl.index;
+          });
+        }
       }
     });
   }
@@ -64,6 +73,40 @@ class _ReportDetailPageState extends State<ReportDetailPage>
           ),
           indicatorMinWidth: 40,
         ),
+        actions: [
+          Container(
+            margin: EdgeInsetsDirectional.only(end: 15),
+            child: InkWell(
+              onTap: () {
+                if (titleIndex == 0) {
+                  ExportUtil.export(
+                    (safeFind<PowerLevelLogic>()?.rows ?? []),
+                    TKey.powerLevel.tr,
+                  );
+                } else {
+                  ExportUtil.export(
+                    (safeFind<StopDegreeLogic>()?.rows ?? []),
+                    TKey.stopDegree.tr,
+                  );
+                }
+              },
+              child: Icon(Icons.save_alt_outlined, color: Colors.white),
+            ),
+          ),
+
+          ///todo
+          /* ExcelExportButton(
+            data: (titleIndex == 0)
+                ? (safeFind<PowerLevelLogic>()?.rows ?? [])
+                : (safeFind<StopDegreeLogic>()?.rows ?? []),
+            fileNamePrefix: titles[titleIndex],
+            onExported: (path) {
+              if (path != null) {
+                debugPrint('Excel导出成功: $path');
+              }
+            },
+          ),*/
+        ],
         backgroundColor: Colors.transparent,
       ),
       backgroundColor: Color(0xFF23282E),

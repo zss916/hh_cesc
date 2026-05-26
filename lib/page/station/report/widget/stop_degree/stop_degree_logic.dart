@@ -1,4 +1,5 @@
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/home.dart';
 import 'package:cescpro/http/bean/statistic_report_entity.dart';
 import 'package:cescpro/page/station/revenue/index.dart';
@@ -14,6 +15,15 @@ class StopDegreeLogic extends GetxController {
   int? endTimeStamp;
 
   List<StatisticReportDailyElecIncomeDetail> list = [];
+  List<List<String>> rows = [];
+
+  List<String> get headers => [
+    TKey.date.tr,
+    TKey.duration.tr,
+    "${TKey.forwardActiveEnergy.tr}(kWh)",
+    "${TKey.negativeActiveContribution.tr}(kwh)",
+    "${TKey.totalEfficiency.tr}(%)",
+  ];
 
   @override
   void onInit() {
@@ -29,6 +39,7 @@ class StopDegreeLogic extends GetxController {
     startTimeStamp = start.millisecondsSinceEpoch;
     DateTime end = DateTime(dateTime.year, dateTime.month, dateTime.day + 1);
     endTimeStamp = end.millisecondsSinceEpoch;
+    rows.clear();
   }
 
   @override
@@ -40,6 +51,7 @@ class StopDegreeLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    AppLoading.dismiss();
   }
 
   Future<void> loadData() async {
@@ -57,7 +69,56 @@ class StopDegreeLogic extends GetxController {
     ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       list.assignAll(value.first.dailyElecIncomeDetail ?? []);
+      rows.clear();
+      rows.add(headers);
+      rows.addAll(valueToList(list));
       update();
     }
+  }
+
+  List<List<String>> valueToList(
+    List<StatisticReportDailyElecIncomeDetail> value,
+  ) {
+    return value.map((e) => toItems(e)).expand((e) => e).toList();
+  }
+
+  List<List<String>> toItems(StatisticReportDailyElecIncomeDetail value) {
+    return [
+      [
+        "${value.formatDate}",
+        TKey.sharp.tr,
+        "${value.endVerPos ?? 0}",
+        "${value.endVerNeg ?? 0}",
+        "0",
+      ],
+      [
+        "${value.formatDate}",
+        TKey.peak.tr,
+        "${value.endHigPos ?? 0}",
+        "${value.endHigNeg ?? 0}",
+        "0",
+      ],
+      [
+        "${value.formatDate}",
+        TKey.average.tr,
+        "${value.endMidPos ?? 0}",
+        "${value.endMidNeg ?? 0}",
+        "0",
+      ],
+      [
+        "${value.formatDate}",
+        TKey.valley.tr,
+        "${value.endLowPos ?? 0}",
+        "${value.endLowNeg ?? 0}",
+        "0",
+      ],
+      [
+        "${value.formatDate}",
+        TKey.all.tr,
+        "${value.endBatChargeWhSum ?? 0}",
+        "${value.endBatDisChargeWhSum ?? 0}",
+        "${value.efficiency}",
+      ],
+    ];
   }
 }

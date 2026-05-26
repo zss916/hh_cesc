@@ -102,6 +102,8 @@ class StatisticReportDailyElecIncomeDetail {
   double? batDisChargeWhSum;
   double? endBatDisChargeWhSum;
   double? totalElecIncome;
+
+  ///效率
   double? efficiency;
   double? totalIncome;
 

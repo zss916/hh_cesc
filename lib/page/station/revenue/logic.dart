@@ -45,6 +45,7 @@ class RevenueLogic extends GetxController {
     "${TKey.amount.tr}(${User.to.getCurrencyUnit()})",
   ];
 
+  List<List<String>> rows2 = [];
   List<List<String>> rows = [];
 
   @override
@@ -64,6 +65,7 @@ class RevenueLogic extends GetxController {
     DateTime end = DateTime(dateTime.year, dateTime.month, dateTime.day + 1);
     endTimeStamp = end.millisecondsSinceEpoch;
 
+    rows2.clear();
     rows.clear();
   }
 
@@ -102,9 +104,9 @@ class RevenueLogic extends GetxController {
     ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       revenueList.assignAll(value);
-      rows.clear();
-      rows.add(headersRevenue);
-      rows.addAll(valueToList2(revenueList));
+      rows2.clear();
+      rows2.add(headersRevenue);
+      rows2.addAll(valueToList2(revenueList));
       update();
     }
   }
@@ -131,8 +133,57 @@ class RevenueLogic extends GetxController {
     ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       list.assignAll(value.first.dailyElecIncomeDetail ?? []);
+      rows.clear();
+      rows.add(headersList);
+      rows.addAll(valueToList(list));
       update();
     }
+  }
+
+  List<List<String>> valueToList(
+    List<StatisticReportDailyElecIncomeDetail> value,
+  ) {
+    return value.map((e) => toItems(e)).expand((e) => e).toList();
+  }
+
+  List<List<String>> toItems(StatisticReportDailyElecIncomeDetail value) {
+    return [
+      [
+        "${value.formatDate}",
+        TKey.sharp.tr,
+        "${value.verPosAmount ?? 0}",
+        "${value.verNegAmount ?? 0}",
+        "0",
+      ],
+      [
+        "${value.formatDate}",
+        TKey.peak.tr,
+        "${value.higPosAmount ?? 0}",
+        "${value.higNegAmount ?? 0}",
+        "0",
+      ],
+      [
+        "${value.formatDate}",
+        TKey.average.tr,
+        "${value.midPosAmount ?? 0}",
+        "${value.midNegAmount ?? 0}",
+        "0",
+      ],
+      [
+        "${value.formatDate}",
+        TKey.valley.tr,
+        "${value.lowPosAmount ?? 0}",
+        "${value.lowNegAmount ?? 0}",
+        "0",
+      ],
+      [
+        "${value.formatDate}",
+        TKey.all.tr,
+        "${value.totalPosAmount ?? 0}",
+        "${value.totalNegAmount ?? 0}",
+        "${value.totalElecIncome ?? 0}",
+      ],
+    ];
   }
 
   List<List<String>> valueToList2(List<ReportDataEntity> value) {

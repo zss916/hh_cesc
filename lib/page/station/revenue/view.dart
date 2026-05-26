@@ -38,11 +38,21 @@ class _ReportDetailPageState extends State<RevenuePage> {
             actions: [
               if (Environment.isOverseas)
                 ExportButton(
-                  data: logic.rows,
+                  data: logic.rows2,
                   fileNamePrefix: TKey.revenue.tr,
                   onExported: (path) {
                     if (path != null) {
                       debugPrint('导出成功: $path');
+                    }
+                  },
+                )
+              else
+                ExcelExportButton(
+                  data: logic.rows,
+                  fileNamePrefix: TKey.revenue.tr,
+                  onExported: (path) {
+                    if (path != null) {
+                      debugPrint('Excel导出成功: $path');
                     }
                   },
                 ),

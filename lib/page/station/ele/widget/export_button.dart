@@ -56,6 +56,9 @@ class _ExportButtonState extends State<ExportButton> {
   }
 
   Future<void> _export() async {
+    if (widget.data.isEmpty) {
+      return;
+    }
     try {
       setState(() {
         _exporting = true;
@@ -103,8 +106,12 @@ class _ExportButtonState extends State<ExportButton> {
       if (!mounted) return;
 
       if (shareAfter) {
-        await Share.shareXFiles([XFile(path)], text: 'The exported data file');
-        await _showInfoDialog(TKey.exportSuccessful.tr, TKey.exportContent.tr);
+        final params = ShareParams(files: [XFile(path)]);
+        await SharePlus.instance.share(params);
+        await _showInfoDialog(
+          TKey.exportSuccessful.tr,
+          TKey.exportSaved.trArgs([path]),
+        );
       } else {
         await _showInfoDialog(
           TKey.exportSuccessful.tr,
@@ -140,8 +147,9 @@ class _ExportButtonState extends State<ExportButton> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(message),
+        backgroundColor: Color(0xFF23282E),
+        title: Text(title, style: TextStyle(color: Colors.white)),
+        content: Text(message, style: TextStyle(color: Colors.white)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

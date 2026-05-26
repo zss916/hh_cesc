@@ -246,7 +246,7 @@ class PowerLevelTableWidget extends StatelessWidget {
                               alignment: AlignmentDirectional.center,
                               child: Column(
                                 children: [
-                                  //放电
+                                  ///放电
                                   buildChildItem(title: "${item.verNeg ?? 0}"),
                                   buildChildItemDiver(),
                                   buildChildItem(title: "${item.higNeg ?? 0}"),
