@@ -7,7 +7,7 @@ export 'package:cescpro/generated/json/power_graph_entity.g.dart';
 
 @JsonSerializable()
 class PowerGraphEntity {
-  int? type; //1 电池功率 2 电网功率 3 光伏功率
+  int? type; //1 电池功率 2 电网功率 3 光伏功率 4 soc
   bool? total; //true:总曲线，false:设备曲线
   int? did; //设备id
   String? sn; //设备sn

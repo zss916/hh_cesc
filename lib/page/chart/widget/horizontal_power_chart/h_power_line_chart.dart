@@ -1,4 +1,3 @@
-import 'package:cescpro/core/color/colors.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:collection/collection.dart';
@@ -6,7 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class HPowerLineChart extends StatefulWidget {
-  final List<List<PowerGraphList>> list;
+  final List<(List<PowerGraphList>, Color)> list;
   final double maxX;
   final double minY;
   final double maxY;
@@ -36,7 +35,7 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
       height: double.maxFinite,
       width: double.maxFinite,
       child: LineChart(
-        transformationConfig: buildFlTransformationConfig,
+        // transformationConfig: buildFlTransformationConfig,
         LineChartData(
           titlesData: buildFlTitlesData(),
           lineBarsData: lineBarsData(widget.list),
@@ -67,10 +66,10 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
                 ? SizedBox(height: 10)
                 : SideTitleWidget(
                     meta: meta,
-                    child: value.toInt() >= (widget.list.first).length
+                    child: value.toInt() >= (widget.list.first.$1).length
                         ? SizedBox.shrink()
                         : Text(
-                            ((widget.list.first)[value.toInt()].time).hm,
+                            ((widget.list.first.$1)[value.toInt()].time).hm,
                             style: TextStyle(
                               color: Color(0xA8FFFFFF),
                               fontWeight: FontWeight.w400,
@@ -133,14 +132,12 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart> {
   );
 
   ///折现数据列表
-  List<LineChartBarData> lineBarsData(List<List<PowerGraphList>> lines) {
+  List<LineChartBarData> lineBarsData(
+    List<(List<PowerGraphList>, Color)> lines,
+  ) {
     return lines.isEmpty
         ? <LineChartBarData>[]
-        : [
-            ...lines.mapIndexed(
-              (i, e) => buildLineChartBarData(AppColors.colorList[i], e),
-            ),
-          ];
+        : [...lines.mapIndexed((i, e) => buildLineChartBarData(e.$2, e.$1))];
   }
 
   LineChartBarData buildLineChartBarData(

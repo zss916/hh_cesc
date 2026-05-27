@@ -1,12 +1,11 @@
-import 'package:cescpro/core/color/colors.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart2.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,6 +81,7 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16.w),
               padding: EdgeInsetsDirectional.only(
+                top: 25,
                 start: 5.w,
                 end: 10.w,
                 bottom: 15.h,
@@ -118,11 +118,9 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                               spacing: 15.w,
                               runSpacing: 8.h,
                               children: [
-                                ...widget.logic.titles.mapIndexed(
-                                  (i, e) => LineTitleWidget(
-                                    color: AppColors.colorList[i],
-                                    title: e,
-                                  ),
+                                ...widget.logic.titles.map(
+                                  (e) =>
+                                      LineTitleWidget(color: e.$2, title: e.$1),
                                 ),
                               ],
                             ),
@@ -137,6 +135,19 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
                             "(kW)",
                             style: TextStyle(
                               color: Color(0x80FFFFFF),
+                              fontSize: 12.sp,
+                            ),
+                          ),
+                        ),
+
+                      if (widget.logic.socPowerLines.isNotEmpty)
+                        PositionedDirectional(
+                          top: 10.h,
+                          end: 10.w,
+                          child: Text(
+                            "(%)",
+                            style: TextStyle(
+                              color: widget.logic.socPowerLines.first.$2,
                               fontSize: 12.sp,
                             ),
                           ),
@@ -171,7 +182,10 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
       _ when viewState == ViewType.loading.index => buildLoading(),
-      _ when viewState == ViewType.common.index => buildPowerLineChart(),
+      _ when viewState == ViewType.common.index =>
+        widget.logic.socPowerLines.isEmpty
+            ? buildPowerLineChart()
+            : buildPowerLineChart2(),
       _ when viewState == ViewType.empty.index => buildEmpty(),
       _ => buildEmpty(),
     };
@@ -192,29 +206,52 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
     );
   }
 
+  Widget buildPowerLineChart2() {
+    return PowerLineChart2(
+      list: widget.logic.powerLines,
+      socList: widget.logic.socPowerLines,
+      maxX: widget.logic.maxX,
+      minY: widget.logic.minY,
+      maxY: widget.logic.maxY,
+      isEmptyView: false,
+    );
+  }
+
   ///empty
   Widget buildEmpty() => PowerLineChart(
     list: [
-      [
-        PowerGraphList()
-          ..time = 0
-          ..val = 0.0,
-      ],
-      [
-        PowerGraphList()
-          ..time = 0
-          ..val = 0.0,
-      ],
-      [
-        PowerGraphList()
-          ..time = 0
-          ..val = 0.0,
-      ],
-      [
-        PowerGraphList()
-          ..time = 0
-          ..val = 0.0,
-      ],
+      (
+        [
+          PowerGraphList()
+            ..time = 0
+            ..val = 0.0,
+        ],
+        Colors.transparent,
+      ),
+      (
+        [
+          PowerGraphList()
+            ..time = 0
+            ..val = 0.0,
+        ],
+        Colors.transparent,
+      ),
+      (
+        [
+          PowerGraphList()
+            ..time = 0
+            ..val = 0.0,
+        ],
+        Colors.transparent,
+      ),
+      (
+        [
+          PowerGraphList()
+            ..time = 0
+            ..val = 0.0,
+        ],
+        Colors.transparent,
+      ),
     ],
     maxX: 0.0,
     minY: 0.0,

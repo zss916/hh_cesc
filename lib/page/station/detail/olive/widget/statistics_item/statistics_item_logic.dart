@@ -9,6 +9,8 @@ import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/http/bean/pv_trend_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/color_utils.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,12 +39,13 @@ class StatisticsItemLogic extends GetxController {
   ).subtract(Duration(microseconds: 1)).millisecondsSinceEpoch;
 
   ///功率折线图表
-  List<List<PowerGraphList>> powerLines = [];
-  List<String> titles = [];
+  List<(List<PowerGraphList>, Color)> powerLines = [];
+  List<(String, Color)> titles = [];
   double minY = 0.0;
   double maxY = 0.0;
   double maxX = 0.0;
   int powerViewStatus = ViewType.loading.index;
+  List<(List<PowerGraphList>, Color)> socPowerLines = [];
 
   ///光伏发电量
   List<PvTrendEntity> pvList = [];
@@ -158,27 +161,50 @@ class StatisticsItemLogic extends GetxController {
       endTimeStamp: endTimeStamp,
     );
     if (isSuccessful) {
+      final colors = ColorGenerator.generateColors(value.length);
+      bool isHasSoc = value.where((e) => e.type == 4).isNotEmpty;
       List<PowerGraphEntity> perData = normalizeChartData(
         value.map((e) => e.toJson()).toList(),
       ).map((e) => PowerGraphEntity.fromJson(e)).toList();
       bool isHasData = perData.any((e) => (e.list ?? []).isNotEmpty);
       if (isHasData) {
-        powerLines.assignAll(
-          perData
-          //.where(((a) => (a.list ?? []).isNotEmpty))
-          .map((e) => (e.list ?? [])),
-        );
+        ///优化
         titles.assignAll(
-          value
-          //.where(((a) => (a.list ?? []).isNotEmpty))
-          .map((w) => w.title ?? ""),
+          value.mapIndexed((i, w) => (w.title ?? "", colors[i])),
         );
-
-        handPowerData(value);
-        powerViewStatus = powerLines.isEmpty
-            ? ViewType.empty.index
-            : ViewType.common.index;
-        update(["powerGraph"]);
+        if (isHasSoc) {
+          List<(PowerGraphEntity, Color)> perDataAndColor = perData
+              .mapIndexed((i, e) => (e, colors[i]))
+              .toList();
+          List<(PowerGraphEntity, Color)> otherPowers = perDataAndColor
+              .where((e) => e.$1.type != 4)
+              .toList();
+          powerLines.assignAll(
+            otherPowers
+                .mapIndexed((i, e) => ((e.$1.list ?? []), e.$2))
+                .toList(),
+          );
+          handPowerData(otherPowers.map((e) => e.$1).toList());
+          List<(PowerGraphEntity, Color)> socPowers = perDataAndColor
+              .where((e) => e.$1.type == 4)
+              .toList();
+          socPowerLines.assignAll(
+            socPowers.map((e) => ((e.$1.list ?? []), e.$2)).toList(),
+          );
+          powerViewStatus = (powerLines.isEmpty && socPowerLines.isEmpty)
+              ? ViewType.empty.index
+              : ViewType.common.index;
+          update(["powerGraph"]);
+        } else {
+          powerLines.assignAll(
+            perData.mapIndexed((i, e) => ((e.list ?? []), colors[i])),
+          );
+          handPowerData(value);
+          powerViewStatus = powerLines.isEmpty
+              ? ViewType.empty.index
+              : ViewType.common.index;
+          update(["powerGraph"]);
+        }
       } else {
         powerViewStatus = ViewType.empty.index;
         update(["powerGraph"]);

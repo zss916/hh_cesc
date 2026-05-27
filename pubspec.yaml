@@ -14,14 +14,12 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   get: 4.7.3
-  #get_x_ducafecat: ^5.0.1
   dio: 5.9.1
   pretty_dio_logger: 1.4.0
   auto_size_text: 3.0.0
   shared_preferences: 2.5.3
   cached_network_image: 3.4.1
   flutter_screenutil: 5.9.3
-  #pull_to_refresh_flutter3: 2.0.2
   pull_to_refresh_simple: 3.0.3
   flutter_easyloading: 3.0.5
   event_bus: ^2.0.1
@@ -38,10 +36,8 @@ dependencies:
   flutter_popup: 3.3.9
   flutter_datetime_picker_plus: 2.2.0
   intl: 0.20.2
-  #时区
-  #timezone: ^0.10.1
   #图表
-  fl_chart: 1.1.1
+  fl_chart: 1.2.0
   easy_date_timeline: 2.0.9
   calendar_date_picker2: 2.0.1
   #国家数据
@@ -53,6 +49,11 @@ dependencies:
   flutter_launcher_icons: 0.14.4
   #splash
   flutter_native_splash: 2.4.7
+  package_info_plus: 10.1.0
+  device_info_plus: 13.1.0
+  super_tooltip: 2.1.1
+  csv: ^6.0.0
+  share_plus: 13.1.0
   #fireBase
   #firebase_core: 4.3.0
   #permission_handler: 12.0.1
@@ -62,8 +63,10 @@ dependencies:
   #easy_load_more: 2.0.0
   #easy_refresh: 3.4.0
   #fl_chart_flutter:
-  package_info_plus: 10.1.0
-  device_info_plus: 13.1.0
+  #timeago:
+  #gal: ^2.1.0
+  #animated_flip_counter: 0.3.4
+  #to_csv: 6.0.1
   #win32: 6.0.1
   #win32_registry: 3.0.3
   #charts_flutter: ^0.12.0
@@ -74,14 +77,11 @@ dependencies:
   #gradient_borders: 1.0.2
   #flutter_debounce: 2.0.0
   #tooltip
-  super_tooltip: 2.1.1
-  #timeago:
-  #gal: ^2.1.0
-  #animated_flip_counter: 0.3.4
-  #to_csv: 6.0.1
-  csv: ^6.0.0
-  share_plus: 13.1.0
-  #excel: ^4.0.0
+  #时区
+  #timezone: ^0.10.1
+  #get_x_ducafecat: ^5.0.1
+  #pull_to_refresh_flutter3: 2.0.2
+
 
   flutter_echart:
     path: plugins/flutter_echart-master
