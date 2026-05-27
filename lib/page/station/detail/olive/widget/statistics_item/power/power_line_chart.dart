@@ -39,7 +39,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
       height: double.maxFinite,
       width: double.maxFinite,
       child: LineChart(
-        // transformationConfig: buildFlTransformationConfig,
+        transformationConfig: buildFlTransformationConfig,
         LineChartData(
           titlesData: buildFlTitlesData(),
           lineBarsData: lineBarsData(widget.list),
@@ -155,7 +155,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
       FlTransformationConfig(
         scaleAxis: FlScaleAxis.horizontal,
         minScale: 2,
-        maxScale: 4,
+        maxScale: 50,
       );
 
   ///触摸

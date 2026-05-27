@@ -169,9 +169,9 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart2> {
   AxisTitles get bottomTitlesR => AxisTitles(
     sideTitles: SideTitles(
       showTitles: true,
-      reservedSize: 25,
+      reservedSize: 20,
       getTitlesWidget: (value, meta) {
-        return (widget.socList.isEmpty)
+        return widget.socList.isEmpty
             ? SizedBox(height: 10)
             : SideTitleWidget(
                 meta: meta,

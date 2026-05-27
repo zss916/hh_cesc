@@ -191,6 +191,7 @@ class StatisticsItemLogic extends GetxController {
           socPowerLines.assignAll(
             socPowers.map((e) => ((e.$1.list ?? []), e.$2)).toList(),
           );
+          //debugPrint("socPowerLines ===> ${socPowerLines.first.$1.length}");
           powerViewStatus = (powerLines.isEmpty && socPowerLines.isEmpty)
               ? ViewType.empty.index
               : ViewType.common.index;
