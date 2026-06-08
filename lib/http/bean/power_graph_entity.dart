@@ -35,7 +35,7 @@ class PowerGraphList {
   int time = 0;
 
   ///y轴数据
-  double val = 0;
+  double? val;
 
   //String dd => DateFormat.;
 

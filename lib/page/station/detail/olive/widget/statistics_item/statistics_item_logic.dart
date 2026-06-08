@@ -10,9 +10,12 @@ import 'package:cescpro/http/bean/pv_trend_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/color_utils.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart3.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 enum ViewType { loading, common, empty }
 
@@ -82,11 +85,6 @@ class StatisticsItemLogic extends GetxController {
               ?.calculateRevenue ??
           false;
     }
-    /*event = AppEventBus.eventBus.on<HasPVEvent>().listen((event) {
-      hasPv = event.hasPv;
-      debugPrint("hasPv===>>>>${hasPv} ");
-      update(["pv"]);
-    });*/
   }
 
   @override
@@ -111,9 +109,8 @@ class StatisticsItemLogic extends GetxController {
       0,
     );
 
-    // debugPrint("start:${start.dateFormatted},end:${end.dateFormatted}");
-
-    loadPower(startTimeStamp: powerStartTime, endTimeStamp: powerEndTime);
+    // loadPower(startTimeStamp: powerStartTime, endTimeStamp: powerEndTime);
+    loadPower2(startTimeStamp: powerStartTime, endTimeStamp: powerEndTime);
 
     loadRevenue(
       type: DataType.revenue,
@@ -138,19 +135,37 @@ class StatisticsItemLogic extends GetxController {
 
   @override
   void onClose() {
-    //event.cancel();
     super.onClose();
     AppLoading.dismiss();
   }
 
-  ///功率分析
-  Future<void> loadPower({
+  ///power 折线图2
+  List<SplineSeries<ChartData, DateTime>> series2 =
+      <SplineSeries<ChartData, DateTime>>[];
+  DateTime minT = DateTime.now();
+  DateTime maxT = DateTime.now();
+  AxisConfig axis = AxisConfig(
+    interval: 2,
+    intervalType: DateTimeIntervalType.minutes,
+    format: DateFormat('HH:mm'),
+  );
+  List<FastLineSeries<ChartData, DateTime>> series =
+      <FastLineSeries<ChartData, DateTime>>[];
+
+  Future<void> loadPower2({
     int type = 0,
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
+    series.clear();
     powerViewStatus = ViewType.loading.index;
-    update(["powerGraph"]);
+    update(["powerGraph2"]);
+    maxT = DateTime.fromMillisecondsSinceEpoch(
+      ((startTimeStamp ?? 0).toInt() * 1),
+    );
+    minT = DateTime.fromMillisecondsSinceEpoch(
+      ((startTimeStamp ?? 0).toInt() * 1),
+    );
 
     final (
       bool isSuccessful,
@@ -160,59 +175,84 @@ class StatisticsItemLogic extends GetxController {
       startTimeStamp: startTimeStamp,
       endTimeStamp: endTimeStamp,
     );
+
     if (isSuccessful) {
-      final colors = ColorGenerator.generateColors(value.length);
-      bool isHasSoc = value.where((e) => e.type == 4).isNotEmpty;
-      List<PowerGraphEntity> perData = normalizeChartData(
-        value.map((e) => e.toJson()).toList(),
-      ).map((e) => PowerGraphEntity.fromJson(e)).toList();
-      bool isHasData = perData.any((e) => (e.list ?? []).isNotEmpty);
-      if (isHasData) {
-        ///优化
-        titles.assignAll(
-          value.mapIndexed((i, w) => (w.title ?? "", colors[i])),
-        );
-        if (isHasSoc) {
-          List<(PowerGraphEntity, Color)> perDataAndColor = perData
-              .mapIndexed((i, e) => (e, colors[i]))
-              .toList();
-          List<(PowerGraphEntity, Color)> otherPowers = perDataAndColor
-              .where((e) => e.$1.type != 4)
-              .toList();
-          powerLines.assignAll(
-            otherPowers
-                .mapIndexed((i, e) => ((e.$1.list ?? []), e.$2))
-                .toList(),
-          );
-          handPowerData(otherPowers.map((e) => e.$1).toList());
-          List<(PowerGraphEntity, Color)> socPowers = perDataAndColor
-              .where((e) => e.$1.type == 4)
-              .toList();
-          socPowerLines.assignAll(
-            socPowers.map((e) => ((e.$1.list ?? []), e.$2)).toList(),
-          );
-          //debugPrint("socPowerLines ===> ${socPowerLines.first.$1.length}");
-          powerViewStatus = (powerLines.isEmpty && socPowerLines.isEmpty)
+      if (value.isNotEmpty) {
+        bool isHasItemData = value.any((e) => (e.list ?? []).isNotEmpty);
+        if (isHasItemData) {
+          /// 直接生成 Map<String, List<ChartData>>
+          final Map<String, List<ChartData>> powerMap = {
+            for (var v in value)
+              "${v.title}": (v.list ?? [])
+                  .map(
+                    (e) => ChartData.fromJson({'time': e.time, 'value': e.val}),
+                  )
+                  .toList(),
+          };
+
+          for (final list in powerMap.values) {
+            for (final p in list) {
+              if (p.time.isBefore(minT)) minT = p.time;
+              if (p.time.isAfter(maxT)) maxT = p.time;
+            }
+          }
+          Duration range = maxT.difference(minT);
+          axis = AxisConfig.fromRange(range);
+          var i = 0;
+          powerMap.forEach((lineName, points) {
+            final isSecondary = lineName.toLowerCase() == 'soc'.toLowerCase();
+            series.add(
+              /*SplineSeries<ChartData, DateTime>(
+                name: lineName,
+                dataSource: points,
+                xValueMapper: (ChartData p, _) => p.time,
+                yValueMapper: (ChartData p, _) => p.value,
+                color: isSecondary ? Colors.blue : palette[i % palette.length],
+                width: 1,
+                splineType: SplineType.natural,
+                yAxisName: isSecondary ? 'secondaryYAxis' : null,
+                markerSettings: MarkerSettings(
+                  isVisible: true,
+                  shape: DataMarkerType.circle,
+                  borderWidth: 0.0,
+                  height: 0.0,
+                  width: 0.0,
+                ),
+              ),*/
+              FastLineSeries<ChartData, DateTime>(
+                name: lineName,
+                yAxisName: isSecondary ? 'secondaryYAxis' : null,
+                dataSource: points,
+                xValueMapper: (p, _) => p.time,
+                yValueMapper: (p, _) => p.value,
+                color: isSecondary ? Colors.blue : palette[i % palette.length],
+                width: 1,
+                markerSettings: MarkerSettings(
+                  isVisible: true,
+                  shape: DataMarkerType.circle,
+                  borderWidth: 0.0,
+                  height: 0.0,
+                  width: 0.0,
+                ),
+              ),
+            );
+            i++;
+          });
+          powerViewStatus = series.isEmpty
               ? ViewType.empty.index
               : ViewType.common.index;
-          update(["powerGraph"]);
+          update(["powerGraph2"]);
         } else {
-          powerLines.assignAll(
-            perData.mapIndexed((i, e) => ((e.list ?? []), colors[i])),
-          );
-          handPowerData(value);
-          powerViewStatus = powerLines.isEmpty
-              ? ViewType.empty.index
-              : ViewType.common.index;
-          update(["powerGraph"]);
+          powerViewStatus = ViewType.empty.index;
+          update(["powerGraph2"]);
         }
       } else {
         powerViewStatus = ViewType.empty.index;
-        update(["powerGraph"]);
+        update(["powerGraph2"]);
       }
     } else {
       powerViewStatus = ViewType.empty.index;
-      update(["powerGraph"]);
+      update(["powerGraph2"]);
     }
   }
 
@@ -241,7 +281,7 @@ class StatisticsItemLogic extends GetxController {
       };
 
       item['list'] = sortedTimes.map((time) {
-        return timeMap[time] ?? {'time': time, 'val': 0};
+        return timeMap[time] ?? {'time': time, 'val': null};
       }).toList();
     }
 
@@ -256,11 +296,11 @@ class StatisticsItemLogic extends GetxController {
         .toList();
     if (data.isNotEmpty) {
       maxY = data
-          .map((e) => e.map((e) => e.val).toList().reduce(max))
+          .map((e) => e.map((e) => e.val ?? 0).toList().reduce(max))
           .toList()
           .reduce(max);
       minY = data
-          .map((e) => e.map((e) => e.val).toList().reduce(min))
+          .map((e) => e.map((e) => e.val ?? 0).toList().reduce(min))
           .toList()
           .reduce(min);
 
@@ -448,5 +488,100 @@ class StatisticsItemLogic extends GetxController {
     pvMinY = pvs.reduce(min);
     // debugPrint("pvMaxY:$pvMaxY,pvMinY:$pvMinY");
     pvLabels.assignAll(pvList.map((e) => (e.dateTime ?? "")).toList());
+  }
+
+  ///功率分析
+  @Deprecated('过期')
+  Future<void> loadPower({
+    int type = 0,
+    int? startTimeStamp,
+    int? endTimeStamp,
+  }) async {
+    powerViewStatus = ViewType.loading.index;
+    update(["powerGraph"]);
+
+    final (
+      bool isSuccessful,
+      List<PowerGraphEntity> value,
+    ) = await SiteAPI.postPowerGraph(
+      siteId: siteId,
+      startTimeStamp: startTimeStamp,
+      endTimeStamp: endTimeStamp,
+    );
+    if (isSuccessful) {
+      final colors = ColorGenerator.generateColors(value.length);
+      bool isHasSoc = value.where((e) => e.type == 4).isNotEmpty;
+      List<PowerGraphEntity> perData = [];
+
+      /* perData = normalizeChartData(
+        value.map((e) => e.toJson()).toList(),
+      ).map((e) => PowerGraphEntity.fromJson(e)).toList();
+*/
+      ///todo 缅甸和DW
+      if (siteId.toString() == 566.toString()) {
+        perData = normalizeChartData(
+          value.map((e) => e.toJson()).toList(),
+        ).map((e) => PowerGraphEntity.fromJson(e)).toList();
+      } else {
+        perData = value
+            .map((e) => e.toJson())
+            .toList()
+            .map((e) => PowerGraphEntity.fromJson(e))
+            .toList();
+      }
+
+      /*perData = value
+          .map((e) => e.toJson())
+          .toList()
+          .map((e) => PowerGraphEntity.fromJson(e))
+          .toList();*/
+      bool isHasData = perData.any((e) => (e.list ?? []).isNotEmpty);
+      if (isHasData) {
+        ///优化
+        titles.assignAll(
+          value.mapIndexed((i, w) => (w.title ?? "", colors[i])),
+        );
+        if (isHasSoc) {
+          List<(PowerGraphEntity, Color)> perDataAndColor = perData
+              .mapIndexed((i, e) => (e, colors[i]))
+              .toList();
+          List<(PowerGraphEntity, Color)> otherPowers = perDataAndColor
+              .where((e) => e.$1.type != 4)
+              .toList();
+          powerLines.assignAll(
+            otherPowers
+                .mapIndexed((i, e) => ((e.$1.list ?? []), e.$2))
+                .toList(),
+          );
+          handPowerData(otherPowers.map((e) => e.$1).toList());
+          List<(PowerGraphEntity, Color)> socPowers = perDataAndColor
+              .where((e) => e.$1.type == 4)
+              .toList();
+          socPowerLines.assignAll(
+            socPowers.map((e) => ((e.$1.list ?? []), e.$2)).toList(),
+          );
+          //debugPrint("socPowerLines ===> ${socPowerLines.first.$1.first}");
+          powerViewStatus = (powerLines.isEmpty && socPowerLines.isEmpty)
+              ? ViewType.empty.index
+              : ViewType.common.index;
+          update(["powerGraph"]);
+        } else {
+          powerLines.assignAll(
+            perData.mapIndexed((i, e) => ((e.list ?? []), colors[i])),
+          );
+          handPowerData(value);
+          powerViewStatus = powerLines.isEmpty
+              ? ViewType.empty.index
+              : ViewType.common.index;
+          update(["powerGraph"]);
+        }
+      } else {
+        powerViewStatus = ViewType.empty.index;
+        update(["powerGraph"]);
+      }
+    } else {
+      powerViewStatus = ViewType.empty.index;
+      update(["powerGraph"]);
+    }
   }
 }

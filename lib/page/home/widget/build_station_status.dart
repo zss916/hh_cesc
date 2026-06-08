@@ -45,7 +45,7 @@ class BuildStationStatus extends StatelessWidget {
         Container(
           width: double.maxFinite,
           // height: 220.h,
-          constraints: BoxConstraints(minHeight: 220.h),
+          constraints: BoxConstraints(minHeight: 240.h),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             color: Color(0xFF313540),
@@ -62,7 +62,7 @@ class BuildStationStatus extends StatelessWidget {
             children: [
               SizedBox(
                 width: double.maxFinite,
-                height: 150.h,
+                height: 170.h,
                 child: RepaintBoundary(
                   child: PieChartLineWidget(
                     total: (normalNum + faultNum + alarmNum + cutOffNum),

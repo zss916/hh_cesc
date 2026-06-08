@@ -1,7 +1,7 @@
 import 'package:cescpro/core/tools/state.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/ele_bar_chart_widget.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_analysis_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_analysis_widget2.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/build_bar_chart_widget_pv.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/revenue_bar_chart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
@@ -18,11 +18,20 @@ class StatisticsItemView extends StatelessWidget {
       child: Column(
         children: [
           ///功率折线
-          GetBuilder<StatisticsItemLogic>(
+          /* GetBuilder<StatisticsItemLogic>(
             id: "powerGraph",
             init: StatisticsItemLogic(),
             builder: (logic) {
               return PowerAnalysisWidget(logic: logic);
+            },
+          ),*/
+
+          ///功率折线
+          GetBuilder<StatisticsItemLogic>(
+            id: "powerGraph2",
+            init: StatisticsItemLogic(),
+            builder: (logic) {
+              return PowerAnalysisWidget2(logic: logic);
             },
           ),
 

@@ -335,12 +335,14 @@ class MonitorLineChartWidgetState extends State<PowerLineChart2> {
 
       ///线下面的区域(true)
       belowBarData: BarAreaData(
-        show: true,
+        show: false,
         color: color.withValues(alpha: 0.1),
       ),
       spots: [
         ...lines.mapIndexed(
-          (i, e) => FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),
+          (i, e) => e.val == null
+              ? FlSpot.nullSpot
+              : FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),
         ),
       ],
     );

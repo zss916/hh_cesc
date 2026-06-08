@@ -41,6 +41,11 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart2> {
         children: [
           ///soc
           LineChart(
+            transformationConfig: FlTransformationConfig(
+              scaleAxis: FlScaleAxis.horizontal,
+              minScale: 80,
+              maxScale: 100,
+            ),
             LineChartData(
               lineTouchData: lineTouchData,
               gridData: buildFlGridDataR,
@@ -146,6 +151,7 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart2> {
     sideTitles: SideTitles(
       showTitles: true,
       reservedSize: 20,
+      //interval: 160,
       getTitlesWidget: (value, meta) {
         return widget.list.isEmpty
             ? SizedBox(height: 10)
@@ -260,6 +266,8 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart2> {
     Color color,
     List<PowerGraphList> lines,
   ) {
+    // debugPrint("lines ==>${lines.length}, ${lines.toString()}");
+
     return LineChartBarData(
       ///是否圆一点
       isCurved: false,
@@ -272,13 +280,15 @@ class MonitorLineChartWidgetState extends State<HPowerLineChart2> {
 
       ///线下面的区域(true)
       belowBarData: BarAreaData(
-        show: true,
+        show: false,
         color: color.withValues(alpha: 0.1),
       ),
       spots: [
-        ...lines.mapIndexed(
-          (i, e) => FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),
-        ),
+        ...lines.mapIndexed((i, e) {
+          // FlSpot.nullSpot;
+          // debugPrint("FlSpot ===>>> ${i.toDouble()}, ${e.val.toDouble()}");
+          return FlSpot(i.toDouble(), (e.val ?? 0).toDouble());
+        }),
       ],
     );
   }

@@ -194,7 +194,7 @@ class MonitorLineChartWidgetState extends State<PowerLineChart> {
 
       ///线下面的区域(true)
       belowBarData: BarAreaData(
-        show: true,
+        show: false,
         color: color.withValues(alpha: 0.1),
       ),
       spots: [

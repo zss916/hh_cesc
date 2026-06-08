@@ -33,7 +33,7 @@ class APages {
   static final List<GetPage> routes = [
     GetPage(name: hRevenueChart, page: () => RevenueChartPage()),
 
-    GetPage(name: hPowerGraphChart, page: () => PowerGraphChartPage()),
+    GetPage(name: hPowerGraphChart, page: () => PowerGraphChartPage2()),
 
     GetPage(name: hMeterChart, page: () => MeterChartPage()),
 
