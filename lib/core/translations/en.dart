@@ -553,7 +553,7 @@ const en = {
   "stationNum": "Station",
   "stationStatus": "Station Status",
   "environmentalValue": "Environmental Value",
-  "resolveStandardCoal": "Standard Coal Consumption",
+  "resolveStandardCoal": "Standard Coal Savings",
   "co2EmissionReduction": "CO\u2082 Emission Reduction",
   "cumulativeDischargeCapacity": "Cumulative Discharging",
   "accumulatedPhotovoltaicPowerGeneration": "Total PV Generation",

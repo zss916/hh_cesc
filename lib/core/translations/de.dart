@@ -28,7 +28,7 @@ const de = {
   "stationNum": "Bahnhof",
   "stationStatus": "Stationsstatus",
   "environmentalValue": "Umweltwert",
-  "resolveStandardCoal": "Standardkohlenverbrauch",
+  "resolveStandardCoal": "Standardkohleeinsparung",
   "co2EmissionReduction": "CO\u2082-Emissionsreduktion",
   "cumulativeDischargeCapacity": "Gesamtentladungsmenge",
   "accumulatedPhotovoltaicPowerGeneration": "Gesamt-PV-Erzeugung",

@@ -33,7 +33,7 @@ const es = {
   "stationNum": "Estación",
   "stationStatus": "Estado de la estación",
   "environmentalValue": "Valor ambiental",
-  "resolveStandardCoal": "Consumo de carbón estándar",
+  "resolveStandardCoal": "Ahorro de carbón estándar",
   "co2EmissionReduction": "Reducción de emisiones de CO\u2082",
   "cumulativeDischargeCapacity": "Descarga acumulada",
   "accumulatedPhotovoltaicPowerGeneration": "Generación PV total",
