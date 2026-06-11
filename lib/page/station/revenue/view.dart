@@ -39,6 +39,7 @@ class _ReportDetailPageState extends State<RevenuePage> {
               if (Environment.isOverseas)
                 ExportButton(
                   data: logic.rows2,
+                  excelName: logic.excelName,
                   fileNamePrefix: TKey.revenue.tr,
                   onExported: (path) {
                     if (path != null) {

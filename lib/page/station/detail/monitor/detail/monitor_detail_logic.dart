@@ -164,7 +164,151 @@ class MonitorDetailLogic extends GetxController {
     return pathSegments.join('/');
   }
 
+  ///loadSocGraph
   Future<void> loadSocGraph() async {
+    DateTime now = DateTime.now();
+    DateTime startOfDay = DateTime(now.year, now.month, now.day, 0, 0, 0);
+    DateTime endOfToday = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      24,
+      0,
+      0,
+    ).subtract(Duration(microseconds: 1));
+
+    if (devType == "ARR") {
+      final (
+        bool isSuccessful,
+        List<SocEntity> value,
+      ) = await RealTimeDataAPI.postSocGraph(
+        siteId: siteId,
+        did: did,
+        devNo: devNo,
+        nodeNo: nodeNo,
+        compType: devType,
+        startTimeStamp: (startOfDay.microsecondsSinceEpoch / 1000).floor(),
+        endTimeStamp: (endOfToday.microsecondsSinceEpoch / 1000).floor(),
+      );
+      if (isSuccessful) {
+        arrList.assignAll(value);
+        if (arrList.isNotEmpty) {
+          List<double> powerList = arrList.map((e) => e.power ?? 0).toList();
+          double powerListMax = powerList.reduce(max);
+          arrMaxY = powerListMax;
+          double powerListMin = powerList.reduce(min);
+          arrMinY = powerListMin;
+          List<int> socList = arrList.map((e) => e.soc ?? 0).toList();
+          int socListMax = socList.reduce(max);
+          arrMaxYR = socListMax.toDouble();
+          int socListMin = socList.reduce(min);
+          arrMinYR = socListMin.toDouble();
+          /* arrMaxY = (powerListMax > socListMax.toDouble())
+              ? powerListMax
+              : socListMax.toDouble();
+          arrMinY = (powerListMin > socListMin.toDouble())
+              ? socListMin.toDouble()
+              : powerListMin;*/
+          arrMaxX = arrList.length.toDouble();
+
+          ///max = min
+          double maxYR = arrMaxYR ?? 0;
+          double minYR = arrMinYR ?? 0;
+          isDiffR = !(maxYR == minYR);
+          if (maxYR == minYR) {
+            if (maxYR == 0) {
+              arrMinYR = 0;
+              arrMaxYR = 100;
+            } else if (maxYR > 0) {
+              arrMinYR = 0;
+              arrMaxYR = maxYR;
+            } else {
+              ///maxY < 0
+              arrMaxYR = 0;
+              arrMinYR = minYR;
+            }
+          }
+
+          ///max = min
+          double maxYL = arrMaxY ?? 0;
+          double minYL = arrMinY ?? 0;
+          isDiffL = !(maxYL == minYL);
+          if (maxYL == minYL) {
+            if (maxYL.toDouble() == 0.toDouble()) {
+              arrMinY = 0;
+              arrMaxY = 100;
+            } else if (maxYL > 0) {
+              arrMinY = 0;
+              arrMaxY = maxYL;
+            } else {
+              ///maxY < 0
+              arrMaxY = 0;
+              arrMinY = minYL;
+            }
+          }
+          realTimeViewStatus = ViewType.common;
+        } else {
+          realTimeViewStatus = ViewType.empty;
+        }
+        update(["realTimeData"]);
+        debugPrint("maxY:$arrMaxY, minY:$arrMinY，len：${arrList.length}");
+      } else {
+        realTimeViewStatus = ViewType.empty;
+        update(["realTimeData"]);
+      }
+    } else if (devType == "PCS" || devType == "METER") {
+      final (
+        bool isSuccessful,
+        List<PowerEntity> value,
+      ) = await RealTimeDataAPI.postGraph(
+        siteId: siteId,
+        did: did,
+        devNo: devNo,
+        nodeNo: nodeNo,
+        compType: devType,
+        startTimeStamp: (startOfDay.microsecondsSinceEpoch / 1000).floor(),
+        endTimeStamp: (endOfToday.microsecondsSinceEpoch / 1000).floor(),
+      );
+      if (isSuccessful) {
+        powerList.assignAll(value);
+        if (powerList.isNotEmpty) {
+          List<double> powers = powerList.map((e) => e.power ?? 0).toList();
+          powerMaxY = powers.reduce(max);
+          powerMinY = powers.reduce(min);
+          powerMaxX = powerList.length.toDouble();
+          powerViewStatus = ViewType.common;
+
+          ///max = min
+          double maxY = powerMaxY ?? 0;
+          double minY = powerMinY ?? 0;
+          debugPrint("maxY===>>> $maxY,minY===>> $minY");
+          isDiff = !(maxY == minY);
+          if (maxY == minY) {
+            if (maxY.toDouble() == 0.toDouble()) {
+              powerMinY = 0;
+              powerMaxY = 100;
+            } else if (maxY > 0) {
+              powerMinY = 0;
+              powerMaxY = maxY;
+            } else {
+              ///maxY < 0
+              powerMaxY = 0;
+              powerMinY = minY;
+            }
+          }
+        } else {
+          powerViewStatus = ViewType.empty;
+        }
+        update(["realTimeData"]);
+        debugPrint("maxY:$powerMaxX, minY:$powerMinY,maxY:$powerMaxY");
+      } else {
+        powerViewStatus = ViewType.empty;
+        update(["realTimeData"]);
+      }
+    }
+  }
+
+  Future<void> loadSocGraph2() async {
     DateTime now = DateTime.now();
     DateTime startOfDay = DateTime(now.year, now.month, now.day, 0, 0, 0);
     DateTime endOfToday = DateTime(

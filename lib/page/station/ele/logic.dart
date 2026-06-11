@@ -35,6 +35,8 @@ class EleLogic extends GetxController {
   ];
 
   List<List<String>> rows = [];
+  String? excelName;
+  String? siteName;
 
   @override
   void onInit() {
@@ -43,6 +45,7 @@ class EleLogic extends GetxController {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       location = map['location'] as String?;
       siteId = map['siteId'] as int?;
+      siteName = map['name'] as String?;
     }
     DateTime dateTime = DateTime.now();
     date = dateTime.millisecondsSinceEpoch;
@@ -82,8 +85,43 @@ class EleLogic extends GetxController {
       rows.clear();
       rows.add(headers);
       rows.addAll(valueToList(eleList));
+      excelName = getExcelName(
+        queryType: queryType,
+        startTimeStamp: startTimeStamp,
+        endTimeStamp: endTimeStamp,
+        siteName: siteName,
+      );
       update();
     }
+  }
+
+  String getExcelName({
+    required QueryType queryType,
+    int? startTimeStamp,
+    int? endTimeStamp,
+    String? siteName,
+  }) {
+    if (queryType == QueryType.daily) {
+      String startTime = DateFormat(
+        'yyyy-MM-dd',
+      ).format(DateTime.fromMillisecondsSinceEpoch(startTimeStamp ?? 0));
+      String endTime = DateFormat(
+        'yyyy-MM-dd',
+      ).format(DateTime.fromMillisecondsSinceEpoch(endTimeStamp ?? 0));
+
+      return "$startTime-${endTime}_$siteName";
+    } else if (queryType == QueryType.monthly) {
+      String startTime = DateFormat(
+        'yyyy-MM',
+      ).format(DateTime.fromMillisecondsSinceEpoch(startTimeStamp ?? 0));
+      return "${startTime}_$siteName";
+    } else if (queryType == QueryType.yearly) {
+      String startTime = DateFormat(
+        'yyyy',
+      ).format(DateTime.fromMillisecondsSinceEpoch(startTimeStamp ?? 0));
+      return "${startTime}_$siteName";
+    }
+    return "$siteName";
   }
 
   List<List<String>> valueToList(List<ReportDataEntity> value) {

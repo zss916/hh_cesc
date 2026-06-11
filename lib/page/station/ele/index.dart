@@ -9,6 +9,7 @@ import 'package:cescpro/page/station/ele/widget/export_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 part 'logic.dart';
 part 'view.dart';

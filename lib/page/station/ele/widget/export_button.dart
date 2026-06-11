@@ -5,7 +5,6 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -15,6 +14,7 @@ typedef ExportCallback = void Function(String? path);
 class ExportButton extends StatefulWidget {
   final List<List<dynamic>> data;
   final String fileNamePrefix;
+  final String? excelName;
   final ExportCallback? onExported;
   final bool showProgress;
 
@@ -24,6 +24,7 @@ class ExportButton extends StatefulWidget {
     this.fileNamePrefix = 'export',
     this.onExported,
     this.showProgress = true,
+    this.excelName,
   });
 
   @override
@@ -85,8 +86,11 @@ class _ExportButtonState extends State<ExportButton> {
       setState(() => _progress = 0.3);
 
       final csvStr = const ListToCsvConverter(eol: '\n').convert(widget.data);
-      final ts = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-      final path = p.join(directory, '${widget.fileNamePrefix}_$ts.csv');
+      //final ts = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+      final path = p.join(
+        directory,
+        '${widget.fileNamePrefix}_${widget.excelName ?? ''}.csv',
+      );
 
       setState(() => _progress = 0.7);
 

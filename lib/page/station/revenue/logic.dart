@@ -47,15 +47,19 @@ class RevenueLogic extends GetxController {
 
   List<List<String>> rows2 = [];
   List<List<String>> rows = [];
+  String? siteName;
+  String? excelName;
 
   @override
   void onInit() {
     super.onInit();
+
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       location = map['location'] as String?;
       siteId = map['siteId'] as int?;
       isShowTimeSlot = map['isShowTimeSlot'] as bool?;
+      siteName = map['name'] as String?;
     }
     DateTime dateTime = DateTime.now();
     date = dateTime.millisecondsSinceEpoch;
@@ -107,8 +111,44 @@ class RevenueLogic extends GetxController {
       rows2.clear();
       rows2.add(headersRevenue);
       rows2.addAll(valueToList2(revenueList));
+      excelName = getExcelName(
+        queryType: queryType,
+        startTimeStamp: startTimeStamp,
+        endTimeStamp: endTimeStamp,
+        siteName: siteName,
+      );
+      // debugPrint("excelName ==> $excelName");
       update();
     }
+  }
+
+  String getExcelName({
+    required QueryType queryType,
+    int? startTimeStamp,
+    int? endTimeStamp,
+    String? siteName,
+  }) {
+    if (queryType == QueryType.daily) {
+      String startTime = DateFormat(
+        'yyyy-MM-dd',
+      ).format(DateTime.fromMillisecondsSinceEpoch(startTimeStamp ?? 0));
+      String endTime = DateFormat(
+        'yyyy-MM-dd',
+      ).format(DateTime.fromMillisecondsSinceEpoch(endTimeStamp ?? 0));
+
+      return "$startTime-${endTime}_$siteName";
+    } else if (queryType == QueryType.monthly) {
+      String startTime = DateFormat(
+        'yyyy-MM',
+      ).format(DateTime.fromMillisecondsSinceEpoch(startTimeStamp ?? 0));
+      return "${startTime}_$siteName";
+    } else if (queryType == QueryType.yearly) {
+      String startTime = DateFormat(
+        'yyyy',
+      ).format(DateTime.fromMillisecondsSinceEpoch(startTimeStamp ?? 0));
+      return "${startTime}_$siteName";
+    }
+    return "$siteName";
   }
 
   @override
@@ -136,6 +176,12 @@ class RevenueLogic extends GetxController {
       rows.clear();
       rows.add(headersList);
       rows.addAll(valueToList(list));
+      excelName = getExcelName(
+        queryType: queryType,
+        startTimeStamp: startTimeStamp,
+        endTimeStamp: endTimeStamp,
+        siteName: siteName,
+      );
       update();
     }
   }

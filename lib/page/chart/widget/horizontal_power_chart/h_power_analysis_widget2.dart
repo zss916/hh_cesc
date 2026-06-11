@@ -1,10 +1,8 @@
 import 'package:cescpro/page/chart/widget/horizontal_power_chart/h_power_line_chart.dart';
 import 'package:cescpro/page/chart/widget/horizontal_power_chart/h_power_line_chart2.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart3.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
-
-import '../../../station/detail/olive/widget/statistics_item/power/power_line_chart3.dart'
-    show PowerLineChart3;
 
 class HPowerAnalysisWidget2 extends StatefulWidget {
   final StatisticsItemLogic logic;

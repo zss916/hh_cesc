@@ -43,6 +43,7 @@ class _ReportDetailPageState extends State<ElePage> {
               ),*/
               ExportButton(
                 data: logic.rows,
+                excelName: logic.excelName,
                 fileNamePrefix: TKey.electricity.tr,
                 onExported: (path) {
                   if (path != null) {

@@ -57,6 +57,9 @@ class OliveItemLogic extends GetxController {
   String showTodayPvTotalNegUnit = "";
 
   SiteDetailEntity? siteDetail;
+
+  ///站点名称
+  String get siteName => siteDetail?.showName ?? "";
   StatisticRecordEntity? statisticRecord;
   bool revenueShow = false;
 

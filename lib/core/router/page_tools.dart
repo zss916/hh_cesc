@@ -116,26 +116,33 @@ class PageTools {
   static offAllNamedSplash() => Get.offAllNamed(APages.splash);
 
   ///收益
-  static toRevenue({int? siteId, String? location, bool? isShowTimeSlot}) =>
-      Get.toNamed(
-        APages.revenue,
-        arguments: {
-          "siteId": siteId,
-          "location": location,
-          "isShowTimeSlot": isShowTimeSlot,
-        },
-      );
+  static toRevenue({
+    int? siteId,
+    String? location,
+    String? siteName,
+    bool? isShowTimeSlot,
+  }) => Get.toNamed(
+    APages.revenue,
+    arguments: {
+      "siteId": siteId,
+      "location": location,
+      "name": siteName,
+      "isShowTimeSlot": isShowTimeSlot,
+    },
+  );
 
   ///报告详情
-  static toReportDetail({int? siteId, String? location}) => Get.toNamed(
-    APages.reportDetail,
-    arguments: {"siteId": siteId, "location": location},
-  );
+  static toReportDetail({int? siteId, String? location, String? siteName}) =>
+      Get.toNamed(
+        APages.reportDetail,
+        arguments: {"siteId": siteId, "location": location, "name": siteName},
+      );
 
-  static toEleReport({int? siteId, String? location}) => Get.toNamed(
-    APages.eleReport,
-    arguments: {"siteId": siteId, "location": location},
-  );
+  static toEleReport({int? siteId, String? location, String? siteName}) =>
+      Get.toNamed(
+        APages.eleReport,
+        arguments: {"siteId": siteId, "location": location, "name": siteName},
+      );
 
   ///首页告警详情
   static toAlarmDetails(AlarmItemEntity item) =>

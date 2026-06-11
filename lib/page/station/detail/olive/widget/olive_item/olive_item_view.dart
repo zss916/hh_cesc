@@ -1618,17 +1618,20 @@ class OliveItemView extends StatelessWidget {
                     if (AppSetting.isOverseas) {
                       PageTools.toEleReport(
                         siteId: logic.siteId,
+                        siteName: logic.siteName,
                         location: logic.siteDetail?.location,
                       );
                     } else {
                       if (logic.siteDetail?.showOverSeasUi ?? false) {
                         PageTools.toEleReport(
                           siteId: logic.siteId,
+                          siteName: logic.siteName,
                           location: logic.siteDetail?.location,
                         );
                       } else {
                         PageTools.toReportDetail(
                           siteId: logic.siteId,
+                          siteName: logic.siteName,
                           location: logic.siteDetail?.location,
                         );
                       }
@@ -1691,6 +1694,7 @@ class OliveItemView extends StatelessWidget {
                   onTap: () {
                     PageTools.toRevenue(
                       siteId: logic.siteId,
+                      siteName: logic.siteName,
                       location: logic.siteDetail?.location,
                       isShowTimeSlot:
                           (logic.siteDetail?.showOverSeasUi ?? false),
@@ -1729,17 +1733,20 @@ class OliveItemView extends StatelessWidget {
           if (AppSetting.isOverseas) {
             PageTools.toEleReport(
               siteId: logic.siteId,
+              siteName: logic.siteName,
               location: logic.siteDetail?.location,
             );
           } else {
             if (logic.siteDetail?.showOverSeasUi ?? false) {
               PageTools.toEleReport(
                 siteId: logic.siteId,
+                siteName: logic.siteName,
                 location: logic.siteDetail?.location,
               );
             } else {
               PageTools.toReportDetail(
                 siteId: logic.siteId,
+                siteName: logic.siteName,
                 location: logic.siteDetail?.location,
               );
             }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class PowerLineChart3 extends StatelessWidget {
-  const PowerLineChart3({
+class FMonitorLineChartWidget extends StatelessWidget {
+  const FMonitorLineChartWidget({
     super.key,
     required this.data,
     required this.maxT,
@@ -12,7 +12,6 @@ class PowerLineChart3 extends StatelessWidget {
     required this.isH,
   });
 
-  //final List<SplineSeries<ChartData, DateTime>> data;
   final List<FastLineSeries<ChartData, DateTime>> data;
 
   final DateTime minT;
@@ -49,21 +48,16 @@ class PowerLineChart3 extends StatelessWidget {
                           buildLegendItem(
                             name: name,
                             color: name.toLowerCase() == "soc"
-                                ? Colors.blue
-                                : palette[index],
+                                ? Color(0x800BC3C4)
+                                : paletteF[index],
                           ),
                   textStyle: TextStyle(fontSize: 12),
                 ),
                 primaryXAxis: DateTimeAxis(
                   title: AxisTitle(text: ''),
-                  dateFormat: DateFormat('HH:mm'),
-                  enableAutoIntervalOnZooming: true,
-                  intervalType: DateTimeIntervalType.minutes,
-
-                  ///old
-                  //dateFormat: axis.format,
-                  //intervalType: axis.intervalType,
-                  //interval: axis.interval,
+                  dateFormat: axis.format,
+                  intervalType: axis.intervalType,
+                  interval: axis.interval,
                   minimum: minT,
                   maximum: maxT,
                   edgeLabelPlacement: EdgeLabelPlacement.shift,
@@ -86,15 +80,18 @@ class PowerLineChart3 extends StatelessWidget {
                     name: 'secondaryYAxis',
                     opposedPosition: true,
                     title: AxisTitle(text: ''),
-                    axisLine: AxisLine(color: Colors.blue, width: 0),
+                    axisLine: AxisLine(color: Color(0x800BC3C4), width: 0),
                     maximum: 100,
                     minimum: 0,
-                    labelStyle: TextStyle(color: Colors.blue, fontSize: 8),
+                    labelStyle: TextStyle(
+                      color: Color(0x800BC3C4),
+                      fontSize: 8,
+                    ),
                     majorTickLines: MajorTickLines(size: 0),
                     majorGridLines: MajorGridLines(
                       width: 0.5,
                       dashArray: <double>[5, 5],
-                      color: Colors.blue,
+                      color: Color(0x800BC3C4),
                     ),
                   ),
                 ],
@@ -140,7 +137,7 @@ TrackballBehavior get trackballBehavior => TrackballBehavior(
   tooltipDisplayMode: TrackballDisplayMode.groupAllPoints,
   tooltipSettings: InteractiveTooltip(
     textStyle: TextStyle(fontSize: 10),
-    color: Colors.black38,
+    color: Colors.white38,
   ),
 );
 
@@ -184,9 +181,7 @@ class AxisConfig {
 
   static AxisConfig fromRange(Duration range) {
     final hours = range.inHours;
-    //
     if (hours <= 1) {
-      debugPrint("hours ===> 1");
       return AxisConfig(
         interval: 2,
         intervalType: DateTimeIntervalType.minutes,
@@ -194,7 +189,6 @@ class AxisConfig {
       );
     }
     if (hours <= 6) {
-      debugPrint("hours ===> 2");
       return AxisConfig(
         interval: 5,
         intervalType: DateTimeIntervalType.minutes,
@@ -202,7 +196,6 @@ class AxisConfig {
       );
     }
     if (hours <= 24) {
-      debugPrint("hours ===> 3");
       return AxisConfig(
         interval: 3,
         intervalType: DateTimeIntervalType.hours,
@@ -239,16 +232,4 @@ class AxisConfig {
 }
 
 ///palette
-const palette = <Color>[
-  Colors.red, // line2
-  Colors.green, // line3
-  Colors.orange, // line4 (右轴)
-  Colors.purple, // line5
-  Colors.teal, // line6
-  Colors.brown, // line7
-  Colors.pink, // line8
-  Colors.indigo, // line9
-  Colors.lime, // line10
-  Colors.cyan, // line11
-  Colors.amber, // line12
-];
+const paletteF = <Color>[Color(0xFF3874F2), Color(0xFF0BC3C4)];
