@@ -27,7 +27,10 @@ class EleLogic extends GetxController {
   List<ReportDataEntity> eleList = [];
 
   List<String> get headers => [
-    TKey.date.tr,
+    //TKey.date.tr,
+    (queryType.value == 3)
+        ? TKey.year.tr
+        : ((queryType.value == 2) ? TKey.month.tr : TKey.date.tr),
     "${TKey.photovoltaicPowerGeneration2.tr}(kWh)",
     "${TKey.gridEleGeneration.tr}(kWh)",
     "${TKey.energyStorageCharge.tr}(kWh)",

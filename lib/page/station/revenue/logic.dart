@@ -30,7 +30,9 @@ class RevenueLogic extends GetxController {
   List<ReportDataEntity> revenueList = [];
 
   List<String> get headersRevenue => [
-    TKey.date.tr,
+    (queryType.value == 3)
+        ? TKey.year.tr
+        : ((queryType.value == 2) ? TKey.month.tr : TKey.date.tr),
     "${TKey.allRevenue.tr}(${User.to.getCurrencyUnit()})",
     "${TKey.feedInRevenue.tr}(${User.to.getCurrencyUnit()})",
     "${TKey.selfGenerationRevenue.tr}(${User.to.getCurrencyUnit()})",
@@ -38,7 +40,9 @@ class RevenueLogic extends GetxController {
   ];
 
   List<String> get headersList => [
-    TKey.date.tr,
+    (queryType.value == 3)
+        ? TKey.year.tr
+        : ((queryType.value == 2) ? TKey.month.tr : TKey.date.tr),
     TKey.duration.tr,
     "${TKey.chargingAmount.tr}(${User.to.getCurrencyUnit()})",
     "${TKey.dischargingAmount.tr}(${User.to.getCurrencyUnit()})",
