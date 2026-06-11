@@ -174,7 +174,7 @@ class EleTableWidget extends StatelessWidget {
                             width: double.maxFinite,
                             alignment: AlignmentDirectional.center,
                             child: Text(
-                              item.showDayDate(queryType),
+                              item.showDayDate(queryType.value),
                               //item.dayDate ?? "--",
                               textAlign: TextAlign.center,
                               style: TextStyle(

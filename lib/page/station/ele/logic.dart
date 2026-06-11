@@ -128,7 +128,7 @@ class EleLogic extends GetxController {
     return value
         .map(
           (e) => [
-            "${e.dayDate}",
+            '="${e.dayDate}"',
             e.isHasPV ? (e.pvGeneration ?? 0).formatNum() : "--",
             e.isShow ? (e.gridFeed ?? 0).formatNum() : "--",
             (e.pos ?? 0).formatNum(),

@@ -236,7 +236,7 @@ class RevenueLogic extends GetxController {
     return value
         .map(
           (e) => [
-            "${e.dayDate}",
+            '="${e.dayDate}"',
             e.allRevenue,
             e.isShow ? (e.gridFeedGain ?? 0.00).formatAmount() : "--",
             e.isHasPV ? (e.pvSelfUseGain ?? 0.00).formatAmount() : "--",

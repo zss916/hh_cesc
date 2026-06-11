@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/report_data_entity.g.dart';
-import 'package:cescpro/page/station/ele/index.dart';
 import 'package:intl/intl.dart';
 
 export 'package:cescpro/generated/json/report_data_entity.g.dart';
@@ -53,13 +52,13 @@ class ReportDataEntity {
               (pvSelfUseGain ?? 0.00))
           .formatAmount();
 
-  String showDayDate(QueryType queryType) {
+  String showDayDate(int queryType) {
     if ((dayDate ?? "").isNotEmpty) {
       try {
-        if (queryType.value == 1) {
+        if (queryType == 1) {
           DateTime dateTime = DateTime.parse(dayDate ?? "");
           return DateFormat('yyyy\nMM-dd').format(dateTime);
-        } else if (queryType.value == 2) {
+        } else if (queryType == 2) {
           if ((dayDate ?? "").contains("-")) {
             return (dayDate ?? "").replaceAll("-", "\n");
           } else {

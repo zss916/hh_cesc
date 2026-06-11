@@ -84,6 +84,7 @@ class _ExportButtonState extends State<ExportButton> {
       }
 
       setState(() => _progress = 0.3);
+      debugPrint("data => ${widget.data.toString()}");
 
       final csvStr = const ListToCsvConverter(eol: '\n').convert(widget.data);
       //final ts = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());

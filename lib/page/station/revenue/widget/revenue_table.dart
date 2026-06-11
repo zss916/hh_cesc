@@ -22,14 +22,14 @@ class RevenueTableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppSetting.isOverseas
-        ? buildRevenueList2()
+        ? buildRevenueList2(queryType)
         : (logic.isShowTimeSlot == true
-              ? buildRevenueList2()
-              : buildRevenueList());
+              ? buildRevenueList2(queryType)
+              : buildRevenueList(queryType));
   }
 
   ///海外版的收益报表
-  Widget buildRevenueList2() {
+  Widget buildRevenueList2(QueryType queryType) {
     return SingleChildScrollView(
       child: Container(
         width: double.maxFinite,
@@ -182,7 +182,8 @@ class RevenueTableWidget extends StatelessWidget {
                               width: double.maxFinite,
                               alignment: AlignmentDirectional.center,
                               child: Text(
-                                item.dayDate ?? "--",
+                                //item.dayDate ?? "--",
+                                item.showDayDate(queryType.value),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: const Color(0xD9FFFFFF),
@@ -304,7 +305,7 @@ class RevenueTableWidget extends StatelessWidget {
   }
 
   ///国内版的收益报表
-  Widget buildRevenueList() {
+  Widget buildRevenueList(QueryType queryType) {
     return SingleChildScrollView(
       child: Container(
         width: double.maxFinite,
