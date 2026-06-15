@@ -108,9 +108,7 @@ class EleLogic extends GetxController {
       String startTime = DateFormat(
         'yyyy-MM-dd',
       ).format(DateTime.fromMillisecondsSinceEpoch(startTimeStamp ?? 0));
-      String endTime = DateFormat(
-        'yyyy-MM-dd',
-      ).format(DateTime.fromMillisecondsSinceEpoch(endTimeStamp ?? 0));
+      String endTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
 
       return "$startTime-${endTime}_$siteName";
     } else if (queryType == QueryType.monthly) {

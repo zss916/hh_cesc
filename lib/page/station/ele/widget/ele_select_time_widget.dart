@@ -100,6 +100,8 @@ class _BuildSelectTimeWidgetState extends State<EleSelectTimeWidget> {
                       dateTime.day + 1,
                     );
                     widget.logic.endTimeStamp = end.millisecondsSinceEpoch;
+
+                    ///todo
                   } else if (widget.logic.queryType == QueryType.monthly) {
                     widget.logic.date = dateTime.millisecondsSinceEpoch;
                     DateTime start = DateTime(dateTime.year, dateTime.month, 1);

@@ -1,10 +1,9 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
-import 'package:cescpro/core/user/user.dart';
-
 
 StatisticRecordEntity $StatisticRecordEntityFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   final StatisticRecordEntity statisticRecordEntity = StatisticRecordEntity();
   final int? groupId = jsonConvert.convert<int>(json['groupId']);
   if (groupId != null) {
@@ -31,82 +30,98 @@ StatisticRecordEntity $StatisticRecordEntityFromJson(
     statisticRecordEntity.todayIncome = todayIncome;
   }
   final double? todayTotalPos = jsonConvert.convert<double>(
-      json['todayTotalPos']);
+    json['todayTotalPos'],
+  );
   if (todayTotalPos != null) {
     statisticRecordEntity.todayTotalPos = todayTotalPos;
   }
   final double? todayTotalNeg = jsonConvert.convert<double>(
-      json['todayTotalNeg']);
+    json['todayTotalNeg'],
+  );
   if (todayTotalNeg != null) {
     statisticRecordEntity.todayTotalNeg = todayTotalNeg;
   }
   final double? lastDayIncome = jsonConvert.convert<double>(
-      json['lastDayIncome']);
+    json['lastDayIncome'],
+  );
   if (lastDayIncome != null) {
     statisticRecordEntity.lastDayIncome = lastDayIncome;
   }
   final double? lastDayTotalPos = jsonConvert.convert<double>(
-      json['lastDayTotalPos']);
+    json['lastDayTotalPos'],
+  );
   if (lastDayTotalPos != null) {
     statisticRecordEntity.lastDayTotalPos = lastDayTotalPos;
   }
   final double? lastDayTotalNeg = jsonConvert.convert<double>(
-      json['lastDayTotalNeg']);
+    json['lastDayTotalNeg'],
+  );
   if (lastDayTotalNeg != null) {
     statisticRecordEntity.lastDayTotalNeg = lastDayTotalNeg;
   }
   final double? currentMonthIncome = jsonConvert.convert<double>(
-      json['currentMonthIncome']);
+    json['currentMonthIncome'],
+  );
   if (currentMonthIncome != null) {
     statisticRecordEntity.currentMonthIncome = currentMonthIncome;
   }
   final double? currentMonthTotalPos = jsonConvert.convert<double>(
-      json['currentMonthTotalPos']);
+    json['currentMonthTotalPos'],
+  );
   if (currentMonthTotalPos != null) {
     statisticRecordEntity.currentMonthTotalPos = currentMonthTotalPos;
   }
   final double? currentMonthTotalNeg = jsonConvert.convert<double>(
-      json['currentMonthTotalNeg']);
+    json['currentMonthTotalNeg'],
+  );
   if (currentMonthTotalNeg != null) {
     statisticRecordEntity.currentMonthTotalNeg = currentMonthTotalNeg;
   }
   final double? currentYearIncome = jsonConvert.convert<double>(
-      json['currentYearIncome']);
+    json['currentYearIncome'],
+  );
   if (currentYearIncome != null) {
     statisticRecordEntity.currentYearIncome = currentYearIncome;
   }
   final double? currentYearTotalPos = jsonConvert.convert<double>(
-      json['currentYearTotalPos']);
+    json['currentYearTotalPos'],
+  );
   if (currentYearTotalPos != null) {
     statisticRecordEntity.currentYearTotalPos = currentYearTotalPos;
   }
   final double? currentYearTotalNeg = jsonConvert.convert<double>(
-      json['currentYearTotalNeg']);
+    json['currentYearTotalNeg'],
+  );
   if (currentYearTotalNeg != null) {
     statisticRecordEntity.currentYearTotalNeg = currentYearTotalNeg;
   }
   final double? todayPvTotalNeg = jsonConvert.convert<double>(
-      json['todayPvTotalNeg']);
+    json['todayPvTotalNeg'],
+  );
   if (todayPvTotalNeg != null) {
     statisticRecordEntity.todayPvTotalNeg = todayPvTotalNeg;
   }
   final double? totalPvTotalNeg = jsonConvert.convert<double>(
-      json['totalPvTotalNeg']);
+    json['totalPvTotalNeg'],
+  );
   if (totalPvTotalNeg != null) {
     statisticRecordEntity.totalPvTotalNeg = totalPvTotalNeg;
   }
   final double? monthPvTotalNeg = jsonConvert.convert<double>(
-      json['monthPvTotalNeg']);
+    json['monthPvTotalNeg'],
+  );
   if (monthPvTotalNeg != null) {
     statisticRecordEntity.monthPvTotalNeg = monthPvTotalNeg;
   }
   final double? lastDayPvTotalNeg = jsonConvert.convert<double>(
-      json['lastDayPvTotalNeg']);
+    json['lastDayPvTotalNeg'],
+  );
   if (lastDayPvTotalNeg != null) {
     statisticRecordEntity.lastDayPvTotalNeg = lastDayPvTotalNeg;
   }
   final double? yearPvTotalNeg = jsonConvert.convert<double>(
-      json['yearPvTotalNeg']);
+    json['yearPvTotalNeg'],
+  );
   if (yearPvTotalNeg != null) {
     statisticRecordEntity.yearPvTotalNeg = yearPvTotalNeg;
   }
@@ -130,12 +145,14 @@ StatisticRecordEntity $StatisticRecordEntityFromJson(
   if (status != null) {
     statisticRecordEntity.status = status;
   }
-  final List<
-      StatisticRecordDailyStatisticVOList>? dailyStatisticVOList = (json['dailyStatisticVOList'] as List<
-      dynamic>?)?.map(
-          (e) =>
-      jsonConvert.convert<StatisticRecordDailyStatisticVOList>(
-          e) as StatisticRecordDailyStatisticVOList).toList();
+  final List<StatisticRecordDailyStatisticVOList>? dailyStatisticVOList =
+      (json['dailyStatisticVOList'] as List<dynamic>?)
+          ?.map(
+            (e) =>
+                jsonConvert.convert<StatisticRecordDailyStatisticVOList>(e)
+                    as StatisticRecordDailyStatisticVOList,
+          )
+          .toList();
   if (dailyStatisticVOList != null) {
     statisticRecordEntity.dailyStatisticVOList = dailyStatisticVOList;
   }
@@ -175,11 +192,16 @@ StatisticRecordEntity $StatisticRecordEntityFromJson(
   if (coal != null) {
     statisticRecordEntity.coal = coal;
   }
+  final int? containerCount = jsonConvert.convert<int>(json['containerCount']);
+  if (containerCount != null) {
+    statisticRecordEntity.containerCount = containerCount;
+  }
   return statisticRecordEntity;
 }
 
 Map<String, dynamic> $StatisticRecordEntityToJson(
-    StatisticRecordEntity entity) {
+  StatisticRecordEntity entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['groupId'] = entity.groupId;
   data['groupName'] = entity.groupName;
@@ -208,8 +230,9 @@ Map<String, dynamic> $StatisticRecordEntityToJson(
   data['power'] = entity.power;
   data['operationTime'] = entity.operationTime;
   data['status'] = entity.status;
-  data['dailyStatisticVOList'] =
-      entity.dailyStatisticVOList?.map((v) => v.toJson()).toList();
+  data['dailyStatisticVOList'] = entity.dailyStatisticVOList
+      ?.map((v) => v.toJson())
+      .toList();
   data['pvPower'] = entity.pvPower;
   data['pvCapacity'] = entity.pvCapacity;
   data['siteNum'] = entity.siteNum;
@@ -219,6 +242,7 @@ Map<String, dynamic> $StatisticRecordEntityToJson(
   data['cutOffNum'] = entity.cutOffNum;
   data['co2'] = entity.co2;
   data['coal'] = entity.coal;
+  data['containerCount'] = entity.containerCount;
   return data;
 }
 
@@ -261,6 +285,7 @@ extension StatisticRecordEntityExtension on StatisticRecordEntity {
     int? cutOffNum,
     num? co2,
     num? coal,
+    int? containerCount,
   }) {
     return StatisticRecordEntity()
       ..groupId = groupId ?? this.groupId
@@ -299,13 +324,15 @@ extension StatisticRecordEntityExtension on StatisticRecordEntity {
       ..alarmNum = alarmNum ?? this.alarmNum
       ..cutOffNum = cutOffNum ?? this.cutOffNum
       ..co2 = co2 ?? this.co2
-      ..coal = coal ?? this.coal;
+      ..coal = coal ?? this.coal
+      ..containerCount = containerCount ?? this.containerCount;
   }
 }
 
-StatisticRecordDailyStatisticVOList $StatisticRecordDailyStatisticVOListFromJson(
-    Map<String, dynamic> json) {
-  final StatisticRecordDailyStatisticVOList statisticRecordDailyStatisticVOList = StatisticRecordDailyStatisticVOList();
+StatisticRecordDailyStatisticVOList
+$StatisticRecordDailyStatisticVOListFromJson(Map<String, dynamic> json) {
+  final StatisticRecordDailyStatisticVOList
+  statisticRecordDailyStatisticVOList = StatisticRecordDailyStatisticVOList();
   final int? siteId = jsonConvert.convert<int>(json['siteId']);
   if (siteId != null) {
     statisticRecordDailyStatisticVOList.siteId = siteId;
@@ -331,60 +358,71 @@ StatisticRecordDailyStatisticVOList $StatisticRecordDailyStatisticVOListFromJson
     statisticRecordDailyStatisticVOList.todayIncome = todayIncome;
   }
   final double? todayTotalPos = jsonConvert.convert<double>(
-      json['todayTotalPos']);
+    json['todayTotalPos'],
+  );
   if (todayTotalPos != null) {
     statisticRecordDailyStatisticVOList.todayTotalPos = todayTotalPos;
   }
   final double? todayTotalNeg = jsonConvert.convert<double>(
-      json['todayTotalNeg']);
+    json['todayTotalNeg'],
+  );
   if (todayTotalNeg != null) {
     statisticRecordDailyStatisticVOList.todayTotalNeg = todayTotalNeg;
   }
   final double? lastDayIncome = jsonConvert.convert<double>(
-      json['lastDayIncome']);
+    json['lastDayIncome'],
+  );
   if (lastDayIncome != null) {
     statisticRecordDailyStatisticVOList.lastDayIncome = lastDayIncome;
   }
   final double? lastDayTotalPos = jsonConvert.convert<double>(
-      json['lastDayTotalPos']);
+    json['lastDayTotalPos'],
+  );
   if (lastDayTotalPos != null) {
     statisticRecordDailyStatisticVOList.lastDayTotalPos = lastDayTotalPos;
   }
   final double? lastDayTotalNeg = jsonConvert.convert<double>(
-      json['lastDayTotalNeg']);
+    json['lastDayTotalNeg'],
+  );
   if (lastDayTotalNeg != null) {
     statisticRecordDailyStatisticVOList.lastDayTotalNeg = lastDayTotalNeg;
   }
   final double? currentMonthIncome = jsonConvert.convert<double>(
-      json['currentMonthIncome']);
+    json['currentMonthIncome'],
+  );
   if (currentMonthIncome != null) {
     statisticRecordDailyStatisticVOList.currentMonthIncome = currentMonthIncome;
   }
   final double? currentMonthTotalPos = jsonConvert.convert<double>(
-      json['currentMonthTotalPos']);
+    json['currentMonthTotalPos'],
+  );
   if (currentMonthTotalPos != null) {
     statisticRecordDailyStatisticVOList.currentMonthTotalPos =
         currentMonthTotalPos;
   }
   final double? currentMonthTotalNeg = jsonConvert.convert<double>(
-      json['currentMonthTotalNeg']);
+    json['currentMonthTotalNeg'],
+  );
   if (currentMonthTotalNeg != null) {
     statisticRecordDailyStatisticVOList.currentMonthTotalNeg =
         currentMonthTotalNeg;
   }
   final double? currentYearIncome = jsonConvert.convert<double>(
-      json['currentYearIncome']);
+    json['currentYearIncome'],
+  );
   if (currentYearIncome != null) {
     statisticRecordDailyStatisticVOList.currentYearIncome = currentYearIncome;
   }
   final double? currentYearTotalPos = jsonConvert.convert<double>(
-      json['currentYearTotalPos']);
+    json['currentYearTotalPos'],
+  );
   if (currentYearTotalPos != null) {
     statisticRecordDailyStatisticVOList.currentYearTotalPos =
         currentYearTotalPos;
   }
   final double? currentYearTotalNeg = jsonConvert.convert<double>(
-      json['currentYearTotalNeg']);
+    json['currentYearTotalNeg'],
+  );
   if (currentYearTotalNeg != null) {
     statisticRecordDailyStatisticVOList.currentYearTotalNeg =
         currentYearTotalNeg;
@@ -409,13 +447,17 @@ StatisticRecordDailyStatisticVOList $StatisticRecordDailyStatisticVOListFromJson
   if (status != null) {
     statisticRecordDailyStatisticVOList.status = status;
   }
-  final List<
-      StatisticRecordDailyStatisticVOListDeviceList>? deviceList = (json['deviceList'] as List<
-      dynamic>?)?.map(
-          (e) =>
-      jsonConvert.convert<
-          StatisticRecordDailyStatisticVOListDeviceList>(
-          e) as StatisticRecordDailyStatisticVOListDeviceList).toList();
+  final List<StatisticRecordDailyStatisticVOListDeviceList>? deviceList =
+      (json['deviceList'] as List<dynamic>?)
+          ?.map(
+            (e) =>
+                jsonConvert
+                        .convert<StatisticRecordDailyStatisticVOListDeviceList>(
+                          e,
+                        )
+                    as StatisticRecordDailyStatisticVOListDeviceList,
+          )
+          .toList();
   if (deviceList != null) {
     statisticRecordDailyStatisticVOList.deviceList = deviceList;
   }
@@ -423,7 +465,8 @@ StatisticRecordDailyStatisticVOList $StatisticRecordDailyStatisticVOListFromJson
 }
 
 Map<String, dynamic> $StatisticRecordDailyStatisticVOListToJson(
-    StatisticRecordDailyStatisticVOList entity) {
+  StatisticRecordDailyStatisticVOList entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['siteId'] = entity.siteId;
   data['siteName'] = entity.siteName;
@@ -451,7 +494,8 @@ Map<String, dynamic> $StatisticRecordDailyStatisticVOListToJson(
   return data;
 }
 
-extension StatisticRecordDailyStatisticVOListExtension on StatisticRecordDailyStatisticVOList {
+extension StatisticRecordDailyStatisticVOListExtension
+    on StatisticRecordDailyStatisticVOList {
   StatisticRecordDailyStatisticVOList copyWith({
     int? siteId,
     String? siteName,
@@ -504,9 +548,13 @@ extension StatisticRecordDailyStatisticVOListExtension on StatisticRecordDailySt
   }
 }
 
-StatisticRecordDailyStatisticVOListDeviceList $StatisticRecordDailyStatisticVOListDeviceListFromJson(
-    Map<String, dynamic> json) {
-  final StatisticRecordDailyStatisticVOListDeviceList statisticRecordDailyStatisticVOListDeviceList = StatisticRecordDailyStatisticVOListDeviceList();
+StatisticRecordDailyStatisticVOListDeviceList
+$StatisticRecordDailyStatisticVOListDeviceListFromJson(
+  Map<String, dynamic> json,
+) {
+  final StatisticRecordDailyStatisticVOListDeviceList
+  statisticRecordDailyStatisticVOListDeviceList =
+      StatisticRecordDailyStatisticVOListDeviceList();
   final int? devNo = jsonConvert.convert<int>(json['devNo']);
   if (devNo != null) {
     statisticRecordDailyStatisticVOListDeviceList.devNo = devNo;
@@ -528,64 +576,75 @@ StatisticRecordDailyStatisticVOListDeviceList $StatisticRecordDailyStatisticVOLi
     statisticRecordDailyStatisticVOListDeviceList.todayIncome = todayIncome;
   }
   final double? todayTotalPos = jsonConvert.convert<double>(
-      json['todayTotalPos']);
+    json['todayTotalPos'],
+  );
   if (todayTotalPos != null) {
     statisticRecordDailyStatisticVOListDeviceList.todayTotalPos = todayTotalPos;
   }
   final double? todayTotalNeg = jsonConvert.convert<double>(
-      json['todayTotalNeg']);
+    json['todayTotalNeg'],
+  );
   if (todayTotalNeg != null) {
     statisticRecordDailyStatisticVOListDeviceList.todayTotalNeg = todayTotalNeg;
   }
   final double? lastDayIncome = jsonConvert.convert<double>(
-      json['lastDayIncome']);
+    json['lastDayIncome'],
+  );
   if (lastDayIncome != null) {
     statisticRecordDailyStatisticVOListDeviceList.lastDayIncome = lastDayIncome;
   }
   final double? lastDayTotalPos = jsonConvert.convert<double>(
-      json['lastDayTotalPos']);
+    json['lastDayTotalPos'],
+  );
   if (lastDayTotalPos != null) {
     statisticRecordDailyStatisticVOListDeviceList.lastDayTotalPos =
         lastDayTotalPos;
   }
   final double? lastDayTotalNeg = jsonConvert.convert<double>(
-      json['lastDayTotalNeg']);
+    json['lastDayTotalNeg'],
+  );
   if (lastDayTotalNeg != null) {
     statisticRecordDailyStatisticVOListDeviceList.lastDayTotalNeg =
         lastDayTotalNeg;
   }
   final double? currentMonthIncome = jsonConvert.convert<double>(
-      json['currentMonthIncome']);
+    json['currentMonthIncome'],
+  );
   if (currentMonthIncome != null) {
     statisticRecordDailyStatisticVOListDeviceList.currentMonthIncome =
         currentMonthIncome;
   }
   final double? currentMonthTotalPos = jsonConvert.convert<double>(
-      json['currentMonthTotalPos']);
+    json['currentMonthTotalPos'],
+  );
   if (currentMonthTotalPos != null) {
     statisticRecordDailyStatisticVOListDeviceList.currentMonthTotalPos =
         currentMonthTotalPos;
   }
   final double? currentMonthTotalNeg = jsonConvert.convert<double>(
-      json['currentMonthTotalNeg']);
+    json['currentMonthTotalNeg'],
+  );
   if (currentMonthTotalNeg != null) {
     statisticRecordDailyStatisticVOListDeviceList.currentMonthTotalNeg =
         currentMonthTotalNeg;
   }
   final double? currentYearIncome = jsonConvert.convert<double>(
-      json['currentYearIncome']);
+    json['currentYearIncome'],
+  );
   if (currentYearIncome != null) {
     statisticRecordDailyStatisticVOListDeviceList.currentYearIncome =
         currentYearIncome;
   }
   final double? currentYearTotalPos = jsonConvert.convert<double>(
-      json['currentYearTotalPos']);
+    json['currentYearTotalPos'],
+  );
   if (currentYearTotalPos != null) {
     statisticRecordDailyStatisticVOListDeviceList.currentYearTotalPos =
         currentYearTotalPos;
   }
   final double? currentYearTotalNeg = jsonConvert.convert<double>(
-      json['currentYearTotalNeg']);
+    json['currentYearTotalNeg'],
+  );
   if (currentYearTotalNeg != null) {
     statisticRecordDailyStatisticVOListDeviceList.currentYearTotalNeg =
         currentYearTotalNeg;
@@ -594,7 +653,8 @@ StatisticRecordDailyStatisticVOListDeviceList $StatisticRecordDailyStatisticVOLi
 }
 
 Map<String, dynamic> $StatisticRecordDailyStatisticVOListDeviceListToJson(
-    StatisticRecordDailyStatisticVOListDeviceList entity) {
+  StatisticRecordDailyStatisticVOListDeviceList entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['devNo'] = entity.devNo;
   data['totalIncome'] = entity.totalIncome;
@@ -615,7 +675,8 @@ Map<String, dynamic> $StatisticRecordDailyStatisticVOListDeviceListToJson(
   return data;
 }
 
-extension StatisticRecordDailyStatisticVOListDeviceListExtension on StatisticRecordDailyStatisticVOListDeviceList {
+extension StatisticRecordDailyStatisticVOListDeviceListExtension
+    on StatisticRecordDailyStatisticVOListDeviceList {
   StatisticRecordDailyStatisticVOListDeviceList copyWith({
     int? devNo,
     double? totalIncome,

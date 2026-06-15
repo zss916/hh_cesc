@@ -1,50 +1,57 @@
 part of 'index.dart';
 
 class PageTools {
-  static toWeb({required String url, required String title}) =>
+  static Future<dynamic>? toWeb({required String url, required String title}) =>
       Get.toNamed(APages.web, arguments: {"url": url, "title": title});
 
   ///登录
-  static toLogin() => Get.toNamed(APages.login);
+  static Future<dynamic>? toLogin() => Get.toNamed(APages.login);
 
   // static offAndToNamedMain() => Get.offAndToNamed(APages.main);
 
-  static offAndToNamedLogin() => Get.offAndToNamed(APages.login);
+  static Future<dynamic>? offAndToNamedLogin() =>
+      Get.offAndToNamed(APages.login);
 
   ///告警详情
-  static toAlarmDetail({int? siteId}) =>
+  static Future<dynamic>? toAlarmDetail({int? siteId}) =>
       Get.toNamed(APages.alarmDetail, arguments: {"siteId": siteId});
 
   ///切换语言
-  static toChangeLanguage() => Get.toNamed(APages.changeLanguage);
+  static Future<dynamic>? toChangeLanguage() =>
+      Get.toNamed(APages.changeLanguage);
 
   ///消息中心
-  static toMessageCenter() => Get.toNamed(APages.messageCenter);
+  static Future<dynamic>? toMessageCenter() =>
+      Get.toNamed(APages.messageCenter);
 
   ///关于我们
-  static toAbout() => Get.toNamed(APages.about);
+  static Future<dynamic>? toAbout() => Get.toNamed(APages.about);
 
   ///反馈
-  static toFeedback() => Get.toNamed(APages.feedback);
+  static Future<dynamic>? toFeedback() => Get.toNamed(APages.feedback);
 
   ///启动页
-  static toSplash() => Get.toNamed(APages.splash);
+  static Future<dynamic>? toSplash() => Get.toNamed(APages.splash);
 
   ///监控详情
-  static toMonitorDetail({required String siteId, MonitorModel? data}) =>
-      Get.toNamed(
-        APages.monitorDetail,
-        arguments: {"data": data, 'siteId': siteId},
-      );
+  static Future<dynamic>? toMonitorDetail({
+    required String siteId,
+    MonitorModel? data,
+  }) => Get.toNamed(
+    APages.monitorDetail,
+    arguments: {"data": data, 'siteId': siteId},
+  );
 
-  static toMonitorDetailV1({required String siteId, MonitorModel? data}) =>
-      Get.toNamed(
-        APages.monitorDetailV1,
-        arguments: {"data": data, 'siteId': siteId},
-      );
+  static Future<dynamic>? toMonitorDetailV1({
+    required String siteId,
+    MonitorModel? data,
+  }) => Get.toNamed(
+    APages.monitorDetailV1,
+    arguments: {"data": data, 'siteId': siteId},
+  );
 
   ///监控详情
-  static toBatteryCluster({
+  static Future<dynamic>? toBatteryCluster({
     String? siteId,
     int? did,
     int? nodeNo,
@@ -63,7 +70,7 @@ class PageTools {
   );
 
   ///分布图
-  static toDistributionMap({
+  static Future<dynamic>? toDistributionMap({
     required String title,
     required String content,
     String? siteId,
@@ -85,7 +92,7 @@ class PageTools {
   );
 
   ///概览电站详情
-  static toOliveSiteDetail({
+  static Future<dynamic>? toOliveSiteDetail({
     required int index,
     required StatisticRecordEntity statisticRecord,
   }) => Get.toNamed(
@@ -96,27 +103,29 @@ class PageTools {
   ///首页
   // static toMain() => Get.toNamed(APages.main);
 
-  static offAllNamedMain() => Get.offAllNamed(APages.main);
+  static Future<dynamic>? offAllNamedMain() => Get.offAllNamed(APages.main);
 
-  static offAndToNamedMain() => Get.offAndToNamed(APages.main);
+  static Future<dynamic>? offAndToNamedMain() => Get.offAndToNamed(APages.main);
 
   ///直接到站点详情
-  static offAllNamedStation({int? siteId, SiteEntity? site}) => Get.offAllNamed(
-    APages.stationDetail,
-    arguments: {"siteId": siteId, "site": site, "toMain": true},
-  );
+  static Future<dynamic>? offAllNamedStation({int? siteId, SiteEntity? site}) =>
+      Get.offAllNamed(
+        APages.stationDetail,
+        arguments: {"siteId": siteId, "site": site, "toMain": true},
+      );
 
   ///站点详情
-  static toStationDetail({int? siteId, SiteEntity? site}) => Get.toNamed(
-    APages.stationDetail,
-    arguments: {"siteId": siteId, "site": site, "toMain": false},
-  );
+  static Future<dynamic>? toStationDetail({int? siteId, SiteEntity? site}) =>
+      Get.toNamed(
+        APages.stationDetail,
+        arguments: {"siteId": siteId, "site": site, "toMain": false},
+      );
 
   ///跳到登录
-  static offAllNamedSplash() => Get.offAllNamed(APages.splash);
+  static Future<dynamic>? offAllNamedSplash() => Get.offAllNamed(APages.splash);
 
   ///收益
-  static toRevenue({
+  static void toRevenue({
     int? siteId,
     String? location,
     String? siteName,
@@ -132,19 +141,22 @@ class PageTools {
   );
 
   ///报告详情
-  static toReportDetail({int? siteId, String? location, String? siteName}) =>
-      Get.toNamed(
-        APages.reportDetail,
-        arguments: {"siteId": siteId, "location": location, "name": siteName},
-      );
+  static void toReportDetail({
+    int? siteId,
+    String? location,
+    String? siteName,
+  }) => Get.toNamed(
+    APages.reportDetail,
+    arguments: {"siteId": siteId, "location": location, "name": siteName},
+  );
 
-  static toEleReport({int? siteId, String? location, String? siteName}) =>
+  static void toEleReport({int? siteId, String? location, String? siteName}) =>
       Get.toNamed(
         APages.eleReport,
         arguments: {"siteId": siteId, "location": location, "name": siteName},
       );
 
   ///首页告警详情
-  static toAlarmDetails(AlarmItemEntity item) =>
+  static void toAlarmDetails(AlarmItemEntity item) =>
       Get.toNamed(APages.alarmDetails, arguments: item);
 }

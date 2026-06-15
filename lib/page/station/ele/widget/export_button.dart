@@ -17,6 +17,7 @@ class ExportButton extends StatefulWidget {
   final String? excelName;
   final ExportCallback? onExported;
   final bool showProgress;
+  final bool isExport;
 
   const ExportButton({
     super.key,
@@ -24,6 +25,7 @@ class ExportButton extends StatefulWidget {
     this.fileNamePrefix = 'export',
     this.onExported,
     this.showProgress = true,
+    this.isExport = true,
     this.excelName,
   });
 
@@ -51,12 +53,17 @@ class _ExportButtonState extends State<ExportButton> {
                   color: Colors.white,
                 ),
               )
-            : const Icon(Icons.save_alt_outlined, color: Colors.white),
+            : (widget.isExport
+                  ? Icon(Icons.save_alt_outlined, color: Colors.white)
+                  : SizedBox.shrink()),
       ),
     );
   }
 
   Future<void> _export() async {
+    if (!widget.isExport) {
+      return;
+    }
     if (widget.data.isEmpty) {
       return;
     }
@@ -139,10 +146,10 @@ class _ExportButtonState extends State<ExportButton> {
         title: Text(title, style: TextStyle(color: Colors.white)),
         content: Text(message, style: TextStyle(color: Colors.white)),
         actions: [
-          TextButton(
+          /*TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(TKey.confirm.tr, style: TextStyle(color: Colors.white)),
-          ),
+          ),*/
         ],
       ),
     );
@@ -156,10 +163,10 @@ class _ExportButtonState extends State<ExportButton> {
         title: Text(title, style: TextStyle(color: Colors.white)),
         content: Text(message, style: TextStyle(color: Colors.white)),
         actions: [
-          TextButton(
+          /*TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(TKey.confirm.tr, style: TextStyle(color: Colors.white)),
-          ),
+          ),*/
         ],
       ),
     );

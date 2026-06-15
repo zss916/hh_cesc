@@ -54,12 +54,12 @@ class StationLogic extends GetxController {
     loadList(pageNumber: pageNum);
   }
 
-  refreshData({bool isLoading = false}) {
+  void refreshData({bool isLoading = false}) {
     pageNum = 1;
     loadList(pageNumber: pageNum, isLoading: isLoading);
   }
 
-  loadMoreData() {
+  void loadMoreData() {
     pageNum += 1;
     loadList(pageNumber: pageNum);
   }

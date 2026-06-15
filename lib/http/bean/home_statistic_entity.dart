@@ -22,6 +22,7 @@ class HomeStatisticEntity {
   int? cutOffNum; //中断告警数
   num? co2;
   num? coal; //煤
+  int? containerCount; //设备数量2
 
   HomeStatisticEntity();
 

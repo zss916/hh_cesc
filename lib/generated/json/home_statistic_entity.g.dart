@@ -12,7 +12,8 @@ HomeStatisticEntity $HomeStatisticEntityFromJson(Map<String, dynamic> json) {
     homeStatisticEntity.todayIncome = todayIncome;
   }
   final String? lastDayIncome = jsonConvert.convert<String>(
-      json['lastDayIncome']);
+    json['lastDayIncome'],
+  );
   if (lastDayIncome != null) {
     homeStatisticEntity.lastDayIncome = lastDayIncome;
   }
@@ -64,6 +65,10 @@ HomeStatisticEntity $HomeStatisticEntityFromJson(Map<String, dynamic> json) {
   if (coal != null) {
     homeStatisticEntity.coal = coal;
   }
+  final int? containerCount = jsonConvert.convert<int>(json['containerCount']);
+  if (containerCount != null) {
+    homeStatisticEntity.containerCount = containerCount;
+  }
   return homeStatisticEntity;
 }
 
@@ -84,6 +89,7 @@ Map<String, dynamic> $HomeStatisticEntityToJson(HomeStatisticEntity entity) {
   data['cutOffNum'] = entity.cutOffNum;
   data['co2'] = entity.co2;
   data['coal'] = entity.coal;
+  data['containerCount'] = entity.containerCount;
   return data;
 }
 
@@ -104,6 +110,7 @@ extension HomeStatisticEntityExtension on HomeStatisticEntity {
     int? cutOffNum,
     num? co2,
     num? coal,
+    int? containerCount,
   }) {
     return HomeStatisticEntity()
       ..totalIncome = totalIncome ?? this.totalIncome
@@ -120,6 +127,7 @@ extension HomeStatisticEntityExtension on HomeStatisticEntity {
       ..alarmNum = alarmNum ?? this.alarmNum
       ..cutOffNum = cutOffNum ?? this.cutOffNum
       ..co2 = co2 ?? this.co2
-      ..coal = coal ?? this.coal;
+      ..coal = coal ?? this.coal
+      ..containerCount = containerCount ?? this.containerCount;
   }
 }

@@ -43,6 +43,8 @@ class SiteDetailEntity {
   String? protocolVersion; //协议版本
   int? isTimeSlot; //是否分时，1用海外UI,0用原来的
 
+  ///设备数量
+  int? containerCount; //设备数量2
   ///是否显示海外版本UI
   bool get showOverSeasUi => isTimeSlot == 1;
 

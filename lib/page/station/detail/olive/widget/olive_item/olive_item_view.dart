@@ -52,7 +52,10 @@ class OliveItemView extends StatelessWidget {
                 else
                   buildReport2(logic),
 
-                buildSiteInfo(siteDetail: logic.siteDetail),
+                buildSiteInfo(
+                  siteDetail: logic.siteDetail,
+                  // deviceCount: logic.siteDetail?.containerCount ?? 0,
+                ),
 
                 SizedBox(height: 200.h),
               ],
@@ -1880,7 +1883,7 @@ class OliveItemView extends StatelessWidget {
                             fontSize: 12.sp,
                             color: Color(0xFFFFFFFF),
                           ),
-                          text: "${siteDetail?.hasDevCount ?? 0}",
+                          text: "${siteDetail?.containerCount ?? 0}",
                         ),
                       ],
                       style: TextStyle(

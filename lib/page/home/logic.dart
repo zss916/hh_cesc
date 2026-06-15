@@ -53,7 +53,8 @@ class HomeLogic extends GetxController {
       totalIncome = data.totalIncome ?? "0.0";
       todayIncome = data.todayIncome ?? "0.0";
       lastDayIncome = data.lastDayIncome ?? "0.0";
-      deviceNum = data.deviceNum ?? 0;
+      // deviceNum = data.deviceNum ?? 0;
+      deviceNum = data.containerCount ?? 0;
       siteNum = data.siteNum ?? 0;
       capacity = data.capacity ?? 0.0;
       totalPos = data.totalPos ?? 0.0;
@@ -72,7 +73,7 @@ class HomeLogic extends GetxController {
       totalIncome = data2.totalIncome ?? "0.0";
       todayIncome = data2.todayIncome ?? "0.0";
       lastDayIncome = data2.lastDayIncome ?? "0.0";
-      deviceNum = data2.deviceNum ?? 0;
+      deviceNum = data2.containerCount ?? 0;
       siteNum = data2.siteNum ?? 0;
       capacity = data2.capacity ?? 0.0;
       totalPos = data2.totalPos ?? 0.0;

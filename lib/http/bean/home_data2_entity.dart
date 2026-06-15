@@ -44,6 +44,7 @@ class HomeData2Entity {
   int? cutOffNum;
   double? co2;
   double? coal;
+  int? containerCount; //设备数量
 
   HomeData2Entity();
 

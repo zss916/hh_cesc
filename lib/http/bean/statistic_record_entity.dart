@@ -48,6 +48,8 @@ class StatisticRecordEntity {
   num? co2;
   num? coal;
 
+  int? containerCount;
+
   StatisticRecordEntity();
 
   factory StatisticRecordEntity.fromJson(Map<String, dynamic> json) =>

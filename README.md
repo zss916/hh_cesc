@@ -14,6 +14,9 @@ https://cloud.honghede.com/#/login
 
 账号：ntbkd 密码：ntbkd123!
 
+测试
+http://192.168.8.35:9088/#/login
+
 
 蒲公英地址：https://www.pgyer.com
 

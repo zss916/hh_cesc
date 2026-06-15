@@ -17,6 +17,7 @@ class ExcelExportButton extends StatefulWidget {
   final String fileNamePrefix;
   final ExcelExportCallback? onExported;
   final bool showProgress;
+  final bool isExport;
 
   const ExcelExportButton({
     super.key,
@@ -24,6 +25,7 @@ class ExcelExportButton extends StatefulWidget {
     this.fileNamePrefix = 'export',
     this.onExported,
     this.showProgress = true,
+    this.isExport = true,
   });
 
   @override
@@ -50,7 +52,9 @@ class _ExcelExportButtonState extends State<ExcelExportButton> {
                   color: Colors.white,
                 ),
               )
-            : const Icon(Icons.save_alt_outlined, color: Colors.white),
+            : (widget.isExport
+                  ? Icon(Icons.save_alt_outlined, color: Colors.white)
+                  : SizedBox.shrink()),
       ),
     );
   }

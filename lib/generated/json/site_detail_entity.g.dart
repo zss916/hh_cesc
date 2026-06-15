@@ -141,6 +141,10 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
   if (isTimeSlot != null) {
     siteDetailEntity.isTimeSlot = isTimeSlot;
   }
+  final int? containerCount = jsonConvert.convert<int>(json['containerCount']);
+  if (containerCount != null) {
+    siteDetailEntity.containerCount = containerCount;
+  }
   return siteDetailEntity;
 }
 
@@ -179,6 +183,7 @@ Map<String, dynamic> $SiteDetailEntityToJson(SiteDetailEntity entity) {
   data['hasPv'] = entity.hasPv;
   data['protocolVersion'] = entity.protocolVersion;
   data['isTimeSlot'] = entity.isTimeSlot;
+  data['containerCount'] = entity.containerCount;
   return data;
 }
 
@@ -217,6 +222,7 @@ extension SiteDetailEntityExtension on SiteDetailEntity {
     bool? hasPv,
     String? protocolVersion,
     int? isTimeSlot,
+    int? containerCount,
   }) {
     return SiteDetailEntity()
       ..id = id ?? this.id
@@ -251,6 +257,7 @@ extension SiteDetailEntityExtension on SiteDetailEntity {
       ..pvPower = pvPower ?? this.pvPower
       ..hasPv = hasPv ?? this.hasPv
       ..protocolVersion = protocolVersion ?? this.protocolVersion
-      ..isTimeSlot = isTimeSlot ?? this.isTimeSlot;
+      ..isTimeSlot = isTimeSlot ?? this.isTimeSlot
+      ..containerCount = containerCount ?? this.containerCount;
   }
 }
