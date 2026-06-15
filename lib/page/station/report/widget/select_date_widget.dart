@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class SelectDateWidget extends StatefulWidget {
   final Function(DateTime start, DateTime end) onSelect;
+
   const SelectDateWidget({super.key, required this.onSelect});
 
   @override
@@ -144,6 +145,7 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
                 showSelectTimePicker(
                   context: context,
                   initDateTime: DateTime.now(),
+                  minTime: startDateTime,
                   onConfirm: (value) {
                     endDateTime = value;
                     widget.onSelect.call(startDateTime, endDateTime);
@@ -187,12 +189,13 @@ class _SelectDateWidgetState extends State<SelectDateWidget> {
   void showSelectTimePicker({
     required BuildContext context,
     required DateTime initDateTime,
+    DateTime? minTime,
     Function(DateTime)? onConfirm,
   }) {
     DatePicker.showDatePicker(
       context,
       showTitleActions: true,
-      minTime: DateTime(2015, 1, 1),
+      minTime: minTime ?? DateTime(2015, 1, 1),
       maxTime: DateTime.now(),
       currentTime: initDateTime,
       //locale: Get.isEn ? LocaleType.en : LocaleType.zh,

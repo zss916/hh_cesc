@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/site_detail_entity.g.dart';
-import 'package:get/get.dart';
 
 export 'package:cescpro/generated/json/site_detail_entity.g.dart';
 
@@ -63,7 +61,7 @@ class SiteDetailEntity {
     return jsonEncode(this);
   }
 
-  String get showName => Get.isZh ? (cname ?? "") : (name ?? "");
+  String get showName => (name ?? "").replaceAll(RegExp(r'[\\/:*?"<>|]'), '_');
 
   String get workModel {
     if (status == 99) {
