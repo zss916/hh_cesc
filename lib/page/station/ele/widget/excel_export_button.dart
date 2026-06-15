@@ -60,6 +60,9 @@ class _ExcelExportButtonState extends State<ExcelExportButton> {
   }
 
   Future<void> _export() async {
+    if (!widget.isExport) {
+      return;
+    }
     if (widget.data.isEmpty) {
       return;
     }
