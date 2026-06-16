@@ -136,7 +136,11 @@ class RevenueLogic extends GetxController {
       String startTime = DateFormat(
         'yyyy-MM-dd',
       ).format(DateTime.fromMillisecondsSinceEpoch(startTimeStamp ?? 0));
-      String endTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+      DateTime end = DateTime.fromMillisecondsSinceEpoch(endTimeStamp ?? 0);
+      DateTime now = DateTime.now();
+      DateTime endDate = end.isAfter(now) ? now : end;
+      String endTime = DateFormat('yyyy-MM-dd').format(endDate);
 
       return "$startTime-${endTime}_$siteName";
     } else if (queryType == QueryType.monthly) {
