@@ -21,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    textEditCtrl.clear();
     textEditCtrl.dispose();
     super.dispose();
   }

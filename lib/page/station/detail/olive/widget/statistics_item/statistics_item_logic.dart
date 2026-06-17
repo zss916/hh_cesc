@@ -140,8 +140,8 @@ class StatisticsItemLogic extends GetxController {
   }
 
   ///power 折线图2
-  List<SplineSeries<ChartData, DateTime>> series2 =
-      <SplineSeries<ChartData, DateTime>>[];
+  /*List<SplineSeries<ChartData, DateTime>> series2 =
+      <SplineSeries<ChartData, DateTime>>[];*/
   DateTime minT = DateTime.now();
   DateTime maxT = DateTime.now();
   AxisConfig axis = AxisConfig(
@@ -190,6 +190,14 @@ class StatisticsItemLogic extends GetxController {
                   .toList(),
           };
 
+          /*for (var value1 in powerMap.entries) {
+            for (var value in value1.value) {
+              debugPrint(
+                "title ===> ${value1.key},time=> ${DateFormat('yyyy-MM-dd HH:mm').format(value.time)},value =>${value.value}",
+              );
+            }
+          }
+*/
           for (final list in powerMap.values) {
             for (final p in list) {
               if (p.time.isBefore(minT)) minT = p.time;

@@ -57,6 +57,7 @@ class PowerLineChart3 extends StatelessWidget {
                 primaryXAxis: DateTimeAxis(
                   title: AxisTitle(text: ''),
                   dateFormat: DateFormat('HH:mm'),
+                  //isInversed: true,
                   enableAutoIntervalOnZooming: true,
                   intervalType: DateTimeIntervalType.minutes,
 
@@ -101,6 +102,24 @@ class PowerLineChart3 extends StatelessWidget {
                 trackballBehavior: trackballBehavior,
                 zoomPanBehavior: zoomPanBehavior,
                 series: data,
+                onZoomEnd: (ZoomPanArgs zoomingArgs) {
+                  // zoomingArgs;
+                },
+                onMarkerRender: (MarkerRenderArgs markerArgs) {
+                  // debugPrint("markerArgs ==> ${markerArgs.toString()}");
+                },
+                onTooltipRender: (TooltipArgs tooltipArgs) {
+                  //debugPrint("tooltipArgs ==> ${tooltipArgs.toString()}");
+                },
+                //onTooltipRender: ,
+                onTrackballPositionChanging: (TrackballArgs args) {
+                  /* debugPrint(
+                    "TrackballArgs===>> ${args.chartPointInfo.label},${args.chartPointInfo.series}",
+                  );*/
+                  /* debugPrint(
+                    "trackballArgs ==> ${trackballArgs.chartPointInfo}",
+                  );*/
+                },
               ),
             ),
           );
@@ -136,11 +155,16 @@ Widget buildLegendItem({required String name, required Color color}) => Row(
 ///trackballBehavior
 TrackballBehavior get trackballBehavior => TrackballBehavior(
   enable: true,
+  shouldAlwaysShow: true,
   activationMode: ActivationMode.singleTap,
   tooltipDisplayMode: TrackballDisplayMode.groupAllPoints,
+  hideDelay: 8000,
   tooltipSettings: InteractiveTooltip(
     textStyle: TextStyle(fontSize: 10),
     color: Colors.black38,
+  ),
+  markerSettings: TrackballMarkerSettings(
+    markerVisibility: TrackballVisibilityMode.visible,
   ),
 );
 
@@ -162,8 +186,21 @@ class ChartData {
     final DateTime parsed = n > 1e12
         ? DateTime.fromMillisecondsSinceEpoch(n.toInt())
         : DateTime.fromMillisecondsSinceEpoch((n.toInt() * 1000));
+
+    ///todo
+    //String time = DateFormat('yyyy-MM-dd HH:mm').format(parsed);
+    //DateTime formatDateTime = DateTime.parse(time);
+    DateTime formatDateTime = DateTime(
+      parsed.year,
+      parsed.month,
+      parsed.day,
+      parsed.hour,
+      parsed.minute,
+    );
     final num rawValue = (json['value'] ?? json['v'] ?? json['y']) as num;
-    return ChartData(time: parsed, value: rawValue.toDouble());
+
+    //return ChartData(time: parsed, value: rawValue.toDouble());
+    return ChartData(time: formatDateTime, value: rawValue.toDouble());
   }
 
   final DateTime time;
@@ -186,7 +223,6 @@ class AxisConfig {
     final hours = range.inHours;
     //
     if (hours <= 1) {
-      debugPrint("hours ===> 1");
       return AxisConfig(
         interval: 2,
         intervalType: DateTimeIntervalType.minutes,
@@ -194,7 +230,6 @@ class AxisConfig {
       );
     }
     if (hours <= 6) {
-      debugPrint("hours ===> 2");
       return AxisConfig(
         interval: 5,
         intervalType: DateTimeIntervalType.minutes,
@@ -202,7 +237,6 @@ class AxisConfig {
       );
     }
     if (hours <= 24) {
-      debugPrint("hours ===> 3");
       return AxisConfig(
         interval: 3,
         intervalType: DateTimeIntervalType.hours,
