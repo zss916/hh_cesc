@@ -515,6 +515,10 @@ class TKey {
   static const String exportSuccessful = "exportSuccessful";
   static const String exportContent = "exportContent";
   static const String exportSaved = "exportSaved";
+
+  static const String gridConnectedElectricity = "gridConnectedElectricity";
+  static const String powerGridCapacity = "powerGridCapacity";
+  static const String loadElectricity = "loadElectricity";
 }
 
 const en = {

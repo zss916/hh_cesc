@@ -272,4 +272,7 @@ const zh = {
   "exportSuccessful": "导出成功",
   "exportContent": "文件已导出，可在分享面板中保存",
   "exportSaved": "文件已保存至:%s",
+  "gridConnectedElectricity": "上网电量",
+  "powerGridCapacity": "电网取电量",
+  "loadElectricity": "负荷用电量",
 };

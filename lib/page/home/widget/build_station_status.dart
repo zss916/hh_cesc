@@ -1,3 +1,4 @@
+import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/home/widget/pie_chart_line_widget.dart';
 import 'package:cescpro/page/station/index/widget/text_rich_widget2.dart';
@@ -60,16 +61,21 @@ class BuildStationStatus extends StatelessWidget {
           padding: EdgeInsetsDirectional.all(16.r),
           child: Column(
             children: [
-              SizedBox(
-                width: double.maxFinite,
-                height: 170.h,
-                child: RepaintBoundary(
-                  child: PieChartLineWidget(
-                    total: (normalNum + faultNum + alarmNum + cutOffNum),
-                    normalNum: normalNum,
-                    faultNum: faultNum,
-                    alarmNum: alarmNum,
-                    cutOffNum: cutOffNum,
+              InkWell(
+                onTap: () {
+                  AppEventBus.eventBus.fire(MainPageEvent(select: 2));
+                },
+                child: SizedBox(
+                  width: double.maxFinite,
+                  height: 170.h,
+                  child: RepaintBoundary(
+                    child: PieChartLineWidget(
+                      total: (normalNum + faultNum + alarmNum + cutOffNum),
+                      normalNum: normalNum,
+                      faultNum: faultNum,
+                      alarmNum: alarmNum,
+                      cutOffNum: cutOffNum,
+                    ),
                   ),
                 ),
               ),

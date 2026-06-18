@@ -74,4 +74,6 @@ class Assets {
       'assets/img/today_pv_generation2.png';
   static const String jsonCountryAndArea = 'assets/json/country_and_area.json';
   static const String jsonPcaCode = 'assets/json/pca-code.json';
+
+  static const String imgEle = 'assets/img/ele.png';
 }

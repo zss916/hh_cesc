@@ -11,6 +11,8 @@ class StationOverviewItemWidget extends StatelessWidget {
   final String title;
   final String image;
   final Rect? centerSlice;
+  final Color? iconColor;
+
   const StationOverviewItemWidget({
     super.key,
     required this.icon,
@@ -19,6 +21,7 @@ class StationOverviewItemWidget extends StatelessWidget {
     required this.title,
     required this.image,
     this.centerSlice,
+    this.iconColor,
   });
 
   @override
@@ -66,6 +69,7 @@ class StationOverviewItemWidget extends StatelessWidget {
               icon,
               width: 28.r,
               height: 28.r,
+              color: iconColor,
               matchTextDirection: true,
             ),
           ),

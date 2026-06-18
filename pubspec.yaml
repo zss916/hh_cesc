@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.21+22
+version: 1.0.22+23
 
 environment:
   sdk: ^3.10.0
@@ -38,7 +38,7 @@ dependencies:
   intl: 0.20.2
   #图表
   fl_chart: 1.2.0
-  syncfusion_flutter_charts: ^33.2.10
+  syncfusion_flutter_charts: 33.2.10
   easy_date_timeline: 2.0.9
   calendar_date_picker2: 2.0.1
   #国家数据

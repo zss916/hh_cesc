@@ -20,6 +20,7 @@ class GridViewWidget2 extends StatelessWidget {
   final StatisticRecordEntity? statisticRecord;
   final String currencyUnit;
   final bool isShow;
+  final String? electricityUnit;
 
   const GridViewWidget2({
     super.key,
@@ -32,6 +33,7 @@ class GridViewWidget2 extends StatelessWidget {
     required this.todayPVPowerEarnings,
     required this.todayPVPowerEarningsUnit,
     required this.isShow,
+    this.electricityUnit = "kWh",
     this.siteDetail,
     this.statisticRecord,
   });
@@ -152,6 +154,76 @@ class GridViewWidget2 extends StatelessWidget {
               VerticalDivider(width: 16.w, color: Colors.transparent),
             ],
           ),
+
+        Divider(height: 8.h, color: Colors.transparent),
+
+        ///todo
+        //if (false)
+        Row(
+          children: [
+            VerticalDivider(width: 16.w, color: Colors.transparent),
+
+            Expanded(
+              child: GestureDetector(
+                onTap: () {},
+                child: StationOverviewItemWidget(
+                  title: TKey.powerGridCapacity.tr,
+                  value: '0 ',
+                  iconColor: Colors.blue,
+                  unit: electricityUnit ?? "kWh",
+                  icon: Assets.imgEle,
+                  image: Assets.imgTodayDisCharging2,
+                ),
+              ),
+            ),
+
+            VerticalDivider(width: 2.w, color: Colors.transparent),
+
+            Expanded(
+              child: GestureDetector(
+                onTap: () {},
+                child: StationOverviewItemWidget(
+                  title: TKey.gridConnectedElectricity.tr,
+                  value: "0 ",
+                  iconColor: Colors.yellowAccent,
+                  unit: electricityUnit ?? "kWh",
+                  icon: Assets.imgEle,
+                  image: Assets.imgTodayDisCharging2,
+                ),
+              ),
+            ),
+
+            VerticalDivider(width: 16.w, color: Colors.transparent),
+          ],
+        ),
+
+        //if (false)
+        Divider(height: 8.h, color: Colors.transparent),
+        // if (false)
+        Row(
+          children: [
+            VerticalDivider(width: 16.w, color: Colors.transparent),
+
+            Expanded(
+              child: GestureDetector(
+                onTap: () {},
+                child: StationOverviewItemWidget(
+                  title: TKey.loadElectricity.tr,
+                  value: '0 ',
+                  unit: electricityUnit ?? "kWh",
+                  icon: Assets.imgEle,
+                  image: Assets.imgTodayDisCharging2,
+                ),
+              ),
+            ),
+
+            VerticalDivider(width: 2.w, color: Colors.transparent),
+
+            Spacer(),
+
+            VerticalDivider(width: 16.w, color: Colors.transparent),
+          ],
+        ),
 
         Divider(height: 10.h, color: Colors.transparent),
       ],
