@@ -196,6 +196,62 @@ StatisticRecordEntity $StatisticRecordEntityFromJson(
   if (containerCount != null) {
     statisticRecordEntity.containerCount = containerCount;
   }
+  final double? lastDayGridNeg = jsonConvert.convert<double>(
+    json['lastDayGridNeg'],
+  );
+  if (lastDayGridNeg != null) {
+    statisticRecordEntity.lastDayGridNeg = lastDayGridNeg;
+  }
+  final double? todayGridNeg = jsonConvert.convert<double>(
+    json['todayGridNeg'],
+  );
+  if (todayGridNeg != null) {
+    statisticRecordEntity.todayGridNeg = todayGridNeg;
+  }
+  final double? monthGridNeg = jsonConvert.convert<double>(
+    json['monthGridNeg'],
+  );
+  if (monthGridNeg != null) {
+    statisticRecordEntity.monthGridNeg = monthGridNeg;
+  }
+  final double? yearGridNeg = jsonConvert.convert<double>(json['yearGridNeg']);
+  if (yearGridNeg != null) {
+    statisticRecordEntity.yearGridNeg = yearGridNeg;
+  }
+  final double? totalGridNeg = jsonConvert.convert<double>(
+    json['totalGridNeg'],
+  );
+  if (totalGridNeg != null) {
+    statisticRecordEntity.totalGridNeg = totalGridNeg;
+  }
+  final double? lastDayGridPos = jsonConvert.convert<double>(
+    json['lastDayGridPos'],
+  );
+  if (lastDayGridPos != null) {
+    statisticRecordEntity.lastDayGridPos = lastDayGridPos;
+  }
+  final double? todayGridPos = jsonConvert.convert<double>(
+    json['todayGridPos'],
+  );
+  if (todayGridPos != null) {
+    statisticRecordEntity.todayGridPos = todayGridPos;
+  }
+  final double? monthGridPos = jsonConvert.convert<double>(
+    json['monthGridPos'],
+  );
+  if (monthGridPos != null) {
+    statisticRecordEntity.monthGridPos = monthGridPos;
+  }
+  final double? yearGridPos = jsonConvert.convert<double>(json['yearGridPos']);
+  if (yearGridPos != null) {
+    statisticRecordEntity.yearGridPos = yearGridPos;
+  }
+  final double? totalGridPos = jsonConvert.convert<double>(
+    json['totalGridPos'],
+  );
+  if (totalGridPos != null) {
+    statisticRecordEntity.totalGridPos = totalGridPos;
+  }
   return statisticRecordEntity;
 }
 
@@ -243,6 +299,16 @@ Map<String, dynamic> $StatisticRecordEntityToJson(
   data['co2'] = entity.co2;
   data['coal'] = entity.coal;
   data['containerCount'] = entity.containerCount;
+  data['lastDayGridNeg'] = entity.lastDayGridNeg;
+  data['todayGridNeg'] = entity.todayGridNeg;
+  data['monthGridNeg'] = entity.monthGridNeg;
+  data['yearGridNeg'] = entity.yearGridNeg;
+  data['totalGridNeg'] = entity.totalGridNeg;
+  data['lastDayGridPos'] = entity.lastDayGridPos;
+  data['todayGridPos'] = entity.todayGridPos;
+  data['monthGridPos'] = entity.monthGridPos;
+  data['yearGridPos'] = entity.yearGridPos;
+  data['totalGridPos'] = entity.totalGridPos;
   return data;
 }
 
@@ -286,6 +352,16 @@ extension StatisticRecordEntityExtension on StatisticRecordEntity {
     num? co2,
     num? coal,
     int? containerCount,
+    double? lastDayGridNeg,
+    double? todayGridNeg,
+    double? monthGridNeg,
+    double? yearGridNeg,
+    double? totalGridNeg,
+    double? lastDayGridPos,
+    double? todayGridPos,
+    double? monthGridPos,
+    double? yearGridPos,
+    double? totalGridPos,
   }) {
     return StatisticRecordEntity()
       ..groupId = groupId ?? this.groupId
@@ -325,7 +401,17 @@ extension StatisticRecordEntityExtension on StatisticRecordEntity {
       ..cutOffNum = cutOffNum ?? this.cutOffNum
       ..co2 = co2 ?? this.co2
       ..coal = coal ?? this.coal
-      ..containerCount = containerCount ?? this.containerCount;
+      ..containerCount = containerCount ?? this.containerCount
+      ..lastDayGridNeg = lastDayGridNeg ?? this.lastDayGridNeg
+      ..todayGridNeg = todayGridNeg ?? this.todayGridNeg
+      ..monthGridNeg = monthGridNeg ?? this.monthGridNeg
+      ..yearGridNeg = yearGridNeg ?? this.yearGridNeg
+      ..totalGridNeg = totalGridNeg ?? this.totalGridNeg
+      ..lastDayGridPos = lastDayGridPos ?? this.lastDayGridPos
+      ..todayGridPos = todayGridPos ?? this.todayGridPos
+      ..monthGridPos = monthGridPos ?? this.monthGridPos
+      ..yearGridPos = yearGridPos ?? this.yearGridPos
+      ..totalGridPos = totalGridPos ?? this.totalGridPos;
   }
 }
 

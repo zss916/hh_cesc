@@ -275,4 +275,12 @@ const zh = {
   "gridConnectedElectricity": "上网电量",
   "powerGridCapacity": "电网取电量",
   "loadElectricity": "负荷用电量",
+  "todayGridNeg": "今日上网电量",
+  "monthGridNeg": "本月上网电量",
+  "yearGridNeg": "本年上网电量",
+  "totalGridNeg": "累计上网电量",
+  "todayGridPos": "今日电网取电量",
+  "monthGridPos": "本月电网取电量",
+  "yearGridPos": "本年电网取电量",
+  "totalGridPos": "累计电网取电量",
 };

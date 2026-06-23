@@ -519,6 +519,16 @@ class TKey {
   static const String gridConnectedElectricity = "gridConnectedElectricity";
   static const String powerGridCapacity = "powerGridCapacity";
   static const String loadElectricity = "loadElectricity";
+
+  static const String todayGridNeg = "todayGridNeg";
+  static const String monthGridNeg = "monthGridNeg";
+  static const String yearGridNeg = "yearGridNeg";
+  static const String totalGridNeg = "totalGridNeg";
+
+  static const String todayGridPos = "todayGridPos";
+  static const String monthGridPos = "monthGridPos";
+  static const String yearGridPos = "yearGridPos";
+  static const String totalGridPos = "totalGridPos";
 }
 
 const en = {
@@ -804,4 +814,16 @@ const en = {
   "exportContent":
       "The file has been exported and can be saved in the sharing panel",
   "exportSaved": "The file has been saved to:%s",
+
+  "gridConnectedElectricity": "Exported Energy",
+  "powerGridCapacity": "Imported Energy",
+  "loadElectricity": "Load Consumption",
+  "todayGridNeg": "Today's Exported Energy",
+  "monthGridNeg": "Monthly Exported Energy",
+  "yearGridNeg": "Yearly Exported Energy",
+  "totalGridNeg": "Total Exported Energy",
+  "todayGridPos": "Today's Imported Energy",
+  "monthGridPos": "Monthly Imported Energy",
+  "yearGridPos": "Yearly Imported Energy",
+  "totalGridPos": "Total Imported Energy",
 };

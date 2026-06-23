@@ -22,7 +22,7 @@ dependencies:
   flutter_screenutil: 5.9.3
   pull_to_refresh_simple: 3.0.3
   flutter_easyloading: 3.0.5
-  event_bus: ^2.0.1
+  event_bus: 2.0.1
   logger: 2.6.1
   url_launcher: 6.3.2
   image_picker: 1.2.1
@@ -38,7 +38,7 @@ dependencies:
   intl: 0.20.2
   #图表
   fl_chart: 1.2.0
-  syncfusion_flutter_charts: 33.2.10
+  syncfusion_flutter_charts: 33.2.13+1
   easy_date_timeline: 2.0.9
   calendar_date_picker2: 2.0.1
   #国家数据
@@ -84,6 +84,7 @@ dependencies:
   #pull_to_refresh_flutter3: 2.0.2
 
 
+  #饼图
   flutter_echart:
     path: plugins/flutter_echart-master
   custom_navigation_bar:

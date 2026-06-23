@@ -47,8 +47,21 @@ class StatisticRecordEntity {
   int? cutOffNum;
   num? co2;
   num? coal;
-
   int? containerCount;
+
+  ///新增上网电量
+  double? lastDayGridNeg;
+  double? todayGridNeg;
+  double? monthGridNeg;
+  double? yearGridNeg;
+  double? totalGridNeg;
+
+  ///新增电网取电量
+  double? lastDayGridPos;
+  double? todayGridPos;
+  double? monthGridPos;
+  double? yearGridPos;
+  double? totalGridPos;
 
   StatisticRecordEntity();
 

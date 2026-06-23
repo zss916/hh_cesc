@@ -60,6 +60,10 @@ ElecGraphEntity $ElecGraphEntityFromJson(Map<String, dynamic> json) {
   if (gridFeedGain != null) {
     elecGraphEntity.gridFeedGain = gridFeedGain;
   }
+  final double? gridPos = jsonConvert.convert<double>(json['gridPos']);
+  if (gridPos != null) {
+    elecGraphEntity.gridPos = gridPos;
+  }
   return elecGraphEntity;
 }
 
@@ -78,6 +82,7 @@ Map<String, dynamic> $ElecGraphEntityToJson(ElecGraphEntity entity) {
   data['pvSelfUseGain'] = entity.pvSelfUseGain;
   data['pvProfit'] = entity.pvProfit;
   data['gridFeedGain'] = entity.gridFeedGain;
+  data['gridPos'] = entity.gridPos;
   return data;
 }
 
@@ -96,6 +101,7 @@ extension ElecGraphEntityExtension on ElecGraphEntity {
     double? pvSelfUseGain,
     double? pvProfit,
     double? gridFeedGain,
+    double? gridPos,
   }) {
     return ElecGraphEntity()
       ..dateTime = dateTime ?? this.dateTime
@@ -110,6 +116,7 @@ extension ElecGraphEntityExtension on ElecGraphEntity {
       ..pvSelfUse = pvSelfUse ?? this.pvSelfUse
       ..pvSelfUseGain = pvSelfUseGain ?? this.pvSelfUseGain
       ..pvProfit = pvProfit ?? this.pvProfit
-      ..gridFeedGain = gridFeedGain ?? this.gridFeedGain;
+      ..gridFeedGain = gridFeedGain ?? this.gridFeedGain
+      ..gridPos = gridPos ?? this.gridPos;
   }
 }

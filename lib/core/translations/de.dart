@@ -267,4 +267,16 @@ const de = {
   "exportContent":
       "Datei exportiert und kann im Freigabefeld gespeichert werden",
   "exportSaved": "Datei gespeichert unter:%s",
+
+  "gridConnectedElectricity": "Eingespeiste Energie",
+  "powerGridCapacity": "Bezogene Energie",
+  "loadElectricity": "Verbrauch",
+  "todayGridNeg": "Heute eingespeiste Energie",
+  "monthGridNeg": "Einspeisung diesen Monat",
+  "yearGridNeg": "Dieses Jahr eingespeiste Energie",
+  "totalGridNeg": "Gesamte eingespeiste Energie",
+  "todayGridPos": "Heute bezogene Energie",
+  "monthGridPos": "Netzbezug diesen Monat",
+  "yearGridPos": "Netzbezug dieses Jahr",
+  "totalGridPos": "Gesamter Netzbezug",
 };

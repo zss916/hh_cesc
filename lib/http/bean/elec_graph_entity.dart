@@ -21,6 +21,8 @@ class ElecGraphEntity {
   double? pvSelfUseGain; //发电自用收益
   double? pvProfit; //光伏收益
   double? gridFeedGain; //上网收益
+  ///上网取电量
+  double? gridPos;
 
   ElecGraphEntity();
 

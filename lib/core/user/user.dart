@@ -23,7 +23,7 @@ class User extends GetxService {
   bool getIsShowRevenue() => StorageService.to.getBool(isShowRevenueKey);
 
   ///是否同意隐私
-  setPrivacyAgreed({required bool isAgree}) =>
+  Future<bool> setPrivacyAgreed({required bool isAgree}) =>
       StorageService.to.setBool(privacyAgreed, isAgree);
 
   bool getPrivacyAgreed() => StorageService.to.getBool(privacyAgreed);
@@ -31,32 +31,28 @@ class User extends GetxService {
   ///是否登录
   bool get isLogin => hasToken && !isLimit;
 
-  static String getToken() {
-    return StorageService.to.getString(tokenKey);
-  }
+  static String getToken() => StorageService.to.getString(tokenKey);
 
   static bool get hasToken => getToken().isNotEmpty;
 
-  static removeToken() {
+  static void removeToken() {
     StorageService.to.remove(tokenKey);
   }
 
-  static setToken({required String token}) {
+  static void setToken({required String token}) {
     StorageService.to.setString(tokenKey, token);
   }
 
-  static setLimitLogin({required bool limit}) {
+  static void setLimitLogin({required bool limit}) {
     StorageService.to.setBool(isLimitLoginKey, limit);
   }
 
   ///是否限制
   static bool get isLimit => StorageService.to.getBool(isLimitLoginKey);
 
-  static String getTokenHead() {
-    return StorageService.to.getString(tokenHeadKey);
-  }
+  static String getTokenHead() => StorageService.to.getString(tokenHeadKey);
 
-  static setTokenHead({required String tokenHead}) {
+  static void setTokenHead({required String tokenHead}) {
     StorageService.to.setString(tokenHeadKey, tokenHead);
   }
 
@@ -66,9 +62,7 @@ class User extends GetxService {
   }
 
   ///获取货币单位
-  String getCurrencyUnit() {
-    return StorageService.to.getString(currencyUnitKey);
-  }
+  String getCurrencyUnit() => StorageService.to.getString(currencyUnitKey);
 
   ///是否是游客
   void setIsGuest({required bool isGuest}) =>

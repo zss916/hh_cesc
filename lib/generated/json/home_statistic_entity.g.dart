@@ -12,8 +12,7 @@ HomeStatisticEntity $HomeStatisticEntityFromJson(Map<String, dynamic> json) {
     homeStatisticEntity.todayIncome = todayIncome;
   }
   final String? lastDayIncome = jsonConvert.convert<String>(
-    json['lastDayIncome'],
-  );
+      json['lastDayIncome']);
   if (lastDayIncome != null) {
     homeStatisticEntity.lastDayIncome = lastDayIncome;
   }

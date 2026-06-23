@@ -283,4 +283,16 @@ const es = {
   "exportContent":
       "El archivo se exporta y se puede guardar en el panel de compartir",
   "exportSaved": "El archivo se ha guardado en:%s",
+
+  "gridConnectedElectricity": "Energía Exportada",
+  "powerGridCapacity": "Energía Importada",
+  "loadElectricity": "Consumo de Carga",
+  "todayGridNeg": "Energía Exportada Hoy",
+  "monthGridNeg": "Energía Exportada Este Mes",
+  "yearGridNeg": "Energía Exportada Este Año",
+  "totalGridNeg": "Energía Exportada Total",
+  "todayGridPos": "Energía Importada Hoy",
+  "monthGridPos": "Energía Importada Este Mes",
+  "yearGridPos": "Energía Importada Este Año",
+  "totalGridPos": "Energía Importada Total",
 };

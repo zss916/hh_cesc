@@ -22,6 +22,11 @@ class GridViewWidget2 extends StatelessWidget {
   final bool isShow;
   final String? electricityUnit;
 
+  final String todayGridNeg;
+  final String todayGridNegUnit;
+  final String todayGridPos;
+  final String todayGridPosUnit;
+
   const GridViewWidget2({
     super.key,
     required this.todayCharging,
@@ -36,6 +41,10 @@ class GridViewWidget2 extends StatelessWidget {
     this.electricityUnit = "kWh",
     this.siteDetail,
     this.statisticRecord,
+    required this.todayGridNeg,
+    required this.todayGridNegUnit,
+    required this.todayGridPos,
+    required this.todayGridPosUnit,
   });
 
   @override
@@ -157,20 +166,25 @@ class GridViewWidget2 extends StatelessWidget {
 
         Divider(height: 8.h, color: Colors.transparent),
 
-        ///todo
-        //if (false)
         Row(
           children: [
             VerticalDivider(width: 16.w, color: Colors.transparent),
 
             Expanded(
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  if (siteDetail != null && statisticRecord != null) {
+                    PageTools.toOliveSiteDetail(
+                      index: 4,
+                      statisticRecord: statisticRecord!,
+                    );
+                  }
+                },
                 child: StationOverviewItemWidget(
                   title: TKey.powerGridCapacity.tr,
-                  value: '0 ',
+                  value: '$todayGridPos ',
                   iconColor: Colors.blue,
-                  unit: electricityUnit ?? "kWh",
+                  unit: todayGridPosUnit,
                   icon: Assets.imgEle,
                   image: Assets.imgTodayDisCharging2,
                 ),
@@ -181,12 +195,19 @@ class GridViewWidget2 extends StatelessWidget {
 
             Expanded(
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  if (siteDetail != null && statisticRecord != null) {
+                    PageTools.toOliveSiteDetail(
+                      index: 5,
+                      statisticRecord: statisticRecord!,
+                    );
+                  }
+                },
                 child: StationOverviewItemWidget(
                   title: TKey.gridConnectedElectricity.tr,
-                  value: "0 ",
+                  value: '$todayGridNeg ',
                   iconColor: Colors.yellowAccent,
-                  unit: electricityUnit ?? "kWh",
+                  unit: todayGridNegUnit,
                   icon: Assets.imgEle,
                   image: Assets.imgTodayDisCharging2,
                 ),
@@ -197,33 +218,33 @@ class GridViewWidget2 extends StatelessWidget {
           ],
         ),
 
-        //if (false)
-        Divider(height: 8.h, color: Colors.transparent),
-        // if (false)
-        Row(
-          children: [
-            VerticalDivider(width: 16.w, color: Colors.transparent),
+        if (false) Divider(height: 8.h, color: Colors.transparent),
 
-            Expanded(
-              child: GestureDetector(
-                onTap: () {},
-                child: StationOverviewItemWidget(
-                  title: TKey.loadElectricity.tr,
-                  value: '0 ',
-                  unit: electricityUnit ?? "kWh",
-                  icon: Assets.imgEle,
-                  image: Assets.imgTodayDisCharging2,
+        if (false)
+          Row(
+            children: [
+              VerticalDivider(width: 16.w, color: Colors.transparent),
+
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {},
+                  child: StationOverviewItemWidget(
+                    title: TKey.loadElectricity.tr,
+                    value: '0 ',
+                    unit: electricityUnit ?? "kWh",
+                    icon: Assets.imgEle,
+                    image: Assets.imgTodayDisCharging2,
+                  ),
                 ),
               ),
-            ),
 
-            VerticalDivider(width: 2.w, color: Colors.transparent),
+              VerticalDivider(width: 2.w, color: Colors.transparent),
 
-            Spacer(),
+              Spacer(),
 
-            VerticalDivider(width: 16.w, color: Colors.transparent),
-          ],
-        ),
+              VerticalDivider(width: 16.w, color: Colors.transparent),
+            ],
+          ),
 
         Divider(height: 10.h, color: Colors.transparent),
       ],

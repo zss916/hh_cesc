@@ -56,6 +56,14 @@ class OliveItemLogic extends GetxController {
   String showTodayPvTotalNeg = "0.00";
   String showTodayPvTotalNegUnit = "";
 
+  ///上网电量
+  String showTodayGridNeg = "0.00";
+  String showTodayGridNegUnit = "";
+
+  ///电网取电量
+  String showTodayGridPos = "0.00";
+  String showTodayGridPosUnit = "";
+
   SiteDetailEntity? siteDetail;
 
   ///站点名称
@@ -172,6 +180,10 @@ class OliveItemLogic extends GetxController {
       showTodayPvTotalNeg = (value.todayPvTotalNeg ?? 0).formatPowerValue();
       showTodayPvTotalNegUnit = (value.todayPvTotalNeg ?? 0)
           .formatPowerValueUnit();
+      showTodayGridNeg = (value.todayGridNeg ?? 0).formatPowerValue();
+      showTodayGridNegUnit = (value.todayGridNeg ?? 0).formatPowerValueUnit();
+      showTodayGridPos = (value.todayGridPos ?? 0).formatPowerValue();
+      showTodayGridPosUnit = (value.todayGridPos ?? 0).formatPowerValueUnit();
       update();
     }
   }

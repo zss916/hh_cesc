@@ -1,5 +1,7 @@
-import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
+import 'package:cescpro/core/model/country_entity.dart';
+import 'package:get/get.dart';
+
 
 CountryEntity $CountryEntityFromJson(Map<String, dynamic> json) {
   final CountryEntity countryEntity = CountryEntity();

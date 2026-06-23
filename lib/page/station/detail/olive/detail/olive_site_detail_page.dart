@@ -36,6 +36,12 @@ class OliveSiteDetailPage extends StatelessWidget {
                   Divider(height: 16.h, color: Colors.transparent),
                 if (logic.index == 3)
                   buildPowerGenerationItem(logic.statisticRecord),
+                if (logic.index == 4)
+                  Divider(height: 16.h, color: Colors.transparent),
+                if (logic.index == 4) buildGridPosItem(logic.statisticRecord),
+                if (logic.index == 5)
+                  Divider(height: 16.h, color: Colors.transparent),
+                if (logic.index == 5) buildGridNegItem(logic.statisticRecord),
                 Divider(height: 16.h, color: Colors.transparent),
               ],
             ),
@@ -324,6 +330,150 @@ class OliveSiteDetailPage extends StatelessWidget {
               Spacer(),
               Text(
                 (value?.totalPvTotalNeg ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  ///上网电量
+  Widget buildGridNegItem(StatisticRecordEntity? value) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsetsDirectional.all(16.r),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xFF313540),
+      ),
+      width: double.maxFinite,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "${TKey.todayGridNeg.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.todayGridNeg ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.monthGridNeg.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.monthGridNeg ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.yearGridNeg.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.yearGridNeg ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.totalGridNeg.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.totalGridNeg ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  ///电网取电量
+  Widget buildGridPosItem(StatisticRecordEntity? value) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsetsDirectional.all(16.r),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xFF313540),
+      ),
+      width: double.maxFinite,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "${TKey.todayGridPos.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.todayGridPos ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.monthGridPos.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.monthGridPos ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.yearGridPos.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.yearGridPos ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.totalGridPos.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.totalGridPos ?? 0).formatPowerValueAndUnit(),
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],

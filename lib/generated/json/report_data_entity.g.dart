@@ -1,5 +1,9 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/report_data_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:intl/intl.dart';
+
 
 ReportDataEntity $ReportDataEntityFromJson(Map<String, dynamic> json) {
   final ReportDataEntity reportDataEntity = ReportDataEntity();
@@ -20,8 +24,7 @@ ReportDataEntity $ReportDataEntityFromJson(Map<String, dynamic> json) {
     reportDataEntity.dayDate = dayDate;
   }
   final double? pvGeneration = jsonConvert.convert<double>(
-    json['pvGeneration'],
-  );
+      json['pvGeneration']);
   if (pvGeneration != null) {
     reportDataEntity.pvGeneration = pvGeneration;
   }
@@ -38,26 +41,22 @@ ReportDataEntity $ReportDataEntityFromJson(Map<String, dynamic> json) {
     reportDataEntity.neg = neg;
   }
   final double? storageProfit = jsonConvert.convert<double>(
-    json['storageProfit'],
-  );
+      json['storageProfit']);
   if (storageProfit != null) {
     reportDataEntity.storageProfit = storageProfit;
   }
   final double? gridFeedGain = jsonConvert.convert<double>(
-    json['gridFeedGain'],
-  );
+      json['gridFeedGain']);
   if (gridFeedGain != null) {
     reportDataEntity.gridFeedGain = gridFeedGain;
   }
   final double? pvSelfUseGain = jsonConvert.convert<double>(
-    json['pvSelfUseGain'],
-  );
+      json['pvSelfUseGain']);
   if (pvSelfUseGain != null) {
     reportDataEntity.pvSelfUseGain = pvSelfUseGain;
   }
-  final List<int>? types = (json['types'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<int>(e) as int)
-      .toList();
+  final List<int>? types = (json['types'] as List<dynamic>?)?.map(
+          (e) => jsonConvert.convert<int>(e) as int).toList();
   if (types != null) {
     reportDataEntity.types = types;
   }

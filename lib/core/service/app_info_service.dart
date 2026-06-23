@@ -39,7 +39,7 @@ class AppInfoService extends GetxService {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     appName = packageInfo.appName;
     appVersion = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
+    // String buildNumber = packageInfo.buildNumber;
     //debugPrint("appName:$appName,version:$appVersion");
     return (appName, appVersion);
   }

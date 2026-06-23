@@ -11,7 +11,7 @@ class ApiPath {
   static const String baseUrlZh = "https://api-cn.hhdzcesc.com/api/v1";
 
   ///测试host
-  //static const String baseUrl = "http://192.168.8.35:9088/api/v1";
+  static const String baseUrl2 = "http://192.168.8.35:9088/api/v1";
 
   static const String baseUrl = Environment.isOverseas ? baseUrlEn : baseUrlZh;
 
