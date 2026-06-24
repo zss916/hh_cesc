@@ -20,12 +20,15 @@ class GridViewWidget2 extends StatelessWidget {
   final StatisticRecordEntity? statisticRecord;
   final String currencyUnit;
   final bool isShow;
-  final String? electricityUnit;
 
   final String todayGridNeg;
   final String todayGridNegUnit;
   final String todayGridPos;
   final String todayGridPosUnit;
+
+  final bool showLoadPos;
+  final String todayLoadPos;
+  final String todayLoadPosUnit;
 
   const GridViewWidget2({
     super.key,
@@ -38,13 +41,15 @@ class GridViewWidget2 extends StatelessWidget {
     required this.todayPVPowerEarnings,
     required this.todayPVPowerEarningsUnit,
     required this.isShow,
-    this.electricityUnit = "kWh",
     this.siteDetail,
     this.statisticRecord,
     required this.todayGridNeg,
     required this.todayGridNegUnit,
     required this.todayGridPos,
     required this.todayGridPosUnit,
+    required this.showLoadPos,
+    required this.todayLoadPos,
+    required this.todayLoadPosUnit,
   });
 
   @override
@@ -218,20 +223,27 @@ class GridViewWidget2 extends StatelessWidget {
           ],
         ),
 
-        if (false) Divider(height: 8.h, color: Colors.transparent),
+        if (showLoadPos) Divider(height: 8.h, color: Colors.transparent),
 
-        if (false)
+        if (showLoadPos)
           Row(
             children: [
               VerticalDivider(width: 16.w, color: Colors.transparent),
 
               Expanded(
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    if (siteDetail != null && statisticRecord != null) {
+                      PageTools.toOliveSiteDetail(
+                        index: 6,
+                        statisticRecord: statisticRecord!,
+                      );
+                    }
+                  },
                   child: StationOverviewItemWidget(
                     title: TKey.loadElectricity.tr,
-                    value: '0 ',
-                    unit: electricityUnit ?? "kWh",
+                    value: '$todayLoadPos ',
+                    unit: todayLoadPosUnit,
                     icon: Assets.imgEle,
                     image: Assets.imgTodayDisCharging2,
                   ),

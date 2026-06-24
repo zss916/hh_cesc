@@ -279,4 +279,8 @@ const de = {
   "monthGridPos": "Netzbezug diesen Monat",
   "yearGridPos": "Netzbezug dieses Jahr",
   "totalGridPos": "Gesamter Netzbezug",
+  "todayLoadPos": "Heutiger Verbrauch",
+  "monthLoadPos": "Verbrauch in diesem Monat",
+  "yearLoadPos": "Verbrauch in diesem Jahr",
+  "totalLoadPos": "Gesamtverbrauch",
 };

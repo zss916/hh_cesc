@@ -63,6 +63,13 @@ class StatisticRecordEntity {
   double? yearGridPos;
   double? totalGridPos;
 
+  ///负载电量
+  double? lastDayLoadPos;
+  double? todayLoadPos;
+  double? monthLoadPos;
+  double? yearLoadPos;
+  double? totalLoadPos;
+
   StatisticRecordEntity();
 
   factory StatisticRecordEntity.fromJson(Map<String, dynamic> json) =>

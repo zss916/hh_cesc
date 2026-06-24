@@ -49,6 +49,9 @@ class OliveItemView extends StatelessWidget {
                   todayGridNegUnit: logic.showTodayGridNegUnit,
                   todayGridPos: logic.showTodayGridPos,
                   todayGridPosUnit: logic.showTodayGridPosUnit,
+                  showLoadPos: logic.showLoadPos,
+                  todayLoadPos: logic.showTodayLoadPos,
+                  todayLoadPosUnit: logic.showTodayLoadPosUnit,
                 ),
 
                 if (AppState.instance.isShowRevenue() && logic.revenueShow)

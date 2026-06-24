@@ -529,6 +529,11 @@ class TKey {
   static const String monthGridPos = "monthGridPos";
   static const String yearGridPos = "yearGridPos";
   static const String totalGridPos = "totalGridPos";
+
+  static const String todayLoadPos = "todayLoadPos";
+  static const String monthLoadPos = "monthLoadPos";
+  static const String yearLoadPos = "yearLoadPos";
+  static const String totalLoadPos = "totalLoadPos";
 }
 
 const en = {
@@ -826,4 +831,8 @@ const en = {
   "monthGridPos": "Monthly Imported Energy",
   "yearGridPos": "Yearly Imported Energy",
   "totalGridPos": "Total Imported Energy",
+  "todayLoadPos": "Today's Load Consumption",
+  "monthLoadPos": "Monthly Load Consumption",
+  "yearLoadPos": "Yearly Load Consumption",
+  "totalLoadPos": "Total Load Consumption",
 };

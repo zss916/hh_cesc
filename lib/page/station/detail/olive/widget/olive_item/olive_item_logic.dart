@@ -64,6 +64,12 @@ class OliveItemLogic extends GetxController {
   String showTodayGridPos = "0.00";
   String showTodayGridPosUnit = "";
 
+  ///负载电量
+  String showTodayLoadPos = "0.00";
+  String showTodayLoadPosUnit = "";
+
+  bool showLoadPos = false;
+
   SiteDetailEntity? siteDetail;
 
   ///站点名称
@@ -184,6 +190,9 @@ class OliveItemLogic extends GetxController {
       showTodayGridNegUnit = (value.todayGridNeg ?? 0).formatPowerValueUnit();
       showTodayGridPos = (value.todayGridPos ?? 0).formatPowerValue();
       showTodayGridPosUnit = (value.todayGridPos ?? 0).formatPowerValueUnit();
+      showTodayLoadPos = (value.todayLoadPos ?? 0).formatPowerValue();
+      showTodayLoadPosUnit = (value.todayLoadPos ?? 0).formatPowerValueUnit();
+      showLoadPos = value.todayLoadPos != null;
       update();
     }
   }

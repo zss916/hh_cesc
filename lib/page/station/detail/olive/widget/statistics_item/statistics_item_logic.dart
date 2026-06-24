@@ -442,6 +442,18 @@ class StatisticsItemLogic extends GetxController {
       list.add(pvMax);
       double pvMin = pv.reduce(min);
       list2.add(pvMin);
+      //电网取电量
+      List<double> pos = eleList.map((e) => (e.gridPos ?? 0)).toList();
+      double posMax = pos.reduce(max);
+      list.add(posMax);
+      double posMin = pos.reduce(min);
+      list2.add(posMin);
+      //上网电量
+      List<double> feed = eleList.map((e) => (e.gridFeed ?? 0)).toList();
+      double feedMax = feed.reduce(max);
+      list.add(feedMax);
+      double feedMin = feed.reduce(min);
+      list2.add(feedMin);
     }
     eleMaxY = list.reduce(max);
     eleMinY = list2.reduce(min);

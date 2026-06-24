@@ -295,4 +295,8 @@ const es = {
   "monthGridPos": "Energía Importada Este Mes",
   "yearGridPos": "Energía Importada Este Año",
   "totalGridPos": "Energía Importada Total",
+  "todayLoadPos": "Consumo de Carga de Hoy",
+  "monthLoadPos": "Consumo de Carga de Este Mes",
+  "yearLoadPos": "Consumo de Carga de Este Año",
+  "totalLoadPos": "Consumo de Carga Total",
 };

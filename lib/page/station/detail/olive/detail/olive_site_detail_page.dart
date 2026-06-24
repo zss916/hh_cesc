@@ -42,6 +42,9 @@ class OliveSiteDetailPage extends StatelessWidget {
                 if (logic.index == 5)
                   Divider(height: 16.h, color: Colors.transparent),
                 if (logic.index == 5) buildGridNegItem(logic.statisticRecord),
+                if (logic.index == 6)
+                  Divider(height: 16.h, color: Colors.transparent),
+                if (logic.index == 6) buildLoadPosItem(logic.statisticRecord),
                 Divider(height: 16.h, color: Colors.transparent),
               ],
             ),
@@ -474,6 +477,78 @@ class OliveSiteDetailPage extends StatelessWidget {
               Spacer(),
               Text(
                 (value?.totalGridPos ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  ///负荷电量
+  Widget buildLoadPosItem(StatisticRecordEntity? value) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsetsDirectional.all(16.r),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xFF313540),
+      ),
+      width: double.maxFinite,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "${TKey.todayLoadPos.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.todayLoadPos ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.monthLoadPos.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.monthLoadPos ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.yearLoadPos.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.yearLoadPos ?? 0).formatPowerValueAndUnit(),
+                style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Row(
+            children: [
+              Text(
+                "${TKey.totalLoadPos.tr}:",
+                style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+              ),
+              Spacer(),
+              Text(
+                (value?.totalLoadPos ?? 0).formatPowerValueAndUnit(),
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
               ),
             ],

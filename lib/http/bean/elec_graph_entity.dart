@@ -15,14 +15,18 @@ class ElecGraphEntity {
   int? type; //1.月 2.年
   ///海外版本新增字段
   double? pvGeneration; //光伏发电量
-  double? gridFeed; //电网馈入量
   double? storageProfit; //储能差价收益
   double? pvSelfUse; //发电自用量
   double? pvSelfUseGain; //发电自用收益
   double? pvProfit; //光伏收益
   double? gridFeedGain; //上网收益
-  ///上网取电量
+  ///上网电量
+  double? gridFeed; //电网馈入量
+  ///电网取电量
   double? gridPos;
+
+  ///负荷用电量
+  double? loadPos;
 
   ElecGraphEntity();
 

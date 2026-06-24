@@ -1,4 +1,5 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,9 @@ class EleBarchartItemWidget extends StatefulWidget {
   final List<double> data; // 充电列表
   final List<double> data2; // 放电列表
   final List<double> data3; // 发电列表
+  final List<double> data4; // 电网取电量列表
+  final List<double> data5; // 上网电量列表
+  final List<double> data6; // 负荷用电量列表
   final List<String> labels; // 标签列表
   final double maxY; // Y轴的最大值
   final double minY; // Y轴的最小值
@@ -17,6 +21,9 @@ class EleBarchartItemWidget extends StatefulWidget {
     required this.data,
     required this.data2,
     required this.data3,
+    required this.data4,
+    required this.data5,
+    required this.data6,
     required this.labels,
     required this.maxY,
     required this.minY,
@@ -125,6 +132,9 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                       Color(0xFF39FFEF),
                       Color(0xFFFFC08C),
                       Color(0xFF42A5F5),
+                      Colors.yellowAccent,
+                      Colors.deepOrangeAccent,
+                      Colors.deepPurpleAccent,
                     ][rodIndex],
                     fontSize: 8.sp,
                   ),
@@ -136,6 +146,9 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                           Color(0xFF39FFEF),
                           Color(0xFFFFC08C),
                           Color(0xFF42A5F5),
+                          Colors.yellowAccent,
+                          Colors.deepOrangeAccent,
+                          Colors.deepPurpleAccent,
                         ][rodIndex],
                         fontWeight: FontWeight.w500,
                         fontSize: 10.sp,
@@ -321,30 +334,106 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
             ),
             width: w,
           ),
-          BarChartRodData(
-            fromY: 0,
-            toY: widget.data3[index],
-            gradient: LinearGradient(
-              colors: [Color(0xFF42A5F5), Colors.blue],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+          if (AppSetting.isOverseas)
+            BarChartRodData(
+              fromY: 0,
+              toY: widget.data3[index],
+              gradient: LinearGradient(
+                colors: [Color(0xFF42A5F5), Colors.blue],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.only(
+                topLeft: widget.data3[index] >= 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                topRight: widget.data3[index] >= 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                bottomLeft: widget.data3[index] < 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                bottomRight: widget.data3[index] < 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+              ),
+              width: w,
             ),
-            borderRadius: BorderRadius.only(
-              topLeft: widget.data3[index] >= 0
-                  ? Radius.circular(2.0)
-                  : Radius.zero,
-              topRight: widget.data3[index] >= 0
-                  ? Radius.circular(2.0)
-                  : Radius.zero,
-              bottomLeft: widget.data3[index] < 0
-                  ? Radius.circular(2.0)
-                  : Radius.zero,
-              bottomRight: widget.data3[index] < 0
-                  ? Radius.circular(2.0)
-                  : Radius.zero,
+          if (widget.data4.isNotEmpty)
+            BarChartRodData(
+              fromY: 0,
+              toY: widget.data4[index],
+              gradient: LinearGradient(
+                colors: [Colors.yellowAccent, Colors.yellowAccent],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.only(
+                topLeft: widget.data4[index] >= 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                topRight: widget.data4[index] >= 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                bottomLeft: widget.data4[index] < 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                bottomRight: widget.data4[index] < 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+              ),
+              width: w,
             ),
-            width: w,
-          ),
+          if (widget.data5.isNotEmpty)
+            BarChartRodData(
+              fromY: 0,
+              toY: widget.data5[index],
+              gradient: LinearGradient(
+                colors: [Colors.deepOrangeAccent, Colors.deepOrangeAccent],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.only(
+                topLeft: widget.data5[index] >= 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                topRight: widget.data5[index] >= 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                bottomLeft: widget.data5[index] < 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                bottomRight: widget.data5[index] < 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+              ),
+              width: w,
+            ),
+          if (widget.data6.isNotEmpty)
+            BarChartRodData(
+              fromY: 0,
+              toY: widget.data6[index],
+              gradient: LinearGradient(
+                colors: [Colors.deepPurpleAccent, Colors.deepPurpleAccent],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.only(
+                topLeft: widget.data6[index] >= 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                topRight: widget.data6[index] >= 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                bottomLeft: widget.data6[index] < 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+                bottomRight: widget.data6[index] < 0
+                    ? Radius.circular(2.0)
+                    : Radius.zero,
+              ),
+              width: w,
+            ),
         ],
       );
     });

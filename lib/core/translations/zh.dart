@@ -283,4 +283,8 @@ const zh = {
   "monthGridPos": "本月电网取电量",
   "yearGridPos": "本年电网取电量",
   "totalGridPos": "累计电网取电量",
+  "todayLoadPos": "今日负荷用电量",
+  "monthLoadPos": "本月负荷用电量",
+  "yearLoadPos": "本年负荷用电量",
+  "totalLoadPos": "累计负荷用电量",
 };
