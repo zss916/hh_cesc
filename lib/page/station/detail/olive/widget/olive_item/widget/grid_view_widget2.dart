@@ -171,61 +171,63 @@ class GridViewWidget2 extends StatelessWidget {
 
         Divider(height: 8.h, color: Colors.transparent),
 
-        Row(
-          children: [
-            VerticalDivider(width: 16.w, color: Colors.transparent),
+        if (false)
+          Row(
+            children: [
+              VerticalDivider(width: 16.w, color: Colors.transparent),
 
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  if (siteDetail != null && statisticRecord != null) {
-                    PageTools.toOliveSiteDetail(
-                      index: 4,
-                      statisticRecord: statisticRecord!,
-                    );
-                  }
-                },
-                child: StationOverviewItemWidget(
-                  title: TKey.powerGridCapacity.tr,
-                  value: '$todayGridPos ',
-                  iconColor: Colors.blue,
-                  unit: todayGridPosUnit,
-                  icon: Assets.imgEle,
-                  image: Assets.imgTodayDisCharging2,
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (siteDetail != null && statisticRecord != null) {
+                      PageTools.toOliveSiteDetail(
+                        index: 4,
+                        statisticRecord: statisticRecord!,
+                      );
+                    }
+                  },
+                  child: StationOverviewItemWidget(
+                    title: TKey.powerGridCapacity.tr,
+                    value: '$todayGridPos ',
+                    iconColor: Colors.blue,
+                    unit: todayGridPosUnit,
+                    icon: Assets.imgEle,
+                    image: Assets.imgTodayDisCharging2,
+                  ),
                 ),
               ),
-            ),
 
-            VerticalDivider(width: 2.w, color: Colors.transparent),
+              VerticalDivider(width: 2.w, color: Colors.transparent),
 
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  if (siteDetail != null && statisticRecord != null) {
-                    PageTools.toOliveSiteDetail(
-                      index: 5,
-                      statisticRecord: statisticRecord!,
-                    );
-                  }
-                },
-                child: StationOverviewItemWidget(
-                  title: TKey.gridConnectedElectricity.tr,
-                  value: '$todayGridNeg ',
-                  iconColor: Colors.yellowAccent,
-                  unit: todayGridNegUnit,
-                  icon: Assets.imgEle,
-                  image: Assets.imgTodayDisCharging2,
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (siteDetail != null && statisticRecord != null) {
+                      PageTools.toOliveSiteDetail(
+                        index: 5,
+                        statisticRecord: statisticRecord!,
+                      );
+                    }
+                  },
+                  child: StationOverviewItemWidget(
+                    title: TKey.gridConnectedElectricity.tr,
+                    value: '$todayGridNeg ',
+                    iconColor: Colors.yellowAccent,
+                    unit: todayGridNegUnit,
+                    icon: Assets.imgEle,
+                    image: Assets.imgTodayDisCharging2,
+                  ),
                 ),
               ),
-            ),
 
-            VerticalDivider(width: 16.w, color: Colors.transparent),
-          ],
-        ),
+              VerticalDivider(width: 16.w, color: Colors.transparent),
+            ],
+          ),
 
-        if (showLoadPos) Divider(height: 8.h, color: Colors.transparent),
+        // if (showLoadPos) Divider(height: 8.h, color: Colors.transparent),
 
-        if (showLoadPos)
+        // if (showLoadPos)
+        if (false)
           Row(
             children: [
               VerticalDivider(width: 16.w, color: Colors.transparent),

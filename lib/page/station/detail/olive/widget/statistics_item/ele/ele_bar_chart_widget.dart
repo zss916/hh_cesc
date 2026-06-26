@@ -233,11 +233,13 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                           title: TKey.discharge.tr,
                           color: Color(0xFFFFC08C),
                         ),
+
                         if (AppSetting.isOverseas)
                           LineTitleWidget(
                             title: TKey.powerGeneration.tr,
                             color: Colors.blueAccent,
                           ),
+                        /*
                         if (AppSetting.isOverseas)
                           LineTitleWidget(
                             title: TKey.powerGridCapacity.tr,
@@ -254,7 +256,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                           LineTitleWidget(
                             title: TKey.loadElectricity.tr,
                             color: Colors.deepPurpleAccent,
-                          ),
+                          ),*/
                       ],
                     ),
                 ],
@@ -322,9 +324,12 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
                 .toList(),
-            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
-            data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
-            data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
+            data4: [],
+            data5: [],
+            data6: [],
+            // data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
+            // data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
+            // data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
             minY: widget.logic.eleMinY ?? 0,
@@ -342,9 +347,12 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
                 .toList(),
-            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
+            data4: [],
+            data5: [],
+            data6: [],
+            /*data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
             data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
-            data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
+            data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),*/
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
             minY: widget.logic.eleMinY ?? 0,
@@ -362,9 +370,12 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
                 .toList(),
-            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
+            data4: [],
+            data5: [],
+            data6: [],
+            /*data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
             data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
-            data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
+            data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),*/
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
             minY: widget.logic.eleMinY ?? 0,
