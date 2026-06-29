@@ -86,93 +86,94 @@ class BuildStationStatus extends StatelessWidget {
 
               SizedBox(
                 height: 220.h,
-                child: Stack(
-                  alignment: AlignmentDirectional.center,
-                  children: [
-                    SfCircularChart(
-                      /*  palette: [
-                        Color(0x333BFFC5),
-                        Color(0xFF44A7FF),
-                        Color(0xFFFF9C4A),
-                        Color(0xFFF8D834),
-                      ],*/
-                      annotations: <CircularChartAnnotation>[
-                        CircularChartAnnotation(
-                          widget: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '${normalNum + faultNum + alarmNum + cutOffNum}',
-                                style: TextStyle(
-                                  fontSize: 28.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                child: RepaintBoundary(
+                  child: SfCircularChart(
+                    annotations: <CircularChartAnnotation>[
+                      CircularChartAnnotation(
+                        widget: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '${normalNum + faultNum + alarmNum + cutOffNum}',
+                              style: TextStyle(
+                                fontSize: 28.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                TKey.total.tr,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
+                            ),
+                            Text(
+                              TKey.total.tr,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.white,
                               ),
-                            ],
-                          ),
-                        ),
-                      ],
-                      title: ChartTitle(text: ''),
-                      legend: Legend(
-                        isVisible: false,
-                        position: LegendPosition.bottom,
-                        textStyle: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
+                            ),
+                          ],
                         ),
                       ),
-
-                      ///点击label
-                      onDataLabelTapped: (DataLabelTapDetails onTapArgs) {
-                        //debugPrint("text ===> ${onTapArgs.text}");
-                      },
-                      series: <CircularSeries>[
-                        DoughnutSeries<PieChartData, String>(
-                          dataSource: chartData,
-                          xValueMapper: (PieChartData data, _) => data.category,
-                          yValueMapper: (PieChartData data, _) => data.value,
-                          pointColorMapper: (PieChartData data, _) =>
-                              data.color,
-                          radius: '70%',
-                          innerRadius: '78%',
-                          //explodeIndex: _explodeIndex ?? -1,
-                          //explode: true,
-                          onPointTap: (ChartPointDetails details) {
-                            final index = details.pointIndex ?? 0;
-                            //_explodeIndex = _explodeIndex == index ? null : index;
-                            final data = chartData[index];
-                            if (data.category == TKey.alarm.tr) {
-                              if (alarmNum != 0) {
-                                AppEventBus.eventBus.fire(
-                                  MainPageEvent(select: 2),
-                                );
-                              }
-                            }
-                          },
-                          dataLabelSettings: DataLabelSettings(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15.sp,
-                            ),
-                            showZeroValue: false,
-                            useSeriesColor: false,
-                            isVisible: true,
-                            labelPosition: ChartDataLabelPosition.outside,
-                          ),
-                          enableTooltip: true,
-                        ),
-                      ],
+                    ],
+                    title: ChartTitle(text: ''),
+                    legend: Legend(
+                      isVisible: false,
+                      position: LegendPosition.bottom,
+                      textStyle: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ],
+                    /* onDataLabelRender: (DataLabelRenderArgs args) {
+                        int index = args.pointIndex;
+                        final data = chartData[index];
+                        args.color = data.color;
+                      },*/
+
+                    ///点击label
+                    onDataLabelTapped: (DataLabelTapDetails onTapArgs) {
+                      int index = onTapArgs.pointIndex;
+                      final data = chartData[index];
+                      if (data.category == TKey.alarm.tr) {
+                        if (alarmNum != 0) {
+                          AppEventBus.eventBus.fire(MainPageEvent(select: 2));
+                        }
+                      }
+                    },
+                    series: <CircularSeries>[
+                      DoughnutSeries<PieChartData, String>(
+                        dataSource: chartData,
+                        xValueMapper: (PieChartData data, _) => data.category,
+                        yValueMapper: (PieChartData data, _) => data.value,
+                        pointColorMapper: (PieChartData data, _) => data.color,
+                        radius: '70%',
+                        innerRadius: '78%',
+                        //explodeIndex: _explodeIndex ?? -1,
+                        //explode: true,
+                        onPointTap: (ChartPointDetails details) {
+                          final index = details.pointIndex ?? 0;
+                          //_explodeIndex = _explodeIndex == index ? null : index;
+                          final data = chartData[index];
+                          if (data.category == TKey.alarm.tr) {
+                            if (alarmNum != 0) {
+                              AppEventBus.eventBus.fire(
+                                MainPageEvent(select: 2),
+                              );
+                            }
+                          }
+                        },
+                        dataLabelSettings: DataLabelSettings(
+                          textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15.sp,
+                          ),
+                          showZeroValue: false,
+                          useSeriesColor: false,
+                          isVisible: true,
+                          labelPosition: ChartDataLabelPosition.outside,
+                        ),
+                        enableTooltip: true,
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
@@ -279,15 +280,6 @@ class BuildStationStatus extends StatelessWidget {
     );
   }
 
-  /*List<EChartPieBean> data = [
-    EChartPieBean(title: "故障", number: 1, color: Color(0xFFF8D834)),
-
-    EChartPieBean(title: "告警", number: 1, color: Color(0xFFFF9C4A)),
-
-    EChartPieBean(title: "正常", number: 1, color: Color(0xFF3BFFC5)),
-
-    EChartPieBean(title: "中断", number: 1, color: Color(0xFF44A7FF)),
-  ];*/
   PieChatWidget buildPieChatWidget(List<EChartPieBean> data) {
     return PieChatWidget(
       dataList: data,
