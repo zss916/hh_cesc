@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_echart/flutter_echart.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 //https://juejin.cn/post/6901828472142823438?searchId=2025092022502584005D1D54B5DA9A6D9C
 class BuildStationStatus extends StatelessWidget {
@@ -26,6 +27,13 @@ class BuildStationStatus extends StatelessWidget {
     required this.alarmNum,
     required this.cutOffNum,
   });
+
+  List<PieChartData> get chartData => [
+    PieChartData(TKey.common.tr, normalNum, const Color(0xFF3BFFC5)),
+    PieChartData(TKey.interrupt.tr, cutOffNum, const Color(0xFF44A7FF)),
+    PieChartData(TKey.alarm.tr, alarmNum, const Color(0xFFFF9C4A)),
+    PieChartData(TKey.fault.tr, faultNum, const Color(0xFFF8D834)),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +69,8 @@ class BuildStationStatus extends StatelessWidget {
           padding: EdgeInsetsDirectional.all(16.r),
           child: Column(
             children: [
-              InkWell(
-                onTap: () {
-                  AppEventBus.eventBus.fire(MainPageEvent(select: 2));
-                },
-                child: SizedBox(
+              if (false)
+                SizedBox(
                   width: double.maxFinite,
                   height: 170.h,
                   child: RepaintBoundary(
@@ -78,10 +83,100 @@ class BuildStationStatus extends StatelessWidget {
                     ),
                   ),
                 ),
+
+              SizedBox(
+                height: 220.h,
+                child: Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    SfCircularChart(
+                      /*  palette: [
+                        Color(0x333BFFC5),
+                        Color(0xFF44A7FF),
+                        Color(0xFFFF9C4A),
+                        Color(0xFFF8D834),
+                      ],*/
+                      annotations: <CircularChartAnnotation>[
+                        CircularChartAnnotation(
+                          widget: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                '${normalNum + faultNum + alarmNum + cutOffNum}',
+                                style: TextStyle(
+                                  fontSize: 28.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                TKey.total.tr,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                      title: ChartTitle(text: ''),
+                      legend: Legend(
+                        isVisible: false,
+                        position: LegendPosition.bottom,
+                        textStyle: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+
+                      ///点击label
+                      onDataLabelTapped: (DataLabelTapDetails onTapArgs) {
+                        //debugPrint("text ===> ${onTapArgs.text}");
+                      },
+                      series: <CircularSeries>[
+                        DoughnutSeries<PieChartData, String>(
+                          dataSource: chartData,
+                          xValueMapper: (PieChartData data, _) => data.category,
+                          yValueMapper: (PieChartData data, _) => data.value,
+                          pointColorMapper: (PieChartData data, _) =>
+                              data.color,
+                          radius: '70%',
+                          innerRadius: '78%',
+                          //explodeIndex: _explodeIndex ?? -1,
+                          //explode: true,
+                          onPointTap: (ChartPointDetails details) {
+                            final index = details.pointIndex ?? 0;
+                            //_explodeIndex = _explodeIndex == index ? null : index;
+                            final data = chartData[index];
+                            if (data.category == TKey.alarm.tr) {
+                              if (alarmNum != 0) {
+                                AppEventBus.eventBus.fire(
+                                  MainPageEvent(select: 2),
+                                );
+                              }
+                            }
+                          },
+                          dataLabelSettings: DataLabelSettings(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15.sp,
+                            ),
+                            showZeroValue: false,
+                            useSeriesColor: false,
+                            isVisible: true,
+                            labelPosition: ChartDataLabelPosition.outside,
+                          ),
+                          enableTooltip: true,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
 
-              Divider(color: Colors.transparent, height: 8.h),
-
+              // Divider(color: Colors.transparent, height: 8.h),
               SizedBox(
                 width: double.maxFinite,
                 child: Wrap(
@@ -218,4 +313,11 @@ class BuildStationStatus extends StatelessWidget {
       },
     );
   }
+}
+
+class PieChartData {
+  PieChartData(this.category, this.value, this.color);
+  final String category;
+  final int value;
+  final Color color;
 }
