@@ -3,12 +3,14 @@ plugins {
     // START: FlutterFire Configuration
    // id("com.google.gms.google-services")
     // END: FlutterFire Configuration
+    //id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
     namespace = "com.example.cescpro"
     compileSdk = flutter.compileSdkVersion
+    //compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -18,7 +20,8 @@ android {
 
     kotlin{
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+            jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+            //jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
         }
     }
 
@@ -62,10 +65,10 @@ android {
             //signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = true
             isShrinkResources = true
-            proguardFiles(
+            /*proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
-            )
+            )*/
             ndk {
                 ndk.abiFilters.clear()
                 ndk.abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a"))

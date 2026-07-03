@@ -27,6 +27,7 @@ dependencies:
   url_launcher: 6.3.2
   image_picker: ^1.2.3
   path_provider: ^2.1.6
+  #flutter_image_compress_lite: ^2.6.1
   flutter_image_compress: 2.4.0
   #luban: ^2.0.1
   webview_flutter: ^4.14.0

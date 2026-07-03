@@ -1,5 +1,6 @@
 import 'dart:io';
 
+//import 'package:flutter_image_compress_lite/flutter_image_compress_lite.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 //import 'package:luban/luban.dart';
@@ -37,10 +38,12 @@ class PhotoUtils {
       minHeight: 480,
       format: format,
     );
+
+    //debugPrint("targetPath2 ==> ${result?.path ?? ""}");
     return result?.path ?? "";
     // final result = await Luban.compress(File(targetPath));
     // return result.value.file.path;
-    //return targetPath;
+    //return Future.value(targetPath);
   }
 
   static Future<String> _createTempFile({
