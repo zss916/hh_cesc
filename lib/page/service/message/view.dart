@@ -26,13 +26,13 @@ class MessageCenterPage extends StatelessWidget {
   }
 
   Widget buildBody({
-    required int viewState,
+    required ViewStatus viewState,
     required MessageCenterLogic logic,
   }) {
     return switch (viewState) {
-      _ when viewState == 0 => buildList(logic: logic),
-      _ when viewState == 1 => buildEmpty(),
-      _ when viewState == 2 => Container(
+      ViewStatus.data => buildList(logic: logic),
+      ViewStatus.empty => buildEmpty(),
+      ViewStatus.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CircularProgressIndicator()),
       ),

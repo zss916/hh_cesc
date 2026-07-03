@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.22+23
+version: 2.0.17+27
 
 environment:
   sdk: ^3.10.0
@@ -14,33 +14,34 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   get: 4.7.3
-  dio: 5.9.1
+  dio: ^5.10.0
   pretty_dio_logger: 1.4.0
   auto_size_text: 3.0.0
-  shared_preferences: 2.5.3
+  shared_preferences: ^2.5.5
   cached_network_image: 3.4.1
   flutter_screenutil: 5.9.3
   pull_to_refresh_simple: 3.0.3
   flutter_easyloading: 3.0.5
   event_bus: 2.0.1
-  logger: 2.6.1
+  logger: ^2.7.0
   url_launcher: 6.3.2
-  image_picker: 1.2.1
-  path_provider: 2.1.5
+  image_picker: ^1.2.3
+  path_provider: ^2.1.6
   flutter_image_compress: 2.4.0
-  webview_flutter: 4.13.0
+  #luban: ^2.0.1
+  webview_flutter: ^4.14.0
   keyboard_visibility_pro: 1.0.0
-  app_settings: 6.1.1
+  #app_settings: 7.0.0
   marquee_widget: 1.2.0
   marquee: ^2.3.0
   flutter_popup: 3.3.9
-  flutter_datetime_picker_plus: 2.2.0
+  flutter_datetime_picker_plus: ^2.4.0
   intl: 0.20.2
   #图表
   fl_chart: 1.2.0
-  syncfusion_flutter_charts: 33.2.13+1
+  syncfusion_flutter_charts: ^33.2.15
   easy_date_timeline: 2.0.9
-  calendar_date_picker2: 2.0.1
+  calendar_date_picker2: ^3.0.0
   #国家数据
   country_state_city: 0.1.6
   collection: 1.19.1
@@ -49,12 +50,12 @@ dependencies:
   #logo
   flutter_launcher_icons: 0.14.4
   #splash
-  flutter_native_splash: 2.4.7
-  package_info_plus: 10.1.0
-  device_info_plus: 13.1.0
+  flutter_native_splash: ^2.4.8
+  package_info_plus: ^10.2.0
+  device_info_plus: 13.2.0
   super_tooltip: 2.1.1
-  csv: ^6.0.0
-  share_plus: 13.1.0
+  csv: 8.0.0
+  share_plus: 13.2.0
   #fireBase
   #firebase_core: 4.3.0
   #permission_handler: 12.0.1

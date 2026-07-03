@@ -18,7 +18,7 @@ class MonitorModel {
 
 class MonitorLogic extends GetxController {
   SiteEntity? site;
-  int viewState = ViewStateEnum.common.index;
+  ViewStateEnum viewState = ViewStateEnum.common;
 
   List<MonitorModel> data = [];
   bool? isV1;
@@ -30,7 +30,7 @@ class MonitorLogic extends GetxController {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       site = map['site'] as SiteEntity?;
     }
-    viewState = ViewStateEnum.loading.index;
+    viewState = ViewStateEnum.loading;
     update();
   }
 
@@ -50,7 +50,7 @@ class MonitorLogic extends GetxController {
   ///isV1
   Future<void> getPointDetails({bool isLoading = false}) async {
     if (isLoading) {
-      viewState = ViewStateEnum.loading.index;
+      viewState = ViewStateEnum.loading;
       update();
     }
     SiteDetailEntity? value = await SiteAPI.getPointDetails(
@@ -66,7 +66,7 @@ class MonitorLogic extends GetxController {
         loadData(isV1: false);
       }
     } else {
-      viewState = ViewStateEnum.error.index;
+      viewState = ViewStateEnum.error;
       update();
       AppLoading.toast("data is null");
     }
@@ -124,9 +124,7 @@ class MonitorLogic extends GetxController {
           }
         }
 
-        viewState = data.isEmpty
-            ? ViewStateEnum.empty.index
-            : ViewStateEnum.common.index;
+        viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
         update();
       }
     }
@@ -183,9 +181,7 @@ class MonitorLogic extends GetxController {
             data.add(MonitorModel(type: e, title: e, isV1: isV1));
           }
         }
-        viewState = data.isEmpty
-            ? ViewStateEnum.empty.index
-            : ViewStateEnum.common.index;
+        viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
         update();
       }
     }

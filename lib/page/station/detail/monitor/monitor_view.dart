@@ -39,16 +39,18 @@ class MonitorView extends StatelessWidget {
     );
   }
 
-  Widget buildBody({required int viewState, required MonitorLogic logic}) {
+  Widget buildBody({
+    required ViewStateEnum viewState,
+    required MonitorLogic logic,
+  }) {
     return switch (viewState) {
-      _ when viewState == ViewStateEnum.common.index => buildList(logic: logic),
-      _ when viewState == ViewStateEnum.empty.index => buildEmpty(),
-      _ when viewState == ViewStateEnum.loading.index => Container(
+      ViewStateEnum.common => buildList(logic: logic),
+      ViewStateEnum.empty => buildEmpty(),
+      ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CircularProgressIndicator()),
       ),
-      _ when viewState == ViewStateEnum.error.index => buildError(logic: logic),
-      _ => SizedBox.shrink(),
+      ViewStateEnum.error => buildError(logic: logic),
     };
   }
 

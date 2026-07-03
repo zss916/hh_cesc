@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
+//import 'package:luban/luban.dart';
 import 'package:path_provider/path_provider.dart';
 
 class PhotoUtils {
@@ -28,7 +29,6 @@ class PhotoUtils {
     } else if (name.endsWith(".webp")) {
       format = CompressFormat.webp;
     }
-
     var result = await FlutterImageCompress.compressAndGetFile(
       file.absolute.path,
       targetPath,
@@ -38,6 +38,9 @@ class PhotoUtils {
       format: format,
     );
     return result?.path ?? "";
+    // final result = await Luban.compress(File(targetPath));
+    // return result.value.file.path;
+    //return targetPath;
   }
 
   static Future<String> _createTempFile({

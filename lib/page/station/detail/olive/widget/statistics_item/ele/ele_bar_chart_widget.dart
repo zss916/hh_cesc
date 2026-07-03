@@ -233,13 +233,12 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                           title: TKey.discharge.tr,
                           color: Color(0xFFFFC08C),
                         ),
-
                         if (AppSetting.isOverseas)
                           LineTitleWidget(
                             title: TKey.powerGeneration.tr,
                             color: Colors.blueAccent,
                           ),
-                        /*
+
                         if (AppSetting.isOverseas)
                           LineTitleWidget(
                             title: TKey.powerGridCapacity.tr,
@@ -256,7 +255,7 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                           LineTitleWidget(
                             title: TKey.loadElectricity.tr,
                             color: Colors.deepPurpleAccent,
-                          ),*/
+                          ),
                       ],
                     ),
                 ],

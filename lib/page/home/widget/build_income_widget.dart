@@ -72,7 +72,7 @@ class IncomeWidget extends StatelessWidget {
                                 : TKey.totalRevenue.trArgs([
                                     User.to.getCurrencyUnit(),
                                   ]),
-                            textAlign: TextAlign.center,
+                            textAlign: .center,
                             style: TextStyle(
                               fontSize: 14.sp,
                               color: Color(0xA6FFFFFF),
@@ -87,7 +87,7 @@ class IncomeWidget extends StatelessWidget {
                     child: Container(
                       //color: Colors.blue,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: .center,
                         children: [
                           FittedBox(
                             child: Text(
@@ -95,7 +95,7 @@ class IncomeWidget extends StatelessWidget {
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: 28.sp,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: .w600,
                                 color: Colors.white,
                               ),
                             ),
@@ -106,7 +106,7 @@ class IncomeWidget extends StatelessWidget {
                                 : TKey.revenueYesterday2.trArgs([
                                     User.to.getCurrencyUnit(),
                                   ]),
-                            textAlign: TextAlign.center,
+                            textAlign: .center,
                             style: TextStyle(
                               fontSize: 14.sp,
                               color: Color(0xA6FFFFFF),

@@ -10,7 +10,7 @@ import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
 class HistoryAlarmLogic extends GetxController with RefresherAndLoadLogic {
   List<AlarmItemEntity> data = [];
 
-  int viewState = ViewStateEnum.common.index;
+  ViewStateEnum viewState = ViewStateEnum.common;
   int pageNum = 1;
   int? startTimeMill;
   int? endTimeMill;
@@ -27,7 +27,7 @@ class HistoryAlarmLogic extends GetxController with RefresherAndLoadLogic {
   @override
   void onInit() {
     super.onInit();
-    viewState = ViewStateEnum.loading.index;
+    viewState = ViewStateEnum.loading;
     update();
   }
 
@@ -55,7 +55,7 @@ class HistoryAlarmLogic extends GetxController with RefresherAndLoadLogic {
 
   ///选
   toFilter({bool isLoading = false}) {
-    viewState = ViewStateEnum.loading.index;
+    viewState = ViewStateEnum.loading;
     update();
     pageNum = 1;
     loadData(pageNum: pageNum, isLoading: isLoading);
@@ -92,9 +92,7 @@ class HistoryAlarmLogic extends GetxController with RefresherAndLoadLogic {
       pageNum -= 1;
       AppLoading.toast("Fail");
     }
-    viewState = data.isEmpty
-        ? ViewStateEnum.empty.index
-        : ViewStateEnum.common.index;
+    viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
     update();
   }
 

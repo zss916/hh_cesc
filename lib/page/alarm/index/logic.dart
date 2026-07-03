@@ -3,7 +3,7 @@ part of 'index.dart';
 class AlarmLogic extends GetxController with RefresherAndLoadLogic {
   List<AlarmItemEntity> data = [];
 
-  int viewState = ViewStateEnum.common.index;
+  ViewStateEnum viewState = ViewStateEnum.common;
   int pageNum = 1;
   int? startTimeMill;
   int? endTimeMill;
@@ -20,7 +20,7 @@ class AlarmLogic extends GetxController with RefresherAndLoadLogic {
   @override
   void onInit() {
     super.onInit();
-    viewState = ViewStateEnum.loading.index;
+    viewState = ViewStateEnum.loading;
     update();
   }
 
@@ -76,9 +76,7 @@ class AlarmLogic extends GetxController with RefresherAndLoadLogic {
       pageNum -= 1;
       AppLoading.toast("Fail");
     }
-    viewState = data.isEmpty
-        ? ViewStateEnum.empty.index
-        : ViewStateEnum.common.index;
+    viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
     update();
   }
 

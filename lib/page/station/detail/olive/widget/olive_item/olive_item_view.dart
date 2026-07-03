@@ -2099,36 +2099,6 @@ class OliveItemView extends StatelessWidget {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  if (false) Divider(height: 8.h, color: Colors.transparent),
-                  if (false)
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      width: double.maxFinite,
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text:
-                                  "${TKey.photovoltaicInstalledCapacity.tr}: ",
-                              children: [
-                                TextSpan(
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    color: Color(0xFFFFFFFF),
-                                  ),
-                                  text: "${siteDetail?.pvCapacity ?? 0}kWh",
-                                ),
-                              ],
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: Color(0xA6FFFFFF),
-                              ),
-                            ),
-                          ],
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
                 ],
               ),
 

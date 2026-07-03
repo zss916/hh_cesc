@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomTheme {
@@ -7,17 +8,21 @@ class CustomTheme {
 
   static CustomTheme get to => _instance;
 
-    CustomTheme._internal();
+  CustomTheme._internal();
 
   ThemeData get dark {
     final scheme = ColorScheme.dark(
       primary: Colors.white,
+
       /// 页面背景色
       surface: const Color(0xFF000000),
+
       /// 卡片背景色
       surfaceContainer: const Color(0xFF101010),
+
       /// 主要文字颜色
       primaryFixed: Colors.white,
+
       /// 次要文字颜色
       secondaryFixed: const Color(0xFFA1A1A1),
       outline: Colors.white.withValues(alpha: 0.1),
@@ -32,10 +37,7 @@ class CustomTheme {
       scaffoldBackgroundColor: scheme.surface,
       splashFactory: NoSplash.splashFactory,
       dividerColor: scheme.outline,
-      dividerTheme: DividerThemeData(
-        color: scheme.outline,
-        space: 0.5,
-      ),
+      dividerTheme: DividerThemeData(color: scheme.outline, space: 0.5),
       appBarTheme: AppBarTheme(
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -75,9 +77,7 @@ class CustomTheme {
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
       iconButtonTheme: const IconButtonThemeData(
-        style: ButtonStyle(
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        )
+        style: ButtonStyle(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
       ),
       cardColor: scheme.surfaceContainer,
       tabBarTheme: TabBarThemeData(

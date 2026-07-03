@@ -2,14 +2,16 @@ part of 'index.dart';
 
 enum MessageStatus { unRead, read, other }
 
+enum ViewStatus { data, empty, loading, error }
+
 class MessageCenterLogic extends GetxController {
-  int viewState = 0;
+  ViewStatus viewState = ViewStatus.data;
   List<MessageItemEntity> data = [];
 
   @override
   void onInit() {
     super.onInit();
-    viewState = 2;
+    viewState = ViewStatus.loading;
     update();
   }
 
@@ -32,7 +34,7 @@ class MessageCenterLogic extends GetxController {
     } else {
       AppLoading.toast("Fail");
     }
-    viewState = data.isEmpty ? 1 : 0;
+    viewState = data.isEmpty ? ViewStatus.empty : ViewStatus.data;
     update();
     AppEventBus.eventBus.fire(MessageEvent());
   }
