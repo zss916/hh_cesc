@@ -3,7 +3,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/home/widget/pie_chart_line_widget.dart';
 import 'package:cescpro/page/station/index/widget/text_rich_widget2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_echart/flutter_echart.dart';
+//import 'package:flutter_echart/flutter_echart.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -280,7 +280,7 @@ class BuildStationStatus extends StatelessWidget {
     );
   }
 
-  PieChatWidget buildPieChatWidget(List<EChartPieBean> data) {
+  /*  PieChatWidget buildPieChatWidget(List<EChartPieBean> data) {
     return PieChatWidget(
       dataList: data,
       //是否输出日志
@@ -304,7 +304,7 @@ class BuildStationStatus extends StatelessWidget {
         //print("当前点击显示 $value");
       },
     );
-  }
+  }*/
 }
 
 class PieChartData {

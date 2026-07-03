@@ -9,8 +9,8 @@ plugins {
 
 android {
     namespace = "com.example.cescpro"
-    compileSdk = flutter.compileSdkVersion
-    //compileSdk = 37
+    //compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

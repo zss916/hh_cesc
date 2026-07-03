@@ -87,8 +87,8 @@ dependencies:
 
 
   #饼图
-  flutter_echart:
-    path: plugins/flutter_echart-master
+  #flutter_echart:
+    #path: plugins/flutter_echart-master
   custom_navigation_bar:
     path: plugins/custom_bubble_navigation_bar-master
   excel:
