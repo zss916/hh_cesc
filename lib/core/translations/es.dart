@@ -299,4 +299,5 @@ const es = {
   "monthLoadPos": "Consumo de Carga de Este Mes",
   "yearLoadPos": "Consumo de Carga de Este Año",
   "totalLoadPos": "Consumo de Carga Total",
+  "strategy": "Estrategia",
 };

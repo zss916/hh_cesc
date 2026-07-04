@@ -534,6 +534,8 @@ class TKey {
   static const String monthLoadPos = "monthLoadPos";
   static const String yearLoadPos = "yearLoadPos";
   static const String totalLoadPos = "totalLoadPos";
+
+  static const String strategy = "strategy";
 }
 
 const en = {
@@ -835,4 +837,5 @@ const en = {
   "monthLoadPos": "Monthly Load Consumption",
   "yearLoadPos": "Yearly Load Consumption",
   "totalLoadPos": "Total Load Consumption",
+  "strategy": "Strategy",
 };

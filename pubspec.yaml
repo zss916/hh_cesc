@@ -85,14 +85,11 @@ dependencies:
   #get_x_ducafecat: ^5.0.1
   #pull_to_refresh_flutter3: 2.0.2
 
-
-  #饼图
-  #flutter_echart:
-    #path: plugins/flutter_echart-master
   custom_navigation_bar:
     path: plugins/custom_bubble_navigation_bar-master
   excel:
     path: plugins/excel-main
+
 
 
 dev_dependencies:

@@ -36,7 +36,12 @@ class _StationDetailState extends State<StationDetailPage> {
         scrollBehavior: null,
         physics: const NeverScrollableScrollPhysics(),
         controller: pageCtrl,*/
-          children: [OliveView(), MonitorView(), RealAlarmView()],
+          children: [
+            OliveView(),
+            MonitorView(),
+            StrategyPage(),
+            RealAlarmView(),
+          ],
         ),
         bottomNavigationBar: Container(
           clipBehavior: Clip.hardEdge,
@@ -88,6 +93,24 @@ class _StationDetailState extends State<StationDetailPage> {
                   style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
                 ),
               ),
+
+              ///策略
+              CustomNavigationBarItem(
+                icon: Image.asset(Assets.imgControl, matchTextDirection: true),
+                selectedIcon: Image.asset(
+                  Assets.imgControlS,
+                  matchTextDirection: true,
+                ),
+                title: Text(
+                  TKey.strategy.tr,
+                  style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                ),
+                selectedTitle: Text(
+                  TKey.strategy.tr,
+                  style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
+                ),
+              ),
+
               CustomNavigationBarItem(
                 icon: Image.asset(Assets.imgAlarm, matchTextDirection: true),
                 selectedIcon: Image.asset(
@@ -103,21 +126,6 @@ class _StationDetailState extends State<StationDetailPage> {
                   style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
                 ),
               ),
-              /*CustomNavigationBarItem(
-              icon: Image.asset(Assets.imgControl, matchTextDirection: true),
-              selectedIcon: Image.asset(
-                Assets.imgControlS,
-                matchTextDirection: true,
-              ),
-              title: Text(
-                TKey.control.tr,
-                style: TextStyle(color: Colors.white, fontSize: 10.sp),
-              ),
-              selectedTitle: Text(
-                TKey.control.tr,
-                style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
-              ),
-            ),*/
             ],
             onTap: (i) {
               if (mounted) {

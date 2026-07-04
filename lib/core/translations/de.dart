@@ -283,4 +283,5 @@ const de = {
   "monthLoadPos": "Verbrauch in diesem Monat",
   "yearLoadPos": "Verbrauch in diesem Jahr",
   "totalLoadPos": "Gesamtverbrauch",
+  "strategy": "Strategie",
 };

@@ -287,4 +287,5 @@ const zh = {
   "monthLoadPos": "本月负荷用电量",
   "yearLoadPos": "本年负荷用电量",
   "totalLoadPos": "累计负荷用电量",
+  "strategy": "策略",
 };
