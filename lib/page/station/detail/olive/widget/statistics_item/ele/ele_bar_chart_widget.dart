@@ -233,12 +233,12 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                           title: TKey.discharge.tr,
                           color: Color(0xFFFFC08C),
                         ),
-                        if (AppSetting.isOverseas)
+
+                        /*if (AppSetting.isOverseas)
                           LineTitleWidget(
                             title: TKey.powerGeneration.tr,
                             color: Colors.blueAccent,
-                          ),
-
+                          ),*/
                         if (AppSetting.isOverseas)
                           LineTitleWidget(
                             title: TKey.powerGridCapacity.tr,
@@ -251,11 +251,11 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                             color: Colors.deepOrangeAccent,
                           ),
 
-                        if (AppSetting.isOverseas)
+                        /*if (AppSetting.isOverseas)
                           LineTitleWidget(
                             title: TKey.loadElectricity.tr,
                             color: Colors.deepPurpleAccent,
-                          ),
+                          ),*/
                       ],
                     ),
                 ],
@@ -320,14 +320,14 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data2: widget.logic.eleList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
-            data3: widget.logic.eleList
+            data3: [],
+
+            /*data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
-                .toList(),
-            data4: [],
-            data5: [],
+                .toList(),*/
             data6: [],
-            // data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
-            // data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
+            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
+            data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
             // data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
@@ -343,15 +343,14 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data2: widget.logic.eleList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
-            data3: widget.logic.eleList
+            data3: [],
+            /* data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
-                .toList(),
-            data4: [],
-            data5: [],
+                .toList(),*/
             data6: [],
-            /*data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
+            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
             data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
-            data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),*/
+            //data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
             minY: widget.logic.eleMinY ?? 0,
@@ -366,15 +365,14 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
             data2: widget.logic.eleList
                 .map((e) => (e.totalRecharge ?? 0))
                 .toList(),
-            data3: widget.logic.eleList
+            /*data3: widget.logic.eleList
                 .map((e) => (e.pvGeneration ?? 0))
-                .toList(),
-            data4: [],
-            data5: [],
+                .toList(),*/
+            data3: [],
             data6: [],
-            /*data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
+            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
             data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
-            data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),*/
+            //data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
             labels: widget.logic.eleLabels,
             maxY: widget.logic.eleMaxY ?? 0,
             minY: widget.logic.eleMinY ?? 0,

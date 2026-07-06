@@ -30,7 +30,7 @@ class BuildStationStatus extends StatelessWidget {
 
   List<PieChartData> get chartData => [
     PieChartData(TKey.common.tr, normalNum, const Color(0xFF3BFFC5)),
-    PieChartData(TKey.interrupt.tr, cutOffNum, const Color(0xFF44A7FF)),
+    PieChartData(TKey.interrupt.tr, cutOffNum, Colors.red),
     PieChartData(TKey.alarm.tr, alarmNum, const Color(0xFFFF9C4A)),
     PieChartData(TKey.fault.tr, faultNum, const Color(0xFFF8D834)),
   ];
@@ -237,11 +237,11 @@ class BuildStationStatus extends StatelessWidget {
                       ),
                     if (cutOffNum != 0)
                       TextRichWidget2(
-                        pointColor: Color(0xFF44A7FF),
+                        pointColor: Colors.red,
                         interval: 8.w,
                         title: "${TKey.interrupt.tr}:",
                         titleStyle: TextStyle(
-                          color: Color(0xFF44A7FF),
+                          color: Colors.red,
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                         ),

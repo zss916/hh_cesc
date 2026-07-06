@@ -437,11 +437,11 @@ class StatisticsItemLogic extends GetxController {
     ///海外版本
     if (AppSetting.isOverseas) {
       //发电
-      List<double> pv = eleList.map((e) => (e.pvGeneration ?? 0)).toList();
+      /*List<double> pv = eleList.map((e) => (e.pvGeneration ?? 0)).toList();
       double pvMax = pv.reduce(max);
       list.add(pvMax);
       double pvMin = pv.reduce(min);
-      list2.add(pvMin);
+      list2.add(pvMin);*/
       //电网取电量
       List<double> pos = eleList.map((e) => (e.gridPos ?? 0)).toList();
       double posMax = pos.reduce(max);

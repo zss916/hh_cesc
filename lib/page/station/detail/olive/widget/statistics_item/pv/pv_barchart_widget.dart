@@ -93,14 +93,13 @@ class _BarChartWidgetState extends State<PVBarchartItemWidget> {
   ///额外线
   ExtraLinesData get buildExtraLinesData => ExtraLinesData(
     horizontalLines: [
-      HorizontalLine(
+      /*HorizontalLine(
         y: widget.maxY,
         label: HorizontalLineLabel(show: !widget.isEmptyView),
         color: widget.isEmptyView ? Color(0xA8FFFFFF) : Color(0xFFFEDB65),
         strokeWidth: 0.4,
         dashArray: [8, 4],
-      ),
-
+      ),*/
       if (widget.minY != 0)
         HorizontalLine(
           y: widget.minY,

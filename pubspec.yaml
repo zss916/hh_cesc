@@ -27,12 +27,9 @@ dependencies:
   url_launcher: 6.3.2
   image_picker: ^1.2.3
   path_provider: ^2.1.6
-  #flutter_image_compress_lite: ^2.6.1
   flutter_image_compress: 2.4.0
-  #luban: ^2.0.1
   webview_flutter: ^4.14.0
   keyboard_visibility_pro: 1.0.0
-  #app_settings: 7.0.0
   marquee_widget: 1.2.0
   marquee: ^2.3.0
   flutter_popup: 3.3.9
@@ -84,6 +81,7 @@ dependencies:
   #timezone: ^0.10.1
   #get_x_ducafecat: ^5.0.1
   #pull_to_refresh_flutter3: 2.0.2
+  #app_settings: 7.0.0
 
   custom_navigation_bar:
     path: plugins/custom_bubble_navigation_bar-master

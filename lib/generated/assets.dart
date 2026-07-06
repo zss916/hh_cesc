@@ -76,4 +76,6 @@ class Assets {
   static const String jsonPcaCode = 'assets/json/pca-code.json';
 
   static const String imgEle = 'assets/img/ele.png';
+
+  static const String imgGridExport = 'assets/img/grid_export.png';
 }

@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:cescpro/core/translations/en.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class AIStrategyPreviewPage extends StatefulWidget {
   const AIStrategyPreviewPage({super.key});
@@ -104,7 +106,6 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
           children: [
             Column(
               children: [
-                //_buildStatusBar(),
                 _buildTopNav(),
                 Expanded(
                   child: SingleChildScrollView(
@@ -192,8 +193,8 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
               },
             ),
           ),
-          const Text(
-            'AI 策略预览',
+          Text(
+            TKey.aiStrategyPreviewTitle.tr,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -232,8 +233,6 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
       ],
     ),
   );
-
-  String bannerTitle = 'AI 智能策略优化';
 
   String bannerContent = '基于光伏预测、负载预测、天气预报与电价动态生成次日最优策略';
 
@@ -275,7 +274,7 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  bannerTitle,
+                  TKey.aiSmartOptimization.tr,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -294,8 +293,6 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
       ),
     );
   }
-
-  String profitTitle = '切换后收益预估（次日）';
 
   ///收益预估
   Widget _buildProfitCard() {
@@ -318,7 +315,7 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
               const Icon(Icons.trending_up, color: Color(0xff2dd4bf), size: 18),
               const SizedBox(width: 6),
               Text(
-                profitTitle,
+                TKey.profitEstimation.tr,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -328,14 +325,16 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
             ],
           ),
           const SizedBox(height: 12),
-          Row(
-            children: [
-              _buildProfitCell('¥1,284', 'AI 策略收益', true),
-              VerticalDivider(width: 10, color: Colors.transparent),
-              _buildProfitCell('¥962', '当前策略收益', false),
-              VerticalDivider(width: 10, color: Colors.transparent),
-              _buildProfitCell('+33.5%', '提升幅度', true),
-            ],
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                _buildProfitCell('¥1,284', TKey.aiStrategyProfit.tr, true),
+                VerticalDivider(width: 10, color: Colors.transparent),
+                _buildProfitCell('¥962', TKey.currentStrategyProfit.tr, false),
+                VerticalDivider(width: 10, color: Colors.transparent),
+                _buildProfitCell('+33.5%', TKey.improvementRate.tr, true),
+              ],
+            ),
           ),
           const SizedBox(height: 12),
           Container(
@@ -355,8 +354,8 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  '每日预计多赚',
+                Text(
+                  TKey.dailyExtraEarning.tr,
                   style: TextStyle(fontSize: 12, color: Color(0xffcccccc)),
                 ),
                 const Text(
@@ -394,7 +393,7 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
                 color: isUp ? const Color(0xff2dd4bf) : const Color(0xffaaaaaa),
               ),
             ),
-            const SizedBox(height: 2),
+            Divider(height: 2, color: Colors.transparent),
             Text(
               label,
               style: TextStyle(fontSize: 10, color: const Color(0xff888888)),
@@ -434,7 +433,7 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
-                        '功率预测综合曲线',
+                        TKey.powerForecastChart.tr,
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -465,8 +464,8 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
       border: Border.all(color: const Color.fromARGB(77, 168, 85, 247)),
       borderRadius: BorderRadius.circular(4),
     ),
-    child: const Text(
-      '推荐',
+    child: Text(
+      TKey.recommended.tr,
       style: TextStyle(fontSize: 10, color: Color(0xffc084fc)),
     ),
   );
@@ -585,7 +584,7 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
         children: [
           _buildLegendItem(
             CustomPaint(size: const Size(14, 8), painter: AiLinePainter()),
-            'AI 策略规划',
+            TKey.aiStrategyPlanning.tr,
           ),
           const SizedBox(width: 14),
           _buildLegendItem(
@@ -597,7 +596,7 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            '光伏预测',
+            TKey.pvForecast.tr,
           ),
           const SizedBox(width: 14),
           _buildLegendItem(
@@ -609,7 +608,7 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            '负载预测',
+            TKey.loadForecast.tr,
           ),
         ],
       ),
@@ -652,8 +651,8 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
                 size: 18,
               ),
               const SizedBox(width: 6),
-              const Text(
-                '电价预测',
+              Text(
+                TKey.priceForecast.tr,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -775,7 +774,7 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
           ),
           const SizedBox(width: 5),
           Text(
-            '电价 元/kWh',
+            '${TKey.electricityPrice.tr} 元/kWh',
             style: TextStyle(fontSize: 11, color: const Color(0xffcccccc)),
           ),
         ],
@@ -823,9 +822,9 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.smart_toy, color: Colors.white, size: 18),
-                  const SizedBox(width: 6),
-                  const Text(
-                    '申请 AI 策略',
+                  VerticalDivider(width: 6, color: Colors.transparent),
+                  Text(
+                    TKey.applyAiStrategy.tr,
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
@@ -837,8 +836,8 @@ class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            '申请审核通过后将自动接管当前策略运行',
+          Text(
+            TKey.applyTip.tr,
             style: TextStyle(fontSize: 11, color: Color(0xff888888)),
           ),
         ],

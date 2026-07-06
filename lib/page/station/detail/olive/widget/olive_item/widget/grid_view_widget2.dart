@@ -186,7 +186,7 @@ class GridViewWidget2 extends StatelessWidget {
                   }
                 },
                 child: StationOverviewItemWidget(
-                  title: TKey.powerGridCapacity.tr,
+                  title: TKey.todayGridPos.tr,
                   value: '$todayGridPos ',
                   iconColor: Colors.blue,
                   unit: todayGridPosUnit,
@@ -209,11 +209,10 @@ class GridViewWidget2 extends StatelessWidget {
                   }
                 },
                 child: StationOverviewItemWidget(
-                  title: TKey.gridConnectedElectricity.tr,
+                  title: TKey.todayGridNeg.tr,
                   value: '$todayGridNeg ',
-                  iconColor: Colors.yellowAccent,
                   unit: todayGridNegUnit,
-                  icon: Assets.imgEle,
+                  icon: Assets.imgGridExport,
                   image: Assets.imgTodayDisCharging2,
                 ),
               ),
@@ -225,38 +224,40 @@ class GridViewWidget2 extends StatelessWidget {
 
         if (showLoadPos) Divider(height: 8.h, color: Colors.transparent),
 
-        if (showLoadPos)
-          Row(
-            children: [
-              VerticalDivider(width: 16.w, color: Colors.transparent),
+        ///后期可能支持
+        if (false)
+          if (showLoadPos)
+            Row(
+              children: [
+                VerticalDivider(width: 16.w, color: Colors.transparent),
 
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    if (siteDetail != null && statisticRecord != null) {
-                      PageTools.toOliveSiteDetail(
-                        index: 6,
-                        statisticRecord: statisticRecord!,
-                      );
-                    }
-                  },
-                  child: StationOverviewItemWidget(
-                    title: TKey.loadElectricity.tr,
-                    value: '$todayLoadPos ',
-                    unit: todayLoadPosUnit,
-                    icon: Assets.imgEle,
-                    image: Assets.imgTodayDisCharging2,
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      if (siteDetail != null && statisticRecord != null) {
+                        PageTools.toOliveSiteDetail(
+                          index: 6,
+                          statisticRecord: statisticRecord!,
+                        );
+                      }
+                    },
+                    child: StationOverviewItemWidget(
+                      title: TKey.loadElectricity.tr,
+                      value: '$todayLoadPos ',
+                      unit: todayLoadPosUnit,
+                      icon: Assets.imgEle,
+                      image: Assets.imgTodayDisCharging2,
+                    ),
                   ),
                 ),
-              ),
 
-              VerticalDivider(width: 2.w, color: Colors.transparent),
+                VerticalDivider(width: 2.w, color: Colors.transparent),
 
-              Spacer(),
+                Spacer(),
 
-              VerticalDivider(width: 16.w, color: Colors.transparent),
-            ],
-          ),
+                VerticalDivider(width: 16.w, color: Colors.transparent),
+              ],
+            ),
 
         Divider(height: 10.h, color: Colors.transparent),
       ],

@@ -1,4 +1,7 @@
+import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/page/station/detail/strategy/history/widget/filter_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class StrategyHistoryPage extends StatefulWidget {
   const StrategyHistoryPage({super.key});
@@ -8,9 +11,6 @@ class StrategyHistoryPage extends StatefulWidget {
 }
 
 class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
-  String _selectedFilter = '全部';
-  final List<String> _filters = ['全部', '切换', '调整参数', '停用'];
-
   final List<DayGroup> _historyData = [
     DayGroup(
       title: '今天 · 2026-07-01',
@@ -85,64 +85,16 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
       body: SafeArea(
         child: Column(
           children: [
-            // _buildStatusBar(),
             _buildTopNav(),
-            _buildFilterBar(),
+            FilterWidget(),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.only(bottom: 100),
                 child: _buildHistoryList(),
               ),
             ),
-            // _buildTabBar(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildStatusBar() {
-    return Container(
-      height: 44,
-      padding: const EdgeInsets.symmetric(horizontal: 22),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            '16:40 📍',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
-          ),
-          Row(
-            children: [
-              const Text('📶', style: TextStyle(fontSize: 13)),
-              const SizedBox(width: 6),
-              const Text(
-                '5G',
-                style: TextStyle(fontSize: 13, color: Colors.white),
-              ),
-              const SizedBox(width: 6),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: const Text(
-                  '69',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -163,8 +115,8 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
               },
             ),
           ),
-          const Text(
-            '策略历史',
+          Text(
+            TKey.strategyHistory.tr,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -172,54 +124,6 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildFilterBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-      child: Row(
-        children: _filters.map((filter) {
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                _selectedFilter = filter;
-              });
-            },
-            child: Container(
-              margin: const EdgeInsets.only(right: 8),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                gradient: _selectedFilter == filter
-                    ? const LinearGradient(
-                        colors: [Color(0xff4a9eff), Color(0xff2c6fd1)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      )
-                    : null,
-                color: _selectedFilter == filter
-                    ? null
-                    : const Color.fromARGB(20, 74, 158, 255),
-                border: Border.all(
-                  color: _selectedFilter == filter
-                      ? Colors.transparent
-                      : const Color.fromARGB(46, 74, 158, 255),
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Text(
-                filter,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: _selectedFilter == filter
-                      ? Colors.white
-                      : const Color(0xffaaaaaa),
-                ),
-              ),
-            ),
-          );
-        }).toList(),
       ),
     );
   }
@@ -349,53 +253,6 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(tag, style: TextStyle(fontSize: 10, color: textColor)),
-    );
-  }
-
-  Widget _buildTabBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(235, 15, 25, 45),
-        border: const Border(
-          top: BorderSide(color: Color.fromARGB(38, 74, 158, 255)),
-        ),
-      ),
-      child: Row(
-        children: [
-          _buildTab('概览', Icons.home, false),
-          _buildTab('监控', Icons.monitor, false),
-          _buildTab('策略', Icons.show_chart, true),
-          _buildTab('告警', Icons.notifications, false),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTab(String label, IconData icon, bool active) {
-    return Expanded(
-      child: TextButton(
-        onPressed: () {},
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              color: active ? const Color(0xff4a9eff) : const Color(0xff666666),
-              size: 24,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color: active
-                    ? const Color(0xff4a9eff)
-                    : const Color(0xff888888),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

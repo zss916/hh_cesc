@@ -53,9 +53,17 @@ class HEleChartPage extends StatelessWidget {
                           data2: logic.eleList
                               .map((e) => (e.totalRecharge ?? 0))
                               .toList(),
-                          data3: logic.eleList
+                          data3: [],
+                          /*data3: logic.eleList
                               .map((e) => (e.pvGeneration ?? 0))
+                              .toList(),*/
+                          data4: logic.eleList
+                              .map((e) => (e.gridPos ?? 0))
                               .toList(),
+                          data5: logic.eleList
+                              .map((e) => (e.gridFeed ?? 0))
+                              .toList(),
+                          data6: [],
                           labels: logic.eleLabels,
                           maxY: logic.eleMaxY ?? 0,
                           minY: logic.eleMinY ?? 0,
@@ -75,10 +83,22 @@ class HEleChartPage extends StatelessWidget {
                       title: TKey.discharge.tr,
                       color: Color(0xFFFFC08C),
                     ),
-                    if (AppSetting.isOverseas)
+
+                    /* if (AppSetting.isOverseas)
                       HLineTitleWidget(
                         title: TKey.powerGeneration.tr,
                         color: Colors.blueAccent,
+                      ),*/
+                    if (AppSetting.isOverseas)
+                      HLineTitleWidget(
+                        title: TKey.powerGridCapacity.tr,
+                        color: Colors.yellowAccent,
+                      ),
+
+                    if (AppSetting.isOverseas)
+                      HLineTitleWidget(
+                        title: TKey.gridConnectedElectricity.tr,
+                        color: Colors.deepOrangeAccent,
                       ),
                   ],
                 ),

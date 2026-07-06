@@ -334,7 +334,7 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
             ),
             width: w,
           ),
-          if (AppSetting.isOverseas)
+          if (AppSetting.isOverseas && widget.data3.isNotEmpty)
             BarChartRodData(
               fromY: 0,
               toY: widget.data3[index],

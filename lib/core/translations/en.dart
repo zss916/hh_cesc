@@ -536,6 +536,37 @@ class TKey {
   static const String totalLoadPos = "totalLoadPos";
 
   static const String strategy = "strategy";
+  static const String currentMode = "currentMode";
+  static const String operationStatus = "operationStatus";
+  static const String protectionParams = "protectionParams";
+  static const String powerCurve = "powerCurve";
+  static const String maxPower = "maxPower";
+  static const String socUpperLimit = "socUpperLimit";
+  static const String socLowerLimit = "socLowerLimit";
+  static const String strategyHistory = "strategyHistory";
+  static const String aiStrategyPreview = "aiStrategyPreview";
+  static const String strategyCurve = "strategyCurve";
+  static const String actualOperation = "actualOperation";
+  static const String aiStrategyPreviewTitle = "aiStrategyPreviewTitle";
+  static const String aiSmartOptimization = "aiSmartOptimization";
+  static const String aiStrategyProfit = "aiStrategyProfit";
+  static const String currentStrategyProfit = "currentStrategyProfit";
+  static const String improvementRate = "improvementRate";
+  static const String profitEstimation = "profitEstimation";
+  static const String dailyExtraEarning = "dailyExtraEarning";
+  static const String powerForecastChart = "powerForecastChart";
+  static const String recommended = "recommended";
+  static const String aiStrategyPlanning = "aiStrategyPlanning";
+  static const String pvForecast = "pvForecast";
+  static const String loadForecast = "loadForecast";
+  static const String priceForecast = "priceForecast";
+  static const String electricityPrice = "electricityPrice";
+  static const String applyAiStrategy = "applyAiStrategy";
+  static const String applyTip = "applyTip";
+  static const String allTab = "allTab";
+  static const String switchTab = "switchTab";
+  static const String adjustTab = "adjustTab";
+  static const String stopTab = "stopTab";
 }
 
 const en = {
@@ -726,8 +757,7 @@ const en = {
   "dischargingAmount": "Discharging Amount",
   "amount": "Amount",
   "realTimeSoc": "Real-Time Curve",
-  "energyStorageChargingAndDischargingCapacity":
-      "Energy Storage Charging And Discharging Capacity",
+  "energyStorageChargingAndDischargingCapacity": "Electricity Metrics",
   "happened": "happened",
   "keepTime": "duration",
   "hour": "hour",
@@ -821,21 +851,52 @@ const en = {
   "exportContent":
       "The file has been exported and can be saved in the sharing panel",
   "exportSaved": "The file has been saved to:%s",
-
-  "gridConnectedElectricity": "Exported Energy",
-  "powerGridCapacity": "Imported Energy",
+  "gridConnectedElectricity": "Grid Export",
+  "powerGridCapacity": "Grid Import",
   "loadElectricity": "Load Consumption",
-  "todayGridNeg": "Today's Exported Energy",
-  "monthGridNeg": "Monthly Exported Energy",
-  "yearGridNeg": "Yearly Exported Energy",
-  "totalGridNeg": "Total Exported Energy",
-  "todayGridPos": "Today's Imported Energy",
-  "monthGridPos": "Monthly Imported Energy",
-  "yearGridPos": "Yearly Imported Energy",
-  "totalGridPos": "Total Imported Energy",
+  "todayGridNeg": "Today's Grid Export",
+  "monthGridNeg": "Current Month Grid Export",
+  "yearGridNeg": "Current Year Grid Export",
+  "totalGridNeg": "Total Grid Export",
+  "todayGridPos": "Today's Grid Import",
+  "monthGridPos": "Current Month Grid Import",
+  "yearGridPos": "Current Year Grid Import",
+  "totalGridPos": "Total Grid Import",
   "todayLoadPos": "Today's Load Consumption",
   "monthLoadPos": "Monthly Load Consumption",
   "yearLoadPos": "Yearly Load Consumption",
   "totalLoadPos": "Total Load Consumption",
   "strategy": "Strategy",
+  "currentMode": "Current Mode: ",
+  "operationStatus": "Operation Status: ",
+  "protectionParams": "Protection Parameters",
+  "powerCurve": "Power Curve",
+  "maxPower": "Max Power",
+  "socUpperLimit": "SOC Upper Limit",
+  "socLowerLimit": "SOC Lower Limit",
+  "strategyHistory": "Strategy History",
+  "aiStrategyPreview": "AI Preview",
+  "strategyCurve": "Strategy Curve",
+  "actualOperation": "Actual Operation",
+  "aiStrategyPreviewTitle": "AI Strategy Preview",
+  "aiSmartOptimization": "AI Smart Strategy Optimization",
+  "aiStrategyProfit": "AI Strategy Profit",
+  "currentStrategyProfit": "Current Strategy Profit",
+  "improvementRate": "Improvement Rate",
+  "profitEstimation": "Revenue forecast (next day)",
+  "dailyExtraEarning": "Expected daily earnings",
+  "powerForecastChart": "Power Forecast Chart",
+  "recommended": "Recommendation",
+  "aiStrategyPlanning": "AI Strategy Planning",
+  "pvForecast": "PV Forecast",
+  "loadForecast": "Load Forecast",
+  "priceForecast": "Price Forecast",
+  "electricityPrice": "Electricity Price",
+  "applyAiStrategy": "Apply AI Strategy",
+  "applyTip":
+      "After approval, AI strategy will automatically take over current operation",
+  "allTab": "All",
+  "switchTab": "Switch",
+  "adjustTab": "Adjust Parameters",
+  "stopTab": "Stop",
 };

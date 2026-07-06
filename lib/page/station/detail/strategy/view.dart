@@ -1,9 +1,12 @@
 import 'dart:math';
 
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/ai_strategy_preview_page.dart';
 import 'package:cescpro/page/station/detail/strategy/history/strategy_history_page.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class StrategyPage extends StatefulWidget {
   const StrategyPage({super.key});
@@ -126,8 +129,8 @@ class _StrategyPageState extends State<StrategyPage> {
               },
             ),
           ),
-          const Text(
-            '策略',
+          Text(
+            TKey.strategy.tr,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -213,10 +216,10 @@ class _StrategyPageState extends State<StrategyPage> {
           Divider(height: 10, color: Colors.transparent),
           _buildModeRow(),
           Divider(height: 14, color: Colors.transparent),
-          _buildSectionLabel('策略保护参数'),
+          _buildSectionLabel(TKey.protectionParams.tr),
           _buildParams(),
           Divider(height: 14, color: Colors.transparent),
-          _buildSectionLabel('功率曲线'),
+          _buildSectionLabel(TKey.powerCurve.tr),
           _buildChart(),
           _buildLegend(),
         ],
@@ -237,8 +240,8 @@ class _StrategyPageState extends State<StrategyPage> {
               child: CustomPaint(painter: StrategyIconPainter()),
             ),
             const SizedBox(width: 8),
-            const Text(
-              '策略',
+            Text(
+              TKey.strategy.tr,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -297,8 +300,8 @@ class _StrategyPageState extends State<StrategyPage> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
-          '当前模式：',
+        Text(
+          TKey.currentMode.tr,
           style: TextStyle(fontSize: 13, color: Color(0xffcccccc)),
         ),
         const Text(
@@ -318,8 +321,8 @@ class _StrategyPageState extends State<StrategyPage> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text(
-          '运行状态：',
+        Text(
+          TKey.operationStatus.tr,
           style: TextStyle(fontSize: 13, color: Color(0xffcccccc)),
         ),
         const Text(
@@ -357,14 +360,16 @@ class _StrategyPageState extends State<StrategyPage> {
   Widget _buildParams() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        children: [
-          _buildParam('80%', 'SOC 上限'),
-          const SizedBox(width: 8),
-          _buildParam('20%', 'SOC 下限'),
-          const SizedBox(width: 8),
-          _buildParam('500kW', '最大功率'),
-        ],
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            _buildParam('80%', TKey.socUpperLimit.tr),
+            VerticalDivider(width: 8, color: Colors.transparent),
+            _buildParam('20%', TKey.socLowerLimit.tr),
+            VerticalDivider(width: 8, color: Colors.transparent),
+            _buildParam('500kW', TKey.maxPower.tr),
+          ],
+        ),
       ),
     );
   }
@@ -382,13 +387,13 @@ class _StrategyPageState extends State<StrategyPage> {
           children: [
             Text(
               value,
-              style: const TextStyle(
-                fontSize: 16,
+              style: TextStyle(
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
               ),
             ),
-            const SizedBox(height: 2),
+            Divider(height: 2, color: Colors.transparent),
             Text(
               label,
               style: TextStyle(fontSize: 10, color: const Color(0xff888888)),
@@ -504,9 +509,9 @@ class _StrategyPageState extends State<StrategyPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildLegendItem(const Color(0xff4a9eff), '策略曲线'),
+          _buildLegendItem(const Color(0xff4a9eff), TKey.strategyCurve.tr),
           const SizedBox(width: 18),
-          _buildLegendItem(const Color(0xff2dd4bf), '实际运行'),
+          _buildLegendItem(const Color(0xff2dd4bf), TKey.actualOperation.tr),
         ],
       ),
     );
@@ -540,7 +545,7 @@ class _StrategyPageState extends State<StrategyPage> {
           Expanded(
             child: _buildActionButton(
               Icons.history,
-              '策略历史',
+              TKey.strategyHistory.tr,
               false,
               () => Navigator.push(
                 context,
@@ -554,7 +559,7 @@ class _StrategyPageState extends State<StrategyPage> {
           Expanded(
             child: _buildActionButton(
               Icons.smart_toy,
-              'AI 策略预览',
+              TKey.aiStrategyPreview.tr,
               true,
               () => Navigator.push(
                 context,
@@ -602,60 +607,13 @@ class _StrategyPageState extends State<StrategyPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, color: Colors.white, size: 18),
-            const SizedBox(width: 6),
+            VerticalDivider(width: 5, color: Colors.transparent),
             Text(
               text,
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTabBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(235, 15, 25, 45),
-        border: const Border(
-          top: BorderSide(color: Color.fromARGB(38, 74, 158, 255)),
-        ),
-      ),
-      child: Row(
-        children: [
-          _buildTab('概览', Icons.home, false),
-          _buildTab('监控', Icons.monitor, false),
-          _buildTab('策略', Icons.show_chart, true),
-          _buildTab('告警', Icons.notifications, false),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTab(String label, IconData icon, bool active) {
-    return Expanded(
-      child: TextButton(
-        onPressed: () => showHint('进入 $label 模块'),
-        child: Column(
-          children: [
-            Icon(
-              icon,
-              color: active ? const Color(0xff4a9eff) : const Color(0xff666666),
-              size: 24,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color: active
-                    ? const Color(0xff4a9eff)
-                    : const Color(0xff888888),
               ),
             ),
           ],
