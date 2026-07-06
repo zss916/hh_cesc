@@ -96,9 +96,9 @@ class _StationDetailState extends State<StationDetailPage> {
 
               ///策略
               CustomNavigationBarItem(
-                icon: Image.asset(Assets.imgControl, matchTextDirection: true),
+                icon: Image.asset(Assets.imgStrategy, matchTextDirection: true),
                 selectedIcon: Image.asset(
-                  Assets.imgControlS,
+                  Assets.imgStrategyS,
                   matchTextDirection: true,
                 ),
                 title: Text(

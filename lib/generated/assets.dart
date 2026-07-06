@@ -78,4 +78,7 @@ class Assets {
   static const String imgEle = 'assets/img/ele.png';
 
   static const String imgGridExport = 'assets/img/grid_export.png';
+
+  static const String imgStrategy = 'assets/img/strategy.png';
+  static const String imgStrategyS = 'assets/img/strategy_s.png';
 }
