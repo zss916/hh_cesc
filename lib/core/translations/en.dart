@@ -567,6 +567,9 @@ class TKey {
   static const String switchTab = "switchTab";
   static const String adjustTab = "adjustTab";
   static const String stopTab = "stopTab";
+  static const String applyTitle = "applyTitle";
+  static const String applyContent = "applyContent";
+  static const String knowTitle = "knowTitle";
 }
 
 const en = {
@@ -899,4 +902,8 @@ const en = {
   "switchTab": "Switch",
   "adjustTab": "Adjust Parameters",
   "stopTab": "Stop",
+  "applyTitle": "Please contact your account manager",
+  "applyContent":
+      'The activation of AI strategies requires review and activation by your account manager. \nlease proactively contact the account manager, submit the activation application, and once approved, you can experience the AI intelligent strategy.',
+  "knowTitle": "I know",
 };

@@ -314,4 +314,8 @@ const de = {
   "switchTab": "Schalter",
   "adjustTab": "Parameter anpassen",
   "stopTab": "Stoppen",
+  "applyTitle": "Bitte kontaktieren Sie Ihren Kundenmanager.",
+  "applyContent":
+      'Die Aktivierung von KI-Richtlinien erfordert eine Überprüfung und Einleitung durch Ihren Account Manager. Bitte wenden Sie sich aktiv an den Account Manager und stellen Sie einen Antrag auf Eröffnung ein, um die KI-Strategie nach der Überprüfung zu erleben.',
+  "knowTitle": "Ja, ich weiß.",
 };

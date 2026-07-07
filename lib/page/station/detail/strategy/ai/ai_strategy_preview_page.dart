@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:cescpro/page/station/detail/strategy/ai/widget/dialog_strategy.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'
     show GradientText, GradientDirection;
@@ -24,7 +23,6 @@ class AIStrategyPreviewPage extends StatelessWidget {
         child: Column(
           children: [
             _buildAIBanner(),
-            _buildProfitCard(),
             _buildRevenueForecast(),
             _buildPowerChart(),
             _buildPriceForecast(),
@@ -91,9 +89,66 @@ class AIStrategyPreviewPage extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 14),
-          color: Color(0xFF313540),
+          decoration: BoxDecoration(
+            color: Color(0xFF313540),
+            borderRadius: BorderRadius.circular(14),
+          ),
           width: double.maxFinite,
-          height: 130,
+          child: Column(
+            children: [
+              IntrinsicHeight(
+                child: Row(
+                  children: [
+                    _buildProfitCell('¥1,284', TKey.aiStrategyProfit.tr, false),
+                    VerticalDivider(width: 5, color: Colors.transparent),
+                    _buildProfitCell(
+                      '¥962',
+                      TKey.currentStrategyProfit.tr,
+                      false,
+                    ),
+                    VerticalDivider(width: 5, color: Colors.transparent),
+                    _buildProfitCell('+33.5%', TKey.improvementRate.tr, true),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 6),
+              Divider(
+                height: 1,
+                color: Color(0x1AFFFFFF),
+                indent: 18,
+                endIndent: 18,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 14,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        TKey.dailyExtraEarning.tr,
+                        textAlign: .left,
+                        style: TextStyle(fontSize: 12, color: Colors.white),
+                      ),
+                    ),
+
+                    Container(
+                      margin: .only(left: 5),
+                      child: Text(
+                        '+ ¥322',
+                        style: TextStyle(
+                          fontSize: 21.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff159FFF),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
         Divider(height: 22, color: Colors.transparent),
       ],
@@ -144,9 +199,73 @@ class AIStrategyPreviewPage extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 14),
-          color: Color(0xFF313540),
+          decoration: BoxDecoration(
+            color: Color(0xFF313540),
+            borderRadius: BorderRadius.circular(14),
+          ),
           width: double.maxFinite,
           height: 270,
+          child: Column(children: [Spacer(), _buildPowerLegend()]),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPowerLegend() {
+    return Container(
+      width: double.maxFinite,
+      padding: const EdgeInsets.only(top: 8, bottom: 15),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 10,
+        children: [
+          _buildLegendItem(
+            Container(
+              width: 7,
+              height: 7,
+              decoration: BoxDecoration(
+                color: const Color(0xFF3874F2),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            TKey.aiStrategyPlanning.tr,
+          ),
+          _buildLegendItem(
+            Container(
+              width: 7,
+              height: 7,
+              decoration: BoxDecoration(
+                color: const Color(0xfffbbf24),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            TKey.pvForecast.tr,
+          ),
+          _buildLegendItem(
+            Container(
+              width: 7,
+              height: 7,
+              decoration: BoxDecoration(
+                color: const Color(0xffff9933),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            TKey.loadForecast.tr,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLegendItem(Widget icon, String text) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        icon,
+        const SizedBox(width: 4),
+        Text(
+          text,
+          style: TextStyle(fontSize: 12.sp, color: const Color(0xD9FFFFFF)),
         ),
       ],
     );
@@ -170,11 +289,39 @@ class AIStrategyPreviewPage extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 14),
-          color: Color(0xFF313540),
+          decoration: BoxDecoration(
+            color: Color(0xFF313540),
+            borderRadius: BorderRadius.circular(14),
+          ),
           width: double.maxFinite,
           height: 270,
+          child: Column(children: [Spacer(), _buildPriceLegend()]),
         ),
       ],
+    );
+  }
+
+  Widget _buildPriceLegend() {
+    return Padding(
+      padding: EdgeInsets.only(top: 8, bottom: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 7,
+            height: 7,
+            decoration: BoxDecoration(
+              color: const Color(0xff2dd4bf),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 4),
+          Text(
+            '${TKey.electricityPrice.tr} 元/kWh',
+            style: TextStyle(fontSize: 12.sp, color: const Color(0xD9FFFFFF)),
+          ),
+        ],
+      ),
     );
   }
 
@@ -185,9 +332,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              /*setState(() {
-                _showModal = true;
-              })*/
+              showStrategyDialog();
             },
             child: Container(
               width: double.infinity,
@@ -217,88 +362,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             TKey.applyTip.tr,
-            style: TextStyle(fontSize: 11, color: Color(0xff888888)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  ///
-  ///收益预估
-  Widget _buildProfitCard() {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xff1a2842), Color(0xff16213a)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        border: Border.all(color: const Color.fromARGB(31, 74, 158, 255)),
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.trending_up, color: Color(0xff2dd4bf), size: 18),
-              const SizedBox(width: 6),
-              Text(
-                TKey.profitEstimation.tr,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          IntrinsicHeight(
-            child: Row(
-              children: [
-                _buildProfitCell('¥1,284', TKey.aiStrategyProfit.tr, true),
-                VerticalDivider(width: 10, color: Colors.transparent),
-                _buildProfitCell('¥962', TKey.currentStrategyProfit.tr, false),
-                VerticalDivider(width: 10, color: Colors.transparent),
-                _buildProfitCell('+33.5%', TKey.improvementRate.tr, true),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [
-                  Color.fromARGB(31, 45, 212, 191),
-                  Color.fromARGB(20, 74, 158, 255),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              border: Border.all(color: const Color.fromARGB(63, 45, 212, 191)),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  TKey.dailyExtraEarning.tr,
-                  style: TextStyle(fontSize: 12, color: Color(0xffcccccc)),
-                ),
-                const Text(
-                  '+ ¥322',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xff2dd4bf),
-                  ),
-                ),
-              ],
-            ),
+            style: TextStyle(fontSize: 10.sp, color: Color(0xd9ffffff)),
           ),
         ],
       ),
@@ -309,25 +373,27 @@ class AIStrategyPreviewPage extends StatelessWidget {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-        decoration: BoxDecoration(
+        /*decoration: BoxDecoration(
           color: const Color.fromARGB(15, 74, 158, 255),
           border: Border.all(color: const Color.fromARGB(31, 74, 158, 255)),
           borderRadius: BorderRadius.circular(10),
-        ),
+        ),*/
         child: Column(
           children: [
             Text(
               value,
+              textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 21.sp,
                 fontWeight: FontWeight.w700,
-                color: isUp ? const Color(0xff2dd4bf) : const Color(0xffaaaaaa),
+                color: isUp ? const Color(0xff159FFF) : Colors.white,
               ),
             ),
             Divider(height: 2, color: Colors.transparent),
             Text(
               label,
-              style: TextStyle(fontSize: 10, color: const Color(0xff888888)),
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12.sp, color: const Color(0xff888888)),
             ),
           ],
         ),
@@ -336,7 +402,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
   }
 }
 
-class AIStrategyPreviewPage2 extends StatefulWidget {
+/*class AIStrategyPreviewPage2 extends StatefulWidget {
   const AIStrategyPreviewPage2({super.key});
 
   @override
@@ -1451,4 +1517,4 @@ class AiLinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
+}*/

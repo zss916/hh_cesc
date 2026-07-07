@@ -45,18 +45,16 @@ class _FilterWidgetState extends State<FilterWidget> {
                 decoration: BoxDecoration(
                   gradient: _selectedFilter == index
                       ? const LinearGradient(
-                          colors: [Color(0xff4a9eff), Color(0xff2c6fd1)],
+                          colors: [Color(0x3372FAFF), Color(0x3372FAFF)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         )
                       : null,
-                  color: _selectedFilter == index
-                      ? null
-                      : const Color.fromARGB(20, 74, 158, 255),
+                  color: _selectedFilter == index ? null : Color(0x3372FAFF),
                   border: Border.all(
                     color: _selectedFilter == index
                         ? Colors.transparent
-                        : const Color.fromARGB(46, 74, 158, 255),
+                        : Color(0x3372FAFF),
                   ),
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -65,8 +63,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                   style: TextStyle(
                     fontSize: 12,
                     color: _selectedFilter == index
-                        ? Colors.white
-                        : const Color(0xffaaaaaa),
+                        ? const Color(0xFF72FAFF)
+                        : Colors.white,
                   ),
                 ),
               ),

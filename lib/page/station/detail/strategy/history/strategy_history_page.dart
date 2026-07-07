@@ -1,3 +1,4 @@
+import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/strategy/history/widget/filter_widget.dart';
 import 'package:flutter/material.dart';
@@ -81,46 +82,15 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff0a1428),
-      body: SafeArea(
-        child: Column(
-          children: [
-            _buildTopNav(),
-            FilterWidget(),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 100),
-                child: _buildHistoryList(),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTopNav() {
-    return Container(
-      width: double.maxFinite,
-      height: 48,
-      child: Stack(
-        alignment: Alignment.center,
+      appBar: baseAppBar(title: TKey.strategyHistory.tr),
+      backgroundColor: Color(0xFF23282E),
+      body: Column(
         children: [
-          Positioned(
-            left: 14,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white, size: 22),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Text(
-            TKey.strategyHistory.tr,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
+          FilterWidget(),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(bottom: 100),
+              child: _buildHistoryList(),
             ),
           ),
         ],
@@ -166,56 +136,32 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
         border: Border.all(color: const Color.fromARGB(31, 74, 158, 255)),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 10,
-            height: 10,
-            decoration: BoxDecoration(
-              color: const Color(0xff4a9eff),
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: const [
-                BoxShadow(color: Color(0xff4a9eff), blurRadius: 8),
-              ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                item.time,
+                style: TextStyle(fontSize: 11, color: const Color(0xff888888)),
+              ),
+              _buildTag(item.tag, item.tagType),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            item.title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
             ),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      item.time,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: const Color(0xff888888),
-                      ),
-                    ),
-                    _buildTag(item.tag, item.tagType),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  item.title,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  item.desc,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: const Color(0xff888888),
-                  ),
-                ),
-              ],
-            ),
+          const SizedBox(height: 4),
+          Text(
+            item.desc,
+            style: TextStyle(fontSize: 12, color: const Color(0xff888888)),
           ),
         ],
       ),

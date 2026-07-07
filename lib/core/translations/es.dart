@@ -330,4 +330,8 @@ const es = {
   "switchTab": "Cambiar",
   "adjustTab": "Ajustar parámetros",
   "stopTab": "Parar",
+  "applyTitle": "Por favor, contacte a su gerente de cuenta.",
+  "applyContent":
+      'La activación de la estrategia de Ia requiere que su gerente de clientes la revise y abra. Por favor, tome la iniciativa de ponerse en contacto con el gerente de clientes, presentar la solicitud de apertura y experimentar la estrategia inteligente de Ia después de la aprobación de la revisión.',
+  "knowTitle": "Lo sé",
 };

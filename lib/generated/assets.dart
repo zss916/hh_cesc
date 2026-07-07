@@ -79,9 +79,9 @@ class Assets {
   static const String imgStrategy = 'assets/img/strategy.png';
   static const String imgStrategyS = 'assets/img/strategy_s.png';
   static const String imgStrategyLocation = 'assets/img/strategy_location.png';
-
   static const String imgStrategyHistory = 'assets/img/strategy_history.png';
   static const String imgAiPreview = 'assets/img/ai_preview.png';
   static const String imgAiPreviewTitleIcon =
       'assets/img/ai_preview_title_icon.png';
+  static const String imgApplyIcon = 'assets/img/apply_icon.png';
 }
