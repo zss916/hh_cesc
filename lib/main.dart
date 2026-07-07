@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         ),
         defaultTransition: Transition.cupertino,
         theme: ThemeData(
-          // scaffoldBackgroundColor: Colors.white,
+          // scaffoldBackgroundColor: Colors.black,
           ///处理中文w500,不加粗效果
           // fontFamily: "PingFang SC",
           ///最底层绘制颜色
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           ),
           tabBarTheme: TabBarThemeData(dividerColor: Colors.transparent),
         ),
-        // themeMode: ThemeMode.dark,
+        //themeMode: ThemeMode.dark,
         darkTheme: ThemeData(
           brightness: Brightness.dark,
           canvasColor: Color(0xFF23282E),
