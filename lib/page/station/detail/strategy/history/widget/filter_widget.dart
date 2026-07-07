@@ -1,6 +1,7 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class FilterWidget extends StatefulWidget {
   const FilterWidget({super.key});
@@ -33,8 +34,6 @@ class _FilterWidgetState extends State<FilterWidget> {
               onTap: () {
                 setState(() {
                   _selectedFilter = index;
-                  /* int i = _filters.indexWhere((e) => e == _selectedFilter);
-                _tabController.animateTo(i);*/
                 });
               },
               child: Container(
@@ -50,12 +49,17 @@ class _FilterWidgetState extends State<FilterWidget> {
                           end: Alignment.bottomRight,
                         )
                       : null,
-                  color: _selectedFilter == index ? null : Color(0x3372FAFF),
-                  border: Border.all(
-                    color: _selectedFilter == index
-                        ? Colors.transparent
-                        : Color(0x3372FAFF),
-                  ),
+                  color: _selectedFilter == index ? null : Color(0x5986A3C1),
+                  border: _selectedFilter == index
+                      ? GradientBoxBorder(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Color(0xFF73FBFF), Color(0xFF128DED)],
+                          ),
+                          width: 1,
+                        )
+                      : Border.all(color: Colors.transparent),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(

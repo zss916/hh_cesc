@@ -105,7 +105,8 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
         children: _historyData.map((group) {
           return Column(
             children: [
-              Padding(
+              Container(
+                width: double.maxFinite,
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                 child: Text(
                   group.title,
@@ -128,12 +129,7 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xff1a2842), Color(0xff16213a)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        border: Border.all(color: const Color.fromARGB(31, 74, 158, 255)),
+        color: Color(0xFF313540),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -192,13 +188,19 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      alignment: AlignmentDirectional.center,
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: bgColor,
         border: Border.all(color: borderColor),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(50),
       ),
-      child: Text(tag, style: TextStyle(fontSize: 10, color: textColor)),
+      child: Text(
+        tag,
+        textAlign: .center,
+        //strutStyle: const StrutStyle(forceStrutHeight: true, height: 1.1),
+        style: TextStyle(fontSize: 10, height: 1.2, color: textColor),
+      ),
     );
   }
 }
