@@ -171,22 +171,21 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
 
     switch (type) {
       case TagType.adjust:
-        bgColor = const Color.fromARGB(23, 45, 212, 191);
-        textColor = const Color(0xff2dd4bf);
-        borderColor = const Color.fromARGB(46, 45, 212, 191);
+        bgColor = const Color(0x2622EEBD);
+        textColor = const Color(0xff22EEBD);
+        borderColor = const Color(0x7322eebd);
         break;
       case TagType.switchMode:
-        bgColor = const Color.fromARGB(23, 45, 212, 191);
-        textColor = const Color(0xff2dd4bf);
-        borderColor = const Color.fromARGB(46, 45, 212, 191);
+        bgColor = const Color(0x2628CCFF);
+        textColor = const Color(0xff28CCFF);
+        borderColor = Color(0x7328CCFF);
         break;
       case TagType.cancel:
-        bgColor = const Color.fromARGB(23, 255, 153, 51);
+        bgColor = const Color(0x26ff9933);
         textColor = const Color(0xffff9933);
-        borderColor = const Color.fromARGB(46, 255, 153, 51);
+        borderColor = const Color(0x73ff9933);
         break;
     }
-
     return Container(
       alignment: AlignmentDirectional.center,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -198,7 +197,6 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
       child: Text(
         tag,
         textAlign: .center,
-        //strutStyle: const StrutStyle(forceStrutHeight: true, height: 1.1),
         style: TextStyle(fontSize: 10, height: 1.2, color: textColor),
       ),
     );
