@@ -306,7 +306,7 @@ const es = {
   "socUpperLimit": "Límite superior del SOC",
   "socLowerLimit": "Límite inferior SOC",
   "strategyHistory": "Historia",
-  "aiStrategyPreview": "Vista previa de AI",
+  "aiStrategyPreview": "Vista previa",
   "strategyCurve": "Curva de Estrategia",
   "actualOperation": "Operación real",
   "aiStrategyPreviewTitle": "Vista previa de AI",

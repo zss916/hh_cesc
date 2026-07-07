@@ -159,4 +159,8 @@ class PageTools {
   ///首页告警详情
   static void toAlarmDetails(AlarmItemEntity item) =>
       Get.toNamed(APages.alarmDetails, arguments: item);
+
+  static void toStrategyHistory() => Get.toNamed(APages.strategyHistory);
+
+  static void toAiPreview() => Get.toNamed(APages.aiPreview);
 }

@@ -29,6 +29,8 @@ class APages {
   static const hRevenueChart = '/hRevenueChart';
   static const hEleChart = '/hEleChart';
   static const hPVChart = '/hPVChart';
+  static const aiPreview = '/aiPreview';
+  static const strategyHistory = '/strategyHistory';
 
   static final List<GetPage> routes = [
     GetPage(name: hRevenueChart, page: () => RevenueChartPage()),
@@ -102,5 +104,11 @@ class APages {
 
     /// 首页告警详情
     GetPage(name: alarmDetails, page: () => AlarmDetailsPage()),
+
+    ///策略历史
+    GetPage(name: strategyHistory, page: () => StrategyHistoryPage()),
+
+    ///ai 预览
+    GetPage(name: aiPreview, page: () => AIStrategyPreviewPage()),
   ];
 }

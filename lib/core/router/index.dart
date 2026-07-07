@@ -25,6 +25,8 @@ import 'package:cescpro/page/station/detail/monitor/distribution/distribution_ma
 import 'package:cescpro/page/station/detail/monitor/monitor_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/monitor_detail_v1_page.dart';
 import 'package:cescpro/page/station/detail/olive/detail/olive_site_detail_page.dart';
+import 'package:cescpro/page/station/detail/strategy/ai/ai_strategy_preview_page.dart';
+import 'package:cescpro/page/station/detail/strategy/history/strategy_history_page.dart';
 import 'package:cescpro/page/station/ele/index.dart';
 import 'package:cescpro/page/station/report/index.dart';
 import 'package:cescpro/page/station/revenue/index.dart';

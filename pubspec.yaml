@@ -82,6 +82,8 @@ dependencies:
   #get_x_ducafecat: ^5.0.1
   #pull_to_refresh_flutter3: 2.0.2
   #app_settings: 7.0.0
+  gradient_borders: ^1.0.4
+  simple_gradient_text: 1.4.0
 
   custom_navigation_bar:
     path: plugins/custom_bubble_navigation_bar-master

@@ -1,18 +1,349 @@
 import 'dart:math';
 
+import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/generated/assets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart'
+    show GradientText, GradientDirection;
 
-class AIStrategyPreviewPage extends StatefulWidget {
-  const AIStrategyPreviewPage({super.key});
+class AIStrategyPreviewPage extends StatelessWidget {
+  AIStrategyPreviewPage({super.key});
+
+  String bannerContent = '基于光伏预测、负载预测、天气预报与电价动态生成次日最优策略';
 
   @override
-  State<AIStrategyPreviewPage> createState() => _AIStrategyPreviewPageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: baseAppBar(title: TKey.aiStrategyPreviewTitle.tr),
+      backgroundColor: Color(0xFF23282E),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 100),
+        child: Column(
+          children: [
+            _buildAIBanner(),
+            _buildProfitCard(),
+            _buildRevenueForecast(),
+            _buildPowerChart(),
+            _buildPriceForecast(),
+            _buildApplySection(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// AI banner
+  Widget _buildAIBanner() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Color(0xFF313540),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Row(
+        children: [
+          Image.asset(Assets.imgAiPreviewTitleIcon, width: 36, height: 36),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  TKey.aiSmartOptimization.tr,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  bannerContent,
+                  style: TextStyle(fontSize: 11, color: Color(0xffaaaaaa)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRevenueForecast() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          alignment: AlignmentDirectional.centerStart,
+          width: double.maxFinite,
+          child: Text(
+            TKey.profitEstimation.tr,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 14),
+          color: Color(0xFF313540),
+          width: double.maxFinite,
+          height: 130,
+        ),
+        Divider(height: 22, color: Colors.transparent),
+      ],
+    );
+  }
+
+  Widget _buildPowerChart() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          width: double.maxFinite,
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  TKey.powerForecastChart.tr,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              SizedBox(width: 5),
+              Container(
+                margin: EdgeInsetsDirectional.only(start: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Color(0x3328CCFF),
+                  border: Border.all(color: Color(0xFF28CCFF)),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: GradientText(
+                  gradientDirection: GradientDirection.btt,
+                  TKey.recommended.tr,
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                  colors: [Color(0xFF40F7FE), Color(0xFF1088EB)],
+                ),
+
+                /*Text(
+                      TKey.recommended.tr,
+                      style: TextStyle(fontSize: 10, color: Color(0xFF40F7FE)),
+                    ),*/
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 14),
+          color: Color(0xFF313540),
+          width: double.maxFinite,
+          height: 270,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPriceForecast() {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          alignment: AlignmentDirectional.centerStart,
+          width: double.maxFinite,
+          child: Text(
+            TKey.priceForecast.tr,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 14),
+          color: Color(0xFF313540),
+          width: double.maxFinite,
+          height: 270,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildApplySection() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              /*setState(() {
+                _showModal = true;
+              })*/
+            },
+            child: Container(
+              width: double.infinity,
+              alignment: AlignmentDirectional.center,
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xff43FFFF), Color(0xff0978E9)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(100),
+                boxShadow: [
+                  BoxShadow(color: Color(0x3343ffff), blurRadius: 20),
+                ],
+              ),
+              child: Text(
+                TKey.applyAiStrategy.tr,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            TKey.applyTip.tr,
+            style: TextStyle(fontSize: 11, color: Color(0xff888888)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ///
+  ///收益预估
+  Widget _buildProfitCard() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xff1a2842), Color(0xff16213a)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        border: Border.all(color: const Color.fromARGB(31, 74, 158, 255)),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.trending_up, color: Color(0xff2dd4bf), size: 18),
+              const SizedBox(width: 6),
+              Text(
+                TKey.profitEstimation.tr,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                _buildProfitCell('¥1,284', TKey.aiStrategyProfit.tr, true),
+                VerticalDivider(width: 10, color: Colors.transparent),
+                _buildProfitCell('¥962', TKey.currentStrategyProfit.tr, false),
+                VerticalDivider(width: 10, color: Colors.transparent),
+                _buildProfitCell('+33.5%', TKey.improvementRate.tr, true),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [
+                  Color.fromARGB(31, 45, 212, 191),
+                  Color.fromARGB(20, 74, 158, 255),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              border: Border.all(color: const Color.fromARGB(63, 45, 212, 191)),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  TKey.dailyExtraEarning.tr,
+                  style: TextStyle(fontSize: 12, color: Color(0xffcccccc)),
+                ),
+                const Text(
+                  '+ ¥322',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xff2dd4bf),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfitCell(String value, String label, bool isUp) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(15, 74, 158, 255),
+          border: Border.all(color: const Color.fromARGB(31, 74, 158, 255)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          children: [
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: isUp ? const Color(0xff2dd4bf) : const Color(0xffaaaaaa),
+              ),
+            ),
+            Divider(height: 2, color: Colors.transparent),
+            Text(
+              label,
+              style: TextStyle(fontSize: 10, color: const Color(0xff888888)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _AIStrategyPreviewPageState extends State<AIStrategyPreviewPage> {
+class AIStrategyPreviewPage2 extends StatefulWidget {
+  const AIStrategyPreviewPage2({super.key});
+
+  @override
+  State<AIStrategyPreviewPage2> createState() => _AIStrategyPreviewPageState2();
+}
+
+class _AIStrategyPreviewPageState2 extends State<AIStrategyPreviewPage2> {
   static const int tick = 5;
   static const int n = (24 * 60) ~/ tick + 1;
   late List<String> labels;

@@ -74,11 +74,14 @@ class Assets {
       'assets/img/today_pv_generation2.png';
   static const String jsonCountryAndArea = 'assets/json/country_and_area.json';
   static const String jsonPcaCode = 'assets/json/pca-code.json';
-
   static const String imgEle = 'assets/img/ele.png';
-
   static const String imgGridExport = 'assets/img/grid_export.png';
-
   static const String imgStrategy = 'assets/img/strategy.png';
   static const String imgStrategyS = 'assets/img/strategy_s.png';
+  static const String imgStrategyLocation = 'assets/img/strategy_location.png';
+
+  static const String imgStrategyHistory = 'assets/img/strategy_history.png';
+  static const String imgAiPreview = 'assets/img/ai_preview.png';
+  static const String imgAiPreviewTitleIcon =
+      'assets/img/ai_preview_title_icon.png';
 }
