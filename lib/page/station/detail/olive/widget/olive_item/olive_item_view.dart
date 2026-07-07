@@ -1834,7 +1834,7 @@ class OliveItemView extends StatelessWidget {
                             fontSize: 12.sp,
                             color: Color(0xFFFFFFFF),
                           ),
-                          text: siteDetail?.name ?? "",
+                          text: siteDetail?.name ?? "--",
                         ),
                       ],
                       style: TextStyle(
@@ -1862,7 +1862,7 @@ class OliveItemView extends StatelessWidget {
                             fontSize: 12.sp,
                             color: Color(0xFFFFFFFF),
                           ),
-                          text: siteDetail?.cname ?? "",
+                          text: siteDetail?.cname ?? "--",
                         ),
                       ],
                       style: TextStyle(

@@ -83,16 +83,25 @@ class OliveItemLogic extends GetxController {
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       siteId = map['siteId'] as int?;
-      revenueShow =
-          ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?)
-              ?.calculateRevenue ??
-          false;
+      SiteEntity? siteEntity =
+          ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?);
+      revenueShow = siteEntity?.calculateRevenue ?? false;
     }
   }
 
   @override
   void onReady() {
     super.onReady();
+    SiteEntity? siteEntity =
+        ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?);
+    if (siteEntity != null) {
+      siteDetail = SiteDetailEntity()
+        ..name = siteEntity.name
+        ..cname = siteEntity.cname
+        ..picture = siteEntity.picture
+        ..location = siteEntity.location;
+      update();
+    }
     loadData();
   }
 
