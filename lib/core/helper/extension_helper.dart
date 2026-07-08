@@ -362,6 +362,10 @@ extension MoneyExt on String? {
       if (value >= 1000) {
         return '${_dynamicDecimal(value / 1000, currentLocale)}K';
       }
+
+      if (value == 0) {
+        return '0.00';
+      }
       return _dynamicDecimal(value, currentLocale);
     }
 
@@ -379,6 +383,9 @@ extension MoneyExt on String? {
         return '${_dynamicDecimal(value / 1000, currentLocale)} Tsd';
       }
 
+      if (value == 0) {
+        return '0.00';
+      }
       return _dynamicDecimal(value, currentLocale);
     }
 
@@ -393,6 +400,10 @@ extension MoneyExt on String? {
 
     if (value >= 1000) {
       return '${_dynamicDecimal(value / 1000, currentLocale)}K';
+    }
+
+    if (value == 0) {
+      return '0.00';
     }
 
     return _dynamicDecimal(value, currentLocale);

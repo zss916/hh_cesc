@@ -182,7 +182,7 @@ const zh = {
   "dischargingAmount": "放电金额",
   "amount": "金额",
   "realTimeSoc": "实时曲线",
-  "energyStorageChargingAndDischargingCapacity": "储能充放电量",
+  "energyStorageChargingAndDischargingCapacity": "电量指标",
   "happened": "发生了",
   "keepTime": "持续时间",
   "hour": "时",

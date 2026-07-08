@@ -73,6 +73,7 @@ class StatisticsItemLogic extends GetxController {
   int eleViewStatus = ViewType.loading.index;
   List<String> eleLabels = [];
   bool revenueShow = false;
+  bool isPvSite = false;
 
   @override
   void onInit() {
@@ -80,10 +81,10 @@ class StatisticsItemLogic extends GetxController {
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       siteId = map['siteId'] as int?;
-      revenueShow =
-          ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?)
-              ?.calculateRevenue ??
-          false;
+      SiteEntity? siteEntity =
+          ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?);
+      revenueShow = siteEntity?.calculateRevenue ?? false;
+      isPvSite = siteEntity?.isPvPower ?? false;
     }
   }
 
@@ -178,6 +179,10 @@ class StatisticsItemLogic extends GetxController {
 
     if (isSuccessful) {
       if (value.isNotEmpty) {
+        if (!isPvSite) {
+          value.removeWhere((d) => d.type == 3);
+        }
+
         bool isHasItemData = value.any((e) => (e.list ?? []).isNotEmpty);
         if (isHasItemData) {
           /// 直接生成 Map<String, List<ChartData>>

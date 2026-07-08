@@ -1,7 +1,9 @@
 import 'package:cescpro/page/chart/widget/horizontal_power_chart/h_power_line_chart.dart';
 import 'package:cescpro/page/chart/widget/horizontal_power_chart/h_power_line_chart2.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart3.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 
 class HPowerAnalysisWidget2 extends StatefulWidget {
@@ -55,6 +57,29 @@ class _PowerAnalysisWidgetState extends State<HPowerAnalysisWidget2> {
               child: buildBody(viewState: widget.logic.powerViewStatus),
             ),
           ),
+
+          Container(
+            padding: EdgeInsetsDirectional.only(start: 10, end: 10, top: 10),
+            width: double.maxFinite,
+            child: Wrap(
+              spacing: 15,
+              runSpacing: 8,
+              children: [
+                ...widget.logic.series
+                    .map((a) => (a.name ?? ""))
+                    .toList()
+                    .mapIndexed(
+                      (i, e) => LineTitleWidget(
+                        color: e.toLowerCase() == "soc"
+                            ? Colors.blue
+                            : palette[i],
+                        title: e,
+                      ),
+                    ),
+              ],
+            ),
+          ),
+
           /* Divider(height: 5, color: Colors.transparent),
           SizedBox(
             width: double.maxFinite,

@@ -1,7 +1,11 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/model/site_info_card_entity.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/tools/state.dart';
 import 'package:cescpro/core/tools/time_tools.dart';
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
+import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/api/weather.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
@@ -35,41 +39,13 @@ class OliveItemLogic extends GetxController {
   ///判断获取货币符号
   String get currencyUnit => User.to.getCurrencyUnit();
 
-  ///今天充电
-  String showChargeAvg = "0.00";
-  String showChargeAvgUnit = "";
-
-  ///今天放电
-  String showRechargeAvg = "0.00";
-  String showRechargeAvgUnit = "";
-
   ///工作模式
   String workModel = "";
 
   ///状态
   int status = 0;
 
-  ///昨日收益
-  String showLastDayIncome = "0.00";
-
-  ///今日光伏发电量
-  String showTodayPvTotalNeg = "0.00";
-  String showTodayPvTotalNegUnit = "";
-
-  ///上网电量
-  String showTodayGridNeg = "0.00";
-  String showTodayGridNegUnit = "";
-
-  ///电网取电量
-  String showTodayGridPos = "0.00";
-  String showTodayGridPosUnit = "";
-
-  ///负载电量
-  String showTodayLoadPos = "0.00";
-  String showTodayLoadPosUnit = "";
-
-  bool showLoadPos = false;
-
+  List<SiteInfoCardEntity> data = [];
   SiteDetailEntity? siteDetail;
 
   ///站点名称
@@ -87,6 +63,57 @@ class OliveItemLogic extends GetxController {
           ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?);
       revenueShow = siteEntity?.calculateRevenue ?? false;
     }
+
+    data = [
+      SiteInfoCardEntity()
+        ..id = 0
+        ..icon = Assets.imgCumulativeCharging2
+        ..value = '0.00 '
+        ..unit = 'kWh'
+        ..title = TKey.todayCharging.tr
+        ..image = Assets.imgTodayCharging2,
+
+      SiteInfoCardEntity()
+        ..id = 1
+        ..icon = Assets.imgCumulativeDischarge2
+        ..value = '0.00 '
+        ..unit = 'kWh'
+        ..title = TKey.todayDischarge.tr
+        ..image = Assets.imgTodayDisCharging2,
+
+      SiteInfoCardEntity()
+        ..id = 2
+        ..icon = Assets.imgLastDayRecharge
+        ..value = '${currencyUnit}0.00'
+        ..unit = ""
+        ..title = TKey.lastDayIncome.tr
+        ..image = Assets.lastDayIncome2,
+
+      SiteInfoCardEntity()
+        ..id = 3
+        ..icon = Assets.imgAccumulatedPhotovoltaic2
+        ..value = '0.00 '
+        ..unit = 'kWh'
+        ..title = TKey.todayPVNeg.tr
+        ..image = Assets.todayPvGeneration2,
+
+      SiteInfoCardEntity()
+        ..id = 4
+        ..icon = Assets.imgEle
+        ..value = '0.00 '
+        ..unit = 'kWh'
+        ..title = TKey.todayGridPos.tr
+        ..image = Assets.imgTodayDisCharging2,
+
+      SiteInfoCardEntity()
+        ..id = 5
+        ..icon = Assets.imgGridExport
+        ..value = '0.00 '
+        ..unit = 'kWh'
+        ..title = TKey.todayGridNeg.tr
+        ..image = Assets.imgTodayDisCharging2,
+    ];
+    update();
   }
 
   @override
@@ -187,22 +214,84 @@ class OliveItemLogic extends GetxController {
     );
     if (value != null) {
       statisticRecord = value;
-      showChargeAvg = (value.todayTotalPos ?? 0).formatPowerValue();
-      showChargeAvgUnit = (value.todayTotalPos ?? 0).formatPowerValueUnit();
-      showRechargeAvg = (value.todayTotalNeg ?? 0).formatPowerValue();
-      showRechargeAvgUnit = (value.todayTotalNeg ?? 0).formatPowerValueUnit();
-      //showLastDayIncome = (value.lastDayIncome ?? 0).moneyFormatted;
-      showLastDayIncome = (value.lastDayIncome ?? 0).toString().moneyFormat2();
-      showTodayPvTotalNeg = (value.todayPvTotalNeg ?? 0).formatPowerValue();
-      showTodayPvTotalNegUnit = (value.todayPvTotalNeg ?? 0)
-          .formatPowerValueUnit();
-      showTodayGridNeg = (value.todayGridNeg ?? 0).formatPowerValue();
-      showTodayGridNegUnit = (value.todayGridNeg ?? 0).formatPowerValueUnit();
-      showTodayGridPos = (value.todayGridPos ?? 0).formatPowerValue();
-      showTodayGridPosUnit = (value.todayGridPos ?? 0).formatPowerValueUnit();
-      showTodayLoadPos = (value.todayLoadPos ?? 0).formatPowerValue();
-      showTodayLoadPosUnit = (value.todayLoadPos ?? 0).formatPowerValueUnit();
-      showLoadPos = value.todayLoadPos != null;
+
+      data.clear();
+      data.add(
+        SiteInfoCardEntity()
+          ..id = 0
+          ..icon = Assets.imgCumulativeCharging2
+          ..value = '${(value.todayTotalPos ?? 0).formatPowerValue()} '
+          ..unit = (value.todayTotalPos ?? 0).formatPowerValueUnit()
+          ..title = TKey.todayCharging.tr
+          ..image = Assets.imgTodayCharging2,
+      );
+
+      data.add(
+        SiteInfoCardEntity()
+          ..id = 1
+          ..icon = Assets.imgCumulativeDischarge2
+          ..value = '${(value.todayTotalNeg ?? 0).formatPowerValue()} '
+          ..unit = (value.todayTotalNeg ?? 0).formatPowerValueUnit()
+          ..title = TKey.todayDischarge.tr
+          ..image = Assets.imgTodayDisCharging2,
+      );
+
+      if (AppState.instance.isShowRevenue() && revenueShow) {
+        data.add(
+          SiteInfoCardEntity()
+            ..id = 2
+            ..icon = Assets.imgLastDayRecharge
+            ..value =
+                '$currencyUnit${(value.lastDayIncome ?? 0).toString().moneyFormat2()}'
+            ..unit = ""
+            ..title = TKey.lastDayIncome.tr
+            ..image = Assets.lastDayIncome2,
+        );
+      }
+
+      if (topology?.hasPv ?? false) {
+        data.add(
+          SiteInfoCardEntity()
+            ..id = 3
+            ..icon = Assets.imgAccumulatedPhotovoltaic2
+            ..value = '${(value.todayPvTotalNeg ?? 0).formatPowerValue()} '
+            ..unit = (value.todayPvTotalNeg ?? 0).formatPowerValueUnit()
+            ..title = TKey.todayPVNeg.tr
+            ..image = Assets.todayPvGeneration2,
+        );
+      }
+
+      data.add(
+        SiteInfoCardEntity()
+          ..id = 4
+          ..icon = Assets.imgEle
+          ..value = '${(value.todayGridPos ?? 0).formatPowerValue()} '
+          ..unit = (value.todayGridPos ?? 0).formatPowerValueUnit()
+          ..title = TKey.todayGridPos.tr
+          ..image = Assets.imgTodayDisCharging2,
+      );
+
+      data.add(
+        SiteInfoCardEntity()
+          ..id = 5
+          ..icon = Assets.imgGridExport
+          ..value = '${(value.todayGridNeg ?? 0).formatPowerValue()} '
+          ..unit = (value.todayGridNeg ?? 0).formatPowerValueUnit()
+          ..title = TKey.todayGridNeg.tr
+          ..image = Assets.imgTodayDisCharging2,
+      );
+
+      /*if (value.todayLoadPos != null) {
+        data.add(
+          SiteInfoCardEntity()
+            ..id = 6
+            ..icon = Assets.imgEle
+            ..value = '${(value.todayLoadPos ?? 0).formatPowerValue()} '
+            ..unit = (value.todayLoadPos ?? 0).formatPowerValueUnit()
+            ..title = TKey.loadElectricity.tr
+            ..image = Assets.imgTodayDisCharging2,
+        );
+      }*/
       update();
     }
   }

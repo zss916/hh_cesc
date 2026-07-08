@@ -33,25 +33,10 @@ class OliveItemView extends StatelessWidget {
                 buildTopology(logic),
 
                 GridViewWidget2(
-                  isShow:
-                      (AppState.instance.isShowRevenue() && logic.revenueShow),
-                  todayCharging: logic.showChargeAvg,
-                  todayChargingUnit: logic.showChargeAvgUnit,
-                  todayDischarge: logic.showRechargeAvg,
-                  todayDischargeUnit: logic.showRechargeAvgUnit,
-                  showTodayIncome: logic.showLastDayIncome,
-                  todayPVPowerEarnings: logic.showTodayPvTotalNeg,
-                  todayPVPowerEarningsUnit: logic.showTodayPvTotalNegUnit,
+                  data: logic.data,
                   siteDetail: logic.siteDetail,
                   statisticRecord: logic.statisticRecord,
                   currencyUnit: logic.currencyUnit,
-                  todayGridNeg: logic.showTodayGridNeg,
-                  todayGridNegUnit: logic.showTodayGridNegUnit,
-                  todayGridPos: logic.showTodayGridPos,
-                  todayGridPosUnit: logic.showTodayGridPosUnit,
-                  showLoadPos: logic.showLoadPos,
-                  todayLoadPos: logic.showTodayLoadPos,
-                  todayLoadPosUnit: logic.showTodayLoadPosUnit,
                 ),
 
                 if (AppState.instance.isShowRevenue() && logic.revenueShow)
@@ -1594,7 +1579,7 @@ class OliveItemView extends StatelessWidget {
     children: [
       Container(
         padding: EdgeInsetsDirectional.only(
-          top: 24.h,
+          top: 16.h,
           start: 18.w,
           end: 18.w,
           bottom: 16.h,

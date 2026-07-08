@@ -33,10 +33,6 @@ ElecGraphEntity $ElecGraphEntityFromJson(Map<String, dynamic> json) {
   if (pvGeneration != null) {
     elecGraphEntity.pvGeneration = pvGeneration;
   }
-  final double? gridFeed = jsonConvert.convert<double>(json['gridFeed']);
-  if (gridFeed != null) {
-    elecGraphEntity.gridFeed = gridFeed;
-  }
   final double? storageProfit = jsonConvert.convert<double>(
       json['storageProfit']);
   if (storageProfit != null) {
@@ -60,9 +56,17 @@ ElecGraphEntity $ElecGraphEntityFromJson(Map<String, dynamic> json) {
   if (gridFeedGain != null) {
     elecGraphEntity.gridFeedGain = gridFeedGain;
   }
+  final double? gridFeed = jsonConvert.convert<double>(json['gridFeed']);
+  if (gridFeed != null) {
+    elecGraphEntity.gridFeed = gridFeed;
+  }
   final double? gridPos = jsonConvert.convert<double>(json['gridPos']);
   if (gridPos != null) {
     elecGraphEntity.gridPos = gridPos;
+  }
+  final double? loadPos = jsonConvert.convert<double>(json['loadPos']);
+  if (loadPos != null) {
+    elecGraphEntity.loadPos = loadPos;
   }
   return elecGraphEntity;
 }
@@ -76,13 +80,14 @@ Map<String, dynamic> $ElecGraphEntityToJson(ElecGraphEntity entity) {
   data['efficiency'] = entity.efficiency;
   data['type'] = entity.type;
   data['pvGeneration'] = entity.pvGeneration;
-  data['gridFeed'] = entity.gridFeed;
   data['storageProfit'] = entity.storageProfit;
   data['pvSelfUse'] = entity.pvSelfUse;
   data['pvSelfUseGain'] = entity.pvSelfUseGain;
   data['pvProfit'] = entity.pvProfit;
   data['gridFeedGain'] = entity.gridFeedGain;
+  data['gridFeed'] = entity.gridFeed;
   data['gridPos'] = entity.gridPos;
+  data['loadPos'] = entity.loadPos;
   return data;
 }
 
@@ -95,13 +100,14 @@ extension ElecGraphEntityExtension on ElecGraphEntity {
     double? efficiency,
     int? type,
     double? pvGeneration,
-    double? gridFeed,
     double? storageProfit,
     double? pvSelfUse,
     double? pvSelfUseGain,
     double? pvProfit,
     double? gridFeedGain,
+    double? gridFeed,
     double? gridPos,
+    double? loadPos,
   }) {
     return ElecGraphEntity()
       ..dateTime = dateTime ?? this.dateTime
@@ -111,12 +117,13 @@ extension ElecGraphEntityExtension on ElecGraphEntity {
       ..efficiency = efficiency ?? this.efficiency
       ..type = type ?? this.type
       ..pvGeneration = pvGeneration ?? this.pvGeneration
-      ..gridFeed = gridFeed ?? this.gridFeed
       ..storageProfit = storageProfit ?? this.storageProfit
       ..pvSelfUse = pvSelfUse ?? this.pvSelfUse
       ..pvSelfUseGain = pvSelfUseGain ?? this.pvSelfUseGain
       ..pvProfit = pvProfit ?? this.pvProfit
       ..gridFeedGain = gridFeedGain ?? this.gridFeedGain
-      ..gridPos = gridPos ?? this.gridPos;
+      ..gridFeed = gridFeed ?? this.gridFeed
+      ..gridPos = gridPos ?? this.gridPos
+      ..loadPos = loadPos ?? this.loadPos;
   }
 }

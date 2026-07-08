@@ -2,10 +2,12 @@ import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart2.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart3.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +24,20 @@ class PowerAnalysisWidget2 extends StatefulWidget {
 
 class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget2> {
   String currentTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+  final palette = <Color>[
+    Colors.red, // line2
+    Colors.green, // line3
+    Colors.orange, // line4 (右轴)
+    Colors.purple, // line5
+    Colors.teal, // line6
+    Colors.brown, // line7
+    Colors.pink, // line8
+    Colors.indigo, // line9
+    Colors.lime, // line10
+    Colors.cyan, // line11
+    Colors.amber, // line12
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +118,32 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget2> {
                             width: double.maxFinite,
                             child: buildBody(
                               viewState: widget.logic.powerViewStatus,
+                            ),
+                          ),
+
+                          Container(
+                            padding: EdgeInsetsDirectional.only(
+                              start: 15.w,
+                              end: 15.w,
+                              top: 10,
+                            ),
+                            width: double.maxFinite,
+                            child: Wrap(
+                              spacing: 15.w,
+                              runSpacing: 8.h,
+                              children: [
+                                ...widget.logic.series
+                                    .map((a) => (a.name ?? ""))
+                                    .toList()
+                                    .mapIndexed(
+                                      (i, e) => LineTitleWidget(
+                                        color: e.toLowerCase() == "soc"
+                                            ? Colors.blue
+                                            : palette[i],
+                                        title: e,
+                                      ),
+                                    ),
+                              ],
                             ),
                           ),
                         ],

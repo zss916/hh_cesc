@@ -20,10 +20,7 @@ class LineTitleWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(2),
           ),
         ),
-        Text(
-          title,
-          style: TextStyle(color: Color(0xD9FFFFFF), fontSize: 12.sp),
-        ),
+        Text(title, style: TextStyle(color: Color(0xD9FFFFFF), fontSize: 12)),
       ],
     );
   }

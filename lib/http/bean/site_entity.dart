@@ -67,6 +67,9 @@ class SiteEntity {
     return jsonEncode(this);
   }
 
+  ///是否有光伏功率
+  bool get isPvPower => (types ?? []).any((e) => e == 2 || e == 4);
+
   ///站点名称
   String get showSiteName => (name ?? "");
 
