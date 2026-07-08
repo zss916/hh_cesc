@@ -57,7 +57,7 @@ class IncomeWidget extends StatelessWidget {
                         children: [
                           FittedBox(
                             child: Text(
-                              totalIncome.moneyFormat(),
+                              totalIncome.moneyFormat2(),
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: 28.sp,
@@ -91,7 +91,7 @@ class IncomeWidget extends StatelessWidget {
                         children: [
                           FittedBox(
                             child: Text(
-                              lastDayIncome.moneyFormat(),
+                              lastDayIncome.moneyFormat2(),
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: 28.sp,

@@ -343,6 +343,60 @@ extension MoneyExt on String? {
 
     return _dynamicDecimal(value, currentLocale);
   }
+
+  String moneyFormat2({String? locale}) {
+    final value = num.tryParse(this ?? '0') ?? 0;
+
+    final currentLocale = locale ?? Get.locale?.languageCode ?? 'en';
+
+    // 中文
+    if (currentLocale.startsWith('zh')) {
+      if (value >= 1000000000) {
+        return '${_dynamicDecimal(value / 1000000000, currentLocale)}B';
+      }
+
+      if (value >= 1000000) {
+        return '${_dynamicDecimal(value / 1000000, currentLocale)}M';
+      }
+
+      if (value >= 1000) {
+        return '${_dynamicDecimal(value / 1000, currentLocale)}K';
+      }
+      return _dynamicDecimal(value, currentLocale);
+    }
+
+    // 德语
+    if (currentLocale.startsWith('de')) {
+      if (value >= 1000000000) {
+        return '${_dynamicDecimal(value / 1000000000, currentLocale)} Mrd';
+      }
+
+      if (value >= 1000000) {
+        return '${_dynamicDecimal(value / 1000000, currentLocale)} Mio';
+      }
+
+      if (value >= 1000) {
+        return '${_dynamicDecimal(value / 1000, currentLocale)} Tsd';
+      }
+
+      return _dynamicDecimal(value, currentLocale);
+    }
+
+    // 默认国际化（英语/西班牙语等）
+    if (value >= 1000000000) {
+      return '${_dynamicDecimal(value / 1000000000, currentLocale)}B';
+    }
+
+    if (value >= 1000000) {
+      return '${_dynamicDecimal(value / 1000000, currentLocale)}M';
+    }
+
+    if (value >= 1000) {
+      return '${_dynamicDecimal(value / 1000, currentLocale)}K';
+    }
+
+    return _dynamicDecimal(value, currentLocale);
+  }
 }
 
 String _dynamicDecimal(num value, String locale) {

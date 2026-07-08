@@ -131,10 +131,11 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                     color: [
                       Color(0xFF39FFEF),
                       Color(0xFFFFC08C),
-                      Color(0xFF42A5F5),
-                      Colors.yellowAccent,
-                      Colors.deepOrangeAccent,
-                      Colors.deepPurpleAccent,
+                      if (AppSetting.isOverseas && widget.data3.isNotEmpty)
+                        Color(0xFF42A5F5),
+                      if (widget.data4.isNotEmpty) Colors.yellowAccent,
+                      if (widget.data5.isNotEmpty) Colors.deepOrangeAccent,
+                      if (widget.data6.isNotEmpty) Colors.deepPurpleAccent,
                     ][rodIndex],
                     fontSize: 8.sp,
                   ),
@@ -145,10 +146,11 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
                         color: [
                           Color(0xFF39FFEF),
                           Color(0xFFFFC08C),
-                          Color(0xFF42A5F5),
-                          Colors.yellowAccent,
-                          Colors.deepOrangeAccent,
-                          Colors.deepPurpleAccent,
+                          if (AppSetting.isOverseas && widget.data3.isNotEmpty)
+                            Color(0xFF42A5F5),
+                          if (widget.data4.isNotEmpty) Colors.yellowAccent,
+                          if (widget.data5.isNotEmpty) Colors.deepOrangeAccent,
+                          if (widget.data6.isNotEmpty) Colors.deepPurpleAccent,
                         ][rodIndex],
                         fontWeight: FontWeight.w500,
                         fontSize: 10.sp,

@@ -1,4 +1,5 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -109,7 +110,11 @@ class _BarChartWidgetState extends State<HEleBarchartItemWidget> {
                     color: [
                       Color(0xFF39FFEF),
                       Color(0xFFFFC08C),
-                      Color(0xFF42A5F5),
+                      if (AppSetting.isOverseas && widget.data3.isNotEmpty)
+                        Color(0xFF42A5F5),
+                      if (widget.data4.isNotEmpty) Colors.yellowAccent,
+                      if (widget.data5.isNotEmpty) Colors.deepOrangeAccent,
+                      if (widget.data6.isNotEmpty) Colors.deepPurpleAccent,
                     ][rodIndex],
                     fontSize: 8,
                   ),
@@ -120,7 +125,11 @@ class _BarChartWidgetState extends State<HEleBarchartItemWidget> {
                         color: [
                           Color(0xFF39FFEF),
                           Color(0xFFFFC08C),
-                          Color(0xFF42A5F5),
+                          if (AppSetting.isOverseas && widget.data3.isNotEmpty)
+                            Color(0xFF42A5F5),
+                          if (widget.data4.isNotEmpty) Colors.yellowAccent,
+                          if (widget.data5.isNotEmpty) Colors.deepOrangeAccent,
+                          if (widget.data6.isNotEmpty) Colors.deepPurpleAccent,
                         ][rodIndex],
                         fontWeight: FontWeight.w500,
                         fontSize: 10,
@@ -388,7 +397,7 @@ class _BarChartWidgetState extends State<HEleBarchartItemWidget> {
             ),
             width: 8,
           ),
-          if (widget.data3.isNotEmpty)
+          if (AppSetting.isOverseas && widget.data3.isNotEmpty)
             BarChartRodData(
               fromY: 0,
               toY: widget.data3[index],
@@ -413,7 +422,6 @@ class _BarChartWidgetState extends State<HEleBarchartItemWidget> {
               ),
               width: 8,
             ),
-
           if (widget.data4.isNotEmpty)
             BarChartRodData(
               fromY: 0,

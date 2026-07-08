@@ -192,7 +192,7 @@ class OliveItemLogic extends GetxController {
       showRechargeAvg = (value.todayTotalNeg ?? 0).formatPowerValue();
       showRechargeAvgUnit = (value.todayTotalNeg ?? 0).formatPowerValueUnit();
       //showLastDayIncome = (value.lastDayIncome ?? 0).moneyFormatted;
-      showLastDayIncome = (value.lastDayIncome ?? 0).toString().moneyFormat();
+      showLastDayIncome = (value.lastDayIncome ?? 0).toString().moneyFormat2();
       showTodayPvTotalNeg = (value.todayPvTotalNeg ?? 0).formatPowerValue();
       showTodayPvTotalNegUnit = (value.todayPvTotalNeg ?? 0)
           .formatPowerValueUnit();
