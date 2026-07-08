@@ -9,7 +9,7 @@ class StationDetailPage extends StatefulWidget {
 
 class _StationDetailState extends State<StationDetailPage> {
   int select = 0;
-  // PageController pageCtrl = PageController(initialPage: 0);
+  //PageController pageCtrl = PageController(initialPage: 0);
 
   @override
   void initState() {

@@ -292,50 +292,6 @@ class LocaleUtils {
   }
 }
 
-/*extension AmountFormatString on String {
-  String get moneyFormatSimple => NumberFormat.compactCurrency(
-    symbol: "",
-    decimalDigits: 1,
-  ).format((num.tryParse(this ?? '0.0') ?? 0));
-
-  String get moneyFormatFull => (num.tryParse(this ?? '0.0') ?? 0).toString();
-
-  String get moneyFormat {
-    num value = (num.tryParse(this ?? '0.0') ?? 0);
-    if (value >= 1000000000) {
-      return '${dynamicDecimal(value / 1000000000)}B';
-    } else if (value >= 1000000) {
-      return '${dynamicDecimal(value / 1000000)}M';
-    } else if (value >= 10000) {
-      return Get.isZH
-          ? '${dynamicDecimal(value / 10000)}W'
-          : '${dynamicDecimal(value / 1000)}K';
-    } else if (value >= 1000) {
-      return '${dynamicDecimal(value / 1000)}K';
-    } else {
-      return dynamicDecimal(value);
-    }
-  }
-
-  ///截取小数点后2位
-  String truncateMoney(num value) =>
-      ((value * 100).truncate() / 100).toStringAsFixed(2);
-
-  String dynamicDecimal(num value) {
-    final truncated = ((value * 100).truncate() / 100);
-
-    if (truncated % 1 == 0) {
-      return truncated.toStringAsFixed(0);
-    }
-
-    if ((truncated * 10) % 1 == 0) {
-      return truncated.toStringAsFixed(1);
-    }
-
-    return truncated.toStringAsFixed(2);
-  }
-}*/
-
 extension MoneyExt on String? {
   String moneyFormat({String? locale}) {
     final value = num.tryParse(this ?? '0') ?? 0;
