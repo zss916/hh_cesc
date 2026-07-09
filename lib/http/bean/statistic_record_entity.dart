@@ -82,6 +82,9 @@ class StatisticRecordEntity {
     return jsonEncode(this);
   }
 
+  ///判断获取货币符号
+  String get currencyUnit => User.to.getCurrencyUnit();
+
   /* String showValue(double value) {
     if (value > 1000) {
       double mwhValue = value / 1000;
@@ -98,9 +101,6 @@ class StatisticRecordEntity {
       return "kWh";
     }
   }*/
-
-  ///判断获取货币符号
-  String get currencyUnit => User.to.getCurrencyUnit();
 
   ///今日光伏充电量
   /*String showTodayPVTotalNeg() {
