@@ -65,7 +65,10 @@ class OliveItemLogic extends GetxController {
       revenueShow = siteEntity?.calculateRevenue ?? false;
       pvCardShow = siteEntity?.isPvPower ?? true;
     }
+    initData();
+  }
 
+  void initData() {
     data = [
       SiteInfoCardEntity()
         ..id = 0

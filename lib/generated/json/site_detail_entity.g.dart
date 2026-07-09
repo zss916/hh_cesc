@@ -36,8 +36,7 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.hasDevCount = hasDevCount;
   }
   final int? operationTimeMill = jsonConvert.convert<int>(
-    json['operationTimeMill'],
-  );
+      json['operationTimeMill']);
   if (operationTimeMill != null) {
     siteDetailEntity.operationTimeMill = operationTimeMill;
   }
@@ -54,8 +53,7 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.activePower = activePower;
   }
   final double? reactivePower = jsonConvert.convert<double>(
-    json['reactivePower'],
-  );
+      json['reactivePower']);
   if (reactivePower != null) {
     siteDetailEntity.reactivePower = reactivePower;
   }
@@ -132,8 +130,7 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.hasPv = hasPv;
   }
   final String? protocolVersion = jsonConvert.convert<String>(
-    json['protocolVersion'],
-  );
+      json['protocolVersion']);
   if (protocolVersion != null) {
     siteDetailEntity.protocolVersion = protocolVersion;
   }

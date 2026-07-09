@@ -570,6 +570,15 @@ class TKey {
   static const String applyTitle = "applyTitle";
   static const String applyContent = "applyContent";
   static const String knowTitle = "knowTitle";
+
+  static const String totalPowerType = "totalPowerType";
+  static const String subSystemType = "subSystemType";
+  static const String peakShavingAndValleyFillingMonthType =
+      "peakShavingAndValleyFillingMonthType";
+  static const String peakShavingAndValleyFillingDayType =
+      "peakShavingAndValleyFillingDayType";
+  static const String selfGenerationAndSelfConsumptionType =
+      "selfGenerationAndSelfConsumptionType";
 }
 
 const en = {
@@ -906,4 +915,9 @@ const en = {
   "applyContent":
       'The activation of AI strategies requires review and activation by your account manager. \nlease proactively contact the account manager, submit the activation application, and once approved, you can experience the AI intelligent strategy.',
   "knowTitle": "I know",
+  "totalPowerType": "总功率",
+  "subSystemType": "子系统",
+  "peakShavingAndValleyFillingMonthType": "削峰填谷(月)",
+  "peakShavingAndValleyFillingDayType": "削峰填谷(日)",
+  "selfGenerationAndSelfConsumptionType": "自发自用",
 };

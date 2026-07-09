@@ -322,4 +322,9 @@ const zh = {
   "applyTitle": "请联系您的客户经理",
   "applyContent": 'AI策略启用需要由您的客户经理进行审核与开通。\n请主动联系客户经理，提交开通申请，审核通过后即可体验AI智能策略。',
   "knowTitle": "我知道了",
+  "totalPowerType": "总功率",
+  "subSystemType": "子系统",
+  "peakShavingAndValleyFillingMonthType": "削峰填谷(月)",
+  "peakShavingAndValleyFillingDayType": "削峰填谷(日)",
+  "selfGenerationAndSelfConsumptionType": "自发自用",
 };

@@ -170,4 +170,37 @@ class ApiPath {
 
   ///更新密码
   static const String updatePs = "/business/admin/updatePassword";
+
+  ///todo
+
+  ///查询模式控制
+  static const String fetchModelControl = "/business/ctl/device/query/modeCtl/";
+
+  ///检查是否满足开启AI调度前置条件
+  static const String checkOpenAI = "/business/forcast/checkPrecondition";
+
+  ///开启AI调度
+  static const String openAI = "/business/forcast/enableAi";
+
+  ///获取AI模式功率曲线预测数据
+  static const String fetchAIData = "/business/forcast/graph/data";
+
+  ///AI预测收益与当前模式对比
+  static const String aIDataCompare = "/business/forcast/revenue/compare";
+
+  ///查询站点调度策略历史记录
+  static const String fetchStrategyHistory =
+      "/business/ctl/device/query/strategyHistory/{siteId}";
+
+  ///配置查询-离网策略
+  static const String queryOfflineStrategy =
+      "/business/ctl/device/v2/setting/offgrid/query";
+
+  ///配置保存-离网策略
+  static const String updateOfflineStrategy =
+      "/business/ctl/device/v2/setting/offgrid/update";
+
+  ///查询站点调度策略历史记录详情
+  static const String fetchStrategyHistoryDetail =
+      "/business/ctl/device/query/strategyHistoryDetail/{id}";
 }

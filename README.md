@@ -4,7 +4,7 @@
 https://codesign.qq.com/s/598224312230189
 
 新UI
-
+https://lanhuapp.com/web/#/item/project/stage?pid=b6e48856-d36b-40ce-b269-14140e37bcb7&tid=8da49369-9446-471a-a31b-7526ad4d139f&see=all
 
 web 端
 https://ems.cescpower.com:9088/#/login

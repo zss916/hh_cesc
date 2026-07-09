@@ -45,7 +45,6 @@ class CompTreeEntity {
         for (var childNode in child!) {
           // 3. 将子节点的 isSelected 设为 false
           childNode.isSelected = false;
-
           // 4. 递归调用子节点的 propagateUnselectedState 方法
           // 确保孙子辈、曾孙子辈等所有后代节点都被处理
           childNode.propagateUnselectedState();

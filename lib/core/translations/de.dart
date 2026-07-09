@@ -318,4 +318,9 @@ const de = {
   "applyContent":
       'Die Aktivierung von KI-Richtlinien erfordert eine Überprüfung und Einleitung durch Ihren Account Manager. Bitte wenden Sie sich aktiv an den Account Manager und stellen Sie einen Antrag auf Eröffnung ein, um die KI-Strategie nach der Überprüfung zu erleben.',
   "knowTitle": "Ja, ich weiß.",
+  "totalPowerType": "总功率",
+  "subSystemType": "子系统",
+  "peakShavingAndValleyFillingMonthType": "削峰填谷(月)",
+  "peakShavingAndValleyFillingDayType": "削峰填谷(日)",
+  "selfGenerationAndSelfConsumptionType": "自发自用",
 };

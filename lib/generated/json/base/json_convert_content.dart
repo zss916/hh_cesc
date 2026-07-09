@@ -8,6 +8,7 @@ import 'package:cescpro/http/bean/alarm_graph_item_entity.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/http/bean/analysis_entity.dart';
 import 'package:cescpro/http/bean/cell_data_entity.dart';
+import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 import 'package:cescpro/http/bean/child_item_info.dart';
 import 'package:cescpro/http/bean/com_card_vo_entity.dart';
 import 'package:cescpro/http/bean/com_type_list_entity.dart';
@@ -19,6 +20,7 @@ import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/id_tree_entity.dart';
 import 'package:cescpro/http/bean/message_content_entity.dart';
 import 'package:cescpro/http/bean/message_item_entity.dart';
+import 'package:cescpro/http/bean/model_ctrl_entity.dart';
 import 'package:cescpro/http/bean/power_entity.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/http/bean/pv_trend_entity.dart';
@@ -293,6 +295,14 @@ class JsonConvert {
               .toList()
           as M;
     }
+    if (<CheckAiOpenEntity>[] is M) {
+      return data
+              .map<CheckAiOpenEntity>(
+                (Map<String, dynamic> e) => CheckAiOpenEntity.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
     if (<ChildItemInfo>[] is M) {
       return data
               .map<ChildItemInfo>(
@@ -419,6 +429,14 @@ class JsonConvert {
       return data
               .map<MessageItemEntity>(
                 (Map<String, dynamic> e) => MessageItemEntity.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<ModelCtrlEntity>[] is M) {
+      return data
+              .map<ModelCtrlEntity>(
+                (Map<String, dynamic> e) => ModelCtrlEntity.fromJson(e),
               )
               .toList()
           as M;
@@ -822,6 +840,7 @@ class JsonConvertClassCollection {
         AnalysisAttentionAlarmDataItems.fromJson,
     (CellDataEntity).toString(): CellDataEntity.fromJson,
     (CellDataCells).toString(): CellDataCells.fromJson,
+    (CheckAiOpenEntity).toString(): CheckAiOpenEntity.fromJson,
     (ChildItemInfo).toString(): ChildItemInfo.fromJson,
     (ComCardVoEntity).toString(): ComCardVoEntity.fromJson,
     (ComCardVoItems).toString(): ComCardVoItems.fromJson,
@@ -840,6 +859,7 @@ class JsonConvertClassCollection {
     (IdTreeEntity).toString(): IdTreeEntity.fromJson,
     (MessageContentEntity).toString(): MessageContentEntity.fromJson,
     (MessageItemEntity).toString(): MessageItemEntity.fromJson,
+    (ModelCtrlEntity).toString(): ModelCtrlEntity.fromJson,
     (PowerEntity).toString(): PowerEntity.fromJson,
     (PowerGraphEntity).toString(): PowerGraphEntity.fromJson,
     (PowerGraphList).toString(): PowerGraphList.fromJson,

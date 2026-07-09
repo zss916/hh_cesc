@@ -1,10 +1,11 @@
 import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
+import 'package:cescpro/page/station/detail/strategy/ai/ai_strategy_preview_logic.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/widget/dialog_strategy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:get/get.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'
     show GradientText, GradientDirection;
 
@@ -20,14 +21,19 @@ class AIStrategyPreviewPage extends StatelessWidget {
       backgroundColor: Color(0xFF23282E),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(bottom: 100),
-        child: Column(
-          children: [
-            _buildAIBanner(),
-            _buildRevenueForecast(),
-            _buildPowerChart(),
-            _buildPriceForecast(),
-            _buildApplySection(),
-          ],
+        child: GetBuilder<AIStrategyPreviewLogic>(
+          init: AIStrategyPreviewLogic(),
+          builder: (logic) {
+            return Column(
+              children: [
+                _buildAIBanner(),
+                _buildRevenueForecast(),
+                _buildPowerChart(),
+                _buildPriceForecast(),
+                _buildApplySection(),
+              ],
+            );
+          },
         ),
       ),
     );

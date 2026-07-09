@@ -23,8 +23,9 @@ class StrategyPage extends StatelessWidget {
           builder: (logic) {
             return Column(
               children: [
-                _buildSiteInfo(),
-                _buildStrategyCard(),
+                _buildSiteInfo(logic: logic),
+                _buildStrategyStatus(),
+                // _buildStrategyCard(),
                 _buildPowerCurve(),
                 _buildActions(),
               ],
@@ -36,7 +37,7 @@ class StrategyPage extends StatelessWidget {
   }
 
   ///站点信息
-  Widget _buildSiteInfo() {
+  Widget _buildSiteInfo({required StrategyPageLogic logic}) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(14),
@@ -52,8 +53,8 @@ class StrategyPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '上海浦东储能示范站 #01 ',
+                Text(
+                  logic.siteName,
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -64,8 +65,8 @@ class StrategyPage extends StatelessWidget {
                 Wrap(
                   spacing: 8,
                   children: [
-                    const Text(
-                      '削峰填谷',
+                    Text(
+                      logic.activeType,
                       style: TextStyle(fontSize: 10, color: Color(0xFF72D3FF)),
                     ),
                     const Text(
@@ -74,11 +75,84 @@ class StrategyPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 Divider(height: 2, color: Colors.transparent),
                 const Text(
                   '装机 1MW / 2MWh · 削峰填谷策略中',
                   style: TextStyle(fontSize: 10, color: Color(0xff888888)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStrategyStatus() {
+    return Container(
+      width: double.maxFinite,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsetsDirectional.symmetric(horizontal: 14),
+      child: Column(
+        children: [
+          Container(
+            alignment: AlignmentDirectional.centerStart,
+            width: double.maxFinite,
+            child: Text(
+              "保护策略",
+              style: TextStyle(fontSize: 16, color: Colors.white),
+            ),
+          ),
+          Container(
+            margin: EdgeInsetsDirectional.only(top: 12, bottom: 8),
+            width: double.maxFinite,
+            child: Wrap(
+              spacing: 10,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent.withValues(alpha: 0.2),
+                    border: Border.all(color: Colors.blueAccent, width: 0.5),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "电压保护",
+                    style: TextStyle(fontSize: 12, color: Colors.white),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent.withValues(alpha: 0.2),
+                    border: Border.all(color: Colors.blueAccent, width: 0.5),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "SOC保护",
+                    style: TextStyle(fontSize: 12, color: Colors.white),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent.withValues(alpha: 0.2),
+                    border: Border.all(color: Colors.blueAccent, width: 0.5),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "需量控制",
+                    style: TextStyle(fontSize: 12, color: Colors.white),
+                  ),
                 ),
               ],
             ),
