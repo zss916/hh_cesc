@@ -130,6 +130,7 @@ class PageTools {
     String? location,
     String? siteName,
     bool? isShowTimeSlot,
+    bool? isShowPv,
   }) => Get.toNamed(
     APages.revenue,
     arguments: {
@@ -137,6 +138,7 @@ class PageTools {
       "location": location,
       "name": siteName,
       "isShowTimeSlot": isShowTimeSlot,
+      "isShowPv": isShowPv,
     },
   );
 
@@ -150,11 +152,20 @@ class PageTools {
     arguments: {"siteId": siteId, "location": location, "name": siteName},
   );
 
-  static void toEleReport({int? siteId, String? location, String? siteName}) =>
-      Get.toNamed(
-        APages.eleReport,
-        arguments: {"siteId": siteId, "location": location, "name": siteName},
-      );
+  static void toEleReport({
+    int? siteId,
+    String? location,
+    String? siteName,
+    bool? isShowPv,
+  }) => Get.toNamed(
+    APages.eleReport,
+    arguments: {
+      "siteId": siteId,
+      "location": location,
+      "name": siteName,
+      'isShowPv': isShowPv,
+    },
+  );
 
   ///首页告警详情
   static void toAlarmDetails(AlarmItemEntity item) =>

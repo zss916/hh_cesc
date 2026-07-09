@@ -45,7 +45,8 @@ class RevenueLogic extends GetxController {
         : ((queryType.value == 2) ? TKey.month.tr : TKey.date.tr),
     TKey.duration.tr,
     "${TKey.chargingAmount.tr}(${User.to.getCurrencyUnit()})",
-    "${TKey.dischargingAmount.tr}(${User.to.getCurrencyUnit()})",
+    if (isShowPv ?? true)
+      "${TKey.dischargingAmount.tr}(${User.to.getCurrencyUnit()})",
     "${TKey.amount.tr}(${User.to.getCurrencyUnit()})",
   ];
 
@@ -53,17 +54,18 @@ class RevenueLogic extends GetxController {
   List<List<String>> rows = [];
   String? siteName;
   String? excelName;
+  bool? isShowPv;
 
   @override
   void onInit() {
     super.onInit();
-
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       location = map['location'] as String?;
       siteId = map['siteId'] as int?;
       isShowTimeSlot = map['isShowTimeSlot'] as bool?;
       siteName = map['name'] as String?;
+      isShowPv = map['isShowPv'] as bool?;
     }
     DateTime dateTime = DateTime.now();
     date = dateTime.millisecondsSinceEpoch;
@@ -245,7 +247,8 @@ class RevenueLogic extends GetxController {
             '="${e.dayDate}"',
             e.allRevenue,
             e.isShow ? (e.gridFeedGain ?? 0.00).formatAmount() : "--",
-            e.isHasPV ? (e.pvSelfUseGain ?? 0.00).formatAmount() : "--",
+            if (isShowPv ?? true)
+              (e.isHasPV ? (e.pvSelfUseGain ?? 0.00).formatAmount() : "--"),
             (e.storageProfit ?? 0.00).formatAmount(),
           ],
         )

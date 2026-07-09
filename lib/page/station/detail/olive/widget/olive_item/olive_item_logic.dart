@@ -52,6 +52,7 @@ class OliveItemLogic extends GetxController {
   String get siteName => siteDetail?.showName ?? "";
   StatisticRecordEntity? statisticRecord;
   bool revenueShow = false;
+  bool pvCardShow = true;
 
   @override
   void onInit() {
@@ -62,6 +63,7 @@ class OliveItemLogic extends GetxController {
       SiteEntity? siteEntity =
           ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?);
       revenueShow = siteEntity?.calculateRevenue ?? false;
+      pvCardShow = siteEntity?.isPvPower ?? true;
     }
 
     data = [
@@ -89,13 +91,14 @@ class OliveItemLogic extends GetxController {
         ..title = TKey.lastDayIncome.tr
         ..image = Assets.lastDayIncome2,
 
-      SiteInfoCardEntity()
-        ..id = 3
-        ..icon = Assets.imgAccumulatedPhotovoltaic2
-        ..value = '0.00 '
-        ..unit = 'kWh'
-        ..title = TKey.todayPVNeg.tr
-        ..image = Assets.todayPvGeneration2,
+      if (pvCardShow)
+        SiteInfoCardEntity()
+          ..id = 3
+          ..icon = Assets.imgAccumulatedPhotovoltaic2
+          ..value = '0.00 '
+          ..unit = 'kWh'
+          ..title = TKey.todayPVNeg.tr
+          ..image = Assets.todayPvGeneration2,
 
       SiteInfoCardEntity()
         ..id = 4
@@ -249,7 +252,7 @@ class OliveItemLogic extends GetxController {
         );
       }
 
-      if (topology?.hasPv ?? false) {
+      if (pvCardShow) {
         data.add(
           SiteInfoCardEntity()
             ..id = 3

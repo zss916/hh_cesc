@@ -122,7 +122,7 @@ class _BarChartWidgetState extends State<EleBarchartItemWidget> {
             enabled: true,
             touchTooltipData: BarTouchTooltipData(
               getTooltipColor: (_) => Color(0x66000000),
-              tooltipHorizontalAlignment: FLHorizontalAlignment.right,
+              tooltipHorizontalAlignment: FLHorizontalAlignment.left,
               tooltipMargin: -30,
               getTooltipItem: (group, groupIndex, rod, rodIndex) {
                 return BarTooltipItem(

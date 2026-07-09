@@ -94,7 +94,11 @@ class _ReportDetailPageState extends State<ElePage> {
               ),
             ),*/
             EleSelectTimeWidget(logic: logic),
-            EleTableWidget(logic: logic, queryType: logic.queryType),
+            EleTableWidget(
+              isShowPv: logic.isShowPv,
+              logic: logic,
+              queryType: logic.queryType,
+            ),
           ],
         ),
       ),

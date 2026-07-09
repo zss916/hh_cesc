@@ -31,7 +31,7 @@ class EleLogic extends GetxController {
     (queryType.value == 3)
         ? TKey.year.tr
         : ((queryType.value == 2) ? TKey.month.tr : TKey.date.tr),
-    "${TKey.photovoltaicPowerGeneration2.tr}(kWh)",
+    if (isShowPv ?? true) "${TKey.photovoltaicPowerGeneration2.tr}(kWh)",
     "${TKey.gridEleGeneration.tr}(kWh)",
     "${TKey.energyStorageCharge.tr}(kWh)",
     "${TKey.energyStorageDischarge.tr}(kWh)",
@@ -40,6 +40,7 @@ class EleLogic extends GetxController {
   List<List<String>> rows = [];
   String? excelName;
   String? siteName;
+  bool? isShowPv;
 
   @override
   void onInit() {
@@ -49,6 +50,7 @@ class EleLogic extends GetxController {
       location = map['location'] as String?;
       siteId = map['siteId'] as int?;
       siteName = map['name'] as String?;
+      isShowPv = map['isShowPv'] as bool?;
     }
     DateTime dateTime = DateTime.now();
     date = dateTime.millisecondsSinceEpoch;
@@ -133,7 +135,8 @@ class EleLogic extends GetxController {
         .map(
           (e) => [
             '="${e.dayDate}"',
-            e.isHasPV ? (e.pvGeneration ?? 0).formatNum() : "--",
+            if (isShowPv ?? true)
+              (e.isHasPV ? (e.pvGeneration ?? 0).formatNum() : "--"),
             e.isShow ? (e.gridFeed ?? 0).formatNum() : "--",
             (e.pos ?? 0).formatNum(),
             (e.neg ?? 0).formatNum(),

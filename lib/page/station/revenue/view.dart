@@ -106,7 +106,11 @@ class _ReportDetailPageState extends State<RevenuePage> {
               ),
             ),*/
             RevenueSelectTimeWidget(logic: logic),
-            RevenueTableWidget(logic: logic, queryType: logic.queryType),
+            RevenueTableWidget(
+              isShowPv: logic.isShowPv,
+              logic: logic,
+              queryType: logic.queryType,
+            ),
           ],
         ),
       ),

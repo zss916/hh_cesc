@@ -13,10 +13,13 @@ import 'package:get/get.dart';
 class RevenueTableWidget extends StatelessWidget {
   final RevenueLogic logic;
   final QueryType queryType;
+  final bool? isShowPv;
+
   const RevenueTableWidget({
     super.key,
     required this.logic,
     required this.queryType,
+    this.isShowPv,
   });
 
   @override
@@ -109,25 +112,26 @@ class RevenueTableWidget extends StatelessWidget {
                     ),
                   ),
                   buildVChildItemDiver(),
-                  Expanded(
-                    child: Container(
-                      alignment: AlignmentDirectional.center,
-                      decoration: BoxDecoration(color: Colors.white10),
-                      width: double.maxFinite,
-                      child: AutoSizeText(
-                        "${TKey.selfGenerationRevenue.tr}\n(${User.to.getCurrencyUnit()})",
-                        textAlign: TextAlign.center,
-                        maxFontSize: 12,
-                        minFontSize: 6,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
+                  if (isShowPv ?? true)
+                    Expanded(
+                      child: Container(
+                        alignment: AlignmentDirectional.center,
+                        decoration: BoxDecoration(color: Colors.white10),
+                        width: double.maxFinite,
+                        child: AutoSizeText(
+                          "${TKey.selfGenerationRevenue.tr}\n(${User.to.getCurrencyUnit()})",
+                          textAlign: TextAlign.center,
+                          maxFontSize: 12,
+                          minFontSize: 6,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  buildVChildItemDiver(),
+                  if (isShowPv ?? true) buildVChildItemDiver(),
                   Expanded(
                     child: Container(
                       alignment: AlignmentDirectional.center,
@@ -241,32 +245,33 @@ class RevenueTableWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsetsDirectional.all(0),
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                    width: 1,
-                                    color: Color(0xFF5A5D66),
+                          if (item.isHasPV)
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsetsDirectional.all(0),
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    left: BorderSide(
+                                      width: 1,
+                                      color: Color(0xFF5A5D66),
+                                    ),
+                                  ),
+                                ),
+                                alignment: AlignmentDirectional.center,
+                                child: Text(
+                                  item.isHasPV
+                                      ? (item.pvSelfUseGain ?? 0.00)
+                                            .formatAmount()
+                                      : "--",
+                                  style: TextStyle(
+                                    color: const Color(0xD9FFFFFF),
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
-                              alignment: AlignmentDirectional.center,
-                              child: Text(
-                                item.isHasPV
-                                    ? (item.pvSelfUseGain ?? 0.00)
-                                          .formatAmount()
-                                    : "--",
-                                style: TextStyle(
-                                  color: const Color(0xD9FFFFFF),
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
                             ),
-                          ),
                           Expanded(
                             child: Container(
                               padding: EdgeInsetsDirectional.all(10),

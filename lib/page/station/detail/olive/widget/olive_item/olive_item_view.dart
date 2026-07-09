@@ -65,6 +65,7 @@ class OliveItemView extends StatelessWidget {
       child: Wrap(
         spacing: 10,
         children: [
+          //if(AppSetting.isOverseas)
           if (logic.weather != null)
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -1615,6 +1616,7 @@ class OliveItemView extends StatelessWidget {
                         siteId: logic.siteId,
                         siteName: logic.siteName,
                         location: logic.siteDetail?.location,
+                        isShowPv: logic.pvCardShow,
                       );
                     } else {
                       if (logic.siteDetail?.showOverSeasUi ?? false) {
@@ -1622,6 +1624,7 @@ class OliveItemView extends StatelessWidget {
                           siteId: logic.siteId,
                           siteName: logic.siteName,
                           location: logic.siteDetail?.location,
+                          isShowPv: logic.pvCardShow,
                         );
                       } else {
                         PageTools.toReportDetail(
@@ -1693,6 +1696,7 @@ class OliveItemView extends StatelessWidget {
                       location: logic.siteDetail?.location,
                       isShowTimeSlot:
                           (logic.siteDetail?.showOverSeasUi ?? false),
+                      isShowPv: logic.pvCardShow,
                     );
                   },
                   child: Container(
@@ -1730,6 +1734,7 @@ class OliveItemView extends StatelessWidget {
               siteId: logic.siteId,
               siteName: logic.siteName,
               location: logic.siteDetail?.location,
+              isShowPv: logic.pvCardShow,
             );
           } else {
             if (logic.siteDetail?.showOverSeasUi ?? false) {
@@ -1737,6 +1742,7 @@ class OliveItemView extends StatelessWidget {
                 siteId: logic.siteId,
                 siteName: logic.siteName,
                 location: logic.siteDetail?.location,
+                isShowPv: logic.pvCardShow,
               );
             } else {
               PageTools.toReportDetail(
