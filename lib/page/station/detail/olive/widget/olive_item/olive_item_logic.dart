@@ -264,7 +264,7 @@ class OliveItemLogic extends GetxController {
       data.add(
         SiteInfoCardEntity()
           ..id = 4
-          ..icon = Assets.imgEle
+          ..icon = Assets.imgGridPos
           ..value = '${(value.todayGridPos ?? 0).formatPowerValue()} '
           ..unit = (value.todayGridPos ?? 0).formatPowerValueUnit()
           ..title = TKey.todayGridPos.tr
@@ -274,7 +274,7 @@ class OliveItemLogic extends GetxController {
       data.add(
         SiteInfoCardEntity()
           ..id = 5
-          ..icon = Assets.imgGridExport
+          ..icon = Assets.imgGridNeg
           ..value = '${(value.todayGridNeg ?? 0).formatPowerValue()} '
           ..unit = (value.todayGridNeg ?? 0).formatPowerValueUnit()
           ..title = TKey.todayGridNeg.tr

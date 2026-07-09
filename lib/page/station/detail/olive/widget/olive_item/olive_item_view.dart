@@ -85,7 +85,7 @@ class OliveItemView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  TKey.workModel.tr,
+                  '${TKey.stationStatus.tr}:',
                   style: TextStyle(fontSize: 13, color: Color(0xB3FFFFFF)),
                 ),
                 LineStatusWidget(status: logic.siteDetail?.status ?? 99),

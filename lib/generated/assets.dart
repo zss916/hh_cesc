@@ -84,4 +84,6 @@ class Assets {
   static const String imgAiPreviewTitleIcon =
       'assets/img/ai_preview_title_icon.png';
   static const String imgApplyIcon = 'assets/img/apply_icon.png';
+  static const String imgGridPos = 'assets/img/grid_pos.png';
+  static const String imgGridNeg = 'assets/img/grid_neg.png';
 }
