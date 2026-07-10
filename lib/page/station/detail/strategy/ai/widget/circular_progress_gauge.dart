@@ -165,18 +165,16 @@ class _GaugePainter extends CustomPainter {
     final sweepAngle = totalAngle * progress;
 
     /// 渐变
-    final shader2 = SweepGradient(
+    /*  final shader2 = SweepGradient(
       startAngle: startAngle,
       endAngle: startAngle + totalAngle,
       colors: gradientColors,
-    ).createShader(rect);
+    ).createShader(rect);*/
 
     final shader = SweepGradient(
       startAngle: startAngle,
       endAngle: startAngle + sweepAngle,
       colors: gradientColors,
-      // colors: const [Color(0xff247BFF), Color(0xff3CAEFF), Color(0xff59F2FF)],
-      //stops: const [0.0, 0.65, 1.0],
       transform: GradientRotation(startAngle + totalAngle),
     ).createShader(rect);
 
@@ -185,14 +183,6 @@ class _GaugePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeWidth = strokeWidth;
-
-    /*canvas.drawArc(
-      arcRect,
-      startAngle,
-      sweepAngle,
-      false,
-      progressPaint,
-    );*/
 
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),

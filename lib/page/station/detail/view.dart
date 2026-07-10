@@ -9,7 +9,6 @@ class StationDetailPage extends StatefulWidget {
 
 class _StationDetailState extends State<StationDetailPage> {
   int select = 0;
-  //PageController pageCtrl = PageController(initialPage: 0);
 
   @override
   void initState() {
@@ -18,7 +17,6 @@ class _StationDetailState extends State<StationDetailPage> {
 
   @override
   void dispose() {
-    // pageCtrl.dispose();
     super.dispose();
   }
 
@@ -32,14 +30,10 @@ class _StationDetailState extends State<StationDetailPage> {
         extendBody: true,
         body: IndexedStack(
           index: select,
-          /*  pageSnapping: false,
-        scrollBehavior: null,
-        physics: const NeverScrollableScrollPhysics(),
-        controller: pageCtrl,*/
           children: [
             OliveView(),
             MonitorView(),
-            StrategyPage(),
+            if (false) StrategyPage(),
             RealAlarmView(),
           ],
         ),
@@ -93,22 +87,25 @@ class _StationDetailState extends State<StationDetailPage> {
                   style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
                 ),
               ),
-
-              CustomNavigationBarItem(
-                icon: Image.asset(Assets.imgStrategy, matchTextDirection: true),
-                selectedIcon: Image.asset(
-                  Assets.imgStrategyS,
-                  matchTextDirection: true,
+              if (false)
+                CustomNavigationBarItem(
+                  icon: Image.asset(
+                    Assets.imgStrategy,
+                    matchTextDirection: true,
+                  ),
+                  selectedIcon: Image.asset(
+                    Assets.imgStrategyS,
+                    matchTextDirection: true,
+                  ),
+                  title: Text(
+                    TKey.strategy.tr,
+                    style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                  ),
+                  selectedTitle: Text(
+                    TKey.strategy.tr,
+                    style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
+                  ),
                 ),
-                title: Text(
-                  TKey.strategy.tr,
-                  style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                ),
-                selectedTitle: Text(
-                  TKey.strategy.tr,
-                  style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
-                ),
-              ),
               CustomNavigationBarItem(
                 icon: Image.asset(Assets.imgAlarm, matchTextDirection: true),
                 selectedIcon: Image.asset(
@@ -129,7 +126,6 @@ class _StationDetailState extends State<StationDetailPage> {
               if (mounted) {
                 setState(() {
                   select = i;
-                  // pageCtrl.jumpToPage(i);
                 });
                 if (select == 0) {
                   Throttle.run1(
