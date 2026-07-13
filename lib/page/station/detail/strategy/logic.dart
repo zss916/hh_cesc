@@ -1,12 +1,17 @@
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/ai.dart';
-import 'package:cescpro/http/bean/check_ai_open_entity.dart';
+import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 import 'package:cescpro/http/bean/model_ctrl_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
+import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:get/get.dart';
 
 class StrategyPageLogic extends GetxController {
   SiteEntity? site;
   String get siteName => site?.name ?? "";
+  String get siteInfo =>
+      '${TKey.energyStorageInstalledPower.tr} ${site?.power ?? "0"}kW · ${TKey.photovoltaicInstalledCapacity.tr} ${site?.capacity ?? "0"}kWh';
+  int? get id => site?.id;
   ModelCtrlEntity? modelCtrl;
   String get activeType => modelCtrl?.activeTypeText ?? "--";
 
@@ -24,7 +29,9 @@ class StrategyPageLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    fetchModelControl(siteId: '479');
+    //fetchModelControl(siteId: '$id');
+    //fetchAIData(siteId: '$id');
+    queryStrategyProtected(siteId: '$id');
   }
 
   @override
@@ -38,11 +45,20 @@ class StrategyPageLogic extends GetxController {
     );
     modelCtrl = value;
     update();
-    //value?.activeTypeText ?? "";
-    //debugPrint("fetchModelControl ==>> ${value?.activeTypeText ?? ""}");
   }
 
-  Future<void> checkOpenAI({required String siteId}) async {
-    CheckAiOpenEntity? value = await AIControlAPI.checkOpenAI(siteId: siteId);
+  Future<void> queryStrategyProtected({required String siteId}) async {
+    StrategyProtectedEntity? value = await AIControlAPI.queryStrategyProtected(
+      siteId: siteId,
+    );
+  }
+
+  Future<void> fetchAIData({required String siteId}) async {
+    AiPowerGraphEntity? value = await AIControlAPI.fetchAIData(
+      siteId: siteId,
+      startTime: DateTime.now().microsecond,
+      endTime: DateTime.now().microsecond,
+    );
+    // update();
   }
 }

@@ -1,7 +1,12 @@
 import 'package:cescpro/components/common_app_bar.dart';
+import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/station/detail/strategy/history/widget/filter_widget.dart';
+import 'package:cescpro/generated/assets.dart';
+import 'package:cescpro/http/bean/strategy_history_entity.dart';
+import 'package:cescpro/page/station/detail/strategy/history/strategy_history_logic.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class StrategyHistoryPage extends StatefulWidget {
@@ -12,7 +17,7 @@ class StrategyHistoryPage extends StatefulWidget {
 }
 
 class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
-  final List<DayGroup> _historyData = [
+  /* final List<DayGroup> _historyData = [
     DayGroup(
       title: '今天 · 2026-07-01',
       items: [
@@ -77,56 +82,72 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
         ),
       ],
     ),
-  ];
+  ];*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: baseAppBar(title: TKey.strategyHistory.tr),
       backgroundColor: Color(0xFF23282E),
-      body: Column(
-        children: [
-          FilterWidget(),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.only(bottom: 100),
-              child: _buildHistoryList(),
-            ),
-          ),
-        ],
+      body: GetBuilder<StrategyHistoryLogic>(
+        init: StrategyHistoryLogic(),
+        builder: (logic) {
+          return buildBody(viewState: logic.viewState, logic: logic);
+        },
       ),
     );
   }
 
-  Widget _buildHistoryList() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14),
-      child: Column(
-        children: _historyData.map((group) {
-          return Column(
-            children: [
-              Container(
-                width: double.maxFinite,
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-                child: Text(
-                  group.title,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: const Color(0xff888888),
-                  ),
-                ),
-              ),
-              ...group.items.map((item) => _buildHistoryItem(item)).toList(),
-            ],
-          );
-        }).toList(),
+  Widget buildBody({
+    required ViewStateEnum viewState,
+    required StrategyHistoryLogic logic,
+  }) {
+    return switch (viewState) {
+      ViewStateEnum.common => buildList(logic),
+      ViewStateEnum.empty => buildEmpty(logic: logic),
+      ViewStateEnum.loading => Container(
+        margin: EdgeInsetsDirectional.only(bottom: 50.h),
+        child: Center(
+          child: CircularProgressIndicator(color: Color(0xFF168FED)),
+        ),
       ),
-    );
+      _ => SizedBox.shrink(),
+    };
   }
 
-  Widget _buildHistoryItem(HistoryItem item) {
+  Widget buildEmpty({required StrategyHistoryLogic logic}) => SizedBox(
+    width: double.maxFinite,
+    height: double.maxFinite,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+            logic.fetchStrategyHistory();
+          },
+          child: Image.asset(Assets.imgEmpty, width: 200, height: 95),
+        ),
+        Text(
+          TKey.noDataAvailable.tr,
+          style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
+        ),
+      ],
+    ),
+  );
+
+  Widget buildList(StrategyHistoryLogic logic) => ListView.builder(
+    itemCount: logic.data.length,
+    padding: EdgeInsetsDirectional.only(top: 10),
+    shrinkWrap: true,
+    itemBuilder: (BuildContext context, int index) {
+      StrategyHistoryEntity item = logic.data[index];
+      return _buildHistoryItem(item);
+    },
+  );
+
+  Widget _buildHistoryItem(StrategyHistoryEntity item) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
+      margin: EdgeInsetsDirectional.only(bottom: 8, start: 14, end: 14),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Color(0xFF313540),
@@ -139,15 +160,15 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                item.time,
+                item.createTime ?? "",
                 style: TextStyle(fontSize: 11, color: const Color(0xff888888)),
               ),
-              _buildTag(item.tag, item.tagType),
+              _buildTag(item.actionTypeEnum),
             ],
           ),
           const SizedBox(height: 4),
           Text(
-            item.title,
+            item.title ?? "",
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -156,7 +177,7 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
           ),
           const SizedBox(height: 4),
           Text(
-            item.desc,
+            item.content ?? "",
             style: TextStyle(fontSize: 12, color: const Color(0xff888888)),
           ),
         ],
@@ -164,23 +185,32 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
     );
   }
 
-  Widget _buildTag(String tag, TagType type) {
+  Widget _buildTag(ActionType type) {
     Color bgColor;
     Color textColor;
     Color borderColor;
-
     switch (type) {
-      case TagType.adjust:
+      case ActionType.none:
+        bgColor = Colors.transparent;
+        textColor = Colors.transparent;
+        borderColor = Colors.transparent;
+        break;
+      case ActionType.open:
         bgColor = const Color(0x2622EEBD);
         textColor = const Color(0xff22EEBD);
         borderColor = const Color(0x7322eebd);
         break;
-      case TagType.switchMode:
+      case ActionType.adjust:
+        bgColor = const Color(0x2622EEBD);
+        textColor = const Color(0xff22EEBD);
+        borderColor = const Color(0x7322eebd);
+        break;
+      case ActionType.switchMode:
         bgColor = const Color(0x2628CCFF);
         textColor = const Color(0xff28CCFF);
         borderColor = Color(0x7328CCFF);
         break;
-      case TagType.cancel:
+      case ActionType.discontinue:
         bgColor = const Color(0x26ff9933);
         textColor = const Color(0xffff9933);
         borderColor = const Color(0x73ff9933);
@@ -195,35 +225,10 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
         borderRadius: BorderRadius.circular(50),
       ),
       child: Text(
-        tag,
+        type.title,
         textAlign: .center,
         style: TextStyle(fontSize: 10, height: 1.2, color: textColor),
       ),
     );
   }
-}
-
-enum TagType { adjust, switchMode, cancel }
-
-class DayGroup {
-  final String title;
-  final List<HistoryItem> items;
-
-  DayGroup({required this.title, required this.items});
-}
-
-class HistoryItem {
-  final String time;
-  final String tag;
-  final TagType tagType;
-  final String title;
-  final String desc;
-
-  HistoryItem({
-    required this.time,
-    required this.tag,
-    required this.tagType,
-    required this.title,
-    required this.desc,
-  });
 }

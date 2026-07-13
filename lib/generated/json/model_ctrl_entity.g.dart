@@ -1,5 +1,9 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/model_ctrl_entity.dart';
+import 'package:cescpro/core/translations/en.dart';
+
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
 
 ModelCtrlEntity $ModelCtrlEntityFromJson(Map<String, dynamic> json) {
   final ModelCtrlEntity modelCtrlEntity = ModelCtrlEntity();

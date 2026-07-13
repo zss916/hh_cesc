@@ -171,7 +171,9 @@ class PageTools {
   static void toAlarmDetails(AlarmItemEntity item) =>
       Get.toNamed(APages.alarmDetails, arguments: item);
 
-  static void toStrategyHistory() => Get.toNamed(APages.strategyHistory);
+  static void toStrategyHistory({int? siteId}) =>
+      Get.toNamed(APages.strategyHistory, arguments: {"siteId": siteId});
 
-  static void toAiPreview() => Get.toNamed(APages.aiPreview);
+  static void toAiPreview({int? siteId}) =>
+      Get.toNamed(APages.aiPreview, arguments: {"siteId": siteId});
 }

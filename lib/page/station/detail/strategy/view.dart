@@ -25,9 +25,8 @@ class StrategyPage extends StatelessWidget {
               children: [
                 _buildSiteInfo(logic: logic),
                 _buildStrategyStatus(),
-                // _buildStrategyCard(),
                 _buildPowerCurve(),
-                _buildActions(),
+                _buildActions(logic: logic),
               ],
             );
           },
@@ -76,8 +75,8 @@ class StrategyPage extends StatelessWidget {
                   ],
                 ),
                 Divider(height: 2, color: Colors.transparent),
-                const Text(
-                  '装机 1MW / 2MWh · 削峰填谷策略中',
+                Text(
+                  logic.siteInfo,
                   style: TextStyle(fontSize: 10, color: Color(0xff888888)),
                 ),
               ],
@@ -99,7 +98,7 @@ class StrategyPage extends StatelessWidget {
             alignment: AlignmentDirectional.centerStart,
             width: double.maxFinite,
             child: Text(
-              "保护策略",
+              TKey.safeStrategy.tr,
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ),
@@ -108,57 +107,31 @@ class StrategyPage extends StatelessWidget {
             width: double.maxFinite,
             child: Wrap(
               spacing: 10,
+              runSpacing: 8,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent.withValues(alpha: 0.2),
-                    border: Border.all(color: Colors.blueAccent, width: 0.5),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    "电压保护",
-                    style: TextStyle(fontSize: 12, color: Colors.white),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent.withValues(alpha: 0.2),
-                    border: Border.all(color: Colors.blueAccent, width: 0.5),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    "SOC保护",
-                    style: TextStyle(fontSize: 12, color: Colors.white),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent.withValues(alpha: 0.2),
-                    border: Border.all(color: Colors.blueAccent, width: 0.5),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    "需量控制",
-                    style: TextStyle(fontSize: 12, color: Colors.white),
-                  ),
-                ),
+                _buildProtection(title: TKey.volProtection.tr),
+                _buildProtection(title: TKey.socProtection.tr),
+                _buildProtection(title: TKey.tempProtection.tr),
+                _buildProtection(title: TKey.antiProtection.tr),
+                _buildProtection(title: TKey.needProtection.tr),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  ///保护
+  Widget _buildProtection({required String title}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.blueAccent.withValues(alpha: 0.2),
+        border: Border.all(color: Colors.blueAccent, width: 0.5),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(title, style: TextStyle(fontSize: 12, color: Colors.white)),
     );
   }
 
@@ -301,7 +274,7 @@ class StrategyPage extends StatelessWidget {
     );
   }
 
-  Widget _buildActions() {
+  Widget _buildActions({required StrategyPageLogic logic}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       child: Row(
@@ -311,7 +284,7 @@ class StrategyPage extends StatelessWidget {
               Assets.imgStrategyHistory,
               TKey.strategyHistory.tr,
               false,
-              () => PageTools.toStrategyHistory(),
+              () => PageTools.toStrategyHistory(siteId: logic.id),
             ),
           ),
           const SizedBox(width: 10),
@@ -320,7 +293,7 @@ class StrategyPage extends StatelessWidget {
               Assets.imgAiPreview,
               TKey.aiStrategyPreview.tr,
               true,
-              () => PageTools.toAiPreview(),
+              () => PageTools.toAiPreview(siteId: logic.id),
             ),
           ),
         ],

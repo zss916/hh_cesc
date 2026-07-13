@@ -76,5 +76,6 @@ void showAIProgressDialog() {
         ),
       ],
     ),
+    barrierDismissible: false,
   );
 }

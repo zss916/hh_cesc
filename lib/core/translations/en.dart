@@ -567,18 +567,25 @@ class TKey {
   static const String switchTab = "switchTab";
   static const String adjustTab = "adjustTab";
   static const String stopTab = "stopTab";
+  static const String openTab = "openTab";
   static const String applyTitle = "applyTitle";
   static const String applyContent = "applyContent";
   static const String knowTitle = "knowTitle";
-
+  static const String aiModeType = "aiModeType";
   static const String totalPowerType = "totalPowerType";
   static const String subSystemType = "subSystemType";
+  static const String safeStrategy = "safeStrategy";
   static const String peakShavingAndValleyFillingMonthType =
       "peakShavingAndValleyFillingMonthType";
   static const String peakShavingAndValleyFillingDayType =
       "peakShavingAndValleyFillingDayType";
   static const String selfGenerationAndSelfConsumptionType =
       "selfGenerationAndSelfConsumptionType";
+  static const String volProtection = "volProtection";
+  static const String socProtection = "socProtection";
+  static const String tempProtection = "tempProtection";
+  static const String antiProtection = "antiProtection";
+  static const String needProtection = "needProtection";
 }
 
 const en = {
@@ -911,6 +918,7 @@ const en = {
   "switchTab": "Switch",
   "adjustTab": "Adjust Parameters",
   "stopTab": "Stop",
+  "openTab": "启用",
   "applyTitle": "Please contact your account manager",
   "applyContent":
       'The activation of AI strategies requires review and activation by your account manager. \nlease proactively contact the account manager, submit the activation application, and once approved, you can experience the AI intelligent strategy.',
@@ -920,4 +928,11 @@ const en = {
   "peakShavingAndValleyFillingMonthType": "削峰填谷(月)",
   "peakShavingAndValleyFillingDayType": "削峰填谷(日)",
   "selfGenerationAndSelfConsumptionType": "自发自用",
+  "aiModeType": "AI模式",
+  "safeStrategy": "保护策略",
+  "volProtection": "电压保护",
+  "socProtection": "SOC保护",
+  "tempProtection": "温度保护",
+  "antiProtection": "防逆流保护",
+  "needProtection": "需量保护",
 };

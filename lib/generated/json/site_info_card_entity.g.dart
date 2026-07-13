@@ -1,5 +1,5 @@
-import 'package:cescpro/core/model/site_info_card_entity.dart';
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
+import 'package:cescpro/core/model/site_info_card_entity.dart';
 
 SiteInfoCardEntity $SiteInfoCardEntityFromJson(Map<String, dynamic> json) {
   final SiteInfoCardEntity siteInfoCardEntity = SiteInfoCardEntity();

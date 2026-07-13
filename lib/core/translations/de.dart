@@ -314,6 +314,7 @@ const de = {
   "switchTab": "Schalter",
   "adjustTab": "Parameter anpassen",
   "stopTab": "Stoppen",
+  "openTab": "启用",
   "applyTitle": "Bitte kontaktieren Sie Ihren Kundenmanager.",
   "applyContent":
       'Die Aktivierung von KI-Richtlinien erfordert eine Überprüfung und Einleitung durch Ihren Account Manager. Bitte wenden Sie sich aktiv an den Account Manager und stellen Sie einen Antrag auf Eröffnung ein, um die KI-Strategie nach der Überprüfung zu erleben.',
@@ -323,4 +324,11 @@ const de = {
   "peakShavingAndValleyFillingMonthType": "削峰填谷(月)",
   "peakShavingAndValleyFillingDayType": "削峰填谷(日)",
   "selfGenerationAndSelfConsumptionType": "自发自用",
+  "aiModeType": "AI模式",
+  "safeStrategy": "保护策略",
+  "volProtection": "电压保护",
+  "socProtection": "SOC保护",
+  "tempProtection": "温度保护",
+  "antiProtection": "防逆流保护",
+  "needProtection": "需量保护",
 };

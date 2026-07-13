@@ -10,9 +10,8 @@ import 'package:simple_gradient_text/simple_gradient_text.dart'
     show GradientText, GradientDirection;
 
 class AIStrategyPreviewPage extends StatelessWidget {
-  AIStrategyPreviewPage({super.key});
 
-  String bannerContent = '基于光伏预测、负载预测、天气预报与电价动态生成次日最优策略';
+  const AIStrategyPreviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +65,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  bannerContent,
+                  '基于光伏预测、负载预测、天气预报与电价动态生成次日最优策略',
                   style: TextStyle(fontSize: 11, color: Color(0xffaaaaaa)),
                 ),
               ],

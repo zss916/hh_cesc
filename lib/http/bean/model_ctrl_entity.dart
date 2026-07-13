@@ -40,6 +40,8 @@ class ModelCtrlEntity {
         return TKey.peakShavingAndValleyFillingDayType.tr;
       case 5:
         return TKey.selfGenerationAndSelfConsumptionType.tr;
+      case 6:
+        return TKey.aiModeType.tr;
       default:
         return '--';
     }

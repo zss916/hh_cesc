@@ -330,6 +330,7 @@ const es = {
   "switchTab": "Cambiar",
   "adjustTab": "Ajustar parámetros",
   "stopTab": "Parar",
+  "openTab": "启用",
   "applyTitle": "Por favor, contacte a su gerente de cuenta.",
   "applyContent":
       'La activación de la estrategia de Ia requiere que su gerente de clientes la revise y abra. Por favor, tome la iniciativa de ponerse en contacto con el gerente de clientes, presentar la solicitud de apertura y experimentar la estrategia inteligente de Ia después de la aprobación de la revisión.',
@@ -339,4 +340,11 @@ const es = {
   "peakShavingAndValleyFillingMonthType": "削峰填谷(月)",
   "peakShavingAndValleyFillingDayType": "削峰填谷(日)",
   "selfGenerationAndSelfConsumptionType": "自发自用",
+  "aiModeType": "AI模式",
+  "safeStrategy": "保护策略",
+  "volProtection": "电压保护",
+  "socProtection": "SOC保护",
+  "tempProtection": "温度保护",
+  "antiProtection": "防逆流保护",
+  "needProtection": "需量保护",
 };

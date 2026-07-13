@@ -190,7 +190,7 @@ class ApiPath {
 
   ///查询站点调度策略历史记录
   static const String fetchStrategyHistory =
-      "/business/ctl/device/query/strategyHistory/{siteId}";
+      "/business/ctl/device/query/strategyHistory/";
 
   ///配置查询-离网策略
   static const String queryOfflineStrategy =
@@ -203,4 +203,8 @@ class ApiPath {
   ///查询站点调度策略历史记录详情
   static const String fetchStrategyHistoryDetail =
       "/business/ctl/device/query/strategyHistoryDetail/{id}";
+
+  ///运行策略模式保护查询
+  static const String queryStrategyProtected =
+      "/business/setting/device/model/protected/query";
 }
