@@ -174,6 +174,16 @@ class PageTools {
   static void toStrategyHistory({int? siteId}) =>
       Get.toNamed(APages.strategyHistory, arguments: {"siteId": siteId});
 
-  static void toAiPreview({int? siteId}) =>
-      Get.toNamed(APages.aiPreview, arguments: {"siteId": siteId});
+  static void toAiPreview({
+    int? siteId,
+    bool? isDaysEnough,
+    int? runningDays,
+  }) => Get.toNamed(
+    APages.aiPreview,
+    arguments: {
+      "siteId": siteId,
+      "isDaysEnough": isDaysEnough,
+      "runningDays": runningDays,
+    },
+  );
 }

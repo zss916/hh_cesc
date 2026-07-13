@@ -336,4 +336,8 @@ const zh = {
   "antiProtection": "防逆流保护",
   "needProtection": "需量保护",
   "strategyBannerContent": "基于光伏预测、负载预测、天气预报与电价动态生成次日最优策略",
+  "strategyProgressTitle": "数据积累中，AI暂未就绪",
+  "strategyProgressContent": "AI策略需要 至少7天 的运行数据用于学习您的电站特征 \n积累完成后将自动开启AI策略预览",
+  "strategyProgressTip": "已积累%s天，还需%s天",
+  "backStrategy": "返回策略页",
 };

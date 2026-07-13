@@ -121,31 +121,32 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget2> {
                             ),
                           ),
 
-                          Container(
-                            padding: EdgeInsetsDirectional.only(
-                              start: 15.w,
-                              end: 15.w,
-                              top: 10,
-                            ),
-                            width: double.maxFinite,
-                            child: Wrap(
-                              spacing: 15.w,
-                              runSpacing: 8.h,
-                              children: [
-                                ...widget.logic.series
-                                    .map((a) => (a.name ?? ""))
-                                    .toList()
-                                    .mapIndexed(
-                                      (i, e) => LineTitleWidget(
-                                        color: e.toLowerCase() == "soc"
-                                            ? Colors.blue
-                                            : palette[i],
-                                        title: e,
+                          if (false)
+                            Container(
+                              padding: EdgeInsetsDirectional.only(
+                                start: 15.w,
+                                end: 15.w,
+                                top: 10,
+                              ),
+                              width: double.maxFinite,
+                              child: Wrap(
+                                spacing: 15.w,
+                                runSpacing: 8.h,
+                                children: [
+                                  ...widget.logic.series
+                                      .map((a) => (a.name ?? ""))
+                                      .toList()
+                                      .mapIndexed(
+                                        (i, e) => LineTitleWidget(
+                                          color: e.toLowerCase() == "soc"
+                                              ? Colors.blue
+                                              : palette[i],
+                                          title: e,
+                                        ),
                                       ),
-                                    ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
                         ],
                       ),
                       if (widget.logic.series.isNotEmpty)

@@ -1,7 +1,6 @@
 import 'package:cescpro/http/api/ai.dart';
 import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
 import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
-import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/widget/dialog_ai_progress.dart';
 import 'package:get/get.dart';
 
@@ -18,16 +17,27 @@ class AIStrategyPreviewLogic extends GetxController {
   ///日增长收益
   int? get dayGrowthRevenue => revenueForecast?.profitGrowth ?? 0;
 
+  bool isFullDay = false;
+  int runningDays = 0;
+
   @override
   void onInit() {
     super.onInit();
     id = ((Get.arguments as Map<String, dynamic>)['siteId'] as int?);
+    isFullDay =
+        ((Get.arguments as Map<String, dynamic>)['isDaysEnough'] as bool?) ??
+        false;
+    runningDays =
+        ((Get.arguments as Map<String, dynamic>)['runningDays'] as int?) ?? 0;
   }
 
   @override
   void onReady() {
     super.onReady();
-    checkOpenAI();
+    if (!isFullDay) {
+      showAIProgressDialog(day: runningDays);
+    }
+
     //getAIDataCompare();
     //fetchAIData();
   }
@@ -35,11 +45,6 @@ class AIStrategyPreviewLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
-  }
-
-  Future<void> checkOpenAI() async {
-    CheckAiOpenEntity? value = await AIControlAPI.checkOpenAI(siteId: '$id');
-    showAIProgressDialog();
   }
 
   ///todo 算法那边还没定好

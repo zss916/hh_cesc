@@ -1,3 +1,4 @@
+/*
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
@@ -315,3 +316,4 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
     );
   }
 }
+*/

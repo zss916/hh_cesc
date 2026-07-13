@@ -39,7 +39,7 @@ class PowerLineChart3 extends StatelessWidget {
                 margin: EdgeInsets.all(0),
                 plotAreaBorderWidth: 0.0,
                 legend: Legend(
-                  isVisible: false,
+                  isVisible: true,
                   position: LegendPosition.bottom,
                   itemPadding: 12.0,
                   overflowMode: LegendItemOverflowMode.scroll,

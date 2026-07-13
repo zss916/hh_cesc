@@ -58,27 +58,28 @@ class _PowerAnalysisWidgetState extends State<HPowerAnalysisWidget2> {
             ),
           ),
 
-          Container(
-            padding: EdgeInsetsDirectional.only(start: 10, end: 10, top: 10),
-            width: double.maxFinite,
-            child: Wrap(
-              spacing: 15,
-              runSpacing: 8,
-              children: [
-                ...widget.logic.series
-                    .map((a) => (a.name ?? ""))
-                    .toList()
-                    .mapIndexed(
-                      (i, e) => LineTitleWidget(
-                        color: e.toLowerCase() == "soc"
-                            ? Colors.blue
-                            : palette[i],
-                        title: e,
+          if (false)
+            Container(
+              padding: EdgeInsetsDirectional.only(start: 10, end: 10, top: 10),
+              width: double.maxFinite,
+              child: Wrap(
+                spacing: 15,
+                runSpacing: 8,
+                children: [
+                  ...widget.logic.series
+                      .map((a) => (a.name ?? ""))
+                      .toList()
+                      .mapIndexed(
+                        (i, e) => LineTitleWidget(
+                          color: e.toLowerCase() == "soc"
+                              ? Colors.blue
+                              : palette[i],
+                          title: e,
+                        ),
                       ),
-                    ),
-              ],
+                ],
+              ),
             ),
-          ),
 
           /* Divider(height: 5, color: Colors.transparent),
           SizedBox(

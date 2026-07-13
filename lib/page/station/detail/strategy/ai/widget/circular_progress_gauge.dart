@@ -16,10 +16,10 @@ class CircularProgressGauge extends StatefulWidget {
   });
 
   /// 当前值
-  final double value;
+  final int value;
 
   /// 最大值
-  final double max;
+  final int max;
 
   /// 控件大小
   final double size;
@@ -55,7 +55,7 @@ class _CircularProgressGaugeState extends State<CircularProgressGauge>
 
     _animation = Tween<double>(
       begin: 0,
-      end: widget.value,
+      end: widget.value.toDouble(),
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
 
     _controller.forward();
@@ -66,8 +66,11 @@ class _CircularProgressGaugeState extends State<CircularProgressGauge>
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.value != widget.value) {
-      _animation = Tween<double>(begin: _animation.value, end: widget.value)
-          .animate(
+      _animation =
+          Tween<double>(
+            begin: _animation.value,
+            end: widget.value.toDouble(),
+          ).animate(
             CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
           );
 
@@ -94,7 +97,7 @@ class _CircularProgressGaugeState extends State<CircularProgressGauge>
           return CustomPaint(
             painter: _GaugePainter(
               value: _animation.value,
-              max: widget.max,
+              max: widget.max.toDouble(),
               strokeWidth: widget.strokeWidth,
               backgroundColor: widget.backgroundColor,
               gradientColors: widget.gradientColors,
@@ -171,46 +174,52 @@ class _GaugePainter extends CustomPainter {
       colors: gradientColors,
     ).createShader(rect);*/
 
-    final shader = SweepGradient(
-      startAngle: startAngle,
-      endAngle: startAngle + sweepAngle,
-      colors: gradientColors,
-      transform: GradientRotation(startAngle + totalAngle),
-    ).createShader(rect);
+    if (sweepAngle > 0.0001) {
+      final shader = SweepGradient(
+        startAngle: startAngle,
+        endAngle: startAngle + sweepAngle,
+        colors: gradientColors,
+        transform: GradientRotation(startAngle + totalAngle),
+      ).createShader(rect);
 
-    final progressPaint = Paint()
-      ..shader = shader
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = strokeWidth;
+      final progressPaint = Paint()
+        ..shader = shader
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round
+        ..strokeWidth = strokeWidth;
 
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      startAngle,
-      sweepAngle,
-      false,
-      progressPaint,
-    );
+      canvas.drawArc(
+        Rect.fromCircle(center: center, radius: radius),
+        startAngle,
+        sweepAngle,
+        false,
+        progressPaint,
+      );
 
-    /// 圆点
-    final angle = startAngle + sweepAngle;
+      /// 圆点
+      final angle = startAngle + sweepAngle;
 
-    final point = Offset(
-      center.dx + radius * cos(angle),
-      center.dy + radius * sin(angle),
-    );
+      final point = Offset(
+        center.dx + radius * cos(angle),
+        center.dy + radius * sin(angle),
+      );
 
-    /// glow
-    canvas.drawCircle(
-      point,
-      strokeWidth * 0.7,
-      Paint()
-        ..color = gradientColors.first.withOpacity(.35)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10),
-    );
+      /// glow
+      canvas.drawCircle(
+        point,
+        strokeWidth * 0.7,
+        Paint()
+          ..color = gradientColors.first.withOpacity(.35)
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10),
+      );
 
-    /// 白点
-    canvas.drawCircle(point, strokeWidth * 0.38, Paint()..color = Colors.white);
+      /// 白点
+      canvas.drawCircle(
+        point,
+        strokeWidth * 0.38,
+        Paint()..color = Colors.white,
+      );
+    }
   }
 
   @override

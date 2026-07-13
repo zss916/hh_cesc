@@ -333,4 +333,10 @@ const de = {
   "needProtection": "Bedarfsschutz",
   "strategyBannerContent":
       "Optimale Strategien am nächsten Tag basierend auf Photovoltaik-Prognosen, Lastprognosen, Wettervorhersagen und Strompreisdynamik",
+
+  "strategyProgressTitle": "In der Datensammlung ist AI noch nicht bereit",
+  "strategyProgressContent":
+      "Eine KI-Strategie erfordert mindestens sieben Tage Betriebsdaten, um die Merkmale Ihres Kraftwerks zu lernen \nEine Vorschau der KI-Richtlinie wird nach Abschluss der Akkumulation automatisch geöffnet",
+  "strategyProgressTip": "%s Tage gesammelt, noch %s Tage.",
+  "backStrategy": "Zurück",
 };

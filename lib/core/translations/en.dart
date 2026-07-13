@@ -587,6 +587,10 @@ class TKey {
   static const String antiProtection = "antiProtection";
   static const String needProtection = "needProtection";
   static const String strategyBannerContent = "strategyBannerContent";
+  static const String strategyProgressTitle = "strategyProgressTitle";
+  static const String strategyProgressContent = "strategyProgressContent";
+  static const String strategyProgressTip = "strategyProgressTip";
+  static const String backStrategy = "backStrategy";
 }
 
 const en = {
@@ -938,4 +942,10 @@ const en = {
   "needProtection": "Demand Protection",
   "strategyBannerContent":
       "Generate the optimal strategy for the next day based on photovoltaic forecasting, load forecasting, weather forecasting, and electricity price dynamics",
+
+  "strategyProgressTitle": "AI is not yet ready for data accumulation",
+  "strategyProgressContent":
+      "AI strategy requires at least 7 days of operational data to learn the characteristics of your power plant \nAfter accumulation is completed, AI strategy preview will be automatically activated",
+  "strategyProgressTip": "Accumulated %s days, still %s days needed",
+  "backStrategy": "Back",
 };

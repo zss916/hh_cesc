@@ -31,6 +31,7 @@ class APages {
   static const hPVChart = '/hPVChart';
   static const aiPreview = '/aiPreview';
   static const strategyHistory = '/strategyHistory';
+  static const aIProgressDialog = '/showAIProgressDialog';
 
   static final List<GetPage> routes = [
     GetPage(name: hRevenueChart, page: () => RevenueChartPage()),

@@ -282,7 +282,11 @@ class StrategyPage extends StatelessWidget {
               Assets.imgAiPreview,
               TKey.aiStrategyPreview.tr,
               true,
-              () => PageTools.toAiPreview(siteId: logic.id),
+              () => PageTools.toAiPreview(
+                siteId: logic.id,
+                isDaysEnough: logic.isFullDay,
+                runningDays: logic.runningDays,
+              ),
             ),
           ),
         ],

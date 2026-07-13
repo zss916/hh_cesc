@@ -1,6 +1,7 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/ai.dart';
 import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
+import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 import 'package:cescpro/http/bean/model_ctrl_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
@@ -15,6 +16,9 @@ class StrategyPageLogic extends GetxController {
   ModelCtrlEntity? modelCtrl;
   String get activeType => modelCtrl?.activeTypeText ?? "--";
   StrategyProtectedEntity? protected;
+  CheckAiOpenEntity? checkAiOpen;
+  bool get isFullDay => checkAiOpen?.isDaysEnough ?? false;
+  int get runningDays => checkAiOpen?.runningDays ?? 0;
 
   @override
   void onInit() {
@@ -30,8 +34,10 @@ class StrategyPageLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    //fetchModelControl(siteId: '$id');
-    //queryStrategyProtected(siteId: '$id');
+    checkOpenAI();
+    //fetchModelControl();
+    //queryStrategyProtected();
+    //fetchAIData();
   }
 
   @override
@@ -39,25 +45,29 @@ class StrategyPageLogic extends GetxController {
     super.onClose();
   }
 
-  Future<void> fetchModelControl({required String siteId}) async {
+  Future<void> checkOpenAI() async {
+    checkAiOpen = await AIControlAPI.checkOpenAI(siteId: '$id');
+  }
+
+  Future<void> fetchModelControl() async {
     ModelCtrlEntity? value = await AIControlAPI.fetchModelControl(
-      siteId: siteId,
+      siteId: '$id',
     );
     modelCtrl = value;
     update();
   }
 
-  Future<void> queryStrategyProtected({required String siteId}) async {
+  Future<void> queryStrategyProtected() async {
     StrategyProtectedEntity? value = await AIControlAPI.queryStrategyProtected(
-      siteId: siteId,
+      siteId: '$id',
     );
     protected = value;
     update();
   }
 
-  Future<void> fetchAIData({required String siteId}) async {
+  Future<void> fetchAIData() async {
     AiPowerGraphEntity? value = await AIControlAPI.fetchAIData(
-      siteId: siteId,
+      siteId: '$id',
       startTime: DateTime.now().microsecond,
       endTime: DateTime.now().microsecond,
     );

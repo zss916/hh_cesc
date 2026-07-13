@@ -349,4 +349,11 @@ const es = {
   "needProtection": "Protección de la demanda",
   "strategyBannerContent":
       "Estrategia óptima para el día siguiente basada en la predicción fotovoltaica, la predicción de carga, la predicción meteorológica y la generación dinámica de precios de la electricidad",
+
+  "strategyProgressTitle":
+      "En la acumulación de datos, la Ia aún no está lista.",
+  "strategyProgressContent":
+      "La estrategia de Ia requiere al menos 7 días de datos operativos para aprender las características de su central eléctrica \nUna vez completada la acumulación, se abrirá automáticamente la vista previa de la estrategia de ia.",
+  "strategyProgressTip": "Se han acumulado %s días y se necesitan %s más.",
+  "backStrategy": "Atrás",
 };
