@@ -61,6 +61,7 @@ class LoginLogic extends GetxController {
       password: (password.trim()),
     );
     if (value != null) {
+      User.to.setAccount(account: account.trim());
       User.to.setIsGuest(isGuest: false);
       User.setTokenHead(tokenHead: value.tokenHeadValue);
       User.setToken(token: value.tokenValue);

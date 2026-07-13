@@ -16,6 +16,13 @@ class User extends GetxService {
   static final String isGuestKey = "isGuestKey";
   static final String isShowRevenueKey = "isShowRevenueKey";
   static final String isLimitLoginKey = "isLimitLoginKey";
+  static final String accountKey = "accountKey";
+
+  void setAccount({required String account}) {
+    StorageService.to.setString(accountKey, account);
+  }
+
+  String getAccount() => StorageService.to.getString(accountKey);
 
   void setIsShowRevenue({required bool isShowRevenue}) =>
       StorageService.to.setBool(isShowRevenueKey, isShowRevenue);

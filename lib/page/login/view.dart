@@ -1,14 +1,5 @@
 part of 'index.dart';
 
-/*class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ;
-  }
-}*/
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -17,12 +8,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController textEditCtrl = TextEditingController();
+  TextEditingController? textEditCtrl = TextEditingController();
 
   @override
   void dispose() {
-    textEditCtrl.dispose();
     super.dispose();
+    if (textEditCtrl != null) {
+      textEditCtrl?.dispose();
+      textEditCtrl = null;
+    }
   }
 
   @override
@@ -59,13 +53,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     InputAccount(
+                      account: User.to.getAccount(),
                       onInput: (value) {
                         logic.account = value;
                       },
                     ),
 
                     InputPassword(
-                      textEditCtrl: textEditCtrl,
+                      textEditCtrl: textEditCtrl!,
                       isShowError: false,
                       onInput: (value) {
                         logic.password = value;
@@ -78,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                         logic.toLogin(
                           onUpdatePsd: (value) {
                             setState(() {
-                              textEditCtrl.clear();
+                              textEditCtrl?.clear();
                             });
                             logic.password = "";
                             logic.update();

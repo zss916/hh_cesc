@@ -21,6 +21,10 @@ class _EditNameState extends State<InputAccount> {
   void initState() {
     super.initState();
     focusNode.unfocus();
+    if ((widget.account ?? "").isNotEmpty) {
+      textEditCtrl.text = widget.account ?? "";
+      widget.onInput.call(widget.account ?? "");
+    }
   }
 
   @override
