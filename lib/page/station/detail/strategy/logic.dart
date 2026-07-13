@@ -14,6 +14,7 @@ class StrategyPageLogic extends GetxController {
   int? get id => site?.id;
   ModelCtrlEntity? modelCtrl;
   String get activeType => modelCtrl?.activeTypeText ?? "--";
+  StrategyProtectedEntity? protected;
 
   @override
   void onInit() {
@@ -51,6 +52,8 @@ class StrategyPageLogic extends GetxController {
     StrategyProtectedEntity? value = await AIControlAPI.queryStrategyProtected(
       siteId: siteId,
     );
+    protected = value;
+    update();
   }
 
   Future<void> fetchAIData({required String siteId}) async {
