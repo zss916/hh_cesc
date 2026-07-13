@@ -31,8 +31,7 @@ class StrategyPageLogic extends GetxController {
   void onReady() {
     super.onReady();
     //fetchModelControl(siteId: '$id');
-    //fetchAIData(siteId: '$id');
-    queryStrategyProtected(siteId: '$id');
+    //queryStrategyProtected(siteId: '$id');
   }
 
   @override

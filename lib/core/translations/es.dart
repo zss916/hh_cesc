@@ -347,4 +347,6 @@ const es = {
   "tempProtection": "Protección de la temperatura",
   "antiProtection": "Protección contra la contracorriente",
   "needProtection": "Protección de la demanda",
+  "strategyBannerContent":
+      "Estrategia óptima para el día siguiente basada en la predicción fotovoltaica, la predicción de carga, la predicción meteorológica y la generación dinámica de precios de la electricidad",
 };

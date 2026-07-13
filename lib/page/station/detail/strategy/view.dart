@@ -296,14 +296,15 @@ class StrategyPage extends StatelessWidget {
     bool primary,
     VoidCallback onPressed,
   ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 2),
-      decoration: BoxDecoration(
-        color: Color(0xFF313540),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
-        onTap: onPressed,
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 2),
+        decoration: BoxDecoration(
+          color: Color(0xFF313540),
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -329,14 +330,15 @@ class StrategyPage extends StatelessWidget {
     bool primary,
     VoidCallback onPressed,
   ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 2),
-      decoration: BoxDecoration(
-        color: Color(0xFF313540),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
-        onTap: onPressed,
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: onPressed,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 2),
+        decoration: BoxDecoration(
+          color: Color(0xFF313540),
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -335,4 +335,5 @@ const zh = {
   "tempProtection": "温度保护",
   "antiProtection": "防逆流保护",
   "needProtection": "需量保护",
+  "strategyBannerContent": "基于光伏预测、负载预测、天气预报与电价动态生成次日最优策略",
 };

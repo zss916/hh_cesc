@@ -331,4 +331,6 @@ const de = {
   "tempProtection": "Temperaturschutz",
   "antiProtection": "Rückstromschutz",
   "needProtection": "Bedarfsschutz",
+  "strategyBannerContent":
+      "Optimale Strategien am nächsten Tag basierend auf Photovoltaik-Prognosen, Lastprognosen, Wettervorhersagen und Strompreisdynamik",
 };

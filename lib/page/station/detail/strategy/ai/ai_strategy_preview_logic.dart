@@ -1,5 +1,6 @@
 import 'package:cescpro/http/api/ai.dart';
 import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
+import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/widget/dialog_ai_progress.dart';
 import 'package:get/get.dart';
@@ -26,8 +27,9 @@ class AIStrategyPreviewLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    //checkOpenAI(siteId: '$id');
-    getAIDataCompare(siteId: '$id');
+    checkOpenAI();
+    //getAIDataCompare();
+    //fetchAIData();
   }
 
   @override
@@ -35,14 +37,24 @@ class AIStrategyPreviewLogic extends GetxController {
     super.onClose();
   }
 
-  Future<void> checkOpenAI({required String siteId}) async {
-    CheckAiOpenEntity? value = await AIControlAPI.checkOpenAI(siteId: siteId);
+  Future<void> checkOpenAI() async {
+    CheckAiOpenEntity? value = await AIControlAPI.checkOpenAI(siteId: '$id');
     showAIProgressDialog();
   }
 
-  Future<void> getAIDataCompare({required String siteId}) async {
+  ///todo 算法那边还没定好
+  Future<void> getAIDataCompare() async {
     AiCompareDataEntity? value = await AIControlAPI.getAIDataCompare(
-      siteId: siteId,
+      siteId: '$id',
     );
+  }
+
+  Future<void> fetchAIData() async {
+    AiPowerGraphEntity? value = await AIControlAPI.fetchAIData(
+      siteId: '$id',
+      startTime: DateTime.now().microsecond,
+      endTime: DateTime.now().microsecond,
+    );
+    // update();
   }
 }

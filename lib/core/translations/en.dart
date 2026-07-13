@@ -586,6 +586,7 @@ class TKey {
   static const String tempProtection = "tempProtection";
   static const String antiProtection = "antiProtection";
   static const String needProtection = "needProtection";
+  static const String strategyBannerContent = "strategyBannerContent";
 }
 
 const en = {
@@ -935,4 +936,6 @@ const en = {
   "tempProtection": "Temperature Protection",
   "antiProtection": "Anti Backflow Protection",
   "needProtection": "Demand Protection",
+  "strategyBannerContent":
+      "Generate the optimal strategy for the next day based on photovoltaic forecasting, load forecasting, weather forecasting, and electricity price dynamics",
 };
