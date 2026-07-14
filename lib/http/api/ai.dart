@@ -4,7 +4,7 @@ import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
 import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 import 'package:cescpro/http/bean/check_ai_open_entity.dart';
-import 'package:cescpro/http/bean/model_ctrl_entity.dart';
+import 'package:cescpro/http/bean/ctrl_model_entity.dart';
 import 'package:cescpro/http/bean/strategy_history_entity.dart';
 import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
@@ -14,13 +14,13 @@ import 'package:flutter/foundation.dart';
 
 class AIControlAPI {
   ///查询模式控制
-  static Future<ModelCtrlEntity?> fetchModelControl({
+  static Future<CtrlModelEntity?> fetchModelControl({
     required String siteId,
   }) async {
     try {
       var result = await Http.instance.get(ApiPath.fetchModelControl + siteId);
       if (result["code"] == HttpStatus.ok) {
-        ModelCtrlEntity value = ModelCtrlEntity.fromJson(result["data"]);
+        CtrlModelEntity value = CtrlModelEntity.fromJson(result["data"]);
         return value;
       } else {
         AppLoading.toast(result["message"]);

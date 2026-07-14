@@ -4,6 +4,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:cescpro/page/station/detail/strategy/logic.dart';
+import 'package:cescpro/page/station/detail/strategy/widget/strategy_power_line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class StrategyPage extends StatelessWidget {
               children: [
                 _buildSiteInfo(logic: logic),
                 _buildStrategyStatus(protected: logic.protected),
-                _buildPowerCurve(),
+                _buildPowerCurve(logic: logic),
                 _buildActions(logic: logic),
               ],
             );
@@ -69,10 +70,10 @@ class StrategyPage extends StatelessWidget {
                       logic.activeType,
                       style: TextStyle(fontSize: 10, color: Color(0xFF72D3FF)),
                     ),
-                    const Text(
+                    /*const Text(
                       '执行中',
                       style: TextStyle(fontSize: 10, color: Color(0xFF22EEBD)),
-                    ),
+                    ),*/
                   ],
                 ),
                 Divider(height: 2, color: Colors.transparent),
@@ -164,7 +165,7 @@ class StrategyPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPowerCurve() {
+  Widget _buildPowerCurve({required StrategyPageLogic logic}) {
     return Container(
       width: double.maxFinite,
       padding: EdgeInsetsDirectional.symmetric(horizontal: 14),
@@ -179,7 +180,7 @@ class StrategyPage extends StatelessWidget {
             ),
           ),
           Divider(height: 12, color: Colors.transparent),
-          _buildChart(),
+          _buildChart(logic: logic),
         ],
       ),
     );
@@ -215,15 +216,35 @@ class StrategyPage extends StatelessWidget {
     );
   }
 
-  Widget _buildChart() {
+  Widget _buildChart({required StrategyPageLogic logic}) {
     return Container(
       width: double.maxFinite,
-      height: 220,
+      height: 350,
+      padding: EdgeInsetsDirectional.only(start: 6, end: 15, top: 10),
       decoration: BoxDecoration(
         color: Color(0xFF313540),
         borderRadius: BorderRadius.circular(14),
       ),
-      child: Column(children: [Spacer(), _buildLegend()]),
+      child: Column(
+        children: [
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              "(kW)",
+              style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+            ),
+          ),
+          Expanded(
+            child: StrategyPowerLineChart(
+              data: logic.series,
+              minT: logic.minT,
+              maxT: logic.maxT,
+              axis: logic.axis,
+            ),
+          ),
+          _buildLegend(),
+        ],
+      ),
     );
   }
 

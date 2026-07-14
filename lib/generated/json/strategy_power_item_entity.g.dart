@@ -2,17 +2,14 @@ import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 
 StrategyPowerItemEntity $StrategyPowerItemEntityFromJson(
-  Map<String, dynamic> json,
-) {
-  final StrategyPowerItemEntity strategyPowerItemEntity =
-      StrategyPowerItemEntity();
+    Map<String, dynamic> json) {
+  final StrategyPowerItemEntity strategyPowerItemEntity = StrategyPowerItemEntity();
   final double? time = jsonConvert.convert<double>(json['time']);
   if (time != null) {
     strategyPowerItemEntity.time = time;
   }
   final double? strategyPower = jsonConvert.convert<double>(
-    json['strategyPower'],
-  );
+      json['strategyPower']);
   if (strategyPower != null) {
     strategyPowerItemEntity.strategyPower = strategyPower;
   }
@@ -24,8 +21,7 @@ StrategyPowerItemEntity $StrategyPowerItemEntityFromJson(
 }
 
 Map<String, dynamic> $StrategyPowerItemEntityToJson(
-  StrategyPowerItemEntity entity,
-) {
+    StrategyPowerItemEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['time'] = entity.time;
   data['strategyPower'] = entity.strategyPower;

@@ -15,6 +15,7 @@ import 'package:cescpro/http/bean/child_item_info.dart';
 import 'package:cescpro/http/bean/com_card_vo_entity.dart';
 import 'package:cescpro/http/bean/com_type_list_entity.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
+import 'package:cescpro/http/bean/ctrl_model_entity.dart';
 import 'package:cescpro/http/bean/currency_entity.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:cescpro/http/bean/home_data2_entity.dart';
@@ -22,7 +23,6 @@ import 'package:cescpro/http/bean/home_statistic_entity.dart';
 import 'package:cescpro/http/bean/id_tree_entity.dart';
 import 'package:cescpro/http/bean/message_content_entity.dart';
 import 'package:cescpro/http/bean/message_item_entity.dart';
-import 'package:cescpro/http/bean/model_ctrl_entity.dart';
 import 'package:cescpro/http/bean/power_entity.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/http/bean/pv_trend_entity.dart';
@@ -388,6 +388,81 @@ class JsonConvert {
               .toList()
           as M;
     }
+    if (<CtrlModelEntity>[] is M) {
+      return data
+              .map<CtrlModelEntity>(
+                (Map<String, dynamic> e) => CtrlModelEntity.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<CtrlModelPower>[] is M) {
+      return data
+              .map<CtrlModelPower>(
+                (Map<String, dynamic> e) => CtrlModelPower.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<CtrlModelPeak>[] is M) {
+      return data
+              .map<CtrlModelPeak>(
+                (Map<String, dynamic> e) => CtrlModelPeak.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<CtrlModelPeakPeakList>[] is M) {
+      return data
+              .map<CtrlModelPeakPeakList>(
+                (Map<String, dynamic> e) => CtrlModelPeakPeakList.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<CtrlModelDemand>[] is M) {
+      return data
+              .map<CtrlModelDemand>(
+                (Map<String, dynamic> e) => CtrlModelDemand.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<CtrlModelDemandDemandList>[] is M) {
+      return data
+              .map<CtrlModelDemandDemandList>(
+                (Map<String, dynamic> e) =>
+                    CtrlModelDemandDemandList.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<CtrlModelSub>[] is M) {
+      return data
+              .map<CtrlModelSub>(
+                (Map<String, dynamic> e) => CtrlModelSub.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<CtrlModelSelfGenerateInfo>[] is M) {
+      return data
+              .map<CtrlModelSelfGenerateInfo>(
+                (Map<String, dynamic> e) =>
+                    CtrlModelSelfGenerateInfo.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
+    if (<CtrlModelSelfGenerateInfoCompulsory>[] is M) {
+      return data
+              .map<CtrlModelSelfGenerateInfoCompulsory>(
+                (Map<String, dynamic> e) =>
+                    CtrlModelSelfGenerateInfoCompulsory.fromJson(e),
+              )
+              .toList()
+          as M;
+    }
     if (<CurrencyEntity>[] is M) {
       return data
               .map<CurrencyEntity>(
@@ -458,14 +533,6 @@ class JsonConvert {
       return data
               .map<MessageItemEntity>(
                 (Map<String, dynamic> e) => MessageItemEntity.fromJson(e),
-              )
-              .toList()
-          as M;
-    }
-    if (<ModelCtrlEntity>[] is M) {
-      return data
-              .map<ModelCtrlEntity>(
-                (Map<String, dynamic> e) => ModelCtrlEntity.fromJson(e),
               )
               .toList()
           as M;
@@ -904,6 +971,16 @@ class JsonConvertClassCollection {
     (ComTypeListEntity).toString(): ComTypeListEntity.fromJson,
     (ComTypeListItem).toString(): ComTypeListItem.fromJson,
     (CompTreeEntity).toString(): CompTreeEntity.fromJson,
+    (CtrlModelEntity).toString(): CtrlModelEntity.fromJson,
+    (CtrlModelPower).toString(): CtrlModelPower.fromJson,
+    (CtrlModelPeak).toString(): CtrlModelPeak.fromJson,
+    (CtrlModelPeakPeakList).toString(): CtrlModelPeakPeakList.fromJson,
+    (CtrlModelDemand).toString(): CtrlModelDemand.fromJson,
+    (CtrlModelDemandDemandList).toString(): CtrlModelDemandDemandList.fromJson,
+    (CtrlModelSub).toString(): CtrlModelSub.fromJson,
+    (CtrlModelSelfGenerateInfo).toString(): CtrlModelSelfGenerateInfo.fromJson,
+    (CtrlModelSelfGenerateInfoCompulsory).toString():
+        CtrlModelSelfGenerateInfoCompulsory.fromJson,
     (CurrencyEntity).toString(): CurrencyEntity.fromJson,
     (ElecGraphEntity).toString(): ElecGraphEntity.fromJson,
     (HomeData2Entity).toString(): HomeData2Entity.fromJson,
@@ -915,7 +992,6 @@ class JsonConvertClassCollection {
     (IdTreeEntity).toString(): IdTreeEntity.fromJson,
     (MessageContentEntity).toString(): MessageContentEntity.fromJson,
     (MessageItemEntity).toString(): MessageItemEntity.fromJson,
-    (ModelCtrlEntity).toString(): ModelCtrlEntity.fromJson,
     (PowerEntity).toString(): PowerEntity.fromJson,
     (PowerGraphEntity).toString(): PowerGraphEntity.fromJson,
     (PowerGraphList).toString(): PowerGraphList.fromJson,

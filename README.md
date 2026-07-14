@@ -29,7 +29,7 @@ bug文档: https://ka1vopqysgx.feishu.cn/wiki/RgTKwjZLSiepeNkjEzmcKPzLnpe?from=f
 Admin
 HhAdmin123#
 
-账号：
+测试账号：
 admin
 Admin123!
 
@@ -136,3 +136,7 @@ CO2: CO\u2082
 
 
 
+用户名：hhdzcesc
+密码：hhdzcesc123!
+
+这个账号可以看到

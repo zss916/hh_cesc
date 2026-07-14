@@ -1,11 +1,17 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/ai.dart';
 import 'package:cescpro/http/bean/check_ai_open_entity.dart';
-import 'package:cescpro/http/bean/model_ctrl_entity.dart';
+import 'package:cescpro/http/bean/ctrl_model_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/f_line_chart.dart';
+import 'package:flutter/material.dart';
+//import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/f_line_chart.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+//import 'package:cescpro/page/station/detail/strategy/widget/strategy_power_line_c
 
 class StrategyPageLogic extends GetxController {
   SiteEntity? site;
@@ -13,7 +19,7 @@ class StrategyPageLogic extends GetxController {
   String get siteInfo =>
       '${TKey.energyStorageInstalledPower.tr} ${site?.power ?? "0"}kW · ${TKey.photovoltaicInstalledCapacity.tr} ${site?.capacity ?? "0"}kWh';
   int? get id => site?.id;
-  ModelCtrlEntity? modelCtrl;
+  CtrlModelEntity? modelCtrl;
   String get activeType => modelCtrl?.activeTypeText ?? "--";
   StrategyProtectedEntity? protected;
   CheckAiOpenEntity? checkAiOpen;
@@ -35,9 +41,9 @@ class StrategyPageLogic extends GetxController {
   void onReady() {
     super.onReady();
     checkOpenAI();
-    //fetchModelControl();
-    //queryStrategyProtected();
-    //fetchStrategyData();
+    fetchModelControl();
+    queryStrategyProtected();
+    queryStrategyCurve();
   }
 
   @override
@@ -50,7 +56,7 @@ class StrategyPageLogic extends GetxController {
   }
 
   Future<void> fetchModelControl() async {
-    ModelCtrlEntity? value = await AIControlAPI.fetchModelControl(
+    CtrlModelEntity? value = await AIControlAPI.fetchModelControl(
       siteId: '$id',
     );
     modelCtrl = value;
@@ -65,9 +71,76 @@ class StrategyPageLogic extends GetxController {
     update();
   }
 
+  DateTime minT = DateTime.now();
+  DateTime maxT = DateTime.now();
+  AxisConfig axis = AxisConfig(
+    interval: 2,
+    intervalType: DateTimeIntervalType.minutes,
+    format: DateFormat('HH:mm'),
+  );
+
+  List<FastLineSeries<ChartData, DateTime>> series =
+      <FastLineSeries<ChartData, DateTime>>[];
+
   Future<void> queryStrategyCurve() async {
-    List<StrategyPowerItemEntity>? value =
-        await AIControlAPI.queryStrategyCurve(siteId: '$id');
-    // update();
+    List<StrategyPowerItemEntity> value = await AIControlAPI.queryStrategyCurve(
+      siteId: '$id',
+    );
+
+    ///strategyPower
+    List<ChartData> strategyPowerList = value
+        .map(
+          (e) => ChartData.fromJson({
+            'time': e.time,
+            'value': (e.strategyPower ?? 0),
+          }),
+        )
+        .toList();
+
+    series.add(
+      FastLineSeries<ChartData, DateTime>(
+        name: TKey.strategyCurve.tr,
+        dataSource: strategyPowerList,
+        xValueMapper: (p, _) => p.time,
+        yValueMapper: (p, _) => p.value,
+        color: Color(0xff4a9eff),
+        width: 1,
+        markerSettings: markerSettings,
+      ),
+    );
+
+    ///actualPower
+    List<ChartData> actualPowerList = value
+        .map(
+          (e) => ChartData.fromJson({'time': e.time, 'value': e.actualPower}),
+        )
+        .toList();
+
+    series.add(
+      FastLineSeries<ChartData, DateTime>(
+        name: TKey.actualOperation.tr,
+        dataSource: actualPowerList,
+        xValueMapper: (p, _) => p.time,
+        yValueMapper: (p, _) => p.value,
+        color: Color(0xff2dd4bf),
+        width: 1,
+        markerSettings: markerSettings,
+      ),
+    );
+
+    for (final p in actualPowerList) {
+      if (p.time.isBefore(minT)) minT = p.time;
+      if (p.time.isAfter(maxT)) maxT = p.time;
+    }
+
+    update();
   }
+
+  MarkerSettings markerSettings = MarkerSettings(
+    isVisible: true,
+    shape: DataMarkerType.circle,
+    borderWidth: 0.0,
+    height: 0.0,
+    width: 0.0,
+  );
 }
