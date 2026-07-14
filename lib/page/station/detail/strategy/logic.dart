@@ -1,9 +1,9 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/ai.dart';
-import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 import 'package:cescpro/http/bean/model_ctrl_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
+import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:get/get.dart';
 
@@ -37,7 +37,7 @@ class StrategyPageLogic extends GetxController {
     checkOpenAI();
     //fetchModelControl();
     //queryStrategyProtected();
-    //fetchAIData();
+    //fetchStrategyData();
   }
 
   @override
@@ -65,12 +65,9 @@ class StrategyPageLogic extends GetxController {
     update();
   }
 
-  Future<void> fetchAIData() async {
-    AiPowerGraphEntity? value = await AIControlAPI.fetchAIData(
-      siteId: '$id',
-      startTime: DateTime.now().microsecond,
-      endTime: DateTime.now().microsecond,
-    );
+  Future<void> queryStrategyCurve() async {
+    List<StrategyPowerItemEntity>? value =
+        await AIControlAPI.queryStrategyCurve(siteId: '$id');
     // update();
   }
 }

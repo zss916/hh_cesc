@@ -6,6 +6,7 @@ import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 import 'package:cescpro/http/bean/model_ctrl_entity.dart';
 import 'package:cescpro/http/bean/strategy_history_entity.dart';
+import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
@@ -136,6 +137,28 @@ class AIControlAPI {
         List<StrategyHistoryEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => StrategyHistoryEntity.fromJson(e)).toList(),
+          (result['data'] as List),
+        );
+        return value;
+      } else {
+        AppLoading.toast(result["message"]);
+        return [];
+      }
+    } catch (error) {
+      return [];
+    }
+  }
+
+  ///获取策略曲线和实时功率曲线
+  static Future<List<StrategyPowerItemEntity>> queryStrategyCurve({
+    required String siteId,
+  }) async {
+    try {
+      var result = await Http.instance.get(ApiPath.queryStrategyCurve + siteId);
+      if (result["code"] == HttpStatus.ok) {
+        List<StrategyPowerItemEntity> value = await compute(
+          (List<dynamic> jsonList) =>
+              jsonList.map((e) => StrategyPowerItemEntity.fromJson(e)).toList(),
           (result['data'] as List),
         );
         return value;

@@ -207,4 +207,8 @@ class ApiPath {
   ///运行策略模式保护查询
   static const String queryStrategyProtected =
       "/business/setting/device/model/protected/query";
+
+  ///获取策略曲线和实时功率曲线
+  static const String queryStrategyCurve =
+      "/business/ctl/device/query/strategyCurve/";
 }
