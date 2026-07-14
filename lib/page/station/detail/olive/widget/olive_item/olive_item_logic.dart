@@ -283,7 +283,7 @@ class OliveItemLogic extends GetxController {
           ..icon = Assets.imgGridNeg
           ..value = '${(value.todayGridNeg ?? 0).formatPowerValue()} '
           ..unit = (value.todayGridNeg ?? 0).formatPowerValueUnit()
-          ..title = TKey.todayGridNeg.tr
+          ..title = TKey.gridConnectedElectricity.tr
           ..image = Assets.imgTodayDisCharging2,
       );
 

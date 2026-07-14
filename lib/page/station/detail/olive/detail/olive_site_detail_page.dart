@@ -343,7 +343,7 @@ class OliveSiteDetailPage extends StatelessWidget {
   }
 
   ///上网电量
-  Widget buildGridNegItem(StatisticRecordEntity? value) {
+  Widget buildGridNegItem2(StatisticRecordEntity? value) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.w),
       padding: EdgeInsetsDirectional.all(16.r),
@@ -406,6 +406,109 @@ class OliveSiteDetailPage extends StatelessWidget {
               Text(
                 (value?.totalGridNeg ?? 0).formatPowerValueAndUnit(),
                 style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildGridNegItem(StatisticRecordEntity? value) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsetsDirectional.all(16.r),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xFF313540),
+      ),
+      width: double.maxFinite,
+      child: Column(
+        children: [
+          Column(
+            spacing: 3,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  "${TKey.todayGridNeg.tr}:",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+              ),
+              SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  (value?.todayGridNeg ?? 0).formatPowerValueAndUnit(),
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Column(
+            spacing: 3,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  "${TKey.monthGridNeg.tr}:",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+              ),
+              SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  (value?.monthGridNeg ?? 0).formatPowerValueAndUnit(),
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Column(
+            spacing: 3,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  "${TKey.yearGridNeg.tr}:",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+              ),
+              SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  (value?.yearGridNeg ?? 0).formatPowerValueAndUnit(),
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
+              ),
+            ],
+          ),
+          Divider(height: 16.h, color: Colors.transparent),
+          Column(
+            spacing: 3,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  "${TKey.totalGridNeg.tr}:",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                ),
+              ),
+              SizedBox(
+                width: double.maxFinite,
+                child: Text(
+                  (value?.totalGridNeg ?? 0).formatPowerValueAndUnit(),
+                  style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                ),
               ),
             ],
           ),

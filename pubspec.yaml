@@ -82,6 +82,8 @@ dependencies:
   #get_x_ducafecat: ^5.0.1
   #pull_to_refresh_flutter3: 2.0.2
   #app_settings: 7.0.0
+  #解决全屏适配
+  #edge_to_edge_resolver: ^1.0.1
   gradient_borders: ^1.0.4
   simple_gradient_text: 1.4.0
 
