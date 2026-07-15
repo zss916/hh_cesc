@@ -26,12 +26,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
           builder: (logic) {
             return Column(
               children: [
-                GestureDetector(
-                  onTap: () {
-                    logic.fetchAIData();
-                  },
-                  child: _buildAIBanner(),
-                ),
+                _buildAIBanner(),
                 _buildRevenueForecast(logic),
                 _buildPowerChart(logic),
                 _buildPriceForecast(logic),

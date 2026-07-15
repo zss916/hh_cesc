@@ -225,7 +225,7 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xfffbbf24),
           width: 1.5,
           markerSettings: markerSettings,
-          //dashArray: <double>[6, 4],
+          dashArray: <double>[6, 4],
         ),
       );
 
@@ -248,7 +248,7 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xffff9933),
           width: 1.5,
           markerSettings: markerSettings,
-          //dashArray: <double>[6, 4],
+          dashArray: <double>[6, 4],
         ),
       );
 
