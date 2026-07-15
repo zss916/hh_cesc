@@ -17,6 +17,11 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     if (accountFocusNode != null) {
       accountFocusNode?.unfocus();
+      accountFocusNode = null;
+    }
+    if (pwdFocusNode != null) {
+      pwdFocusNode?.unfocus();
+      pwdFocusNode = null;
     }
   }
 
