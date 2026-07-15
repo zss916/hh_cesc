@@ -591,6 +591,8 @@ class TKey {
   static const String strategyProgressContent = "strategyProgressContent";
   static const String strategyProgressTip = "strategyProgressTip";
   static const String backStrategy = "backStrategy";
+  static const String reason = "reason";
+  static const String operator = "operator";
 }
 
 const en = {
@@ -948,4 +950,6 @@ const en = {
       "AI strategy requires at least 7 days of operational data to learn the characteristics of your power plant \nAfter accumulation is completed, AI strategy preview will be automatically activated",
   "strategyProgressTip": "Accumulated %s days, still %s days needed",
   "backStrategy": "Back",
+  "reason": "Reason:",
+  "operator": "Operator:",
 };

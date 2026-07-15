@@ -1,5 +1,9 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/ctrl_model_entity.dart';
+import 'package:cescpro/core/translations/en.dart';
+
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
 
 CtrlModelEntity $CtrlModelEntityFromJson(Map<String, dynamic> json) {
   final CtrlModelEntity ctrlModelEntity = CtrlModelEntity();
@@ -8,8 +12,7 @@ CtrlModelEntity $CtrlModelEntityFromJson(Map<String, dynamic> json) {
     ctrlModelEntity.activeType = activeType;
   }
   final CtrlModelPower? power = jsonConvert.convert<CtrlModelPower>(
-    json['power'],
-  );
+      json['power']);
   if (power != null) {
     ctrlModelEntity.power = power;
   }
@@ -18,8 +21,7 @@ CtrlModelEntity $CtrlModelEntityFromJson(Map<String, dynamic> json) {
     ctrlModelEntity.peak = peak;
   }
   final CtrlModelDemand? demand = jsonConvert.convert<CtrlModelDemand>(
-    json['demand'],
-  );
+      json['demand']);
   if (demand != null) {
     ctrlModelEntity.demand = demand;
   }
@@ -27,8 +29,8 @@ CtrlModelEntity $CtrlModelEntityFromJson(Map<String, dynamic> json) {
   if (sub != null) {
     ctrlModelEntity.sub = sub;
   }
-  final CtrlModelSelfGenerateInfo? selfGenerateInfo = jsonConvert
-      .convert<CtrlModelSelfGenerateInfo>(json['selfGenerateInfo']);
+  final CtrlModelSelfGenerateInfo? selfGenerateInfo = jsonConvert.convert<
+      CtrlModelSelfGenerateInfo>(json['selfGenerateInfo']);
   if (selfGenerateInfo != null) {
     ctrlModelEntity.selfGenerateInfo = selfGenerateInfo;
   }
@@ -81,21 +83,22 @@ Map<String, dynamic> $CtrlModelPowerToJson(CtrlModelPower entity) {
 }
 
 extension CtrlModelPowerExtension on CtrlModelPower {
-  CtrlModelPower copyWith({double? power}) {
-    return CtrlModelPower()..power = power ?? this.power;
+  CtrlModelPower copyWith({
+    double? power,
+  }) {
+    return CtrlModelPower()
+      ..power = power ?? this.power;
   }
 }
 
 CtrlModelPeak $CtrlModelPeakFromJson(Map<String, dynamic> json) {
   final CtrlModelPeak ctrlModelPeak = CtrlModelPeak();
-  final List<CtrlModelPeakPeakList>? peakList =
-      (json['peakList'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                jsonConvert.convert<CtrlModelPeakPeakList>(e)
-                    as CtrlModelPeakPeakList,
-          )
-          .toList();
+  final List<CtrlModelPeakPeakList>? peakList = (json['peakList'] as List<
+      dynamic>?)
+      ?.map(
+          (e) =>
+      jsonConvert.convert<CtrlModelPeakPeakList>(e) as CtrlModelPeakPeakList)
+      .toList();
   if (peakList != null) {
     ctrlModelPeak.peakList = peakList;
   }
@@ -109,14 +112,16 @@ Map<String, dynamic> $CtrlModelPeakToJson(CtrlModelPeak entity) {
 }
 
 extension CtrlModelPeakExtension on CtrlModelPeak {
-  CtrlModelPeak copyWith({List<CtrlModelPeakPeakList>? peakList}) {
-    return CtrlModelPeak()..peakList = peakList ?? this.peakList;
+  CtrlModelPeak copyWith({
+    List<CtrlModelPeakPeakList>? peakList,
+  }) {
+    return CtrlModelPeak()
+      ..peakList = peakList ?? this.peakList;
   }
 }
 
 CtrlModelPeakPeakList $CtrlModelPeakPeakListFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   final CtrlModelPeakPeakList ctrlModelPeakPeakList = CtrlModelPeakPeakList();
   final String? name = jsonConvert.convert<String>(json['name']);
   if (name != null) {
@@ -126,9 +131,8 @@ CtrlModelPeakPeakList $CtrlModelPeakPeakListFromJson(
   if (startMonth != null) {
     ctrlModelPeakPeakList.startMonth = startMonth;
   }
-  final List<double>? powerList = (json['powerList'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<double>(e) as double)
-      .toList();
+  final List<double>? powerList = (json['powerList'] as List<dynamic>?)?.map(
+          (e) => jsonConvert.convert<double>(e) as double).toList();
   if (powerList != null) {
     ctrlModelPeakPeakList.powerList = powerList;
   }
@@ -136,8 +140,7 @@ CtrlModelPeakPeakList $CtrlModelPeakPeakListFromJson(
 }
 
 Map<String, dynamic> $CtrlModelPeakPeakListToJson(
-  CtrlModelPeakPeakList entity,
-) {
+    CtrlModelPeakPeakList entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['name'] = entity.name;
   data['startMonth'] = entity.startMonth;
@@ -160,14 +163,12 @@ extension CtrlModelPeakPeakListExtension on CtrlModelPeakPeakList {
 
 CtrlModelDemand $CtrlModelDemandFromJson(Map<String, dynamic> json) {
   final CtrlModelDemand ctrlModelDemand = CtrlModelDemand();
-  final List<CtrlModelDemandDemandList>? demandList =
-      (json['demandList'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                jsonConvert.convert<CtrlModelDemandDemandList>(e)
-                    as CtrlModelDemandDemandList,
-          )
-          .toList();
+  final List<
+      CtrlModelDemandDemandList>? demandList = (json['demandList'] as List<
+      dynamic>?)?.map(
+          (e) =>
+      jsonConvert.convert<CtrlModelDemandDemandList>(
+          e) as CtrlModelDemandDemandList).toList();
   if (demandList != null) {
     ctrlModelDemand.demandList = demandList;
   }
@@ -181,16 +182,17 @@ Map<String, dynamic> $CtrlModelDemandToJson(CtrlModelDemand entity) {
 }
 
 extension CtrlModelDemandExtension on CtrlModelDemand {
-  CtrlModelDemand copyWith({List<CtrlModelDemandDemandList>? demandList}) {
-    return CtrlModelDemand()..demandList = demandList ?? this.demandList;
+  CtrlModelDemand copyWith({
+    List<CtrlModelDemandDemandList>? demandList,
+  }) {
+    return CtrlModelDemand()
+      ..demandList = demandList ?? this.demandList;
   }
 }
 
 CtrlModelDemandDemandList $CtrlModelDemandDemandListFromJson(
-  Map<String, dynamic> json,
-) {
-  final CtrlModelDemandDemandList ctrlModelDemandDemandList =
-      CtrlModelDemandDemandList();
+    Map<String, dynamic> json) {
+  final CtrlModelDemandDemandList ctrlModelDemandDemandList = CtrlModelDemandDemandList();
   final double? power = jsonConvert.convert<double>(json['power']);
   if (power != null) {
     ctrlModelDemandDemandList.power = power;
@@ -219,8 +221,7 @@ CtrlModelDemandDemandList $CtrlModelDemandDemandListFromJson(
 }
 
 Map<String, dynamic> $CtrlModelDemandDemandListToJson(
-  CtrlModelDemandDemandList entity,
-) {
+    CtrlModelDemandDemandList entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['power'] = entity.power;
   data['startDate'] = entity.startDate;
@@ -310,10 +311,8 @@ extension CtrlModelSubExtension on CtrlModelSub {
 }
 
 CtrlModelSelfGenerateInfo $CtrlModelSelfGenerateInfoFromJson(
-  Map<String, dynamic> json,
-) {
-  final CtrlModelSelfGenerateInfo ctrlModelSelfGenerateInfo =
-      CtrlModelSelfGenerateInfo();
+    Map<String, dynamic> json) {
+  final CtrlModelSelfGenerateInfo ctrlModelSelfGenerateInfo = CtrlModelSelfGenerateInfo();
   final int? activeType = jsonConvert.convert<int>(json['activeType']);
   if (activeType != null) {
     ctrlModelSelfGenerateInfo.activeType = activeType;
@@ -334,14 +333,12 @@ CtrlModelSelfGenerateInfo $CtrlModelSelfGenerateInfoFromJson(
   if (margin != null) {
     ctrlModelSelfGenerateInfo.margin = margin;
   }
-  final List<CtrlModelSelfGenerateInfoCompulsory>? compulsory =
-      (json['compulsory'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                jsonConvert.convert<CtrlModelSelfGenerateInfoCompulsory>(e)
-                    as CtrlModelSelfGenerateInfoCompulsory,
-          )
-          .toList();
+  final List<
+      CtrlModelSelfGenerateInfoCompulsory>? compulsory = (json['compulsory'] as List<
+      dynamic>?)?.map(
+          (e) =>
+      jsonConvert.convert<CtrlModelSelfGenerateInfoCompulsory>(
+          e) as CtrlModelSelfGenerateInfoCompulsory).toList();
   if (compulsory != null) {
     ctrlModelSelfGenerateInfo.compulsory = compulsory;
   }
@@ -349,8 +346,7 @@ CtrlModelSelfGenerateInfo $CtrlModelSelfGenerateInfoFromJson(
 }
 
 Map<String, dynamic> $CtrlModelSelfGenerateInfoToJson(
-  CtrlModelSelfGenerateInfo entity,
-) {
+    CtrlModelSelfGenerateInfo entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['activeType'] = entity.activeType;
   data['feedIn'] = entity.feedIn;
@@ -380,10 +376,9 @@ extension CtrlModelSelfGenerateInfoExtension on CtrlModelSelfGenerateInfo {
   }
 }
 
-CtrlModelSelfGenerateInfoCompulsory
-$CtrlModelSelfGenerateInfoCompulsoryFromJson(Map<String, dynamic> json) {
-  final CtrlModelSelfGenerateInfoCompulsory
-  ctrlModelSelfGenerateInfoCompulsory = CtrlModelSelfGenerateInfoCompulsory();
+CtrlModelSelfGenerateInfoCompulsory $CtrlModelSelfGenerateInfoCompulsoryFromJson(
+    Map<String, dynamic> json) {
+  final CtrlModelSelfGenerateInfoCompulsory ctrlModelSelfGenerateInfoCompulsory = CtrlModelSelfGenerateInfoCompulsory();
   final int? startSocEnable = jsonConvert.convert<int>(json['startSocEnable']);
   if (startSocEnable != null) {
     ctrlModelSelfGenerateInfoCompulsory.startSocEnable = startSocEnable;
@@ -432,8 +427,7 @@ $CtrlModelSelfGenerateInfoCompulsoryFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> $CtrlModelSelfGenerateInfoCompulsoryToJson(
-  CtrlModelSelfGenerateInfoCompulsory entity,
-) {
+    CtrlModelSelfGenerateInfoCompulsory entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['startSocEnable'] = entity.startSocEnable;
   data['startSoc'] = entity.startSoc;
@@ -449,8 +443,7 @@ Map<String, dynamic> $CtrlModelSelfGenerateInfoCompulsoryToJson(
   return data;
 }
 
-extension CtrlModelSelfGenerateInfoCompulsoryExtension
-    on CtrlModelSelfGenerateInfoCompulsory {
+extension CtrlModelSelfGenerateInfoCompulsoryExtension on CtrlModelSelfGenerateInfoCompulsory {
   CtrlModelSelfGenerateInfoCompulsory copyWith({
     int? startSocEnable,
     double? startSoc,

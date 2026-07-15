@@ -340,4 +340,6 @@ const zh = {
   "strategyProgressContent": "AI策略需要 至少7天 的运行数据用于学习您的电站特征 \n积累完成后将自动开启AI策略预览",
   "strategyProgressTip": "已积累%s天，还需%s天",
   "backStrategy": "返回策略页",
+  "reason": "原因:",
+  "operator": "操作人:",
 };

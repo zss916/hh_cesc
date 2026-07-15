@@ -4,6 +4,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
 import 'package:cescpro/generated/json/strategy_history_entity.g.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:intl/intl.dart';
 
 export 'package:cescpro/generated/json/strategy_history_entity.g.dart';
 
@@ -37,6 +38,21 @@ class StrategyHistoryEntity {
     return jsonEncode(this);
   }
 
+  // "reason": null,
+  //"operatorName": "admin",
+
+  ///转化时间
+  String toTime() {
+    if (createTime != null) {
+      final dt = DateTime.parse(createTime ?? "");
+      String time = DateFormat('yyyy-MM-dd HH:mm:ss').format(dt);
+      return time;
+    } else {
+      return '';
+    }
+  }
+
+  ///action 类型
   ActionType get actionTypeEnum {
     switch ((actionType ?? 0)) {
       case 0:

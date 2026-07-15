@@ -17,25 +17,12 @@ class StrategyHistoryLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    //fetchStrategyHistory();
-    mock();
+    fetchStrategyHistory();
   }
 
   @override
   void onClose() {
     super.onClose();
-  }
-
-  void mock() {
-    data.add(
-      StrategyHistoryEntity()
-        ..createTime = "2026-07-01"
-        ..title = "削峰填谷·参数微调"
-        ..actionType = 1
-        ..content = "内容",
-    );
-    viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
-    update();
   }
 
   Future<void> fetchStrategyHistory() async {

@@ -25,7 +25,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
             return Column(
               children: [
                 _buildAIBanner(),
-                _buildRevenueForecast(),
+                _buildRevenueForecast(logic),
                 _buildPowerChart(),
                 _buildPriceForecast(),
                 _buildApplySection(),
@@ -75,7 +75,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
     );
   }
 
-  Widget _buildRevenueForecast() {
+  Widget _buildRevenueForecast(AIStrategyPreviewLogic logic) {
     return Column(
       children: [
         Container(
@@ -103,15 +103,23 @@ class AIStrategyPreviewPage extends StatelessWidget {
               IntrinsicHeight(
                 child: Row(
                   children: [
-                    _buildProfitCell('¥1,284', TKey.aiStrategyProfit.tr, false),
+                    _buildProfitCell(
+                      '${logic.currencySymbol}${logic.aiAllRevenue}',
+                      TKey.aiStrategyProfit.tr,
+                      false,
+                    ),
                     VerticalDivider(width: 5, color: Colors.transparent),
                     _buildProfitCell(
-                      '¥962',
+                      '${logic.currencySymbol}${logic.currentRevenue}',
                       TKey.currentStrategyProfit.tr,
                       false,
                     ),
                     VerticalDivider(width: 5, color: Colors.transparent),
-                    _buildProfitCell('+33.5%', TKey.improvementRate.tr, true),
+                    _buildProfitCell(
+                      logic.profitGrowthRate,
+                      TKey.improvementRate.tr,
+                      true,
+                    ),
                   ],
                 ),
               ),
@@ -140,7 +148,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
                     Container(
                       margin: .only(left: 5),
                       child: Text(
-                        '+ ¥322',
+                        '${logic.currencySymbol}${logic.dayGrowthRevenue}',
                         style: TextStyle(
                           fontSize: 21.sp,
                           fontWeight: FontWeight.w700,

@@ -1,7 +1,8 @@
+import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/api/ai.dart';
 import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
 import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
-import 'package:cescpro/page/station/detail/strategy/ai/widget/dialog_ai_progress.dart';
 import 'package:get/get.dart';
 
 class AIStrategyPreviewLogic extends GetxController {
@@ -12,10 +13,17 @@ class AIStrategyPreviewLogic extends GetxController {
   String get profitGrowthRate => revenueForecast?.profitGrowthRate ?? "";
 
   ///ai策略收益
-  int? get aiAllRevenue => revenueForecast?.aiPredictTotalProfit ?? 0;
+  String? get aiAllRevenue => revenueForecast?.aiPredictTotalProfit ?? "0";
+
+  ///当前策略收益
+  String? get currentRevenue => revenueForecast?.yesterdayTotalProfit ?? "0";
 
   ///日增长收益
-  int? get dayGrowthRevenue => revenueForecast?.profitGrowth ?? 0;
+  String get dayGrowthRevenue => revenueForecast?.profitGrowth ?? "0";
+
+  ///货币符号
+  String get currencySymbol =>
+      (revenueForecast?.currency ?? (User.to.getCurrencyUnit())).currencySymbol;
 
   bool isFullDay = false;
   int runningDays = 0;
@@ -35,11 +43,11 @@ class AIStrategyPreviewLogic extends GetxController {
   void onReady() {
     super.onReady();
     if (!isFullDay) {
-      showAIProgressDialog(day: runningDays);
+      // showAIProgressDialog(day: runningDays);
     }
 
-    //getAIDataCompare();
-    //fetchAIData();
+    getAIDataCompare();
+    fetchAIData();
   }
 
   @override
@@ -52,6 +60,8 @@ class AIStrategyPreviewLogic extends GetxController {
     AiCompareDataEntity? value = await AIControlAPI.getAIDataCompare(
       siteId: '$id',
     );
+    revenueForecast = value;
+    update();
   }
 
   Future<void> fetchAIData() async {

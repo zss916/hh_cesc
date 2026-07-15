@@ -356,4 +356,6 @@ const es = {
       "La estrategia de Ia requiere al menos 7 días de datos operativos para aprender las características de su central eléctrica \nUna vez completada la acumulación, se abrirá automáticamente la vista previa de la estrategia de ia.",
   "strategyProgressTip": "Se han acumulado %s días y se necesitan %s más.",
   "backStrategy": "Atrás",
+  "reason": "Razón:",
+  "operator": "Operador:",
 };

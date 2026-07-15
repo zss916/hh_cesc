@@ -17,73 +17,6 @@ class StrategyHistoryPage extends StatefulWidget {
 }
 
 class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
-  /* final List<DayGroup> _historyData = [
-    DayGroup(
-      title: '今天 · 2026-07-01',
-      items: [
-        HistoryItem(
-          time: '16:32',
-          tag: '调整',
-          tagType: TagType.adjust,
-          title: '削峰填谷 · 参数微调',
-          desc: '最大功率 <b>500kW → 600kW</b>，SOC 上限 <b>80% → 85%</b>',
-        ),
-        HistoryItem(
-          time: '09:15',
-          tag: '切换',
-          tagType: TagType.switchMode,
-          title: '切换为 削峰填谷 模式',
-          desc: '由 <b>自发自用</b> 切换为 <b>削峰填谷</b>，操作人：张工',
-        ),
-      ],
-    ),
-    DayGroup(
-      title: '昨天 · 2026-06-30',
-      items: [
-        HistoryItem(
-          time: '18:42',
-          tag: '停用',
-          tagType: TagType.cancel,
-          title: '临时停用 需量响应',
-          desc: '手动停用，持续 <b>2 小时</b>，原因：设备检修',
-        ),
-        HistoryItem(
-          time: '14:08',
-          tag: '切换',
-          tagType: TagType.switchMode,
-          title: '切换为 需量响应 模式',
-          desc: '检测到尖峰电价时段，自动触发切换',
-        ),
-        HistoryItem(
-          time: '08:20',
-          tag: '调整',
-          tagType: TagType.adjust,
-          title: '自发自用 · 参数调整',
-          desc: 'SOC 下限由 <b>15% → 20%</b>',
-        ),
-      ],
-    ),
-    DayGroup(
-      title: '2026-06-29',
-      items: [
-        HistoryItem(
-          time: '10:05',
-          tag: '切换',
-          tagType: TagType.switchMode,
-          title: '切换为 自发自用 模式',
-          desc: '由 <b>恒功率</b> 切换为 <b>自发自用</b>',
-        ),
-        HistoryItem(
-          time: '00:30',
-          tag: '调整',
-          tagType: TagType.adjust,
-          title: '恒功率 · 创建',
-          desc: '创建新策略，设定功率 <b>200kW</b>，操作人：系统',
-        ),
-      ],
-    ),
-  ];*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,7 +70,7 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
 
   Widget buildList(StrategyHistoryLogic logic) => ListView.builder(
     itemCount: logic.data.length,
-    padding: EdgeInsetsDirectional.only(top: 10),
+    padding: EdgeInsetsDirectional.only(top: 10, bottom: 50),
     shrinkWrap: true,
     itemBuilder: (BuildContext context, int index) {
       StrategyHistoryEntity item = logic.data[index];
@@ -160,13 +93,13 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                item.createTime ?? "",
+                item.toTime(),
                 style: TextStyle(fontSize: 11, color: const Color(0xff888888)),
               ),
               _buildTag(item.actionTypeEnum),
             ],
           ),
-          const SizedBox(height: 4),
+          Divider(height: 6, color: Colors.transparent),
           Text(
             item.title ?? "",
             style: const TextStyle(
@@ -175,11 +108,29 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 4),
+          Divider(height: 6, color: Colors.transparent),
           Text(
             item.content ?? "",
             style: TextStyle(fontSize: 12, color: const Color(0xff888888)),
           ),
+          if (item.reason != null)
+            Container(
+              margin: EdgeInsetsDirectional.only(top: 6),
+              width: double.maxFinite,
+              child: Text(
+                "${TKey.reason.tr} ${(item.reason ?? "")}",
+                style: TextStyle(fontSize: 12, color: const Color(0xff888888)),
+              ),
+            ),
+          if (item.operatorName != null)
+            Container(
+              margin: EdgeInsetsDirectional.only(top: 6),
+              width: double.maxFinite,
+              child: Text(
+                "${TKey.operator.tr} ${(item.operatorName ?? "")}",
+                style: TextStyle(fontSize: 12, color: const Color(0xff888888)),
+              ),
+            ),
         ],
       ),
     );

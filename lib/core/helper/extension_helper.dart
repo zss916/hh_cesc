@@ -428,3 +428,8 @@ String _dynamicDecimal(num value, String locale) {
     decimalDigits: digits,
   ).format(truncated);
 }
+
+extension CurrencySymbolExt on String {
+  String get currencySymbol =>
+      NumberFormat.simpleCurrency(name: this).currencySymbol;
+}
