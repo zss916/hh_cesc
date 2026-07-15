@@ -101,7 +101,7 @@ class StrategyPageLogic extends GetxController {
           .toList();
 
       series.add(
-        /*FastLineSeries<ChartData, DateTime>(
+        FastLineSeries<ChartData, DateTime>(
           name: TKey.strategyCurve.tr,
           dataSource: strategyPowerList,
           xValueMapper: (p, _) => p.time,
@@ -109,8 +109,8 @@ class StrategyPageLogic extends GetxController {
           color: Color(0xff4a9eff),
           width: 1.5,
           markerSettings: markerSettings,
-        ),*/
-        AreaSeries<ChartData, DateTime>(
+        ),
+        /*AreaSeries<ChartData, DateTime>(
           name: TKey.strategyCurve.tr,
           dataSource: strategyPowerList,
           xValueMapper: (e, _) => e.time,
@@ -118,7 +118,8 @@ class StrategyPageLogic extends GetxController {
           color: Color(0xff4a9eff).withValues(alpha: 0.1),
           borderColor: Color(0xff4a9eff),
           borderWidth: 1.5,
-        ),
+          markerSettings: markerSettings,
+        ),*/
       );
 
       ///actualPower
@@ -129,7 +130,7 @@ class StrategyPageLogic extends GetxController {
           .toList();
 
       series.add(
-        /*FastLineSeries<ChartData, DateTime>(
+        FastLineSeries<ChartData, DateTime>(
           name: TKey.actualOperation.tr,
           dataSource: actualPowerList,
           xValueMapper: (p, _) => p.time,
@@ -137,8 +138,8 @@ class StrategyPageLogic extends GetxController {
           color: Color(0xff2dd4bf),
           width: 1.5,
           markerSettings: markerSettings,
-        ),*/
-        AreaSeries<ChartData, DateTime>(
+        ),
+        /*AreaSeries<ChartData, DateTime>(
           name: TKey.actualOperation.tr,
           dataSource: actualPowerList,
           xValueMapper: (e, _) => e.time,
@@ -146,7 +147,8 @@ class StrategyPageLogic extends GetxController {
           color: Color(0xff2dd4bf).withValues(alpha: 0.1),
           borderColor: Color(0xff2dd4bf),
           borderWidth: 1.5,
-        ),
+          markerSettings: markerSettings,
+        ),*/
       );
 
       for (final p in actualPowerList) {

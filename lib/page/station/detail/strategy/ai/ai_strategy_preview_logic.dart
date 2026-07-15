@@ -121,7 +121,7 @@ class AIStrategyPreviewLogic extends GetxController {
           .toList();
 
       priceSeries.add(
-        AreaSeries<ChartData, DateTime>(
+        /*AreaSeries<ChartData, DateTime>(
           name: TKey.predictingElectricityPrices.tr,
           dataSource: predictConsumptionPriceList,
           xValueMapper: (e, _) => e.time,
@@ -129,8 +129,9 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xff2dd4bf).withValues(alpha: 0.1),
           borderColor: Color(0xff2dd4bf),
           borderWidth: 1,
-        ),
-        /* FastLineSeries<ChartData, DateTime>(
+          markerSettings: markerSettings,
+        ),*/
+        FastLineSeries<ChartData, DateTime>(
           name: TKey.predictingElectricityPrices.tr,
           dataSource: predictConsumptionPriceList,
           xValueMapper: (p, _) => p.time,
@@ -138,7 +139,7 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xff2dd4bf),
           width: 1.5,
           markerSettings: markerSettings,
-        ),*/
+        ),
       );
 
       ///预测售电电价
@@ -159,6 +160,7 @@ class AIStrategyPreviewLogic extends GetxController {
           yValueMapper: (e, _) => e.value,
           color: Color(0xffecc207).withValues(alpha: 0.1),
           borderColor: Color(0xffecc207),
+          markerSettings: markerSettings,
           borderWidth: 1,
         ),*/
         FastLineSeries<ChartData, DateTime>(
@@ -184,7 +186,7 @@ class AIStrategyPreviewLogic extends GetxController {
           .toList();
 
       series.add(
-        /* FastLineSeries<ChartData, DateTime>(
+        FastLineSeries<ChartData, DateTime>(
           name: TKey.aiStrategyPlanning.tr,
           dataSource: predictPowerList,
           xValueMapper: (p, _) => p.time,
@@ -192,8 +194,8 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xFF3874F2),
           width: 1.5,
           markerSettings: markerSettings,
-        ),*/
-        AreaSeries<ChartData, DateTime>(
+        ),
+        /*AreaSeries<ChartData, DateTime>(
           name: TKey.aiStrategyPlanning.tr,
           dataSource: predictPowerList,
           xValueMapper: (e, _) => e.time,
@@ -201,7 +203,7 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xFF3874F2).withValues(alpha: 0.2),
           borderColor: Color(0xFF3874F2),
           borderWidth: 1.5,
-        ),
+        ),*/
       );
 
       ///光伏预测
@@ -223,7 +225,7 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xfffbbf24),
           width: 1.5,
           markerSettings: markerSettings,
-          dashArray: <double>[6, 4],
+          //dashArray: <double>[6, 4],
         ),
       );
 
@@ -246,7 +248,7 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xffff9933),
           width: 1.5,
           markerSettings: markerSettings,
-          dashArray: <double>[6, 4],
+          //dashArray: <double>[6, 4],
         ),
       );
 
