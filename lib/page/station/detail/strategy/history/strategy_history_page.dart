@@ -68,15 +68,109 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
     ),
   );
 
-  Widget buildList(StrategyHistoryLogic logic) => ListView.builder(
-    itemCount: logic.data.length,
+  Widget buildList(StrategyHistoryLogic logic) => ListView.separated(
+    itemCount: logic.list.length,
     padding: EdgeInsetsDirectional.only(top: 10, bottom: 50),
     shrinkWrap: true,
     itemBuilder: (BuildContext context, int index) {
-      StrategyHistoryEntity item = logic.data[index];
-      return _buildHistoryItem(item);
+      List<StrategyHistoryEntity> items = logic.list[index];
+      return _buildHistoryItems(items);
     },
+    separatorBuilder: (BuildContext context, int index) =>
+        Divider(height: 16, color: Colors.transparent),
   );
+
+  Widget _buildHistoryItems(List<StrategyHistoryEntity> items) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          margin: EdgeInsetsDirectional.only(bottom: 8, start: 14, end: 14),
+          width: double.maxFinite,
+          child: Text(
+            items.first.toDate(),
+            style: TextStyle(fontSize: 11, color: const Color(0xff888888)),
+          ),
+        ),
+
+        ListView.builder(
+          itemCount: items.length,
+          padding: EdgeInsetsDirectional.zero,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) {
+            StrategyHistoryEntity item = items[index];
+            return _buildHistoryItem(item);
+          },
+        ),
+
+        /* Container(
+          margin: EdgeInsetsDirectional.only(bottom: 8, start: 14, end: 14),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: Color(0xFF313540),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    item.toTime(),
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: const Color(0xff888888),
+                    ),
+                  ),
+                  _buildTag(item.actionTypeEnum),
+                ],
+              ),
+              Divider(height: 6, color: Colors.transparent),
+              Text(
+                item.title ?? "",
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+              Divider(height: 6, color: Colors.transparent),
+              Text(
+                item.content ?? "",
+                style: TextStyle(fontSize: 12, color: const Color(0xff888888)),
+              ),
+              if (item.reason != null)
+                Container(
+                  margin: EdgeInsetsDirectional.only(top: 6),
+                  width: double.maxFinite,
+                  child: Text(
+                    "${TKey.reason.tr} ${(item.reason ?? "")}",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: const Color(0xff888888),
+                    ),
+                  ),
+                ),
+              if (item.operatorName != null)
+                Container(
+                  margin: EdgeInsetsDirectional.only(top: 6),
+                  width: double.maxFinite,
+                  child: Text(
+                    "${TKey.operator.tr} ${(item.operatorName ?? "")}",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: const Color(0xff888888),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),*/
+      ],
+    );
+  }
 
   Widget _buildHistoryItem(StrategyHistoryEntity item) {
     return Container(
@@ -182,4 +276,17 @@ class _StrategyHistoryPageState extends State<StrategyHistoryPage> {
       ),
     );
   }
+
+  /* Widget buildList2(StrategyHistoryLogic logic) => ListView.separated(
+    itemCount: logic.data.length,
+    padding: EdgeInsetsDirectional.only(top: 10, bottom: 50),
+    shrinkWrap: true,
+    itemBuilder: (BuildContext context, int index) {
+      StrategyHistoryEntity item = logic.data[index];
+      return _buildHistoryItem(item, index);
+    },
+    separatorBuilder: (BuildContext context, int index) =>
+        Divider(height: 16, color: Colors.transparent),
+  );
+*/
 }

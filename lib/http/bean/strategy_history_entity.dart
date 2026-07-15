@@ -38,14 +38,21 @@ class StrategyHistoryEntity {
     return jsonEncode(this);
   }
 
-  // "reason": null,
-  //"operatorName": "admin",
-
   ///转化时间
   String toTime() {
     if (createTime != null) {
       final dt = DateTime.parse(createTime ?? "");
-      String time = DateFormat('yyyy-MM-dd HH:mm:ss').format(dt);
+      String time = DateFormat('HH:mm:ss').format(dt);
+      return time;
+    } else {
+      return '';
+    }
+  }
+
+  String toDate() {
+    if (createTime != null) {
+      final dt = DateTime.parse(createTime ?? "");
+      String time = DateFormat('yyyy-MM-dd').format(dt);
       return time;
     } else {
       return '';
