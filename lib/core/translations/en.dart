@@ -596,6 +596,7 @@ class TKey {
   static const String predictSellingPrice = "predictSellingPrice";
   static const String predictingElectricityPrices =
       "predictingElectricityPrices";
+  static const String running = "running";
 }
 
 const en = {
@@ -957,4 +958,5 @@ const en = {
   "operator": "Operator:",
   "predictSellingPrice": "Predict the electricity selling price",
   "predictingElectricityPrices": "Predicting electricity prices",
+  "running": "Running",
 };

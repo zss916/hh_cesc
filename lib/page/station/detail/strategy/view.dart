@@ -70,10 +70,14 @@ class StrategyPage extends StatelessWidget {
                       logic.activeType,
                       style: TextStyle(fontSize: 10, color: Color(0xFF72D3FF)),
                     ),
-                    /*const Text(
-                      '执行中',
-                      style: TextStyle(fontSize: 10, color: Color(0xFF22EEBD)),
-                    ),*/
+                    if (logic.running)
+                      Text(
+                        TKey.running.tr,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFF22EEBD),
+                        ),
+                      ),
                   ],
                 ),
                 Divider(height: 2, color: Colors.transparent),

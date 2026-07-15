@@ -3,6 +3,8 @@ part of 'index.dart';
 class LoginLogic extends GetxController {
   String account = '';
   String password = '';
+  TextEditingController? accountTextEditCtrl = TextEditingController();
+  TextEditingController? pwdTextEditCtrl = TextEditingController();
 
   @override
   void onInit() {
@@ -15,11 +17,28 @@ class LoginLogic extends GetxController {
     if (GetPlatform.isAndroid && !AppSetting.isOverseas) {
       checkPrivacyAgreement();
     }
+    initData();
+  }
+
+  Future<void> initData() async {
+    account = await User.to.getAccount();
+    accountTextEditCtrl?.text = account;
+    password = await User.to.getPwd();
+    pwdTextEditCtrl?.text = password;
+    update();
   }
 
   @override
   void onClose() {
     super.onClose();
+    if (accountTextEditCtrl != null) {
+      accountTextEditCtrl?.dispose();
+      accountTextEditCtrl = null;
+    }
+    if (pwdTextEditCtrl != null) {
+      pwdTextEditCtrl?.dispose();
+      pwdTextEditCtrl = null;
+    }
     AppLoading.dismiss();
   }
 
@@ -62,6 +81,7 @@ class LoginLogic extends GetxController {
     );
     if (value != null) {
       User.to.setAccount(account: account.trim());
+      User.to.setPwd(pwd: password.trim());
       User.to.setIsGuest(isGuest: false);
       User.setTokenHead(tokenHead: value.tokenHeadValue);
       User.setToken(token: value.tokenValue);

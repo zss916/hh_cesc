@@ -1,3 +1,4 @@
+import 'package:cescpro/core/storage/secure_storage.dart';
 import 'package:cescpro/core/storage/storage.dart';
 import 'package:get/get.dart';
 
@@ -17,12 +18,25 @@ class User extends GetxService {
   static final String isShowRevenueKey = "isShowRevenueKey";
   static final String isLimitLoginKey = "isLimitLoginKey";
   static final String accountKey = "accountKey";
+  static final String passwordKey = "passwordKey";
 
   void setAccount({required String account}) {
-    StorageService.to.setString(accountKey, account);
+    SecureStorage.to.save(accountKey, account);
   }
 
-  String getAccount() => StorageService.to.getString(accountKey);
+  void setPwd({required String pwd}) {
+    SecureStorage.to.save(passwordKey, pwd);
+  }
+
+  Future<String> getAccount() async {
+    String? account = await SecureStorage.to.get(accountKey);
+    return account ?? "";
+  }
+
+  Future<String> getPwd() async {
+    String? pwd = await SecureStorage.to.get(passwordKey);
+    return pwd ?? "";
+  }
 
   void setIsShowRevenue({required bool isShowRevenue}) =>
       StorageService.to.setBool(isShowRevenueKey, isShowRevenue);

@@ -4,75 +4,31 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:keyboard_visibility_pro/keyboard_visibility_pro.dart';
 
-class InputPassword extends StatefulWidget {
+class InputPassword extends StatelessWidget {
   final Function(String) onInput;
-  final bool isShowError;
   final String? pwd;
-  final TextEditingController textEditCtrl;
+  final TextEditingController? textEditCtrl;
+  final FocusNode? pwdFocusNode;
+  final bool obscureText;
+  final Function() onObscure;
 
   const InputPassword({
     super.key,
-    required this.isShowError,
     required this.onInput,
-    required this.textEditCtrl,
+    required this.onObscure,
+    required this.obscureText,
+    this.textEditCtrl,
+    this.pwdFocusNode,
     this.pwd,
   });
-
-  @override
-  _EditNameState createState() => _EditNameState();
-}
-
-class _EditNameState extends State<InputPassword> {
-  // TextEditingController textEditCtrl = TextEditingController();
-  FocusNode focusNode = FocusNode();
-  bool isError = false;
-
-  @override
-  void initState() {
-    super.initState();
-    focusNode.unfocus();
-    focusNode.addListener(_onFocusChange);
-  }
-
-  @override
-  void dispose() {
-    focusNode.removeListener(_onFocusChange);
-    focusNode.dispose();
-    widget.textEditCtrl.dispose();
-    super.dispose();
-  }
-
-  bool isValidPassword(String password) {
-    return true;
-    //return isPwd(password);
-  }
-
-  void _onFocusChange() {
-    if (!focusNode.hasFocus) {
-      _valid();
-    }
-  }
-
-  void _valid() {
-    setState(() {
-      String psd = widget.textEditCtrl.text.trim();
-      isError = !isValidPassword(psd);
-    });
-  }
-
-  void _hideKeyboard() {
-    FocusScope.of(context).requestFocus(FocusNode()); // 隐藏键盘
-  }
-
-  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibility(
       onChanged: (bool isKeyboardVisible) {
         if (!isKeyboardVisible) {
-          if (widget.textEditCtrl.text.isNotEmpty) {
-            _valid();
+          if ((textEditCtrl?.text ?? "").isNotEmpty) {
+            // onValid.call();
           }
         }
       },
@@ -85,8 +41,8 @@ class _EditNameState extends State<InputPassword> {
             width: double.maxFinite,
             child: TextField(
               cursorColor: Colors.white,
-              controller: widget.textEditCtrl,
-              focusNode: focusNode,
+              controller: textEditCtrl,
+              focusNode: pwdFocusNode,
               obscureText: obscureText,
               onTapOutside: (_) {
                 FocusManager.instance.primaryFocus?.unfocus();
@@ -96,9 +52,7 @@ class _EditNameState extends State<InputPassword> {
                 suffixIcon: InkWell(
                   borderRadius: BorderRadius.circular(50),
                   onTap: () {
-                    setState(() {
-                      obscureText = !obscureText;
-                    });
+                    onObscure.call();
                   },
                   child: Stack(
                     alignment: AlignmentDirectional.center,
@@ -135,50 +89,25 @@ class _EditNameState extends State<InputPassword> {
                 ),
               ),
               onChanged: (value) {
-                if (value.trim().isEmpty) {
-                  setState(() {
-                    isError = false;
-                  });
-                } else {
-                  setState(() {
-                    isError = !isValidPassword(value);
-                  });
-                }
-
-                widget.onInput.call(value);
+                onInput.call(value);
               },
               onEditingComplete: () {
-                _hideKeyboard();
-                _valid();
+                _hideKeyboard(context);
+                //onValid.call();
               },
               onSubmitted: (value) {
-                _hideKeyboard();
-                _valid();
+                _hideKeyboard(context);
+                // onValid.call();
               },
-            ),
-          ),
-          Container(
-            alignment: AlignmentDirectional.bottomEnd,
-            margin: EdgeInsetsDirectional.only(
-              start: 10.w,
-              end: 10.w,
-              top: 12.h,
-            ),
-            width: double.maxFinite,
-            child: Text(
-              TKey.passwordError.tr,
-              style: TextStyle(
-                color: widget.isShowError
-                    ? const Color(0xFFFF4141)
-                    : Colors.transparent,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.normal,
-              ),
             ),
           ),
           Divider(height: 16.h, color: Colors.transparent),
         ],
       ),
     );
+  }
+
+  void _hideKeyboard(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode()); // 隐藏键盘
   }
 }

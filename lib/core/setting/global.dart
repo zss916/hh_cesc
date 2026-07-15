@@ -1,6 +1,7 @@
 import 'package:cescpro/core/service/app_info_service.dart';
 import 'package:cescpro/core/service/device_service.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/storage/secure_storage.dart';
 import 'package:cescpro/core/storage/storage.dart';
 import 'package:cescpro/core/user/user.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class Global {
     WidgetsFlutterBinding.ensureInitialized();
     setSystemUi();
     await Future.wait([
+      Get.put<SecureStorage>(SecureStorage()).init(),
       Get.put<StorageService>(StorageService()).init(),
       Get.put<DeviceService>(DeviceService()).init(),
     ]).whenComplete(() async {

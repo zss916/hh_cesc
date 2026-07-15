@@ -28,6 +28,9 @@ class CtrlModelEntity {
     return jsonEncode(this);
   }
 
+  ///是否运行中
+  bool get running => (activeType == 3) || (activeType == 4);
+
   String get activeTypeText {
     switch (activeType) {
       case 1:

@@ -343,4 +343,5 @@ const de = {
   "operator": "Betreiber:",
   "predictSellingPrice": "Vorhersagen des Stromverkaufspreises",
   "predictingElectricityPrices": "Strompreise vorhersagen",
+  "running": "Laufen",
 };

@@ -3,17 +3,96 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class InputAccount extends StatefulWidget {
+class InputAccount extends StatelessWidget {
+  const InputAccount({
+    super.key,
+    required this.onInput,
+    this.account,
+    this.accountTextEditCtrl,
+    this.accountFocusNode,
+  });
+
+  final Function(String) onInput;
+  final String? account;
+  final TextEditingController? accountTextEditCtrl;
+  final FocusNode? accountFocusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 48,
+          color: Colors.transparent,
+          width: double.maxFinite,
+          child: TextField(
+            cursorColor: Colors.white,
+            //keyboardType: TextInputType.emailAddress,
+            controller: accountTextEditCtrl,
+            focusNode: accountFocusNode,
+            onTapOutside: (_) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+            style: TextStyle(color: Colors.white, fontSize: 16.sp),
+            decoration: InputDecoration(
+              fillColor: Color(0x99484D55),
+              filled: true,
+              hintText: TKey.account.tr,
+              hintStyle: TextStyle(
+                color: const Color(0xFFA4A4A4),
+                fontSize: 16.sp,
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(50.r),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(50.r),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(50.r),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(50.r),
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+            ),
+            onChanged: (value) {
+              onInput.call(value);
+            },
+            onEditingComplete: () {
+              _hideKeyboard(context);
+            },
+            onSubmitted: (value) {
+              _hideKeyboard(context);
+            },
+          ),
+        ),
+        Divider(height: 16.h, color: Colors.transparent),
+      ],
+    );
+  }
+
+  void _hideKeyboard(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+}
+
+/*
+class InputAccount2 extends StatefulWidget {
   final Function(String) onInput;
   final String? account;
 
-  const InputAccount({super.key, required this.onInput, this.account});
+  const InputAccount2({super.key, required this.onInput, this.account});
 
   @override
   _EditNameState createState() => _EditNameState();
 }
 
-class _EditNameState extends State<InputAccount> {
+class _EditNameState extends State<InputAccount2> {
   TextEditingController textEditCtrl = TextEditingController();
   FocusNode focusNode = FocusNode();
 
@@ -92,9 +171,9 @@ class _EditNameState extends State<InputAccount> {
             },
           ),
         ),
-
         Divider(height: 16.h, color: Colors.transparent),
       ],
     );
   }
 }
+*/

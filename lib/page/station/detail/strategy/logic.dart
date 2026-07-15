@@ -7,11 +7,9 @@ import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/f_line_chart.dart';
 import 'package:flutter/material.dart';
-//import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/f_line_chart.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-//import 'package:cescpro/page/station/detail/strategy/widget/strategy_power_line_c
 
 class StrategyPageLogic extends GetxController {
   SiteEntity? site;
@@ -21,6 +19,7 @@ class StrategyPageLogic extends GetxController {
   int? get id => site?.id;
   CtrlModelEntity? modelCtrl;
   String get activeType => modelCtrl?.activeTypeText ?? "--";
+  bool get running => modelCtrl?.running ?? false;
   StrategyProtectedEntity? protected;
   CheckAiOpenEntity? checkAiOpen;
   bool get isFullDay => checkAiOpen?.isDaysEnough ?? false;

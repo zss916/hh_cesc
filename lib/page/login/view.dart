@@ -8,14 +8,28 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController? textEditCtrl = TextEditingController();
+  FocusNode? accountFocusNode = FocusNode();
+  FocusNode? pwdFocusNode = FocusNode();
+  bool obscureText = true;
+
+  @override
+  void initState() {
+    super.initState();
+    if (accountFocusNode != null) {
+      accountFocusNode?.unfocus();
+    }
+  }
 
   @override
   void dispose() {
     super.dispose();
-    if (textEditCtrl != null) {
-      textEditCtrl?.dispose();
-      textEditCtrl = null;
+    if (accountFocusNode != null) {
+      accountFocusNode?.dispose();
+      accountFocusNode = null;
+    }
+    if (pwdFocusNode != null) {
+      pwdFocusNode?.unfocus();
+      pwdFocusNode = null;
     }
   }
 
@@ -53,17 +67,26 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     InputAccount(
-                      account: User.to.getAccount(),
+                      accountFocusNode: accountFocusNode,
+                      accountTextEditCtrl: logic.accountTextEditCtrl,
+                      account: logic.account,
                       onInput: (value) {
                         logic.account = value;
                       },
                     ),
 
                     InputPassword(
-                      textEditCtrl: textEditCtrl!,
-                      isShowError: false,
+                      pwd: logic.password,
+                      obscureText: obscureText,
+                      textEditCtrl: logic.pwdTextEditCtrl,
+                      pwdFocusNode: pwdFocusNode,
                       onInput: (value) {
                         logic.password = value;
+                      },
+                      onObscure: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
                       },
                     ),
 
@@ -72,11 +95,11 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         logic.toLogin(
                           onUpdatePsd: (value) {
-                            setState(() {
-                              textEditCtrl?.clear();
-                            });
-                            logic.password = "";
-                            logic.update();
+                            /*setState(() {
+                              logic.pwdTextEditCtrl?.clear();
+                            });*/
+                            // logic.password = "";
+                            // logic.update();
                           },
                         );
                       },
