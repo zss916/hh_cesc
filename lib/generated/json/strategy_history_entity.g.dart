@@ -1,12 +1,9 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/strategy_history_entity.dart';
-import 'package:cescpro/core/translations/en.dart';
-
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
-
 
 StrategyHistoryEntity $StrategyHistoryEntityFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   final StrategyHistoryEntity strategyHistoryEntity = StrategyHistoryEntity();
   final double? id = jsonConvert.convert<double>(json['id']);
   if (id != null) {
@@ -21,7 +18,8 @@ StrategyHistoryEntity $StrategyHistoryEntityFromJson(
     strategyHistoryEntity.cmdSn = cmdSn;
   }
   final String? operatorName = jsonConvert.convert<String>(
-      json['operatorName']);
+    json['operatorName'],
+  );
   if (operatorName != null) {
     strategyHistoryEntity.operatorName = operatorName;
   }
@@ -42,12 +40,14 @@ StrategyHistoryEntity $StrategyHistoryEntityFromJson(
     strategyHistoryEntity.reason = reason;
   }
   final String? beforeSnapshot = jsonConvert.convert<String>(
-      json['beforeSnapshot']);
+    json['beforeSnapshot'],
+  );
   if (beforeSnapshot != null) {
     strategyHistoryEntity.beforeSnapshot = beforeSnapshot;
   }
   final String? afterSnapshot = jsonConvert.convert<String>(
-      json['afterSnapshot']);
+    json['afterSnapshot'],
+  );
   if (afterSnapshot != null) {
     strategyHistoryEntity.afterSnapshot = afterSnapshot;
   }
@@ -67,7 +67,8 @@ StrategyHistoryEntity $StrategyHistoryEntityFromJson(
 }
 
 Map<String, dynamic> $StrategyHistoryEntityToJson(
-    StrategyHistoryEntity entity) {
+  StrategyHistoryEntity entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['id'] = entity.id;
   data['siteId'] = entity.siteId;

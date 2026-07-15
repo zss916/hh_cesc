@@ -593,6 +593,9 @@ class TKey {
   static const String backStrategy = "backStrategy";
   static const String reason = "reason";
   static const String operator = "operator";
+  static const String predictSellingPrice = "predictSellingPrice";
+  static const String predictingElectricityPrices =
+      "predictingElectricityPrices";
 }
 
 const en = {
@@ -952,4 +955,6 @@ const en = {
   "backStrategy": "Back",
   "reason": "Reason:",
   "operator": "Operator:",
+  "predictSellingPrice": "Predict the electricity selling price",
+  "predictingElectricityPrices": "Predicting electricity prices",
 };

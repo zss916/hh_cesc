@@ -342,4 +342,6 @@ const zh = {
   "backStrategy": "返回策略页",
   "reason": "原因:",
   "operator": "操作人:",
+  "predictSellingPrice": "预测售电电价",
+  "predictingElectricityPrices": "预测用电电价",
 };

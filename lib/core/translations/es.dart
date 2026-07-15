@@ -358,4 +358,6 @@ const es = {
   "backStrategy": "Atrás",
   "reason": "Razón:",
   "operator": "Operador:",
+  "predictSellingPrice": "Predice el precio de venta de electricidad",
+  "predictingElectricityPrices": "Predicción de precios de la electricidad",
 };

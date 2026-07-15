@@ -42,53 +42,53 @@ AiPowerGraphData $AiPowerGraphDataFromJson(Map<String, dynamic> json) {
   if (timestamp != null) {
     aiPowerGraphData.timestamp = timestamp;
   }
-  final int? predictPower = jsonConvert.convert<int>(json['predictPower']);
+  final num? predictPower = jsonConvert.convert<num>(json['predictPower']);
   if (predictPower != null) {
     aiPowerGraphData.predictPower = predictPower;
   }
-  final int? actualPower = jsonConvert.convert<int>(json['actualPower']);
+  final num? actualPower = jsonConvert.convert<num>(json['actualPower']);
   if (actualPower != null) {
     aiPowerGraphData.actualPower = actualPower;
   }
-  final int? pvPredictPower = jsonConvert.convert<int>(json['pvPredictPower']);
+  final num? pvPredictPower = jsonConvert.convert<num>(json['pvPredictPower']);
   if (pvPredictPower != null) {
     aiPowerGraphData.pvPredictPower = pvPredictPower;
   }
-  final int? pvActualPower = jsonConvert.convert<int>(json['pvActualPower']);
+  final num? pvActualPower = jsonConvert.convert<num>(json['pvActualPower']);
   if (pvActualPower != null) {
     aiPowerGraphData.pvActualPower = pvActualPower;
   }
-  final int? loadPredictPower = jsonConvert.convert<int>(
+  final num? loadPredictPower = jsonConvert.convert<num>(
     json['loadPredictPower'],
   );
   if (loadPredictPower != null) {
     aiPowerGraphData.loadPredictPower = loadPredictPower;
   }
-  final int? loadActualPower = jsonConvert.convert<int>(
+  final num? loadActualPower = jsonConvert.convert<num>(
     json['loadActualPower'],
   );
   if (loadActualPower != null) {
     aiPowerGraphData.loadActualPower = loadActualPower;
   }
-  final int? predictConsumptionPrice = jsonConvert.convert<int>(
+  final num? predictConsumptionPrice = jsonConvert.convert<num>(
     json['predictConsumptionPrice'],
   );
   if (predictConsumptionPrice != null) {
     aiPowerGraphData.predictConsumptionPrice = predictConsumptionPrice;
   }
-  final int? actualConsumptionPrice = jsonConvert.convert<int>(
+  final num? actualConsumptionPrice = jsonConvert.convert<num>(
     json['actualConsumptionPrice'],
   );
   if (actualConsumptionPrice != null) {
     aiPowerGraphData.actualConsumptionPrice = actualConsumptionPrice;
   }
-  final int? predictSellingPrice = jsonConvert.convert<int>(
+  final num? predictSellingPrice = jsonConvert.convert<num>(
     json['predictSellingPrice'],
   );
   if (predictSellingPrice != null) {
     aiPowerGraphData.predictSellingPrice = predictSellingPrice;
   }
-  final int? actualSellingPrice = jsonConvert.convert<int>(
+  final num? actualSellingPrice = jsonConvert.convert<num>(
     json['actualSellingPrice'],
   );
   if (actualSellingPrice != null) {
@@ -123,16 +123,16 @@ Map<String, dynamic> $AiPowerGraphDataToJson(AiPowerGraphData entity) {
 extension AiPowerGraphDataExtension on AiPowerGraphData {
   AiPowerGraphData copyWith({
     int? timestamp,
-    int? predictPower,
-    int? actualPower,
-    int? pvPredictPower,
-    int? pvActualPower,
-    int? loadPredictPower,
-    int? loadActualPower,
-    int? predictConsumptionPrice,
-    int? actualConsumptionPrice,
-    int? predictSellingPrice,
-    int? actualSellingPrice,
+    num? predictPower,
+    num? actualPower,
+    num? pvPredictPower,
+    num? pvActualPower,
+    num? loadPredictPower,
+    num? loadActualPower,
+    num? predictConsumptionPrice,
+    num? actualConsumptionPrice,
+    num? predictSellingPrice,
+    num? actualSellingPrice,
     String? currencyCode,
   }) {
     return AiPowerGraphData()

@@ -3,21 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class StrategyPowerLineChart extends StatelessWidget {
-  const StrategyPowerLineChart({
+class ForecastPowerLineChart extends StatelessWidget {
+  const ForecastPowerLineChart({
     super.key,
     required this.data,
     required this.maxT,
     required this.minT,
     required this.axis,
-    this.numberFormat,
   });
 
-  final List<XyDataSeries<ChartData, DateTime>> data;
+  final List<FastLineSeries<ChartData, DateTime>> data;
   final DateTime minT;
   final DateTime maxT;
   final AxisConfig axis;
-  final NumberFormat? numberFormat;
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +41,8 @@ class StrategyPowerLineChart extends StatelessWidget {
                   majorGridLines: const MajorGridLines(width: 0),
                   labelStyle: TextStyle(fontSize: 8, color: Color(0x80FFFFFF)),
                 ),
-                primaryYAxis: NumericAxis(
+                primaryYAxis: const NumericAxis(
                   title: AxisTitle(text: ''),
-                  numberFormat: numberFormat,
                   axisLine: AxisLine(width: 0, color: Colors.transparent),
                   labelStyle: TextStyle(color: Color(0x80FFFFFF), fontSize: 8),
                   majorGridLines: MajorGridLines(

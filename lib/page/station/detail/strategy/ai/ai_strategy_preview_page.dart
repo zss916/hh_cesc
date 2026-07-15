@@ -3,9 +3,11 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/ai_strategy_preview_logic.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/widget/dialog_strategy.dart';
+import 'package:cescpro/page/station/detail/strategy/widget/strategy_power_line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'
     show GradientText, GradientDirection;
 
@@ -24,10 +26,15 @@ class AIStrategyPreviewPage extends StatelessWidget {
           builder: (logic) {
             return Column(
               children: [
-                _buildAIBanner(),
+                GestureDetector(
+                  onTap: () {
+                    logic.fetchAIData();
+                  },
+                  child: _buildAIBanner(),
+                ),
                 _buildRevenueForecast(logic),
-                _buildPowerChart(),
-                _buildPriceForecast(),
+                _buildPowerChart(logic),
+                _buildPriceForecast(logic),
                 _buildApplySection(),
               ],
             );
@@ -167,7 +174,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPowerChart() {
+  Widget _buildPowerChart(AIStrategyPreviewLogic logic) {
     return Column(
       children: [
         Container(
@@ -200,11 +207,6 @@ class AIStrategyPreviewPage extends StatelessWidget {
                   style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
                   colors: [Color(0xFF40F7FE), Color(0xFF1088EB)],
                 ),
-
-                /*Text(
-                      TKey.recommended.tr,
-                      style: TextStyle(fontSize: 10, color: Color(0xFF40F7FE)),
-                    ),*/
               ),
             ],
           ),
@@ -216,8 +218,28 @@ class AIStrategyPreviewPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
           ),
           width: double.maxFinite,
-          height: 270,
-          child: Column(children: [Spacer(), _buildPowerLegend()]),
+          padding: EdgeInsetsDirectional.only(start: 8, end: 8, top: 10),
+          height: 320,
+          child: Column(
+            children: [
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(
+                  "(kW)",
+                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                ),
+              ),
+              Expanded(
+                child: StrategyPowerLineChart(
+                  data: logic.series,
+                  minT: logic.minT,
+                  maxT: logic.maxT,
+                  axis: logic.axis,
+                ),
+              ),
+              _buildPowerLegend(),
+            ],
+          ),
         ),
       ],
     );
@@ -226,7 +248,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
   Widget _buildPowerLegend() {
     return Container(
       width: double.maxFinite,
-      padding: const EdgeInsets.only(top: 8, bottom: 15),
+      padding: const EdgeInsets.only(top: 8, bottom: 10),
       child: Wrap(
         alignment: WrapAlignment.center,
         spacing: 10,
@@ -283,7 +305,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceForecast() {
+  Widget _buildPriceForecast(AIStrategyPreviewLogic logic) {
     return Column(
       children: [
         Container(
@@ -306,8 +328,24 @@ class AIStrategyPreviewPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
           ),
           width: double.maxFinite,
-          height: 270,
-          child: Column(children: [Spacer(), _buildPriceLegend()]),
+          padding: EdgeInsetsDirectional.only(start: 8, end: 8, top: 15),
+          height: 320,
+          child: Column(
+            children: [
+              Expanded(
+                child: StrategyPowerLineChart(
+                  data: logic.priceSeries,
+                  minT: logic.minT,
+                  maxT: logic.maxT,
+                  axis: logic.axis,
+                  numberFormat: NumberFormat.compactCurrency(
+                    symbol: logic.priceCurrencySymbol,
+                  ),
+                ),
+              ),
+              _buildPriceLegend(),
+            ],
+          ),
         ),
       ],
     );
@@ -315,22 +353,33 @@ class AIStrategyPreviewPage extends StatelessWidget {
 
   Widget _buildPriceLegend() {
     return Padding(
-      padding: EdgeInsets.only(top: 8, bottom: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      padding: EdgeInsets.only(top: 8, bottom: 8),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 10,
         children: [
-          Container(
-            width: 7,
-            height: 7,
-            decoration: BoxDecoration(
-              color: const Color(0xff2dd4bf),
-              borderRadius: BorderRadius.circular(2),
+          _buildLegendItem(
+            Container(
+              width: 7,
+              height: 7,
+              decoration: BoxDecoration(
+                color: const Color(0xff2dd4bf),
+                borderRadius: BorderRadius.circular(2),
+              ),
             ),
+            TKey.predictingElectricityPrices.tr,
           ),
-          const SizedBox(width: 4),
-          Text(
-            '${TKey.electricityPrice.tr} 元/kWh',
-            style: TextStyle(fontSize: 12.sp, color: const Color(0xD9FFFFFF)),
+
+          _buildLegendItem(
+            Container(
+              width: 7,
+              height: 7,
+              decoration: BoxDecoration(
+                color: const Color(0xffecc207),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            TKey.predictSellingPrice.tr,
           ),
         ],
       ),

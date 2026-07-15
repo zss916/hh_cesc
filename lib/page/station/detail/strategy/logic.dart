@@ -79,61 +79,83 @@ class StrategyPageLogic extends GetxController {
     format: DateFormat('HH:mm'),
   );
 
-  List<FastLineSeries<ChartData, DateTime>> series =
-      <FastLineSeries<ChartData, DateTime>>[];
+  List<XyDataSeries<ChartData, DateTime>> series =
+      <XyDataSeries<ChartData, DateTime>>[];
 
   Future<void> queryStrategyCurve() async {
     List<StrategyPowerItemEntity> value = await AIControlAPI.queryStrategyCurve(
       siteId: '$id',
     );
 
-    ///strategyPower
-    List<ChartData> strategyPowerList = value
-        .map(
-          (e) => ChartData.fromJson({
-            'time': e.time,
-            'value': (e.strategyPower ?? 0),
-          }),
-        )
-        .toList();
+    if (value.isNotEmpty) {
+      series.clear();
 
-    series.add(
-      FastLineSeries<ChartData, DateTime>(
-        name: TKey.strategyCurve.tr,
-        dataSource: strategyPowerList,
-        xValueMapper: (p, _) => p.time,
-        yValueMapper: (p, _) => p.value,
-        color: Color(0xff4a9eff),
-        width: 1,
-        markerSettings: markerSettings,
-      ),
-    );
+      ///strategyPower
+      List<ChartData> strategyPowerList = value
+          .map(
+            (e) => ChartData.fromJson({
+              'time': e.time,
+              'value': (e.strategyPower ?? 0),
+            }),
+          )
+          .toList();
 
-    ///actualPower
-    List<ChartData> actualPowerList = value
-        .map(
-          (e) => ChartData.fromJson({'time': e.time, 'value': e.actualPower}),
-        )
-        .toList();
+      series.add(
+        /*FastLineSeries<ChartData, DateTime>(
+          name: TKey.strategyCurve.tr,
+          dataSource: strategyPowerList,
+          xValueMapper: (p, _) => p.time,
+          yValueMapper: (p, _) => p.value,
+          color: Color(0xff4a9eff),
+          width: 1.5,
+          markerSettings: markerSettings,
+        ),*/
+        AreaSeries<ChartData, DateTime>(
+          name: TKey.strategyCurve.tr,
+          dataSource: strategyPowerList,
+          xValueMapper: (e, _) => e.time,
+          yValueMapper: (e, _) => e.value,
+          color: Color(0xff4a9eff).withValues(alpha: 0.1),
+          borderColor: Color(0xff4a9eff),
+          borderWidth: 1.5,
+        ),
+      );
 
-    series.add(
-      FastLineSeries<ChartData, DateTime>(
-        name: TKey.actualOperation.tr,
-        dataSource: actualPowerList,
-        xValueMapper: (p, _) => p.time,
-        yValueMapper: (p, _) => p.value,
-        color: Color(0xff2dd4bf),
-        width: 1,
-        markerSettings: markerSettings,
-      ),
-    );
+      ///actualPower
+      List<ChartData> actualPowerList = value
+          .map(
+            (e) => ChartData.fromJson({'time': e.time, 'value': e.actualPower}),
+          )
+          .toList();
 
-    for (final p in actualPowerList) {
-      if (p.time.isBefore(minT)) minT = p.time;
-      if (p.time.isAfter(maxT)) maxT = p.time;
+      series.add(
+        /*FastLineSeries<ChartData, DateTime>(
+          name: TKey.actualOperation.tr,
+          dataSource: actualPowerList,
+          xValueMapper: (p, _) => p.time,
+          yValueMapper: (p, _) => p.value,
+          color: Color(0xff2dd4bf),
+          width: 1.5,
+          markerSettings: markerSettings,
+        ),*/
+        AreaSeries<ChartData, DateTime>(
+          name: TKey.actualOperation.tr,
+          dataSource: actualPowerList,
+          xValueMapper: (e, _) => e.time,
+          yValueMapper: (e, _) => e.value,
+          color: Color(0xff2dd4bf).withValues(alpha: 0.1),
+          borderColor: Color(0xff2dd4bf),
+          borderWidth: 1.5,
+        ),
+      );
+
+      for (final p in actualPowerList) {
+        if (p.time.isBefore(minT)) minT = p.time;
+        if (p.time.isAfter(maxT)) maxT = p.time;
+      }
+
+      update();
     }
-
-    update();
   }
 
   MarkerSettings markerSettings = MarkerSettings(

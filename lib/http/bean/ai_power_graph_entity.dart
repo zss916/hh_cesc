@@ -26,16 +26,16 @@ class AiPowerGraphEntity {
 @JsonSerializable()
 class AiPowerGraphData {
   int? timestamp;
-  int? predictPower; //预测功率 (kW)
-  int? actualPower; //实际功率 (kW)
-  int? pvPredictPower; //预测光伏功率
-  int? pvActualPower; //实际光伏功率
-  int? loadPredictPower; //预测负载功率
-  int? loadActualPower; //实际负载功率
-  int? predictConsumptionPrice; //预测用电电价
-  int? actualConsumptionPrice; //实际用电电价
-  int? predictSellingPrice; //预测售电电价
-  int? actualSellingPrice; //实际售电电价
+  num? predictPower; //预测功率 (kW)
+  num? actualPower; //实际功率 (kW)
+  num? pvPredictPower; //预测光伏功率
+  num? pvActualPower; //实际光伏功率
+  num? loadPredictPower; //预测负载功率
+  num? loadActualPower; //实际负载功率
+  num? predictConsumptionPrice; //预测用电电价
+  num? actualConsumptionPrice; //实际用电电价
+  num? predictSellingPrice; //预测售电电价
+  num? actualSellingPrice; //实际售电电价
   String? currencyCode;
 
   AiPowerGraphData();

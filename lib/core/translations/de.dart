@@ -341,4 +341,6 @@ const de = {
   "backStrategy": "Zurück",
   "reason": "Grund:",
   "operator": "Betreiber:",
+  "predictSellingPrice": "Vorhersagen des Stromverkaufspreises",
+  "predictingElectricityPrices": "Strompreise vorhersagen",
 };

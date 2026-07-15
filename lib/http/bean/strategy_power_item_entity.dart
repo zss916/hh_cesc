@@ -7,9 +7,9 @@ export 'package:cescpro/generated/json/strategy_power_item_entity.g.dart';
 
 @JsonSerializable()
 class StrategyPowerItemEntity {
-  double? time;
-  double? strategyPower;
-  double? actualPower;
+  int? time;
+  num? strategyPower;
+  num? actualPower;
 
   StrategyPowerItemEntity();
 
