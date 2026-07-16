@@ -45,7 +45,7 @@ class ServiceLogic extends GetxController {
   ///注销账号
   void toRemoveAccount() {
     User.to.setPrivacyAgreed(isAgree: false);
-    User.removeToken();
+    User.logOff();
     PageTools.offAllNamedSplash();
   }
 

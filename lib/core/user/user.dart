@@ -60,6 +60,21 @@ class User extends GetxService {
     StorageService.to.remove(tokenKey);
   }
 
+  static void removeAccount() {
+    SecureStorage.to.remove(accountKey);
+  }
+
+  static void removePwd() {
+    SecureStorage.to.remove(passwordKey);
+  }
+
+  ///注销
+  static void logOff() {
+    removeToken();
+    removeAccount();
+    removePwd();
+  }
+
   static void setToken({required String token}) {
     StorageService.to.setString(tokenKey, token);
   }
