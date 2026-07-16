@@ -55,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(color: Colors.white, fontSize: 28.sp),
                       ),
                     ),
-
                     InputAccount(
                       accountFocusNode: logic.accountFocusNode,
                       accountTextEditCtrl: logic.accountTextEditCtrl,
@@ -64,7 +63,6 @@ class _LoginPageState extends State<LoginPage> {
                         logic.account = value;
                       },
                     ),
-
                     InputPassword(
                       pwd: logic.password,
                       obscureText: obscureText,
@@ -84,7 +82,6 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       },
                     ),
-
                     if (isShowPwdError)
                       Container(
                         margin: EdgeInsetsDirectional.only(top: 3.h),
@@ -94,7 +91,6 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.red, fontSize: 12),
                         ),
                       ),
-
                     Container(
                       alignment: AlignmentDirectional.centerStart,
                       margin: EdgeInsetsDirectional.only(

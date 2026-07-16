@@ -29,7 +29,7 @@ class CtrlModelEntity {
   }
 
   ///是否运行中
-  bool get running => (activeType == 3) || (activeType == 4);
+  bool get running => activeType != null;
 
   String get activeTypeText {
     switch (activeType) {

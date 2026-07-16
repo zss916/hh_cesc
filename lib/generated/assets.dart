@@ -24,8 +24,6 @@ class Assets {
   static const String htmlPrivacyPolicyZ = 'assets/html/privacy-policy-z.html';
   static const String htmlUserPolicyE = 'assets/html/user-policy-e.html';
   static const String htmlUserPolicyZ = 'assets/html/user-policy-z.html';
-  static const String imgAccumulatedPhotovoltaic =
-      'assets/img/accumulated_photovoltaic.png';
   static const String imgAccumulatedPhotovoltaic2 =
       'assets/img/accumulated_photovoltaic2.png';
   static const String imgPvBg = 'assets/img/pv_bg.png';
@@ -38,18 +36,13 @@ class Assets {
   static const String imgCo2Reduction = 'assets/img/co2_reduction.png';
   static const String imgControl = 'assets/img/control.png';
   static const String imgControlS = 'assets/img/control_s.png';
-  static const String imgCumulativeCharging =
-      'assets/img/cumulative_charging.png';
   static const String imgCumulativeCharging2 =
       'assets/img/cumulative_charging2.png';
-  static const String imgCumulativeDischarge =
-      'assets/img/cumulative_discharge.png';
   static const String imgCumulativeDischarge2 =
       'assets/img/cumulative_discharge2.png';
   static const String imgLastDayRecharge = 'assets/img/lastday_recharge.png';
   static const String imgEmpty = 'assets/img/empty.png';
   static const String imgEmpty2 = 'assets/img/empty2.png';
-  static const String imgEnergyStorage = 'assets/img/energy_storage.png';
   static const String imgEnergyStorage2 = 'assets/img/energy_storage2.png';
   static const String imgFilter = 'assets/img/filter.png';
   static const String imgHome = 'assets/img/home.png';
@@ -66,7 +59,6 @@ class Assets {
   static const String imgServiceS = 'assets/img/service_s.png';
   static const String imgStation = 'assets/img/station.png';
   static const String imgStationS = 'assets/img/station_s.png';
-  static const String imgTodayRecharge = 'assets/img/today_recharge.png';
   static const String imgTodayDisCharging2 = 'assets/img/today_discharge2.png';
   static const String imgTodayCharging2 = 'assets/img/today_charging2.png';
   static const String lastDayIncome2 = 'assets/img/last_day_income2.png';
