@@ -116,7 +116,7 @@ class OliveItemLogic extends GetxController {
         ..icon = Assets.imgGridExport
         ..value = '0.00 '
         ..unit = 'kWh'
-        ..title = TKey.todayGridNeg.tr
+        ..title = TKey.gridConnectedElectricity.tr
         ..image = Assets.imgTodayDisCharging2,
     ];
     update();
