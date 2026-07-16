@@ -597,6 +597,7 @@ class TKey {
   static const String predictingElectricityPrices =
       "predictingElectricityPrices";
   static const String running = "running";
+  static const String rememberPassword = "rememberPassword";
 }
 
 const en = {
@@ -959,4 +960,5 @@ const en = {
   "predictSellingPrice": "Predict the electricity selling price",
   "predictingElectricityPrices": "Predicting electricity prices",
   "running": "Running",
+  "rememberPassword": "Remember Password",
 };

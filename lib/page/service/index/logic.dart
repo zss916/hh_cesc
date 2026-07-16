@@ -38,14 +38,14 @@ class ServiceLogic extends GetxController {
 
   /// 退出登录
   void toLogOut() {
-    User.removeToken();
+    User.to.removeToken();
     PageTools.offAllNamedSplash();
   }
 
   ///注销账号
   void toRemoveAccount() {
     User.to.setPrivacyAgreed(isAgree: false);
-    User.logOff();
+    User.to.logOff();
     PageTools.offAllNamedSplash();
   }
 

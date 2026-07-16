@@ -11,11 +11,13 @@ class InputPassword extends StatelessWidget {
   final FocusNode? pwdFocusNode;
   final bool obscureText;
   final Function() onObscure;
+  final Function(String) onValid;
 
   const InputPassword({
     super.key,
     required this.onInput,
     required this.onObscure,
+    required this.onValid,
     required this.obscureText,
     this.textEditCtrl,
     this.pwdFocusNode,
@@ -28,7 +30,7 @@ class InputPassword extends StatelessWidget {
       onChanged: (bool isKeyboardVisible) {
         if (!isKeyboardVisible) {
           if ((textEditCtrl?.text ?? "").isNotEmpty) {
-            // onValid.call();
+            onValid.call(textEditCtrl?.text.trim() ?? "");
           }
         }
       },
@@ -90,18 +92,19 @@ class InputPassword extends StatelessWidget {
               ),
               onChanged: (value) {
                 onInput.call(value);
+                onValid.call(value);
               },
               onEditingComplete: () {
                 _hideKeyboard(context);
-                //onValid.call();
+                onValid.call(textEditCtrl?.text.trim() ?? "");
               },
               onSubmitted: (value) {
                 _hideKeyboard(context);
-                // onValid.call();
+                onValid.call(value);
               },
             ),
           ),
-          Divider(height: 16.h, color: Colors.transparent),
+          Divider(height: 0.h, color: Colors.transparent),
         ],
       ),
     );

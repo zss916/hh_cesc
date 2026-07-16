@@ -62,7 +62,7 @@ class AuthInterceptor extends Interceptor {
     _redirectLock.complete();
 
     try {
-      User.removeToken();
+      User.to.removeToken();
       PageTools.offAllNamedSplash();
       AppLoading.toast(msg);
     } finally {

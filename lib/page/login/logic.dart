@@ -3,12 +3,25 @@ part of 'index.dart';
 class LoginLogic extends GetxController {
   String account = '';
   String password = '';
+  bool isChecked = false;
+
+  FocusNode? accountFocusNode = FocusNode();
+  FocusNode? pwdFocusNode = FocusNode();
   TextEditingController? accountTextEditCtrl = TextEditingController();
   TextEditingController? pwdTextEditCtrl = TextEditingController();
 
   @override
   void onInit() {
     super.onInit();
+
+    if (accountFocusNode != null) {
+      accountFocusNode?.unfocus();
+      accountFocusNode = null;
+    }
+    if (pwdFocusNode != null) {
+      pwdFocusNode?.unfocus();
+      pwdFocusNode = null;
+    }
   }
 
   @override
@@ -25,12 +38,21 @@ class LoginLogic extends GetxController {
     accountTextEditCtrl?.text = account;
     password = await User.to.getPwd();
     pwdTextEditCtrl?.text = password;
+    isChecked = password.isNotEmpty;
     update();
   }
 
   @override
   void onClose() {
     super.onClose();
+    if (accountFocusNode != null) {
+      accountFocusNode?.dispose();
+      accountFocusNode = null;
+    }
+    if (pwdFocusNode != null) {
+      pwdFocusNode?.unfocus();
+      pwdFocusNode = null;
+    }
     if (accountTextEditCtrl != null) {
       accountTextEditCtrl?.dispose();
       accountTextEditCtrl = null;
@@ -39,6 +61,7 @@ class LoginLogic extends GetxController {
       pwdTextEditCtrl?.dispose();
       pwdTextEditCtrl = null;
     }
+
     AppLoading.dismiss();
   }
 
@@ -57,7 +80,12 @@ class LoginLogic extends GetxController {
     }
   }
 
-  Future<void> toLogin({Function(String newPassword)? onUpdatePsd}) async {
+  Future<void> toLogin({
+    required String account,
+    required String password,
+    Function(String newPassword)? onUpdatePsd,
+    bool? isCheck,
+  }) async {
     if (GetPlatform.isAndroid && !AppSetting.isOverseas) {
       if (!User.to.getPrivacyAgreed()) {
         AppLoading.toast(TKey.privacyAgreementRequired.tr);
@@ -81,7 +109,11 @@ class LoginLogic extends GetxController {
     );
     if (value != null) {
       User.to.setAccount(account: account.trim());
-      User.to.setPwd(pwd: password.trim());
+      if (isCheck == true) {
+        User.to.setPwd(pwd: password.trim());
+      } else {
+        User.to.removePwd();
+      }
       User.to.setIsGuest(isGuest: false);
       User.setTokenHead(tokenHead: value.tokenHeadValue);
       User.setToken(token: value.tokenValue);

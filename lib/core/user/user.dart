@@ -56,20 +56,20 @@ class User extends GetxService {
 
   static bool get hasToken => getToken().isNotEmpty;
 
-  static void removeToken() {
+  void removeToken() {
     StorageService.to.remove(tokenKey);
   }
 
-  static void removeAccount() {
+  void removeAccount() {
     SecureStorage.to.remove(accountKey);
   }
 
-  static void removePwd() {
+  void removePwd() {
     SecureStorage.to.remove(passwordKey);
   }
 
   ///注销
-  static void logOff() {
+  void logOff() {
     removeToken();
     removeAccount();
     removePwd();

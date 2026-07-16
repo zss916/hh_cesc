@@ -344,4 +344,5 @@ const de = {
   "predictSellingPrice": "Vorhersagen des Stromverkaufspreises",
   "predictingElectricityPrices": "Strompreise vorhersagen",
   "running": "Laufen",
+  "rememberPassword": "Passwort merken",
 };

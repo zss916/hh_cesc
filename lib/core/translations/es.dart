@@ -361,4 +361,5 @@ const es = {
   "predictSellingPrice": "Predice el precio de venta de electricidad",
   "predictingElectricityPrices": "Predicción de precios de la electricidad",
   "running": "Corriendo",
+  "rememberPassword": "Recuerda la contraseña",
 };

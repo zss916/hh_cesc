@@ -8,34 +8,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  FocusNode? accountFocusNode = FocusNode();
-  FocusNode? pwdFocusNode = FocusNode();
   bool obscureText = true;
+  bool isShowPwdError = false;
 
   @override
   void initState() {
     super.initState();
-    if (accountFocusNode != null) {
-      accountFocusNode?.unfocus();
-      accountFocusNode = null;
-    }
-    if (pwdFocusNode != null) {
-      pwdFocusNode?.unfocus();
-      pwdFocusNode = null;
-    }
   }
 
   @override
   void dispose() {
+    FocusManager.instance.primaryFocus?.unfocus();
     super.dispose();
-    if (accountFocusNode != null) {
-      accountFocusNode?.dispose();
-      accountFocusNode = null;
-    }
-    if (pwdFocusNode != null) {
-      pwdFocusNode?.unfocus();
-      pwdFocusNode = null;
-    }
   }
 
   @override
@@ -56,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsetsDirectional.only(start: 20.w, end: 20.w),
             child: GetBuilder<LoginLogic>(
               init: LoginLogic(),
+              initState: (_) {},
               builder: (logic) {
                 return Column(
                   children: [
@@ -72,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     InputAccount(
-                      accountFocusNode: accountFocusNode,
+                      accountFocusNode: logic.accountFocusNode,
                       accountTextEditCtrl: logic.accountTextEditCtrl,
                       account: logic.account,
                       onInput: (value) {
@@ -84,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                       pwd: logic.password,
                       obscureText: obscureText,
                       textEditCtrl: logic.pwdTextEditCtrl,
-                      pwdFocusNode: pwdFocusNode,
+                      pwdFocusNode: logic.pwdFocusNode,
                       onInput: (value) {
                         logic.password = value;
                       },
@@ -93,18 +78,73 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText = !obscureText;
                         });
                       },
+                      onValid: (value) {
+                        setState(() {
+                          isShowPwdError = value.isEmpty;
+                        });
+                      },
+                    ),
+
+                    if (isShowPwdError)
+                      Container(
+                        margin: EdgeInsetsDirectional.only(top: 3.h),
+                        width: double.maxFinite,
+                        child: Text(
+                          TKey.passwordRequired.tr,
+                          style: TextStyle(color: Colors.red, fontSize: 12),
+                        ),
+                      ),
+
+                    Container(
+                      alignment: AlignmentDirectional.centerStart,
+                      margin: EdgeInsetsDirectional.only(
+                        top: isShowPwdError ? 5.h : 10.h,
+                        bottom: 10.h,
+                      ),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(2),
+                        onTap: () {
+                          logic.isChecked = !logic.isChecked;
+                          logic.update();
+                        },
+                        child: Container(
+                          padding: EdgeInsetsDirectional.only(
+                            top: 6.h,
+                            bottom: 6.h,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                logic.isChecked
+                                    ? Icons.check_box
+                                    : Icons.check_box_outline_blank,
+                                color: Colors.blue,
+                              ),
+                              Container(
+                                margin: EdgeInsetsDirectional.only(start: 5),
+                                child: Text(
+                                  TKey.rememberPassword.tr,
+                                  style: TextStyle(color: Color(0x99FFFFFF)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
 
                     CommonBtn(
                       title: TKey.login.tr,
                       onTap: () {
                         logic.toLogin(
+                          account: logic.account,
+                          password: logic.password,
+                          isCheck: logic.isChecked,
                           onUpdatePsd: (value) {
-                            /*setState(() {
-                              logic.pwdTextEditCtrl?.clear();
-                            });*/
-                            // logic.password = "";
-                            // logic.update();
+                            logic.pwdTextEditCtrl?.clear();
+                            logic.password = "";
+                            logic.update();
                           },
                         );
                       },

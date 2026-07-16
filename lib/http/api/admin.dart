@@ -19,7 +19,7 @@ abstract class AdminAPI {
     required String password,
   }) async {
     try {
-      User.removeToken();
+      User.to.removeToken();
       var result = await Http.instance.post(
         ApiPath.postLogin,
         data: {"username": username, "password": password},

@@ -345,4 +345,5 @@ const zh = {
   "predictSellingPrice": "预测售电电价",
   "predictingElectricityPrices": "预测用电电价",
   "running": "执行中",
+  "rememberPassword": "记住密码",
 };
