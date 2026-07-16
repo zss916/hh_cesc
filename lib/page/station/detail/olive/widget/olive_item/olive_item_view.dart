@@ -78,20 +78,6 @@ class OliveItemView extends StatelessWidget {
                   style: TextStyle(fontSize: 15, color: Color(0xDEFFFFFF)),
                 ),
               ],
-            )
-          else
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  TKey.todayWeather.tr,
-                  style: TextStyle(fontSize: 13, color: Color(0xB3FFFFFF)),
-                ),
-                Text(
-                  "--",
-                  style: TextStyle(fontSize: 15, color: Color(0xDEFFFFFF)),
-                ),
-              ],
             ),
 
           if (logic.workModel.isNotEmpty)
@@ -105,21 +91,6 @@ class OliveItemView extends StatelessWidget {
                 LineStatusWidget(status: logic.siteDetail?.status ?? 99),
                 Text(
                   logic.workModel,
-                  style: TextStyle(fontSize: 15, color: Color(0xDEFFFFFF)),
-                ),
-              ],
-            )
-          else
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '${TKey.stationStatus.tr}:',
-                  style: TextStyle(fontSize: 13, color: Color(0xB3FFFFFF)),
-                ),
-                // LineStatusWidget(status: logic.siteDetail?.status ?? 99),
-                Text(
-                  "--",
                   style: TextStyle(fontSize: 15, color: Color(0xDEFFFFFF)),
                 ),
               ],
