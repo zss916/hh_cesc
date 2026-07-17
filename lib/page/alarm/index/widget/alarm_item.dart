@@ -15,13 +15,6 @@ class AlarmItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return buildItem();
-
-    /*return GestureDetector(
-      onTap: () {
-        // PageTools.toAlarmDetails(item);
-      },
-      child: buildItem(),
-    );*/
   }
 
   Widget buildItem() {

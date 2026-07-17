@@ -3,23 +3,23 @@ import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
 
 AiCompareDataEntity $AiCompareDataEntityFromJson(Map<String, dynamic> json) {
   final AiCompareDataEntity aiCompareDataEntity = AiCompareDataEntity();
-  final int? yesterdayGridFeedGain = jsonConvert.convert<int>(
-    json['yesterdayGridFeedGain'],
+  final int? actualGridFeedGain = jsonConvert.convert<int>(
+    json['actualGridFeedGain'],
   );
-  if (yesterdayGridFeedGain != null) {
-    aiCompareDataEntity.yesterdayGridFeedGain = yesterdayGridFeedGain;
+  if (actualGridFeedGain != null) {
+    aiCompareDataEntity.actualGridFeedGain = actualGridFeedGain;
   }
-  final int? yesterdayPvSelfUseGain = jsonConvert.convert<int>(
-    json['yesterdayPvSelfUseGain'],
+  final int? actualPvSelfUseGain = jsonConvert.convert<int>(
+    json['actualPvSelfUseGain'],
   );
-  if (yesterdayPvSelfUseGain != null) {
-    aiCompareDataEntity.yesterdayPvSelfUseGain = yesterdayPvSelfUseGain;
+  if (actualPvSelfUseGain != null) {
+    aiCompareDataEntity.actualPvSelfUseGain = actualPvSelfUseGain;
   }
-  final int? yesterdayStorageProfit = jsonConvert.convert<int>(
-    json['yesterdayStorageProfit'],
+  final int? actualStorageProfit = jsonConvert.convert<int>(
+    json['actualStorageProfit'],
   );
-  if (yesterdayStorageProfit != null) {
-    aiCompareDataEntity.yesterdayStorageProfit = yesterdayStorageProfit;
+  if (actualStorageProfit != null) {
+    aiCompareDataEntity.actualStorageProfit = actualStorageProfit;
   }
   final int? aiPredictGridFeedGain = jsonConvert.convert<int>(
     json['aiPredictGridFeedGain'],
@@ -39,11 +39,11 @@ AiCompareDataEntity $AiCompareDataEntityFromJson(Map<String, dynamic> json) {
   if (aiPredictStorageProfit != null) {
     aiCompareDataEntity.aiPredictStorageProfit = aiPredictStorageProfit;
   }
-  final String? yesterdayTotalProfit = jsonConvert.convert<String>(
-    json['yesterdayTotalProfit'],
+  final String? actualTotalProfit = jsonConvert.convert<String>(
+    json['actualTotalProfit'],
   );
-  if (yesterdayTotalProfit != null) {
-    aiCompareDataEntity.yesterdayTotalProfit = yesterdayTotalProfit;
+  if (actualTotalProfit != null) {
+    aiCompareDataEntity.actualTotalProfit = actualTotalProfit;
   }
   final String? aiPredictTotalProfit = jsonConvert.convert<String>(
     json['aiPredictTotalProfit'],
@@ -76,13 +76,13 @@ AiCompareDataEntity $AiCompareDataEntityFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> $AiCompareDataEntityToJson(AiCompareDataEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
-  data['yesterdayGridFeedGain'] = entity.yesterdayGridFeedGain;
-  data['yesterdayPvSelfUseGain'] = entity.yesterdayPvSelfUseGain;
-  data['yesterdayStorageProfit'] = entity.yesterdayStorageProfit;
+  data['actualGridFeedGain'] = entity.actualGridFeedGain;
+  data['actualPvSelfUseGain'] = entity.actualPvSelfUseGain;
+  data['actualStorageProfit'] = entity.actualStorageProfit;
   data['aiPredictGridFeedGain'] = entity.aiPredictGridFeedGain;
   data['aiPredictPvSelfUseGain'] = entity.aiPredictPvSelfUseGain;
   data['aiPredictStorageProfit'] = entity.aiPredictStorageProfit;
-  data['yesterdayTotalProfit'] = entity.yesterdayTotalProfit;
+  data['actualTotalProfit'] = entity.actualTotalProfit;
   data['aiPredictTotalProfit'] = entity.aiPredictTotalProfit;
   data['profitGrowth'] = entity.profitGrowth;
   data['profitGrowthRate'] = entity.profitGrowthRate;
@@ -93,13 +93,13 @@ Map<String, dynamic> $AiCompareDataEntityToJson(AiCompareDataEntity entity) {
 
 extension AiCompareDataEntityExtension on AiCompareDataEntity {
   AiCompareDataEntity copyWith({
-    int? yesterdayGridFeedGain,
-    int? yesterdayPvSelfUseGain,
-    int? yesterdayStorageProfit,
+    int? actualGridFeedGain,
+    int? actualPvSelfUseGain,
+    int? actualStorageProfit,
     int? aiPredictGridFeedGain,
     int? aiPredictPvSelfUseGain,
     int? aiPredictStorageProfit,
-    String? yesterdayTotalProfit,
+    String? actualTotalProfit,
     String? aiPredictTotalProfit,
     String? profitGrowth,
     String? profitGrowthRate,
@@ -107,19 +107,16 @@ extension AiCompareDataEntityExtension on AiCompareDataEntity {
     String? currency,
   }) {
     return AiCompareDataEntity()
-      ..yesterdayGridFeedGain =
-          yesterdayGridFeedGain ?? this.yesterdayGridFeedGain
-      ..yesterdayPvSelfUseGain =
-          yesterdayPvSelfUseGain ?? this.yesterdayPvSelfUseGain
-      ..yesterdayStorageProfit =
-          yesterdayStorageProfit ?? this.yesterdayStorageProfit
+      ..actualGridFeedGain = actualGridFeedGain ?? this.actualGridFeedGain
+      ..actualPvSelfUseGain = actualPvSelfUseGain ?? this.actualPvSelfUseGain
+      ..actualStorageProfit = actualStorageProfit ?? this.actualStorageProfit
       ..aiPredictGridFeedGain =
           aiPredictGridFeedGain ?? this.aiPredictGridFeedGain
       ..aiPredictPvSelfUseGain =
           aiPredictPvSelfUseGain ?? this.aiPredictPvSelfUseGain
       ..aiPredictStorageProfit =
           aiPredictStorageProfit ?? this.aiPredictStorageProfit
-      ..yesterdayTotalProfit = yesterdayTotalProfit ?? this.yesterdayTotalProfit
+      ..actualTotalProfit = actualTotalProfit ?? this.actualTotalProfit
       ..aiPredictTotalProfit = aiPredictTotalProfit ?? this.aiPredictTotalProfit
       ..profitGrowth = profitGrowth ?? this.profitGrowth
       ..profitGrowthRate = profitGrowthRate ?? this.profitGrowthRate

@@ -243,9 +243,10 @@ class AIStrategyPreviewPage extends StatelessWidget {
   Widget _buildPowerLegend() {
     return Container(
       width: double.maxFinite,
+      alignment: AlignmentDirectional.center,
       padding: const EdgeInsets.only(top: 8, bottom: 10),
       child: Wrap(
-        alignment: WrapAlignment.center,
+        alignment: WrapAlignment.start,
         spacing: 10,
         children: [
           _buildLegendItem(
@@ -347,36 +348,40 @@ class AIStrategyPreviewPage extends StatelessWidget {
   }
 
   Widget _buildPriceLegend() {
-    return Padding(
-      padding: EdgeInsets.only(top: 8, bottom: 8),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        spacing: 10,
-        children: [
-          _buildLegendItem(
-            Container(
-              width: 7,
-              height: 7,
-              decoration: BoxDecoration(
-                color: const Color(0xff2dd4bf),
-                borderRadius: BorderRadius.circular(2),
+    return Container(
+      alignment: AlignmentDirectional.center,
+      width: double.maxFinite,
+      child: Padding(
+        padding: EdgeInsets.only(top: 8, bottom: 8),
+        child: Wrap(
+          alignment: WrapAlignment.start,
+          spacing: 10,
+          children: [
+            _buildLegendItem(
+              Container(
+                width: 7,
+                height: 7,
+                decoration: BoxDecoration(
+                  color: const Color(0xff2dd4bf),
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
+              TKey.predictingElectricityPrices.tr,
             ),
-            TKey.predictingElectricityPrices.tr,
-          ),
 
-          _buildLegendItem(
-            Container(
-              width: 7,
-              height: 7,
-              decoration: BoxDecoration(
-                color: const Color(0xffecc207),
-                borderRadius: BorderRadius.circular(2),
+            _buildLegendItem(
+              Container(
+                width: 7,
+                height: 7,
+                decoration: BoxDecoration(
+                  color: const Color(0xffecc207),
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
+              TKey.predictSellingPrice.tr,
             ),
-            TKey.predictSellingPrice.tr,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

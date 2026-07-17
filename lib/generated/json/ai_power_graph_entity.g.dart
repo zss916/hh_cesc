@@ -4,13 +4,13 @@ import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 AiPowerGraphEntity $AiPowerGraphEntityFromJson(Map<String, dynamic> json) {
   final AiPowerGraphEntity aiPowerGraphEntity = AiPowerGraphEntity();
   final String? currencyCode = jsonConvert.convert<String>(
-    json['currencyCode'],
-  );
+      json['currencyCode']);
   if (currencyCode != null) {
     aiPowerGraphEntity.currencyCode = currencyCode;
   }
   final List<AiPowerGraphData>? data = (json['data'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<AiPowerGraphData>(e) as AiPowerGraphData)
+      ?.map(
+          (e) => jsonConvert.convert<AiPowerGraphData>(e) as AiPowerGraphData)
       .toList();
   if (data != null) {
     aiPowerGraphEntity.data = data;
@@ -59,44 +59,37 @@ AiPowerGraphData $AiPowerGraphDataFromJson(Map<String, dynamic> json) {
     aiPowerGraphData.pvActualPower = pvActualPower;
   }
   final num? loadPredictPower = jsonConvert.convert<num>(
-    json['loadPredictPower'],
-  );
+      json['loadPredictPower']);
   if (loadPredictPower != null) {
     aiPowerGraphData.loadPredictPower = loadPredictPower;
   }
   final num? loadActualPower = jsonConvert.convert<num>(
-    json['loadActualPower'],
-  );
+      json['loadActualPower']);
   if (loadActualPower != null) {
     aiPowerGraphData.loadActualPower = loadActualPower;
   }
   final num? predictConsumptionPrice = jsonConvert.convert<num>(
-    json['predictConsumptionPrice'],
-  );
+      json['predictConsumptionPrice']);
   if (predictConsumptionPrice != null) {
     aiPowerGraphData.predictConsumptionPrice = predictConsumptionPrice;
   }
   final num? actualConsumptionPrice = jsonConvert.convert<num>(
-    json['actualConsumptionPrice'],
-  );
+      json['actualConsumptionPrice']);
   if (actualConsumptionPrice != null) {
     aiPowerGraphData.actualConsumptionPrice = actualConsumptionPrice;
   }
   final num? predictSellingPrice = jsonConvert.convert<num>(
-    json['predictSellingPrice'],
-  );
+      json['predictSellingPrice']);
   if (predictSellingPrice != null) {
     aiPowerGraphData.predictSellingPrice = predictSellingPrice;
   }
   final num? actualSellingPrice = jsonConvert.convert<num>(
-    json['actualSellingPrice'],
-  );
+      json['actualSellingPrice']);
   if (actualSellingPrice != null) {
     aiPowerGraphData.actualSellingPrice = actualSellingPrice;
   }
   final String? currencyCode = jsonConvert.convert<String>(
-    json['currencyCode'],
-  );
+      json['currencyCode']);
   if (currencyCode != null) {
     aiPowerGraphData.currencyCode = currencyCode;
   }
@@ -143,10 +136,10 @@ extension AiPowerGraphDataExtension on AiPowerGraphData {
       ..pvActualPower = pvActualPower ?? this.pvActualPower
       ..loadPredictPower = loadPredictPower ?? this.loadPredictPower
       ..loadActualPower = loadActualPower ?? this.loadActualPower
-      ..predictConsumptionPrice =
-          predictConsumptionPrice ?? this.predictConsumptionPrice
-      ..actualConsumptionPrice =
-          actualConsumptionPrice ?? this.actualConsumptionPrice
+      ..predictConsumptionPrice = predictConsumptionPrice ??
+          this.predictConsumptionPrice
+      ..actualConsumptionPrice = actualConsumptionPrice ??
+          this.actualConsumptionPrice
       ..predictSellingPrice = predictSellingPrice ?? this.predictSellingPrice
       ..actualSellingPrice = actualSellingPrice ?? this.actualSellingPrice
       ..currencyCode = currencyCode ?? this.currencyCode;

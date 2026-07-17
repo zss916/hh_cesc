@@ -33,7 +33,7 @@ class _StationDetailState extends State<StationDetailPage> {
           children: [
             OliveView(),
             MonitorView(),
-            //StrategyPage(),
+            StrategyPage(),
             RealAlarmView(),
           ],
         ),
@@ -87,25 +87,22 @@ class _StationDetailState extends State<StationDetailPage> {
                   style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
                 ),
               ),
-              if (false)
-                CustomNavigationBarItem(
-                  icon: Image.asset(
-                    Assets.imgStrategy,
-                    matchTextDirection: true,
-                  ),
-                  selectedIcon: Image.asset(
-                    Assets.imgStrategyS,
-                    matchTextDirection: true,
-                  ),
-                  title: Text(
-                    TKey.strategy.tr,
-                    style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                  ),
-                  selectedTitle: Text(
-                    TKey.strategy.tr,
-                    style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
-                  ),
+              // if (false)
+              CustomNavigationBarItem(
+                icon: Image.asset(Assets.imgStrategy, matchTextDirection: true),
+                selectedIcon: Image.asset(
+                  Assets.imgStrategyS,
+                  matchTextDirection: true,
                 ),
+                title: Text(
+                  TKey.strategy.tr,
+                  style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                ),
+                selectedTitle: Text(
+                  TKey.strategy.tr,
+                  style: TextStyle(color: Color(0xFF52D5F9), fontSize: 10.sp),
+                ),
+              ),
               CustomNavigationBarItem(
                 icon: Image.asset(Assets.imgAlarm, matchTextDirection: true),
                 selectedIcon: Image.asset(

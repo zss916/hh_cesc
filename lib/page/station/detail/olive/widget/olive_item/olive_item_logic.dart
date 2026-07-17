@@ -105,7 +105,7 @@ class OliveItemLogic extends GetxController {
 
       SiteInfoCardEntity()
         ..id = 4
-        ..icon = Assets.imgEle
+        ..icon = Assets.imgGridPos
         ..value = '0.00 '
         ..unit = 'kWh'
         ..title = TKey.todayGridPos.tr
@@ -113,7 +113,7 @@ class OliveItemLogic extends GetxController {
 
       SiteInfoCardEntity()
         ..id = 5
-        ..icon = Assets.imgGridExport
+        ..icon = Assets.imgGridNeg
         ..value = '0.00 '
         ..unit = 'kWh'
         ..title = TKey.gridConnectedElectricity.tr

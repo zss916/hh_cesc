@@ -21,7 +21,7 @@ class AIStrategyPreviewLogic extends GetxController {
   String? get aiAllRevenue => revenueForecast?.aiPredictTotalProfit ?? "0";
 
   ///当前策略收益
-  String? get currentRevenue => revenueForecast?.yesterdayTotalProfit ?? "0";
+  String? get currentRevenue => revenueForecast?.actualTotalProfit ?? "0";
 
   ///日增长收益
   String get dayGrowthRevenue => revenueForecast?.profitGrowth ?? "0";
