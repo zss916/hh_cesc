@@ -276,9 +276,18 @@ class StationPage extends StatelessWidget {
                           value: item.showPvPower,
                         ),
                         Divider(height: 8.h, color: Colors.transparent),
-                        TextRichWidget(
+                        /* TextRichWidget(
                           title: "${TKey.chargeAndDischarge.tr}  ",
                           value: item.chargeAndRecharge,
+                        ),*/
+                        TextRichWidget(
+                          title: "${TKey.charge.tr}  ",
+                          value: item.showCharge,
+                        ),
+                        Divider(height: 8.h, color: Colors.transparent),
+                        TextRichWidget(
+                          title: "${TKey.discharge.tr}  ",
+                          value: item.showRecharge,
                         ),
                       ],
                     ),

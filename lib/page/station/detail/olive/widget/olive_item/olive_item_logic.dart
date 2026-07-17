@@ -116,7 +116,7 @@ class OliveItemLogic extends GetxController {
         ..icon = Assets.imgGridNeg
         ..value = '0.00 '
         ..unit = 'kWh'
-        ..title = TKey.gridConnectedElectricity.tr
+        ..title = TKey.todayGridNeg.tr
         ..image = Assets.imgTodayDisCharging2,
     ];
     update();
@@ -283,7 +283,7 @@ class OliveItemLogic extends GetxController {
           ..icon = Assets.imgGridNeg
           ..value = '${(value.todayGridNeg ?? 0).formatPowerValue()} '
           ..unit = (value.todayGridNeg ?? 0).formatPowerValueUnit()
-          ..title = TKey.gridConnectedElectricity.tr
+          ..title = TKey.todayGridNeg.tr
           ..image = Assets.imgTodayDisCharging2,
       );
 
