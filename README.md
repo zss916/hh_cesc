@@ -140,3 +140,11 @@ CO2: CO\u2082
 密码：hhdzcesc123!
 
 这个账号可以看到
+
+
+
+
+Gitlab访问地址：
+http://gitlab.cescpower.com:8081
+登录账号：Zhouss， 密码：zss1991android@
+

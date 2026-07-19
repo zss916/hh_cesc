@@ -18,6 +18,7 @@ class _WebPageState extends State<WebPage> {
   String url = "";
   String title = "";
   String javaScriptChannelName = "app";
+
   @override
   void initState() {
     super.initState();
