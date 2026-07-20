@@ -57,7 +57,6 @@ class AIStrategyPreviewLogic extends GetxController {
     }
 
     getAIDataCompare();
-    //fetchAIData();
     loop();
   }
 

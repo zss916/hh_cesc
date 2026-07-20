@@ -141,7 +141,6 @@ class OliveItemLogic extends GetxController {
   Future<void> loadData() async {
     loadWeather();
     loop();
-    //getSiteTopology();
     getPointDetails();
     getSiteStatisticRecord();
   }
