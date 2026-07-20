@@ -8,6 +8,7 @@ import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/api/weather.dart';
+import 'package:cescpro/http/base/cancel_token_manager.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
@@ -53,6 +54,8 @@ class OliveItemLogic extends GetxController {
   StatisticRecordEntity? statisticRecord;
   bool revenueShow = false;
   bool pvCardShow = true;
+
+  String oliveItemLogicTag = "OliveItemLogic";
 
   @override
   void onInit() {
@@ -147,8 +150,9 @@ class OliveItemLogic extends GetxController {
 
   @override
   void onClose() {
-    TimeTools.instance.stop();
-    topologyCancelToken.cancel("topologyCancelToken");
+    TimeTools.instance.stop(tag: oliveItemLogicTag);
+    CancelTokenManager.cancel(oliveItemLogicTag);
+    //topologyCancelToken.cancel("topologyCancelToken");
     super.onClose();
     AppLoading.dismiss();
   }
@@ -165,7 +169,7 @@ class OliveItemLogic extends GetxController {
     }
   }
 
-  CancelToken topologyCancelToken = CancelToken();
+  // CancelToken topologyCancelToken = CancelToken();
 
   ///获取拓扑图
   Future<void> loadSiteTopologyDelayed({CancelToken? cancelToken}) async {
@@ -185,8 +189,11 @@ class OliveItemLogic extends GetxController {
       await loadSiteTopologyDelayed(cancelToken: null);
     } finally {
       TimeTools.instance.start(
+        tag: oliveItemLogicTag,
         onCall: () {
-          loadSiteTopologyDelayed(cancelToken: topologyCancelToken);
+          loadSiteTopologyDelayed(
+            cancelToken: CancelTokenManager.of(oliveItemLogicTag),
+          );
         },
       );
     }

@@ -28,6 +28,7 @@ class StrategyPageLogic extends GetxController {
   int get runningDays => checkAiOpen?.runningDays ?? 0;
 
   CancelToken cancelToken = CancelToken();
+  String strategyPageLogicTag = "StrategyPageLogic";
 
   @override
   void onInit() {
@@ -52,8 +53,8 @@ class StrategyPageLogic extends GetxController {
 
   @override
   void onClose() {
-    cancelToken.cancel("queryStrategyCurve");
-    TimeTools.instance.stop();
+    cancelToken.cancel(strategyPageLogicTag);
+    TimeTools.instance.stop(tag: strategyPageLogicTag);
     super.onClose();
   }
 
@@ -94,6 +95,7 @@ class StrategyPageLogic extends GetxController {
       await queryStrategyCurve();
     } finally {
       TimeTools.instance.start(
+        tag: strategyPageLogicTag,
         duration: Duration(minutes: 2),
         onCall: () {
           queryStrategyCurve(cancelToken: cancelToken);

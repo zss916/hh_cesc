@@ -38,6 +38,8 @@ class AIStrategyPreviewLogic extends GetxController {
   ///预测电价货币符号
   String priceCurrencySymbol = User.to.getCurrencyUnit().currencySymbol;
 
+  String aiStrategyPreviewTag = "AIStrategyPreviewLogic";
+
   @override
   void onInit() {
     super.onInit();
@@ -62,7 +64,7 @@ class AIStrategyPreviewLogic extends GetxController {
 
   @override
   void onClose() {
-    TimeTools.instance.stop();
+    TimeTools.instance.stop(tag: aiStrategyPreviewTag);
     cancelToken.cancel("fetchAIData");
     super.onClose();
   }
@@ -75,6 +77,7 @@ class AIStrategyPreviewLogic extends GetxController {
       await fetchAIData(cancelToken: null);
     } finally {
       TimeTools.instance.start(
+        tag: aiStrategyPreviewTag,
         duration: Duration(minutes: 2),
         onCall: () {
           fetchAIData(cancelToken: cancelToken);
