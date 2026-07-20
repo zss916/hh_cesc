@@ -8,8 +8,8 @@ class TimeTools {
 
   Timer? _timer;
 
-  void start({Function? onCall}) {
-    _timer = Timer.periodic(const Duration(seconds: 30), (timer) {
+  void start({Function? onCall, Duration? duration}) {
+    _timer = Timer.periodic(duration ?? const Duration(seconds: 32), (timer) {
       onCall?.call();
     });
   }

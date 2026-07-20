@@ -1,10 +1,12 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/tools/time_tools.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/api/ai.dart';
 import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
 import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/f_line_chart.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -55,15 +57,33 @@ class AIStrategyPreviewLogic extends GetxController {
     }
 
     getAIDataCompare();
-    fetchAIData();
+    //fetchAIData();
+    loop();
   }
 
   @override
   void onClose() {
+    TimeTools.instance.stop();
+    cancelToken.cancel("fetchAIData");
     super.onClose();
   }
 
-  ///todo 算法那边还没定好
+  CancelToken cancelToken = CancelToken();
+
+  ///轮询
+  Future<void> loop() async {
+    try {
+      await fetchAIData(cancelToken: null);
+    } finally {
+      TimeTools.instance.start(
+        duration: Duration(minutes: 2),
+        onCall: () {
+          fetchAIData(cancelToken: cancelToken);
+        },
+      );
+    }
+  }
+
   Future<void> getAIDataCompare() async {
     AiCompareDataEntity? value = await AIControlAPI.getAIDataCompare(
       siteId: '$id',
@@ -85,7 +105,7 @@ class AIStrategyPreviewLogic extends GetxController {
   List<XyDataSeries<ChartData, DateTime>> priceSeries =
       <XyDataSeries<ChartData, DateTime>>[];
 
-  Future<void> fetchAIData() async {
+  Future<void> fetchAIData({CancelToken? cancelToken}) async {
     final startOfDay = DateTime.now();
     final start = DateTime(startOfDay.year, startOfDay.month, startOfDay.day);
     final end = DateTime(
@@ -100,6 +120,7 @@ class AIStrategyPreviewLogic extends GetxController {
       siteId: '$id',
       startTime: start.millisecondsSinceEpoch,
       endTime: end.millisecondsSinceEpoch,
+      cancelToken: cancelToken,
     );
     priceCurrencySymbol =
         (value?.currencyCode ?? (User.to.getCurrencyUnit())).currencySymbol;

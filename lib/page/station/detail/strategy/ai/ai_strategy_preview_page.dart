@@ -170,73 +170,78 @@ class AIStrategyPreviewPage extends StatelessWidget {
   }
 
   Widget _buildPowerChart(AIStrategyPreviewLogic logic) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-          width: double.maxFinite,
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  TKey.powerForecastChart.tr,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
+    return RepaintBoundary(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            width: double.maxFinite,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    TKey.powerForecastChart.tr,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(width: 5),
-              Container(
-                margin: EdgeInsetsDirectional.only(start: 15),
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Color(0x3328CCFF),
-                  border: Border.all(color: Color(0xFF28CCFF)),
-                  borderRadius: BorderRadius.circular(10),
+                SizedBox(width: 5),
+                Container(
+                  margin: EdgeInsetsDirectional.only(start: 15),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0x3328CCFF),
+                    border: Border.all(color: Color(0xFF28CCFF)),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: GradientText(
+                    gradientDirection: GradientDirection.btt,
+                    TKey.recommended.tr,
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
+                    colors: [Color(0xFF40F7FE), Color(0xFF1088EB)],
+                  ),
                 ),
-                child: GradientText(
-                  gradientDirection: GradientDirection.btt,
-                  TKey.recommended.tr,
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
-                  colors: [Color(0xFF40F7FE), Color(0xFF1088EB)],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(
-            color: Color(0xFF313540),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          width: double.maxFinite,
-          padding: EdgeInsetsDirectional.only(start: 8, end: 8, top: 10),
-          height: 320,
-          child: Column(
-            children: [
-              Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: Text(
-                  "(kW)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 14),
+            decoration: BoxDecoration(
+              color: Color(0xFF313540),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            width: double.maxFinite,
+            padding: EdgeInsetsDirectional.only(start: 8, end: 8, top: 10),
+            height: 320,
+            child: Column(
+              children: [
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(
+                    "(kW)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  ),
                 ),
-              ),
-              Expanded(
-                child: StrategyPowerLineChart(
-                  data: logic.series,
-                  minT: logic.minT,
-                  maxT: logic.maxT,
-                  axis: logic.axis,
+                Expanded(
+                  child: StrategyPowerLineChart(
+                    data: logic.series,
+                    minT: logic.minT,
+                    maxT: logic.maxT,
+                    axis: logic.axis,
+                  ),
                 ),
-              ),
-              _buildPowerLegend(),
-            ],
+                _buildPowerLegend(),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -302,48 +307,50 @@ class AIStrategyPreviewPage extends StatelessWidget {
   }
 
   Widget _buildPriceForecast(AIStrategyPreviewLogic logic) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-          alignment: AlignmentDirectional.centerStart,
-          width: double.maxFinite,
-          child: Text(
-            TKey.priceForecast.tr,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
+    return RepaintBoundary(
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            alignment: AlignmentDirectional.centerStart,
+            width: double.maxFinite,
+            child: Text(
+              TKey.priceForecast.tr,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(
-            color: Color(0xFF313540),
-            borderRadius: BorderRadius.circular(14),
-          ),
-          width: double.maxFinite,
-          padding: EdgeInsetsDirectional.only(start: 8, end: 8, top: 15),
-          height: 320,
-          child: Column(
-            children: [
-              Expanded(
-                child: StrategyPowerLineChart(
-                  data: logic.priceSeries,
-                  minT: logic.minT,
-                  maxT: logic.maxT,
-                  axis: logic.axis,
-                  numberFormat: NumberFormat.compactCurrency(
-                    symbol: logic.priceCurrencySymbol,
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 14),
+            decoration: BoxDecoration(
+              color: Color(0xFF313540),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            width: double.maxFinite,
+            padding: EdgeInsetsDirectional.only(start: 8, end: 8, top: 15),
+            height: 320,
+            child: Column(
+              children: [
+                Expanded(
+                  child: StrategyPowerLineChart(
+                    data: logic.priceSeries,
+                    minT: logic.minT,
+                    maxT: logic.maxT,
+                    axis: logic.axis,
+                    numberFormat: NumberFormat.compactCurrency(
+                      symbol: logic.priceCurrencySymbol,
+                    ),
                   ),
                 ),
-              ),
-              _buildPriceLegend(),
-            ],
+                _buildPriceLegend(),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

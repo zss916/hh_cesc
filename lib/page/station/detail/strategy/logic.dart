@@ -1,3 +1,4 @@
+import 'package:cescpro/core/tools/time_tools.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/ai.dart';
 import 'package:cescpro/http/bean/check_ai_open_entity.dart';
@@ -6,6 +7,7 @@ import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/f_line_chart.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -25,6 +27,8 @@ class StrategyPageLogic extends GetxController {
   bool get isFullDay => checkAiOpen?.isDaysEnough ?? false;
   int get runningDays => checkAiOpen?.runningDays ?? 0;
 
+  CancelToken cancelToken = CancelToken();
+
   @override
   void onInit() {
     super.onInit();
@@ -42,11 +46,14 @@ class StrategyPageLogic extends GetxController {
     checkOpenAI();
     fetchModelControl();
     queryStrategyProtected();
-    queryStrategyCurve();
+    // queryStrategyCurve();
+    loop();
   }
 
   @override
   void onClose() {
+    cancelToken.cancel("queryStrategyCurve");
+    TimeTools.instance.stop();
     super.onClose();
   }
 
@@ -81,9 +88,24 @@ class StrategyPageLogic extends GetxController {
   List<XyDataSeries<ChartData, DateTime>> series =
       <XyDataSeries<ChartData, DateTime>>[];
 
-  Future<void> queryStrategyCurve() async {
+  ///轮询
+  Future<void> loop() async {
+    try {
+      await queryStrategyCurve();
+    } finally {
+      TimeTools.instance.start(
+        duration: Duration(minutes: 2),
+        onCall: () {
+          queryStrategyCurve(cancelToken: cancelToken);
+        },
+      );
+    }
+  }
+
+  Future<void> queryStrategyCurve({CancelToken? cancelToken}) async {
     List<StrategyPowerItemEntity> value = await AIControlAPI.queryStrategyCurve(
       siteId: '$id',
+      cancelToken: cancelToken,
     );
 
     if (value.isNotEmpty) {

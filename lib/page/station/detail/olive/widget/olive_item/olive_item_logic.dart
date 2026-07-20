@@ -28,13 +28,13 @@ class OliveItemLogic extends GetxController {
 
   ///拓扑图
   SiteTopologyEntity? topology;
-  double get pvPower => topology?.pv?.power ?? 0;
+  /* double get pvPower => topology?.pv?.power ?? 0;
   double get gridPower => topology?.grid?.power ?? 0;
   double get loadPower => topology?.load?.power ?? 0;
   double get storagePower => topology?.storage?.power ?? 0;
   double get storageSoc => topology?.storage?.soc ?? 0;
   bool get isHasPv => topology?.hasPv ?? false;
-  List<SiteTopologyLine> line = [];
+  List<SiteTopologyLine> get line => topology?.line ?? [];*/
 
   ///判断获取货币符号
   String get currencyUnit => User.to.getCurrencyUnit();
@@ -140,7 +140,8 @@ class OliveItemLogic extends GetxController {
 
   Future<void> loadData() async {
     loadWeather();
-    getSiteTopology();
+    loop();
+    //getSiteTopology();
     getPointDetails();
     getSiteStatisticRecord();
   }
@@ -148,7 +149,7 @@ class OliveItemLogic extends GetxController {
   @override
   void onClose() {
     TimeTools.instance.stop();
-    topologyCancelToken.cancel();
+    topologyCancelToken.cancel("topologyCancelToken");
     super.onClose();
     AppLoading.dismiss();
   }
@@ -168,33 +169,25 @@ class OliveItemLogic extends GetxController {
   CancelToken topologyCancelToken = CancelToken();
 
   ///获取拓扑图
-  Future<void> loadSiteTopologyDelayed() async {
+  Future<void> loadSiteTopologyDelayed({CancelToken? cancelToken}) async {
     SiteTopologyEntity? value = await SiteAPI.getSiteTopology(
       siteId: siteId ?? 0,
-      cancelToken: topologyCancelToken,
+      cancelToken: cancelToken,
     );
     if (value != null) {
       topology = value;
-      line = value.line ?? [];
       update();
     }
   }
 
   ///拓扑图
-  Future<void> getSiteTopology() async {
+  Future<void> loop() async {
     try {
-      SiteTopologyEntity? value = await SiteAPI.getSiteTopology(
-        siteId: siteId ?? 0,
-      );
-      if (value != null) {
-        topology = value;
-        line = value.line ?? [];
-        update();
-      }
+      await loadSiteTopologyDelayed(cancelToken: null);
     } finally {
       TimeTools.instance.start(
         onCall: () {
-          loadSiteTopologyDelayed();
+          loadSiteTopologyDelayed(cancelToken: topologyCancelToken);
         },
       );
     }

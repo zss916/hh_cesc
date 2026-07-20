@@ -12,18 +12,18 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8
+  cupertino_icons: 1.0.8
   get: 4.7.3
   dio: ^5.10.0
   pretty_dio_logger: 1.4.0
   auto_size_text: 3.0.0
-  shared_preferences: ^2.5.5
+  shared_preferences: 2.5.5
   cached_network_image: 3.4.1
   flutter_screenutil: 5.9.3
   pull_to_refresh_simple: 3.0.3
   flutter_easyloading: 3.0.5
   event_bus: 2.0.1
-  logger: ^2.7.0
+  logger: 2.7.0
   url_launcher: 6.3.2
   image_picker: ^1.2.3
   path_provider: ^2.1.6

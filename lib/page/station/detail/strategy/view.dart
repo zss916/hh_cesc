@@ -170,22 +170,24 @@ class StrategyPage extends StatelessWidget {
   }
 
   Widget _buildPowerCurve({required StrategyPageLogic logic}) {
-    return Container(
-      width: double.maxFinite,
-      padding: EdgeInsetsDirectional.symmetric(horizontal: 14),
-      child: Column(
-        children: [
-          Container(
-            alignment: AlignmentDirectional.centerStart,
-            width: double.maxFinite,
-            child: Text(
-              TKey.powerCurve.tr,
-              style: TextStyle(fontSize: 16, color: Colors.white),
+    return RepaintBoundary(
+      child: Container(
+        width: double.maxFinite,
+        padding: EdgeInsetsDirectional.symmetric(horizontal: 14),
+        child: Column(
+          children: [
+            Container(
+              alignment: AlignmentDirectional.centerStart,
+              width: double.maxFinite,
+              child: Text(
+                TKey.powerCurve.tr,
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              ),
             ),
-          ),
-          Divider(height: 12, color: Colors.transparent),
-          _buildChart(logic: logic),
-        ],
+            Divider(height: 12, color: Colors.transparent),
+            _buildChart(logic: logic),
+          ],
+        ),
       ),
     );
   }

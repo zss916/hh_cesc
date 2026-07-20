@@ -10,6 +10,7 @@ import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class AIControlAPI {
@@ -56,13 +57,18 @@ class AIControlAPI {
     required String siteId,
     required int startTime,
     required int endTime,
+    CancelToken? cancelToken,
   }) async {
     try {
       Map<String, dynamic> map = {};
       map["siteId"] = siteId;
       map["startTime"] = startTime;
       map["endTime"] = endTime;
-      var result = await Http.instance.post(ApiPath.fetchAIData, data: map);
+      var result = await Http.instance.post(
+        ApiPath.fetchAIData,
+        data: map,
+        cancelToken: cancelToken,
+      );
       if (result["code"] == HttpStatus.ok) {
         AiPowerGraphEntity value = AiPowerGraphEntity.fromJson(result["data"]);
         return value;
@@ -152,9 +158,13 @@ class AIControlAPI {
   ///获取策略曲线和实时功率曲线
   static Future<List<StrategyPowerItemEntity>> queryStrategyCurve({
     required String siteId,
+    CancelToken? cancelToken,
   }) async {
     try {
-      var result = await Http.instance.get(ApiPath.queryStrategyCurve + siteId);
+      var result = await Http.instance.get(
+        ApiPath.queryStrategyCurve + siteId,
+        cancelToken: cancelToken,
+      );
       if (result["code"] == HttpStatus.ok) {
         List<StrategyPowerItemEntity> value = await compute(
           (List<dynamic> jsonList) =>
