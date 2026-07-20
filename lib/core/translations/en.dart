@@ -957,8 +957,8 @@ const en = {
   "backStrategy": "Back",
   "reason": "Reason:",
   "operator": "Operator:",
-  "predictSellingPrice": "Predict the electricity selling price",
-  "predictingElectricityPrices": "Predicting electricity prices",
+  "predictSellingPrice": "Predict The Electricity Selling Price",
+  "predictingElectricityPrices": "Predicting Electricity Prices",
   "running": "Running",
   "rememberPassword": "Remember Password",
 };
