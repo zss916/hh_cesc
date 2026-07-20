@@ -106,13 +106,13 @@ class AIStrategyPreviewPage extends StatelessWidget {
                 child: Row(
                   children: [
                     _buildProfitCell(
-                      '${logic.currencySymbol}${logic.aiAllRevenue}',
+                      '${logic.aiAllRevenue}',
                       TKey.aiStrategyProfit.tr,
                       false,
                     ),
                     VerticalDivider(width: 5, color: Colors.transparent),
                     _buildProfitCell(
-                      '${logic.currencySymbol}${logic.currentRevenue}',
+                      '${logic.currentRevenue}',
                       TKey.currentStrategyProfit.tr,
                       false,
                     ),
@@ -150,7 +150,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
                     Container(
                       margin: .only(left: 5),
                       child: Text(
-                        '${logic.currencySymbol}${logic.dayGrowthRevenue}',
+                        logic.dayGrowthRevenue,
                         style: TextStyle(
                           fontSize: 21.sp,
                           fontWeight: FontWeight.w700,

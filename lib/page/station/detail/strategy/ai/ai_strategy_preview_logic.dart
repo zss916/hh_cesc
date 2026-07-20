@@ -17,16 +17,22 @@ class AIStrategyPreviewLogic extends GetxController {
   AiCompareDataEntity? revenueForecast;
 
   ///提升幅度
-  String get profitGrowthRate => revenueForecast?.profitGrowthRate ?? "";
+  String get profitGrowthRate => revenueForecast?.profitGrowthRate ?? "-";
 
   ///ai策略收益
-  String? get aiAllRevenue => revenueForecast?.aiPredictTotalProfit ?? "0";
+  String? get aiAllRevenue => (revenueForecast?.aiPredictTotalProfit == null)
+      ? "-"
+      : "$currencySymbol${revenueForecast?.aiPredictTotalProfit ?? 0}";
 
   ///当前策略收益
-  String? get currentRevenue => revenueForecast?.actualTotalProfit ?? "0";
+  String? get currentRevenue => (revenueForecast?.actualTotalProfit == null)
+      ? "-"
+      : "$currencySymbol${revenueForecast?.actualTotalProfit ?? 0}";
 
   ///日增长收益
-  String get dayGrowthRevenue => revenueForecast?.profitGrowth ?? "0";
+  String get dayGrowthRevenue => (revenueForecast?.profitGrowth == null)
+      ? "-"
+      : "$currencySymbol${revenueForecast?.profitGrowth ?? 0}";
 
   ///货币符号
   String get currencySymbol =>

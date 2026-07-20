@@ -915,7 +915,7 @@ const en = {
   "currentStrategyProfit": "Current Strategy Profit",
   "improvementRate": "Improvement Rate",
   "profitEstimation": "Revenue forecast (next day)",
-  "dailyExtraEarning": "Expected daily earnings",
+  "dailyExtraEarning": "Expected Daily Earnings",
   "powerForecastChart": "Power Forecast Chart",
   "recommended": "Recommendation",
   "aiStrategyPlanning": "AI Strategy Planning",
