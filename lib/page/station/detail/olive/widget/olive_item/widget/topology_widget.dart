@@ -1,9 +1,6 @@
-import 'package:cescpro/core/tools/time_tools.dart';
 import 'package:cescpro/generated/assets.dart';
-import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/line/gplot_line_widget.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -758,4 +755,50 @@ class TopologyWidget extends StatelessWidget {
   }
 }
 
+/*class LoopWidget extends StatefulWidget {
+  SiteTopologyEntity? topology;
+  LoopWidget({super.key, this.topology});
 
+  @override
+  State<LoopWidget> createState() => _LoopWidgetState();
+}
+
+class _LoopWidgetState extends State<LoopWidget> with RouteAware {
+  Timer? _timer;
+  bool isPause = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 6), (timer) {
+      if (!isPause) {
+        if (mounted) {
+          setState(() {
+            debugPrint("====>>>>>LoopWidget");
+            widget.topology = null;
+          });
+        }
+      }
+    });
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    setState(() {
+      isPause = false;
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+    isPause = true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TopologyWidget(topology: widget.topology);
+  }
+}*/

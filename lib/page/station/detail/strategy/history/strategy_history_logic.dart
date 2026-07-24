@@ -3,6 +3,7 @@ import 'package:cescpro/http/api/ai.dart';
 import 'package:cescpro/http/bean/strategy_history_entity.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
 
 class StrategyHistoryLogic extends GetxController {
   int? id;
@@ -10,6 +11,11 @@ class StrategyHistoryLogic extends GetxController {
   ViewStateEnum viewState = ViewStateEnum.common;
 
   List<List<StrategyHistoryEntity>> list = [];
+
+  late RefreshController refreshCtrl = RefreshController(
+    initialRefresh: false,
+    initialLoadStatus: LoadStatus.canLoading,
+  );
 
   @override
   void onInit() {
@@ -20,19 +26,47 @@ class StrategyHistoryLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    fetchStrategyHistory();
+    refreshData();
   }
 
   @override
   void onClose() {
+    refreshCtrl.dispose();
     super.onClose();
   }
 
-  Future<void> fetchStrategyHistory() async {
-    viewState = ViewStateEnum.loading;
-    update();
+  void refreshAndLoadCtl(bool isRefresh, int size) {
+    if (isRefresh) {
+      refreshCtrl.refreshCompleted(resetFooterState: true);
+    } else {
+      if (size == 0) {
+        refreshCtrl.loadNoData();
+      } else {
+        refreshCtrl.loadComplete();
+      }
+    }
+  }
+
+  int pageNum = 1;
+
+  void refreshData() {
+    pageNum = 1;
+    fetchStrategyHistory(pageNum: pageNum);
+  }
+
+  void loadMoreData() {
+    pageNum += 1;
+    fetchStrategyHistory(pageNum: pageNum);
+  }
+
+  Future<void> fetchStrategyHistory({required int pageNum}) async {
+    if (list.isEmpty && pageNum == 1) {
+      viewState = ViewStateEnum.loading;
+      update();
+    }
     List<StrategyHistoryEntity> value = await AIControlAPI.fetchStrategyHistory(
       siteId: '$id',
+      pageNum: pageNum,
     );
     List<List<Map<String, dynamic>>> data = groupByDay(
       value.map((e) => e.toJson()).toList(),
@@ -40,8 +74,14 @@ class StrategyHistoryLogic extends GetxController {
     List<List<StrategyHistoryEntity>> historyList = data
         .map((e) => e.map((b) => StrategyHistoryEntity.fromJson(b)).toList())
         .toList();
-    list.assignAll(historyList);
-    viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
+    if (pageNum == 1) {
+      //list.assignAll(historyList);
+      list = historyList;
+    } else {
+      list.addAll(historyList);
+    }
+    refreshAndLoadCtl(pageNum == 1, historyList.length);
+    viewState = list.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
     update();
   }
 

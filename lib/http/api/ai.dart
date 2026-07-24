@@ -134,16 +134,21 @@ class AIControlAPI {
   ///策略历史
   static Future<List<StrategyHistoryEntity>> fetchStrategyHistory({
     required String siteId,
+    required int pageNum,
   }) async {
     try {
+      Map<String, dynamic> map = {};
+      map["pageNum"] = pageNum;
+      map["pageSize"] = 10;
       var result = await Http.instance.get(
         ApiPath.fetchStrategyHistory + siteId,
+        query: map,
       );
       if (result["code"] == HttpStatus.ok) {
         List<StrategyHistoryEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => StrategyHistoryEntity.fromJson(e)).toList(),
-          (result['data'] as List),
+          (result['data']['list'] as List),
         );
         return value;
       } else {

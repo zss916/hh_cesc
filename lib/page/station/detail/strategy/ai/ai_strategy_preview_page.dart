@@ -152,8 +152,8 @@ class AIStrategyPreviewPage extends StatelessWidget {
                       child: Text(
                         logic.dayGrowthRevenue,
                         style: TextStyle(
-                          fontSize: 21.sp,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
                           color: Color(0xff159FFF),
                         ),
                       ),
@@ -452,8 +452,8 @@ class AIStrategyPreviewPage extends StatelessWidget {
               value,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 21.sp,
-                fontWeight: FontWeight.w700,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
                 color: isUp ? const Color(0xff159FFF) : Colors.white,
               ),
             ),
