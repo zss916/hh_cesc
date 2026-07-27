@@ -40,6 +40,9 @@ class SiteDetailEntity {
   bool? hasPv;
   String? protocolVersion; //协议版本
   int? isTimeSlot; //是否分时，1用海外UI,0用原来的
+  bool? calculateRevenue;
+  bool? enableAi;
+  bool? enableStrategy; //是否策略
 
   ///设备数量
   int? containerCount; //设备数量2

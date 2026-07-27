@@ -99,6 +99,20 @@ abstract class AdminAPI {
     }
   }
 
+  /*  static Future<dynamic> getPermission() async {
+    try {
+      var result = await Http.instance.get("${ApiPath.getPermission}1");
+      if (result["code"] == HttpStatus.ok) {
+        return null;
+      } else {
+        AppLoading.toast(result["message"]);
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  }*/
+
   ///上传图片
   static Future<String?> uploadImage(String path) async {
     try {

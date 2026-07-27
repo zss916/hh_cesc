@@ -54,6 +54,7 @@ class SiteEntity {
   String? areaCode;
   String? protocolVersion; //协议版本
   bool? calculateRevenue; //是否计算收入
+  bool? enableStrategy; //是否开启策略
 
   SiteEntity();
 

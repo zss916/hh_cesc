@@ -36,7 +36,8 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.hasDevCount = hasDevCount;
   }
   final int? operationTimeMill = jsonConvert.convert<int>(
-      json['operationTimeMill']);
+    json['operationTimeMill'],
+  );
   if (operationTimeMill != null) {
     siteDetailEntity.operationTimeMill = operationTimeMill;
   }
@@ -53,7 +54,8 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.activePower = activePower;
   }
   final double? reactivePower = jsonConvert.convert<double>(
-      json['reactivePower']);
+    json['reactivePower'],
+  );
   if (reactivePower != null) {
     siteDetailEntity.reactivePower = reactivePower;
   }
@@ -130,13 +132,30 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.hasPv = hasPv;
   }
   final String? protocolVersion = jsonConvert.convert<String>(
-      json['protocolVersion']);
+    json['protocolVersion'],
+  );
   if (protocolVersion != null) {
     siteDetailEntity.protocolVersion = protocolVersion;
   }
   final int? isTimeSlot = jsonConvert.convert<int>(json['isTimeSlot']);
   if (isTimeSlot != null) {
     siteDetailEntity.isTimeSlot = isTimeSlot;
+  }
+  final bool? calculateRevenue = jsonConvert.convert<bool>(
+    json['calculateRevenue'],
+  );
+  if (calculateRevenue != null) {
+    siteDetailEntity.calculateRevenue = calculateRevenue;
+  }
+  final bool? enableAi = jsonConvert.convert<bool>(json['enableAi']);
+  if (enableAi != null) {
+    siteDetailEntity.enableAi = enableAi;
+  }
+  final bool? enableStrategy = jsonConvert.convert<bool>(
+    json['enableStrategy'],
+  );
+  if (enableStrategy != null) {
+    siteDetailEntity.enableStrategy = enableStrategy;
   }
   final int? containerCount = jsonConvert.convert<int>(json['containerCount']);
   if (containerCount != null) {
@@ -180,6 +199,9 @@ Map<String, dynamic> $SiteDetailEntityToJson(SiteDetailEntity entity) {
   data['hasPv'] = entity.hasPv;
   data['protocolVersion'] = entity.protocolVersion;
   data['isTimeSlot'] = entity.isTimeSlot;
+  data['calculateRevenue'] = entity.calculateRevenue;
+  data['enableAi'] = entity.enableAi;
+  data['enableStrategy'] = entity.enableStrategy;
   data['containerCount'] = entity.containerCount;
   return data;
 }
@@ -219,6 +241,9 @@ extension SiteDetailEntityExtension on SiteDetailEntity {
     bool? hasPv,
     String? protocolVersion,
     int? isTimeSlot,
+    bool? calculateRevenue,
+    bool? enableAi,
+    bool? enableStrategy,
     int? containerCount,
   }) {
     return SiteDetailEntity()
@@ -255,6 +280,9 @@ extension SiteDetailEntityExtension on SiteDetailEntity {
       ..hasPv = hasPv ?? this.hasPv
       ..protocolVersion = protocolVersion ?? this.protocolVersion
       ..isTimeSlot = isTimeSlot ?? this.isTimeSlot
+      ..calculateRevenue = calculateRevenue ?? this.calculateRevenue
+      ..enableAi = enableAi ?? this.enableAi
+      ..enableStrategy = enableStrategy ?? this.enableStrategy
       ..containerCount = containerCount ?? this.containerCount;
   }
 }

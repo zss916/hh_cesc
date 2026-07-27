@@ -213,4 +213,7 @@ class ApiPath {
   ///获取策略曲线和实时功率曲线
   static const String queryStrategyCurve =
       "/business/ctl/device/query/strategyCurve/";
+
+  ///获取角色的资源权限树
+  // static const String getPermission = "/business/resPermission/roleResTree/";
 }

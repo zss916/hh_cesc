@@ -4,62 +4,52 @@ import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
 AiCompareDataEntity $AiCompareDataEntityFromJson(Map<String, dynamic> json) {
   final AiCompareDataEntity aiCompareDataEntity = AiCompareDataEntity();
   final int? actualGridFeedGain = jsonConvert.convert<int>(
-    json['actualGridFeedGain'],
-  );
+      json['actualGridFeedGain']);
   if (actualGridFeedGain != null) {
     aiCompareDataEntity.actualGridFeedGain = actualGridFeedGain;
   }
   final int? actualPvSelfUseGain = jsonConvert.convert<int>(
-    json['actualPvSelfUseGain'],
-  );
+      json['actualPvSelfUseGain']);
   if (actualPvSelfUseGain != null) {
     aiCompareDataEntity.actualPvSelfUseGain = actualPvSelfUseGain;
   }
   final int? actualStorageProfit = jsonConvert.convert<int>(
-    json['actualStorageProfit'],
-  );
+      json['actualStorageProfit']);
   if (actualStorageProfit != null) {
     aiCompareDataEntity.actualStorageProfit = actualStorageProfit;
   }
   final int? aiPredictGridFeedGain = jsonConvert.convert<int>(
-    json['aiPredictGridFeedGain'],
-  );
+      json['aiPredictGridFeedGain']);
   if (aiPredictGridFeedGain != null) {
     aiCompareDataEntity.aiPredictGridFeedGain = aiPredictGridFeedGain;
   }
   final int? aiPredictPvSelfUseGain = jsonConvert.convert<int>(
-    json['aiPredictPvSelfUseGain'],
-  );
+      json['aiPredictPvSelfUseGain']);
   if (aiPredictPvSelfUseGain != null) {
     aiCompareDataEntity.aiPredictPvSelfUseGain = aiPredictPvSelfUseGain;
   }
   final int? aiPredictStorageProfit = jsonConvert.convert<int>(
-    json['aiPredictStorageProfit'],
-  );
+      json['aiPredictStorageProfit']);
   if (aiPredictStorageProfit != null) {
     aiCompareDataEntity.aiPredictStorageProfit = aiPredictStorageProfit;
   }
   final String? actualTotalProfit = jsonConvert.convert<String>(
-    json['actualTotalProfit'],
-  );
+      json['actualTotalProfit']);
   if (actualTotalProfit != null) {
     aiCompareDataEntity.actualTotalProfit = actualTotalProfit;
   }
   final String? aiPredictTotalProfit = jsonConvert.convert<String>(
-    json['aiPredictTotalProfit'],
-  );
+      json['aiPredictTotalProfit']);
   if (aiPredictTotalProfit != null) {
     aiCompareDataEntity.aiPredictTotalProfit = aiPredictTotalProfit;
   }
   final String? profitGrowth = jsonConvert.convert<String>(
-    json['profitGrowth'],
-  );
+      json['profitGrowth']);
   if (profitGrowth != null) {
     aiCompareDataEntity.profitGrowth = profitGrowth;
   }
   final String? profitGrowthRate = jsonConvert.convert<String>(
-    json['profitGrowthRate'],
-  );
+      json['profitGrowthRate']);
   if (profitGrowthRate != null) {
     aiCompareDataEntity.profitGrowthRate = profitGrowthRate;
   }
@@ -110,12 +100,12 @@ extension AiCompareDataEntityExtension on AiCompareDataEntity {
       ..actualGridFeedGain = actualGridFeedGain ?? this.actualGridFeedGain
       ..actualPvSelfUseGain = actualPvSelfUseGain ?? this.actualPvSelfUseGain
       ..actualStorageProfit = actualStorageProfit ?? this.actualStorageProfit
-      ..aiPredictGridFeedGain =
-          aiPredictGridFeedGain ?? this.aiPredictGridFeedGain
-      ..aiPredictPvSelfUseGain =
-          aiPredictPvSelfUseGain ?? this.aiPredictPvSelfUseGain
-      ..aiPredictStorageProfit =
-          aiPredictStorageProfit ?? this.aiPredictStorageProfit
+      ..aiPredictGridFeedGain = aiPredictGridFeedGain ??
+          this.aiPredictGridFeedGain
+      ..aiPredictPvSelfUseGain = aiPredictPvSelfUseGain ??
+          this.aiPredictPvSelfUseGain
+      ..aiPredictStorageProfit = aiPredictStorageProfit ??
+          this.aiPredictStorageProfit
       ..actualTotalProfit = actualTotalProfit ?? this.actualTotalProfit
       ..aiPredictTotalProfit = aiPredictTotalProfit ?? this.aiPredictTotalProfit
       ..profitGrowth = profitGrowth ?? this.profitGrowth

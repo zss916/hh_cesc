@@ -17,7 +17,7 @@ class MainLogic extends GetxController {
     loadCurrencyList();
   }
 
-  loadSites() async {
+  void loadSites() async {
     final (bool isSuccessful, List<SiteDataEntity> value) =
         await SiteAPI.postSites();
     if (isSuccessful) {

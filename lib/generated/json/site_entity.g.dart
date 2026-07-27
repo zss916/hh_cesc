@@ -214,6 +214,11 @@ SiteEntity $SiteEntityFromJson(Map<String, dynamic> json) {
   if (calculateRevenue != null) {
     siteEntity.calculateRevenue = calculateRevenue;
   }
+  final bool? enableStrategy = jsonConvert.convert<bool>(
+      json['enableStrategy']);
+  if (enableStrategy != null) {
+    siteEntity.enableStrategy = enableStrategy;
+  }
   return siteEntity;
 }
 
@@ -266,6 +271,7 @@ Map<String, dynamic> $SiteEntityToJson(SiteEntity entity) {
   data['areaCode'] = entity.areaCode;
   data['protocolVersion'] = entity.protocolVersion;
   data['calculateRevenue'] = entity.calculateRevenue;
+  data['enableStrategy'] = entity.enableStrategy;
   return data;
 }
 
@@ -317,6 +323,7 @@ extension SiteEntityExtension on SiteEntity {
     String? areaCode,
     String? protocolVersion,
     bool? calculateRevenue,
+    bool? enableStrategy,
   }) {
     return SiteEntity()
       ..cid = cid ?? this.cid
@@ -364,7 +371,8 @@ extension SiteEntityExtension on SiteEntity {
       ..cityCode = cityCode ?? this.cityCode
       ..areaCode = areaCode ?? this.areaCode
       ..protocolVersion = protocolVersion ?? this.protocolVersion
-      ..calculateRevenue = calculateRevenue ?? this.calculateRevenue;
+      ..calculateRevenue = calculateRevenue ?? this.calculateRevenue
+      ..enableStrategy = enableStrategy ?? this.enableStrategy;
   }
 }
 
