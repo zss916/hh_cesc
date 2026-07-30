@@ -930,16 +930,19 @@ const en = {
   "switchTab": "Switch",
   "adjustTab": "Adjust Parameters",
   "stopTab": "Stop",
-  "openTab": "启用",
+  "openTab": "Enable",
   "applyTitle": "Please contact your account manager",
   "applyContent":
       'The activation of AI strategies requires review and activation by your account manager. \nlease proactively contact the account manager, submit the activation application, and once approved, you can experience the AI intelligent strategy.',
   "knowTitle": "I know",
-  "totalPowerType": "总功率",
-  "subSystemType": "子系统",
-  "peakShavingAndValleyFillingMonthType": "削峰填谷(月)",
-  "peakShavingAndValleyFillingDayType": "削峰填谷(日)",
-  "selfGenerationAndSelfConsumptionType": "自发自用",
+  "totalPowerType": "Total Power",
+  "subSystemType": "Sub System",
+  "peakShavingAndValleyFillingMonthType":
+      "Peak Shaving And Valley Filling (Monthly)",
+  "peakShavingAndValleyFillingDayType":
+      "Peak Shaving And Valley Filling (Daily)",
+  "selfGenerationAndSelfConsumptionType":
+      "Self-Generation And Self-Consumption",
   "aiModeType": "AI Mode",
   "safeStrategy": "Protection Strategy",
   "volProtection": "Voltage Protection",
