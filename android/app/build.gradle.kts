@@ -13,6 +13,8 @@ android {
     compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
+    //externalNativeBuild { cmake { version "3.31.0" } }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -65,10 +67,10 @@ android {
             //signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = true
             isShrinkResources = true
-            /*proguardFiles(
+            proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
-            )*/
+            )
             ndk {
                 ndk.abiFilters.clear()
                 ndk.abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a"))
