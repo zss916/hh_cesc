@@ -103,7 +103,7 @@ class StationPage extends StatelessWidget {
       ViewStateEnum.empty => buildEmpty(logic: logic),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(child: CescGlowLoading()),
       ),
       _ => SizedBox.shrink(),
     };

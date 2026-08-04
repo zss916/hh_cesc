@@ -7,6 +7,7 @@ import 'package:cescpro/page/alarm/index/widget/alarm_item.dart';
 import 'package:cescpro/page/alarm/tab/view/history/history_alarm_logic.dart';
 import 'package:cescpro/page/alarm/tab/view/widget/alarm_filter_widget.dart';
 import 'package:cescpro/page/alarm/tab/view/widget/select_level_widget.dart';
+import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -67,7 +68,7 @@ class HistoryAlarmView extends StatelessWidget {
       ViewStateEnum.empty => buildEmpty(logic: logic),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(child: CescGlowLoading()),
       ),
       _ => SizedBox.shrink(),
     };

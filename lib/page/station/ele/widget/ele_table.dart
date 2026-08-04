@@ -36,112 +36,242 @@ class EleTableWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(
+          buildTableHead(),
+          if (logic.eleList.isNotEmpty) buildTableList() else buildEmptyTable(),
+        ],
+      ),
+    );
+  }
+
+  ///表头
+  Widget buildTableHead() => SizedBox(
+    width: double.maxFinite,
+    height: 80,
+    child: Row(
+      children: [
+        Expanded(
+          child: Container(
             width: double.maxFinite,
-            height: 80,
+            alignment: AlignmentDirectional.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(3)),
+              color: Colors.white10,
+            ),
+            child: AutoSizeText(
+              TKey.date.tr,
+              textAlign: TextAlign.center,
+              maxFontSize: 12,
+              minFontSize: 6,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        buildVChildItemDiver(),
+        if (isShowPv ?? true)
+          Expanded(
+            child: Container(
+              alignment: AlignmentDirectional.center,
+              decoration: BoxDecoration(color: Colors.white10),
+              width: double.maxFinite,
+              child: AutoSizeText(
+                "${TKey.photovoltaicPowerGeneration2.tr}\n(kWh)",
+                textAlign: TextAlign.center,
+                maxFontSize: 12,
+                minFontSize: 6,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+        if (isShowPv ?? true) buildVChildItemDiver(),
+        Expanded(
+          child: Container(
+            alignment: AlignmentDirectional.center,
+            decoration: BoxDecoration(color: Colors.white10),
+            width: double.maxFinite,
+            child: AutoSizeText(
+              "${TKey.gridEleGeneration.tr}\n(kWh)",
+              textAlign: TextAlign.center,
+              maxFontSize: 12,
+              minFontSize: 6,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        buildVChildItemDiver(),
+        Expanded(
+          child: Container(
+            alignment: AlignmentDirectional.center,
+            decoration: BoxDecoration(color: Colors.white10),
+            width: double.maxFinite,
+            child: AutoSizeText(
+              "${TKey.energyStorageCharge.tr}\n(kWh)",
+              textAlign: TextAlign.center,
+              maxFontSize: 12,
+              minFontSize: 6,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        buildVChildItemDiver(),
+        Expanded(
+          child: Container(
+            alignment: AlignmentDirectional.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topRight: Radius.circular(3)),
+              color: Colors.white10,
+            ),
+            width: double.maxFinite,
+            child: AutoSizeText(
+              "${TKey.energyStorageDischarge.tr}\n(kWh)",
+              textAlign: TextAlign.center,
+              maxFontSize: 12,
+              minFontSize: 6,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  ///表格
+  Widget buildTableList() => Container(
+    width: double.maxFinite,
+    constraints: BoxConstraints(minHeight: (66).toDouble()),
+    child: ListView.builder(
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: logic.eleList.length,
+      itemBuilder: (_, i) {
+        ReportDataEntity item = logic.eleList[i];
+        return Container(
+          width: double.maxFinite,
+          constraints: BoxConstraints(minHeight: 66),
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(width: 1, color: Color(0xFF5A5D66))),
+          ),
+          child: IntrinsicHeight(
             child: Row(
               children: [
                 Expanded(
                   child: Container(
+                    // color: Colors.amber,
+                    padding: EdgeInsetsDirectional.all(10),
                     width: double.maxFinite,
                     alignment: AlignmentDirectional.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(3),
-                      ),
-                      color: Colors.white10,
-                    ),
-                    child: AutoSizeText(
-                      TKey.date.tr,
+                    child: Text(
+                      item.showDayDate(queryType.value),
+                      //item.dayDate ?? "--",
                       textAlign: TextAlign.center,
-                      maxFontSize: 12,
-                      minFontSize: 6,
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
+                        color: const Color(0xD9FFFFFF),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
                 ),
-                buildVChildItemDiver(),
-                if (isShowPv ?? true)
+                if (item.isHasPV)
                   Expanded(
                     child: Container(
-                      alignment: AlignmentDirectional.center,
-                      decoration: BoxDecoration(color: Colors.white10),
+                      padding: EdgeInsetsDirectional.all(0),
                       width: double.maxFinite,
-                      child: AutoSizeText(
-                        "${TKey.photovoltaicPowerGeneration2.tr}\n(kWh)",
-                        textAlign: TextAlign.center,
-                        maxFontSize: 12,
-                        minFontSize: 6,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          left: BorderSide(width: 1, color: Color(0xFF5A5D66)),
+                        ),
+                      ),
+                      alignment: AlignmentDirectional.center,
+                      child: Text(
+                        item.isHasPV
+                            ? (item.pvGeneration ?? 0).formatNum()
+                            : "--",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
+                          color: const Color(0xD9FFFFFF),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
                   ),
-                if (isShowPv ?? true) buildVChildItemDiver(),
                 Expanded(
                   child: Container(
-                    alignment: AlignmentDirectional.center,
-                    decoration: BoxDecoration(color: Colors.white10),
+                    padding: EdgeInsetsDirectional.all(0),
                     width: double.maxFinite,
-                    child: AutoSizeText(
-                      "${TKey.gridEleGeneration.tr}\n(kWh)",
-                      textAlign: TextAlign.center,
-                      maxFontSize: 12,
-                      minFontSize: 6,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-                buildVChildItemDiver(),
-                Expanded(
-                  child: Container(
-                    alignment: AlignmentDirectional.center,
-                    decoration: BoxDecoration(color: Colors.white10),
-                    width: double.maxFinite,
-                    child: AutoSizeText(
-                      "${TKey.energyStorageCharge.tr}\n(kWh)",
-                      textAlign: TextAlign.center,
-                      maxFontSize: 12,
-                      minFontSize: 6,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
-                buildVChildItemDiver(),
-                Expanded(
-                  child: Container(
-                    alignment: AlignmentDirectional.center,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(3),
+                      border: Border(
+                        left: BorderSide(width: 1, color: Color(0xFF5A5D66)),
                       ),
-                      color: Colors.white10,
                     ),
-                    width: double.maxFinite,
-                    child: AutoSizeText(
-                      "${TKey.energyStorageDischarge.tr}\n(kWh)",
-                      textAlign: TextAlign.center,
-                      maxFontSize: 12,
-                      minFontSize: 6,
+                    alignment: AlignmentDirectional.center,
+                    child: Text(
+                      item.isShow ? (item.gridFeed ?? 0).formatNum() : "--",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
+                        color: const Color(0xD9FFFFFF),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsetsDirectional.all(0),
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        left: BorderSide(width: 1, color: Color(0xFF5A5D66)),
+                      ),
+                    ),
+                    alignment: AlignmentDirectional.center,
+                    child: Text(
+                      (item.pos ?? 0).formatNum(),
+                      style: TextStyle(
+                        color: const Color(0xD9FFFFFF),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsetsDirectional.all(10),
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        left: BorderSide(width: 1, color: Color(0xFF5A5D66)),
+                      ),
+                    ),
+                    alignment: AlignmentDirectional.center,
+                    child: Text(
+                      (item.neg ?? 0).formatNum(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xD9FFFFFF),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),
@@ -149,154 +279,132 @@ class EleTableWidget extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: double.maxFinite,
-            constraints: BoxConstraints(minHeight: (66).toDouble()),
-            child: ListView.builder(
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: logic.eleList.length,
-              itemBuilder: (_, i) {
-                ReportDataEntity item = logic.eleList[i];
-                return Container(
+        );
+      },
+    ),
+  );
+
+  ///空表格
+  Widget buildEmptyTable() => Container(
+    width: double.maxFinite,
+    constraints: BoxConstraints(minHeight: (66).toDouble()),
+    child: ListView.builder(
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: 8,
+      itemBuilder: (_, i) => Container(
+        width: double.maxFinite,
+        constraints: BoxConstraints(minHeight: 66),
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(width: 1, color: Color(0xFF5A5D66))),
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: EdgeInsetsDirectional.all(10),
                   width: double.maxFinite,
-                  constraints: BoxConstraints(minHeight: 66),
+                  alignment: AlignmentDirectional.center,
+                  child: Text(
+                    "",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: const Color(0xD9FFFFFF),
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsetsDirectional.all(0),
+                  width: double.maxFinite,
                   decoration: BoxDecoration(
                     border: Border(
-                      top: BorderSide(width: 1, color: Color(0xFF5A5D66)),
+                      left: BorderSide(width: 1, color: Color(0xFF5A5D66)),
                     ),
                   ),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            // color: Colors.amber,
-                            padding: EdgeInsetsDirectional.all(10),
-                            width: double.maxFinite,
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              item.showDayDate(queryType.value),
-                              //item.dayDate ?? "--",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: const Color(0xD9FFFFFF),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                        if (item.isHasPV)
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsetsDirectional.all(0),
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                    width: 1,
-                                    color: Color(0xFF5A5D66),
-                                  ),
-                                ),
-                              ),
-                              alignment: AlignmentDirectional.center,
-                              child: Text(
-                                item.isHasPV
-                                    ? (item.pvGeneration ?? 0).formatNum()
-                                    : "--",
-                                style: TextStyle(
-                                  color: const Color(0xD9FFFFFF),
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsetsDirectional.all(0),
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  width: 1,
-                                  color: Color(0xFF5A5D66),
-                                ),
-                              ),
-                            ),
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              item.isShow
-                                  ? (item.gridFeed ?? 0).formatNum()
-                                  : "--",
-                              style: TextStyle(
-                                color: const Color(0xD9FFFFFF),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsetsDirectional.all(0),
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  width: 1,
-                                  color: Color(0xFF5A5D66),
-                                ),
-                              ),
-                            ),
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              (item.pos ?? 0).formatNum(),
-                              style: TextStyle(
-                                color: const Color(0xD9FFFFFF),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsetsDirectional.all(10),
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  width: 1,
-                                  color: Color(0xFF5A5D66),
-                                ),
-                              ),
-                            ),
-                            alignment: AlignmentDirectional.center,
-                            child: Text(
-                              (item.neg ?? 0).formatNum(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xD9FFFFFF),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                  alignment: AlignmentDirectional.center,
+                  child: Text(
+                    "",
+                    style: TextStyle(
+                      color: const Color(0xD9FFFFFF),
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsetsDirectional.all(0),
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: BorderSide(width: 1, color: Color(0xFF5A5D66)),
+                    ),
+                  ),
+                  alignment: AlignmentDirectional.center,
+                  child: Text(
+                    "",
+                    style: TextStyle(
+                      color: const Color(0xD9FFFFFF),
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsetsDirectional.all(0),
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: BorderSide(width: 1, color: Color(0xFF5A5D66)),
+                    ),
+                  ),
+                  alignment: AlignmentDirectional.center,
+                  child: Text(
+                    "",
+                    style: TextStyle(
+                      color: const Color(0xD9FFFFFF),
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsetsDirectional.all(10),
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      left: BorderSide(width: 1, color: Color(0xFF5A5D66)),
+                    ),
+                  ),
+                  alignment: AlignmentDirectional.center,
+                  child: Text(
+                    "",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xD9FFFFFF),
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
-    );
-  }
+    ),
+  );
 
   ///子组件
   Widget buildChildItem({required String title}) => Container(

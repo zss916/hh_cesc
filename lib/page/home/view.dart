@@ -19,39 +19,59 @@ class HomePage extends StatelessWidget {
             backgroundColor: Colors.white,
             onRefresh: () => refresh(logic),
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  if (AppState.instance.isShowRevenue())
-                    IncomeWidget(
-                      totalIncome: logic.totalIncome,
-                      todayIncome: logic.todayIncome,
-                      lastDayIncome: logic.lastDayIncome,
-                    ),
-                  BuildStationOverview3(
-                    capacity: logic.capacity,
-                    totalPos: logic.totalPos,
-                    totalNeg: logic.totalNeg,
-                    totalPvNeg: logic.totalPvNeg,
-                  ),
-                  Divider(height: 10.h, color: Colors.transparent),
-                  BuildDeviceAndSiteCount(
-                    deviceNum: logic.deviceNum,
-                    siteNum: logic.siteNum,
-                  ),
-                  BuildStationStatus(
-                    normalNum: logic.normalNum,
-                    faultNum: logic.faultNum,
-                    alarmNum: logic.alarmNum,
-                    cutOffNum: logic.cutOffNum,
-                  ),
-                  BuildEnvironmental(co2: logic.co2, coal: logic.coal),
-                  Divider(height: 150.h, color: Colors.transparent),
-                ],
-              ),
+              child: buildBody(viewState: logic.viewState, logic: logic),
             ),
           );
         },
       ),
+    );
+  }
+
+  Widget buildBody({
+    required ViewStateEnum viewState,
+    required HomeLogic logic,
+  }) {
+    return switch (viewState) {
+      ViewStateEnum.common => buildContent(logic),
+      ViewStateEnum.loading => Container(
+        width: double.maxFinite,
+        margin: EdgeInsetsDirectional.only(top: 200),
+        child: Center(child: CescGlowLoading()),
+      ),
+      ViewStateEnum.empty => SizedBox.shrink(),
+      _ => SizedBox.shrink(),
+    };
+  }
+
+  Widget buildContent(HomeLogic logic) {
+    return Column(
+      children: [
+        if (AppState.instance.isShowRevenue())
+          IncomeWidget(
+            totalIncome: logic.totalIncome,
+            todayIncome: logic.todayIncome,
+            lastDayIncome: logic.lastDayIncome,
+          ),
+        BuildStationOverview3(
+          capacity: logic.capacity,
+          totalPos: logic.totalPos,
+          totalNeg: logic.totalNeg,
+          totalPvNeg: logic.totalPvNeg,
+        ),
+        Divider(height: 10.h, color: Colors.transparent),
+        BuildDeviceAndSiteCount(
+          deviceNum: logic.deviceNum,
+          siteNum: logic.siteNum,
+        ),
+        BuildStationStatus(
+          normalNum: logic.normalNum,
+          faultNum: logic.faultNum,
+          alarmNum: logic.alarmNum,
+          cutOffNum: logic.cutOffNum,
+        ),
+        BuildEnvironmental(co2: logic.co2, coal: logic.coal),
+        Divider(height: 150.h, color: Colors.transparent),
+      ],
     );
   }
 

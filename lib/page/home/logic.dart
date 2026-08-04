@@ -32,6 +32,13 @@ class HomeLogic extends GetxController {
   //中断告警数
   int cutOffNum = 0;
 
+  ViewStateEnum viewState = ViewStateEnum.common;
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
   @override
   void onReady() {
     super.onReady();
@@ -45,7 +52,9 @@ class HomeLogic extends GetxController {
   }
 
   Future<void> loadHome({bool loading = true}) async {
-    if (loading) AppLoading.show();
+    //if (loading) AppLoading.show();
+    if (loading) viewState = ViewStateEnum.loading;
+    update();
     final (HomeStatisticEntity? data, HomeData2Entity? data2) =
         await HomeAPI.loadHomeData().whenComplete(() => AppLoading.dismiss());
 
@@ -66,6 +75,7 @@ class HomeLogic extends GetxController {
       faultNum = data.faultNum ?? 0;
       alarmNum = data.alarmNum ?? 0;
       cutOffNum = data.cutOffNum ?? 0;
+      viewState = ViewStateEnum.common;
       update();
     }
 
@@ -85,6 +95,7 @@ class HomeLogic extends GetxController {
       faultNum = data2.faultNum ?? 0;
       alarmNum = data2.alarmNum ?? 0;
       cutOffNum = data2.cutOffNum ?? 0;
+      viewState = ViewStateEnum.common;
       update();
     }
   }

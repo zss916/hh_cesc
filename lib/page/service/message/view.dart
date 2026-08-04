@@ -34,7 +34,7 @@ class MessageCenterPage extends StatelessWidget {
       ViewStatus.empty => buildEmpty(),
       ViewStatus.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(child: CescGlowLoading()),
       ),
       _ => SizedBox.shrink(),
     };

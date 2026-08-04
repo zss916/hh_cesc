@@ -3,6 +3,7 @@ import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/strategy_history_entity.dart';
+import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
 import 'package:cescpro/page/station/detail/strategy/history/strategy_history_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,9 +37,7 @@ class StrategyHistoryPage extends StatelessWidget {
       ViewStateEnum.empty => buildEmpty(logic: logic),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(
-          child: CircularProgressIndicator(color: Color(0xFF168FED)),
-        ),
+        child: Center(child: CescGlowLoading()),
       ),
       _ => SizedBox.shrink(),
     };
