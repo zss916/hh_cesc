@@ -43,7 +43,7 @@ class OverviewItemWidget extends StatelessWidget {
       ),
       padding: EdgeInsetsDirectional.all(12.r),
       width: 170.w,
-      height: 120.h,
+      height: 127.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

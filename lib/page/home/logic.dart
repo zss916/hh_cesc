@@ -35,7 +35,7 @@ class HomeLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    loadHome();
+    loadHome(loading: true);
   }
 
   @override

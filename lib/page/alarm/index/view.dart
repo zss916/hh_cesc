@@ -1,5 +1,6 @@
 part of 'index.dart';
 
+@Deprecated("remove")
 class AlarmPage extends StatelessWidget {
   const AlarmPage({super.key});
 

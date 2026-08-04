@@ -178,12 +178,14 @@ class PageTools {
     int? siteId,
     bool? isDaysEnough,
     int? runningDays,
+    int? modeType,
   }) => Get.toNamed(
     APages.aiPreview,
     arguments: {
       "siteId": siteId,
       "isDaysEnough": isDaysEnough,
       "runningDays": runningDays,
+      "modeType": modeType,
     },
   );
 }

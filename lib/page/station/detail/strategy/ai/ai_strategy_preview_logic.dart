@@ -41,6 +41,7 @@ class AIStrategyPreviewLogic extends GetxController {
 
   bool isFullDay = false;
   int runningDays = 0;
+  int? modeType;
 
   ///预测电价货币符号
   String priceCurrencySymbol = User.to.getCurrencyUnit().currencySymbol;
@@ -56,6 +57,7 @@ class AIStrategyPreviewLogic extends GetxController {
         false;
     runningDays =
         ((Get.arguments as Map<String, dynamic>)['runningDays'] as int?) ?? 0;
+    modeType = ((Get.arguments as Map<String, dynamic>)['modeType'] as int?);
   }
 
   @override
@@ -114,8 +116,17 @@ class AIStrategyPreviewLogic extends GetxController {
   List<XyDataSeries<ChartData, DateTime>> priceSeries =
       <XyDataSeries<ChartData, DateTime>>[];
 
+  DateTime getDate() {
+    if (modeType == 6) {
+      return DateTime.now();
+    } else {
+      final tomorrow = DateTime.now().add(const Duration(days: 1));
+      return tomorrow;
+    }
+  }
+
   Future<void> fetchAIData({CancelToken? cancelToken}) async {
-    final startOfDay = DateTime.now();
+    final startOfDay = getDate();
     final start = DateTime(startOfDay.year, startOfDay.month, startOfDay.day);
     final end = DateTime(
       startOfDay.year,
@@ -169,6 +180,7 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xff2dd4bf),
           width: 1.5,
           markerSettings: markerSettings,
+          // enableTooltip: true,
         ),
       );
 
@@ -282,10 +294,19 @@ class AIStrategyPreviewLogic extends GetxController {
         ),
       );
 
-      for (final p in predictPowerList) {
+      ///获取时间轴
+      List<DateTime> timeList = aiPowerGraph
+          .map((e) => ChartData.toDateTime((e.timestamp ?? 0)))
+          .toList();
+      for (final p in timeList) {
+        if (p.isBefore(minT)) minT = p;
+        if (p.isAfter(maxT)) maxT = p;
+      }
+
+      /*for (final p in predictPowerList) {
         if (p.time.isBefore(minT)) minT = p.time;
         if (p.time.isAfter(maxT)) maxT = p.time;
-      }
+      }*/
     }
 
     update();

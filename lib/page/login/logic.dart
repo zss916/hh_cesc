@@ -121,8 +121,15 @@ class LoginLogic extends GetxController {
       User.setLimitLogin(limit: !(userInfo?.canLogin ?? true));
       if (userInfo?.canLogin ?? true) {
         await loadCurrencyList(userInfo);
-        final (bool isSuccessful, List<SiteEntity> list) =
-            await SiteAPI.postSiteList(pageNum: 1, name: null, status: null);
+        final (
+          bool isSuccessful,
+          List<SiteEntity> list,
+        ) = await SiteAPI.postSiteList(
+          pageNum: 1,
+          pageSize: 2,
+          name: null,
+          status: null,
+        );
         AppLoading.dismiss();
         if (list.length == 1) {
           PageTools.offAllNamedStation(siteId: list.first.id, site: list.first);

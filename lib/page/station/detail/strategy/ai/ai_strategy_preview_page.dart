@@ -30,7 +30,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
                 _buildRevenueForecast(logic),
                 _buildPowerChart(logic),
                 _buildPriceForecast(logic),
-                _buildApplySection(),
+                if (logic.modeType != 6) _buildApplySection(),
               ],
             );
           },
@@ -85,7 +85,9 @@ class AIStrategyPreviewPage extends StatelessWidget {
           alignment: AlignmentDirectional.centerStart,
           width: double.maxFinite,
           child: Text(
-            TKey.profitEstimation.tr,
+            logic.modeType == 6
+                ? TKey.todayEstimatedRevenue.tr
+                : TKey.profitEstimation.tr,
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -93,6 +95,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
             ),
           ),
         ),
+
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 14),
           decoration: BoxDecoration(
@@ -100,69 +103,88 @@ class AIStrategyPreviewPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
           ),
           width: double.maxFinite,
-          child: Column(
-            children: [
-              IntrinsicHeight(
-                child: Row(
+          child: logic.modeType == 6
+              ? Container(
+                  margin: EdgeInsetsDirectional.symmetric(
+                    horizontal: 10,
+                    vertical: 20,
+                  ),
+                  child: Text(
+                    logic.currentRevenue ?? "-",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : Column(
                   children: [
-                    _buildProfitCell(
-                      '${logic.aiAllRevenue}',
-                      TKey.aiStrategyProfit.tr,
-                      false,
-                    ),
-                    VerticalDivider(width: 5, color: Colors.transparent),
-                    _buildProfitCell(
-                      '${logic.currentRevenue}',
-                      TKey.currentStrategyProfit.tr,
-                      false,
-                    ),
-                    VerticalDivider(width: 5, color: Colors.transparent),
-                    _buildProfitCell(
-                      logic.profitGrowthRate,
-                      TKey.improvementRate.tr,
-                      true,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 6),
-              Divider(
-                height: 1,
-                color: Color(0x1AFFFFFF),
-                indent: 18,
-                endIndent: 18,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 14,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        TKey.dailyExtraEarning.tr,
-                        textAlign: .left,
-                        style: TextStyle(fontSize: 12, color: Colors.white),
+                    IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          _buildProfitCell(
+                            '${logic.aiAllRevenue}',
+                            TKey.aiStrategyProfit.tr,
+                            false,
+                          ),
+                          VerticalDivider(width: 5, color: Colors.transparent),
+                          _buildProfitCell(
+                            '${logic.currentRevenue}',
+                            TKey.currentStrategyProfit.tr,
+                            false,
+                          ),
+                          VerticalDivider(width: 5, color: Colors.transparent),
+                          _buildProfitCell(
+                            logic.profitGrowthRate,
+                            TKey.improvementRate.tr,
+                            true,
+                          ),
+                        ],
                       ),
                     ),
-
+                    const SizedBox(height: 6),
+                    Divider(
+                      height: 1,
+                      color: Color(0x1AFFFFFF),
+                      indent: 18,
+                      endIndent: 18,
+                    ),
                     Container(
-                      margin: .only(left: 5),
-                      child: Text(
-                        logic.dayGrowthRevenue,
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xff159FFF),
-                        ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 18,
+                        vertical: 14,
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              TKey.dailyExtraEarning.tr,
+                              textAlign: .left,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+
+                          Container(
+                            margin: .only(left: 5),
+                            child: Text(
+                              logic.dayGrowthRevenue,
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xff159FFF),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
         ),
         Divider(height: 22, color: Colors.transparent),
       ],
@@ -217,7 +239,12 @@ class AIStrategyPreviewPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
             ),
             width: double.maxFinite,
-            padding: EdgeInsetsDirectional.only(start: 8, end: 8, top: 10),
+            padding: EdgeInsetsDirectional.only(
+              start: 8,
+              end: 8,
+              top: 10,
+              bottom: 8,
+            ),
             height: 320,
             child: Column(
               children: [
@@ -234,9 +261,14 @@ class AIStrategyPreviewPage extends StatelessWidget {
                     minT: logic.minT,
                     maxT: logic.maxT,
                     axis: logic.axis,
+                    colors: [
+                      Color(0xFF3874F2),
+                      Color(0xfffbbf24),
+                      Color(0xffff9933),
+                    ],
                   ),
                 ),
-                _buildPowerLegend(),
+                // _buildPowerLegend(),
               ],
             ),
           ),
@@ -245,7 +277,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPowerLegend() {
+  /*Widget _buildPowerLegend() {
     return Container(
       width: double.maxFinite,
       alignment: AlignmentDirectional.center,
@@ -290,7 +322,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
         ],
       ),
     );
-  }
+  }*/
 
   Widget _buildLegendItem(Widget icon, String text) {
     return Row(
@@ -330,7 +362,12 @@ class AIStrategyPreviewPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
             ),
             width: double.maxFinite,
-            padding: EdgeInsetsDirectional.only(start: 8, end: 8, top: 15),
+            padding: EdgeInsetsDirectional.only(
+              start: 8,
+              end: 8,
+              top: 15,
+              bottom: 8,
+            ),
             height: 320,
             child: Column(
               children: [
@@ -340,12 +377,13 @@ class AIStrategyPreviewPage extends StatelessWidget {
                     minT: logic.minT,
                     maxT: logic.maxT,
                     axis: logic.axis,
+                    colors: [Color(0xff2dd4bf), Color(0xffecc207)],
                     numberFormat: NumberFormat.compactCurrency(
                       symbol: logic.priceCurrencySymbol,
                     ),
                   ),
                 ),
-                _buildPriceLegend(),
+                // _buildPriceLegend(),
               ],
             ),
           ),
@@ -354,7 +392,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceLegend() {
+  /*Widget _buildPriceLegend() {
     return Container(
       alignment: AlignmentDirectional.center,
       width: double.maxFinite,
@@ -391,7 +429,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 
   Widget _buildApplySection() {
     return Container(

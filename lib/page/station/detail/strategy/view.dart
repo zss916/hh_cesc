@@ -226,7 +226,12 @@ class StrategyPage extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       height: 350,
-      padding: EdgeInsetsDirectional.only(start: 6, end: 15, top: 10),
+      padding: EdgeInsetsDirectional.only(
+        start: 6,
+        end: 15,
+        top: 10,
+        bottom: 8,
+      ),
       decoration: BoxDecoration(
         color: Color(0xFF313540),
         borderRadius: BorderRadius.circular(14),
@@ -246,47 +251,11 @@ class StrategyPage extends StatelessWidget {
               minT: logic.minT,
               maxT: logic.maxT,
               axis: logic.axis,
+              colors: [Color(0xff4a9eff), Color(0xff2dd4bf)],
             ),
           ),
-          _buildLegend(),
         ],
       ),
-    );
-  }
-
-  Widget _buildLegend() {
-    return Container(
-      width: double.maxFinite,
-      padding: const EdgeInsets.only(top: 8, bottom: 15, left: 8, right: 8),
-      child: Wrap(
-        spacing: 16,
-        alignment: WrapAlignment.center,
-        children: [
-          _buildLegendItem(const Color(0xff4a9eff), TKey.strategyCurve.tr),
-          _buildLegendItem(const Color(0xff2dd4bf), TKey.actualOperation.tr),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLegendItem(Color color, String text) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 8,
-          height: 8,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(width: 3),
-        Text(
-          text,
-          style: TextStyle(fontSize: 12, color: const Color(0xffcccccc)),
-        ),
-      ],
     );
   }
 
@@ -313,6 +282,7 @@ class StrategyPage extends StatelessWidget {
                 siteId: logic.id,
                 isDaysEnough: logic.isFullDay,
                 runningDays: logic.runningDays,
+                modeType: logic.modelCtrl?.activeType,
               ),
             ),
           ),

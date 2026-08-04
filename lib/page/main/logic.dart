@@ -11,8 +11,6 @@ class MainLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-
-    ///todo 通过改弹窗，可以优化
     loadSites();
     loadCurrencyList();
   }

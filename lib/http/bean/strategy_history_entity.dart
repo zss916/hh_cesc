@@ -41,7 +41,7 @@ class StrategyHistoryEntity {
   ///转化时间
   String toTime() {
     if (createTime != null) {
-      final dt = DateTime.parse(createTime ?? "");
+      final dt = DateTime.parse(createTime ?? "").toUtc();
       String time = DateFormat('HH:mm:ss').format(dt);
       return time;
     } else {
@@ -51,7 +51,7 @@ class StrategyHistoryEntity {
 
   String toDate() {
     if (createTime != null) {
-      final dt = DateTime.parse(createTime ?? "");
+      final dt = DateTime.parse(createTime ?? "").toUtc();
       String time = DateFormat('yyyy-MM-dd').format(dt);
       return time;
     } else {

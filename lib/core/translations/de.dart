@@ -318,7 +318,7 @@ const de = {
   "applyTitle": "Bitte kontaktieren Sie Ihren Kundenmanager.",
   "applyContent":
       'Die Aktivierung von KI-Richtlinien erfordert eine Überprüfung und Einleitung durch Ihren Account Manager. Bitte wenden Sie sich aktiv an den Account Manager und stellen Sie einen Antrag auf Eröffnung ein, um die KI-Strategie nach der Überprüfung zu erleben.',
-  "knowTitle": "Ja, ich weiß.",
+  "knowTitle": "OK",
   "totalPowerType": "Gesamtleistung",
   "subSystemType": "Subsystem",
   "peakShavingAndValleyFillingMonthType": "Spitzenfüllung (Monat)",
@@ -341,8 +341,9 @@ const de = {
   "backStrategy": "Zurück",
   "reason": "Grund:",
   "operator": "Betreiber:",
-  "predictSellingPrice": "Vorhersagen des Stromverkaufspreises",
-  "predictingElectricityPrices": "Strompreise vorhersagen",
+  "predictSellingPrice": "Prognose Verkaufspreis",
+  "predictingElectricityPrices": "Prognose Kaufpreis",
   "running": "Laufen",
   "rememberPassword": "Passwort merken",
+  "todayEstimatedRevenue": "Prognostizierter heutiger Ertrag",
 };

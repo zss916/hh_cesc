@@ -67,10 +67,10 @@ android {
             //signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = true
             isShrinkResources = true
-            proguardFiles(
+           /* proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
-            )
+            )*/
             ndk {
                 ndk.abiFilters.clear()
                 ndk.abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a"))

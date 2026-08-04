@@ -165,6 +165,14 @@ class ChartData {
 
   final DateTime time;
   final double value;
+
+  static DateTime toDateTime(num n) {
+    // final num n = raw as num;
+    final DateTime parsed = n > 1e12
+        ? DateTime.fromMillisecondsSinceEpoch(n.toInt())
+        : DateTime.fromMillisecondsSinceEpoch((n.toInt() * 1000));
+    return parsed;
+  }
 }
 
 /// X 轴自适应：根据数据时间范围自动决定间隔和格式

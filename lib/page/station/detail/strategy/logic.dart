@@ -24,7 +24,7 @@ class StrategyPageLogic extends GetxController {
   bool get running => modelCtrl?.running ?? false;
   StrategyProtectedEntity? protected;
   CheckAiOpenEntity? checkAiOpen;
-  bool get isFullDay => checkAiOpen?.isDaysEnough ?? false;
+  bool get isFullDay => checkAiOpen?.daysEnough ?? false;
   int get runningDays => checkAiOpen?.runningDays ?? 0;
 
   CancelToken cancelToken = CancelToken();
@@ -113,8 +113,12 @@ class StrategyPageLogic extends GetxController {
     if (value.isNotEmpty) {
       series.clear();
 
+      List<StrategyPowerItemEntity> strategyPowerData = value
+          .where((e) => e.strategyPower != null)
+          .toList();
+
       ///strategyPower
-      List<ChartData> strategyPowerList = value
+      List<ChartData> strategyPowerList = strategyPowerData
           .map(
             (e) => ChartData.fromJson({
               'time': e.time,
@@ -123,17 +127,18 @@ class StrategyPageLogic extends GetxController {
           )
           .toList();
 
-      series.add(
-        FastLineSeries<ChartData, DateTime>(
-          name: TKey.strategyCurve.tr,
-          dataSource: strategyPowerList,
-          xValueMapper: (p, _) => p.time,
-          yValueMapper: (p, _) => p.value,
-          color: Color(0xff4a9eff),
-          width: 1.5,
-          markerSettings: markerSettings,
-        ),
-        /*AreaSeries<ChartData, DateTime>(
+      if (strategyPowerList.isNotEmpty) {
+        series.add(
+          FastLineSeries<ChartData, DateTime>(
+            name: TKey.strategyCurve.tr,
+            dataSource: strategyPowerList,
+            xValueMapper: (p, _) => p.time,
+            yValueMapper: (p, _) => p.value,
+            color: Color(0xff4a9eff),
+            width: 1.5,
+            markerSettings: markerSettings,
+          ),
+          /*AreaSeries<ChartData, DateTime>(
           name: TKey.strategyCurve.tr,
           dataSource: strategyPowerList,
           xValueMapper: (e, _) => e.time,
@@ -143,26 +148,32 @@ class StrategyPageLogic extends GetxController {
           borderWidth: 1.5,
           markerSettings: markerSettings,
         ),*/
-      );
+        );
+      }
+
+      List<StrategyPowerItemEntity> actualPowerData = value
+          .where((e) => e.actualPower != null)
+          .toList();
 
       ///actualPower
-      List<ChartData> actualPowerList = value
+      List<ChartData> actualPowerList = actualPowerData
           .map(
             (e) => ChartData.fromJson({'time': e.time, 'value': e.actualPower}),
           )
           .toList();
 
-      series.add(
-        FastLineSeries<ChartData, DateTime>(
-          name: TKey.actualOperation.tr,
-          dataSource: actualPowerList,
-          xValueMapper: (p, _) => p.time,
-          yValueMapper: (p, _) => p.value,
-          color: Color(0xff2dd4bf),
-          width: 1.5,
-          markerSettings: markerSettings,
-        ),
-        /*AreaSeries<ChartData, DateTime>(
+      if (actualPowerList.isNotEmpty) {
+        series.add(
+          FastLineSeries<ChartData, DateTime>(
+            name: TKey.actualOperation.tr,
+            dataSource: actualPowerList,
+            xValueMapper: (p, _) => p.time,
+            yValueMapper: (p, _) => p.value,
+            color: Color(0xff2dd4bf),
+            width: 1.5,
+            markerSettings: markerSettings,
+          ),
+          /*AreaSeries<ChartData, DateTime>(
           name: TKey.actualOperation.tr,
           dataSource: actualPowerList,
           xValueMapper: (e, _) => e.time,
@@ -172,11 +183,16 @@ class StrategyPageLogic extends GetxController {
           borderWidth: 1.5,
           markerSettings: markerSettings,
         ),*/
-      );
+        );
 
-      for (final p in actualPowerList) {
-        if (p.time.isBefore(minT)) minT = p.time;
-        if (p.time.isAfter(maxT)) maxT = p.time;
+        ///获取时间轴
+        List<DateTime> timeList = value
+            .map((e) => ChartData.toDateTime((e.time ?? 0)))
+            .toList();
+        for (final p in timeList) {
+          if (p.isBefore(minT)) minT = p;
+          if (p.isAfter(maxT)) maxT = p;
+        }
       }
 
       update();

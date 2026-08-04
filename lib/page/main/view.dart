@@ -89,7 +89,6 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
                 HomePage(),
                 StationPage(),
                 AlarmTabPage(),
-                //AlarmPage(),
                 ServicePage(),
               ],
             ),

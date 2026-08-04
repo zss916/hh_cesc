@@ -35,7 +35,6 @@ class StationLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    //loadData();
     refreshData();
   }
 

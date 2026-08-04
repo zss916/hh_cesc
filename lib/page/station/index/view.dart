@@ -205,8 +205,7 @@ class StationPage extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Container(
-                    constraints: BoxConstraints(maxWidth: 150.w),
+                  Expanded(
                     child: Text(
                       item.showSiteName,
                       maxLines: 1,
@@ -214,14 +213,14 @@ class StationPage extends StatelessWidget {
                       style: TextStyle(color: Colors.white, fontSize: 18.sp),
                     ),
                   ),
-                  Spacer(),
+                  //Spacer(),
+                  SizedBox(width: 10),
+                  if (item.status != null) StatusTag(status: item.status ?? 99),
                   Wrap(
-                    spacing: 5.w,
+                    spacing: 0.w,
                     children: [
                       //if ((item.types ?? []).isNotEmpty)
                       // CommonTag(type: (item.types ?? []).first),
-                      if (item.status != null)
-                        StatusTag(status: item.status ?? 99),
                     ],
                   ),
                 ],

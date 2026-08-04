@@ -7,7 +7,7 @@ export 'package:cescpro/generated/json/check_ai_open_entity.g.dart';
 
 @JsonSerializable()
 class CheckAiOpenEntity {
-  bool? isDaysEnough; //是否满足运行天数（>=7天）
+  bool? daysEnough; //是否满足运行天数（>=7天）
   int? runningDays; //实际运行天数（向下取整）
   bool? hasBuyPrice; //是否配置了买电电价
 

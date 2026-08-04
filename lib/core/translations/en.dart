@@ -598,6 +598,7 @@ class TKey {
       "predictingElectricityPrices";
   static const String running = "running";
   static const String rememberPassword = "rememberPassword";
+  static const String todayEstimatedRevenue = "todayEstimatedRevenue";
 }
 
 const en = {
@@ -907,8 +908,8 @@ const en = {
   "socLowerLimit": "SOC Lower Limit",
   "strategyHistory": "Strategy History",
   "aiStrategyPreview": "AI Preview",
-  "strategyCurve": "Strategy Curve",
-  "actualOperation": "Actual Operation",
+  "strategyCurve": "Target Strategy Curve",
+  "actualOperation": "Actual Operation Curve",
   "aiStrategyPreviewTitle": "AI Strategy Preview",
   "aiSmartOptimization": "AI Smart Strategy Optimization",
   "aiStrategyProfit": "AI Strategy Profit",
@@ -933,8 +934,8 @@ const en = {
   "openTab": "Enable",
   "applyTitle": "Please contact your account manager",
   "applyContent":
-      'The activation of AI strategies requires review and activation by your account manager. \nlease proactively contact the account manager, submit the activation application, and once approved, you can experience the AI intelligent strategy.',
-  "knowTitle": "I know",
+      'Please contact your account managerAI strategy activation needs to be reviewed and approved by your account manager.\nPlease proactively contact your account manager to submit an activation application.\nOnce approved, you will be able to use the AI strategy.',
+  "knowTitle": "OK",
   "totalPowerType": "Total Power",
   "subSystemType": "Sub System",
   "peakShavingAndValleyFillingMonthType":
@@ -960,8 +961,9 @@ const en = {
   "backStrategy": "Back",
   "reason": "Reason:",
   "operator": "Operator:",
-  "predictSellingPrice": "Predict The Electricity Selling Price",
-  "predictingElectricityPrices": "Predicting Electricity Prices",
+  "predictSellingPrice": "Forecast Selling Price",
+  "predictingElectricityPrices": "Forecast Purchase Price",
   "running": "Running",
   "rememberPassword": "Remember Password",
+  "todayEstimatedRevenue": "Today's estimated revenue",
 };

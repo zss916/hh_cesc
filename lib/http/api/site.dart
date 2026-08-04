@@ -83,6 +83,7 @@ class SiteAPI {
     int? groupId,
     String? adcode,
     int? total,
+    int pageSize = 10,
   }) async {
     if (Mock.isGuest) {
       return (true, Mock.site(pageNum == 1, status));
@@ -91,7 +92,7 @@ class SiteAPI {
     try {
       Map<String, dynamic> map = {};
       map["pageNum"] = pageNum;
-      map["pageSize"] = 10;
+      map["pageSize"] = pageSize;
       if (cid != null) {
         map["cid"] = cid;
       }

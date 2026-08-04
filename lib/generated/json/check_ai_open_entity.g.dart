@@ -3,9 +3,9 @@ import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 
 CheckAiOpenEntity $CheckAiOpenEntityFromJson(Map<String, dynamic> json) {
   final CheckAiOpenEntity checkAiOpenEntity = CheckAiOpenEntity();
-  final bool? isDaysEnough = jsonConvert.convert<bool>(json['isDaysEnough']);
-  if (isDaysEnough != null) {
-    checkAiOpenEntity.isDaysEnough = isDaysEnough;
+  final bool? daysEnough = jsonConvert.convert<bool>(json['daysEnough']);
+  if (daysEnough != null) {
+    checkAiOpenEntity.daysEnough = daysEnough;
   }
   final int? runningDays = jsonConvert.convert<int>(json['runningDays']);
   if (runningDays != null) {
@@ -20,7 +20,7 @@ CheckAiOpenEntity $CheckAiOpenEntityFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> $CheckAiOpenEntityToJson(CheckAiOpenEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
-  data['isDaysEnough'] = entity.isDaysEnough;
+  data['daysEnough'] = entity.daysEnough;
   data['runningDays'] = entity.runningDays;
   data['hasBuyPrice'] = entity.hasBuyPrice;
   return data;
@@ -28,12 +28,12 @@ Map<String, dynamic> $CheckAiOpenEntityToJson(CheckAiOpenEntity entity) {
 
 extension CheckAiOpenEntityExtension on CheckAiOpenEntity {
   CheckAiOpenEntity copyWith({
-    bool? isDaysEnough,
+    bool? daysEnough,
     int? runningDays,
     bool? hasBuyPrice,
   }) {
     return CheckAiOpenEntity()
-      ..isDaysEnough = isDaysEnough ?? this.isDaysEnough
+      ..daysEnough = daysEnough ?? this.daysEnough
       ..runningDays = runningDays ?? this.runningDays
       ..hasBuyPrice = hasBuyPrice ?? this.hasBuyPrice;
   }
