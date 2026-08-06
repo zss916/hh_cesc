@@ -32,8 +32,17 @@ class APages {
   static const aiPreview = '/aiPreview';
   static const strategyHistory = '/strategyHistory';
   static const aIProgressDialog = '/showAIProgressDialog';
+  static const hStrategyChart = '/hStrategyChart';
+  static const hPowerForecastChart = '/hPowerForecastChart';
+  static const hPriceForecastChart = '/hPriceForecastChart';
 
   static final List<GetPage> routes = [
+    GetPage(name: hPriceForecastChart, page: () => PriceForecastChartPage()),
+
+    GetPage(name: hPowerForecastChart, page: () => PowerForecastChartPage()),
+
+    GetPage(name: hStrategyChart, page: () => StrategyChartPage()),
+
     GetPage(name: hRevenueChart, page: () => RevenueChartPage()),
 
     GetPage(name: hPowerGraphChart, page: () => PowerGraphChartPage2()),

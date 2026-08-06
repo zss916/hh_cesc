@@ -1,4 +1,5 @@
 import 'package:cescpro/components/common_app_bar.dart';
+import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/ai_strategy_preview_logic.dart';
@@ -490,45 +491,68 @@ class AIStrategyPreviewPage extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 14),
-            decoration: BoxDecoration(
-              color: Color(0xFF313540),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            width: double.maxFinite,
-            padding: EdgeInsetsDirectional.only(
-              start: 8,
-              end: 8,
-              top: 10,
-              bottom: 8,
-            ),
-            height: 320,
-            child: Column(
-              children: [
-                Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text(
-                    "(kW)",
-                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 14),
+                decoration: BoxDecoration(
+                  color: Color(0xFF313540),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                width: double.maxFinite,
+                padding: EdgeInsetsDirectional.only(
+                  start: 8,
+                  end: 8,
+                  top: 10,
+                  bottom: 8,
+                ),
+                height: 320,
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        "(kW)",
+                        style: TextStyle(
+                          color: Color(0x80FFFFFF),
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: StrategyPowerLineChart(
+                        data: logic.series,
+                        minT: logic.minT,
+                        maxT: logic.maxT,
+                        axis: logic.axis,
+                        colors: [
+                          Color(0xFF3874F2),
+                          Color(0xfffbbf24),
+                          Color(0xffff9933),
+                        ],
+                      ),
+                    ),
+                    // _buildPowerLegend(),
+                  ],
+                ),
+              ),
+              if (logic.series.isNotEmpty)
+                PositionedDirectional(
+                  top: 5,
+                  end: 5 + 15,
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(APages.hPowerForecastChart);
+                    },
+                    child: Icon(
+                      Icons.zoom_out_map_rounded,
+                      size: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                Expanded(
-                  child: StrategyPowerLineChart(
-                    data: logic.series,
-                    minT: logic.minT,
-                    maxT: logic.maxT,
-                    axis: logic.axis,
-                    colors: [
-                      Color(0xFF3874F2),
-                      Color(0xfffbbf24),
-                      Color(0xffff9933),
-                    ],
-                  ),
-                ),
-                // _buildPowerLegend(),
-              ],
-            ),
+            ],
           ),
         ],
       ),
@@ -613,42 +637,65 @@ class AIStrategyPreviewPage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 14),
-            decoration: BoxDecoration(
-              color: Color(0xFF313540),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            width: double.maxFinite,
-            padding: EdgeInsetsDirectional.only(
-              start: 8,
-              end: 8,
-              top: 10,
-              bottom: 8,
-            ),
-            height: 320,
-            child: Column(
-              children: [
-                Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Text(
-                    logic.priceCurrencyUnit,
-                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 14),
+                decoration: BoxDecoration(
+                  color: Color(0xFF313540),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                width: double.maxFinite,
+                padding: EdgeInsetsDirectional.only(
+                  start: 8,
+                  end: 8,
+                  top: 10,
+                  bottom: 8,
+                ),
+                height: 320,
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Text(
+                        logic.priceCurrencyUnit,
+                        style: TextStyle(
+                          color: Color(0x80FFFFFF),
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: StrategyPowerLineChart(
+                        data: logic.priceSeries,
+                        minT: logic.minT,
+                        maxT: logic.maxT,
+                        axis: logic.axis,
+                        colors: [Color(0xff2dd4bf), Color(0xffecc207)],
+                        numberFormat: NumberFormat.compactCurrency(symbol: ""),
+                      ),
+                    ),
+                    // _buildPriceLegend(),
+                  ],
+                ),
+              ),
+              if (logic.series.isNotEmpty)
+                PositionedDirectional(
+                  top: 5,
+                  end: 5 + 15,
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(APages.hPriceForecastChart);
+                    },
+                    child: Icon(
+                      Icons.zoom_out_map_rounded,
+                      size: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                Expanded(
-                  child: StrategyPowerLineChart(
-                    data: logic.priceSeries,
-                    minT: logic.minT,
-                    maxT: logic.maxT,
-                    axis: logic.axis,
-                    colors: [Color(0xff2dd4bf), Color(0xffecc207)],
-                    numberFormat: NumberFormat.compactCurrency(symbol: ""),
-                  ),
-                ),
-                // _buildPriceLegend(),
-              ],
-            ),
+            ],
           ),
         ],
       ),

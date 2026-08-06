@@ -27,59 +27,56 @@ class StrategyPowerLineChart extends StatelessWidget {
     return (minT.isAtSameMomentAs(maxT))
         ? buildUnableToDraw()
         : Container(
-            padding: EdgeInsetsDirectional.only(top: 10),
-            child: Container(
-              margin: EdgeInsetsDirectional.only(top: 0),
-              width: double.maxFinite,
-              height: double.maxFinite,
-              child: SfCartesianChart(
-                margin: EdgeInsets.all(0),
-                plotAreaBorderWidth: 0.0,
-                primaryXAxis: DateTimeAxis(
-                  title: AxisTitle(text: ''),
-                  axisLine: AxisLine(color: Colors.white10, width: 1),
-                  dateFormat: DateFormat('HH:mm'),
-                  enableAutoIntervalOnZooming: true,
-                  intervalType: DateTimeIntervalType.minutes,
-                  minimum: minT,
-                  maximum: maxT,
-                  edgeLabelPlacement: EdgeLabelPlacement.shift,
-                  majorGridLines: const MajorGridLines(width: 0),
-                  labelStyle: TextStyle(fontSize: 8, color: Color(0x80FFFFFF)),
-                ),
-                primaryYAxis: NumericAxis(
-                  title: AxisTitle(text: ''),
-                  numberFormat: numberFormat,
-                  axisLine: AxisLine(width: 0, color: Colors.transparent),
-                  labelStyle: TextStyle(color: Color(0x80FFFFFF), fontSize: 8),
-                  majorGridLines: MajorGridLines(
-                    width: 0.5,
-                    dashArray: <double>[5, 5],
-                    color: Color(0x80FFFFFF),
-                  ),
-                  majorTickLines: MajorTickLines(size: 0),
-                ),
-                trackballBehavior: buildTrackballBehavior(colors),
-                zoomPanBehavior: zoomPanBehavior,
-                series: data,
-                legend: Legend(
-                  isVisible: true,
-                  position: LegendPosition.bottom,
-                  itemPadding: 12.0,
-                  overflowMode: LegendItemOverflowMode.scroll,
-                  orientation: LegendItemOrientation.horizontal,
-                  legendItemBuilder:
-                      (String name, dynamic series, dynamic point, int index) =>
-                          buildLegendItem(
-                            name: name,
-                            color: colors.isEmpty
-                                ? Colors.white24
-                                : colors[index],
-                          ),
-                  textStyle: TextStyle(fontSize: 12),
-                ),
-                //tooltipBehavior: _tooltip,
+            margin: EdgeInsetsDirectional.only(top: 10),
+            width: double.maxFinite,
+            height: double.maxFinite,
+            child: SfCartesianChart(
+              margin: EdgeInsets.all(0),
+              plotAreaBorderWidth: 0.0,
+              primaryXAxis: DateTimeAxis(
+                title: AxisTitle(text: ''),
+                axisLine: AxisLine(color: Colors.white10, width: 1),
+                dateFormat: DateFormat('HH:mm'),
+                enableAutoIntervalOnZooming: true,
+                intervalType: DateTimeIntervalType.minutes,
+                minimum: minT,
+                maximum: maxT,
+                edgeLabelPlacement: EdgeLabelPlacement.shift,
+                majorGridLines: const MajorGridLines(width: 0),
+                labelStyle: TextStyle(fontSize: 8, color: Color(0x80FFFFFF)),
               ),
+              primaryYAxis: NumericAxis(
+                title: AxisTitle(text: ''),
+                numberFormat: numberFormat,
+                axisLine: AxisLine(width: 0, color: Colors.transparent),
+                labelStyle: TextStyle(color: Color(0x80FFFFFF), fontSize: 8),
+                majorGridLines: MajorGridLines(
+                  width: 0.5,
+                  dashArray: <double>[5, 5],
+                  color: Color(0x80FFFFFF),
+                ),
+                majorTickLines: MajorTickLines(size: 0),
+              ),
+              trackballBehavior: buildTrackballBehavior(colors),
+              zoomPanBehavior: zoomPanBehavior,
+              series: data,
+              legend: Legend(
+                isVisible: true,
+                position: LegendPosition.bottom,
+                itemPadding: 12.0,
+                overflowMode: LegendItemOverflowMode.scroll,
+                orientation: LegendItemOrientation.horizontal,
+                legendItemBuilder:
+                    (String name, dynamic series, dynamic point, int index) =>
+                        buildLegendItem(
+                          name: name,
+                          color: colors.isEmpty
+                              ? Colors.white24
+                              : colors[index],
+                        ),
+                textStyle: TextStyle(fontSize: 12),
+              ),
+              //tooltipBehavior: _tooltip,
             ),
           );
   }

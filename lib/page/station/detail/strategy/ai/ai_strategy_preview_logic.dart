@@ -136,7 +136,15 @@ class AIStrategyPreviewLogic extends GetxController {
 
   Future<void> fetchAIData({CancelToken? cancelToken}) async {
     final startOfDay = getDate();
-    final start = DateTime(startOfDay.year, startOfDay.month, startOfDay.day);
+    final start = DateTime(
+      startOfDay.year,
+      startOfDay.month,
+      startOfDay.day,
+      0,
+      0,
+      0,
+      000,
+    );
     final end = DateTime(
       startOfDay.year,
       startOfDay.month,
@@ -161,6 +169,9 @@ class AIStrategyPreviewLogic extends GetxController {
     if (aiPowerGraph.isNotEmpty) {
       series.clear();
       priceSeries.clear();
+
+      maxT = start;
+      minT = start;
 
       ///预测用电电价
       List<ChartData> predictConsumptionPriceList = aiPowerGraph
@@ -311,6 +322,7 @@ class AIStrategyPreviewLogic extends GetxController {
       List<DateTime> timeList = aiPowerGraph
           .map((e) => ChartData.toDateTime((e.timestamp ?? 0)))
           .toList();
+
       for (final p in timeList) {
         if (p.isBefore(minT)) minT = p;
         if (p.isAfter(maxT)) maxT = p;

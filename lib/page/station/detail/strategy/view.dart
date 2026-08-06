@@ -223,39 +223,62 @@ class StrategyPage extends StatelessWidget {
   }
 
   Widget _buildChart({required StrategyPageLogic logic}) {
-    return Container(
-      width: double.maxFinite,
-      height: 350,
-      padding: EdgeInsetsDirectional.only(
-        start: 6,
-        end: 15,
-        top: 10,
-        bottom: 8,
-      ),
-      decoration: BoxDecoration(
-        color: Color(0xFF313540),
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Column(
-        children: [
-          Align(
-            alignment: AlignmentDirectional.centerStart,
-            child: Text(
-              "(kW)",
-              style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        Container(
+          width: double.maxFinite,
+          height: 360,
+          padding: EdgeInsetsDirectional.only(
+            start: 6,
+            end: 15,
+            top: 15,
+            bottom: 8,
+          ),
+          decoration: BoxDecoration(
+            color: Color(0xFF313540),
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Column(
+            children: [
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Container(
+                  margin: EdgeInsetsDirectional.only(top: 0),
+                  child: Text(
+                    "(kW)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: StrategyPowerLineChart(
+                  data: logic.series,
+                  minT: logic.minT,
+                  maxT: logic.maxT,
+                  axis: logic.axis,
+                  colors: [Color(0xff4a9eff), Color(0xff2dd4bf)],
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (logic.series.isNotEmpty)
+          PositionedDirectional(
+            top: 8,
+            end: 8,
+            child: InkWell(
+              onTap: () {
+                Get.toNamed(APages.hStrategyChart);
+              },
+              child: Icon(
+                Icons.zoom_out_map_rounded,
+                size: 20,
+                color: Colors.white,
+              ),
             ),
           ),
-          Expanded(
-            child: StrategyPowerLineChart(
-              data: logic.series,
-              minT: logic.minT,
-              maxT: logic.maxT,
-              axis: logic.axis,
-              colors: [Color(0xff4a9eff), Color(0xff2dd4bf)],
-            ),
-          ),
-        ],
-      ),
+      ],
     );
   }
 
