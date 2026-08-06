@@ -1,17 +1,17 @@
 part of 'index.dart';
 
 class StationDetailLogic extends GetxController {
-  SiteEntity? siteEntity;
-  bool enableStrategy = false;
+  /* SiteEntity? siteEntity;
+  bool enableStrategy = false;*/
 
   @override
   void onInit() {
     super.onInit();
-    siteEntity =
+    /* siteEntity =
         ((Get.arguments as Map<String, dynamic>)['site'] as SiteEntity?);
     if (siteEntity != null) {
       enableStrategy = siteEntity?.enableStrategy ?? false;
-    }
+    }*/
   }
 
   @override

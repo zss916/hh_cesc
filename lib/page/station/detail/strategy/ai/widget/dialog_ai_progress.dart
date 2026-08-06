@@ -82,6 +82,7 @@ void showAIProgressDialog({required int day}) {
       ),
     ),
     routeSettings: RouteSettings(name: APages.aIProgressDialog),
+    barrierColor: Colors.black,
     barrierDismissible: false,
   );
 }

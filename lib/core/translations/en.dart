@@ -598,7 +598,11 @@ class TKey {
       "predictingElectricityPrices";
   static const String running = "running";
   static const String rememberPassword = "rememberPassword";
-  static const String todayEstimatedRevenue = "todayEstimatedRevenue";
+  //static const String todayEstimatedRevenue = "todayEstimatedRevenue";
+  static const String expectedDailyRevenue = "expectedDailyRevenue";
+  static const String expectedDailyRevenueTip = "expectedDailyRevenueTip";
+  static const String expectedMonthRevenue = "expectedMonthRevenue";
+  static const String expectedMonthRevenueTip = "expectedMonthRevenueTip";
 }
 
 const en = {
@@ -915,7 +919,7 @@ const en = {
   "aiStrategyProfit": "AI Strategy Profit",
   "currentStrategyProfit": "Current Strategy Profit",
   "improvementRate": "Improvement Rate",
-  "profitEstimation": "Revenue forecast (next day)",
+  "profitEstimation": "Revenue forecast",
   "dailyExtraEarning": "Expected Daily Earnings",
   "powerForecastChart": "Power Forecast Chart",
   "recommended": "Recommendation",
@@ -952,8 +956,7 @@ const en = {
   "antiProtection": "Anti Backflow Protection",
   "needProtection": "Demand Protection",
   "strategyBannerContent":
-      "Generate the optimal strategy for the next day based on photovoltaic forecasting, load forecasting, weather forecasting, and electricity price dynamics",
-
+      "Optimal strategy generation based on photovoltaic forecasting, load forecasting, weather forecasts, and electricity price dynamics",
   "strategyProgressTitle": "AI is not yet ready for data accumulation",
   "strategyProgressContent":
       "AI strategy requires at least 7 days of operational data to learn the characteristics of your power plant \nAfter accumulation is completed, AI strategy preview will be automatically activated",
@@ -965,5 +968,11 @@ const en = {
   "predictingElectricityPrices": "Forecast Purchase Price",
   "running": "Running",
   "rememberPassword": "Remember Password",
-  "todayEstimatedRevenue": "Today's estimated revenue",
+  "expectedDailyRevenue": "Expected daily revenue increase",
+  "expectedDailyRevenueTip":
+      "Daily revenue comparison relative to the current control strategy",
+  "expectedMonthRevenue": "Expected monthly revenue increase",
+  "expectedMonthRevenueTip":
+      "Extrapolated estimate based on current month's operating conditions",
+  //"todayEstimatedRevenue": "Today's estimated revenue",
 };

@@ -45,8 +45,8 @@ class StrategyPageLogic extends GetxController {
   void onReady() {
     super.onReady();
     checkOpenAI();
-    fetchModelControl();
-    queryStrategyProtected();
+    //fetchModelControl();
+    //queryStrategyProtected();
     // queryStrategyCurve();
     loop();
   }
@@ -62,17 +62,19 @@ class StrategyPageLogic extends GetxController {
     checkAiOpen = await AIControlAPI.checkOpenAI(siteId: '$id');
   }
 
-  Future<void> fetchModelControl() async {
+  Future<void> fetchModelControl({CancelToken? cancelToken}) async {
     CtrlModelEntity? value = await AIControlAPI.fetchModelControl(
       siteId: '$id',
+      cancelToken: cancelToken,
     );
     modelCtrl = value;
     update();
   }
 
-  Future<void> queryStrategyProtected() async {
+  Future<void> queryStrategyProtected({CancelToken? cancelToken}) async {
     StrategyProtectedEntity? value = await AIControlAPI.queryStrategyProtected(
       siteId: '$id',
+      cancelToken: cancelToken,
     );
     protected = value;
     update();
@@ -92,12 +94,17 @@ class StrategyPageLogic extends GetxController {
   ///轮询
   Future<void> loop() async {
     try {
-      await queryStrategyCurve();
+      fetchModelControl();
+      queryStrategyProtected();
+      queryStrategyCurve();
     } finally {
       TimeTools.instance.start(
         tag: strategyPageLogicTag,
         duration: Duration(minutes: 2),
+        //duration: Duration(seconds: 5),
         onCall: () {
+          fetchModelControl(cancelToken: cancelToken);
+          queryStrategyProtected(cancelToken: cancelToken);
           queryStrategyCurve(cancelToken: cancelToken);
         },
       );

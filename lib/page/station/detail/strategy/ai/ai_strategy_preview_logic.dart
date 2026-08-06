@@ -21,9 +21,17 @@ class AIStrategyPreviewLogic extends GetxController {
   String get profitGrowthRate => revenueForecast?.profitGrowthRate ?? "-";
 
   ///ai策略收益
-  String? get aiAllRevenue => (revenueForecast?.aiPredictTotalProfit == null)
+  String? get aiAllRevenue2 => (revenueForecast?.aiPredictTotalProfit == null)
       ? "-"
       : "$currencySymbol${revenueForecast?.aiPredictTotalProfit ?? 0}";
+
+  String? get aiAllRevenue => (revenueForecast?.aiPredictTotalProfit == null)
+      ? "-"
+      : "${revenueForecast?.aiPredictTotalProfit ?? 0}";
+
+  String? get aiAllRevenueMonth => revenueForecast?.aiAllRevenueMonth ?? "-";
+
+  String? get aiAllRevenueUnit => revenueForecast?.currency ?? "";
 
   ///当前策略收益
   String? get currentRevenue => (revenueForecast?.actualTotalProfit == null)
@@ -44,7 +52,8 @@ class AIStrategyPreviewLogic extends GetxController {
   int? modeType;
 
   ///预测电价货币符号
-  String priceCurrencySymbol = User.to.getCurrencyUnit().currencySymbol;
+  String priceCurrencySymbol2 = User.to.getCurrencyUnit().currencySymbol;
+  String priceCurrencyUnit = '';
 
   String aiStrategyPreviewTag = "AIStrategyPreviewLogic";
 
@@ -135,6 +144,7 @@ class AIStrategyPreviewLogic extends GetxController {
       23,
       59,
       59,
+      999,
     );
     AiPowerGraphEntity? value = await AIControlAPI.fetchAIData(
       siteId: '$id',
@@ -142,8 +152,9 @@ class AIStrategyPreviewLogic extends GetxController {
       endTime: end.millisecondsSinceEpoch,
       cancelToken: cancelToken,
     );
-    priceCurrencySymbol =
+    priceCurrencySymbol2 =
         (value?.currencyCode ?? (User.to.getCurrencyUnit())).currencySymbol;
+    priceCurrencyUnit = '(${value?.currencyCode}/kWh)';
     update();
 
     List<AiPowerGraphData> aiPowerGraph = value?.data ?? [];
@@ -267,7 +278,8 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xfffbbf24),
           width: 1.5,
           markerSettings: markerSettings,
-          dashArray: <double>[6, 4],
+          // dashArray: <double>[6, 4],
+          dashArray: <double>[3, 2],
         ),
       );
 
@@ -290,7 +302,8 @@ class AIStrategyPreviewLogic extends GetxController {
           color: Color(0xffff9933),
           width: 1.5,
           markerSettings: markerSettings,
-          dashArray: <double>[6, 4],
+          dashArray: <double>[3, 2],
+          //dashArray: <double>[6, 4],
         ),
       );
 

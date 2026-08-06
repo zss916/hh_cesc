@@ -36,11 +36,8 @@ class _StationDetailState extends State<StationDetailPage> {
               children: [
                 OliveView(),
                 MonitorView(),
-                /*if (((Get.arguments as Map<String,
-                  dynamic>)['site'] as SiteEntity?)
-                  ?.enableStrategy ==
-                  true)*/
-                if (logic.enableStrategy == true) StrategyPage(),
+                //if (logic.enableStrategy == true)
+                StrategyPage(),
                 RealAlarmView(),
               ],
             ),
@@ -107,32 +104,28 @@ class _StationDetailState extends State<StationDetailPage> {
                       ),
                     ),
                   ),
-                  /*if (((Get.arguments as Map<String, dynamic>)['site']
-                as SiteEntity?)
-                    ?.enableStrategy ==
-                    true)*/
-                  if (logic.enableStrategy == true)
-                    CustomNavigationBarItem(
-                      icon: Image.asset(
-                        Assets.imgStrategy,
-                        matchTextDirection: true,
-                      ),
-                      selectedIcon: Image.asset(
-                        Assets.imgStrategyS,
-                        matchTextDirection: true,
-                      ),
-                      title: Text(
-                        TKey.strategy.tr,
-                        style: TextStyle(color: Colors.white, fontSize: 10.sp),
-                      ),
-                      selectedTitle: Text(
-                        TKey.strategy.tr,
-                        style: TextStyle(
-                          color: Color(0xFF52D5F9),
-                          fontSize: 10.sp,
-                        ),
+                  // if (logic.enableStrategy == true)
+                  CustomNavigationBarItem(
+                    icon: Image.asset(
+                      Assets.imgStrategy,
+                      matchTextDirection: true,
+                    ),
+                    selectedIcon: Image.asset(
+                      Assets.imgStrategyS,
+                      matchTextDirection: true,
+                    ),
+                    title: Text(
+                      TKey.strategy.tr,
+                      style: TextStyle(color: Colors.white, fontSize: 10.sp),
+                    ),
+                    selectedTitle: Text(
+                      TKey.strategy.tr,
+                      style: TextStyle(
+                        color: Color(0xFF52D5F9),
+                        fontSize: 10.sp,
                       ),
                     ),
+                  ),
                   CustomNavigationBarItem(
                     icon: Image.asset(
                       Assets.imgAlarm,

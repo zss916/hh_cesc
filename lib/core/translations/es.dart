@@ -314,7 +314,7 @@ const es = {
   "aiStrategyProfit": "Beneficios de la estrategia de AI",
   "currentStrategyProfit": "Ganancias actuales",
   "improvementRate": "Aumento",
-  "profitEstimation": "Estimación de ingresos (al día siguiente)",
+  "profitEstimation": "Estimación de ingresos",
   "dailyExtraEarning": "Ganancia extra diaria",
   "powerForecastChart": "Curva integral de predicción de potencia",
   "recommended": "Recomendar",
@@ -348,8 +348,7 @@ const es = {
   "antiProtection": "Protección contra la contracorriente",
   "needProtection": "Protección de la demanda",
   "strategyBannerContent":
-      "Estrategia óptima para el día siguiente basada en la predicción fotovoltaica, la predicción de carga, la predicción meteorológica y la generación dinámica de precios de la electricidad",
-
+      "Generar estrategias óptimas basadas en predicciones fotovoltaicas, predicciones de carga, pronósticos meteorológicos y dinámicas de precios de electricidad.",
   "strategyProgressTitle":
       "En la acumulación de datos, la Ia aún no está lista.",
   "strategyProgressContent":
@@ -362,5 +361,12 @@ const es = {
   "predictingElectricityPrices": "Pronóstico de precio de compra",
   "running": "Corriendo",
   "rememberPassword": "Recuerda la contraseña",
-  "todayEstimatedRevenue": "Beneficios previstos hoy",
+
+  //"todayEstimatedRevenue": "Beneficios previstos hoy",
+  "expectedDailyRevenue": "Aumento esperado de ingresos diarios",
+  "expectedDailyRevenueTip":
+      "Comparación de ingresos diarios con respecto a la estrategia de control actual",
+  "expectedMonthRevenue": "Aumento esperado de ingresos mensuales",
+  "expectedMonthRevenueTip":
+      "Estimación extrapolada según las condiciones operativas del mes actual",
 };

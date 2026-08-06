@@ -184,6 +184,14 @@ packages:
       relative: true
     source: path
     version: "0.8.3"
+  decimal:
+    dependency: "direct main"
+    description:
+      name: decimal
+      sha256: "2c3c8b74f2948066d3f42585477aec9cfc48fefd7a723a4d4274a6c71a5c0df7"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.2.6"
   device_info_plus:
     dependency: "direct main"
     description:
@@ -939,6 +947,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.3"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      sha256: cb808fb6f1a839e6fc5f7d8cb3b0a10e1db48b3be102de73938c627f0b636336
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.2.3"
   record_use:
     dependency: transitive
     description:

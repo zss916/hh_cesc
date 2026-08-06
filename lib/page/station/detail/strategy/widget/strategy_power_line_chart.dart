@@ -37,6 +37,7 @@ class StrategyPowerLineChart extends StatelessWidget {
                 plotAreaBorderWidth: 0.0,
                 primaryXAxis: DateTimeAxis(
                   title: AxisTitle(text: ''),
+                  axisLine: AxisLine(color: Colors.white10, width: 1),
                   dateFormat: DateFormat('HH:mm'),
                   enableAutoIntervalOnZooming: true,
                   intervalType: DateTimeIntervalType.minutes,
@@ -83,67 +84,6 @@ class StrategyPowerLineChart extends StatelessWidget {
           );
   }
 }
-
-TooltipBehavior _tooltip = TooltipBehavior(
-  enable: true,
-  builder:
-      (
-        dynamic data,
-        dynamic point,
-        dynamic series,
-        int pointIndex,
-        int seriesIndex,
-      ) {
-        // final chartData = data as ChartData;
-        return Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.black87,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 8,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "dddd",
-                style: const TextStyle(color: Colors.white70, fontSize: 12),
-              ),
-              const SizedBox(height: 6),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: const BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  const SizedBox(width: 3),
-                  Text(
-                    '\${chartData.value.toStringAsFixed(1)} kW',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-);
 
 Widget buildLegendItem({required String name, required Color color}) => Row(
   mainAxisSize: MainAxisSize.min,

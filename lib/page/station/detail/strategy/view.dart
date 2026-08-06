@@ -272,20 +272,26 @@ class StrategyPage extends StatelessWidget {
               () => PageTools.toStrategyHistory(siteId: logic.id),
             ),
           ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: _buildActionGradientButton(
-              Assets.imgAiPreview,
-              TKey.aiStrategyPreview.tr,
-              true,
-              () => PageTools.toAiPreview(
-                siteId: logic.id,
-                isDaysEnough: logic.isFullDay,
-                runningDays: logic.runningDays,
-                modeType: logic.modelCtrl?.activeType,
+          if (logic.site?.enableStrategy == true)
+            const SizedBox(width: 10)
+          else
+            SizedBox.shrink(),
+          if (logic.site?.enableStrategy == true)
+            Expanded(
+              child: _buildActionGradientButton(
+                Assets.imgAiPreview,
+                TKey.aiStrategyPreview.tr,
+                true,
+                () => PageTools.toAiPreview(
+                  siteId: logic.id,
+                  isDaysEnough: logic.isFullDay,
+                  runningDays: logic.runningDays,
+                  modeType: logic.modelCtrl?.activeType,
+                ),
               ),
-            ),
-          ),
+            )
+          else
+            SizedBox.shrink(),
         ],
       ),
     );

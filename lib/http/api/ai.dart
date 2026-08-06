@@ -17,9 +17,13 @@ class AIControlAPI {
   ///查询模式控制
   static Future<CtrlModelEntity?> fetchModelControl({
     required String siteId,
+    CancelToken? cancelToken,
   }) async {
     try {
-      var result = await Http.instance.get(ApiPath.fetchModelControl + siteId);
+      var result = await Http.instance.get(
+        ApiPath.fetchModelControl + siteId,
+        cancelToken: cancelToken,
+      );
       if (result["code"] == HttpStatus.ok) {
         CtrlModelEntity value = CtrlModelEntity.fromJson(result["data"]);
         return value;
@@ -109,6 +113,7 @@ class AIControlAPI {
   ///运行策略模式保护查询
   static Future<StrategyProtectedEntity?> queryStrategyProtected({
     required String siteId,
+    CancelToken? cancelToken,
   }) async {
     try {
       Map<String, dynamic> params = {};
@@ -116,6 +121,7 @@ class AIControlAPI {
       var result = await Http.instance.get(
         ApiPath.queryStrategyProtected,
         query: params,
+        cancelToken: cancelToken,
       );
       if (result["code"] == HttpStatus.ok) {
         StrategyProtectedEntity value = StrategyProtectedEntity.fromJson(

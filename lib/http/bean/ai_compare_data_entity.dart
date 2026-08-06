@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cescpro/generated/json/ai_compare_data_entity.g.dart';
 import 'package:cescpro/generated/json/base/json_field.dart';
+import 'package:decimal/decimal.dart';
 
 export 'package:cescpro/generated/json/ai_compare_data_entity.g.dart';
 
@@ -30,5 +31,13 @@ class AiCompareDataEntity {
   @override
   String toString() {
     return jsonEncode(this);
+  }
+
+  String get aiAllRevenueMonth {
+    DateTime now = DateTime.now();
+    int day = (DateTime(now.year, now.month + 1, 0).day);
+    Decimal price = Decimal.parse((aiPredictTotalProfit ?? "0"));
+    Decimal total = price * Decimal.fromInt(day);
+    return total.toString();
   }
 }

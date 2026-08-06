@@ -298,7 +298,7 @@ const de = {
   "aiStrategyProfit": "AI-Strategie-Gewinn",
   "currentStrategyProfit": "Aktuelle Gewinne",
   "improvementRate": "Verbesserungsrate",
-  "profitEstimation": "Gewinnschätzung (am nächsten Tag)",
+  "profitEstimation": "Gewinnschätzung",
   "dailyExtraEarning": "Erwartete zunehmende Gewinne",
   "powerForecastChart": "Leistungsprognose-Diagramm",
   "recommended": "Empfehlung",
@@ -332,8 +332,7 @@ const de = {
   "antiProtection": "Rückstromschutz",
   "needProtection": "Bedarfsschutz",
   "strategyBannerContent":
-      "Optimale Strategien am nächsten Tag basierend auf Photovoltaik-Prognosen, Lastprognosen, Wettervorhersagen und Strompreisdynamik",
-
+      "Optimale Strategiegenerierung basierend auf Photovoltaikvorhersage, Lastvorhersage, Wettervorhersage und Strompreisdynamik",
   "strategyProgressTitle": "In der Datensammlung ist AI noch nicht bereit",
   "strategyProgressContent":
       "Eine KI-Strategie erfordert mindestens sieben Tage Betriebsdaten, um die Merkmale Ihres Kraftwerks zu lernen \nEine Vorschau der KI-Richtlinie wird nach Abschluss der Akkumulation automatisch geöffnet",
@@ -345,5 +344,12 @@ const de = {
   "predictingElectricityPrices": "Prognose Kaufpreis",
   "running": "Laufen",
   "rememberPassword": "Passwort merken",
-  "todayEstimatedRevenue": "Prognostizierter heutiger Ertrag",
+
+  //"todayEstimatedRevenue": "Prognostizierter heutiger Ertrag",
+  "expectedDailyRevenue": "Erwartete tägliche Umsatzsteigerung",
+  "expectedDailyRevenueTip":
+      "Täglicher Umsatzvergleich zur aktuellen Steuerstrategie",
+  "expectedMonthRevenue": "Erwartete monatliche Umsatzsteigerung",
+  "expectedMonthRevenueTip":
+      "Hochrechnung basierend auf den Betriebsbedingungen des aktuellen Monats",
 };

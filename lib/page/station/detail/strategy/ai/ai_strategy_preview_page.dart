@@ -77,7 +77,8 @@ class AIStrategyPreviewPage extends StatelessWidget {
     );
   }
 
-  Widget _buildRevenueForecast(AIStrategyPreviewLogic logic) {
+  /*
+  Widget _buildRevenueForecast2(AIStrategyPreviewLogic logic) {
     return Column(
       children: [
         Container(
@@ -186,6 +187,263 @@ class AIStrategyPreviewPage extends StatelessWidget {
                   ],
                 ),
         ),
+        Divider(height: 22, color: Colors.transparent),
+      ],
+    );
+  }
+*/
+
+  Widget _buildRevenueForecast(AIStrategyPreviewLogic logic) {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          alignment: AlignmentDirectional.centerStart,
+          width: double.maxFinite,
+          child: Text(
+            TKey.profitEstimation.tr,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
+
+        if (logic.modeType == 6)
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 14),
+            decoration: BoxDecoration(
+              color: Color(0xFF313540),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            width: double.maxFinite,
+            child: Container(
+              margin: EdgeInsetsDirectional.symmetric(
+                horizontal: 10,
+                vertical: 20,
+              ),
+              child: Text(
+                logic.currentRevenue ?? "-",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          )
+        else
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 14),
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Color(0xFF313540),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            width: double.maxFinite,
+            child: Column(
+              spacing: 16,
+              children: [
+                /* IntrinsicHeight(
+                  child: Row(
+                    children: [
+                      _buildProfitCell(
+                        '${logic.aiAllRevenue}',
+                        TKey.aiStrategyProfit.tr,
+                        false,
+                      ),
+                      VerticalDivider(width: 5, color: Colors.transparent),
+                      _buildProfitCell(
+                        '${logic.currentRevenue}',
+                        TKey.currentStrategyProfit.tr,
+                        false,
+                      ),
+                      VerticalDivider(width: 5, color: Colors.transparent),
+                      _buildProfitCell(
+                        logic.profitGrowthRate,
+                        TKey.improvementRate.tr,
+                        true,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Divider(
+                  height: 1,
+                  color: Color(0x1AFFFFFF),
+                  indent: 18,
+                  endIndent: 18,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 18,
+                    vertical: 14,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          TKey.dailyExtraEarning.tr,
+                          textAlign: .left,
+                          style: TextStyle(fontSize: 12, color: Colors.white),
+                        ),
+                      ),
+
+                      Container(
+                        margin: .only(left: 5),
+                        child: Text(
+                          logic.dayGrowthRevenue,
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff159FFF),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),*/
+                Column(
+                  spacing: 8,
+                  children: [
+                    Text(
+                      TKey.expectedDailyRevenue.tr,
+                      style: TextStyle(fontSize: 14, color: Colors.white),
+                    ),
+                    Wrap(
+                      spacing: 10,
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '+${logic.aiAllRevenue}',
+                                children: [
+                                  TextSpan(
+                                    text: ' ${logic.aiAllRevenueUnit}',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xff159FFF),
+                                    ),
+                                  ),
+                                ],
+                                style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xff159FFF),
+                                ),
+                              ),
+                            ],
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+
+                        Container(
+                          padding: EdgeInsetsDirectional.symmetric(
+                            horizontal: 6,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white12,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Text(
+                            logic.profitGrowthRate,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.lightGreenAccent,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      TKey.expectedDailyRevenueTip.tr,
+                      style: TextStyle(fontSize: 12, color: Colors.white54),
+                    ),
+                  ],
+                ),
+                Divider(
+                  height: 1,
+                  color: Color(0x1AFFFFFF),
+                  indent: 18,
+                  endIndent: 18,
+                ),
+                Column(
+                  spacing: 8,
+                  children: [
+                    Text(
+                      TKey.expectedMonthRevenue.tr,
+                      style: TextStyle(fontSize: 14, color: Colors.white),
+                    ),
+                    Wrap(
+                      spacing: 10,
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '+${logic.aiAllRevenueMonth}',
+                                children: [
+                                  TextSpan(
+                                    text: ' ${logic.aiAllRevenueUnit}',
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xff159FFF),
+                                    ),
+                                  ),
+                                ],
+                                style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xff159FFF),
+                                ),
+                              ),
+                            ],
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+
+                        Container(
+                          padding: EdgeInsetsDirectional.symmetric(
+                            horizontal: 6,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white12,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Text(
+                            logic.profitGrowthRate,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.lightGreenAccent,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      TKey.expectedMonthRevenueTip.tr,
+                      style: TextStyle(fontSize: 12, color: Colors.white54),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         Divider(height: 22, color: Colors.transparent),
       ],
     );
@@ -365,12 +623,19 @@ class AIStrategyPreviewPage extends StatelessWidget {
             padding: EdgeInsetsDirectional.only(
               start: 8,
               end: 8,
-              top: 15,
+              top: 10,
               bottom: 8,
             ),
             height: 320,
             child: Column(
               children: [
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(
+                    logic.priceCurrencyUnit,
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  ),
+                ),
                 Expanded(
                   child: StrategyPowerLineChart(
                     data: logic.priceSeries,
@@ -378,9 +643,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
                     maxT: logic.maxT,
                     axis: logic.axis,
                     colors: [Color(0xff2dd4bf), Color(0xffecc207)],
-                    numberFormat: NumberFormat.compactCurrency(
-                      symbol: logic.priceCurrencySymbol,
-                    ),
+                    numberFormat: NumberFormat.compactCurrency(symbol: ""),
                   ),
                 ),
                 // _buildPriceLegend(),

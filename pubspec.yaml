@@ -86,6 +86,8 @@ dependencies:
   #edge_to_edge_resolver: ^1.0.1
   gradient_borders: ^1.0.4
   simple_gradient_text: 1.4.0
+  decimal: ^3.2.6
+
 
   custom_navigation_bar:
     path: plugins/custom_bubble_navigation_bar-master
