@@ -350,6 +350,7 @@ const zh = {
   "expectedDailyRevenueTip": "相对当前控制策略的日收益对比",
   "expectedMonthRevenue": "预期月收益提升",
   "expectedMonthRevenueTip": "按当月运营情况外推估算",
+  "noInternetConnection": "无网络连接",
 
   //"todayEstimatedRevenue": "今日预计收益",
 };

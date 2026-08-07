@@ -1,8 +1,14 @@
 import 'package:cescpro/components/common_app_bar.dart';
+import 'package:cescpro/components/offline_on_refresh.dart';
+import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/router/index.dart';
+import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/core/utils/dialog_utils.dart';
 import 'package:cescpro/generated/assets.dart';
+import 'package:cescpro/http/base/interceptor/network_status.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
+import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
 import 'package:cescpro/page/station/detail/strategy/logic.dart';
 import 'package:cescpro/page/station/detail/strategy/widget/strategy_power_line_chart.dart';
 import 'package:flutter/material.dart';
@@ -15,25 +21,53 @@ class StrategyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: baseAppBar(title: TKey.strategy.tr),
-      backgroundColor: Color(0xFF23282E),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 100),
-        child: GetBuilder<StrategyPageLogic>(
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: baseAppBar(title: TKey.strategy.tr),
+        backgroundColor: Color(0xFF23282E),
+        body: GetBuilder<StrategyPageLogic>(
           init: StrategyPageLogic(),
-          builder: (logic) {
-            return Column(
-              children: [
-                _buildSiteInfo(logic: logic),
-                _buildStrategyStatus(protected: logic.protected),
-                _buildPowerCurve(logic: logic),
-                _buildActions(logic: logic),
-              ],
-            );
+          builder: (logic) =>
+              buildBody(viewState: logic.viewState, logic: logic),
+        ),
+      ),
+    );
+  }
+
+  Widget buildBody({
+    required ViewStateEnum viewState,
+    required StrategyPageLogic logic,
+  }) {
+    return switch (viewState) {
+      ViewStateEnum.common => SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 100),
+        child: buildContent(logic: logic),
+      ),
+      ViewStateEnum.loading => Container(
+        margin: EdgeInsetsDirectional.only(bottom: 50.h),
+        child: Center(child: CescGlowLoading()),
+      ),
+      ViewStateEnum.offline => Center(
+        child: OfflineOnRefresh(
+          onCall: () {
+            AppEventBus.eventBus.fire(NetWorkRefresh());
           },
         ),
       ),
+      ViewStateEnum.empty => SizedBox.shrink(),
+      ViewStateEnum.error => SizedBox.shrink(),
+    };
+  }
+
+  Widget buildContent({required StrategyPageLogic logic}) {
+    return Column(
+      children: [
+        _buildSiteInfo(logic: logic),
+        _buildStrategyStatus(protected: logic.protected),
+        _buildPowerCurve(logic: logic),
+        _buildActions(logic: logic),
+      ],
     );
   }
 
@@ -305,12 +339,23 @@ class StrategyPage extends StatelessWidget {
                 Assets.imgAiPreview,
                 TKey.aiStrategyPreview.tr,
                 true,
-                () => PageTools.toAiPreview(
-                  siteId: logic.id,
-                  isDaysEnough: logic.isFullDay,
-                  runningDays: logic.runningDays,
-                  modeType: logic.modelCtrl?.activeType,
-                ),
+                () async {
+                  final isConnected = await NetworkStatusService.instance
+                      .isConnected();
+                  if (isConnected) {
+                    PageTools.toAiPreview(
+                      siteId: logic.id,
+                      isDaysEnough: logic.isFullDay,
+                      runningDays: logic.runningDays,
+                      modeType: logic.modelCtrl?.activeType,
+                    );
+                  } else {
+                    DialogUtils.showSnackBar(
+                      TKey.noInternetConnection.tr,
+                      snackbarType: SnackbarType.failure,
+                    );
+                  }
+                },
               ),
             )
           else

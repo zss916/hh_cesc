@@ -27,6 +27,11 @@ class StationLogic extends ViewStateController {
     super.onInit();
     onLoading();
     update();
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(loading: true, isDelayed: true);
+      },
+    );
   }
 
   @override
@@ -39,6 +44,7 @@ class StationLogic extends ViewStateController {
   void onClose() {
     refreshCtrl.dispose();
     super.onClose();
+    onDisposeNetWork();
     AppLoading.dismiss();
   }
 

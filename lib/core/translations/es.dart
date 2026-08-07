@@ -361,7 +361,6 @@ const es = {
   "predictingElectricityPrices": "Pronóstico de precio de compra",
   "running": "Corriendo",
   "rememberPassword": "Recuerda la contraseña",
-
   //"todayEstimatedRevenue": "Beneficios previstos hoy",
   "expectedDailyRevenue": "Aumento esperado de ingresos diarios",
   "expectedDailyRevenueTip":
@@ -369,4 +368,5 @@ const es = {
   "expectedMonthRevenue": "Aumento esperado de ingresos mensuales",
   "expectedMonthRevenueTip":
       "Estimación extrapolada según las condiciones operativas del mes actual",
+  "noInternetConnection": "No hay conexión a internet.",
 };

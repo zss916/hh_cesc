@@ -1,17 +1,14 @@
-import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/state/view_state_mixin.dart';
 import 'package:cescpro/http/api/alarm.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
-//import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
-class AlarmDetailLogic extends GetxController {
+class AlarmDetailLogic extends ViewStateController {
   int? siteId;
-
   List<AlarmItemEntity> list = [];
   int pageNum = 1;
-  int viewState = ViewStateEnum.common.index;
   int? alarmLevel;
   String? alarmTitle;
   String? compType;
@@ -24,7 +21,7 @@ class AlarmDetailLogic extends GetxController {
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       siteId = map['siteId'] as int?;
-      viewState = ViewStateEnum.loading.index;
+      onLoading();
       update();
     }
   }
@@ -35,14 +32,26 @@ class AlarmDetailLogic extends GetxController {
     refreshData();
   }
 
-  refreshData() {
+  void refreshData() {
     pageNum = 1;
     loadData(pageNum: pageNum);
   }
 
-  loadMoreData() {
+  void loadMoreData() {
     pageNum += 1;
     loadData(pageNum: pageNum);
+  }
+
+  void refreshAndLoadCtl(bool isRefresh, int size) {
+    if (isRefresh) {
+      refreshCtrl.refreshCompleted(resetFooterState: true);
+    } else {
+      if (size == 0) {
+        refreshCtrl.loadNoData();
+      } else {
+        refreshCtrl.loadComplete();
+      }
+    }
   }
 
   Future<void> loadData({int pageNum = 1, bool isLoading = false}) async {
@@ -63,22 +72,15 @@ class AlarmDetailLogic extends GetxController {
       if (isSuccessful) {
         if (pageNum == 1) {
           list.assignAll(value);
-          refreshCtrl.refreshCompleted();
         } else {
           list.addAll(value);
-          if (value.isEmpty) {
-            refreshCtrl.loadNoData();
-          } else {
-            refreshCtrl.loadComplete();
-          }
         }
       } else {
         pageNum -= 1;
         AppLoading.toast("Fail");
       }
-      viewState = list.isEmpty
-          ? ViewStateEnum.empty.index
-          : ViewStateEnum.common.index;
+      refreshAndLoadCtl(pageNum <= 1, value.length);
+      list.isEmpty ? onEmpty() : onComplete();
       update();
     }
   }

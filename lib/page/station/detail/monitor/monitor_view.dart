@@ -2,6 +2,7 @@ import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/components/offline_on_refresh.dart';
 import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/router/index.dart';
+import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
@@ -47,7 +48,7 @@ class MonitorView extends StatelessWidget {
   }) {
     return switch (viewState) {
       ViewStateEnum.common => buildList(logic: logic),
-      ViewStateEnum.empty => buildEmpty(),
+      ViewStateEnum.empty => buildEmpty(logic: logic),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CescGlowLoading()),
@@ -55,7 +56,7 @@ class MonitorView extends StatelessWidget {
       ViewStateEnum.offline => Center(
         child: OfflineOnRefresh(
           onCall: () {
-            logic.loadData(isDelayed: true);
+            AppEventBus.eventBus.fire(NetWorkRefresh());
           },
         ),
       ),
@@ -129,25 +130,30 @@ class MonitorView extends StatelessWidget {
     },
   );
 
-  Widget buildEmpty() => SizedBox(
+  Widget buildEmpty({required MonitorLogic logic}) => SizedBox(
     width: double.maxFinite,
     height: double.maxFinite,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(Assets.imgEmpty, width: 200, height: 95),
-        Text(
-          TKey.noDataAvailable.tr,
-          style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
-        ),
-        Container(
-          margin: EdgeInsetsDirectional.only(top: 17.h, bottom: 120.h),
-          child: Text(
-            TKey.noDataAvailableTip.tr,
-            style: TextStyle(fontSize: 14, color: Color(0xFF909399)),
+    child: GestureDetector(
+      onTap: () {
+        logic.loadData(isDelayed: true);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(Assets.imgEmpty, width: 200, height: 95),
+          Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
           ),
-        ),
-      ],
+          Container(
+            margin: EdgeInsetsDirectional.only(top: 17.h, bottom: 120.h),
+            child: Text(
+              TKey.noDataAvailableTip.tr,
+              style: TextStyle(fontSize: 14, color: Color(0xFF909399)),
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }

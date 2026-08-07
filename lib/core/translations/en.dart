@@ -603,6 +603,7 @@ class TKey {
   static const String expectedDailyRevenueTip = "expectedDailyRevenueTip";
   static const String expectedMonthRevenue = "expectedMonthRevenue";
   static const String expectedMonthRevenueTip = "expectedMonthRevenueTip";
+  static const String noInternetConnection = "noInternetConnection";
 }
 
 const en = {
@@ -974,6 +975,6 @@ const en = {
   "expectedMonthRevenue": "Expected monthly revenue increase",
   "expectedMonthRevenueTip":
       "Extrapolated estimate based on current month's operating conditions",
-
+  "noInternetConnection": "No internet connection",
   //"todayEstimatedRevenue": "Today's estimated revenue",
 };

@@ -33,3 +33,7 @@ class TopologyEvent {
 class MessageEvent {
   MessageEvent();
 }
+
+class NetWorkRefresh {
+  NetWorkRefresh();
+}

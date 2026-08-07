@@ -352,4 +352,5 @@ const de = {
   "expectedMonthRevenue": "Erwartete monatliche Umsatzsteigerung",
   "expectedMonthRevenueTip":
       "Hochrechnung basierend auf den Betriebsbedingungen des aktuellen Monats",
+  "noInternetConnection": "Keine Internetverbindung",
 };

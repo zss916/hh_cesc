@@ -27,6 +27,11 @@ class HistoryAlarmLogic extends ViewStateController with RefresherAndLoadLogic {
     super.onInit();
     onLoading();
     update();
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(loading: true, isDelayed: true);
+      },
+    );
   }
 
   @override
@@ -39,6 +44,7 @@ class HistoryAlarmLogic extends ViewStateController with RefresherAndLoadLogic {
   void onClose() {
     refreshCtrl.dispose();
     super.onClose();
+    onDisposeNetWork();
   }
 
   Future<void> loadData({bool loading = true, bool? isDelayed}) async {

@@ -7,7 +7,6 @@ import 'package:cescpro/page/station/detail/alarm/index/widget/pie_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-//import 'package:marquee/marquee.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 
 class RealAlarmView extends StatelessWidget {

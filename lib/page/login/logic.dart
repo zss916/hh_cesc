@@ -86,6 +86,15 @@ class LoginLogic extends GetxController {
     Function(String newPassword)? onUpdatePsd,
     bool? isCheck,
   }) async {
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      DialogUtils.showSnackBar(
+        TKey.noInternetConnection.tr,
+        snackbarType: SnackbarType.failure,
+      );
+      return;
+    }
+
     if (GetPlatform.isAndroid && !AppSetting.isOverseas) {
       if (!User.to.getPrivacyAgreed()) {
         AppLoading.toast(TKey.privacyAgreementRequired.tr);
@@ -149,10 +158,21 @@ class LoginLogic extends GetxController {
           },
         );
       }
+    } else {
+      AppLoading.dismiss();
     }
   }
 
   Future<void> toGuestLogin() async {
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      DialogUtils.showSnackBar(
+        TKey.noInternetConnection.tr,
+        snackbarType: SnackbarType.failure,
+      );
+      return;
+    }
+
     AppLoading.show();
     TokenEntity? value =
         await AdminAPI.login(

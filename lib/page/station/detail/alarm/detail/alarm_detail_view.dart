@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
 
 class AlarmDetailPage extends StatelessWidget {
-  AlarmDetailPage({super.key});
+  const AlarmDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,6 @@ class AlarmDetailPage extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
@@ -124,13 +123,14 @@ class AlarmDetailPage extends StatelessWidget {
     );
   }
 
-  Widget buildBody({required int viewState, required AlarmDetailLogic logic}) {
+  Widget buildBody({
+    required ViewStateEnum viewState,
+    required AlarmDetailLogic logic,
+  }) {
     return switch (viewState) {
-      _ when viewState == ViewStateEnum.common.index => buildList2(
-        logic: logic,
-      ),
-      _ when viewState == ViewStateEnum.empty.index => buildEmpty(),
-      _ when viewState == ViewStateEnum.loading.index => Container(
+      _ when viewState == ViewStateEnum.common => buildList2(logic: logic),
+      _ when viewState == ViewStateEnum.empty => buildEmpty(),
+      _ when viewState == ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CescGlowLoading()),
       ),

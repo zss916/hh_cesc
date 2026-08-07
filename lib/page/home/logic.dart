@@ -35,6 +35,11 @@ class HomeLogic extends ViewStateController {
   @override
   void onInit() {
     super.onInit();
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(loading: true, isDelayed: true);
+      },
+    );
   }
 
   @override
@@ -46,6 +51,7 @@ class HomeLogic extends ViewStateController {
   @override
   void onClose() {
     super.onClose();
+    onDisposeNetWork();
     AppLoading.dismiss();
   }
 

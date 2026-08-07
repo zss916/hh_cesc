@@ -46,7 +46,7 @@ class HistoryAlarmView extends StatelessWidget {
       ViewStateEnum.offline => Center(
         child: OfflineOnRefresh(
           onCall: () {
-            logic.loadData(loading: true, isDelayed: true);
+            AppEventBus.eventBus.fire(NetWorkRefresh());
           },
         ),
       ),

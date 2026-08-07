@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:cescpro/core/enum/app_enum.dart';
+import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:get/get.dart';
 
 class ViewStateController extends GetxController {
@@ -24,6 +27,18 @@ class ViewStateController extends GetxController {
     viewState = ViewStateEnum.common;
   }
 
+  late StreamSubscription<NetWorkRefresh> event;
+
+  void onNetWorkRefresh({Function? onRefresh}) {
+    event = AppEventBus.eventBus.on<NetWorkRefresh>().listen((event) {
+      onRefresh?.call();
+    });
+  }
+
+  void onDisposeNetWork() {
+    event.cancel();
+  }
+
   /* Future<void> loadData({bool loading = true, bool? isDelayed}) async {
     if (loading) {
       onLoading();
@@ -33,7 +48,7 @@ class ViewStateController extends GetxController {
 
     final isConnected = await NetworkStatusService.instance.isConnected();
     if (!isConnected) {
-      onError();
+      onOffline();
       update();
       return;
     }

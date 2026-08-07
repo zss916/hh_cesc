@@ -31,6 +31,11 @@ class MonitorLogic extends ViewStateController {
     }
     onLoading();
     update();
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(isDelayed: true);
+      },
+    );
   }
 
   @override
@@ -42,6 +47,7 @@ class MonitorLogic extends ViewStateController {
   @override
   void onClose() {
     super.onClose();
+    onDisposeNetWork();
     AppLoading.dismiss();
   }
 
@@ -54,11 +60,12 @@ class MonitorLogic extends ViewStateController {
 
     final isConnected = await NetworkStatusService.instance.isConnected();
     if (!isConnected) {
-      onError();
+      onOffline();
       update();
       return;
     }
 
+    onComplete();
     getPointDetails();
   }
 
@@ -81,7 +88,6 @@ class MonitorLogic extends ViewStateController {
         fetchData(isV1: false);
       }
     } else {
-      ///network_error 或者 data_error
       onError();
       update();
       AppLoading.toast("data is null");

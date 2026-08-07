@@ -1,6 +1,10 @@
+import 'dart:async';
+
+import 'package:cescpro/core/state/view_state_mixin.dart';
 import 'package:cescpro/core/tools/time_tools.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/ai.dart';
+import 'package:cescpro/http/base/interceptor/network_status.dart';
 import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 import 'package:cescpro/http/bean/ctrl_model_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
@@ -13,7 +17,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class StrategyPageLogic extends GetxController {
+class StrategyPageLogic extends ViewStateController {
   SiteEntity? site;
   String get siteName => site?.name ?? "";
   String get siteInfo =>
@@ -39,12 +43,35 @@ class StrategyPageLogic extends GetxController {
       site = siteEntity;
       update();
     }
+
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(isDelayed: true);
+      },
+    );
   }
 
   @override
   void onReady() {
     super.onReady();
     checkOpenAI();
+    loadData(loading: false);
+  }
+
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      onLoading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      onOffline();
+      update();
+      return;
+    }
+    onComplete();
     loop();
   }
 
@@ -52,6 +79,7 @@ class StrategyPageLogic extends GetxController {
   void onClose() {
     cancelToken.cancel(strategyPageLogicTag);
     TimeTools.instance.stop(tag: strategyPageLogicTag);
+    onDisposeNetWork();
     super.onClose();
   }
 
