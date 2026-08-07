@@ -1,6 +1,6 @@
 part of 'index.dart';
 
-class HomeLogic extends GetxController {
+class HomeLogic extends ViewStateController {
   //累计收益
   String totalIncome = "0.0";
   //当日收益
@@ -32,8 +32,6 @@ class HomeLogic extends GetxController {
   //中断告警数
   int cutOffNum = 0;
 
-  ViewStateEnum viewState = ViewStateEnum.common;
-
   @override
   void onInit() {
     super.onInit();
@@ -42,7 +40,7 @@ class HomeLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    loadHome(loading: true);
+    loadData(loading: true);
   }
 
   @override
@@ -51,10 +49,23 @@ class HomeLogic extends GetxController {
     AppLoading.dismiss();
   }
 
-  Future<void> loadHome({bool loading = true}) async {
-    //if (loading) AppLoading.show();
-    if (loading) viewState = ViewStateEnum.loading;
-    update();
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      onLoading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      onOffline();
+      update();
+      return;
+    }
+    loadHome();
+  }
+
+  Future<void> loadHome() async {
     final (HomeStatisticEntity? data, HomeData2Entity? data2) =
         await HomeAPI.loadHomeData().whenComplete(() => AppLoading.dismiss());
 
@@ -75,7 +86,7 @@ class HomeLogic extends GetxController {
       faultNum = data.faultNum ?? 0;
       alarmNum = data.alarmNum ?? 0;
       cutOffNum = data.cutOffNum ?? 0;
-      viewState = ViewStateEnum.common;
+      onComplete();
       update();
     }
 
@@ -95,7 +106,7 @@ class HomeLogic extends GetxController {
       faultNum = data2.faultNum ?? 0;
       alarmNum = data2.alarmNum ?? 0;
       cutOffNum = data2.cutOffNum ?? 0;
-      viewState = ViewStateEnum.common;
+      onComplete();
       update();
     }
   }

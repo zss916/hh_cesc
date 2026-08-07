@@ -87,6 +87,9 @@ dependencies:
   gradient_borders: ^1.0.4
   simple_gradient_text: 1.4.0
   decimal: ^3.2.6
+  connectivity_plus: ^7.3.1
+  # Toast提示 (支持 SPM, v9+ 开始支持)
+  fluttertoast: ^10.0.0
 
 
   custom_navigation_bar:

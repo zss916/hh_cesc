@@ -1,11 +1,8 @@
 part of 'index.dart';
 
-class StationLogic extends GetxController {
+class StationLogic extends ViewStateController {
   List<SiteEntity> data = [];
-
-  ViewStateEnum viewState = ViewStateEnum.common;
   int pageNum = 1;
-
   String? nameParam;
   int? statusParam;
 
@@ -28,14 +25,14 @@ class StationLogic extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    viewState = ViewStateEnum.loading;
+    onLoading();
     update();
   }
 
   @override
   void onReady() {
     super.onReady();
-    refreshData();
+    loadData();
   }
 
   @override
@@ -45,10 +42,29 @@ class StationLogic extends GetxController {
     AppLoading.dismiss();
   }
 
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      onLoading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      onOffline();
+      update();
+      return;
+    }
+
+    refreshData();
+  }
+
   // //99.正常 (0:停止1:充电2:放电3:待机) 4: 故障，-3:中断 -2:告警
-  void toSearch() {
-    viewState = ViewStateEnum.loading;
-    update();
+  void toSearch({bool isLoading = false}) {
+    if (isLoading) {
+      onLoading();
+      update();
+    }
     pageNum = 1;
     loadList(pageNumber: pageNum);
   }
@@ -91,20 +107,14 @@ class StationLogic extends GetxController {
     if (isSuccessful) {
       if (pageNumber == 1) {
         data = value;
-        //update();
       } else {
         data.addAll(value);
-        //update();
       }
-      refreshAndLoadCtl(pageNumber == 1, value.length);
-      viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
-      update();
     } else {
       pageNum -= 1;
-      viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
-      refreshCtrl.loadNoData();
-      update();
-      // AppLoading.toast("Fail");
     }
+    refreshAndLoadCtl(pageNumber <= 1, value.length);
+    data.isEmpty ? onEmpty() : onComplete();
+    update();
   }
 }

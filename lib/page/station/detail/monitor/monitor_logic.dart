@@ -1,9 +1,10 @@
-import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/state/view_state_mixin.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/home.dart';
 import 'package:cescpro/http/api/site.dart';
+import 'package:cescpro/http/base/interceptor/network_status.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/helper/device_view_enum.dart';
@@ -16,10 +17,8 @@ class MonitorModel {
   MonitorModel({required this.title, required this.type, required this.isV1});
 }
 
-class MonitorLogic extends GetxController {
+class MonitorLogic extends ViewStateController {
   SiteEntity? site;
-  ViewStateEnum viewState = ViewStateEnum.common;
-
   List<MonitorModel> data = [];
   bool? isV1;
 
@@ -30,15 +29,14 @@ class MonitorLogic extends GetxController {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       site = map['site'] as SiteEntity?;
     }
-    viewState = ViewStateEnum.loading;
+    onLoading();
     update();
   }
 
   @override
   void onReady() {
     super.onReady();
-    //loadData(isV1: false);
-    getPointDetails();
+    loadData();
   }
 
   @override
@@ -47,10 +45,27 @@ class MonitorLogic extends GetxController {
     AppLoading.dismiss();
   }
 
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      onLoading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      onError();
+      update();
+      return;
+    }
+
+    getPointDetails();
+  }
+
   ///isV1
   Future<void> getPointDetails({bool isLoading = false}) async {
     if (isLoading) {
-      viewState = ViewStateEnum.loading;
+      onLoading();
       update();
     }
     SiteDetailEntity? value = await SiteAPI.getPointDetails(
@@ -60,19 +75,20 @@ class MonitorLogic extends GetxController {
     if (value != null) {
       if (value.isV1 == true) {
         ///v1
-        loadDataV1(isV1: true);
+        fetchData(isV1: true);
       } else {
         ///v2
-        loadData(isV1: false);
+        fetchData(isV1: false);
       }
     } else {
-      viewState = ViewStateEnum.error;
+      ///network_error 或者 data_error
+      onError();
       update();
       AppLoading.toast("data is null");
     }
   }
 
-  Future<void> loadData({required bool isV1}) async {
+  Future<void> fetchData({required bool isV1}) async {
     if (site != null) {
       data.clear();
       final ((
@@ -123,14 +139,13 @@ class MonitorLogic extends GetxController {
             data.add(MonitorModel(type: e, title: e, isV1: isV1));
           }
         }
-
-        viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
+        data.isEmpty ? onEmpty() : onComplete();
         update();
       }
     }
   }
 
-  Future<void> loadDataV1({required bool isV1}) async {
+  Future<void> fetchDataV1({required bool isV1}) async {
     if (site != null) {
       data.clear();
       final ((
@@ -181,7 +196,7 @@ class MonitorLogic extends GetxController {
             data.add(MonitorModel(type: e, title: e, isV1: isV1));
           }
         }
-        viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
+        data.isEmpty ? onEmpty() : onComplete();
         update();
       }
     }

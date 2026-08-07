@@ -88,6 +88,7 @@ class AIControlAPI {
   ///AI预测收益与当前模式对比
   static Future<AiCompareDataEntity?> getAIDataCompare({
     required String siteId,
+    CancelToken? cancelToken,
   }) async {
     try {
       Map<String, dynamic> params = {};
@@ -95,6 +96,7 @@ class AIControlAPI {
       var result = await Http.instance.get(
         ApiPath.aIDataCompare,
         query: params,
+        cancelToken: cancelToken,
       );
       if (result["code"] == HttpStatus.ok) {
         AiCompareDataEntity value = AiCompareDataEntity.fromJson(

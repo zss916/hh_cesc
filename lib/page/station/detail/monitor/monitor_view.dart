@@ -1,8 +1,10 @@
 import 'package:cescpro/components/common_app_bar.dart';
+import 'package:cescpro/components/offline_on_refresh.dart';
 import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
+import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
 import 'package:cescpro/page/station/detail/monitor/monitor_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,11 +50,39 @@ class MonitorView extends StatelessWidget {
       ViewStateEnum.empty => buildEmpty(),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(child: CescGlowLoading()),
+      ),
+      ViewStateEnum.offline => Center(
+        child: OfflineOnRefresh(
+          onCall: () {
+            logic.loadData(isDelayed: true);
+          },
+        ),
       ),
       ViewStateEnum.error => buildError(logic: logic),
     };
   }
+
+  Widget buildError({required MonitorLogic logic}) => SizedBox(
+    width: double.maxFinite,
+    height: double.maxFinite,
+    child: GestureDetector(
+      onTap: () {
+        logic.getPointDetails(isLoading: true);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(Assets.imgEmpty2, width: 200, height: 95),
+          SizedBox(height: 20),
+          Text(
+            TKey.refresh.tr,
+            style: TextStyle(fontSize: 16, color: Color(0xFF909399)),
+          ),
+        ],
+      ),
+    ),
+  );
 
   Widget buildList({required MonitorLogic logic}) => GridView.builder(
     itemCount: logic.data.length,
@@ -118,27 +148,6 @@ class MonitorView extends StatelessWidget {
           ),
         ),
       ],
-    ),
-  );
-
-  Widget buildError({required MonitorLogic logic}) => SizedBox(
-    width: double.maxFinite,
-    height: double.maxFinite,
-    child: GestureDetector(
-      onTap: () {
-        logic.getPointDetails(isLoading: true);
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(Assets.imgEmpty2, width: 200, height: 95),
-          SizedBox(height: 20),
-          Text(
-            TKey.refresh.tr,
-            style: TextStyle(fontSize: 16, color: Color(0xFF909399)),
-          ),
-        ],
-      ),
     ),
   );
 }

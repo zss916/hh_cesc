@@ -1,3 +1,4 @@
+import 'package:cescpro/components/offline_on_refresh.dart';
 import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
@@ -20,41 +21,7 @@ class HistoryAlarmView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HistoryAlarmLogic>(
       init: HistoryAlarmLogic(),
-      builder: (logic) => Column(
-        children: [
-          Container(
-            height: 42,
-            margin: EdgeInsetsDirectional.only(top: 8.h, bottom: 8.h, start: 5),
-            child: Row(
-              children: [
-                Expanded(
-                  child: SelectLevelWidget(
-                    alarmLevel: logic.alarmLevel,
-                    onCall: (int? value) {
-                      logic.alarmLevel = value;
-                      logic.toFilter();
-                    },
-                  ),
-                ),
-                AlarmFilterWidget(
-                  alarmLevel: logic.alarmLevel,
-                  onFilter: () {
-                    AppEventBus.eventBus.fire(
-                      OpenDrawerEvent(
-                        DrawerTypeEnum.historyAlarm.index,
-                        alarmLevel: logic.alarmLevel,
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: buildBody(viewState: logic.viewState, logic: logic),
-          ),
-        ],
-      ),
+      builder: (logic) => buildBody(viewState: logic.viewState, logic: logic),
     );
   }
 
@@ -64,14 +31,63 @@ class HistoryAlarmView extends StatelessWidget {
     required HistoryAlarmLogic logic,
   }) {
     return switch (viewState) {
-      ViewStateEnum.common => buildList(logic: logic),
-      ViewStateEnum.empty => buildEmpty(logic: logic),
+      ViewStateEnum.common => buildPage(
+        child: buildList(logic: logic),
+        logic: logic,
+      ),
+      ViewStateEnum.empty => buildPage(
+        child: buildEmpty(logic: logic),
+        logic: logic,
+      ),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CescGlowLoading()),
       ),
-      _ => SizedBox.shrink(),
+      ViewStateEnum.offline => Center(
+        child: OfflineOnRefresh(
+          onCall: () {
+            logic.loadData(loading: true, isDelayed: true);
+          },
+        ),
+      ),
+      ViewStateEnum.error => SizedBox.shrink(),
     };
+  }
+
+  Widget buildPage({required Widget child, required HistoryAlarmLogic logic}) {
+    return Column(
+      children: [
+        Container(
+          height: 42,
+          margin: EdgeInsetsDirectional.only(top: 8.h, bottom: 8.h, start: 5),
+          child: Row(
+            children: [
+              Expanded(
+                child: SelectLevelWidget(
+                  alarmLevel: logic.alarmLevel,
+                  onCall: (int? value) {
+                    logic.alarmLevel = value;
+                    logic.toFilter();
+                  },
+                ),
+              ),
+              AlarmFilterWidget(
+                alarmLevel: logic.alarmLevel,
+                onFilter: () {
+                  AppEventBus.eventBus.fire(
+                    OpenDrawerEvent(
+                      DrawerTypeEnum.historyAlarm.index,
+                      alarmLevel: logic.alarmLevel,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        Expanded(child: child),
+      ],
+    );
   }
 
   Widget buildList({required HistoryAlarmLogic logic}) => SmartRefresher(

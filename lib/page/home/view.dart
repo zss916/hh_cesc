@@ -14,15 +14,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Color(0xFF23282E),
       body: GetBuilder<HomeLogic>(
         init: HomeLogic(),
-        builder: (logic) {
-          return RefreshIndicator(
-            backgroundColor: Colors.white,
-            onRefresh: () => refresh(logic),
-            child: SingleChildScrollView(
-              child: buildBody(viewState: logic.viewState, logic: logic),
-            ),
-          );
-        },
+        builder: (logic) => buildBody(viewState: logic.viewState, logic: logic),
       ),
     );
   }
@@ -32,14 +24,25 @@ class HomePage extends StatelessWidget {
     required HomeLogic logic,
   }) {
     return switch (viewState) {
-      ViewStateEnum.common => buildContent(logic),
-      ViewStateEnum.loading => Container(
-        width: double.maxFinite,
-        margin: EdgeInsetsDirectional.only(top: 200),
-        child: Center(child: CescGlowLoading()),
+      ViewStateEnum.common => RefreshIndicator(
+        backgroundColor: Colors.white,
+        onRefresh: () => refresh(logic),
+        child: SingleChildScrollView(child: buildContent(logic)),
       ),
+      ViewStateEnum.loading => Container(
+        alignment: AlignmentDirectional.center,
+        margin: EdgeInsetsDirectional.only(bottom: 50.h),
+        child: CescGlowLoading(),
+      ),
+      ViewStateEnum.offline => Center(
+        child: OfflineOnRefresh(
+          onCall: () {
+            logic.loadData(loading: true, isDelayed: true);
+          },
+        ),
+      ),
+      ViewStateEnum.error => SizedBox.shrink(),
       ViewStateEnum.empty => SizedBox.shrink(),
-      _ => SizedBox.shrink(),
     };
   }
 
@@ -76,7 +79,7 @@ class HomePage extends StatelessWidget {
   }
 
   Future<void> refresh(HomeLogic logic) async {
-    logic.loadHome(loading: false);
+    logic.loadData(loading: false);
     await Future.delayed(const Duration(seconds: 2));
   }
 }

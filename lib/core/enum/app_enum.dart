@@ -130,6 +130,6 @@ extension AlarmExtension on Alarm {
   }
 }
 
-enum ViewStateEnum { common, empty, loading, error }
+enum ViewStateEnum { common, empty, loading, error, offline }
 
 enum DrawerTypeEnum { site, alarm, realTimeAlarm, historyAlarm }

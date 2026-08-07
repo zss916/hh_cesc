@@ -1,7 +1,10 @@
 import 'package:cescpro/components/common_app_bar.dart';
+import 'package:cescpro/components/offline_on_refresh.dart';
+import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/generated/assets.dart';
+import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/ai_strategy_preview_logic.dart';
 import 'package:cescpro/page/station/detail/strategy/ai/widget/dialog_strategy.dart';
 import 'package:cescpro/page/station/detail/strategy/widget/strategy_power_line_chart.dart';
@@ -20,23 +23,47 @@ class AIStrategyPreviewPage extends StatelessWidget {
     return Scaffold(
       appBar: baseAppBar(title: TKey.aiStrategyPreviewTitle.tr),
       backgroundColor: Color(0xFF23282E),
-      body: SingleChildScrollView(
+      body: GetBuilder<AIStrategyPreviewLogic>(
+        init: AIStrategyPreviewLogic(),
+        builder: (logic) => buildBody(viewState: logic.viewState, logic: logic),
+      ),
+    );
+  }
+
+  Widget buildBody({
+    required ViewStateEnum viewState,
+    required AIStrategyPreviewLogic logic,
+  }) {
+    return switch (viewState) {
+      ViewStateEnum.common => SingleChildScrollView(
         padding: const EdgeInsets.only(bottom: 100),
-        child: GetBuilder<AIStrategyPreviewLogic>(
-          init: AIStrategyPreviewLogic(),
-          builder: (logic) {
-            return Column(
-              children: [
-                _buildAIBanner(),
-                _buildRevenueForecast(logic),
-                _buildPowerChart(logic),
-                _buildPriceForecast(logic),
-                if (logic.modeType != 6) _buildApplySection(),
-              ],
-            );
+        child: buildContent(logic: logic),
+      ),
+      ViewStateEnum.loading => Container(
+        margin: EdgeInsetsDirectional.only(bottom: 50.h),
+        child: Center(child: CescGlowLoading()),
+      ),
+      ViewStateEnum.offline => Center(
+        child: OfflineOnRefresh(
+          onCall: () {
+            logic.loadData(isDelayed: true);
           },
         ),
       ),
+      ViewStateEnum.empty => SizedBox.shrink(),
+      ViewStateEnum.error => SizedBox.shrink(),
+    };
+  }
+
+  Widget buildContent({required AIStrategyPreviewLogic logic}) {
+    return Column(
+      children: [
+        _buildAIBanner(),
+        _buildRevenueForecast(logic),
+        _buildPowerChart(logic),
+        _buildPriceForecast(logic),
+        if (logic.modeType != 6) _buildApplySection(),
+      ],
     );
   }
 

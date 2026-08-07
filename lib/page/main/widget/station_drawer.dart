@@ -150,7 +150,7 @@ class _StationDrawerState extends State<StationDrawer> {
                       setState(() {
                         select = null;
                         safeFind<StationLogic>()?.statusParam = select;
-                        safeFind<StationLogic>()?.toSearch();
+                        safeFind<StationLogic>()?.toSearch(isLoading: true);
                       });
                     }
                   }
@@ -177,7 +177,7 @@ class _StationDrawerState extends State<StationDrawer> {
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
                   safeFind<StationLogic>()?.statusParam = select;
-                  safeFind<StationLogic>()?.toSearch();
+                  safeFind<StationLogic>()?.toSearch(isLoading: true);
                   widget.onConfirm.call();
                 },
                 child: Container(

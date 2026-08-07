@@ -5,6 +5,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/widget/alarm_level_status_widget.dart';
 import 'package:cescpro/generated/assets.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
+import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
 import 'package:cescpro/page/main/sheet/alarm_select_sheet.dart';
 import 'package:cescpro/page/station/detail/alarm/detail/alarm_detail_logic.dart';
 import 'package:cescpro/page/station/detail/alarm/detail/sheet/device_select_sheet.dart';
@@ -131,7 +132,7 @@ class AlarmDetailPage extends StatelessWidget {
       _ when viewState == ViewStateEnum.empty.index => buildEmpty(),
       _ when viewState == ViewStateEnum.loading.index => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(child: CescGlowLoading()),
       ),
       _ => SizedBox.shrink(),
     };

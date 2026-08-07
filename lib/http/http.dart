@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:cescpro/http/base/interceptor/network_status.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'base/base_options.dart' show baseDioOptions;
@@ -13,15 +17,41 @@ class Http {
   late Dio _dio;
   CancelToken cancelTokenAll = CancelToken();
 
+  /// 网络质量监听订阅
+  StreamSubscription<NetworkQuality>? _qualitySub;
+
   Http._internal() {
     _dio = Dio(baseDioOptions);
     _dio.httpClientAdapter = httpAdapter;
+    _setupInterceptors();
+    //_setupNetworkQualityListener();
+  }
+
+  void _setupInterceptors() {
     _dio.interceptors.add(AuthInterceptor());
+    // _dio.interceptors.add(NetworkStatusInterceptor(dioGetter: () => _dio));
+    //_dio.interceptors.add(ErrorInterceptor(),);
     _dio.interceptors.add(prettyDioLogger);
+  }
+
+  /// 监听网络质量变化，动态调整超时时间
+  void _setupNetworkQualityListener() {
+    _qualitySub = NetworkStatusService.instance.qualityStream.listen((quality) {
+      debugPrint('[ApiClient] 网络质量变化: $quality，动态调整超时配置');
+      _dio.options.connectTimeout =
+          NetworkStatusService.instance.connectTimeout;
+      _dio.options.receiveTimeout =
+          NetworkStatusService.instance.receiveTimeout;
+    });
   }
 
   void cancelALLRequests() {
     cancelTokenAll.cancel("cancel all request");
+  }
+
+  /// 释放资源
+  void dispose() {
+    _qualitySub?.cancel();
   }
 
   PrettyDioLogger prettyDioLogger = PrettyDioLogger(

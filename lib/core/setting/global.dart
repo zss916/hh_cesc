@@ -4,6 +4,7 @@ import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/storage/secure_storage.dart';
 import 'package:cescpro/core/storage/storage.dart';
 import 'package:cescpro/core/user/user.dart';
+import 'package:cescpro/http/base/interceptor/network_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class Global {
       AppLoading();
       Get.putAsync<AppInfoService>(() => AppInfoService().init());
       await Get.putAsync<User>(() => User().init());
+      await NetworkStatusService.instance.init();
     });
   }
 

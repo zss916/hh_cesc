@@ -1,8 +1,10 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
+import 'package:cescpro/core/state/view_state_mixin.dart';
 import 'package:cescpro/core/tools/time_tools.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/api/ai.dart';
+import 'package:cescpro/http/base/interceptor/network_status.dart';
 import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
 import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/f_line_chart.dart';
@@ -13,7 +15,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class AIStrategyPreviewLogic extends GetxController {
+class AIStrategyPreviewLogic extends ViewStateController {
   int? id;
   AiCompareDataEntity? revenueForecast;
 
@@ -72,10 +74,27 @@ class AIStrategyPreviewLogic extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    loadData(loading: false);
+  }
+
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      onLoading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      onOffline();
+      update();
+      return;
+    }
+
+    onComplete();
     if (!isFullDay) {
       showAIProgressDialog(day: runningDays);
     } else {
-      getAIDataCompare();
       loop();
     }
   }
@@ -92,21 +111,24 @@ class AIStrategyPreviewLogic extends GetxController {
   ///轮询
   Future<void> loop() async {
     try {
-      await fetchAIData(cancelToken: null);
+      getAIDataCompare(cancelToken: null);
+      fetchAIData(cancelToken: null);
     } finally {
       TimeTools.instance.start(
         tag: aiStrategyPreviewTag,
         duration: Duration(minutes: 2),
         onCall: () {
+          getAIDataCompare(cancelToken: cancelToken);
           fetchAIData(cancelToken: cancelToken);
         },
       );
     }
   }
 
-  Future<void> getAIDataCompare() async {
+  Future<void> getAIDataCompare({CancelToken? cancelToken}) async {
     AiCompareDataEntity? value = await AIControlAPI.getAIDataCompare(
       siteId: '$id',
+      cancelToken: cancelToken,
     );
     revenueForecast = value;
     update();

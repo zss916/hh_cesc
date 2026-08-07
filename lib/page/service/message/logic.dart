@@ -2,16 +2,13 @@ part of 'index.dart';
 
 enum MessageStatus { unRead, read, other }
 
-enum ViewStatus { data, empty, loading, error }
-
-class MessageCenterLogic extends GetxController {
-  ViewStatus viewState = ViewStatus.data;
+class MessageCenterLogic extends ViewStateController {
   List<MessageItemEntity> data = [];
 
   @override
   void onInit() {
     super.onInit();
-    viewState = ViewStatus.loading;
+    onLoading();
     update();
   }
 
@@ -24,9 +21,26 @@ class MessageCenterLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    AppLoading.dismiss();
   }
 
-  Future<void> loadData() async {
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      onLoading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      onOffline();
+      update();
+      return;
+    }
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
     final (bool isSuccessful, List<MessageItemEntity> value) =
         await MessageAPI.postQueryMessage();
     if (isSuccessful) {
@@ -34,7 +48,7 @@ class MessageCenterLogic extends GetxController {
     } else {
       AppLoading.toast("Fail");
     }
-    viewState = data.isEmpty ? ViewStatus.empty : ViewStatus.data;
+    data.isEmpty ? onEmpty() : onComplete();
     update();
     AppEventBus.eventBus.fire(MessageEvent());
   }

@@ -36,7 +36,6 @@ class _StationDetailState extends State<StationDetailPage> {
               children: [
                 OliveView(),
                 MonitorView(),
-                //if (logic.enableStrategy == true)
                 StrategyPage(),
                 RealAlarmView(),
               ],
@@ -104,7 +103,6 @@ class _StationDetailState extends State<StationDetailPage> {
                       ),
                     ),
                   ),
-                  // if (logic.enableStrategy == true)
                   CustomNavigationBarItem(
                     icon: Image.asset(
                       Assets.imgStrategy,

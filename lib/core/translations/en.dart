@@ -974,5 +974,6 @@ const en = {
   "expectedMonthRevenue": "Expected monthly revenue increase",
   "expectedMonthRevenueTip":
       "Extrapolated estimate based on current month's operating conditions",
+
   //"todayEstimatedRevenue": "Today's estimated revenue",
 };

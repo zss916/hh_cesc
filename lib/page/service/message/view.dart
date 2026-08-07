@@ -26,17 +26,24 @@ class MessageCenterPage extends StatelessWidget {
   }
 
   Widget buildBody({
-    required ViewStatus viewState,
+    required ViewStateEnum viewState,
     required MessageCenterLogic logic,
   }) {
     return switch (viewState) {
-      ViewStatus.data => buildList(logic: logic),
-      ViewStatus.empty => buildEmpty(),
-      ViewStatus.loading => Container(
+      ViewStateEnum.common => buildList(logic: logic),
+      ViewStateEnum.empty => buildEmpty(),
+      ViewStateEnum.error => SizedBox.shrink(),
+      ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CescGlowLoading()),
       ),
-      _ => SizedBox.shrink(),
+      ViewStateEnum.offline => Center(
+        child: OfflineOnRefresh(
+          onCall: () {
+            logic.loadData(loading: true, isDelayed: true);
+          },
+        ),
+      ),
     };
   }
 

@@ -1,40 +1,40 @@
-import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/state/view_state_mixin.dart';
 import 'package:cescpro/http/api/alarm.dart';
+import 'package:cescpro/http/base/interceptor/network_status.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/page/alarm/index/widget/refresher_and_load_logic.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
 
-class RealTimeAlarmLogic extends GetxController with RefresherAndLoadLogic {
+class RealTimeAlarmLogic extends ViewStateController
+    with RefresherAndLoadLogic {
   List<AlarmItemEntity> data = [];
 
-  ViewStateEnum viewState = ViewStateEnum.common;
   int pageNum = 1;
   int? startTimeMill;
   int? endTimeMill;
   CountryEntity? country;
-  //
   int? alarmLevel;
-  // String? adcode;
-  // SiteEntity? site
   int? siteId;
   String? siteName;
+  // String? adcode;
+  // SiteEntity? site
 
   RefreshController refreshCtrl = RefreshController(initialRefresh: false);
 
   @override
   void onInit() {
     super.onInit();
-    viewState = ViewStateEnum.loading;
+    onLoading();
     update();
   }
 
   @override
   void onReady() {
     super.onReady();
-    refreshData();
+    loadData();
   }
 
   @override
@@ -43,17 +43,45 @@ class RealTimeAlarmLogic extends GetxController with RefresherAndLoadLogic {
     super.onClose();
   }
 
-  refreshData({bool? isLoading}) {
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      onLoading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      onOffline();
+      update();
+      return;
+    }
+    refreshData();
+  }
+
+  void refreshData({bool? isLoading}) {
     pageNum = 1;
-    loadData(pageNum: pageNum, isLoading: isLoading ?? false);
+    fetchData(pageNum: pageNum, isLoading: isLoading ?? false);
   }
 
-  loadMoreData() {
+  void loadMoreData() {
     pageNum += 1;
-    loadData(pageNum: pageNum);
+    fetchData(pageNum: pageNum);
   }
 
-  Future<void> loadData({int pageNum = 1, bool isLoading = false}) async {
+  void refreshAndLoadCtl(bool isRefresh, int size) {
+    if (isRefresh) {
+      refreshCtrl.refreshCompleted(resetFooterState: true);
+    } else {
+      if (size == 0) {
+        refreshCtrl.loadNoData();
+      } else {
+        refreshCtrl.loadComplete();
+      }
+    }
+  }
+
+  Future<void> fetchData({int pageNum = 1, bool isLoading = false}) async {
     if (isLoading) AppLoading.show();
     final (
       bool isSuccessful,
@@ -71,29 +99,26 @@ class RealTimeAlarmLogic extends GetxController with RefresherAndLoadLogic {
       if (pageNum == 1) {
         //data.where((e) => (e.status ?? 0) == 0).toList().assignAll(value);
         data.assignAll(value);
-        refreshCtrl.refreshCompleted();
       } else {
         data.addAll(value);
-        if (value.isEmpty) {
-          refreshCtrl.loadNoData();
-        } else {
-          refreshCtrl.loadComplete();
-        }
       }
     } else {
       pageNum -= 1;
       AppLoading.toast("Fail");
     }
-    viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
+    refreshAndLoadCtl(pageNum <= 1, value.length);
+    data.isEmpty ? onEmpty() : onComplete();
     update();
   }
 
   ///选
-  toFilter({bool isLoading = false}) {
-    viewState = ViewStateEnum.loading;
-    update();
+  void toFilter({bool isLoading = false}) {
+    if (isLoading) {
+      onLoading();
+      update();
+    }
     pageNum = 1;
-    loadData(pageNum: pageNum, isLoading: isLoading);
+    fetchData(pageNum: pageNum, isLoading: isLoading);
   }
 
   ///=================================================================================

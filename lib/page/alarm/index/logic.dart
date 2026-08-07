@@ -36,12 +36,12 @@ class AlarmLogic extends GetxController with RefresherAndLoadLogic {
     super.onClose();
   }
 
-  refreshData({bool? isLoading}) {
+  void refreshData({bool? isLoading}) {
     pageNum = 1;
     loadData(pageNum: pageNum, isLoading: isLoading ?? false);
   }
 
-  loadMoreData() {
+  void loadMoreData() {
     pageNum += 1;
     loadData(pageNum: pageNum);
   }

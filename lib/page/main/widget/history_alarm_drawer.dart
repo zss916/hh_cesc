@@ -197,7 +197,7 @@ class _HistoryAlarmDrawerState extends State<HistoryAlarmDrawer> {
                     safeFind<HistoryAlarmLogic>()?.alarmLevel = null;
                     safeFind<HistoryAlarmLogic>()?.siteId = null;
                     safeFind<HistoryAlarmLogic>()?.siteName = null;
-                    safeFind<HistoryAlarmLogic>()?.toFilter();
+                    safeFind<HistoryAlarmLogic>()?.toFilter(isLoading: true);
                     widget.onReset.call();
                   }
                 },
@@ -229,7 +229,7 @@ class _HistoryAlarmDrawerState extends State<HistoryAlarmDrawer> {
                   safeFind<HistoryAlarmLogic>()?.alarmLevel = alarmLevel;
                   safeFind<HistoryAlarmLogic>()?.siteId = siteId;
                   safeFind<HistoryAlarmLogic>()?.siteName = siteName;
-                  safeFind<HistoryAlarmLogic>()?.toFilter();
+                  safeFind<HistoryAlarmLogic>()?.toFilter(isLoading: true);
                   widget.onConfirm.call();
 
                   /* debugPrint(

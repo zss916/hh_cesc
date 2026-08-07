@@ -45,9 +45,6 @@ class StrategyPageLogic extends GetxController {
   void onReady() {
     super.onReady();
     checkOpenAI();
-    //fetchModelControl();
-    //queryStrategyProtected();
-    // queryStrategyCurve();
     loop();
   }
 

@@ -197,7 +197,7 @@ class _RealTimeAlarmDrawerState extends State<RealTimeAlarmDrawer> {
                     safeFind<RealTimeAlarmLogic>()?.alarmLevel = null;
                     safeFind<RealTimeAlarmLogic>()?.siteId = null;
                     safeFind<RealTimeAlarmLogic>()?.siteName = null;
-                    safeFind<RealTimeAlarmLogic>()?.toFilter();
+                    safeFind<RealTimeAlarmLogic>()?.toFilter(isLoading: true);
                     widget.onReset.call();
                   }
                 },
@@ -229,7 +229,7 @@ class _RealTimeAlarmDrawerState extends State<RealTimeAlarmDrawer> {
                   safeFind<RealTimeAlarmLogic>()?.alarmLevel = alarmLevel;
                   safeFind<RealTimeAlarmLogic>()?.siteId = siteId;
                   safeFind<RealTimeAlarmLogic>()?.siteName = siteName;
-                  safeFind<RealTimeAlarmLogic>()?.toFilter();
+                  safeFind<RealTimeAlarmLogic>()?.toFilter(isLoading: true);
                   widget.onConfirm.call();
 
                   /* debugPrint(
