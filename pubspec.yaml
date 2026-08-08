@@ -27,7 +27,7 @@ dependencies:
   url_launcher: 6.3.2
   image_picker: ^1.2.3
   path_provider: ^2.1.6
-  flutter_image_compress: 2.4.0
+  flutter_image_compress: 2.5.1
   webview_flutter: ^4.14.0
   keyboard_visibility_pro: 1.0.0
   marquee_widget: 1.2.0
@@ -88,6 +88,7 @@ dependencies:
   simple_gradient_text: 1.4.0
   decimal: ^3.2.6
   connectivity_plus: ^7.3.1
+  hit: ^1.2.4
 
 
 

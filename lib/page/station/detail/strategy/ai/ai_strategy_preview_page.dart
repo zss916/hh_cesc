@@ -11,6 +11,7 @@ import 'package:cescpro/page/station/detail/strategy/widget/strategy_power_line_
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hit/hit.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'
     show GradientText, GradientDirection;
@@ -566,16 +567,32 @@ class AIStrategyPreviewPage extends StatelessWidget {
               ),
               if (logic.series.isNotEmpty)
                 PositionedDirectional(
-                  top: 5,
-                  end: 5 + 15,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed(APages.hPowerForecastChart);
-                    },
-                    child: Icon(
-                      Icons.zoom_out_map_rounded,
-                      size: 20,
-                      color: Colors.white,
+                  top: 0,
+                  end: 15,
+                  child: HitScope(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.red.withValues(alpha: 0),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: HitLayer(
+                        alignment: Alignment.center,
+                        behavior: HitTestBehavior.deferToChild,
+                        hitChild: GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            Get.toNamed(APages.hPowerForecastChart);
+                          },
+                          child: const SizedBox(width: 40, height: 40),
+                        ),
+                        paintChild: const IgnorePointer(
+                          child: Icon(
+                            Icons.zoom_out_map_rounded,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -709,16 +726,32 @@ class AIStrategyPreviewPage extends StatelessWidget {
               ),
               if (logic.series.isNotEmpty)
                 PositionedDirectional(
-                  top: 5,
-                  end: 5 + 15,
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed(APages.hPriceForecastChart);
-                    },
-                    child: Icon(
-                      Icons.zoom_out_map_rounded,
-                      size: 20,
-                      color: Colors.white,
+                  top: 0,
+                  end: 15,
+                  child: HitScope(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.red.withValues(alpha: 0),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: HitLayer(
+                        alignment: Alignment.center,
+                        behavior: HitTestBehavior.deferToChild,
+                        hitChild: GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            Get.toNamed(APages.hPriceForecastChart);
+                          },
+                          child: const SizedBox(width: 40, height: 40),
+                        ),
+                        paintChild: const IgnorePointer(
+                          child: Icon(
+                            Icons.zoom_out_map_rounded,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),

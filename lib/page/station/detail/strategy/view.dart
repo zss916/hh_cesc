@@ -14,6 +14,7 @@ import 'package:cescpro/page/station/detail/strategy/widget/strategy_power_line_
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hit/hit.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class StrategyPage extends StatelessWidget {
@@ -297,18 +298,35 @@ class StrategyPage extends StatelessWidget {
             ],
           ),
         ),
+
         if (logic.series.isNotEmpty)
           PositionedDirectional(
-            top: 8,
-            end: 8,
-            child: InkWell(
-              onTap: () {
-                Get.toNamed(APages.hStrategyChart);
-              },
-              child: Icon(
-                Icons.zoom_out_map_rounded,
-                size: 20,
-                color: Colors.white,
+            top: 0,
+            end: 0,
+            child: HitScope(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.red.withValues(alpha: 0),
+                ),
+                padding: const EdgeInsets.all(8),
+                child: HitLayer(
+                  alignment: Alignment.center,
+                  behavior: HitTestBehavior.deferToChild,
+                  hitChild: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      Get.toNamed(APages.hStrategyChart);
+                    },
+                    child: const SizedBox(width: 40, height: 40),
+                  ),
+                  paintChild: const IgnorePointer(
+                    child: Icon(
+                      Icons.zoom_out_map_rounded,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
