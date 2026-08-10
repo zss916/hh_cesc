@@ -1,15 +1,4 @@
-import 'package:cescpro/components/common_app_bar.dart';
-import 'package:cescpro/components/offline_on_refresh.dart';
-import 'package:cescpro/core/enum/app_enum.dart';
-import 'package:cescpro/core/router/index.dart';
-import 'package:cescpro/core/storage/app_event_bus.dart';
-import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/generated/assets.dart';
-import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
-import 'package:cescpro/page/station/detail/monitor/monitor_logic.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+part of 'index.dart';
 
 class MonitorView extends StatelessWidget {
   const MonitorView({super.key});
@@ -34,59 +23,27 @@ class MonitorView extends StatelessWidget {
         backgroundColor: Color(0xFF23282E),
         body: GetBuilder<MonitorLogic>(
           init: MonitorLogic(),
-          builder: (logic) {
-            return buildBody(viewState: logic.viewState, logic: logic);
-          },
+          builder: (logic) => buildBodyUI(state: logic.state, logic: logic),
         ),
       ),
     );
   }
 
-  Widget buildBody({
-    required ViewStateEnum viewState,
-    required MonitorLogic logic,
-  }) {
-    return switch (viewState) {
-      ViewStateEnum.common => buildList(logic: logic),
-      ViewStateEnum.empty => buildEmpty(logic: logic),
-      ViewStateEnum.loading => Container(
-        margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CescGlowLoading()),
-      ),
-      ViewStateEnum.offline => Center(
-        child: OfflineOnRefresh(
-          onCall: () {
-            AppEventBus.eventBus.fire(NetWorkRefresh());
-          },
-        ),
-      ),
-      ViewStateEnum.error => buildError(logic: logic),
+  Widget buildBodyUI({required UiState state, required MonitorLogic logic}) {
+    return switch (state) {
+      Success(:final data) => buildList(data: data, logic: logic),
+      Empty() => buildEmpty,
+      Loading() => buildLoading,
+      Offline() => buildOffline,
+      Failure() => buildError,
     };
   }
 
-  Widget buildError({required MonitorLogic logic}) => SizedBox(
-    width: double.maxFinite,
-    height: double.maxFinite,
-    child: GestureDetector(
-      onTap: () {
-        logic.getPointDetails(isLoading: true);
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(Assets.imgEmpty2, width: 200, height: 95),
-          SizedBox(height: 20),
-          Text(
-            TKey.refresh.tr,
-            style: TextStyle(fontSize: 16, color: Color(0xFF909399)),
-          ),
-        ],
-      ),
-    ),
-  );
-
-  Widget buildList({required MonitorLogic logic}) => GridView.builder(
-    itemCount: logic.data.length,
+  Widget buildList({
+    required List<MonitorModel> data,
+    required MonitorLogic logic,
+  }) => GridView.builder(
+    itemCount: data.length,
     padding: EdgeInsetsDirectional.only(
       top: 12.h,
       start: 14.w,
@@ -116,7 +73,7 @@ class MonitorView extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              logic.data[index].title,
+              data[index].title,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -130,12 +87,47 @@ class MonitorView extends StatelessWidget {
     },
   );
 
-  Widget buildEmpty({required MonitorLogic logic}) => SizedBox(
+  Widget get buildLoading => Container(
+    margin: EdgeInsetsDirectional.only(bottom: 50.h),
+    child: Center(child: CescGlowLoading()),
+  );
+
+  Widget get buildOffline => Center(
+    child: OfflineOnRefresh(
+      onCall: () {
+        AppEventBus.eventBus.fire(NetWorkRefresh());
+      },
+    ),
+  );
+
+  Widget get buildError => SizedBox(
     width: double.maxFinite,
     height: double.maxFinite,
     child: GestureDetector(
       onTap: () {
-        logic.loadData(isDelayed: true);
+        AppEventBus.eventBus.fire(NetWorkRefresh());
+        // logic.getPointDetails(isLoading: true);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(Assets.imgEmpty2, width: 200, height: 95),
+          SizedBox(height: 20),
+          Text(
+            TKey.refresh.tr,
+            style: TextStyle(fontSize: 16, color: Color(0xFF909399)),
+          ),
+        ],
+      ),
+    ),
+  );
+
+  Widget get buildEmpty => SizedBox(
+    width: double.maxFinite,
+    height: double.maxFinite,
+    child: GestureDetector(
+      onTap: () {
+        AppEventBus.eventBus.fire(NetWorkRefresh());
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

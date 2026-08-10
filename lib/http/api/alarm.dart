@@ -6,11 +6,12 @@ import 'package:cescpro/http/bean/alarm_item_entity.dart';
 import 'package:cescpro/http/bean/analysis_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
+import 'package:cescpro/http/result/result.dart';
 import 'package:flutter/foundation.dart';
 
 class AlarmAPI {
   ///实时告警数据
-  static Future<(bool, List<AlarmItemEntity>)> postRealTimePage({
+  static Future<ApiResult<List<AlarmItemEntity>>> postRealTimePage({
     required String siteId,
     int? pageNum = 1,
     int? pageSize = 10,
@@ -43,13 +44,12 @@ class AlarmAPI {
               jsonList.map((e) => AlarmItemEntity.fromJson(e)).toList(),
           (result['data']['list'] as List),
         );
-        return (true, value);
+        return ApiSuccess(value);
       } else {
-        //AppLoading.toast(result["message"]);
-        return (false, <AlarmItemEntity>[]);
+        return ApiError(ErrorState.error, result["message"]);
       }
     } catch (error) {
-      return (false, <AlarmItemEntity>[]);
+      return ApiError(ErrorState.error, error.toString());
     }
   }
 

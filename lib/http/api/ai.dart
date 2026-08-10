@@ -10,6 +10,7 @@ import 'package:cescpro/http/bean/strategy_power_item_entity.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
+import 'package:cescpro/http/result/result.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -140,7 +141,7 @@ class AIControlAPI {
   }
 
   ///策略历史
-  static Future<List<StrategyHistoryEntity>> fetchStrategyHistory({
+  static Future<ApiResult<List<StrategyHistoryEntity>>> fetchStrategyHistory({
     required String siteId,
     required int pageNum,
   }) async {
@@ -158,13 +159,12 @@ class AIControlAPI {
               jsonList.map((e) => StrategyHistoryEntity.fromJson(e)).toList(),
           (result['data']['list'] as List),
         );
-        return value;
+        return ApiSuccess(value);
       } else {
-        AppLoading.toast(result["message"]);
-        return [];
+        return Future.syncValue(ApiError(ErrorState.error, result["message"]));
       }
-    } catch (error) {
-      return [];
+    } catch (e) {
+      return Future.syncValue(ApiError(ErrorState.exception, e.toString()));
     }
   }
 

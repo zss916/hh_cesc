@@ -27,7 +27,6 @@ class RealAlarmView extends StatelessWidget {
           }
         },
       ),
-      //appBar: baseAppBar(title: TKey.realTimeData.tr),
       backgroundColor: Color(0xFF23282E),
       body: GetBuilder<RealAlarmLogic>(
         init: RealAlarmLogic(),

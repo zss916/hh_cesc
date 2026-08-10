@@ -114,7 +114,6 @@ class _RealTimeAlarmDrawerState extends State<RealTimeAlarmDrawer> {
           subTitle: alarmTitle,
           onTap: () {
             showAlarmLevelSheet(
-              context: context,
               selectLevel: alarmLevel,
               onSelect: (String? alarmLevelTitle, int? level) {
                 setState(() {

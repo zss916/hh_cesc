@@ -9,7 +9,7 @@ import 'package:cescpro/http/bean/com_type_list_entity.dart';
 import 'package:cescpro/http/bean/comp_tree_entity.dart';
 import 'package:cescpro/http/bean/power_entity.dart';
 import 'package:cescpro/http/bean/soc_entity.dart';
-import 'package:cescpro/page/station/detail/monitor/monitor_logic.dart';
+import 'package:cescpro/page/station/detail/monitor/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

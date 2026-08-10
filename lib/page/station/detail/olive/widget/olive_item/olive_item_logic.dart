@@ -201,6 +201,7 @@ class OliveItemLogic extends GetxController {
 
   ///获取今天充电/今天放电
   Future<void> getPointDetails() async {
+    ///todo
     SiteDetailEntity? value = await SiteAPI.getPointDetails(
       siteId: siteId ?? 0,
     );

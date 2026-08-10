@@ -30,12 +30,15 @@ class TopItemWidget extends StatelessWidget {
             width: double.maxFinite,
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Row(
+              spacing: 5,
               children: [
-                Text(
-                  logic.compTree,
-                  style: TextStyle(color: Colors.white, fontSize: 14),
+                Expanded(
+                  child: Text(
+                    logic.compTree,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
                 ),
-                Spacer(),
                 Icon(
                   Icons.arrow_right_rounded,
                   color: Color(0xA6FFFFFF),

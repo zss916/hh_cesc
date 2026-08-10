@@ -2,14 +2,19 @@ part of 'index.dart';
 
 enum MessageStatus { unRead, read, other }
 
-class MessageCenterLogic extends ViewStateController {
-  List<MessageItemEntity> data = [];
+class MessageCenterLogic extends GetxController with NetWorkRefreshEvent {
+  UiState state = Loading();
 
   @override
   void onInit() {
     super.onInit();
-    onLoading();
+    state = Loading();
     update();
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(loading: true, isDelayed: true);
+      },
+    );
   }
 
   @override
@@ -21,19 +26,20 @@ class MessageCenterLogic extends ViewStateController {
   @override
   void onClose() {
     super.onClose();
+    onDisposeNetWork();
     AppLoading.dismiss();
   }
 
   Future<void> loadData({bool loading = true, bool? isDelayed}) async {
     if (loading) {
-      onLoading();
+      state = Loading();
       update();
       if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
     }
 
     final isConnected = await NetworkStatusService.instance.isConnected();
     if (!isConnected) {
-      onOffline();
+      state = Offline();
       update();
       return;
     }
@@ -41,15 +47,21 @@ class MessageCenterLogic extends ViewStateController {
   }
 
   Future<void> fetchData() async {
-    final (bool isSuccessful, List<MessageItemEntity> value) =
+    final ApiResult<List<MessageItemEntity>> result =
         await MessageAPI.postQueryMessage();
-    if (isSuccessful) {
-      data = value;
-    } else {
-      AppLoading.toast("Fail");
+    switch (result) {
+      case ApiSuccess(:final data):
+        state = data.isEmpty ? Empty() : Success<List<MessageItemEntity>>(data);
+        update();
+      case ApiError(:final errorState, :final msg):
+        state = Failure();
+        update();
+        if (errorState == ErrorState.error) {
+          AppLoading.toast(msg);
+        } else {
+          AppLoading.toast("Fail");
+        }
     }
-    data.isEmpty ? onEmpty() : onComplete();
-    update();
     AppEventBus.eventBus.fire(MessageEvent());
   }
 

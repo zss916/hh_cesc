@@ -5,11 +5,12 @@ import 'package:cescpro/http/bean/message_content_entity.dart';
 import 'package:cescpro/http/bean/message_item_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
+import 'package:cescpro/http/result/result.dart';
 import 'package:flutter/foundation.dart';
 
 class MessageAPI {
   /// 查询用户消息列表
-  static Future<(bool, List<MessageItemEntity>)> postQueryMessage({
+  static Future<ApiResult<List<MessageItemEntity>>> postQueryMessage({
     int? pageNum,
     String? sendTimeStart,
     String? sendTimeEnd,
@@ -35,13 +36,12 @@ class MessageAPI {
               jsonList.map((e) => MessageItemEntity.fromJson(e)).toList(),
           (result['data']['list'] as List),
         );
-        return (true, value);
+        return ApiSuccess(value);
       } else {
-        AppLoading.toast(result["message"]);
-        return (false, <MessageItemEntity>[]);
+        return Future.syncValue(ApiError(ErrorState.error, result["message"]));
       }
-    } catch (error) {
-      return (false, <MessageItemEntity>[]);
+    } catch (e) {
+      return Future.syncValue(ApiError(ErrorState.exception, e.toString()));
     }
   }
 

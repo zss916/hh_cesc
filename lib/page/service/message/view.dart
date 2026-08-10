@@ -13,52 +13,77 @@ class MessageCenterPage extends StatelessWidget {
         backgroundColor: Color(0xFF23282E),
         body: GetBuilder<MessageCenterLogic>(
           init: MessageCenterLogic(),
-          builder: (logic) {
-            return SizedBox(
-              width: double.maxFinite,
-              height: double.maxFinite,
-              child: buildBody(viewState: logic.viewState, logic: logic),
-            );
-          },
+          builder: (logic) => buildBodyUI(state: logic.state, logic: logic),
         ),
       ),
     );
   }
 
-  Widget buildBody({
-    required ViewStateEnum viewState,
+  Widget buildBodyUI({
+    required UiState state,
     required MessageCenterLogic logic,
   }) {
-    return switch (viewState) {
-      ViewStateEnum.common => buildList(logic: logic),
-      ViewStateEnum.empty => buildEmpty(),
-      ViewStateEnum.error => SizedBox.shrink(),
-      ViewStateEnum.loading => Container(
-        margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CescGlowLoading()),
-      ),
-      ViewStateEnum.offline => Center(
-        child: OfflineOnRefresh(
-          onCall: () {
-            logic.loadData(loading: true, isDelayed: true);
-          },
-        ),
-      ),
+    return switch (state) {
+      Loading() => buildLoading,
+      Success(:final data) => buildSuccess(data: data, logic: logic),
+      Failure() => buildFailure,
+      Offline() => buildOffline,
+      Empty() => buildEmpty,
     };
   }
 
-  Widget buildList({required MessageCenterLogic logic}) {
+  Widget buildSuccess({
+    required List<MessageItemEntity> data,
+    required MessageCenterLogic logic,
+  }) {
     return ListView.separated(
       padding: EdgeInsetsDirectional.only(top: 10.h, bottom: 100.h),
-      itemCount: logic.data.length,
+      itemCount: data.length,
       itemBuilder: (_, int index) {
-        MessageItemEntity item = logic.data[index];
+        MessageItemEntity item = data[index];
         return buildMessageItem(item: item, logic: logic);
       },
       separatorBuilder: (_, int index) =>
           Divider(height: 16.h, color: Colors.transparent),
     );
   }
+
+  Widget get buildOffline => Center(
+    child: OfflineOnRefresh(
+      onCall: () {
+        AppEventBus.eventBus.fire(NetWorkRefresh());
+      },
+    ),
+  );
+
+  Widget get buildLoading => Container(
+    margin: EdgeInsetsDirectional.only(bottom: 50.h),
+    child: Center(child: CescGlowLoading()),
+  );
+
+  Widget get buildEmpty => SizedBox(
+    width: double.maxFinite,
+    height: double.maxFinite,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(Assets.imgEmpty, width: 200, height: 95),
+        Text(
+          TKey.noDataAvailable.tr,
+          style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
+        ),
+        Container(
+          margin: EdgeInsetsDirectional.only(top: 17.h, bottom: 120.h),
+          child: Text(
+            TKey.noDataAvailableTip.tr,
+            style: TextStyle(fontSize: 14, color: Color(0xFF909399)),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget get buildFailure => SizedBox.shrink();
 
   Widget buildMessageItem({
     required MessageItemEntity item,
@@ -152,16 +177,6 @@ class MessageCenterPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  /*Container(
-                    margin: EdgeInsets.only(left: 5.w),
-                    child: Text(
-                      "${TKey.sender.tr}${item.senderName}",
-                      style: TextStyle(
-                        color: Color(0x80FFFFFF),
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                  ),*/
                 ],
               ),
             ),
@@ -170,26 +185,4 @@ class MessageCenterPage extends StatelessWidget {
       ),
     );
   }
-
-  Widget buildEmpty() => SizedBox(
-    width: double.maxFinite,
-    height: double.maxFinite,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(Assets.imgEmpty, width: 200, height: 95),
-        Text(
-          TKey.noDataAvailable.tr,
-          style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
-        ),
-        Container(
-          margin: EdgeInsetsDirectional.only(top: 17.h, bottom: 120.h),
-          child: Text(
-            TKey.noDataAvailableTip.tr,
-            style: TextStyle(fontSize: 14, color: Color(0xFF909399)),
-          ),
-        ),
-      ],
-    ),
-  );
 }

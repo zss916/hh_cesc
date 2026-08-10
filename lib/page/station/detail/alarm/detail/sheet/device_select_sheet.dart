@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-void showDeviceLevelSheet({
-  required BuildContext context,
-  Function(String?)? onSelect,
-  String? deviceType,
-}) {
+void showDeviceLevelSheet({Function(String?)? onSelect, String? deviceType}) {
   Get.bottomSheet(
     DeviceSelectSheetWidget(deviceType: deviceType, onSelect: onSelect),
     ignoreSafeArea: false,

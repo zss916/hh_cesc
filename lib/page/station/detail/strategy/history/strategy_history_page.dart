@@ -1,15 +1,4 @@
-import 'package:cescpro/components/common_app_bar.dart';
-import 'package:cescpro/core/enum/app_enum.dart';
-import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/generated/assets.dart';
-import 'package:cescpro/http/bean/strategy_history_entity.dart';
-import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
-import 'package:cescpro/page/station/detail/strategy/history/strategy_history_logic.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
+part of 'index.dart';
 
 class StrategyHistoryPage extends StatelessWidget {
   const StrategyHistoryPage({super.key});
@@ -21,49 +10,28 @@ class StrategyHistoryPage extends StatelessWidget {
       backgroundColor: Color(0xFF23282E),
       body: GetBuilder<StrategyHistoryLogic>(
         init: StrategyHistoryLogic(),
-        builder: (logic) {
-          return buildBody(viewState: logic.viewState, logic: logic);
-        },
+        builder: (logic) => buildBodyUI(state: logic.state, logic: logic),
       ),
     );
   }
 
-  Widget buildBody({
-    required ViewStateEnum viewState,
+  Widget buildBodyUI({
+    required UiState state,
     required StrategyHistoryLogic logic,
   }) {
-    return switch (viewState) {
-      ViewStateEnum.common => buildRefresherList(logic),
-      ViewStateEnum.empty => buildEmpty(logic: logic),
-      ViewStateEnum.loading => Container(
-        margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CescGlowLoading()),
-      ),
-      _ => SizedBox.shrink(),
+    return switch (state) {
+      Success(:final data) => buildRefresherList(data, logic),
+      Empty() => buildEmpty,
+      Loading() => buildLoading,
+      Offline() => buildOffline,
+      Failure() => SizedBox.shrink(),
     };
   }
 
-  Widget buildEmpty({required StrategyHistoryLogic logic}) => SizedBox(
-    width: double.maxFinite,
-    height: double.maxFinite,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        GestureDetector(
-          onTap: () {
-            logic.refreshData();
-          },
-          child: Image.asset(Assets.imgEmpty, width: 200, height: 95),
-        ),
-        Text(
-          TKey.noDataAvailable.tr,
-          style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
-        ),
-      ],
-    ),
-  );
-
-  Widget buildRefresherList(StrategyHistoryLogic logic) {
+  Widget buildRefresherList(
+    List<List<StrategyHistoryEntity>> data,
+    StrategyHistoryLogic logic,
+  ) {
     return SmartRefresher(
       header: MaterialClassicHeader(),
       footer: ClassicFooter(
@@ -83,21 +51,22 @@ class StrategyHistoryPage extends StatelessWidget {
       onLoading: () {
         logic.loadMoreData();
       },
-      child: buildList(logic),
+      child: buildList(data),
     );
   }
 
-  Widget buildList(StrategyHistoryLogic logic) => ListView.separated(
-    itemCount: logic.list.length,
-    padding: EdgeInsetsDirectional.only(top: 10, bottom: 10),
-    shrinkWrap: true,
-    itemBuilder: (BuildContext context, int index) {
-      List<StrategyHistoryEntity> items = logic.list[index];
-      return _buildHistoryItems(items);
-    },
-    separatorBuilder: (BuildContext context, int index) =>
-        Divider(height: 16, color: Colors.transparent),
-  );
+  Widget buildList(List<List<StrategyHistoryEntity>> data) =>
+      ListView.separated(
+        itemCount: data.length,
+        padding: EdgeInsetsDirectional.only(top: 10, bottom: 10),
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index) {
+          List<StrategyHistoryEntity> items = data[index];
+          return _buildHistoryItems(items);
+        },
+        separatorBuilder: (BuildContext context, int index) =>
+            Divider(height: 16, color: Colors.transparent),
+      );
 
   Widget _buildHistoryItems(List<StrategyHistoryEntity> items) {
     return Column(
@@ -230,6 +199,42 @@ class StrategyHistoryPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget get buildOffline => Container(
+    alignment: AlignmentDirectional.center,
+    margin: EdgeInsetsDirectional.only(bottom: 150),
+    child: OfflineOnRefresh(
+      onCall: () {
+        AppEventBus.eventBus.fire(NetWorkRefresh());
+      },
+    ),
+  );
+
+  Widget get buildLoading => Container(
+    margin: EdgeInsetsDirectional.only(bottom: 150),
+    child: Center(child: CescGlowLoading()),
+  );
+
+  Widget get buildEmpty => Container(
+    width: double.maxFinite,
+    height: double.maxFinite,
+    padding: EdgeInsetsDirectional.only(bottom: 150),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () {
+            AppEventBus.eventBus.fire(NetWorkRefresh());
+          },
+          child: Image.asset(Assets.imgEmpty, width: 200, height: 95),
+        ),
+        Text(
+          TKey.noDataAvailable.tr,
+          style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
+        ),
+      ],
+    ),
+  );
 }
 
 /*

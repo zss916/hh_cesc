@@ -2,7 +2,7 @@ import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/v1.dart';
 import 'package:cescpro/http/bean/id_tree_entity.dart';
-import 'package:cescpro/page/station/detail/monitor/monitor_logic.dart';
+import 'package:cescpro/page/station/detail/monitor/index.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/helper/arr_api_mixin.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/helper/cell_api_mixin.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/helper/clu_api_mixin.dart';

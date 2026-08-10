@@ -1,14 +1,4 @@
-import 'package:cescpro/core/router/index.dart';
-import 'package:cescpro/core/setting/app_loading.dart';
-import 'package:cescpro/core/state/view_state_mixin.dart';
-import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/http/api/home.dart';
-import 'package:cescpro/http/api/site.dart';
-import 'package:cescpro/http/base/interceptor/network_status.dart';
-import 'package:cescpro/http/bean/site_detail_entity.dart';
-import 'package:cescpro/http/bean/site_entity.dart';
-import 'package:cescpro/page/station/detail/monitor/v1/helper/device_view_enum.dart';
-import 'package:get/get.dart';
+part of 'index.dart';
 
 class MonitorModel {
   String title;
@@ -17,10 +7,11 @@ class MonitorModel {
   MonitorModel({required this.title, required this.type, required this.isV1});
 }
 
-class MonitorLogic extends ViewStateController {
+class MonitorLogic extends GetxController with NetWorkRefreshEvent {
   SiteEntity? site;
   List<MonitorModel> data = [];
   bool? isV1;
+  UiState state = Loading();
 
   @override
   void onInit() {
@@ -29,7 +20,7 @@ class MonitorLogic extends ViewStateController {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       site = map['site'] as SiteEntity?;
     }
-    onLoading();
+    state = Loading();
     update();
     onNetWorkRefresh(
       onRefresh: () {
@@ -47,34 +38,29 @@ class MonitorLogic extends ViewStateController {
   @override
   void onClose() {
     super.onClose();
-    onDisposeNetWork();
     AppLoading.dismiss();
+    onDisposeNetWork();
   }
 
   Future<void> loadData({bool loading = true, bool? isDelayed}) async {
     if (loading) {
-      onLoading();
+      state = Loading();
       update();
       if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
     }
 
     final isConnected = await NetworkStatusService.instance.isConnected();
     if (!isConnected) {
-      onOffline();
+      state = Offline();
       update();
       return;
     }
 
-    onComplete();
     getPointDetails();
   }
 
   ///isV1
-  Future<void> getPointDetails({bool isLoading = false}) async {
-    if (isLoading) {
-      onLoading();
-      update();
-    }
+  Future<void> getPointDetails() async {
     SiteDetailEntity? value = await SiteAPI.getPointDetails(
       siteId: site?.id ?? 0,
     );
@@ -82,15 +68,14 @@ class MonitorLogic extends ViewStateController {
     if (value != null) {
       if (value.isV1 == true) {
         ///v1
-        fetchData(isV1: true);
+        await fetchData(isV1: true);
       } else {
         ///v2
-        fetchData(isV1: false);
+        await fetchData(isV1: false);
       }
     } else {
-      onError();
+      state = Failure();
       update();
-      AppLoading.toast("data is null");
     }
   }
 
@@ -145,9 +130,17 @@ class MonitorLogic extends ViewStateController {
             data.add(MonitorModel(type: e, title: e, isV1: isV1));
           }
         }
-        data.isEmpty ? onEmpty() : onComplete();
+
+        //debugPrint("===>>>> ${data.isEmpty}");
+        state = data.isEmpty ? Empty() : Success(data);
+        update();
+      } else {
+        state = Failure();
         update();
       }
+    } else {
+      state = Failure();
+      update();
     }
   }
 
@@ -202,9 +195,12 @@ class MonitorLogic extends ViewStateController {
             data.add(MonitorModel(type: e, title: e, isV1: isV1));
           }
         }
-        data.isEmpty ? onEmpty() : onComplete();
+        data.isEmpty ? Empty() : Success(data);
         update();
       }
+    } else {
+      state = Failure();
+      update();
     }
   }
 

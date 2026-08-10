@@ -1,53 +1,56 @@
-import 'package:cescpro/core/enum/app_enum.dart';
-import 'package:cescpro/http/api/ai.dart';
-import 'package:cescpro/http/bean/strategy_history_entity.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
+part of 'index.dart';
 
-class StrategyHistoryLogic extends GetxController {
-  int? id;
-  //List<StrategyHistoryEntity> data = [];
-  ViewStateEnum viewState = ViewStateEnum.common;
-
-  List<List<StrategyHistoryEntity>> list = [];
-
+class StrategyHistoryLogic extends GetxController with NetWorkRefreshEvent {
   late RefreshController refreshCtrl = RefreshController(
     initialRefresh: false,
     initialLoadStatus: LoadStatus.canLoading,
   );
 
+  int? id;
+  UiState state = Loading();
+  int pageNum = 1;
+  final List<List<StrategyHistoryEntity>> _list = [];
+
   @override
   void onInit() {
     super.onInit();
     id = ((Get.arguments as Map<String, dynamic>)['siteId'] as int?);
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(loading: true, isDelayed: true);
+      },
+    );
   }
 
   @override
   void onReady() {
     super.onReady();
-    refreshData();
+    loadData(loading: true);
   }
 
   @override
   void onClose() {
     refreshCtrl.dispose();
     super.onClose();
+    _list.clear();
+    onDisposeNetWork();
   }
 
-  void refreshAndLoadCtl(bool isRefresh, int size) {
-    if (isRefresh) {
-      refreshCtrl.refreshCompleted(resetFooterState: true);
-    } else {
-      if (size == 0) {
-        refreshCtrl.loadNoData();
-      } else {
-        refreshCtrl.loadComplete();
-      }
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      state = Loading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
     }
-  }
 
-  int pageNum = 1;
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      state = Offline();
+      update();
+      return;
+    }
+    refreshData();
+  }
 
   void refreshData() {
     pageNum = 1;
@@ -60,29 +63,52 @@ class StrategyHistoryLogic extends GetxController {
   }
 
   Future<void> fetchStrategyHistory({required int pageNum}) async {
-    if (list.isEmpty && pageNum == 1) {
-      viewState = ViewStateEnum.loading;
-      update();
+    ApiResult<List<StrategyHistoryEntity>> result =
+        await AIControlAPI.fetchStrategyHistory(
+          siteId: '$id',
+          pageNum: pageNum,
+        );
+
+    switch (result) {
+      case ApiSuccess(:final data):
+        List<List<Map<String, dynamic>>> list = groupByDay(
+          data.map((e) => e.toJson()).toList(),
+        );
+        List<List<StrategyHistoryEntity>> historyList = list
+            .map(
+              (e) => e.map((b) => StrategyHistoryEntity.fromJson(b)).toList(),
+            )
+            .toList();
+        if (pageNum == 1) {
+          _list.assignAll(historyList);
+        } else {
+          _list.addAll(historyList);
+        }
+        state = _list.isEmpty ? Empty() : Success(_list);
+        refreshAndLoadCtl(pageNum == 1, historyList.length);
+        update();
+        update();
+      case ApiError(:final errorState, :final msg):
+        state = Failure();
+        update();
+        if (errorState == ErrorState.error) {
+          AppLoading.toast(msg);
+        } else {
+          AppLoading.toast("Fail");
+        }
     }
-    List<StrategyHistoryEntity> value = await AIControlAPI.fetchStrategyHistory(
-      siteId: '$id',
-      pageNum: pageNum,
-    );
-    List<List<Map<String, dynamic>>> data = groupByDay(
-      value.map((e) => e.toJson()).toList(),
-    );
-    List<List<StrategyHistoryEntity>> historyList = data
-        .map((e) => e.map((b) => StrategyHistoryEntity.fromJson(b)).toList())
-        .toList();
-    if (pageNum == 1) {
-      //list.assignAll(historyList);
-      list = historyList;
+  }
+
+  void refreshAndLoadCtl(bool isRefresh, int size) {
+    if (isRefresh) {
+      refreshCtrl.refreshCompleted(resetFooterState: true);
     } else {
-      list.addAll(historyList);
+      if (size == 0) {
+        refreshCtrl.loadNoData();
+      } else {
+        refreshCtrl.loadComplete();
+      }
     }
-    refreshAndLoadCtl(pageNum == 1, historyList.length);
-    viewState = list.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
-    update();
   }
 
   List<List<Map<String, dynamic>>> groupByDay(List<Map<String, dynamic>> data) {

@@ -1,19 +1,15 @@
-import 'package:cescpro/core/setting/app_loading.dart';
-import 'package:cescpro/core/state/view_state_mixin.dart';
-import 'package:cescpro/http/api/alarm.dart';
-import 'package:cescpro/http/bean/alarm_item_entity.dart';
-import 'package:get/get.dart';
-import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
+part of 'index.dart';
 
-class AlarmDetailLogic extends ViewStateController {
+class AlarmDetailLogic extends GetxController
+    with RefreshControllerHelper, NetWorkRefreshEvent {
   int? siteId;
-  List<AlarmItemEntity> list = [];
+  final List<AlarmItemEntity> _list = [];
   int pageNum = 1;
   int? alarmLevel;
   String? alarmTitle;
   String? compType;
 
-  RefreshController refreshCtrl = RefreshController(initialRefresh: false);
+  UiState state = Loading();
 
   @override
   void onInit() {
@@ -21,74 +17,93 @@ class AlarmDetailLogic extends ViewStateController {
     if (Get.arguments != null) {
       Map<String, dynamic> map = Get.arguments as Map<String, dynamic>;
       siteId = map['siteId'] as int?;
-      onLoading();
+      state = Loading();
       update();
     }
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(loading: true, isDelayed: true);
+      },
+    );
   }
 
   @override
   void onReady() {
     super.onReady();
+    loadData();
+  }
+
+  @override
+  void onClose() {
+    onRefreshDispose();
+    onDisposeNetWork();
+    super.onClose();
+    _list.clear();
+    AppLoading.dismiss();
+  }
+
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      state = Loading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      state = Offline();
+      update();
+      return;
+    }
     refreshData();
   }
 
   void refreshData() {
     pageNum = 1;
-    loadData(pageNum: pageNum);
+    fetchData(pageNum: pageNum);
   }
 
   void loadMoreData() {
     pageNum += 1;
-    loadData(pageNum: pageNum);
+    fetchData(pageNum: pageNum);
   }
 
-  void refreshAndLoadCtl(bool isRefresh, int size) {
-    if (isRefresh) {
-      refreshCtrl.refreshCompleted(resetFooterState: true);
-    } else {
-      if (size == 0) {
-        refreshCtrl.loadNoData();
-      } else {
-        refreshCtrl.loadComplete();
-      }
-    }
-  }
-
-  Future<void> loadData({int pageNum = 1, bool isLoading = false}) async {
+  Future<void> fetchData({int pageNum = 1, bool isLoading = false}) async {
     if (siteId != null) {
       if (isLoading) {
         AppLoading.show();
       }
-      final (
-        bool isSuccessful,
-        List<AlarmItemEntity> value,
-      ) = await AlarmAPI.postRealTimePage(
+      final result = await AlarmAPI.postRealTimePage(
         siteId: "$siteId",
         alarmLevel: alarmLevel,
         compType: compType,
         pageNum: pageNum,
       ).whenComplete(() => AppLoading.dismiss());
 
-      if (isSuccessful) {
-        if (pageNum == 1) {
-          list.assignAll(value);
-        } else {
-          list.addAll(value);
-        }
-      } else {
-        pageNum -= 1;
-        AppLoading.toast("Fail");
+      switch (result) {
+        case ApiSuccess(:final data):
+          if (pageNum == 1) {
+            _list.assignAll(data);
+          } else {
+            _list.addAll(data);
+          }
+          refreshAndLoadCtl(pageNum <= 1, data.length);
+          state = data.isEmpty ? Empty() : Success<List<AlarmItemEntity>>(data);
+          update();
+        case ApiError(:final errorState, :final msg):
+          pageNum -= 1;
+          refreshAndLoadCtl(pageNum <= 1, _list.length);
+          state = Failure();
+          update();
+          if (errorState == ErrorState.error) {
+            AppLoading.toast(msg);
+          } else {
+            AppLoading.toast("Fail");
+          }
       }
-      refreshAndLoadCtl(pageNum <= 1, value.length);
-      list.isEmpty ? onEmpty() : onComplete();
+    } else {
+      state = Failure();
       update();
     }
-  }
-
-  @override
-  void onClose() {
-    refreshCtrl.dispose();
-    super.onClose();
-    AppLoading.dismiss();
   }
 }
