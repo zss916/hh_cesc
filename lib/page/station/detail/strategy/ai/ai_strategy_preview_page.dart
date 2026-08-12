@@ -13,8 +13,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hit/hit.dart';
 import 'package:intl/intl.dart';
-import 'package:simple_gradient_text/simple_gradient_text.dart'
-    show GradientText, GradientDirection;
 
 class AIStrategyPreviewPage extends StatelessWidget {
   const AIStrategyPreviewPage({super.key});
@@ -485,38 +483,13 @@ class AIStrategyPreviewPage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             width: double.maxFinite,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    TKey.powerForecastChart.tr,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 5),
-                Container(
-                  margin: EdgeInsetsDirectional.only(start: 15),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 2,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0x3328CCFF),
-                    border: Border.all(color: Color(0xFF28CCFF)),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: GradientText(
-                    gradientDirection: GradientDirection.btt,
-                    TKey.recommended.tr,
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
-                    colors: [Color(0xFF40F7FE), Color(0xFF1088EB)],
-                  ),
-                ),
-              ],
+            child: Text(
+              TKey.powerForecastChart.tr,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ),
           Stack(
@@ -836,10 +809,6 @@ class AIStrategyPreviewPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            TKey.applyTip.tr,
-            style: TextStyle(fontSize: 10.sp, color: Color(0xd9ffffff)),
-          ),
         ],
       ),
     );

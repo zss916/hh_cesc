@@ -3,18 +3,18 @@ import 'package:cescpro/http/bean/analysis_entity.dart';
 
 AnalysisEntity $AnalysisEntityFromJson(Map<String, dynamic> json) {
   final AnalysisEntity analysisEntity = AnalysisEntity();
-  final AnalysisTotalAlarmData? totalAlarmData = jsonConvert.convert<
-      AnalysisTotalAlarmData>(json['totalAlarmData']);
+  final AnalysisTotalAlarmData? totalAlarmData = jsonConvert
+      .convert<AnalysisTotalAlarmData>(json['totalAlarmData']);
   if (totalAlarmData != null) {
     analysisEntity.totalAlarmData = totalAlarmData;
   }
-  final AnalysisHighestAlarmData? highestAlarmData = jsonConvert.convert<
-      AnalysisHighestAlarmData>(json['highestAlarmData']);
+  final AnalysisHighestAlarmData? highestAlarmData = jsonConvert
+      .convert<AnalysisHighestAlarmData>(json['highestAlarmData']);
   if (highestAlarmData != null) {
     analysisEntity.highestAlarmData = highestAlarmData;
   }
-  final AnalysisAttentionAlarmData? attentionAlarmData = jsonConvert.convert<
-      AnalysisAttentionAlarmData>(json['attentionAlarmData']);
+  final AnalysisAttentionAlarmData? attentionAlarmData = jsonConvert
+      .convert<AnalysisAttentionAlarmData>(json['attentionAlarmData']);
   if (attentionAlarmData != null) {
     analysisEntity.attentionAlarmData = attentionAlarmData;
   }
@@ -43,8 +43,10 @@ extension AnalysisEntityExtension on AnalysisEntity {
 }
 
 AnalysisTotalAlarmData $AnalysisTotalAlarmDataFromJson(
-    Map<String, dynamic> json) {
-  final AnalysisTotalAlarmData analysisTotalAlarmData = AnalysisTotalAlarmData();
+  Map<String, dynamic> json,
+) {
+  final AnalysisTotalAlarmData analysisTotalAlarmData =
+      AnalysisTotalAlarmData();
   final int? totalCnt = jsonConvert.convert<int>(json['totalCnt']);
   if (totalCnt != null) {
     analysisTotalAlarmData.totalCnt = totalCnt;
@@ -69,7 +71,8 @@ AnalysisTotalAlarmData $AnalysisTotalAlarmDataFromJson(
 }
 
 Map<String, dynamic> $AnalysisTotalAlarmDataToJson(
-    AnalysisTotalAlarmData entity) {
+  AnalysisTotalAlarmData entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['totalCnt'] = entity.totalCnt;
   data['firstCnt'] = entity.firstCnt;
@@ -97,17 +100,22 @@ extension AnalysisTotalAlarmDataExtension on AnalysisTotalAlarmData {
 }
 
 AnalysisHighestAlarmData $AnalysisHighestAlarmDataFromJson(
-    Map<String, dynamic> json) {
-  final AnalysisHighestAlarmData analysisHighestAlarmData = AnalysisHighestAlarmData();
+  Map<String, dynamic> json,
+) {
+  final AnalysisHighestAlarmData analysisHighestAlarmData =
+      AnalysisHighestAlarmData();
   final int? totalCnt = jsonConvert.convert<int>(json['totalCnt']);
   if (totalCnt != null) {
     analysisHighestAlarmData.totalCnt = totalCnt;
   }
-  final List<AnalysisHighestAlarmDataItems>? items = (json['items'] as List<
-      dynamic>?)?.map(
-          (e) =>
-      jsonConvert.convert<AnalysisHighestAlarmDataItems>(
-          e) as AnalysisHighestAlarmDataItems).toList();
+  final List<AnalysisHighestAlarmDataItems>? items =
+      (json['items'] as List<dynamic>?)
+          ?.map(
+            (e) =>
+                jsonConvert.convert<AnalysisHighestAlarmDataItems>(e)
+                    as AnalysisHighestAlarmDataItems,
+          )
+          .toList();
   if (items != null) {
     analysisHighestAlarmData.items = items;
   }
@@ -115,7 +123,8 @@ AnalysisHighestAlarmData $AnalysisHighestAlarmDataFromJson(
 }
 
 Map<String, dynamic> $AnalysisHighestAlarmDataToJson(
-    AnalysisHighestAlarmData entity) {
+  AnalysisHighestAlarmData entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['totalCnt'] = entity.totalCnt;
   data['items'] = entity.items?.map((v) => v.toJson()).toList();
@@ -134,8 +143,10 @@ extension AnalysisHighestAlarmDataExtension on AnalysisHighestAlarmData {
 }
 
 AnalysisHighestAlarmDataItems $AnalysisHighestAlarmDataItemsFromJson(
-    Map<String, dynamic> json) {
-  final AnalysisHighestAlarmDataItems analysisHighestAlarmDataItems = AnalysisHighestAlarmDataItems();
+  Map<String, dynamic> json,
+) {
+  final AnalysisHighestAlarmDataItems analysisHighestAlarmDataItems =
+      AnalysisHighestAlarmDataItems();
   final String? type = jsonConvert.convert<String>(json['type']);
   if (type != null) {
     analysisHighestAlarmDataItems.type = type;
@@ -148,18 +159,17 @@ AnalysisHighestAlarmDataItems $AnalysisHighestAlarmDataItemsFromJson(
 }
 
 Map<String, dynamic> $AnalysisHighestAlarmDataItemsToJson(
-    AnalysisHighestAlarmDataItems entity) {
+  AnalysisHighestAlarmDataItems entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['type'] = entity.type;
   data['cnt'] = entity.cnt;
   return data;
 }
 
-extension AnalysisHighestAlarmDataItemsExtension on AnalysisHighestAlarmDataItems {
-  AnalysisHighestAlarmDataItems copyWith({
-    String? type,
-    int? cnt,
-  }) {
+extension AnalysisHighestAlarmDataItemsExtension
+    on AnalysisHighestAlarmDataItems {
+  AnalysisHighestAlarmDataItems copyWith({String? type, int? cnt}) {
     return AnalysisHighestAlarmDataItems()
       ..type = type ?? this.type
       ..cnt = cnt ?? this.cnt;
@@ -167,17 +177,22 @@ extension AnalysisHighestAlarmDataItemsExtension on AnalysisHighestAlarmDataItem
 }
 
 AnalysisAttentionAlarmData $AnalysisAttentionAlarmDataFromJson(
-    Map<String, dynamic> json) {
-  final AnalysisAttentionAlarmData analysisAttentionAlarmData = AnalysisAttentionAlarmData();
+  Map<String, dynamic> json,
+) {
+  final AnalysisAttentionAlarmData analysisAttentionAlarmData =
+      AnalysisAttentionAlarmData();
   final int? totalCnt = jsonConvert.convert<int>(json['totalCnt']);
   if (totalCnt != null) {
     analysisAttentionAlarmData.totalCnt = totalCnt;
   }
-  final List<AnalysisAttentionAlarmDataItems>? items = (json['items'] as List<
-      dynamic>?)?.map(
-          (e) =>
-      jsonConvert.convert<AnalysisAttentionAlarmDataItems>(
-          e) as AnalysisAttentionAlarmDataItems).toList();
+  final List<AnalysisAttentionAlarmDataItems>? items =
+      (json['items'] as List<dynamic>?)
+          ?.map(
+            (e) =>
+                jsonConvert.convert<AnalysisAttentionAlarmDataItems>(e)
+                    as AnalysisAttentionAlarmDataItems,
+          )
+          .toList();
   if (items != null) {
     analysisAttentionAlarmData.items = items;
   }
@@ -185,7 +200,8 @@ AnalysisAttentionAlarmData $AnalysisAttentionAlarmDataFromJson(
 }
 
 Map<String, dynamic> $AnalysisAttentionAlarmDataToJson(
-    AnalysisAttentionAlarmData entity) {
+  AnalysisAttentionAlarmData entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['totalCnt'] = entity.totalCnt;
   data['items'] = entity.items?.map((v) => v.toJson()).toList();
@@ -204,8 +220,10 @@ extension AnalysisAttentionAlarmDataExtension on AnalysisAttentionAlarmData {
 }
 
 AnalysisAttentionAlarmDataItems $AnalysisAttentionAlarmDataItemsFromJson(
-    Map<String, dynamic> json) {
-  final AnalysisAttentionAlarmDataItems analysisAttentionAlarmDataItems = AnalysisAttentionAlarmDataItems();
+  Map<String, dynamic> json,
+) {
+  final AnalysisAttentionAlarmDataItems analysisAttentionAlarmDataItems =
+      AnalysisAttentionAlarmDataItems();
   final String? type = jsonConvert.convert<String>(json['type']);
   if (type != null) {
     analysisAttentionAlarmDataItems.type = type;
@@ -218,18 +236,17 @@ AnalysisAttentionAlarmDataItems $AnalysisAttentionAlarmDataItemsFromJson(
 }
 
 Map<String, dynamic> $AnalysisAttentionAlarmDataItemsToJson(
-    AnalysisAttentionAlarmDataItems entity) {
+  AnalysisAttentionAlarmDataItems entity,
+) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['type'] = entity.type;
   data['cnt'] = entity.cnt;
   return data;
 }
 
-extension AnalysisAttentionAlarmDataItemsExtension on AnalysisAttentionAlarmDataItems {
-  AnalysisAttentionAlarmDataItems copyWith({
-    String? type,
-    int? cnt,
-  }) {
+extension AnalysisAttentionAlarmDataItemsExtension
+    on AnalysisAttentionAlarmDataItems {
+  AnalysisAttentionAlarmDataItems copyWith({String? type, int? cnt}) {
     return AnalysisAttentionAlarmDataItems()
       ..type = type ?? this.type
       ..cnt = cnt ?? this.cnt;

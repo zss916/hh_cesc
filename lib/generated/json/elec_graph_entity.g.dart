@@ -16,7 +16,8 @@ ElecGraphEntity $ElecGraphEntityFromJson(Map<String, dynamic> json) {
     elecGraphEntity.totalCharge = totalCharge;
   }
   final double? totalRecharge = jsonConvert.convert<double>(
-      json['totalRecharge']);
+    json['totalRecharge'],
+  );
   if (totalRecharge != null) {
     elecGraphEntity.totalRecharge = totalRecharge;
   }
@@ -29,12 +30,14 @@ ElecGraphEntity $ElecGraphEntityFromJson(Map<String, dynamic> json) {
     elecGraphEntity.type = type;
   }
   final double? pvGeneration = jsonConvert.convert<double>(
-      json['pvGeneration']);
+    json['pvGeneration'],
+  );
   if (pvGeneration != null) {
     elecGraphEntity.pvGeneration = pvGeneration;
   }
   final double? storageProfit = jsonConvert.convert<double>(
-      json['storageProfit']);
+    json['storageProfit'],
+  );
   if (storageProfit != null) {
     elecGraphEntity.storageProfit = storageProfit;
   }
@@ -43,7 +46,8 @@ ElecGraphEntity $ElecGraphEntityFromJson(Map<String, dynamic> json) {
     elecGraphEntity.pvSelfUse = pvSelfUse;
   }
   final double? pvSelfUseGain = jsonConvert.convert<double>(
-      json['pvSelfUseGain']);
+    json['pvSelfUseGain'],
+  );
   if (pvSelfUseGain != null) {
     elecGraphEntity.pvSelfUseGain = pvSelfUseGain;
   }
@@ -52,7 +56,8 @@ ElecGraphEntity $ElecGraphEntityFromJson(Map<String, dynamic> json) {
     elecGraphEntity.pvProfit = pvProfit;
   }
   final double? gridFeedGain = jsonConvert.convert<double>(
-      json['gridFeedGain']);
+    json['gridFeedGain'],
+  );
   if (gridFeedGain != null) {
     elecGraphEntity.gridFeedGain = gridFeedGain;
   }

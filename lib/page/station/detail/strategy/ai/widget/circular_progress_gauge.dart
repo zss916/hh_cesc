@@ -168,11 +168,11 @@ class _GaugePainter extends CustomPainter {
     final sweepAngle = totalAngle * progress;
 
     /// 渐变
-    /*  final shader2 = SweepGradient(
+    final shader2 = SweepGradient(
       startAngle: startAngle,
       endAngle: startAngle + totalAngle,
       colors: gradientColors,
-    ).createShader(rect);*/
+    ).createShader(rect);
 
     if (sweepAngle > 0.0001) {
       final shader = SweepGradient(

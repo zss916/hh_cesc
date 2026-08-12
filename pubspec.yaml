@@ -84,11 +84,14 @@ dependencies:
   #app_settings: 7.0.0
   #解决全屏适配
   #edge_to_edge_resolver: ^1.0.1
-  gradient_borders: ^1.0.4
+  #gradient_borders: ^1.0.4
   simple_gradient_text: 1.4.0
   decimal: ^3.2.6
   connectivity_plus: ^7.3.1
   hit: ^1.2.4
+  #objectbox: 5.2.0
+  #objectbox_flutter_libs: 5.2.0
+
 
 
 
@@ -104,6 +107,8 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: 6.0.0
+  build_runner: any
+  #objectbox_generator: 5.2.0
 
 flutter:
   uses-material-design: true

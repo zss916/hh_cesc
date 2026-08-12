@@ -562,7 +562,7 @@ class TKey {
   static const String priceForecast = "priceForecast";
   static const String electricityPrice = "electricityPrice";
   static const String applyAiStrategy = "applyAiStrategy";
-  static const String applyTip = "applyTip";
+  //static const String applyTip = "applyTip";
   static const String allTab = "allTab";
   static const String switchTab = "switchTab";
   static const String adjustTab = "adjustTab";
@@ -895,10 +895,12 @@ const en = {
   "monthGridNeg": "Current Month Reverse Grid Energy",
   "yearGridNeg": "Current Year Reverse Grid Energy",
   "totalGridNeg": "Total Reverse Grid Energy",
+
   "todayGridPos": "Today Grid Import",
   "monthGridPos": "Current Month Grid Import",
   "yearGridPos": "Current Year Grid Import",
   "totalGridPos": "Total Grid Import",
+
   "todayLoadPos": "Today Load Consumption",
   "monthLoadPos": "Monthly Load Consumption",
   "yearLoadPos": "Yearly Load Consumption",
@@ -913,8 +915,8 @@ const en = {
   "socLowerLimit": "SOC Lower Limit",
   "strategyHistory": "Strategy History",
   "aiStrategyPreview": "AI Preview",
-  "strategyCurve": "Target Strategy Curve",
-  "actualOperation": "Actual Operation Curve",
+  "strategyCurve": "Predicted ESS power",
+  "actualOperation": "Actual ESS power",
   "aiStrategyPreviewTitle": "AI Strategy Preview",
   "aiSmartOptimization": "AI Smart Strategy Optimization",
   "aiStrategyProfit": "AI Strategy Profit",
@@ -924,14 +926,12 @@ const en = {
   "dailyExtraEarning": "Expected Daily Earnings",
   "powerForecastChart": "Power Forecast Chart",
   "recommended": "Recommendation",
-  "aiStrategyPlanning": "AI Strategy Planning",
-  "pvForecast": "PV Forecast",
-  "loadForecast": "Load Forecast",
+  "aiStrategyPlanning": "Predicted ESS power",
+  "pvForecast": "Predicted PV power",
+  "loadForecast": "Predicted load power",
   "priceForecast": "Price Forecast",
   "electricityPrice": "Electricity Price",
   "applyAiStrategy": "Apply AI Strategy",
-  "applyTip":
-      "After approval, AI strategy will automatically take over current operation",
   "allTab": "All",
   "switchTab": "Switch",
   "adjustTab": "Adjust Parameters",
@@ -942,14 +942,11 @@ const en = {
       'Please contact your account managerAI strategy activation needs to be reviewed and approved by your account manager.\nPlease proactively contact your account manager to submit an activation application.\nOnce approved, you will be able to use the AI strategy.',
   "knowTitle": "OK",
   "totalPowerType": "Total Power",
-  "subSystemType": "Sub System",
-  "peakShavingAndValleyFillingMonthType":
-      "Peak Shaving And Valley Filling (Monthly)",
-  "peakShavingAndValleyFillingDayType":
-      "Peak Shaving And Valley Filling (Daily)",
-  "selfGenerationAndSelfConsumptionType":
-      "Self-Generation And Self-Consumption",
-  "aiModeType": "AI Mode",
+  "subSystemType": "Subsystem",
+  "peakShavingAndValleyFillingMonthType": "Peak load shifting monthly",
+  "peakShavingAndValleyFillingDayType": "Peak load shifting daily",
+  "selfGenerationAndSelfConsumptionType": "Spontaneous self use",
+  "aiModeType": "Smart control",
   "safeStrategy": "Protection Strategy",
   "volProtection": "Voltage Protection",
   "socProtection": "SOC Protection",

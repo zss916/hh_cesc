@@ -57,14 +57,15 @@ class StrategyPowerLineChart extends StatelessWidget {
                 ),
                 majorTickLines: MajorTickLines(size: 0),
               ),
-              trackballBehavior: buildTrackballBehavior(colors),
+              trackballBehavior: trackballBehavior,
+              //trackballBehavior: buildTrackballBehavior(colors),
               zoomPanBehavior: zoomPanBehavior,
               series: data,
               legend: Legend(
                 isVisible: true,
                 position: LegendPosition.bottom,
                 itemPadding: 12.0,
-                overflowMode: LegendItemOverflowMode.scroll,
+                overflowMode: LegendItemOverflowMode.wrap,
                 orientation: LegendItemOrientation.horizontal,
                 legendItemBuilder:
                     (String name, dynamic series, dynamic point, int index) =>
@@ -81,6 +82,22 @@ class StrategyPowerLineChart extends StatelessWidget {
           );
   }
 }
+
+///trackballBehavior
+TrackballBehavior get trackballBehavior => TrackballBehavior(
+  enable: true,
+  shouldAlwaysShow: true,
+  activationMode: ActivationMode.singleTap,
+  tooltipDisplayMode: TrackballDisplayMode.groupAllPoints,
+  hideDelay: 8000,
+  tooltipSettings: InteractiveTooltip(
+    textStyle: TextStyle(fontSize: 10),
+    color: Colors.black38,
+  ),
+  markerSettings: TrackballMarkerSettings(
+    markerVisibility: TrackballVisibilityMode.visible,
+  ),
+);
 
 Widget buildLegendItem({required String name, required Color color}) => Row(
   mainAxisSize: MainAxisSize.min,
@@ -107,7 +124,7 @@ Widget buildUnableToDraw() => Center(
   ),
 );
 
-///trackballBehavior
+/// 自定义 trackballBehavior
 TrackballBehavior buildTrackballBehavior(List<Color> colors) {
   return TrackballBehavior(
     enable: true,

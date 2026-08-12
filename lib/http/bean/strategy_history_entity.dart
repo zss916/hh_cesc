@@ -23,6 +23,7 @@ class StrategyHistoryEntity {
   double? status; //状态: 1-执行中, 2-成功, 3-失败
   String? createTime;
   String? modifyTime;
+  int? createTimestamp;
 
   int get actionTypeNum => actionType ?? 0;
 
@@ -41,7 +42,10 @@ class StrategyHistoryEntity {
   ///转化时间
   String toTime() {
     if (createTime != null) {
-      final dt = DateTime.parse(createTime ?? "").toUtc();
+      DateTime dt = DateTime.fromMillisecondsSinceEpoch(
+        createTimestamp ?? 0,
+        isUtc: true,
+      ).toLocal();
       String time = DateFormat('HH:mm:ss').format(dt);
       return time;
     } else {
@@ -50,8 +54,11 @@ class StrategyHistoryEntity {
   }
 
   String toDate() {
-    if (createTime != null) {
-      final dt = DateTime.parse(createTime ?? "").toUtc();
+    if (createTimestamp != null) {
+      DateTime dt = DateTime.fromMillisecondsSinceEpoch(
+        createTimestamp ?? 0,
+        isUtc: true,
+      ).toLocal();
       String time = DateFormat('yyyy-MM-dd').format(dt);
       return time;
     } else {

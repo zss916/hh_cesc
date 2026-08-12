@@ -1,7 +1,5 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/message_item_entity.dart';
-import 'package:cescpro/page/service/message/index.dart';
-
 
 MessageItemEntity $MessageItemEntityFromJson(Map<String, dynamic> json) {
   final MessageItemEntity messageItemEntity = MessageItemEntity();
@@ -30,7 +28,8 @@ MessageItemEntity $MessageItemEntityFromJson(Map<String, dynamic> json) {
     messageItemEntity.channelType = channelType;
   }
   final int? channelDestination = jsonConvert.convert<int>(
-      json['channelDestination']);
+    json['channelDestination'],
+  );
   if (channelDestination != null) {
     messageItemEntity.channelDestination = channelDestination;
   }

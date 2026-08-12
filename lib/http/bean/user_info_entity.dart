@@ -7,7 +7,7 @@ import 'package:cescpro/generated/json/user_info_entity.g.dart';
 class UserInfoEntity {
   int? tenantId;
   int? cid;
-  int? id;
+  String? id;
   String? username;
   String? icon;
   String? email;

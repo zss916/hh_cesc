@@ -1,5 +1,7 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
+import 'package:decimal/decimal.dart';
+
 
 AiCompareDataEntity $AiCompareDataEntityFromJson(Map<String, dynamic> json) {
   final AiCompareDataEntity aiCompareDataEntity = AiCompareDataEntity();

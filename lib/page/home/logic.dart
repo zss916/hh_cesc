@@ -69,6 +69,7 @@ class HomeLogic extends ViewStateController {
       return;
     }
     loadHome();
+    //fetchData();
   }
 
   Future<void> loadHome() async {
@@ -116,4 +117,26 @@ class HomeLogic extends ViewStateController {
       update();
     }
   }
+
+  /*  Home? value;
+
+  Future<void> fetchData() async {
+    await HomeRepository.fetch()
+        .listen(
+          (data) {
+            if (value != null) {
+              value = data;
+              update();
+            } else {
+              value = Home();
+              update();
+            }
+            debugPrint("fetchData");
+          },
+          onDone: () {
+            onComplete();
+          },
+        )
+        .asFuture<void>();
+  }*/
 }

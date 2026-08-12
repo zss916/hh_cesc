@@ -17,12 +17,29 @@ class PowerForecastChartPage extends StatelessWidget {
         child: GetBuilder<AIStrategyPreviewLogic>(
           init: AIStrategyPreviewLogic(),
           builder: (logic) {
-            return StrategyPowerLineChart(
-              data: logic.series,
-              minT: logic.minT,
-              maxT: logic.maxT,
-              axis: logic.axis,
-              colors: [Color(0xFF3874F2), Color(0xfffbbf24), Color(0xffff9933)],
+            return Column(
+              children: [
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(
+                    "(kW)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
+                  ),
+                ),
+                Expanded(
+                  child: StrategyPowerLineChart(
+                    data: logic.series,
+                    minT: logic.minT,
+                    maxT: logic.maxT,
+                    axis: logic.axis,
+                    colors: [
+                      Color(0xFF3874F2),
+                      Color(0xfffbbf24),
+                      Color(0xffff9933),
+                    ],
+                  ),
+                ),
+              ],
             );
           },
         ),

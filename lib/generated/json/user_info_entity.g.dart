@@ -11,7 +11,7 @@ UserInfoEntity $UserInfoEntityFromJson(Map<String, dynamic> json) {
   if (cid != null) {
     userInfoEntity.cid = cid;
   }
-  final int? id = jsonConvert.convert<int>(json['id']);
+  final String? id = jsonConvert.convert<String>(json['id']);
   if (id != null) {
     userInfoEntity.id = id;
   }
@@ -52,12 +52,14 @@ UserInfoEntity $UserInfoEntityFromJson(Map<String, dynamic> json) {
     userInfoEntity.logoUrl = logoUrl;
   }
   final String? currencyCode = jsonConvert.convert<String>(
-      json['currencyCode']);
+    json['currencyCode'],
+  );
   if (currencyCode != null) {
     userInfoEntity.currencyCode = currencyCode;
   }
   final int? revenueShowType = jsonConvert.convert<int>(
-      json['revenueShowType']);
+    json['revenueShowType'],
+  );
   if (revenueShowType != null) {
     userInfoEntity.revenueShowType = revenueShowType;
   }
@@ -87,7 +89,7 @@ extension UserInfoEntityExtension on UserInfoEntity {
   UserInfoEntity copyWith({
     int? tenantId,
     int? cid,
-    int? id,
+    String? id,
     String? username,
     String? icon,
     String? email,

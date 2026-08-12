@@ -88,7 +88,8 @@ MessageContentEntity $MessageContentEntityFromJson(Map<String, dynamic> json) {
     messageContentEntity.channelType = channelType;
   }
   final int? channelDestination = jsonConvert.convert<int>(
-      json['channelDestination']);
+    json['channelDestination'],
+  );
   if (channelDestination != null) {
     messageContentEntity.channelDestination = channelDestination;
   }

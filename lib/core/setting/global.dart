@@ -17,6 +17,7 @@ class Global {
       Get.put<SecureStorage>(SecureStorage()).init(),
       Get.put<StorageService>(StorageService()).init(),
       Get.put<DeviceService>(DeviceService()).init(),
+      //Get.put<AppDBService>(AppDBService()).init(),
     ]).whenComplete(() async {
       AppLoading();
       Get.putAsync<AppInfoService>(() => AppInfoService().init());

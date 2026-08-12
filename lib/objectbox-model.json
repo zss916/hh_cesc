@@ -1,0 +1,119 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:5889303700164409998",
+      "lastPropertyId": "6:1220670412945539816",
+      "name": "Person",
+      "properties": [
+        {
+          "id": "1:4165556573441632459",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7978739855472237348",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:3839201119137233389",
+          "name": "avatar",
+          "type": 9
+        },
+        {
+          "id": "5:4136484801589392710",
+          "name": "currencyCode",
+          "type": 9
+        },
+        {
+          "id": "6:1220670412945539816",
+          "name": "uid",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:8060802645335638365",
+      "lastPropertyId": "16:5562414059919676933",
+      "name": "Home",
+      "properties": [
+        {
+          "id": "1:8839229606867735307",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:9142683552651726996",
+          "name": "totalIncome",
+          "type": 9
+        },
+        {
+          "id": "3:1751625980054259248",
+          "name": "todayIncome",
+          "type": 9
+        },
+        {
+          "id": "4:7766375291284166383",
+          "name": "lastDayIncome",
+          "type": 9
+        },
+        {
+          "id": "5:807875368477741575",
+          "name": "deviceNum",
+          "type": 6
+        },
+        {
+          "id": "6:8826627317305839216",
+          "name": "siteNum",
+          "type": 6
+        },
+        {
+          "id": "13:7125333897195291704",
+          "name": "normalNum",
+          "type": 6
+        },
+        {
+          "id": "14:3932149835475208445",
+          "name": "faultNum",
+          "type": 6
+        },
+        {
+          "id": "15:3539677074467370788",
+          "name": "alarmNum",
+          "type": 6
+        },
+        {
+          "id": "16:5562414059919676933",
+          "name": "cutOffNum",
+          "type": 6
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:8060802645335638365",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    353226606053880788,
+    6442155453102333111,
+    8302137427552492633,
+    1347816219583240353,
+    1127288714485779332,
+    3355167394213769021,
+    1142251929860121560
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

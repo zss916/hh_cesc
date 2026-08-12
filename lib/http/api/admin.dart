@@ -80,6 +80,37 @@ abstract class AdminAPI {
     }
   }
 
+  ///offline-first
+  /*static Stream<Person?> getUserProfile() async* {
+    final userProfile = await AppDBService.to.userProfileDao.fetchUserProfile();
+    // Returns the database result if it exists
+    if (userProfile != null) {
+      debugPrint("getUserProfile database => ${userProfile.toJson()}");
+      yield userProfile;
+    }
+
+    // Fetch the user profile from the API
+    try {
+      UserInfoEntity? userInfo = await getUserInfo2();
+      final apiUserProfile2 = Person(
+        uid: (userInfo?.id).toString(),
+        name: userInfo?.username ?? "",
+        avatar: userInfo?.icon ?? '',
+        currencyCode: userInfo?.currencyCode ?? "",
+      );
+      debugPrint("getUserProfile api => ${apiUserProfile2.toJson()}");
+      //Update the database with the API result
+      final apiUserProfile = await AppDBService.to.userProfileDao
+          .putAndGetAsync(apiUserProfile2);
+      // Return the API result
+      debugPrint("getUserProfile api update=> ${apiUserProfile2.toJson()}");
+      yield apiUserProfile;
+    } catch (e) {
+      // Handle the error
+      yield null;
+    }
+  }
+*/
   static Future<List<CurrencyEntity>> getCurrencyList() async {
     try {
       var result = await Http.instance.get(ApiPath.getCurrencyList);

@@ -18,13 +18,26 @@ class PriceForecastChartPage extends StatelessWidget {
         child: GetBuilder<AIStrategyPreviewLogic>(
           init: AIStrategyPreviewLogic(),
           builder: (logic) {
-            return StrategyPowerLineChart(
-              data: logic.priceSeries,
-              minT: logic.minT,
-              maxT: logic.maxT,
-              axis: logic.axis,
-              colors: [Color(0xff2dd4bf), Color(0xffecc207)],
-              numberFormat: NumberFormat.compactCurrency(symbol: ""),
+            return Column(
+              children: [
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(
+                    logic.priceCurrencyUnit,
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
+                  ),
+                ),
+                Expanded(
+                  child: StrategyPowerLineChart(
+                    data: logic.priceSeries,
+                    minT: logic.minT,
+                    maxT: logic.maxT,
+                    axis: logic.axis,
+                    colors: [Color(0xff2dd4bf), Color(0xffecc207)],
+                    numberFormat: NumberFormat.compactCurrency(symbol: ""),
+                  ),
+                ),
+              ],
             );
           },
         ),

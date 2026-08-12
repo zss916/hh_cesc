@@ -4,9 +4,7 @@ import 'package:cescpro/core/enum/app_enum.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/core/utils/dialog_utils.dart';
 import 'package:cescpro/generated/assets.dart';
-import 'package:cescpro/http/base/interceptor/network_status.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
 import 'package:cescpro/page/station/detail/strategy/logic.dart';
@@ -357,8 +355,15 @@ class StrategyPage extends StatelessWidget {
                 Assets.imgAiPreview,
                 TKey.aiStrategyPreview.tr,
                 true,
-                () async {
-                  final isConnected = await NetworkStatusService.instance
+                () {
+                  PageTools.toAiPreview(
+                    siteId: logic.id,
+                    isDaysEnough: logic.isFullDay,
+                    runningDays: logic.runningDays,
+                    modeType: logic.modelCtrl?.activeType,
+                  );
+
+                  /*final isConnected = await NetworkStatusService.instance
                       .isConnected();
                   if (isConnected) {
                     PageTools.toAiPreview(
@@ -372,7 +377,7 @@ class StrategyPage extends StatelessWidget {
                       TKey.noInternetConnection.tr,
                       snackbarType: SnackbarType.failure,
                     );
-                  }
+                  }*/
                 },
               ),
             )

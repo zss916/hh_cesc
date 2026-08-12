@@ -42,8 +42,9 @@ class PowerLineChart3 extends StatelessWidget {
                   isVisible: true,
                   position: LegendPosition.bottom,
                   itemPadding: 12.0,
-                  overflowMode: LegendItemOverflowMode.scroll,
+                  overflowMode: LegendItemOverflowMode.wrap,
                   orientation: LegendItemOrientation.horizontal,
+                  textStyle: TextStyle(fontSize: 12),
                   legendItemBuilder:
                       (String name, dynamic series, dynamic point, int index) =>
                           buildLegendItem(
@@ -52,7 +53,6 @@ class PowerLineChart3 extends StatelessWidget {
                                 ? Colors.blue
                                 : palette[index],
                           ),
-                  textStyle: TextStyle(fontSize: 12),
                 ),
                 primaryXAxis: DateTimeAxis(
                   title: AxisTitle(text: ''),
@@ -102,24 +102,6 @@ class PowerLineChart3 extends StatelessWidget {
                 trackballBehavior: trackballBehavior,
                 zoomPanBehavior: zoomPanBehavior,
                 series: data,
-                onZoomEnd: (ZoomPanArgs zoomingArgs) {
-                  // zoomingArgs;
-                },
-                onMarkerRender: (MarkerRenderArgs markerArgs) {
-                  // debugPrint("markerArgs ==> ${markerArgs.toString()}");
-                },
-                onTooltipRender: (TooltipArgs tooltipArgs) {
-                  //debugPrint("tooltipArgs ==> ${tooltipArgs.toString()}");
-                },
-                //onTooltipRender: ,
-                onTrackballPositionChanging: (TrackballArgs args) {
-                  /* debugPrint(
-                    "TrackballArgs===>> ${args.chartPointInfo.label},${args.chartPointInfo.series}",
-                  );*/
-                  /* debugPrint(
-                    "trackballArgs ==> ${trackballArgs.chartPointInfo}",
-                  );*/
-                },
               ),
             ),
           );

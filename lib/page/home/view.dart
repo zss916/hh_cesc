@@ -29,22 +29,44 @@ class HomePage extends StatelessWidget {
         onRefresh: () => refresh(logic),
         child: SingleChildScrollView(child: buildContent(logic)),
       ),
-      ViewStateEnum.loading => Container(
-        alignment: AlignmentDirectional.center,
-        margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: CescGlowLoading(),
-      ),
-      ViewStateEnum.offline => Center(
-        child: OfflineOnRefresh(
-          onCall: () {
-            AppEventBus.eventBus.fire(NetWorkRefresh());
-          },
-        ),
-      ),
+      ViewStateEnum.loading => buildLoading,
+      ViewStateEnum.offline => buildOffline,
       ViewStateEnum.error => SizedBox.shrink(),
       ViewStateEnum.empty => SizedBox.shrink(),
     };
   }
+
+  /* Widget buildContentUI(Home value) {
+    return Column(
+      children: [
+        if (AppState.instance.isShowRevenue())
+          IncomeWidget(
+            totalIncome: value.totalIncome,
+            todayIncome: value.todayIncome,
+            lastDayIncome: value.lastDayIncome,
+          ),
+        BuildStationOverview3(
+          capacity: value.capacity,
+          totalPos: value.totalPos,
+          totalNeg: value.totalNeg,
+          totalPvNeg: value.totalPvNeg,
+        ),
+        Divider(height: 10.h, color: Colors.transparent),
+        BuildDeviceAndSiteCount(
+          deviceNum: value.deviceNum,
+          siteNum: value.siteNum,
+        ),
+        BuildStationStatus(
+          normalNum: value.normalNum,
+          faultNum: value.faultNum,
+          alarmNum: value.alarmNum,
+          cutOffNum: value.cutOffNum,
+        ),
+        BuildEnvironmental(co2: value.co2, coal: value.coal),
+        Divider(height: 150.h, color: Colors.transparent),
+      ],
+    );
+  }*/
 
   Widget buildContent(HomeLogic logic) {
     return Column(
@@ -77,6 +99,20 @@ class HomePage extends StatelessWidget {
       ],
     );
   }
+
+  Widget get buildLoading => Container(
+    alignment: AlignmentDirectional.center,
+    margin: EdgeInsetsDirectional.only(bottom: 50.h),
+    child: CescGlowLoading(),
+  );
+
+  Widget get buildOffline => Center(
+    child: OfflineOnRefresh(
+      onCall: () {
+        AppEventBus.eventBus.fire(NetWorkRefresh());
+      },
+    ),
+  );
 
   Future<void> refresh(HomeLogic logic) async {
     logic.loadData(loading: false);

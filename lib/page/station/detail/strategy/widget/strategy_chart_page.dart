@@ -17,12 +17,29 @@ class StrategyChartPage extends StatelessWidget {
         child: GetBuilder<StrategyPageLogic>(
           init: StrategyPageLogic(),
           builder: (logic) {
-            return StrategyPowerLineChart(
-              data: logic.series,
-              minT: logic.minT,
-              maxT: logic.maxT,
-              axis: logic.axis,
-              colors: [Color(0xff4a9eff), Color(0xff2dd4bf)],
+            return Column(
+              children: [
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Container(
+                    margin: EdgeInsetsDirectional.only(top: 0),
+                    child: Text(
+                      "(kW)",
+                      style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12),
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: StrategyPowerLineChart(
+                    data: logic.series,
+                    minT: logic.minT,
+                    maxT: logic.maxT,
+                    axis: logic.axis,
+                    colors: [Color(0xff4a9eff), Color(0xff2dd4bf)],
+                  ),
+                ),
+              ],
             );
           },
         ),

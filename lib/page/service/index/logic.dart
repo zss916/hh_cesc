@@ -2,13 +2,10 @@ part of 'index.dart';
 
 class ServiceLogic extends GetxController {
   UserInfoEntity? value;
-
   String get userName => value?.username ?? '--';
   String get icon => value?.icon ?? '';
-  int? get id => value?.id;
-
+  String get uid => value?.id ?? '';
   int unreadNum = 0;
-
   late StreamSubscription<MessageEvent> messageEvent;
 
   @override
@@ -29,6 +26,18 @@ class ServiceLogic extends GetxController {
   Future<void> loadUserInfo() async {
     value = await AdminAPI.getUserInfo2();
     update();
+    /* await AdminAPI.getUserProfile()
+        .listen(
+          (data) {
+            // value = data;
+            debugPrint("loadUserInfo=> ${data?.toJson()}");
+            update();
+          },
+          onError: (error) {
+            // handle error
+          },
+        )
+        .asFuture<void>();*/
   }
 
   Future<void> getUnreadNum() async {
@@ -66,10 +75,10 @@ class ServiceLogic extends GetxController {
         String? icon = await AdminAPI.uploadImage(path).whenComplete(() {
           AppLoading.dismiss();
         });
-        value?.icon = icon;
+        value?.icon = icon ?? '';
         update();
         if (value != null) {
-          await AdminAPI.editUser(id: id.toString(), map: value!.toJson());
+          await AdminAPI.editUser(id: uid, map: value!.toJson());
         }
       });
     });
