@@ -33,11 +33,25 @@ class AiCompareDataEntity {
     return jsonEncode(this);
   }
 
+  ///是否负
+  bool isNegative(String? input) {
+    double? number = double.tryParse(input ?? "0");
+    bool isNegative = number != null && number < 0;
+    return isNegative;
+  }
+
+  String? showAiPredictTotalProfit() {
+    return isNegative(aiPredictTotalProfit)
+        ? aiPredictTotalProfit
+        : "+$aiPredictTotalProfit";
+  }
+
   String get aiAllRevenueMonth {
     DateTime now = DateTime.now();
     int day = (DateTime(now.year, now.month + 1, 0).day);
     Decimal price = Decimal.parse((aiPredictTotalProfit ?? "0"));
     Decimal total = price * Decimal.fromInt(day);
-    return total.toString();
+    bool isNegative = total < Decimal.zero;
+    return isNegative ? total.toString() : "+$total";
   }
 }

@@ -29,7 +29,7 @@ class AIStrategyPreviewLogic extends ViewStateController {
 
   String? get aiAllRevenue => (revenueForecast?.aiPredictTotalProfit == null)
       ? "-"
-      : "${revenueForecast?.aiPredictTotalProfit ?? 0}";
+      : "${revenueForecast?.showAiPredictTotalProfit() ?? 0}";
 
   String? get aiAllRevenueMonth => revenueForecast?.aiAllRevenueMonth ?? "-";
 

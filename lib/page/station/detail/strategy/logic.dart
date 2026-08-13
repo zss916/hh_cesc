@@ -34,6 +34,8 @@ class StrategyPageLogic extends ViewStateController {
   CancelToken cancelToken = CancelToken();
   String strategyPageLogicTag = "StrategyPageLogic";
 
+  List<Color> colors = [];
+
   @override
   void onInit() {
     super.onInit();
@@ -144,6 +146,7 @@ class StrategyPageLogic extends ViewStateController {
 
     if (value.isNotEmpty) {
       series.clear();
+      colors.clear();
 
       List<StrategyPowerItemEntity> strategyPowerData = value
           .where((e) => e.strategyPower != null)
@@ -160,6 +163,7 @@ class StrategyPageLogic extends ViewStateController {
           .toList();
 
       if (strategyPowerList.isNotEmpty) {
+        colors.add(Color(0xff4a9eff));
         series.add(
           FastLineSeries<ChartData, DateTime>(
             name: TKey.strategyCurve.tr,
@@ -195,6 +199,7 @@ class StrategyPageLogic extends ViewStateController {
           .toList();
 
       if (actualPowerList.isNotEmpty) {
+        colors.add(Color(0xff2dd4bf));
         series.add(
           FastLineSeries<ChartData, DateTime>(
             name: TKey.actualOperation.tr,

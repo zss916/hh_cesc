@@ -289,7 +289,7 @@ const de = {
   "maxPower": "Maximalleistung",
   "socUpperLimit": "SOC Obergrenze",
   "socLowerLimit": "SOC Untergrenze",
-  "strategyHistory": "Geschichte",
+  "strategyHistory": "Strategiehistorie",
   "aiStrategyPreview": "AI Vorschau",
   "strategyCurve": "Vorhergesagte Speicherleistung",
   "actualOperation": "Tatsächliche Speicherleistung",
@@ -315,7 +315,7 @@ const de = {
   "openTab": "Aktivieren",
   "applyTitle": "Bitte kontaktieren Sie Ihren Kundenmanager.",
   "applyContent":
-      'Die Aktivierung von KI-Richtlinien erfordert eine Überprüfung und Einleitung durch Ihren Account Manager. Bitte wenden Sie sich aktiv an den Account Manager und stellen Sie einen Antrag auf Eröffnung ein, um die KI-Strategie nach der Überprüfung zu erleben.',
+      'Die Aktivierung der KI‑Strategie erfordert eine Freischaltung durch Ihren Kundenmanager. Bitte wenden Sie sich an ihn und stellen Sie einen Freischaltungsantrag, um die KI‑Strategie nach der Prüfung nutzen zu können.',
   "knowTitle": "OK",
   "totalPowerType": "Gesamtleistung",
   "subSystemType": "Subsystem",
@@ -342,11 +342,10 @@ const de = {
   "predictingElectricityPrices": "Prognose Kaufpreis",
   "running": "Laufen",
   "rememberPassword": "Passwort merken",
-
   //"todayEstimatedRevenue": "Prognostizierter heutiger Ertrag",
-  "expectedDailyRevenue": "Erwartete tägliche Umsatzsteigerung",
+  "expectedDailyRevenue": "Erwartete tägliche Gewinnsteigerung",
   "expectedDailyRevenueTip":
-      "Täglicher Umsatzvergleich zur aktuellen Steuerstrategie",
+      "Täglicher Gewinnvergleich zur aktuellen Steuerungsstrategie",
   "expectedMonthRevenue": "Erwartete monatliche Umsatzsteigerung",
   "expectedMonthRevenueTip":
       "Hochrechnung basierend auf den Betriebsbedingungen des aktuellen Monats",

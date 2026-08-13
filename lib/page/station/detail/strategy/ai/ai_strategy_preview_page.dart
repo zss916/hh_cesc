@@ -348,7 +348,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: '+${logic.aiAllRevenue}',
+                                text: '${logic.aiAllRevenue}',
                                 children: [
                                   TextSpan(
                                     text: ' ${logic.aiAllRevenueUnit}',
@@ -419,7 +419,7 @@ class AIStrategyPreviewPage extends StatelessWidget {
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: '+${logic.aiAllRevenueMonth}',
+                                text: '${logic.aiAllRevenueMonth}',
                                 children: [
                                   TextSpan(
                                     text: ' ${logic.aiAllRevenueUnit}',
