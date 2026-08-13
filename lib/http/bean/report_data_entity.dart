@@ -20,6 +20,10 @@ class ReportDataEntity {
   double? storageProfit;
   double? gridFeedGain;
   double? pvSelfUseGain;
+  double? gridImport;
+  double? gridImportCost;
+  double? chargingOutput;
+  double? chargingRevenue;
 
   ///1-纯储能；2-光储充；3-储能液冷; 4-光储
   List<int>? types;

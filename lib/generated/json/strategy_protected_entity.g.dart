@@ -2,10 +2,8 @@ import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/strategy_protected_entity.dart';
 
 StrategyProtectedEntity $StrategyProtectedEntityFromJson(
-  Map<String, dynamic> json,
-) {
-  final StrategyProtectedEntity strategyProtectedEntity =
-      StrategyProtectedEntity();
+    Map<String, dynamic> json) {
+  final StrategyProtectedEntity strategyProtectedEntity = StrategyProtectedEntity();
   final bool? volEnabled = jsonConvert.convert<bool>(json['volEnabled']);
   if (volEnabled != null) {
     strategyProtectedEntity.volEnabled = volEnabled;
@@ -30,8 +28,7 @@ StrategyProtectedEntity $StrategyProtectedEntityFromJson(
 }
 
 Map<String, dynamic> $StrategyProtectedEntityToJson(
-  StrategyProtectedEntity entity,
-) {
+    StrategyProtectedEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['volEnabled'] = entity.volEnabled;
   data['socEnabled'] = entity.socEnabled;

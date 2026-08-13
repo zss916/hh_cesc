@@ -141,10 +141,7 @@ TrackballBehavior get trackballBehavior => TrackballBehavior(
   activationMode: ActivationMode.singleTap,
   tooltipDisplayMode: TrackballDisplayMode.groupAllPoints,
   hideDelay: 8000,
-  tooltipSettings: InteractiveTooltip(
-    textStyle: TextStyle(fontSize: 10),
-    color: Colors.black38,
-  ),
+  tooltipSettings: InteractiveTooltip(textStyle: TextStyle(fontSize: 10)),
   markerSettings: TrackballMarkerSettings(
     markerVisibility: TrackballVisibilityMode.visible,
   ),

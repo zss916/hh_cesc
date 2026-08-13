@@ -1,6 +1,15 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
-import 'package:cescpro/http/bean/child_item_info.dart';
 import 'package:cescpro/http/bean/v1_pcs_info_entity.dart';
+import 'package:cescpro/core/helper/extension_helper.dart';
+
+import 'package:cescpro/core/translations/en.dart';
+
+import 'package:cescpro/http/bean/child_item_info.dart';
+
+import 'package:get/get_core/src/get_main.dart';
+
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+
 
 V1PcsInfoEntity $V1PcsInfoEntityFromJson(Map<String, dynamic> json) {
   final V1PcsInfoEntity v1PcsInfoEntity = V1PcsInfoEntity();
@@ -9,8 +18,7 @@ V1PcsInfoEntity $V1PcsInfoEntityFromJson(Map<String, dynamic> json) {
     v1PcsInfoEntity.alarmStatus = alarmStatus;
   }
   final bool? communicationStatus = jsonConvert.convert<bool>(
-    json['communicationStatus'],
-  );
+      json['communicationStatus']);
   if (communicationStatus != null) {
     v1PcsInfoEntity.communicationStatus = communicationStatus;
   }
@@ -19,20 +27,17 @@ V1PcsInfoEntity $V1PcsInfoEntityFromJson(Map<String, dynamic> json) {
     v1PcsInfoEntity.devStatus = devStatus;
   }
   final String? statusNameDesc = jsonConvert.convert<String>(
-    json['statusNameDesc'],
-  );
+      json['statusNameDesc']);
   if (statusNameDesc != null) {
     v1PcsInfoEntity.statusNameDesc = statusNameDesc;
   }
   final String? statusEnNameDesc = jsonConvert.convert<String>(
-    json['statusEnNameDesc'],
-  );
+      json['statusEnNameDesc']);
   if (statusEnNameDesc != null) {
     v1PcsInfoEntity.statusEnNameDesc = statusEnNameDesc;
   }
   final int? statusUpdateTimeMill = jsonConvert.convert<int>(
-    json['statusUpdateTimeMill'],
-  );
+      json['statusUpdateTimeMill']);
   if (statusUpdateTimeMill != null) {
     v1PcsInfoEntity.statusUpdateTimeMill = statusUpdateTimeMill;
   }
@@ -197,7 +202,8 @@ V1PcsInfoEntity $V1PcsInfoEntityFromJson(Map<String, dynamic> json) {
     v1PcsInfoEntity.acWPowS = acWPowS;
   }
   final List<ChildItemInfo>? list = (json['list'] as List<dynamic>?)
-      ?.map((e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
+      ?.map(
+          (e) => jsonConvert.convert<ChildItemInfo>(e) as ChildItemInfo)
       .toList();
   if (list != null) {
     v1PcsInfoEntity.list = list;

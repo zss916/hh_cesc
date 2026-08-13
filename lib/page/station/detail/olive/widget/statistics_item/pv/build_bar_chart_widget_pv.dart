@@ -1,6 +1,7 @@
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/base_bar_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/pv_barchart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
@@ -269,12 +270,73 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
       _ when viewState == ViewType.loading.index => buildLoading(),
-      _ when viewState == ViewType.common.index => buildPv(),
-      _ when viewState == ViewType.empty.index => buildEmpty(),
-      _ => buildEmpty(),
+      _ when viewState == ViewType.common.index => buildPVChart(),
+      _ when viewState == ViewType.empty.index => buildPVEmpty(),
+      //_ when viewState == ViewType.common.index => buildPv(),
+      //_ when viewState == ViewType.empty.index => buildEmpty(),
+      _ => buildPVEmpty(),
     };
   }
 
+  Widget buildPVChart() {
+    return Container(
+      color: Colors.transparent,
+      height: 290.h,
+      width: double.maxFinite,
+      child: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: tabCtrl,
+        children: [
+          BaseBarChart(
+            list: widget.logic.pvList,
+            maximumZoomLevel: getLevel(widget.logic.pvList.length),
+          ),
+          BaseBarChart(
+            list: widget.logic.pvList,
+            maximumZoomLevel: getLevel(widget.logic.pvList.length),
+          ),
+          BaseBarChart(
+            list: widget.logic.pvList,
+            maximumZoomLevel: getLevel(widget.logic.pvList.length),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildPVEmpty() => Container(
+    color: Colors.transparent,
+    height: 280.h,
+    width: double.maxFinite,
+    child: TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: tabCtrl,
+      children: [SizedBox(), SizedBox(), SizedBox()],
+    ),
+  );
+
+  ///获取level
+  double getLevel(int len) {
+    if (len >= 0 && len < 5) {
+      return 1;
+    } else if (len >= 5 && len <= 7) {
+      return 0.5;
+    } else if (len > 7 && len <= 15) {
+      return 0.34;
+    } else if (len > 15 && len <= 31) {
+      return 0.1;
+    } else {
+      return 0.01;
+    }
+  }
+
+  Widget buildLoading() => SizedBox(
+    height: 280.h,
+    width: double.maxFinite,
+    child: Center(child: CircularProgressIndicator(color: Colors.white)),
+  );
+
+  @Deprecated('hide')
   Widget buildPv() {
     return Container(
       color: Colors.transparent,
@@ -316,12 +378,7 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
     );
   }
 
-  Widget buildLoading() => SizedBox(
-    height: 280.h,
-    width: double.maxFinite,
-    child: Center(child: CircularProgressIndicator(color: Colors.white)),
-  );
-
+  @Deprecated('hide')
   Widget buildEmpty() => Container(
     color: Colors.transparent,
     height: 280.h,

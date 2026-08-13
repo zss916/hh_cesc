@@ -36,8 +36,7 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.hasDevCount = hasDevCount;
   }
   final int? operationTimeMill = jsonConvert.convert<int>(
-    json['operationTimeMill'],
-  );
+      json['operationTimeMill']);
   if (operationTimeMill != null) {
     siteDetailEntity.operationTimeMill = operationTimeMill;
   }
@@ -54,8 +53,7 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.activePower = activePower;
   }
   final double? reactivePower = jsonConvert.convert<double>(
-    json['reactivePower'],
-  );
+      json['reactivePower']);
   if (reactivePower != null) {
     siteDetailEntity.reactivePower = reactivePower;
   }
@@ -132,8 +130,7 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.hasPv = hasPv;
   }
   final String? protocolVersion = jsonConvert.convert<String>(
-    json['protocolVersion'],
-  );
+      json['protocolVersion']);
   if (protocolVersion != null) {
     siteDetailEntity.protocolVersion = protocolVersion;
   }
@@ -142,8 +139,7 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.isTimeSlot = isTimeSlot;
   }
   final bool? calculateRevenue = jsonConvert.convert<bool>(
-    json['calculateRevenue'],
-  );
+      json['calculateRevenue']);
   if (calculateRevenue != null) {
     siteDetailEntity.calculateRevenue = calculateRevenue;
   }
@@ -152,8 +148,7 @@ SiteDetailEntity $SiteDetailEntityFromJson(Map<String, dynamic> json) {
     siteDetailEntity.enableAi = enableAi;
   }
   final bool? enableStrategy = jsonConvert.convert<bool>(
-    json['enableStrategy'],
-  );
+      json['enableStrategy']);
   if (enableStrategy != null) {
     siteDetailEntity.enableStrategy = enableStrategy;
   }

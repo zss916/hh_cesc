@@ -135,10 +135,7 @@ TrackballBehavior get trackballBehavior => TrackballBehavior(
   enable: true,
   activationMode: ActivationMode.singleTap,
   tooltipDisplayMode: TrackballDisplayMode.groupAllPoints,
-  tooltipSettings: InteractiveTooltip(
-    textStyle: TextStyle(fontSize: 10),
-    color: Colors.white38,
-  ),
+  tooltipSettings: InteractiveTooltip(textStyle: TextStyle(fontSize: 10)),
 );
 
 ///zoomPanBehavior

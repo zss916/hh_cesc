@@ -195,7 +195,7 @@ class HomeAPI {
         List<ReportDataEntity> value = await compute(
           (List<dynamic> jsonList) =>
               jsonList.map((e) => ReportDataEntity.fromJson(e)).toList(),
-          (result['data'] as List),
+          (result['data']['list'] as List),
         );
         return (true, value);
       } else {

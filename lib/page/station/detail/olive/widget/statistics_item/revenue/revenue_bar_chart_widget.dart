@@ -2,6 +2,8 @@ import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
+import 'package:cescpro/http/bean/elec_graph_entity.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/base_bar_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/widget/revenue_barchart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +72,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
           padding: EdgeInsetsDirectional.only(
             start: 5.w,
             end: 10.w,
-            bottom: 15.h,
+            bottom: 5.h,
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -268,12 +270,125 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
       _ when viewState == ViewType.loading.index => buildLoading(),
-      _ when viewState == ViewType.common.index => buildRevenue(),
-      _ when viewState == ViewType.empty.index => buildEmpty(),
+      _ when viewState == ViewType.common.index => buildRevenueWidget(),
+      _ when viewState == ViewType.empty.index => buildRevenueEmpty(),
+      // _ when viewState == ViewType.common.index => buildRevenue(),
+      // _ when viewState == ViewType.empty.index => buildEmpty(),
       _ => buildEmpty(),
     };
   }
 
+  Widget buildRevenueWidget() {
+    return Container(
+      height: 280.h,
+      color: Colors.transparent,
+      width: double.maxFinite,
+      child: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: tabCtrl,
+        children: [
+          ///周
+          buildRevenueBarChart(widget.logic.revenueList),
+
+          ///月
+          buildRevenueBarChart(widget.logic.revenueList),
+
+          ///年
+          buildRevenueBarChart(widget.logic.revenueList),
+        ],
+      ),
+    );
+  }
+
+  Widget buildRevenueBarChart(List<ElecGraphEntity> list) {
+    return SizedBox(
+      height: 280.h,
+      width: double.maxFinite,
+      child: BaseBarChart(list: list, maximumZoomLevel: getLevel(list.length)),
+    );
+  }
+
+  ///获取level
+  double getLevel(int len) {
+    if (len >= 0 && len < 5) {
+      return 1;
+    } else if (len >= 5 && len <= 7) {
+      return 0.5;
+    } else if (len > 7 && len <= 15) {
+      return 0.34;
+    } else if (len > 15 && len <= 31) {
+      return 0.1;
+    } else {
+      return 0.01;
+    }
+  }
+
+  Widget buildLoading() => SizedBox(
+    height: 280.h,
+    width: double.maxFinite,
+    child: Center(child: CircularProgressIndicator(color: Colors.white)),
+  );
+
+  Widget buildRevenueEmpty() => Container(
+    color: Colors.transparent,
+    height: 280.h,
+    width: double.maxFinite,
+    child: TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: tabCtrl,
+      children: [
+        ///周
+        SizedBox(),
+
+        ///月
+        SizedBox(),
+
+        ///年
+        SizedBox(),
+      ],
+    ),
+  );
+
+  @Deprecated("hide")
+  Widget buildEmpty() => Container(
+    color: Colors.transparent,
+    height: 280.h,
+    width: double.maxFinite,
+    child: TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: tabCtrl,
+      children: [
+        ///周
+        RevenueBarchartWidget(
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          labels: [],
+          maxY: 100,
+          minY: 0,
+          isDiff: widget.logic.isDiff,
+        ),
+
+        ///月
+        RevenueBarchartWidget(
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          labels: [],
+          maxY: 100,
+          minY: 0,
+          isDiff: widget.logic.isDiff,
+        ),
+
+        ///年
+        RevenueBarchartWidget(
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          labels: [],
+          maxY: 100,
+          minY: 0,
+          isDiff: widget.logic.isDiff,
+        ),
+      ],
+    ),
+  );
+
+  @Deprecated("hide")
   Widget buildRevenue() {
     return Container(
       color: Colors.transparent,
@@ -319,48 +434,4 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
       ),
     );
   }
-
-  Widget buildLoading() => SizedBox(
-    height: 280.h,
-    width: double.maxFinite,
-    child: Center(child: CircularProgressIndicator(color: Colors.white)),
-  );
-
-  Widget buildEmpty() => Container(
-    color: Colors.transparent,
-    height: 280.h,
-    width: double.maxFinite,
-    child: TabBarView(
-      physics: NeverScrollableScrollPhysics(),
-      controller: tabCtrl,
-      children: [
-        ///周
-        RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isDiff: widget.logic.isDiff,
-        ),
-
-        ///月
-        RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isDiff: widget.logic.isDiff,
-        ),
-
-        ///年
-        RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isDiff: widget.logic.isDiff,
-        ),
-      ],
-    ),
-  );
 }

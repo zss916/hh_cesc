@@ -1,9 +1,5 @@
 import 'package:cescpro/generated/json/base/json_convert_content.dart';
 import 'package:cescpro/http/bean/report_data_entity.dart';
-import 'package:cescpro/core/helper/extension_helper.dart';
-
-import 'package:intl/intl.dart';
-
 
 ReportDataEntity $ReportDataEntityFromJson(Map<String, dynamic> json) {
   final ReportDataEntity reportDataEntity = ReportDataEntity();
@@ -24,7 +20,8 @@ ReportDataEntity $ReportDataEntityFromJson(Map<String, dynamic> json) {
     reportDataEntity.dayDate = dayDate;
   }
   final double? pvGeneration = jsonConvert.convert<double>(
-      json['pvGeneration']);
+    json['pvGeneration'],
+  );
   if (pvGeneration != null) {
     reportDataEntity.pvGeneration = pvGeneration;
   }
@@ -41,22 +38,48 @@ ReportDataEntity $ReportDataEntityFromJson(Map<String, dynamic> json) {
     reportDataEntity.neg = neg;
   }
   final double? storageProfit = jsonConvert.convert<double>(
-      json['storageProfit']);
+    json['storageProfit'],
+  );
   if (storageProfit != null) {
     reportDataEntity.storageProfit = storageProfit;
   }
   final double? gridFeedGain = jsonConvert.convert<double>(
-      json['gridFeedGain']);
+    json['gridFeedGain'],
+  );
   if (gridFeedGain != null) {
     reportDataEntity.gridFeedGain = gridFeedGain;
   }
   final double? pvSelfUseGain = jsonConvert.convert<double>(
-      json['pvSelfUseGain']);
+    json['pvSelfUseGain'],
+  );
   if (pvSelfUseGain != null) {
     reportDataEntity.pvSelfUseGain = pvSelfUseGain;
   }
-  final List<int>? types = (json['types'] as List<dynamic>?)?.map(
-          (e) => jsonConvert.convert<int>(e) as int).toList();
+  final double? gridImport = jsonConvert.convert<double>(json['gridImport']);
+  if (gridImport != null) {
+    reportDataEntity.gridImport = gridImport;
+  }
+  final double? gridImportCost = jsonConvert.convert<double>(
+    json['gridImportCost'],
+  );
+  if (gridImportCost != null) {
+    reportDataEntity.gridImportCost = gridImportCost;
+  }
+  final double? chargingOutput = jsonConvert.convert<double>(
+    json['chargingOutput'],
+  );
+  if (chargingOutput != null) {
+    reportDataEntity.chargingOutput = chargingOutput;
+  }
+  final double? chargingRevenue = jsonConvert.convert<double>(
+    json['chargingRevenue'],
+  );
+  if (chargingRevenue != null) {
+    reportDataEntity.chargingRevenue = chargingRevenue;
+  }
+  final List<int>? types = (json['types'] as List<dynamic>?)
+      ?.map((e) => jsonConvert.convert<int>(e) as int)
+      .toList();
   if (types != null) {
     reportDataEntity.types = types;
   }
@@ -80,6 +103,10 @@ Map<String, dynamic> $ReportDataEntityToJson(ReportDataEntity entity) {
   data['storageProfit'] = entity.storageProfit;
   data['gridFeedGain'] = entity.gridFeedGain;
   data['pvSelfUseGain'] = entity.pvSelfUseGain;
+  data['gridImport'] = entity.gridImport;
+  data['gridImportCost'] = entity.gridImportCost;
+  data['chargingOutput'] = entity.chargingOutput;
+  data['chargingRevenue'] = entity.chargingRevenue;
   data['types'] = entity.types;
   data['isGrid'] = entity.isGrid;
   return data;
@@ -98,6 +125,10 @@ extension ReportDataEntityExtension on ReportDataEntity {
     double? storageProfit,
     double? gridFeedGain,
     double? pvSelfUseGain,
+    double? gridImport,
+    double? gridImportCost,
+    double? chargingOutput,
+    double? chargingRevenue,
     List<int>? types,
     int? isGrid,
   }) {
@@ -113,6 +144,10 @@ extension ReportDataEntityExtension on ReportDataEntity {
       ..storageProfit = storageProfit ?? this.storageProfit
       ..gridFeedGain = gridFeedGain ?? this.gridFeedGain
       ..pvSelfUseGain = pvSelfUseGain ?? this.pvSelfUseGain
+      ..gridImport = gridImport ?? this.gridImport
+      ..gridImportCost = gridImportCost ?? this.gridImportCost
+      ..chargingOutput = chargingOutput ?? this.chargingOutput
+      ..chargingRevenue = chargingRevenue ?? this.chargingRevenue
       ..types = types ?? this.types
       ..isGrid = isGrid ?? this.isGrid;
   }
