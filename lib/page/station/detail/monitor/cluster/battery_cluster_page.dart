@@ -3,9 +3,9 @@ import 'package:cescpro/components/common_app_bar.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/com_type_list_entity.dart';
+import 'package:cescpro/page/station/detail/monitor/cluster/base_line_chart.dart';
 import 'package:cescpro/page/station/detail/monitor/cluster/battery_cluster_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
-import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -344,100 +344,43 @@ class BatteryClusterPage extends StatelessWidget {
           ),
         ),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w),
+          margin: EdgeInsets.symmetric(horizontal: 16),
           padding: EdgeInsetsDirectional.only(
-            start: 5.w,
-            end: 5.w,
-            bottom: 15.h,
+            top: 5,
+            start: 5,
+            end: 5,
+            bottom: 5,
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Color(0xFF313540),
           ),
           width: double.maxFinite,
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
+          height: 320.h,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
+              Row(
                 children: [
-                  Divider(height: 15.h, color: Colors.transparent),
-                  GetBuilder<BatteryClusterLogic>(
-                    id: "realTimeData",
-                    init: BatteryClusterLogic(),
-                    builder: (logic) {
-                      return Container(
-                        color: Colors.transparent,
-                        height: 280.h,
-                        width: double.maxFinite,
-                        child: buildContent(logic.viewStatus, logic),
-                      );
-                    },
+                  Text(
+                    "(kW)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                   ),
-                  Divider(height: 5.h, color: Colors.transparent),
-                  Row(
-                    children: [
-                      Spacer(),
-                      Row(
-                        children: [
-                          Container(
-                            width: 7,
-                            height: 7,
-                            margin: EdgeInsets.only(right: 5.w),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF3874F2),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                          Text(
-                            TKey.power.tr,
-                            style: TextStyle(
-                              color: Color(0xD9FFFFFF),
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      VerticalDivider(width: 16.w, color: Colors.transparent),
-                      Row(
-                        children: [
-                          Container(
-                            width: 7,
-                            height: 7,
-                            margin: EdgeInsets.only(right: 5.w),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF0BC3C4),
-                              borderRadius: BorderRadius.circular(2),
-                            ),
-                          ),
-                          Text(
-                            "SOC",
-                            style: TextStyle(
-                              color: Color(0xD9FFFFFF),
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                    ],
+                  Spacer(),
+                  Text(
+                    "(%)",
+                    style: TextStyle(color: Color(0xFF0BC3C4), fontSize: 12.sp),
                   ),
                 ],
               ),
-              PositionedDirectional(
-                start: 0.w,
-                top: 10.h,
-                child: Text(
-                  "(kW)",
-                  style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
-                ),
-              ),
-              PositionedDirectional(
-                end: 0.w,
-                top: 10.h,
-                child: Text(
-                  "(%)",
-                  style: TextStyle(color: Color(0xFF0BC3C4), fontSize: 12.sp),
+              Divider(height: 10, color: Colors.transparent),
+              Expanded(
+                child: GetBuilder<BatteryClusterLogic>(
+                  id: "realTimeData",
+                  init: BatteryClusterLogic(),
+                  builder: (logic) {
+                    return buildContent(logic.viewStatus, logic);
+                  },
                 ),
               ),
             ],
@@ -593,39 +536,19 @@ class BatteryClusterPage extends StatelessWidget {
 
   Widget buildContent(ViewType viewState, BatteryClusterLogic logic) {
     return switch (viewState) {
-      _ when viewState == ViewType.loading => buildLoading(),
-      _ when viewState == ViewType.common => buildLineChart(logic),
-      _ when viewState == ViewType.empty => buildEmpty(),
-      _ => buildEmpty(),
+      _ when viewState == ViewType.loading => buildLoading,
+      _ when viewState == ViewType.common => BaseLineChart(
+        socList: logic.arrList,
+      ),
+      _ when viewState == ViewType.empty => buildEmpty,
+      _ => buildEmpty,
     };
   }
 
-  Widget buildLoading() =>
+  Widget get buildLoading =>
       Center(child: CircularProgressIndicator(color: Colors.white));
 
-  Widget buildEmpty() {
-    return MonitorLineChartWidget(
-      arrList: [],
-      maxX: 0,
-      maxY: 100,
-      minY: 0,
-      maxYR: 100,
-      minYR: 0,
-      isDiffL: false,
-      isDiffR: false,
-    );
-  }
-
-  Widget buildLineChart(BatteryClusterLogic logic) {
-    return MonitorLineChartWidget(
-      arrList: logic.arrList,
-      maxX: logic.arrMaxX.toDouble(),
-      maxY: logic.arrMaxY,
-      minY: logic.arrMinY,
-      maxYR: logic.arrMaxYR,
-      minYR: logic.arrMinYR,
-      isDiffR: logic.isDiffR,
-      isDiffL: logic.isDiffL,
-    );
-  }
+  Widget get buildEmpty => Center(
+    child: Text(TKey.noDataAvailable.tr, style: TextStyle(color: Colors.white)),
+  );
 }

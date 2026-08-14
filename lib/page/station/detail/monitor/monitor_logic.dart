@@ -4,6 +4,7 @@ class MonitorModel {
   String title;
   String type;
   bool isV1;
+
   MonitorModel({required this.title, required this.type, required this.isV1});
 }
 

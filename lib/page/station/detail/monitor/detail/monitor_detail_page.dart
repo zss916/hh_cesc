@@ -1,5 +1,4 @@
 import 'package:cescpro/components/common_app_bar.dart';
-import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/battery_view.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/cool_view.dart';
@@ -9,7 +8,6 @@ import 'package:cescpro/page/station/detail/monitor/detail/widget/pcs_view.dart'
 import 'package:cescpro/page/station/detail/monitor/detail/widget/pv_view.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/helper/device_view_enum.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class MonitorDetailPage extends StatelessWidget {
@@ -25,41 +23,51 @@ class MonitorDetailPage extends StatelessWidget {
           return Scaffold(
             appBar: baseAppBar(title: logic.title),
             backgroundColor: Color(0xFF23282E),
-            body: SingleChildScrollView(
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  if (logic.devType == DeviceEnum.arr.value)
-                    BatteryView(logic: logic),
-
-                  if (logic.devType == DeviceEnum.pcs.value)
-                    PcsView(logic: logic),
-
-                  if (logic.devType == DeviceEnum.meter.value)
-                    MeterView(logic: logic),
-
-                  if (logic.devType == DeviceEnum.cool.value)
-                    CoolView(logic: logic),
-
-                  if (logic.devType == DeviceEnum.drier.value)
-                    DrierView(logic: logic),
-
-                  if (logic.devType == DeviceEnum.dido.value)
-                    DrierView(logic: logic),
-
-                  if (logic.devType == DeviceEnum.pv.value)
-                    PVView(logic: logic),
-                ],
-              ),
-            ),
+            body: SingleChildScrollView(child: buildBody(logic)),
           );
         },
       ),
     );
   }
 
+  Widget buildBody(MonitorDetailLogic logic) => Stack(
+    alignment: Alignment.topCenter,
+    children: [
+      if (logic.devType == DeviceEnum.arr.value) BatteryView(logic: logic),
+
+      if (logic.devType == DeviceEnum.pcs.value) PcsView(logic: logic),
+
+      if (logic.devType == DeviceEnum.meter.value) MeterView(logic: logic),
+
+      if (logic.devType == DeviceEnum.cool.value) CoolView(logic: logic),
+
+      if (logic.devType == DeviceEnum.drier.value) DrierView(logic: logic),
+
+      if (logic.devType == DeviceEnum.dido.value) DrierView(logic: logic),
+
+      if (logic.devType == DeviceEnum.pv.value) PVView(logic: logic),
+    ],
+  );
+
+  Widget buildBody2(DeviceEnum type, MonitorDetailLogic logic) {
+    return switch (type) {
+      DeviceEnum.arr => BatteryView(logic: logic),
+      DeviceEnum.pcs => PcsView(logic: logic),
+      DeviceEnum.meter => MeterView(logic: logic),
+      DeviceEnum.cool => CoolView(logic: logic),
+      DeviceEnum.drier => DrierView(logic: logic),
+      DeviceEnum.pv => PVView(logic: logic),
+      DeviceEnum.clu => SizedBox.shrink(),
+      DeviceEnum.airCool => SizedBox.shrink(),
+      DeviceEnum.dido => SizedBox.shrink(),
+      DeviceEnum.cell => SizedBox.shrink(),
+      DeviceEnum.statsMeter => SizedBox.shrink(),
+      DeviceEnum.fire => SizedBox.shrink(),
+    };
+  }
+
   ///交流侧
-  Widget buildACSide(MonitorDetailLogic logic) => Container(
+  /*  Widget buildACSide(MonitorDetailLogic logic) => Container(
     margin: EdgeInsets.symmetric(horizontal: 16.w),
     padding: EdgeInsetsDirectional.only(
       start: 16.w,
@@ -350,5 +358,5 @@ class MonitorDetailPage extends StatelessWidget {
         ),
       ],
     ),
-  );
+  );*/
 }

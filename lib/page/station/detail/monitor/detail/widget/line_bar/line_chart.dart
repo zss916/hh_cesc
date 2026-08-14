@@ -240,7 +240,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
   );
 
   ///折现数据列表
-  /* List<LineChartBarData> lineBarsData(List<SocEntity> lines) {
+  List<LineChartBarData> lineBarsData(List<SocEntity> lines) {
     return [
       LineChartBarData(
         ///是否圆一点
@@ -277,7 +277,7 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
         ],
       ),
     ];
-  }*/
+  }
 
   ///底部titles
   AxisTitles get bottomTitles => AxisTitles(
@@ -332,19 +332,19 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
         strokeWidth: 0.4, // 水平线宽度
       ),
 
-      /*HorizontalLine(
-                          y: widget.maxYR,
-                          dashArray: [8, 4],
-                          color: Colors.cyanAccent, // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),*/
+      HorizontalLine(
+        y: widget.maxYR,
+        dashArray: [8, 4],
+        color: Colors.cyanAccent, // 水平线颜色
+        strokeWidth: 0.4, // 水平线宽度
+      ),
 
-      /*HorizontalLine(
-                          y: widget.minYR,
-                          dashArray: [8, 4],
-                          color: Colors.cyanAccent, // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),*/
+      HorizontalLine(
+        y: widget.minYR,
+        dashArray: [8, 4],
+        color: Colors.cyanAccent, // 水平线颜色
+        strokeWidth: 0.4, // 水平线宽度
+      ),
     ],
   );
 
@@ -374,19 +374,20 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget> {
   ///extraLinesData3
   ExtraLinesData get extraLinesData3 => ExtraLinesData(
     horizontalLines: [
-      /* HorizontalLine(
-                          y: widget.maxY,
-                          dashArray: [8, 4],
-                          color: Color(0xFF3874F2), // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),
+      HorizontalLine(
+        y: widget.maxY,
+        dashArray: [8, 4],
+        color: Color(0xFF3874F2), // 水平线颜色
+        strokeWidth: 0.4, // 水平线宽度
+      ),
 
-                        HorizontalLine(
-                          y: widget.minY,
-                          dashArray: [8, 4],
-                          color: Color(0xFF3874F2), // 水平线颜色
-                          strokeWidth: 0.4, // 水平线宽度
-                        ),*/
+      HorizontalLine(
+        y: widget.minY,
+        dashArray: [8, 4],
+        color: Color(0xFF3874F2), // 水平线颜色
+        strokeWidth: 0.4, // 水平线宽度
+      ),
+
       HorizontalLine(
         y: 0,
         color: Colors.transparent, // 水平线颜色
