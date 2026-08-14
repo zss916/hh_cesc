@@ -27,6 +27,7 @@ class StrategyPageLogic extends ViewStateController {
   String get activeType => modelCtrl?.activeTypeText ?? "--";
   bool get running => modelCtrl?.running ?? false;
   StrategyProtectedEntity? protected;
+  bool get isUseSafe => protected?.isUseProtected ?? false;
   CheckAiOpenEntity? checkAiOpen;
   bool get isFullDay => checkAiOpen?.daysEnough ?? false;
   int get runningDays => checkAiOpen?.runningDays ?? 0;
@@ -173,6 +174,7 @@ class StrategyPageLogic extends ViewStateController {
             color: Color(0xff4a9eff),
             width: 1.5,
             markerSettings: markerSettings,
+            enableTooltip: false,
           ),
           /*AreaSeries<ChartData, DateTime>(
           name: TKey.strategyCurve.tr,
@@ -209,6 +211,8 @@ class StrategyPageLogic extends ViewStateController {
             color: Color(0xff2dd4bf),
             width: 1.5,
             markerSettings: markerSettings,
+            enableTooltip: false,
+            // dashArray: <double>[6, 4],
           ),
           /*AreaSeries<ChartData, DateTime>(
           name: TKey.actualOperation.tr,

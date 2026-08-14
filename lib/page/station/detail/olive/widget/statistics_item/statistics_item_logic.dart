@@ -9,9 +9,7 @@ import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/http/bean/pv_trend_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/color_utils.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart3.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -324,7 +322,11 @@ class StatisticsItemLogic extends GetxController {
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
-    AppLoading.show();
+    //AppLoading.show();
+    revenueViewStatus = ViewType.loading.index;
+    update(["revenue"]);
+    await Future.delayed(Duration(seconds: 1));
+
     final (
       bool isSuccessful,
       List<ElecGraphEntity> value,
@@ -360,7 +362,11 @@ class StatisticsItemLogic extends GetxController {
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
-    AppLoading.show();
+    //AppLoading.show();
+    eleViewStatus = ViewType.loading.index;
+    update(["ele"]);
+    await Future.delayed(Duration(seconds: 1));
+
     final (
       bool isSuccessful,
       List<ElecGraphEntity> value,
@@ -463,12 +469,17 @@ class StatisticsItemLogic extends GetxController {
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
-    AppLoading.show();
+    //AppLoading.show();
+    pvViewStatus = ViewType.loading.index;
+    update(["pv"]);
+    await Future.delayed(Duration(seconds: 1));
+
     SiteTopologyEntity? data = await SiteAPI.getSiteTopology(
       siteId: siteId ?? 0,
     );
     hasPv = data?.hasPv ?? false;
     update(["pv"]);
+
     if (!hasPv) {
       AppLoading.dismiss();
       return;
@@ -505,100 +516,5 @@ class StatisticsItemLogic extends GetxController {
     pvMinY = pvs.reduce(min);
     // debugPrint("pvMaxY:$pvMaxY,pvMinY:$pvMinY");
     pvLabels.assignAll(pvList.map((e) => (e.dateTime ?? "")).toList());
-  }
-
-  ///功率分析
-  @Deprecated('过期')
-  Future<void> loadPower({
-    int type = 0,
-    int? startTimeStamp,
-    int? endTimeStamp,
-  }) async {
-    powerViewStatus = ViewType.loading.index;
-    update(["powerGraph"]);
-
-    final (
-      bool isSuccessful,
-      List<PowerGraphEntity> value,
-    ) = await SiteAPI.postPowerGraph(
-      siteId: siteId,
-      startTimeStamp: startTimeStamp,
-      endTimeStamp: endTimeStamp,
-    );
-    if (isSuccessful) {
-      final colors = ColorGenerator.generateColors(value.length);
-      bool isHasSoc = value.where((e) => e.type == 4).isNotEmpty;
-      List<PowerGraphEntity> perData = [];
-
-      /* perData = normalizeChartData(
-        value.map((e) => e.toJson()).toList(),
-      ).map((e) => PowerGraphEntity.fromJson(e)).toList();
-*/
-      ///todo 缅甸和DW
-      if (siteId.toString() == 566.toString()) {
-        perData = normalizeChartData(
-          value.map((e) => e.toJson()).toList(),
-        ).map((e) => PowerGraphEntity.fromJson(e)).toList();
-      } else {
-        perData = value
-            .map((e) => e.toJson())
-            .toList()
-            .map((e) => PowerGraphEntity.fromJson(e))
-            .toList();
-      }
-
-      /*perData = value
-          .map((e) => e.toJson())
-          .toList()
-          .map((e) => PowerGraphEntity.fromJson(e))
-          .toList();*/
-      bool isHasData = perData.any((e) => (e.list ?? []).isNotEmpty);
-      if (isHasData) {
-        ///优化
-        titles.assignAll(
-          value.mapIndexed((i, w) => (w.title ?? "", colors[i])),
-        );
-        if (isHasSoc) {
-          List<(PowerGraphEntity, Color)> perDataAndColor = perData
-              .mapIndexed((i, e) => (e, colors[i]))
-              .toList();
-          List<(PowerGraphEntity, Color)> otherPowers = perDataAndColor
-              .where((e) => e.$1.type != 4)
-              .toList();
-          powerLines.assignAll(
-            otherPowers
-                .mapIndexed((i, e) => ((e.$1.list ?? []), e.$2))
-                .toList(),
-          );
-          handPowerData(otherPowers.map((e) => e.$1).toList());
-          List<(PowerGraphEntity, Color)> socPowers = perDataAndColor
-              .where((e) => e.$1.type == 4)
-              .toList();
-          socPowerLines.assignAll(
-            socPowers.map((e) => ((e.$1.list ?? []), e.$2)).toList(),
-          );
-          //debugPrint("socPowerLines ===> ${socPowerLines.first.$1.first}");
-          powerViewStatus = (powerLines.isEmpty && socPowerLines.isEmpty)
-              ? ViewType.empty.index
-              : ViewType.common.index;
-          update(["powerGraph"]);
-        } else {
-          powerLines.assignAll(
-            perData.mapIndexed((i, e) => ((e.list ?? []), colors[i])),
-          );
-          handPowerData(value);
-          powerViewStatus = powerLines.isEmpty
-              ? ViewType.empty.index
-              : ViewType.common.index;
-          update(["powerGraph"]);
-        }
-      } else {
-        powerViewStatus = ViewType.empty.index;
-        update(["powerGraph"]);
-      }
-    } else {
-      powerViewStatus = ViewType.empty.index;
-      update(["powerGraph"]);
-    }
   }
 }

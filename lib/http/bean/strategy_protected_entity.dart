@@ -33,4 +33,12 @@ class StrategyProtectedEntity {
   String toString() {
     return jsonEncode(this);
   }
+
+  ///是否使用保护模式
+  bool get isUseProtected =>
+      (volEnabled == true) ||
+      (socEnabled == true) ||
+      (temEnabled == true) ||
+      (backEnabled == true) ||
+      (needEnabled == true);
 }

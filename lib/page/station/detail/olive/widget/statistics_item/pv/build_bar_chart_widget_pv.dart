@@ -272,8 +272,8 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
       _ when viewState == ViewType.loading.index => buildLoading(),
       _ when viewState == ViewType.common.index => buildPVChart(),
       _ when viewState == ViewType.empty.index => buildPVEmpty(),
-      //_ when viewState == ViewType.common.index => buildPv(),
-      //_ when viewState == ViewType.empty.index => buildEmpty(),
+      // _ when viewState == ViewType.common.index => buildPv(),
+      // _ when viewState == ViewType.empty.index => buildEmpty(),
       _ => buildPVEmpty(),
     };
   }
@@ -311,7 +311,26 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
     child: TabBarView(
       physics: NeverScrollableScrollPhysics(),
       controller: tabCtrl,
-      children: [SizedBox(), SizedBox(), SizedBox()],
+      children: [
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
     ),
   );
 

@@ -350,4 +350,5 @@ const de = {
   "expectedMonthRevenueTip":
       "Hochrechnung basierend auf den Betriebsbedingungen des aktuellen Monats",
   "noInternetConnection": "Keine Internetverbindung",
+  "onEnable": "Nicht aktiviert",
 };

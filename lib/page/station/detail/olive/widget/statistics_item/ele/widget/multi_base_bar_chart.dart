@@ -1,12 +1,12 @@
-import 'package:cescpro/http/bean/pv_trend_entity.dart';
+import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class BaseBarChart extends StatelessWidget {
-  final List<PvTrendEntity> list;
+class MultiBaseBarChart extends StatelessWidget {
+  final List<ElecGraphEntity> list;
   final double maximumZoomLevel;
-  const BaseBarChart({
+  const MultiBaseBarChart({
     super.key,
     required this.list,
     required this.maximumZoomLevel,
@@ -28,22 +28,15 @@ class BaseBarChart extends StatelessWidget {
       trackballBehavior: trackballBehavior,
       primaryXAxis: DateTimeCategoryAxis(
         dateFormat: dateFormat(list.first.dateTime ?? ''),
-        // minimum: minDateTime(list.first.dateTime ?? ""),
         labelRotation: 0,
         majorTickLines: MajorTickLines(color: Colors.transparent),
         labelStyle: const TextStyle(fontSize: 8, color: Color(0xA8FFFFFF)),
         autoScrollingMode: AutoScrollingMode.start,
         intervalType: DateTimeIntervalType.auto,
-        // enableAutoIntervalOnZooming: true,
         majorGridLines: MajorGridLines(width: 0, color: Colors.transparent),
       ),
       primaryYAxis: NumericAxis(
         axisLine: const AxisLine(width: 1, color: Colors.transparent),
-        /*numberFormat: NumberFormat.compactCurrency(
-          symbol: "",
-          decimalDigits: 3,
-        ),*/
-        //numberFormat: NumberFormat.compact(),
         majorTickLines: const MajorTickLines(
           size: 0,
           width: 0,
@@ -56,27 +49,77 @@ class BaseBarChart extends StatelessWidget {
         ),
         labelStyle: const TextStyle(color: Color(0xA8FFFFFF), fontSize: 9),
       ),
-      series: <CartesianSeries<PvTrendEntity, DateTime>>[
-        ColumnSeries<PvTrendEntity, DateTime>(
+      series: <CartesianSeries<ElecGraphEntity, DateTime>>[
+        ///充电
+        ColumnSeries<ElecGraphEntity, DateTime>(
           name: "",
           legendIconType: LegendIconType.image,
           legendItemText: '',
           dataSource: list,
-          xValueMapper: (PvTrendEntity data, _) =>
+          xValueMapper: (ElecGraphEntity data, _) =>
               getXValue(data.dateTime ?? ""),
-          yValueMapper: (PvTrendEntity data, _) => data.summaryValue ?? 0,
+          yValueMapper: (ElecGraphEntity data, _) => data.totalCharge ?? 0,
           width: 0.4,
           spacing: 0.1,
           dataLabelSettings: const DataLabelSettings(isVisible: false),
           animationDuration: 0,
           enableTooltip: true,
           borderRadius: BorderRadius.circular(4),
-          gradient: LinearGradient(
-            colors: [Color(0xFFFEDB65), Color(0xFFFFA600)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          //selectionBehavior: SelectionBehavior(enable: true),
+          color: Color(0xFF39FFEF),
+        ),
+
+        ///放电
+        ColumnSeries<ElecGraphEntity, DateTime>(
+          name: "",
+          legendIconType: LegendIconType.image,
+          legendItemText: '',
+          dataSource: list,
+          xValueMapper: (ElecGraphEntity data, _) =>
+              getXValue(data.dateTime ?? ""),
+          yValueMapper: (ElecGraphEntity data, _) => data.totalRecharge ?? 0,
+          width: 0.4,
+          spacing: 0.1,
+          dataLabelSettings: const DataLabelSettings(isVisible: false),
+          animationDuration: 0,
+          enableTooltip: true,
+          borderRadius: BorderRadius.circular(4),
+          color: Color(0xFFFFC08C),
+        ),
+
+        ///电网用电量
+        ColumnSeries<ElecGraphEntity, DateTime>(
+          name: "",
+          legendIconType: LegendIconType.image,
+          legendItemText: '',
+          dataSource: list,
+          xValueMapper: (ElecGraphEntity data, _) =>
+              getXValue(data.dateTime ?? ""),
+          yValueMapper: (ElecGraphEntity data, _) => data.gridPos ?? 0,
+          width: 0.4,
+          spacing: 0.1,
+          dataLabelSettings: const DataLabelSettings(isVisible: false),
+          animationDuration: 0,
+          enableTooltip: true,
+          borderRadius: BorderRadius.circular(4),
+          color: Colors.yellowAccent,
+        ),
+
+        ///电网馈电量
+        ColumnSeries<ElecGraphEntity, DateTime>(
+          name: "",
+          legendIconType: LegendIconType.image,
+          legendItemText: '',
+          dataSource: list,
+          xValueMapper: (ElecGraphEntity data, _) =>
+              getXValue(data.dateTime ?? ""),
+          yValueMapper: (ElecGraphEntity data, _) => data.gridFeed ?? 0,
+          width: 0.4,
+          spacing: 0.1,
+          dataLabelSettings: const DataLabelSettings(isVisible: false),
+          animationDuration: 0,
+          enableTooltip: true,
+          borderRadius: BorderRadius.circular(4),
+          color: Colors.deepOrangeAccent,
         ),
       ],
     );

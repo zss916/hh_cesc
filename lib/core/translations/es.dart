@@ -368,4 +368,5 @@ const es = {
   "expectedMonthRevenueTip":
       "Estimación extrapolada según las condiciones operativas del mes actual",
   "noInternetConnection": "No hay conexión a internet.",
+  "onEnable": "No habilitado",
 };

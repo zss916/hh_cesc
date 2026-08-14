@@ -59,6 +59,9 @@ class StrategyPowerLineChart extends StatelessWidget {
               ),
               trackballBehavior: trackballBehavior,
               //trackballBehavior: buildTrackballBehavior(colors),
+              //tooltipBehavior: TooltipBehavior(),
+              //tooltipBehavior: tooltipBehavior(data),
+              //trackballBehavior: buildTrackballBehavior(colors),
               zoomPanBehavior: zoomPanBehavior,
               series: data,
               legend: Legend(
@@ -90,7 +93,11 @@ TrackballBehavior get trackballBehavior => TrackballBehavior(
   activationMode: ActivationMode.singleTap,
   tooltipDisplayMode: TrackballDisplayMode.groupAllPoints,
   hideDelay: 8000,
-  tooltipSettings: InteractiveTooltip(textStyle: TextStyle(fontSize: 10)),
+  lineType: TrackballLineType.vertical,
+  tooltipSettings: InteractiveTooltip(
+    enable: true,
+    textStyle: TextStyle(fontSize: 10),
+  ),
   markerSettings: TrackballMarkerSettings(
     markerVisibility: TrackballVisibilityMode.visible,
   ),
@@ -165,7 +172,7 @@ TrackballBehavior buildTrackballBehavior(List<Color> colors) {
               margin: EdgeInsetsDirectional.only(bottom: 3),
               child: Text(
                 DateFormat(
-                  'yyyy-MM-dd HH:mm',
+                  '${values.length} yyyy-MM-dd HH:mm',
                 ).format((ChartData.toDateTime(timestamp ?? 0))),
                 style: const TextStyle(color: Colors.white60, fontSize: 11),
               ),
@@ -276,6 +283,120 @@ TrackballBehavior get trackballBehavior => TrackballBehavior(
   },
 );
 */
+
+///tooltipBehavior
+/*TooltipBehavior tooltipBehavior(
+  List<XyDataSeries<ChartData, DateTime>> value,
+) => TooltipBehavior(
+  enable: true,
+  activationMode: ActivationMode.singleTap,
+  textStyle: TextStyle(fontSize: 8),
+  //format: 'point.x\npoint.y',
+  builder:
+      (
+        dynamic data,
+        dynamic point,
+        dynamic series,
+        int pointIndex,
+        int seriesIndex,
+      ) {
+        debugPrint("===>>> $series");
+        //double x = value[pointIndex].value;
+        return Container(
+          margin: EdgeInsetsDirectional.all(5),
+          child: Text.rich(
+            TextSpan(
+              text: "",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.normal,
+              ),
+              children: [
+                TextSpan(text: "\n"),
+                //if(seriesIndex == 0)
+                WidgetSpan(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        margin: EdgeInsetsDirectional.only(end: 3),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF39FFEF),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        width: 8,
+                        height: 8,
+                      ),
+                      Text(
+                        "y KWh",
+                        style: TextStyle(
+                          color: Color(0xFF39FFEF),
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                TextSpan(text: "\n"),
+                // if(seriesIndex == 1)
+                WidgetSpan(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        margin: EdgeInsetsDirectional.only(end: 3),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFFC08C),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        width: 8,
+                        height: 8,
+                      ),
+                      Text(
+                        "ele KWh",
+                        style: TextStyle(
+                          color: Color(0xFFFFC08C),
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                TextSpan(text: "\n"),
+                //if(seriesIndex == 2)
+                WidgetSpan(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        margin: EdgeInsetsDirectional.only(end: 3),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF42A5F5),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        width: 8,
+                        height: 8,
+                      ),
+                      Text(
+                        "ele2 KWh",
+                        style: TextStyle(
+                          color: Color(0xFF42A5F5),
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+);*/
 
 ///zoomPanBehavior
 ZoomPanBehavior get zoomPanBehavior => ZoomPanBehavior(

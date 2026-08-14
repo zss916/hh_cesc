@@ -272,8 +272,8 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
       _ when viewState == ViewType.loading.index => buildLoading(),
       _ when viewState == ViewType.common.index => buildRevenueWidget(),
       _ when viewState == ViewType.empty.index => buildRevenueEmpty(),
-      // _ when viewState == ViewType.common.index => buildRevenue(),
-      // _ when viewState == ViewType.empty.index => buildEmpty(),
+      //_ when viewState == ViewType.common.index => buildRevenue(),
+      //_ when viewState == ViewType.empty.index => buildEmpty(),
       _ => buildEmpty(),
     };
   }
@@ -338,13 +338,28 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
       controller: tabCtrl,
       children: [
         ///周
-        SizedBox(),
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
 
         ///月
-        SizedBox(),
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
 
         ///年
-        SizedBox(),
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
       ],
     ),
   );

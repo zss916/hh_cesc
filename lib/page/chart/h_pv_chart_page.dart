@@ -12,19 +12,20 @@ class HPVChartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return HorizontalChartView(
       child: Container(
+        width: double.maxFinite,
+        height: double.maxFinite,
         margin: EdgeInsets.symmetric(horizontal: 16),
         padding: EdgeInsetsDirectional.only(
           start: 10,
           end: 10,
           top: 10,
-          bottom: 0,
+          bottom: 10,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Color(0xFF313540),
         ),
-        width: double.maxFinite,
-        height: double.maxFinite,
+
         child: Column(
           children: [
             Align(

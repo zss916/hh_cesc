@@ -597,6 +597,7 @@ class TKey {
   static const String predictingElectricityPrices =
       "predictingElectricityPrices";
   static const String running = "running";
+  static const String onEnable = "onEnable";
   static const String rememberPassword = "rememberPassword";
   //static const String todayEstimatedRevenue = "todayEstimatedRevenue";
   static const String expectedDailyRevenue = "expectedDailyRevenue";
@@ -973,5 +974,6 @@ const en = {
   "expectedMonthRevenueTip":
       "Extrapolated estimate based on current month's operating conditions",
   "noInternetConnection": "No internet connection",
+  "onEnable": "Not enabled",
   //"todayEstimatedRevenue": "Today's estimated revenue",
 };

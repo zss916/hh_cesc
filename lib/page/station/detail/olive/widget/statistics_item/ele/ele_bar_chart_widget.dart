@@ -3,6 +3,7 @@ import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/widget/ele_barchart_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/widget/multi_base_bar_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
@@ -297,12 +298,156 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
       _ when viewState == ViewType.loading.index => buildLoading(),
-      _ when viewState == ViewType.common.index => buildEle(),
-      _ when viewState == ViewType.empty.index => buildEmpty(),
-      _ => buildEmpty(),
+      _ when viewState == ViewType.common.index => buildEleChart(),
+      _ when viewState == ViewType.empty.index => buildEleEmpty(),
+      //_ when viewState == ViewType.common.index => buildEle(),
+      //_ when viewState == ViewType.empty.index => buildEmpty(),
+      _ => buildEleEmpty(),
     };
   }
 
+  Widget buildEleChart() {
+    return Container(
+      color: Colors.transparent,
+      height: 280.h,
+      width: double.maxFinite,
+      child: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
+        controller: tabCtrl,
+        children: [
+          ///周
+          MultiBaseBarChart(
+            list: widget.logic.eleList,
+            maximumZoomLevel: getLevel(widget.logic.eleList.length),
+          ),
+
+          ///月
+          MultiBaseBarChart(
+            list: widget.logic.eleList,
+            maximumZoomLevel: getLevel(widget.logic.eleList.length),
+          ),
+
+          ///年
+          MultiBaseBarChart(
+            list: widget.logic.eleList,
+            maximumZoomLevel: getLevel(widget.logic.eleList.length),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildEleEmpty() => Container(
+    color: Colors.transparent,
+    height: 280.h,
+    width: double.maxFinite,
+    child: TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: tabCtrl,
+      children: [
+        ///周
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+
+        ///月
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+
+        ///年
+        Center(
+          child: Text(
+            TKey.noDataAvailable.tr,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  ///获取level
+  double getLevel(int len) {
+    if (len >= 0 && len < 5) {
+      return 1;
+    } else if (len >= 5 && len <= 7) {
+      return 0.5;
+    } else if (len > 7 && len <= 15) {
+      return 0.34;
+    } else if (len > 15 && len <= 31) {
+      return 0.1;
+    } else {
+      return 0.01;
+    }
+  }
+
+  Widget buildLoading() => SizedBox(
+    height: 280.h,
+    width: double.maxFinite,
+    child: Center(child: CircularProgressIndicator(color: Colors.white)),
+  );
+
+  @Deprecated('hide')
+  Widget buildEmpty() => Container(
+    color: Colors.transparent,
+    height: 280.h,
+    width: double.maxFinite,
+    child: TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: tabCtrl,
+      children: [
+        ///周
+        EleBarchartItemWidget(
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
+          labels: [],
+          maxY: 100.0,
+          minY: 0,
+          isEmptyView: true,
+        ),
+
+        ///月
+        EleBarchartItemWidget(
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
+          labels: [],
+          maxY: 100.0,
+          minY: 0,
+          isEmptyView: true,
+        ),
+
+        ///年
+        EleBarchartItemWidget(
+          data: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
+          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
+          labels: [],
+          maxY: 100.0,
+          minY: 0,
+          isEmptyView: true,
+        ),
+      ],
+    ),
+  );
+
+  @Deprecated('hide')
   Widget buildEle() {
     return Container(
       color: Colors.transparent,
@@ -382,63 +527,4 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
       ),
     );
   }
-
-  Widget buildLoading() => SizedBox(
-    height: 280.h,
-    width: double.maxFinite,
-    child: Center(child: CircularProgressIndicator(color: Colors.white)),
-  );
-
-  Widget buildEmpty() => Container(
-    color: Colors.transparent,
-    height: 280.h,
-    width: double.maxFinite,
-    child: TabBarView(
-      physics: NeverScrollableScrollPhysics(),
-      controller: tabCtrl,
-      children: [
-        ///周
-        EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100.0,
-          minY: 0,
-          isEmptyView: true,
-        ),
-
-        ///月
-        EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100.0,
-          minY: 0,
-          isEmptyView: true,
-        ),
-
-        ///年
-        EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100.0,
-          minY: 0,
-          isEmptyView: true,
-        ),
-      ],
-    ),
-  );
 }

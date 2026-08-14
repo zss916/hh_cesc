@@ -20,7 +20,10 @@ class StationPage extends StatelessWidget {
       backgroundColor: Color(0xFF23282E),
       body: GetBuilder<StationLogic>(
         init: StationLogic(),
-        builder: (logic) => buildBody(viewState: logic.viewState, logic: logic),
+        builder: (logic) => buildPage(
+          child: buildBody(viewState: logic.viewState, logic: logic),
+          logic: logic,
+        ),
       ),
     );
   }
@@ -30,14 +33,16 @@ class StationPage extends StatelessWidget {
     required StationLogic logic,
   }) {
     return switch (viewState) {
-      ViewStateEnum.common => buildPage(
+      /*ViewStateEnum.common => buildPage(
         child: buildList2(logic: logic),
         logic: logic,
-      ),
-      ViewStateEnum.empty => buildPage(
+      ),*/
+      ViewStateEnum.common => buildList2(logic: logic),
+      /*ViewStateEnum.empty => buildPage(
         child: buildEmpty(logic: logic),
         logic: logic,
-      ),
+      ),*/
+      ViewStateEnum.empty => buildEmpty(logic: logic),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
         child: Center(child: CescGlowLoading()),

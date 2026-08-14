@@ -321,9 +321,10 @@ const zh = {
   "adjustTab": "调整参数",
   "stopTab": "停用",
   "openTab": "启用",
+  "onEnable": "未启用",
   "applyTitle": "请联系您的客户经理",
   "applyContent": 'AI策略启用需要由您的客户经理进行审核与开通。\n请主动联系客户经理，提交开通申请，审核通过后即可体验AI智能策略。',
-  "knowTitle": "OK",
+  "knowTitle": "确认",
   "totalPowerType": "总功率",
   "subSystemType": "子系统",
   "peakShavingAndValleyFillingMonthType": "削峰填谷(月)",
@@ -352,6 +353,4 @@ const zh = {
   "expectedMonthRevenue": "预期月收益提升",
   "expectedMonthRevenueTip": "按当月运营情况外推估算",
   "noInternetConnection": "无网络连接",
-
-  //"todayEstimatedRevenue": "今日预计收益",
 };

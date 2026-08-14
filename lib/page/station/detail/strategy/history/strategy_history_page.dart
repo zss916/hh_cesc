@@ -125,11 +125,12 @@ class StrategyHistoryPage extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          Divider(height: 6, color: Colors.transparent),
-          Text(
-            item.content ?? "",
-            style: TextStyle(fontSize: 12, color: const Color(0xff888888)),
-          ),
+          if (false) Divider(height: 6, color: Colors.transparent),
+          if (false)
+            Text(
+              item.content ?? "",
+              style: TextStyle(fontSize: 12, color: const Color(0xff888888)),
+            ),
           if (item.reason != null)
             Container(
               margin: EdgeInsetsDirectional.only(top: 6),
