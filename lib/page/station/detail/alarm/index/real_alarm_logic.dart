@@ -18,7 +18,7 @@ class RealAlarmLogic extends GetxController {
   AnalysisAttentionAlarmData? get attentionAlarmData =>
       analysis?.attentionAlarmData;
 
-  List<Map<String, dynamic>> get list => [
+  List<Map<String, dynamic>> get totalList => [
     {
       "title": TKey.alarmLevel1.tr,
       "number": totalAlarmData?.firstCnt ?? 0,
@@ -41,9 +41,9 @@ class RealAlarmLogic extends GetxController {
     },
   ];
 
-  List<Map<String, dynamic>> list2 = [];
+  List<Map<String, dynamic>> highestList = [];
 
-  List<Map<String, dynamic>> list3 = [];
+  List<Map<String, dynamic>> attentionList = [];
 
   String contents = "";
 
@@ -81,7 +81,7 @@ class RealAlarmLogic extends GetxController {
       AnalysisEntity? value = await AlarmAPI.getAnalysis(siteId: "$siteId");
       analysis = value;
       if ((analysis?.highestAlarmData?.items ?? []).isNotEmpty) {
-        list2 = (analysis?.highestAlarmData?.items)!
+        highestList = (analysis?.highestAlarmData?.items)!
             .mapIndexed(
               (i, e) => {
                 "title": e.type ?? "",
@@ -93,7 +93,7 @@ class RealAlarmLogic extends GetxController {
       }
 
       if ((analysis?.attentionAlarmData?.items ?? []).isNotEmpty) {
-        list3 = (analysis?.attentionAlarmData?.items)!
+        attentionList = (analysis?.attentionAlarmData?.items)!
             .mapIndexed(
               (i, e) => {
                 "title": e.type ?? "",

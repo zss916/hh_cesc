@@ -40,9 +40,11 @@ class RealAlarmView extends StatelessWidget {
                 if (logic.totalAlarmData != null)
                   buildTotalAlarmItem(logic.totalAlarmData!, logic),
 
-                if ((logic.list2).isNotEmpty) buildHighestAlarmItem(logic),
+                if ((logic.highestList).isNotEmpty)
+                  buildHighestAlarmItem(logic),
 
-                if ((logic.list3).isNotEmpty) buildAttentionAlarmItem(logic),
+                if ((logic.attentionList).isNotEmpty)
+                  buildAttentionAlarmItem(logic),
 
                 if (logic.contents.isNotEmpty) buildFocusOn(logic),
 
@@ -105,7 +107,7 @@ class RealAlarmView extends StatelessWidget {
           title: TKey.alarmTotal.tr,
           count: "${value.totalCnt ?? 0}",
           totalCount: (value.totalCnt ?? 0),
-          list: logic.list,
+          list: logic.totalList,
         ),
         VerticalDivider(color: Colors.transparent, width: 20.w),
         Expanded(
@@ -225,14 +227,14 @@ class RealAlarmView extends StatelessWidget {
           title: TKey.highLevel.tr,
           count: "${logic.highestAlarmData?.totalCnt ?? 0}",
           totalCount: (logic.highestAlarmData?.totalCnt ?? 0),
-          list: logic.list2,
+          list: logic.highestList,
         ),
         VerticalDivider(color: Colors.transparent, width: 20.w),
         Expanded(
           child: Column(
             spacing: 15.h,
             children: [
-              ...(logic.list2).map(
+              ...(logic.highestList).map(
                 (e) => Row(
                   children: [
                     Container(
@@ -279,14 +281,14 @@ class RealAlarmView extends StatelessWidget {
           title: TKey.focusOn.tr,
           count: "${logic.attentionAlarmData?.totalCnt ?? 0}",
           totalCount: (logic.attentionAlarmData?.totalCnt ?? 0),
-          list: logic.list3,
+          list: logic.attentionList,
         ),
         VerticalDivider(color: Colors.transparent, width: 20.w),
         Expanded(
           child: Column(
             spacing: 15.h,
             children: [
-              ...(logic.list3).map(
+              ...(logic.attentionList).map(
                 (e) => Row(
                   children: [
                     Container(

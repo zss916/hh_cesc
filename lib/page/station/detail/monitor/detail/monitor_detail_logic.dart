@@ -191,6 +191,10 @@ class MonitorDetailLogic extends GetxController {
         update(["realTimeData"]);
       }
     } else if (devType == "PCS" || devType == "METER") {
+      powerViewStatus = ViewType.loading;
+      update(["realTimeData"]);
+      await Future.delayed(Duration(seconds: 1));
+
       final (
         bool isSuccessful,
         List<PowerEntity> value,
@@ -205,11 +209,9 @@ class MonitorDetailLogic extends GetxController {
       );
       if (isSuccessful) {
         powerList.assignAll(value);
-        if (powerList.isNotEmpty) {
-          powerViewStatus = ViewType.common;
-        } else {
-          powerViewStatus = ViewType.empty;
-        }
+        powerViewStatus = powerList.isNotEmpty
+            ? ViewType.common
+            : ViewType.empty;
         update(["realTimeData"]);
       } else {
         powerViewStatus = ViewType.empty;
