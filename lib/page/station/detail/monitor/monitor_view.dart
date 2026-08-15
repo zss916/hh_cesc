@@ -106,7 +106,6 @@ class MonitorView extends StatelessWidget {
     child: GestureDetector(
       onTap: () {
         AppEventBus.eventBus.fire(NetWorkRefresh());
-        // logic.getPointDetails(isLoading: true);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

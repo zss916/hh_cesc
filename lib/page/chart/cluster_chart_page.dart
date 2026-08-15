@@ -1,3 +1,4 @@
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/chart/widget/horizontal_chart_view.dart';
 import 'package:cescpro/page/station/detail/monitor/cluster/base_line_chart.dart';
 import 'package:cescpro/page/station/detail/monitor/cluster/battery_cluster_logic.dart';
@@ -48,7 +49,8 @@ class ClusterChartPage extends StatelessWidget {
                 id: "realTimeData",
                 init: BatteryClusterLogic(),
                 builder: (logic) {
-                  return BaseLineChart(socList: logic.arrList);
+                  return buildContent(logic.viewStatus, logic);
+                  //return BaseLineChart(socList: logic.arrList);
                 },
               ),
             ),
@@ -57,4 +59,22 @@ class ClusterChartPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget buildContent(ViewType viewState, BatteryClusterLogic logic) {
+    return switch (viewState) {
+      _ when viewState == ViewType.loading => buildLoading,
+      _ when viewState == ViewType.common => BaseLineChart(
+        socList: logic.arrList,
+      ),
+      _ when viewState == ViewType.empty => buildEmpty,
+      _ => buildEmpty,
+    };
+  }
+
+  Widget get buildLoading =>
+      Center(child: CircularProgressIndicator(color: Colors.white));
+
+  Widget get buildEmpty => Center(
+    child: Text(TKey.noDataAvailable.tr, style: TextStyle(color: Colors.white)),
+  );
 }
