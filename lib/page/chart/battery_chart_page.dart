@@ -1,8 +1,10 @@
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/chart/widget/horizontal_chart_view.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/base_line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class BatteryChartPage extends StatelessWidget {
   const BatteryChartPage({super.key});
@@ -48,7 +50,7 @@ class BatteryChartPage extends StatelessWidget {
                 id: "realTimeData",
                 init: MonitorDetailLogic(),
                 builder: (logic) {
-                  return BaseLineChart(socList: logic.arrList);
+                  return buildContent(logic.realTimeViewStatus, logic);
                 },
               ),
             ),
@@ -57,4 +59,22 @@ class BatteryChartPage extends StatelessWidget {
       ),
     );
   }
+
+  Widget buildContent(ViewType viewState, MonitorDetailLogic logic) {
+    return switch (viewState) {
+      _ when viewState == ViewType.loading => buildLoading,
+      _ when viewState == ViewType.common => BaseLineChart(
+        socList: logic.arrList,
+      ),
+      _ when viewState == ViewType.empty => buildEmpty,
+      _ => buildEmpty,
+    };
+  }
+
+  Widget get buildLoading =>
+      Center(child: CircularProgressIndicator(color: Colors.white));
+
+  Widget get buildEmpty => Center(
+    child: Text(TKey.noDataAvailable.tr, style: TextStyle(color: Colors.white)),
+  );
 }

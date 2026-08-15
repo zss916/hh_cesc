@@ -2,7 +2,6 @@ import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/widget/ele_barchart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/ele/widget/multi_base_bar_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
@@ -171,7 +170,6 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                             0,
                           );
                           widget.logic.loadEle(
-                            type: DataType.ele,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
                             endTimeStamp: end.millisecondsSinceEpoch,
@@ -189,7 +187,6 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                             0,
                           ).subtract(Duration(microseconds: 1));
                           widget.logic.loadEle(
-                            type: DataType.ele,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
                             endTimeStamp: end.millisecondsSinceEpoch,
@@ -210,7 +207,6 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
                             "start:${start.timestampFormat},end:${end.timestampFormat}",
                           );
                           widget.logic.loadEle(
-                            type: DataType.ele,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
                             endTimeStamp: end.millisecondsSinceEpoch,
@@ -298,10 +294,8 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
       _ when viewState == ViewType.loading.index => buildLoading(),
-      //_ when viewState == ViewType.common.index => buildEleChart(),
-      //_ when viewState == ViewType.empty.index => buildEleEmpty(),
-      _ when viewState == ViewType.common.index => buildEle(),
-      _ when viewState == ViewType.empty.index => buildEmpty(),
+      _ when viewState == ViewType.common.index => buildEleChart(),
+      _ when viewState == ViewType.empty.index => buildEleEmpty(),
       _ => buildEleEmpty(),
     };
   }
@@ -392,139 +386,4 @@ class _RevenueBarChartWidget extends State<EleBarChartWidget>
     width: double.maxFinite,
     child: Center(child: CircularProgressIndicator(color: Colors.white)),
   );
-
-  @Deprecated('hide')
-  Widget buildEmpty() => Container(
-    color: Colors.transparent,
-    height: 280.h,
-    width: double.maxFinite,
-    child: TabBarView(
-      physics: NeverScrollableScrollPhysics(),
-      controller: tabCtrl,
-      children: [
-        ///周
-        EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100.0,
-          minY: 0,
-          isEmptyView: true,
-        ),
-
-        ///月
-        EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100.0,
-          minY: 0,
-          isEmptyView: true,
-        ),
-
-        ///年
-        EleBarchartItemWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data2: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data3: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data4: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data5: [0.0, 0.0, 0.0, 0.0, 0.0],
-          data6: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100.0,
-          minY: 0,
-          isEmptyView: true,
-        ),
-      ],
-    ),
-  );
-
-  @Deprecated('hide')
-  Widget buildEle() {
-    return Container(
-      color: Colors.transparent,
-      height: 280.h,
-      width: double.maxFinite,
-      child: TabBarView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: tabCtrl,
-        children: [
-          ///周
-          EleBarchartItemWidget(
-            data: widget.logic.eleList
-                .map((e) => (e.totalCharge ?? 0))
-                .toList(),
-            data2: widget.logic.eleList
-                .map((e) => (e.totalRecharge ?? 0))
-                .toList(),
-            data3: [],
-
-            /*data3: widget.logic.eleList
-                .map((e) => (e.pvGeneration ?? 0))
-                .toList(),*/
-            data6: [],
-            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
-            data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
-            // data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
-            labels: widget.logic.eleLabels,
-            maxY: widget.logic.eleMaxY ?? 0,
-            minY: widget.logic.eleMinY ?? 0,
-            isEmptyView: false,
-          ),
-
-          ///月
-          EleBarchartItemWidget(
-            data: widget.logic.eleList
-                .map((e) => (e.totalCharge ?? 0))
-                .toList(),
-            data2: widget.logic.eleList
-                .map((e) => (e.totalRecharge ?? 0))
-                .toList(),
-            data3: [],
-            /* data3: widget.logic.eleList
-                .map((e) => (e.pvGeneration ?? 0))
-                .toList(),*/
-            data6: [],
-            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
-            data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
-            //data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
-            labels: widget.logic.eleLabels,
-            maxY: widget.logic.eleMaxY ?? 0,
-            minY: widget.logic.eleMinY ?? 0,
-            isEmptyView: false,
-          ),
-
-          ///年
-          EleBarchartItemWidget(
-            data: widget.logic.eleList
-                .map((e) => (e.totalCharge ?? 0))
-                .toList(),
-            data2: widget.logic.eleList
-                .map((e) => (e.totalRecharge ?? 0))
-                .toList(),
-            /*data3: widget.logic.eleList
-                .map((e) => (e.pvGeneration ?? 0))
-                .toList(),*/
-            data3: [],
-            data6: [],
-            data4: widget.logic.eleList.map((e) => (e.gridPos ?? 0)).toList(),
-            data5: widget.logic.eleList.map((e) => (e.gridFeed ?? 0)).toList(),
-            //data6: widget.logic.eleList.map((e) => (e.loadPos ?? 0)).toList(),
-            labels: widget.logic.eleLabels,
-            maxY: widget.logic.eleMaxY ?? 0,
-            minY: widget.logic.eleMinY ?? 0,
-            isEmptyView: false,
-          ),
-        ],
-      ),
-    );
-  }
 }

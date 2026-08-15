@@ -1,6 +1,5 @@
 import 'package:cescpro/core/storage/app_event_bus.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/home/widget/pie_chart_line_widget.dart';
 import 'package:cescpro/page/station/index/widget/text_rich_widget2.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_echart/flutter_echart.dart';
@@ -69,21 +68,6 @@ class BuildStationStatus extends StatelessWidget {
           padding: EdgeInsetsDirectional.all(16.r),
           child: Column(
             children: [
-              if (false)
-                SizedBox(
-                  width: double.maxFinite,
-                  height: 170.h,
-                  child: RepaintBoundary(
-                    child: PieChartLineWidget(
-                      total: (normalNum + faultNum + alarmNum + cutOffNum),
-                      normalNum: normalNum,
-                      faultNum: faultNum,
-                      alarmNum: alarmNum,
-                      cutOffNum: cutOffNum,
-                    ),
-                  ),
-                ),
-
               SizedBox(
                 height: 220.h,
                 child: RepaintBoundary(
@@ -176,8 +160,6 @@ class BuildStationStatus extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Divider(color: Colors.transparent, height: 8.h),
               SizedBox(
                 width: double.maxFinite,
                 child: Wrap(
@@ -258,53 +240,9 @@ class BuildStationStatus extends StatelessWidget {
             ],
           ),
         ),
-
-        /*  Container(
-          width: double.maxFinite,
-          height: 220.h,
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            color: Color(0xFF313540),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          margin: EdgeInsetsDirectional.only(
-            top: 16.h,
-            bottom: 16.h,
-            start: 16.w,
-            end: 16.w,
-          ),
-          padding: EdgeInsetsDirectional.all(16.r),
-          child: buildPieChatWidget(data),
-        ),*/
       ],
     );
   }
-
-  /*  PieChatWidget buildPieChatWidget(List<EChartPieBean> data) {
-    return PieChatWidget(
-      dataList: data,
-      //是否输出日志
-      isLog: false,
-      //是否需要背景
-      isBackground: false,
-      //是否画直线
-      isLineText: true,
-      //背景
-      bgColor: Color(0xFF313540),
-      //是否显示最前面的内容
-      isFrontgText: true,
-      //默认选择放大的块
-      initSelect: -1,
-      //初次显示以动画方式展开
-      openType: OpenType.NON,
-      //旋转类型
-      loopType: LoopType.NON,
-      //点击回调
-      clickCallBack: (int value) {
-        //print("当前点击显示 $value");
-      },
-    );
-  }*/
 }
 
 class PieChartData {

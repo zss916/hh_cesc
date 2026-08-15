@@ -1,5 +1,5 @@
 import 'package:cescpro/page/chart/widget/horizontal_chart_view.dart';
-import 'package:cescpro/page/chart/widget/pv/h_pv_barchart_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/base_bar_chart.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,21 +42,13 @@ class HPVChartPage extends StatelessWidget {
                   id: "pv",
                   init: StatisticsItemLogic(),
                   builder: (logic) {
-                    /*  return SizedBox(
+                    return SizedBox(
                       width: double.maxFinite,
                       height: double.maxFinite,
                       child: BaseBarChart(
                         list: logic.pvList,
                         maximumZoomLevel: getLevel(logic.pvList.length),
                       ),
-                    );*/
-                    return HPVBarchartItemWidget(
-                      data: logic.pvList
-                          .map((e) => (e.summaryValue ?? 0))
-                          .toList(),
-                      labels: logic.pvLabels,
-                      maxY: logic.pvMaxY ?? 0,
-                      minY: logic.pvMinY ?? 0,
                     );
                   },
                 ),

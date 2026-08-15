@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.27+28
+version: 2.0.20+30
 
 environment:
   sdk: ^3.12.2
@@ -91,6 +91,7 @@ dependencies:
   hit: ^1.2.4
   #objectbox: 5.2.0
   #objectbox_flutter_libs: 5.2.0
+  #flutter_offline: ^6.0.0
 
 
 

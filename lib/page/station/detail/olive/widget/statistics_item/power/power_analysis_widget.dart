@@ -1,11 +1,7 @@
-/*
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/http/bean/power_graph_entity.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart2.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
@@ -23,6 +19,20 @@ class PowerAnalysisWidget extends StatefulWidget {
 
 class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
   String currentTime = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+  final palette = <Color>[
+    Colors.red, // line2
+    Colors.green, // line3
+    Colors.orange, // line4 (右轴)
+    Colors.purple, // line5
+    Colors.teal, // line6
+    Colors.brown, // line7
+    Colors.pink, // line8
+    Colors.indigo, // line9
+    Colors.lime, // line10
+    Colors.cyan, // line11
+    Colors.amber, // line12
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -76,105 +86,71 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
             ],
           ),
         ),
-        Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.w),
-              padding: EdgeInsetsDirectional.only(
-                top: 25,
-                start: 5.w,
-                end: 10.w,
-                bottom: 15.h,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color(0xFF313540),
-              ),
-              width: double.maxFinite,
-              child: Stack(
-                alignment: AlignmentDirectional.topCenter,
-                children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            color: Colors.transparent,
-                            height: 320.h,
-                            width: double.maxFinite,
-                            child: buildBody(
-                              viewState: widget.logic.powerViewStatus,
-                            ),
-                          ),
-                          Divider(height: 5.h, color: Colors.transparent),
-                          Container(
-                            padding: EdgeInsetsDirectional.symmetric(
-                              horizontal: 15.w,
-                            ),
-                            width: double.maxFinite,
-                            child: Wrap(
-                              spacing: 15.w,
-                              runSpacing: 8.h,
-                              children: [
-                                ...widget.logic.titles.map(
-                                  (e) =>
-                                      LineTitleWidget(color: e.$2, title: e.$1),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      if (widget.logic.powerLines.isNotEmpty)
-                        PositionedDirectional(
-                          top: 10.h,
-                          start: 10.w,
-                          child: Text(
-                            "(kW)",
-                            style: TextStyle(
-                              color: Color(0x80FFFFFF),
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ),
-
-                      if (widget.logic.socPowerLines.isNotEmpty)
-                        PositionedDirectional(
-                          top: 10.h,
-                          end: 10.w,
-                          child: Text(
-                            "(%)",
-                            style: TextStyle(
-                              color: widget.logic.socPowerLines.first.$2,
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            if (widget.logic.powerLines.isNotEmpty &&
-                ViewType.common.index == widget.logic.powerViewStatus)
-              PositionedDirectional(
-                top: 5,
-                end: 5 + 16.w,
-                child: InkWell(
-                  onTap: () {
-                    Get.toNamed(APages.hPowerGraphChart);
-                  },
-                  child: Icon(
-                    Icons.zoom_out_map_rounded,
-                    size: 20,
-                    color: Colors.white,
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsetsDirectional.only(
+            top: 10,
+            bottom: 10,
+            start: 8,
+            end: 8,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color(0xFF313540),
+          ),
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (widget.logic.series.isNotEmpty &&
+                  ViewType.common.index == widget.logic.powerViewStatus)
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(APages.hPowerGraphChart);
+                    },
+                    child: Icon(
+                      Icons.zoom_out_map_rounded,
+                      size: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
+
+              Divider(height: 8.h, color: Colors.transparent),
+              if (widget.logic.series.isNotEmpty)
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsetsDirectional.only(start: 0),
+                      child: Text(
+                        "(kW)",
+                        style: TextStyle(
+                          color: Color(0x80FFFFFF),
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Container(
+                      margin: EdgeInsetsDirectional.only(end: 0),
+                      child: Text(
+                        "(%)",
+                        style: TextStyle(color: Colors.blue, fontSize: 12.sp),
+                      ),
+                    ),
+                  ],
+                ),
+
+              Container(
+                color: Colors.transparent,
+                height: 355.h,
+                width: double.maxFinite,
+                child: buildBody(viewState: widget.logic.powerViewStatus),
               ),
-          ],
+            ],
+          ),
         ),
       ],
     );
@@ -182,83 +158,34 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
 
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
-      _ when viewState == ViewType.loading.index => buildLoading(),
+      _ when viewState == ViewType.loading.index => buildLoading,
+      _ when viewState == ViewType.empty.index => buildEmpty,
       _ when viewState == ViewType.common.index =>
-        widget.logic.socPowerLines.isEmpty
-            ? buildPowerLineChart()
-            : buildPowerLineChart2(),
-      _ when viewState == ViewType.empty.index => buildEmpty(),
-      _ => buildEmpty(),
+        widget.logic.series.isEmpty ? buildEmpty : buildPowerLineChart(),
+      _ when viewState == ViewType.empty.index => buildEmpty,
+      _ => buildEmpty,
     };
   }
 
   ///loading
-  Widget buildLoading() =>
+  Widget get buildLoading =>
       Center(child: CircularProgressIndicator(color: Colors.white));
+
+  ///empty
+  Widget get buildEmpty => Center(
+    child: Text(TKey.noDataAvailable.tr, style: TextStyle(color: Colors.white)),
+  );
 
   ///line chart
   Widget buildPowerLineChart() {
     return PowerLineChart(
-      list: widget.logic.powerLines,
-      maxX: widget.logic.maxX,
-      minY: widget.logic.minY,
-      maxY: widget.logic.maxY,
-      isEmptyView: false,
+      data: widget.logic.series,
+      minT: widget.logic.minT,
+      maxT: widget.logic.maxT,
+      axis: widget.logic.axis,
+      isH: false,
     );
   }
-
-  Widget buildPowerLineChart2() {
-    return PowerLineChart2(
-      list: widget.logic.powerLines,
-      socList: widget.logic.socPowerLines,
-      maxX: widget.logic.maxX,
-      minY: widget.logic.minY,
-      maxY: widget.logic.maxY,
-      isEmptyView: false,
-    );
-  }
-
-  ///empty
-  Widget buildEmpty() => PowerLineChart(
-    list: [
-      (
-        [
-          PowerGraphList()
-            ..time = 0
-            ..val = 0.0,
-        ],
-        Colors.transparent,
-      ),
-      (
-        [
-          PowerGraphList()
-            ..time = 0
-            ..val = 0.0,
-        ],
-        Colors.transparent,
-      ),
-      (
-        [
-          PowerGraphList()
-            ..time = 0
-            ..val = 0.0,
-        ],
-        Colors.transparent,
-      ),
-      (
-        [
-          PowerGraphList()
-            ..time = 0
-            ..val = 0.0,
-        ],
-        Colors.transparent,
-      ),
-    ],
-    maxX: 0.0,
-    minY: 0.0,
-    maxY: 100.0,
-    isEmptyView: true,
-  );
 
   void showDateTimePicker(StatisticsItemLogic logic) {
     DatePicker.showDatePicker(
@@ -268,7 +195,6 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
       maxTime: DateTime.now(),
       currentTime: DateTime.parse(currentTime),
       locale: LocaleUtils.fromLanguageCode(Get.locale?.languageCode),
-      //locale: Get.isEn ? LocaleType.en : LocaleType.zh,
       theme: DatePickerTheme(
         backgroundColor: Color(0xFF23282E),
         itemStyle: TextStyle(
@@ -316,4 +242,3 @@ class _PowerAnalysisWidgetState extends State<PowerAnalysisWidget> {
     );
   }
 }
-*/

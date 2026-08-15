@@ -3,7 +3,7 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/child/top_item_widget.dart';
-import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/line_chart4.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/base_single_line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -740,29 +740,70 @@ class PcsView extends StatelessWidget {
             ),
           ),
         ),
+
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 16.w),
+          height: 320.h,
+          width: double.maxFinite,
+          margin: EdgeInsets.symmetric(horizontal: 16),
           padding: EdgeInsetsDirectional.only(
-            start: 5.w,
-            end: 5.w,
-            bottom: 15.h,
+            start: 10,
+            end: 10,
+            top: 8,
+            bottom: 0,
           ),
+          alignment: AlignmentDirectional.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Color(0xFF313540),
           ),
-          width: double.maxFinite,
-          child: GetBuilder<MonitorDetailLogic>(
-            id: "realTimeData",
-            init: MonitorDetailLogic(),
-            builder: (logic) {
-              return Container(
-                color: Colors.transparent,
-                width: double.maxFinite,
-                alignment: AlignmentDirectional.center,
-                child: buildContent(logic.powerViewStatus, logic),
-              );
-            },
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "(kW)",
+                        style: TextStyle(
+                          color: Color(0x80FFFFFF),
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      Spacer(),
+                      GetBuilder<MonitorDetailLogic>(
+                        id: "realTimeData",
+                        init: MonitorDetailLogic(),
+                        builder: (logic) {
+                          return logic.powerList.isEmpty
+                              ? SizedBox.shrink()
+                              : InkWell(
+                                  onTap: () {
+                                    Get.toNamed(APages.hPCSChart);
+                                  },
+                                  child: Icon(
+                                    Icons.zoom_out_map_rounded,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
+                                );
+                        },
+                      ),
+                    ],
+                  ),
+                  Divider(height: 10.h, color: Colors.transparent),
+                  Expanded(
+                    child: GetBuilder<MonitorDetailLogic>(
+                      id: "realTimeData",
+                      init: MonitorDetailLogic(),
+                      builder: (logic) =>
+                          buildContent(logic.powerViewStatus, logic),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ],
@@ -771,156 +812,19 @@ class PcsView extends StatelessWidget {
 
   Widget buildContent(ViewType viewState, MonitorDetailLogic logic) {
     return switch (viewState) {
-      _ when viewState == ViewType.loading => buildLoading(),
-      _ when viewState == ViewType.common => buildLineChart(logic),
-      _ when viewState == ViewType.empty => buildEmpty(),
-      _ => buildEmpty(),
+      _ when viewState == ViewType.loading => buildLoading,
+      _ when viewState == ViewType.common => BaseSingleLineChart(
+        powerList: logic.powerList,
+      ),
+      _ when viewState == ViewType.empty => buildEmpty,
+      _ => buildEmpty,
     };
   }
 
-  Widget buildLoading() => Container(
-    color: Colors.transparent,
-    width: double.maxFinite,
-    height: 300.h,
-    alignment: AlignmentDirectional.center,
-    child: CircularProgressIndicator(color: Colors.white),
+  Widget get buildEmpty => Center(
+    child: Text(TKey.noDataAvailable.tr, style: TextStyle(color: Colors.white)),
   );
 
-  Widget buildEmpty() {
-    return Stack(
-      alignment: AlignmentDirectional.topCenter,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Divider(height: 15.h, color: Colors.transparent),
-            Container(
-              color: Colors.transparent,
-              height: 285.h,
-              width: double.maxFinite,
-              child: MonitorLineChartWidget4(
-                powerList: [],
-                maxY: 100,
-                minY: 0,
-                maxX: 0,
-                isEmpty: true,
-                isDiff: false,
-              ),
-            ),
-            Divider(height: 5.h, color: Colors.transparent),
-            Row(
-              children: [
-                Spacer(),
-                Row(
-                  children: [
-                    Container(
-                      width: 7,
-                      height: 7,
-                      margin: EdgeInsets.only(right: 5.w),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF3874F2),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                    Text(
-                      TKey.power.tr,
-                      style: TextStyle(
-                        color: Color(0xD9FFFFFF),
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                  ],
-                ),
-                Spacer(),
-              ],
-            ),
-          ],
-        ),
-        PositionedDirectional(
-          start: 0.w,
-          top: 10.h,
-          child: Text(
-            "(kW)",
-            style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buildLineChart(MonitorDetailLogic logic) {
-    return Stack(
-      alignment: AlignmentDirectional.topCenter,
-      children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Divider(height: 15.h, color: Colors.transparent),
-            Container(
-              color: Colors.transparent,
-              height: 285.h,
-              width: double.maxFinite,
-              child: MonitorLineChartWidget4(
-                powerList: logic.powerList,
-                maxY: logic.powerMaxY,
-                minY: logic.powerMinY,
-                maxX: logic.powerMaxX,
-                isEmpty: logic.powerList.isEmpty,
-                isDiff: logic.isDiff,
-              ),
-            ),
-            Divider(height: 5.h, color: Colors.transparent),
-            Row(
-              children: [
-                Spacer(),
-                Row(
-                  children: [
-                    Container(
-                      width: 7,
-                      height: 7,
-                      margin: EdgeInsets.only(right: 5.w),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF3874F2),
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                    Text(
-                      TKey.power.tr,
-                      style: TextStyle(
-                        color: Color(0xD9FFFFFF),
-                        fontSize: 12.sp,
-                      ),
-                    ),
-                  ],
-                ),
-                Spacer(),
-              ],
-            ),
-          ],
-        ),
-        PositionedDirectional(
-          start: 0.w,
-          top: 10.h,
-          child: Text(
-            "(kW)",
-            style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
-          ),
-        ),
-        PositionedDirectional(
-          top: 5,
-          end: 5,
-          child: InkWell(
-            onTap: () {
-              Get.toNamed(APages.hPCSChart);
-            },
-            child: Icon(
-              Icons.zoom_out_map_rounded,
-              size: 20,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  Widget get buildLoading =>
+      Center(child: CircularProgressIndicator(color: Colors.white));
 }

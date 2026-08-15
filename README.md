@@ -125,6 +125,12 @@ flutter_animated_circle: ^0.1.1
 custom_pie_chart_label: ^1.0.0
 ## 触摸显示折线的饼图
 donut_chart: ^0.0.1
+## 好看的chart
+fl_pretty_charts: ^2.4.0
+chartify: ^1.0.2
+pie_chart_3d: ^0.0.7
+three_d_pie_chart: ^1.0.3
+custom_pie_chart_label: ^1.0.0
 
 
 

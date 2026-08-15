@@ -1,15 +1,13 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:cescpro/core/setting/app_loading.dart';
-import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/http/api/site.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:cescpro/http/bean/power_graph_entity.dart';
 import 'package:cescpro/http/bean/pv_trend_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart3.dart';
+import 'package:cescpro/page/station/detail/olive/widget/statistics_item/power/power_line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -40,36 +38,29 @@ class StatisticsItemLogic extends GetxController {
   ).subtract(Duration(microseconds: 1)).millisecondsSinceEpoch;
 
   ///功率折线图表
-  List<(List<PowerGraphList>, Color)> powerLines = [];
-  List<(String, Color)> titles = [];
-  double minY = 0.0;
-  double maxY = 0.0;
-  double maxX = 0.0;
   int powerViewStatus = ViewType.loading.index;
-  List<(List<PowerGraphList>, Color)> socPowerLines = [];
+  DateTime minT = DateTime.now();
+  DateTime maxT = DateTime.now();
+  AxisConfig axis = AxisConfig(
+    interval: 2,
+    intervalType: DateTimeIntervalType.minutes,
+    format: DateFormat('HH:mm'),
+  );
+  List<FastLineSeries<ChartData, DateTime>> series =
+      <FastLineSeries<ChartData, DateTime>>[];
 
   ///光伏发电量
   List<PvTrendEntity> pvList = [];
-  List<String> pvLabels = [];
-  double? pvMaxY;
-  double? pvMinY;
   int pvViewStatus = ViewType.loading.index;
   bool hasPv = false;
 
   ///收益
   List<ElecGraphEntity> revenueList = [];
-  double? revenueMaxY;
-  double? revenueMinY;
-  List<String> labels = [];
   int revenueViewStatus = ViewType.loading.index;
-  bool isDiff = false;
 
   ///电量指标
   List<ElecGraphEntity> eleList = [];
-  double? eleMaxY;
-  double? eleMinY;
   int eleViewStatus = ViewType.loading.index;
-  List<String> eleLabels = [];
   bool revenueShow = false;
   bool isPvSite = false;
 
@@ -108,18 +99,15 @@ class StatisticsItemLogic extends GetxController {
       0,
     );
 
-    // loadPower(startTimeStamp: powerStartTime, endTimeStamp: powerEndTime);
-    loadPower2(startTimeStamp: powerStartTime, endTimeStamp: powerEndTime);
+    loadPower(startTimeStamp: powerStartTime, endTimeStamp: powerEndTime);
 
     loadRevenue(
-      type: DataType.revenue,
       queryType: 0,
       startTimeStamp: start.millisecondsSinceEpoch,
       endTimeStamp: end.millisecondsSinceEpoch,
     );
 
     loadEle(
-      type: DataType.ele,
       queryType: 0,
       startTimeStamp: start.millisecondsSinceEpoch,
       endTimeStamp: end.millisecondsSinceEpoch,
@@ -138,27 +126,14 @@ class StatisticsItemLogic extends GetxController {
     AppLoading.dismiss();
   }
 
-  ///power 折线图2
-  /*List<SplineSeries<ChartData, DateTime>> series2 =
-      <SplineSeries<ChartData, DateTime>>[];*/
-  DateTime minT = DateTime.now();
-  DateTime maxT = DateTime.now();
-  AxisConfig axis = AxisConfig(
-    interval: 2,
-    intervalType: DateTimeIntervalType.minutes,
-    format: DateFormat('HH:mm'),
-  );
-  List<FastLineSeries<ChartData, DateTime>> series =
-      <FastLineSeries<ChartData, DateTime>>[];
-
-  Future<void> loadPower2({
+  Future<void> loadPower({
     int type = 0,
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
     series.clear();
     powerViewStatus = ViewType.loading.index;
-    update(["powerGraph2"]);
+    update(["powerGraph"]);
     maxT = DateTime.fromMillisecondsSinceEpoch(
       ((startTimeStamp ?? 0).toInt() * 1),
     );
@@ -244,85 +219,27 @@ class StatisticsItemLogic extends GetxController {
           powerViewStatus = series.isEmpty
               ? ViewType.empty.index
               : ViewType.common.index;
-          update(["powerGraph2"]);
+          update(["powerGraph"]);
         } else {
           powerViewStatus = ViewType.empty.index;
-          update(["powerGraph2"]);
+          update(["powerGraph"]);
         }
       } else {
         powerViewStatus = ViewType.empty.index;
-        update(["powerGraph2"]);
+        update(["powerGraph"]);
       }
     } else {
       powerViewStatus = ViewType.empty.index;
-      update(["powerGraph2"]);
+      update(["powerGraph"]);
     }
   }
-
-  ///预处理数据
-  List<Map<String, dynamic>> normalizeChartData(
-    List<Map<String, dynamic>> data,
-  ) {
-    // 找出所有出现过的 time
-    final Set<int> allTimes = {};
-
-    for (final item in data) {
-      final list = item['list'] as List;
-      for (final point in list) {
-        allTimes.add(point['time'] as int);
-      }
-    }
-
-    final sortedTimes = allTimes.toList()..sort();
-
-    // 每个 list 按统一横坐标补齐
-    for (final item in data) {
-      final list = item['list'] as List;
-
-      final Map<int, dynamic> timeMap = {
-        for (final point in list) point['time'] as int: point,
-      };
-
-      item['list'] = sortedTimes.map((time) {
-        return timeMap[time] ?? {'time': time, 'val': null};
-      }).toList();
-    }
-
-    return data;
-  }
-
-  ///处理数据
-  void handPowerData(List<PowerGraphEntity> powerList) {
-    List<List<PowerGraphList>> data = powerList
-        .where((e) => (e.list ?? []).isNotEmpty)
-        .map((e) => (e.list ?? []))
-        .toList();
-    if (data.isNotEmpty) {
-      maxY = data
-          .map((e) => e.map((e) => e.val ?? 0).toList().reduce(max))
-          .toList()
-          .reduce(max);
-      minY = data
-          .map((e) => e.map((e) => e.val ?? 0).toList().reduce(min))
-          .toList()
-          .reduce(min);
-
-      maxX = data.map((e) => e.length).reduce(max).toDouble();
-    }
-  }
-
-  List<double> maxVals = [];
-  List<double> minVals = [];
-  List<double> lens = [];
 
   ///收益统计
   Future<void> loadRevenue({
-    required DataType type,
     int queryType = 0,
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
-    //AppLoading.show();
     revenueViewStatus = ViewType.loading.index;
     update(["revenue"]);
     await Future.delayed(Duration(seconds: 1));
@@ -338,31 +255,22 @@ class StatisticsItemLogic extends GetxController {
     ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       revenueList.assignAll(value);
-      if (type == DataType.revenue) {
-        if (revenueList.isNotEmpty) {
-          handRevenueData(revenueList);
-        }
-        revenueViewStatus = revenueList.isEmpty
-            ? ViewType.empty.index
-            : ViewType.common.index;
-        update(["revenue"]);
-      }
+      revenueViewStatus = revenueList.isEmpty
+          ? ViewType.empty.index
+          : ViewType.common.index;
+      update(["revenue"]);
     } else {
-      if (type == DataType.revenue) {
-        revenueViewStatus = ViewType.empty.index;
-        update(["revenue"]);
-      }
+      revenueViewStatus = ViewType.empty.index;
+      update(["revenue"]);
     }
   }
 
   ///电量指标
   Future<void> loadEle({
-    required DataType type,
     int queryType = 0,
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
-    //AppLoading.show();
     eleViewStatus = ViewType.loading.index;
     update(["ele"]);
     await Future.delayed(Duration(seconds: 1));
@@ -378,89 +286,14 @@ class StatisticsItemLogic extends GetxController {
     ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       eleList.assignAll(value);
-      if (type == DataType.ele) {
-        if (eleList.isNotEmpty) {
-          handEleData(eleList);
-        }
-        eleViewStatus = eleList.isEmpty
-            ? ViewType.empty.index
-            : ViewType.common.index;
-        update(["ele"]);
-      }
+      eleViewStatus = eleList.isEmpty
+          ? ViewType.empty.index
+          : ViewType.common.index;
+      update(["ele"]);
     } else {
-      if (type == DataType.ele) {
-        eleViewStatus = ViewType.empty.index;
-        update(["ele"]);
-      }
+      eleViewStatus = ViewType.empty.index;
+      update(["ele"]);
     }
-  }
-
-  void handRevenueData(List<ElecGraphEntity> eleList) {
-    List<double> incomes = eleList.map((e) => (e.totalIncome ?? 0)).toList();
-    revenueMaxY = incomes.reduce(max) ?? 0;
-    revenueMinY = incomes.reduce(min);
-    debugPrint("revenueMaxY:$revenueMaxY,revenueMinY:$revenueMinY");
-    labels.assignAll(eleList.map((e) => (e.dateTime ?? "")).toList());
-
-    ///max = min
-    double maxY = revenueMaxY ?? 0;
-    double minY = revenueMinY ?? 0;
-    isDiff = !(maxY == minY);
-    if (maxY == minY) {
-      if (maxY == 0) {
-        revenueMinY = 0;
-        revenueMaxY = 100;
-      } else if (maxY > 0) {
-        revenueMinY = 0;
-        revenueMaxY = maxY;
-      } else {
-        ///maxY < 0
-        revenueMaxY = 0;
-        revenueMinY = minY;
-      }
-    }
-  }
-
-  void handEleData(List<ElecGraphEntity> eleList) {
-    List<double> list = [];
-    List<double> list2 = [];
-    //充电
-    List<double> charges = eleList.map((e) => (e.totalCharge ?? 0)).toList();
-    double chargesMax = charges.reduce(max);
-    list.add(chargesMax);
-    double chargesMin = charges.reduce(min);
-    list2.add(chargesMin);
-    //放电
-    List<double> recharge = eleList.map((e) => (e.totalRecharge ?? 0)).toList();
-    double rechargeMax = recharge.reduce(max);
-    list.add(rechargeMax);
-    double rechargeMin = recharge.reduce(min);
-    list2.add(rechargeMin);
-
-    ///海外版本
-    if (AppSetting.isOverseas) {
-      //发电
-      /*List<double> pv = eleList.map((e) => (e.pvGeneration ?? 0)).toList();
-      double pvMax = pv.reduce(max);
-      list.add(pvMax);
-      double pvMin = pv.reduce(min);
-      list2.add(pvMin);*/
-      //电网取电量
-      List<double> pos = eleList.map((e) => (e.gridPos ?? 0)).toList();
-      double posMax = pos.reduce(max);
-      list.add(posMax);
-      double posMin = pos.reduce(min);
-      list2.add(posMin);
-      //上网电量
-      List<double> feed = eleList.map((e) => (e.gridFeed ?? 0)).toList();
-      double feedMax = feed.reduce(max);
-      list.add(feedMax);
-      double feedMin = feed.reduce(min);
-      list2.add(feedMin);
-    }
-    eleMaxY = list.reduce(max);
-    eleMinY = list2.reduce(min);
-    eleLabels.assignAll(eleList.map((e) => (e.dateTime ?? "")).toList());
   }
 
   ///光伏发电
@@ -469,7 +302,6 @@ class StatisticsItemLogic extends GetxController {
     int? startTimeStamp,
     int? endTimeStamp,
   }) async {
-    //AppLoading.show();
     pvViewStatus = ViewType.loading.index;
     update(["pv"]);
     await Future.delayed(Duration(seconds: 1));
@@ -495,9 +327,6 @@ class StatisticsItemLogic extends GetxController {
       ).whenComplete(() => AppLoading.dismiss());
       if (isSuccessful) {
         pvList.assignAll(value);
-        if (pvList.isNotEmpty) {
-          handPVData(pvList);
-        }
         pvViewStatus = pvList.isEmpty
             ? ViewType.empty.index
             : ViewType.common.index;
@@ -507,14 +336,5 @@ class StatisticsItemLogic extends GetxController {
         update(["pv"]);
       }
     }
-  }
-
-  void handPVData(List<PvTrendEntity> pvList) {
-    List<double> pvs = pvList.map((e) => (e.summaryValue ?? 0)).toList();
-    double pvMax = pvs.reduce(max);
-    pvMaxY = (pvMax == 0.0) ? 100 : pvMax;
-    pvMinY = pvs.reduce(min);
-    // debugPrint("pvMaxY:$pvMaxY,pvMinY:$pvMinY");
-    pvLabels.assignAll(pvList.map((e) => (e.dateTime ?? "")).toList());
   }
 }

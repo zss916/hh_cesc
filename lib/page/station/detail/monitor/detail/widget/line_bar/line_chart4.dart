@@ -1,3 +1,4 @@
+/*
 import 'package:cescpro/components/line_chart/custom_touch_indicators.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/http/bean/power_entity.dart';
@@ -125,12 +126,14 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
           minY: widget.minY,
           extraLinesData: ExtraLinesData(
             horizontalLines: [
-              /*HorizontalLine(
+              */
+/*HorizontalLine(
                 y: 0,
                 // dashArray: [8, 4],
                 color: Colors.transparent, // 水平线颜色
                 strokeWidth: 0.4, // 水平线宽度
-              ),*/
+              ),*/ /*
+
               HorizontalLine(
                 y: widget.maxY,
                 label: HorizontalLineLabel(show: widget.isDiff),
@@ -141,12 +144,14 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
                 strokeWidth: 0.4, // 水平线宽度
               ),
 
-              /*HorizontalLine(
+              */
+/*HorizontalLine(
                       y: widget.minY,
                       dashArray: [8, 4],
                       color: Color(0xFF3874F2), // 水平线颜色
                       strokeWidth: 0.4, // 水平线宽度
-                    ),*/
+                    ),*/ /*
+
             ],
           ),
         ),
@@ -189,3 +194,4 @@ class MonitorLineChartWidgetState extends State<MonitorLineChartWidget4> {
     ];
   }
 }
+*/

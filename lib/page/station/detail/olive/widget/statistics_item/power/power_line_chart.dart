@@ -1,232 +1,264 @@
-import 'package:cescpro/components/line_chart/custom_touch_indicators.dart';
-import 'package:cescpro/core/helper/extension_helper.dart';
-import 'package:cescpro/http/bean/power_graph_entity.dart';
-import 'package:collection/collection.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
-class PowerLineChart extends StatefulWidget {
-  final List<(List<PowerGraphList>, Color)> list;
-  final double maxX;
-  final double minY;
-  final double maxY;
-  final bool isEmptyView;
-
+class PowerLineChart extends StatelessWidget {
   const PowerLineChart({
     super.key,
-    required this.list,
-    required this.maxX,
-    required this.maxY,
-    required this.minY,
-    required this.isEmptyView,
+    required this.data,
+    required this.maxT,
+    required this.minT,
+    required this.axis,
+    required this.isH,
   });
 
-  @override
-  State<StatefulWidget> createState() => MonitorLineChartWidgetState();
-}
+  //final List<SplineSeries<ChartData, DateTime>> data;
+  final List<FastLineSeries<ChartData, DateTime>> data;
 
-class MonitorLineChartWidgetState extends State<PowerLineChart> {
+  final DateTime minT;
+  final DateTime maxT;
+  final AxisConfig axis;
+  final bool isH;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsetsDirectional.only(
-        start: 12,
-        end: 10,
-        top: 40,
-        bottom: 0,
-      ),
-      height: double.maxFinite,
-      width: double.maxFinite,
-      child: LineChart(
-        transformationConfig: buildFlTransformationConfig,
-        LineChartData(
-          titlesData: buildFlTitlesData(),
-          lineBarsData: lineBarsData(widget.list),
-          lineTouchData: lineTouchData,
-          gridData: buildFlGridData,
-          borderData: buildFlBorderData,
-          extraLinesData: buildExtraLinesData(),
-          minX: 0,
-          maxX: widget.maxX.toDouble(),
-          maxY: widget.maxY,
-          //minY: widget.minY,
-          minY: widget.minY >= 0 ? 0 : widget.minY,
-        ),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
-
-  ///网格
-  FlGridData get buildFlGridData => FlGridData(
-    show: true,
-    drawHorizontalLine: true,
-    drawVerticalLine: false,
-    getDrawingHorizontalLine: (value) {
-      return FlLine(
-        strokeWidth: 0.4,
-        dashArray: [8, 4],
-        color: Color(0xA8FFFFFF), // 水平线颜色
-        //strokeWidth: 1, // 水平线宽度
-      );
-    },
-  );
-
-  ///额外线
-  ExtraLinesData? buildExtraLinesData() {
-    return widget.isEmptyView
-        ? ExtraLinesData(
-            horizontalLines: [
-              HorizontalLine(
-                y: widget.maxY,
-                label: HorizontalLineLabel(show: false),
-                color: Color(0xA8FFFFFF),
-                strokeWidth: 0.4,
-                dashArray: [8, 4],
-              ),
-            ],
-          )
-        : null;
-  }
-
-  /// title
-  FlTitlesData buildFlTitlesData() {
-    return FlTitlesData(
-      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-      topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-      bottomTitles: AxisTitles(
-        sideTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 25,
-          getTitlesWidget: (value, meta) {
-            return (widget.list.isEmpty || widget.isEmptyView)
-                ? SizedBox(height: 10)
-                : SideTitleWidget(
-                    meta: meta,
-                    child: value.toInt() >= (widget.list.first.$1).length
-                        ? SizedBox.shrink()
-                        : Text(
-                            ((widget.list.first.$1)[value.toInt()].time).hm,
-                            style: TextStyle(
-                              color: Color(0xA8FFFFFF),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 9.sp,
-                            ),
+    return (minT.isAtSameMomentAs(maxT))
+        ? buildUnableToDraw()
+        : Container(
+            padding: EdgeInsetsDirectional.only(
+              top: 8,
+              bottom: 0,
+              start: 0,
+              end: 0,
+            ),
+            child: Container(
+              margin: EdgeInsetsDirectional.only(top: isH ? 0 : 8),
+              width: double.maxFinite,
+              height: double.maxFinite,
+              child: SfCartesianChart(
+                margin: EdgeInsets.all(0),
+                plotAreaBorderWidth: 0.0,
+                legend: Legend(
+                  isVisible: true,
+                  position: LegendPosition.bottom,
+                  itemPadding: 12.0,
+                  overflowMode: isH
+                      ? LegendItemOverflowMode.scroll
+                      : LegendItemOverflowMode.wrap,
+                  orientation: LegendItemOrientation.horizontal,
+                  textStyle: TextStyle(fontSize: 12),
+                  legendItemBuilder:
+                      (String name, dynamic series, dynamic point, int index) =>
+                          buildLegendItem(
+                            name: name,
+                            color: name.toLowerCase() == "soc"
+                                ? Colors.blue
+                                : palette[index],
                           ),
-                  );
-          },
-        ),
-      ),
-      leftTitles: AxisTitles(
-        sideTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 25,
-          maxIncluded: widget.isEmptyView ? true : widget.list.isEmpty,
-          //minIncluded: true,
-          minIncluded: widget.isEmptyView ? true : (widget.list.isEmpty),
-          getTitlesWidget: (value, meta) {
-            return SideTitleWidget(
-              space: 2,
-              meta: meta,
-              child: Text(
-                value.titleL,
-                style: TextStyle(
-                  color: Color(0xA8FFFFFF),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 8.sp,
                 ),
+                primaryXAxis: DateTimeAxis(
+                  title: AxisTitle(text: ''),
+                  dateFormat: DateFormat('HH:mm'),
+                  //isInversed: true,
+                  enableAutoIntervalOnZooming: true,
+                  intervalType: DateTimeIntervalType.minutes,
+
+                  ///old
+                  //dateFormat: axis.format,
+                  //intervalType: axis.intervalType,
+                  //interval: axis.interval,
+                  minimum: minT,
+                  maximum: maxT,
+                  edgeLabelPlacement: EdgeLabelPlacement.shift,
+                  majorGridLines: const MajorGridLines(width: 0),
+                  labelStyle: TextStyle(fontSize: 8, color: Color(0x80FFFFFF)),
+                ),
+                primaryYAxis: const NumericAxis(
+                  title: AxisTitle(text: ''),
+                  axisLine: AxisLine(width: 0, color: Colors.transparent),
+                  labelStyle: TextStyle(color: Color(0x80FFFFFF), fontSize: 8),
+                  majorGridLines: MajorGridLines(
+                    width: 0.5,
+                    dashArray: <double>[5, 5],
+                    color: Color(0x80FFFFFF),
+                  ),
+                  majorTickLines: MajorTickLines(size: 0),
+                ),
+                axes: const <ChartAxis>[
+                  NumericAxis(
+                    name: 'secondaryYAxis',
+                    opposedPosition: true,
+                    title: AxisTitle(text: ''),
+                    axisLine: AxisLine(color: Colors.blue, width: 0),
+                    maximum: 100,
+                    minimum: 0,
+                    labelStyle: TextStyle(color: Colors.blue, fontSize: 8),
+                    majorTickLines: MajorTickLines(size: 0),
+                    majorGridLines: MajorGridLines(
+                      width: 0.5,
+                      dashArray: <double>[5, 5],
+                      color: Colors.blue,
+                    ),
+                  ),
+                ],
+                trackballBehavior: trackballBehavior,
+                zoomPanBehavior: zoomPanBehavior,
+                series: data,
               ),
-            );
-          },
-        ), // 左边Y轴标签禁用，手动创建
-      ),
-    );
-  }
-
-  ///边界
-  FlBorderData get buildFlBorderData => FlBorderData(
-    show: true,
-    border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
-  );
-
-  ///转化设置
-  FlTransformationConfig get buildFlTransformationConfig =>
-      FlTransformationConfig(
-        scaleAxis: FlScaleAxis.horizontal,
-        minScale: 2,
-        maxScale: 50,
-      );
-
-  ///触摸
-  LineTouchData get lineTouchData => LineTouchData(
-    enabled: false,
-    handleBuiltInTouches: false,
-    getTouchedSpotIndicator: customTouchedIndicators,
-    touchTooltipData: LineTouchTooltipData(
-      getTooltipColor: (touchedSpot) => Colors.white,
-    ),
-  );
-
-  ///折现数据列表
-  List<LineChartBarData> lineBarsData(
-    List<(List<PowerGraphList>, Color)> lines,
-  ) {
-    return lines.isEmpty
-        ? <LineChartBarData>[]
-        : [...lines.mapIndexed((i, e) => buildLineChartBarData(e.$2, e.$1))];
-  }
-
-  ///柱状数据
-  LineChartBarData buildLineChartBarData(
-    Color color,
-    List<PowerGraphList> lines,
-  ) {
-    return LineChartBarData(
-      ///是否圆一点
-      isCurved: false,
-      color: color,
-      barWidth: 1,
-      isStrokeCapRound: true,
-
-      ///点数据
-      dotData: const FlDotData(show: false),
-
-      ///线下面的区域(true)
-      belowBarData: BarAreaData(
-        show: false,
-        color: color.withValues(alpha: 0.1),
-      ),
-      spots: [
-        ...lines.mapIndexed(
-          (i, e) => FlSpot(i.toDouble(), (e.val ?? 0).toDouble()),
-        ),
-      ],
-    );
-  }
-
-  @Deprecated("delete")
-  Color lerpGradient(List<Color> colors, List<double> stops, double t) {
-    final length = colors.length;
-    if (stops.length != length) {
-      /// provided gradientColorStops is invalid and we calculate it here
-      stops = List.generate(length, (i) => (i + 1) / length);
-    }
-
-    for (var s = 0; s < stops.length - 1; s++) {
-      final leftStop = stops[s];
-      final rightStop = stops[s + 1];
-
-      final leftColor = colors[s];
-      final rightColor = colors[s + 1];
-
-      if (t <= leftStop) {
-        return leftColor;
-      } else if (t < rightStop) {
-        final sectionT = (t - leftStop) / (rightStop - leftStop);
-        return Color.lerp(leftColor, rightColor, sectionT)!;
-      }
-    }
-    return colors.last;
+            ),
+          );
   }
 }
+
+/// not draw
+Widget buildUnableToDraw() => Center(
+  child: Text(
+    'Unable to draw',
+    style: TextStyle(color: Colors.white, fontSize: 12),
+  ),
+);
+
+/// legend item
+Widget buildLegendItem({required String name, required Color color}) => Row(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    Container(
+      width: 7,
+      height: 7,
+      margin: EdgeInsetsDirectional.only(end: 4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(2),
+        color: color,
+        shape: BoxShape.rectangle,
+      ),
+    ),
+    Text(name, style: TextStyle(color: Color(0xD9FFFFFF), fontSize: 8)),
+  ],
+);
+
+///trackballBehavior
+TrackballBehavior get trackballBehavior => TrackballBehavior(
+  enable: true,
+  shouldAlwaysShow: true,
+  activationMode: ActivationMode.singleTap,
+  tooltipDisplayMode: TrackballDisplayMode.groupAllPoints,
+  hideDelay: 8000,
+  tooltipSettings: InteractiveTooltip(textStyle: TextStyle(fontSize: 10)),
+  markerSettings: TrackballMarkerSettings(
+    markerVisibility: TrackballVisibilityMode.visible,
+  ),
+);
+
+///zoomPanBehavior
+ZoomPanBehavior get zoomPanBehavior => ZoomPanBehavior(
+  enablePanning: true,
+  enablePinching: true,
+  zoomMode: ZoomMode.x,
+);
+
+// 数据模型
+class ChartData {
+  ChartData({required this.time, required this.value});
+
+  /// Unix 秒（10 位）或毫秒（13 位）都会自动识别
+  factory ChartData.fromJson(Map<String, dynamic> json) {
+    final dynamic raw = json['time'];
+    final num n = raw as num;
+    final DateTime parsed = n > 1e12
+        ? DateTime.fromMillisecondsSinceEpoch(n.toInt())
+        : DateTime.fromMillisecondsSinceEpoch((n.toInt() * 1000));
+
+    DateTime formatDateTime = DateTime(
+      parsed.year,
+      parsed.month,
+      parsed.day,
+      parsed.hour,
+      parsed.minute,
+    );
+    final num rawValue = (json['value'] ?? json['v'] ?? json['y']) as num;
+    return ChartData(time: formatDateTime, value: rawValue.toDouble());
+  }
+
+  final DateTime time;
+  final double value;
+}
+
+/// X 轴自适应：根据数据时间范围自动决定间隔和格式
+class AxisConfig {
+  const AxisConfig({
+    required this.interval,
+    required this.intervalType,
+    required this.format,
+  });
+
+  final double interval;
+  final DateTimeIntervalType intervalType;
+  final DateFormat format;
+
+  static AxisConfig fromRange(Duration range) {
+    final hours = range.inHours;
+    //
+    if (hours <= 1) {
+      return AxisConfig(
+        interval: 2,
+        intervalType: DateTimeIntervalType.minutes,
+        format: DateFormat('HH:mm'),
+      );
+    }
+    if (hours <= 6) {
+      return AxisConfig(
+        interval: 5,
+        intervalType: DateTimeIntervalType.minutes,
+        format: DateFormat('HH:mm'),
+      );
+    }
+    if (hours <= 24) {
+      return AxisConfig(
+        interval: 3,
+        intervalType: DateTimeIntervalType.hours,
+        format: DateFormat('HH:mm'),
+      );
+    }
+    if (hours <= 24 * 3) {
+      return AxisConfig(
+        interval: 6,
+        intervalType: DateTimeIntervalType.hours,
+        format: DateFormat('MM-dd HH:mm'),
+      );
+    }
+    if (hours <= 24 * 14) {
+      return AxisConfig(
+        interval: 1,
+        intervalType: DateTimeIntervalType.days,
+        format: DateFormat('MM-dd'),
+      );
+    }
+    if (hours <= 24 * 60) {
+      return AxisConfig(
+        interval: 7,
+        intervalType: DateTimeIntervalType.days,
+        format: DateFormat('yyyy-MM-dd'),
+      );
+    }
+    return AxisConfig(
+      interval: 30,
+      intervalType: DateTimeIntervalType.days,
+      format: DateFormat('yyyy-MM-dd'),
+    );
+  }
+}
+
+///palette
+const palette = <Color>[
+  Colors.red, // line2
+  Colors.green, // line3
+  Colors.orange, // line4 (右轴)
+  Colors.purple, // line5
+  Colors.teal, // line6
+  Colors.brown, // line7
+  Colors.pink, // line8
+  Colors.indigo, // line9
+  Colors.lime, // line10
+  Colors.cyan, // line11
+  Colors.amber, // line12
+];

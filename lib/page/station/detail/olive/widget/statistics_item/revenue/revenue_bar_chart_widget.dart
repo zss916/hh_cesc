@@ -4,7 +4,6 @@ import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/bean/elec_graph_entity.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/base_bar_chart.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/revenue/widget/revenue_barchart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -178,7 +177,6 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                             "start:${start.timestampFormat},end:${end.timestampFormat}",
                           );
                           widget.logic.loadRevenue(
-                            type: DataType.revenue,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
                             endTimeStamp: end.millisecondsSinceEpoch,
@@ -199,7 +197,6 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                             "start:${start.timestampFormat},end:${end.timestampFormat}",
                           );
                           widget.logic.loadRevenue(
-                            type: DataType.revenue,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
                             endTimeStamp: end.millisecondsSinceEpoch,
@@ -220,7 +217,6 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                             "start:${start.timestampFormat},end:${end.timestampFormat}",
                           );
                           widget.logic.loadRevenue(
-                            type: DataType.revenue,
                             queryType: index,
                             startTimeStamp: start.millisecondsSinceEpoch,
                             endTimeStamp: end.millisecondsSinceEpoch,
@@ -234,7 +230,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                   Divider(height: 5.h, color: Colors.transparent),
                 ],
               ),
-              if (widget.logic.labels.isNotEmpty &&
+              if (widget.logic.revenueList.isNotEmpty &&
                   User.to.getCurrencyUnit().isNotEmpty)
                 PositionedDirectional(
                   start: 0.w,
@@ -244,7 +240,7 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
                     style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
                   ),
                 ),
-              if (widget.logic.labels.isNotEmpty &&
+              if (widget.logic.revenueList.isNotEmpty &&
                   ViewType.common.index == widget.logic.revenueViewStatus)
                 PositionedDirectional(
                   end: 0.w,
@@ -270,11 +266,9 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
       _ when viewState == ViewType.loading.index => buildLoading(),
-      //_ when viewState == ViewType.common.index => buildRevenueWidget(),
-      //_ when viewState == ViewType.empty.index => buildRevenueEmpty(),
-      _ when viewState == ViewType.common.index => buildRevenue(),
-      _ when viewState == ViewType.empty.index => buildEmpty(),
-      _ => buildEmpty(),
+      _ when viewState == ViewType.common.index => buildRevenueWidget(),
+      _ when viewState == ViewType.empty.index => buildRevenueEmpty(),
+      _ => buildRevenueEmpty(),
     };
   }
 
@@ -363,90 +357,4 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
       ],
     ),
   );
-
-  @Deprecated("hide")
-  Widget buildEmpty() => Container(
-    color: Colors.transparent,
-    height: 280.h,
-    width: double.maxFinite,
-    child: TabBarView(
-      physics: NeverScrollableScrollPhysics(),
-      controller: tabCtrl,
-      children: [
-        ///周
-        RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isDiff: widget.logic.isDiff,
-        ),
-
-        ///月
-        RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isDiff: widget.logic.isDiff,
-        ),
-
-        ///年
-        RevenueBarchartWidget(
-          data: [0.0, 0.0, 0.0, 0.0, 0.0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isDiff: widget.logic.isDiff,
-        ),
-      ],
-    ),
-  );
-
-  @Deprecated("hide")
-  Widget buildRevenue() {
-    return Container(
-      color: Colors.transparent,
-      height: 280.h,
-      width: double.maxFinite,
-      child: TabBarView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: tabCtrl,
-        children: [
-          ///周
-          RevenueBarchartWidget(
-            data: widget.logic.revenueList
-                .map((e) => (e.totalIncome ?? 0))
-                .toList(),
-            labels: widget.logic.labels,
-            maxY: widget.logic.revenueMaxY ?? 0,
-            minY: widget.logic.revenueMinY ?? 0,
-            isDiff: widget.logic.isDiff,
-          ),
-
-          ///月
-          RevenueBarchartWidget(
-            data: widget.logic.revenueList
-                .map((e) => (e.totalIncome ?? 0))
-                .toList(),
-            labels: widget.logic.labels,
-            maxY: widget.logic.revenueMaxY ?? 0,
-            minY: widget.logic.revenueMinY ?? 0,
-            isDiff: widget.logic.isDiff,
-          ),
-
-          ///年
-          RevenueBarchartWidget(
-            data: widget.logic.revenueList
-                .map((e) => (e.totalIncome ?? 0))
-                .toList(),
-            labels: widget.logic.labels,
-            maxY: widget.logic.revenueMaxY ?? 0,
-            minY: widget.logic.revenueMinY ?? 0,
-            isDiff: widget.logic.isDiff,
-          ),
-        ],
-      ),
-    );
-  }
 }

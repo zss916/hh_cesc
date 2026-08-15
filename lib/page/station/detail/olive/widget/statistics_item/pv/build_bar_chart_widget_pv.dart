@@ -2,7 +2,6 @@ import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/base_bar_chart.dart';
-import 'package:cescpro/page/station/detail/olive/widget/statistics_item/pv/pv_barchart_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -270,10 +269,8 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
       _ when viewState == ViewType.loading.index => buildLoading(),
-      //_ when viewState == ViewType.common.index => buildPVChart(),
-      //_ when viewState == ViewType.empty.index => buildPVEmpty(),
-      _ when viewState == ViewType.common.index => buildPv(),
-      _ when viewState == ViewType.empty.index => buildEmpty(),
+      _ when viewState == ViewType.common.index => buildPVChart(),
+      _ when viewState == ViewType.empty.index => buildPVEmpty(),
       _ => buildPVEmpty(),
     };
   }
@@ -353,81 +350,5 @@ class _BuildBarChartWidget extends State<BuildBarChartWidgetPV>
     height: 280.h,
     width: double.maxFinite,
     child: Center(child: CircularProgressIndicator(color: Colors.white)),
-  );
-
-  @Deprecated('hide')
-  Widget buildPv() {
-    return Container(
-      color: Colors.transparent,
-      height: 290.h,
-      width: double.maxFinite,
-      child: TabBarView(
-        physics: NeverScrollableScrollPhysics(),
-        controller: tabCtrl,
-        children: [
-          PVBarchartItemWidget(
-            data: widget.logic.pvList
-                .map((e) => (e.summaryValue ?? 0))
-                .toList(),
-            labels: widget.logic.pvLabels,
-            maxY: widget.logic.pvMaxY ?? 0,
-            minY: widget.logic.pvMinY ?? 0,
-            isEmptyView: false,
-          ),
-          PVBarchartItemWidget(
-            data: widget.logic.pvList
-                .map((e) => (e.summaryValue ?? 0))
-                .toList(),
-            labels: widget.logic.pvLabels,
-            maxY: widget.logic.pvMaxY ?? 0,
-            minY: widget.logic.pvMinY ?? 0,
-            isEmptyView: false,
-          ),
-          PVBarchartItemWidget(
-            data: widget.logic.pvList
-                .map((e) => (e.summaryValue ?? 0))
-                .toList(),
-            labels: widget.logic.pvLabels,
-            maxY: widget.logic.pvMaxY ?? 0,
-            minY: widget.logic.pvMinY ?? 0,
-            isEmptyView: false,
-          ),
-        ],
-      ),
-    );
-  }
-
-  @Deprecated('hide')
-  Widget buildEmpty() => Container(
-    color: Colors.transparent,
-    height: 280.h,
-    width: double.maxFinite,
-    child: TabBarView(
-      physics: NeverScrollableScrollPhysics(),
-      controller: tabCtrl,
-      children: [
-        PVBarchartItemWidget(
-          data: [0, 0, 0, 0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isEmptyView: true,
-        ),
-        PVBarchartItemWidget(
-          data: [0, 0, 0, 0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isEmptyView: true,
-        ),
-        PVBarchartItemWidget(
-          data: [0, 0, 0, 0],
-          labels: [],
-          maxY: 100,
-          minY: 0,
-          isEmptyView: true,
-        ),
-      ],
-    ),
   );
 }

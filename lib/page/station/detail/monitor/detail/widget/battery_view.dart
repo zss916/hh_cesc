@@ -389,7 +389,7 @@ class BatteryView extends StatelessWidget {
                       id: "realTimeData",
                       init: MonitorDetailLogic(),
                       builder: (logic) =>
-                          buildContent(logic.realTimeViewStatus),
+                          buildContent(logic.realTimeViewStatus, logic),
                     ),
                   ),
                 ],
@@ -585,7 +585,7 @@ class BatteryView extends StatelessWidget {
     ],
   );
 
-  Widget buildContent(ViewType viewState) {
+  Widget buildContent(ViewType viewState, MonitorDetailLogic logic) {
     return switch (viewState) {
       _ when viewState == ViewType.loading => buildLoading,
       _ when viewState == ViewType.common => BaseLineChart(
