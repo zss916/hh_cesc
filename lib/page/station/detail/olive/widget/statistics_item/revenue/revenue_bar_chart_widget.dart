@@ -270,10 +270,10 @@ class _RevenueBarChartWidget extends State<RevenueBarChartWidget>
   Widget buildBody({required int viewState}) {
     return switch (viewState) {
       _ when viewState == ViewType.loading.index => buildLoading(),
-      _ when viewState == ViewType.common.index => buildRevenueWidget(),
-      _ when viewState == ViewType.empty.index => buildRevenueEmpty(),
-      //_ when viewState == ViewType.common.index => buildRevenue(),
-      //_ when viewState == ViewType.empty.index => buildEmpty(),
+      //_ when viewState == ViewType.common.index => buildRevenueWidget(),
+      //_ when viewState == ViewType.empty.index => buildRevenueEmpty(),
+      _ when viewState == ViewType.common.index => buildRevenue(),
+      _ when viewState == ViewType.empty.index => buildEmpty(),
       _ => buildEmpty(),
     };
   }

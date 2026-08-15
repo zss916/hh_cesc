@@ -1,7 +1,6 @@
 import 'package:cescpro/page/chart/widget/horizontal_chart_view.dart';
 import 'package:cescpro/page/chart/widget/revenue/h_revenue_barchart_widget.dart'
     show HRevenueBarchartWidget;
-import 'package:cescpro/page/chart/widget/revenue/h_revenue_barchart_widget2.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +23,7 @@ class RevenueChartPage extends StatelessWidget {
           id: 'revenue',
           init: StatisticsItemLogic(),
           builder: (logic) {
-            return HRevenueBarchartWidget2(list: logic.revenueList);
+            //return HRevenueBarchartWidget2(list: logic.revenueList);
             return HRevenueBarchartWidget(
               data: logic.revenueList.map((e) => (e.totalIncome ?? 0)).toList(),
               labels: logic.labels,

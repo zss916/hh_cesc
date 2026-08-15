@@ -144,45 +144,40 @@ class StrategyPage extends StatelessWidget {
           Container(
             margin: EdgeInsetsDirectional.only(top: 12, bottom: 8),
             width: double.maxFinite,
-            child: protected == null
-                ? SizedBox(height: 30)
-                : Stack(
-                    alignment: AlignmentDirectional.center,
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                if (protected?.isUseProtected == true)
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 8,
                     children: [
-                      if (protected.isUseProtected == true)
-                        Wrap(
-                          spacing: 10,
-                          runSpacing: 8,
-                          children: [
-                            _buildProtection(
-                              title: TKey.volProtection.tr,
-                              isOpen: (protected?.volEnabled ?? false),
-                            ),
-                            _buildProtection(
-                              title: TKey.socProtection.tr,
-                              isOpen: (protected?.socEnabled ?? false),
-                            ),
-                            _buildProtection(
-                              title: TKey.tempProtection.tr,
-                              isOpen: (protected?.temEnabled ?? false),
-                            ),
-                            _buildProtection(
-                              title: TKey.antiProtection.tr,
-                              isOpen: (protected?.backEnabled ?? false),
-                            ),
-                            _buildProtection(
-                              title: TKey.needProtection.tr,
-                              isOpen: (protected?.needEnabled ?? false),
-                            ),
-                          ],
-                        ),
-                      if (protected?.isUseProtected == false)
-                        _buildProtection(
-                          title: TKey.onEnable.tr,
-                          isOpen: false,
-                        ),
+                      _buildProtection(
+                        title: TKey.volProtection.tr,
+                        isOpen: (protected?.volEnabled ?? false),
+                      ),
+                      _buildProtection(
+                        title: TKey.socProtection.tr,
+                        isOpen: (protected?.socEnabled ?? false),
+                      ),
+                      _buildProtection(
+                        title: TKey.tempProtection.tr,
+                        isOpen: (protected?.temEnabled ?? false),
+                      ),
+                      _buildProtection(
+                        title: TKey.antiProtection.tr,
+                        isOpen: (protected?.backEnabled ?? false),
+                      ),
+                      _buildProtection(
+                        title: TKey.needProtection.tr,
+                        isOpen: (protected?.needEnabled ?? false),
+                      ),
                     ],
-                  ),
+                  )
+                else
+                  _buildProtection(title: TKey.onEnable.tr, isOpen: false),
+              ],
+            ),
           ),
         ],
       ),

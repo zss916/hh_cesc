@@ -28,8 +28,8 @@ android {
     }
 
     defaultConfig {
-        //applicationId = "com.bujunshou.product"
-        applicationId = "com.example.cescpro"
+        applicationId = "com.bujunshou.product"
+        //applicationId = "com.example.cescpro"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

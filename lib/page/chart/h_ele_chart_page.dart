@@ -1,7 +1,6 @@
 import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/chart/widget/ele/h_ele_barchart_widget.dart';
-import 'package:cescpro/page/chart/widget/ele/h_ele_barchart_widget2.dart';
 import 'package:cescpro/page/chart/widget/horizontal_chart_view.dart';
 import 'package:cescpro/page/chart/widget/horizontal_power_chart/h_line_title_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/statistics_item/statistics_item_logic.dart';
@@ -47,10 +46,10 @@ class HEleChartPage extends StatelessWidget {
                       id: 'ele',
                       init: StatisticsItemLogic(),
                       builder: (logic) {
-                        return HEleBarchartItemWidget2(
+                        /*return HEleBarchartItemWidget2(
                           list: logic.eleList,
                           maximumZoomLevel: getLevel(logic.eleList.length),
-                        );
+                        );*/
                         return HEleBarchartItemWidget(
                           data: logic.eleList
                               .map((e) => (e.totalCharge ?? 0))

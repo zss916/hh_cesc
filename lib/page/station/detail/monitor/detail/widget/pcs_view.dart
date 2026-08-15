@@ -20,7 +20,7 @@ class PcsView extends StatelessWidget {
         Divider(height: 12.h, color: Colors.transparent),
 
         ///状态
-        buildPCSSatusItem(logic),
+        buildPCSStatusItem(logic),
         Divider(height: 12.h, color: Colors.transparent),
 
         ///基础数据
@@ -43,7 +43,7 @@ class PcsView extends StatelessWidget {
   }
 
   ///PCS状态
-  Widget buildPCSSatusItem(MonitorDetailLogic logic) => Column(
+  Widget buildPCSStatusItem(MonitorDetailLogic logic) => Column(
     children: [
       Container(
         padding: EdgeInsetsDirectional.only(

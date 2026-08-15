@@ -18,15 +18,6 @@ class StatisticsItemView extends StatelessWidget {
       child: Column(
         children: [
           ///功率折线
-          /* GetBuilder<StatisticsItemLogic>(
-            id: "powerGraph",
-            init: StatisticsItemLogic(),
-            builder: (logic) {
-              return PowerAnalysisWidget(logic: logic);
-            },
-          ),*/
-
-          ///功率折线
           GetBuilder<StatisticsItemLogic>(
             id: "powerGraph2",
             init: StatisticsItemLogic(),
