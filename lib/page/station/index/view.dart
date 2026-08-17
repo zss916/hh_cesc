@@ -33,15 +33,7 @@ class StationPage extends StatelessWidget {
     required StationLogic logic,
   }) {
     return switch (viewState) {
-      /*ViewStateEnum.common => buildPage(
-        child: buildList2(logic: logic),
-        logic: logic,
-      ),*/
-      ViewStateEnum.common => buildList2(logic: logic),
-      /*ViewStateEnum.empty => buildPage(
-        child: buildEmpty(logic: logic),
-        logic: logic,
-      ),*/
+      ViewStateEnum.common => buildList(logic: logic),
       ViewStateEnum.empty => buildEmpty(logic: logic),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
@@ -120,7 +112,7 @@ class StationPage extends StatelessWidget {
     ),
   );
 
-  Widget buildList2({required StationLogic logic}) {
+  Widget buildList({required StationLogic logic}) {
     return SmartRefresher(
       header: MaterialClassicHeader(),
       footer: ClassicFooter(

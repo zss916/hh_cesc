@@ -1,6 +1,6 @@
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/page/chart/widget/horizontal_chart_view.dart';
-import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_logic.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/index.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/base_line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';

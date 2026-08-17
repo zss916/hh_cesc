@@ -19,7 +19,7 @@ import 'package:cescpro/page/service/message/index.dart';
 import 'package:cescpro/page/splash/index.dart';
 import 'package:cescpro/page/station/detail/index.dart';
 import 'package:cescpro/page/station/detail/monitor/cluster/battery_cluster_page.dart';
-import 'package:cescpro/page/station/detail/monitor/detail/monitor_detail_page.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/index.dart';
 import 'package:cescpro/page/station/detail/monitor/distribution/distribution_map_page.dart';
 import 'package:cescpro/page/station/detail/monitor/index.dart';
 import 'package:cescpro/page/station/detail/monitor/v1/monitor_detail_v1_page.dart';

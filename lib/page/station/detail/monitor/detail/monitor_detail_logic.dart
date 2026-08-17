@@ -1,24 +1,15 @@
-import 'package:cescpro/core/helper/extension_helper.dart';
-import 'package:cescpro/core/setting/app_loading.dart';
-import 'package:cescpro/http/api/realTimeData.dart';
-import 'package:cescpro/http/api/site.dart';
-import 'package:cescpro/http/bean/com_card_vo_entity.dart';
-import 'package:cescpro/http/bean/com_type_list_entity.dart';
-import 'package:cescpro/http/bean/comp_tree_entity.dart';
-import 'package:cescpro/http/bean/power_entity.dart';
-import 'package:cescpro/http/bean/soc_entity.dart';
-import 'package:cescpro/page/station/detail/monitor/index.dart';
-import 'package:get/get.dart';
+part of 'index.dart';
 
 enum ViewType { loading, common, empty }
 
-class MonitorDetailLogic extends GetxController {
+class MonitorDetailLogic extends GetxController with NetWorkRefreshEvent {
   String title = "";
   String? devType;
   String? siteId;
   int? did;
   int? nodeNo;
   int? devNo;
+  DeviceEnum? deviceType;
 
   List<CompTreeEntity> titles = [];
   ComTypeListEntity? comTypeList;
@@ -30,8 +21,11 @@ class MonitorDetailLogic extends GetxController {
   ViewType realTimeViewStatus = ViewType.loading;
   List<SocEntity> arrList = [];
 
+  ///功率
   ViewType powerViewStatus = ViewType.loading;
   List<PowerEntity> powerList = [];
+
+  UiState state = Loading();
 
   @override
   void onInit() {
@@ -42,7 +36,15 @@ class MonitorDetailLogic extends GetxController {
       devType = data?.type;
       title = data?.title ?? "";
       isV1 = data?.isV1 ?? false;
+      deviceType = data?.deviceType ?? (DeviceEnum.other);
     }
+    state = Loading();
+    update();
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(isDelayed: true);
+      },
+    );
   }
 
   @override
@@ -51,14 +53,35 @@ class MonitorDetailLogic extends GetxController {
     loadData();
   }
 
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      state = Loading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      state = Offline();
+      update();
+      return;
+    }
+    fetchData();
+  }
+
   @override
   void onClose() {
     super.onClose();
     AppLoading.dismiss();
+    onDisposeNetWork();
   }
 
-  Future<void> loadData() async {
-    AppLoading.show();
+  Future<void> fetchData() async {
+    //  AppLoading.show();
+    state = Loading();
+    update();
+    await Future.delayed(Duration(seconds: 1));
+
     getCompTree().then((isOK) {
       if (isOK) {
         Future.wait([
@@ -68,8 +91,13 @@ class MonitorDetailLogic extends GetxController {
 
         ///ARR,PCS,METER
         loadSocGraph();
+
+        state = Success();
+        update();
       } else {
         AppLoading.dismiss();
+        state = Failure();
+        update();
       }
     });
   }

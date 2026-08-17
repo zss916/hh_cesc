@@ -10,7 +10,8 @@ enum DeviceEnum {
   fire(value: "FIRE"),
   drier(value: "DRIER"),
   cool(value: "COOL"),
-  pv(value: "PV");
+  pv(value: "PV"),
+  other(value: "OTHER");
 
   final String value;
 
@@ -18,4 +19,11 @@ enum DeviceEnum {
 
   static String getValue(String value) =>
       DeviceEnum.values.firstWhere((e) => e.value == value).value;
+
+  static DeviceEnum fromValue(String value) {
+    return DeviceEnum.values.firstWhere(
+      (e) => e.value == value,
+      orElse: () => DeviceEnum.other,
+    );
+  }
 }

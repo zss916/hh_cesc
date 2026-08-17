@@ -34,9 +34,13 @@ class Http {
     _dio.interceptors.add(AuthInterceptor());
     _dio.interceptors.add(NetworkStatusInterceptor(dioGetter: () => _dio));
     _dio.interceptors.add(LoadingInterceptor());
+
+    ///todo
     // _dio.interceptors.add(ErrorInterceptor());
     _dio.interceptors.add(RetryInterceptor(dioGetter: () => _dio));
-    //_dio.interceptors.add(ResponseInterceptor());
+
+    ///todo
+    // _dio.interceptors.add(ResponseInterceptor());
     if (kDebugMode) {
       _dio.interceptors.add(prettyDioLogger);
     }

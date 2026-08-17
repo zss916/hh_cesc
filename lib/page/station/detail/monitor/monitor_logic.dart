@@ -4,8 +4,14 @@ class MonitorModel {
   String title;
   String type;
   bool isV1;
+  DeviceEnum deviceType;
 
-  MonitorModel({required this.title, required this.type, required this.isV1});
+  MonitorModel({
+    required this.title,
+    required this.type,
+    required this.isV1,
+    required this.deviceType,
+  });
 }
 
 class MonitorLogic extends GetxController with NetWorkRefreshEvent {
@@ -56,7 +62,6 @@ class MonitorLogic extends GetxController with NetWorkRefreshEvent {
       update();
       return;
     }
-
     getPointDetails();
   }
 
@@ -100,15 +105,26 @@ class MonitorLogic extends GetxController with NetWorkRefreshEvent {
                   type: DeviceEnum.arr.value,
                   title: TKey.batterySystem.tr,
                   isV1: isV1,
+                  deviceType: DeviceEnum.arr,
                 ),
               );
             }
+          } else if (e == DeviceEnum.pcs.value) {
+            data.add(
+              MonitorModel(
+                type: DeviceEnum.pcs.value,
+                title: TKey.pcsInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.pcs,
+              ),
+            );
           } else if (e == DeviceEnum.cool.value) {
             data.add(
               MonitorModel(
                 type: DeviceEnum.cool.value,
                 title: TKey.liquidCooling.tr,
                 isV1: isV1,
+                deviceType: DeviceEnum.cool,
               ),
             );
           } else if (e == DeviceEnum.drier.value) {
@@ -117,6 +133,7 @@ class MonitorLogic extends GetxController with NetWorkRefreshEvent {
                 type: DeviceEnum.drier.value,
                 title: TKey.temperatureAndHumidity.tr,
                 isV1: isV1,
+                deviceType: DeviceEnum.drier,
               ),
             );
           } else if (e == DeviceEnum.meter.value) {
@@ -125,78 +142,33 @@ class MonitorLogic extends GetxController with NetWorkRefreshEvent {
                 type: DeviceEnum.meter.value,
                 title: TKey.electricityMeter.tr,
                 isV1: isV1,
+                deviceType: DeviceEnum.meter,
+              ),
+            );
+          } else if (e == DeviceEnum.dido.value) {
+            data.add(
+              MonitorModel(
+                type: DeviceEnum.dido.value,
+                title: TKey.didoInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.dido,
               ),
             );
           } else {
-            data.add(MonitorModel(type: e, title: e, isV1: isV1));
+            data.add(
+              MonitorModel(
+                type: e,
+                title: e,
+                isV1: isV1,
+                deviceType: DeviceEnum.fromValue(e),
+              ),
+            );
           }
         }
-
-        //debugPrint("===>>>> ${data.isEmpty}");
         state = data.isEmpty ? Empty() : Success(data);
         update();
       } else {
         state = Failure();
-        update();
-      }
-    } else {
-      state = Failure();
-      update();
-    }
-  }
-
-  Future<void> fetchDataV1({required bool isV1}) async {
-    if (site != null) {
-      data.clear();
-      final ((
-        bool isSuccessful,
-        List<String> value,
-      )) = await HomeAPI.getSupportDevTypesV1(
-        siteId: site?.id,
-        protocolId: site?.protocolId,
-      );
-      if (isSuccessful) {
-        //["ARR", "CLU", "PCS", "AIR_COOL", "METER", "DIDO", "CELL"]
-        for (var e in value) {
-          if (e == DeviceEnum.arr.value) {
-            data.add(
-              MonitorModel(type: e, title: TKey.stackInfo.tr, isV1: isV1),
-            );
-          } else if (e == DeviceEnum.clu.value) {
-            data.add(MonitorModel(type: e, title: TKey.cluInfo.tr, isV1: isV1));
-          } else if (e == DeviceEnum.pcs.value) {
-            data.add(MonitorModel(type: e, title: TKey.pcsInfo.tr, isV1: isV1));
-          } else if (e == DeviceEnum.airCool.value) {
-            data.add(MonitorModel(type: e, title: TKey.hotInfo.tr, isV1: isV1));
-          } else if (e == DeviceEnum.meter.value) {
-            data.add(
-              MonitorModel(type: e, title: TKey.meterInfo.tr, isV1: isV1),
-            );
-          } else if (e == DeviceEnum.dido.value) {
-            data.add(
-              MonitorModel(type: e, title: TKey.didoInfo.tr, isV1: isV1),
-            );
-          } else if (e == DeviceEnum.cell.value) {
-            data.add(
-              MonitorModel(type: e, title: TKey.singleInfo.tr, isV1: isV1),
-            );
-          } else if (e == DeviceEnum.statsMeter.value) {
-            data.add(
-              MonitorModel(type: e, title: TKey.statisticsMeter.tr, isV1: isV1),
-            );
-          } else if (e == DeviceEnum.fire.value) {
-            data.add(
-              MonitorModel(
-                type: e,
-                title: TKey.fireProtectionInfo.tr,
-                isV1: isV1,
-              ),
-            );
-          } else {
-            data.add(MonitorModel(type: e, title: e, isV1: isV1));
-          }
-        }
-        data.isEmpty ? Empty() : Success(data);
         update();
       }
     } else {
@@ -217,4 +189,117 @@ class MonitorLogic extends GetxController with NetWorkRefreshEvent {
       PageTools.toMonitorDetail(siteId: "${site?.id}", data: data[index]);
     }
   }
+
+  /* Future<void> fetchDataV1({required bool isV1}) async {
+    if (site != null) {
+      data.clear();
+      final ((
+        bool isSuccessful,
+        List<String> value,
+      )) = await HomeAPI.getSupportDevTypesV1(
+        siteId: site?.id,
+        protocolId: site?.protocolId,
+      );
+      if (isSuccessful) {
+        for (var e in value) {
+          if (e == DeviceEnum.arr.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.stackInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.arr,
+              ),
+            );
+          } else if (e == DeviceEnum.clu.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.cluInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.clu,
+              ),
+            );
+          } else if (e == DeviceEnum.pcs.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.pcsInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.pcs,
+              ),
+            );
+          } else if (e == DeviceEnum.airCool.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.hotInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.airCool,
+              ),
+            );
+          } else if (e == DeviceEnum.meter.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.meterInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.meter,
+              ),
+            );
+          } else if (e == DeviceEnum.dido.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.didoInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.dido,
+              ),
+            );
+          } else if (e == DeviceEnum.cell.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.singleInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.cell,
+              ),
+            );
+          } else if (e == DeviceEnum.statsMeter.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.statisticsMeter.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.statsMeter,
+              ),
+            );
+          } else if (e == DeviceEnum.fire.value) {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: TKey.fireProtectionInfo.tr,
+                isV1: isV1,
+                deviceType: DeviceEnum.fire,
+              ),
+            );
+          } else {
+            data.add(
+              MonitorModel(
+                type: e,
+                title: e,
+                isV1: isV1,
+                deviceType: DeviceEnum.other,
+              ),
+            );
+          }
+        }
+        data.isEmpty ? Empty() : Success(data);
+        update();
+      }
+    } else {
+      state = Failure();
+      update();
+    }
+  }*/
 }
