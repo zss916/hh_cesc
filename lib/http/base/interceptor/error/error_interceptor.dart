@@ -1,7 +1,9 @@
 import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/base/exceptions/network_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 // Dio 的 onError 是 逆序执行 的（后添加的先执行）
 class ErrorInterceptor extends Interceptor {
@@ -40,50 +42,50 @@ class ErrorInterceptor extends Interceptor {
       final statusCode = error.response!.statusCode;
       switch (statusCode) {
         case 400:
-          AppLoading.showError('请求参数错误');
+          AppLoading.showError(TKey.requestParameterError.tr);
           break;
         case 403:
-          AppLoading.showError('无权访问');
+          AppLoading.showError(TKey.noAccess.tr);
           break;
         case 404:
-          AppLoading.showError('请求地址不存在');
+          AppLoading.showError(TKey.requestedAddressDoesNotExist.tr);
           break;
         case 500:
-          AppLoading.showError('服务器内部错误');
+          AppLoading.showError(TKey.internalServerError.tr);
           break;
         default:
           final data = error.response!.data;
           if (data is Map && data.containsKey('message')) {
             AppLoading.showError(data['message']);
           } else {
-            AppLoading.showError('请求失败: $statusCode');
+            AppLoading.showError('${TKey.requestFailed.tr}: $statusCode');
           }
           break;
       }
     } else {
       switch (error.type) {
         case DioExceptionType.connectionTimeout:
-          AppLoading.showError('连接超时，请检查网络');
+          AppLoading.showError(TKey.timeout.tr);
           break;
         case DioExceptionType.sendTimeout:
-          AppLoading.showError('发送超时');
+          AppLoading.showError(TKey.sendTimeout.tr);
           break;
         case DioExceptionType.receiveTimeout:
-          AppLoading.showError('接收超时');
+          AppLoading.showError(TKey.receiveTimeout.tr);
           break;
         case DioExceptionType.connectionError:
-          AppLoading.showError('网络连接错误');
+          AppLoading.showError(TKey.connectionError.tr);
           break;
         case DioExceptionType.unknown:
           if (error.error is NetworkException) {
-            AppLoading.showError('网络不可用');
+            AppLoading.showError(TKey.networkUnavailable.tr);
           } else {
-            final message = error.message ?? '未知网络异常';
-            AppLoading.showError('网络异常: $message');
+            final message = error.message ?? TKey.unknownNetworkAnomaly.tr;
+            AppLoading.showError('${TKey.networkAnomaly.tr}: $message');
           }
           break;
         default:
-          AppLoading.showError('未知错误');
+          AppLoading.showError(TKey.unknownError.tr);
           break;
       }
     }

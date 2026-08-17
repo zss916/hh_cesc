@@ -606,7 +606,19 @@ class TKey {
   static const String expectedMonthRevenueTip = "expectedMonthRevenueTip";
   static const String noInternetConnection = "noInternetConnection";
   static const String networkUnavailable = "networkUnavailable";
-
+  static const String requestParameterError = "requestParameterError";
+  static const String noAccess = "noAccess";
+  static const String unknownError = "unknownError";
+  static const String timeout = "timeout";
+  static const String networkAnomaly = "networkAnomaly";
+  static const String connectionError = "connectionError";
+  static const String sendTimeout = "sendTimeout";
+  static const String unknownNetworkAnomaly = "unknownNetworkAnomaly";
+  static const String requestFailed = "requestFailed";
+  static const String receiveTimeout = "receiveTimeout";
+  static const String internalServerError = "internalServerError";
+  static const String requestedAddressDoesNotExist =
+      "requestedAddressDoesNotExist";
 }
 
 const en = {
@@ -978,5 +990,17 @@ const en = {
   "noInternetConnection": "No internet connection",
   "onEnable": "Not enabled",
   //"todayEstimatedRevenue": "Today's estimated revenue",
-  "networkUnavailable":"Network unavailable"
+  "networkUnavailable": "Network unavailable",
+  "requestParameterError": "Request parameter error",
+  "noAccess": "No access",
+  "requestedAddressDoesNotExist": "The requested address does not exist",
+  "internalServerError": "Internal server error",
+  "requestFailed": "Request failed",
+  "unknownError": "Unknown error",
+  "timeout": "Connection timeout, please check the network",
+  "sendTimeout": "Send timeout",
+  "receiveTimeout": "Receive timeout",
+  "connectionError": "Connection Error",
+  "networkAnomaly": "Network anomaly",
+  "unknownNetworkAnomaly": "Unknown network anomaly",
 };

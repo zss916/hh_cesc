@@ -352,4 +352,17 @@ const de = {
   "noInternetConnection": "Keine Internetverbindung",
   "onEnable": "Nicht aktiviert",
   "networkUnavailable": "Netzwerk nicht verfügbar",
+  "requestParameterError": "Falsche Anforderungsparameter",
+  "noAccess": "Kein Zugriff",
+  "requestedAddressDoesNotExist": "Die angeforderte Adresse existiert nicht.",
+  "internalServerError": "Interner Fehler des Servers",
+  "requestFailed": "Anfrage fehlgeschlagen",
+  "unknownError": "Unbekannter Fehler",
+  "timeout":
+      "Verbindungszeit ist abgelaufen, bitte überprüfen Sie das Netzwerk",
+  "sendTimeout": "Zeitüberschreitung senden",
+  "receiveTimeout": "Empfangszeit",
+  "connectionError": "Netzwerkverbindungsfehler",
+  "networkAnomaly": "Netzwerkabweichung",
+  "unknownNetworkAnomaly": "Unbekannte Netzwerkabweichung",
 };
