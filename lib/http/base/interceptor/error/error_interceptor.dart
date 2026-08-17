@@ -1,7 +1,9 @@
-import 'package:cescpro/http/base/exceptions/business_exception.dart';
+import 'package:cescpro/core/setting/app_loading.dart';
+import 'package:cescpro/http/base/exceptions/network_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
+// Dio 的 onError 是 逆序执行 的（后添加的先执行）
 class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
@@ -36,55 +38,52 @@ class ErrorInterceptor extends Interceptor {
 
     if (error.response != null) {
       final statusCode = error.response!.statusCode;
-
       switch (statusCode) {
         case 400:
-          // ToastService.instance.show('请求参数错误');
-          break;
-        case 401:
+          AppLoading.showError('请求参数错误');
           break;
         case 403:
-          // ToastService.instance.show('无权访问');
+          AppLoading.showError('无权访问');
           break;
         case 404:
-          // ToastService.instance.show('请求地址不存在');
+          AppLoading.showError('请求地址不存在');
           break;
         case 500:
-          //ToastService.instance.show('服务器内部错误');
+          AppLoading.showError('服务器内部错误');
           break;
         default:
           final data = error.response!.data;
           if (data is Map && data.containsKey('message')) {
-            //  ToastService.instance.show(data['message']);
+            AppLoading.showError(data['message']);
           } else {
-            // ToastService.instance.show('请求失败: $statusCode');
+            AppLoading.showError('请求失败: $statusCode');
           }
           break;
       }
     } else {
       switch (error.type) {
         case DioExceptionType.connectionTimeout:
-          // ToastService.instance.show('连接超时，请检查网络');
+          AppLoading.showError('连接超时，请检查网络');
           break;
         case DioExceptionType.sendTimeout:
-          // ToastService.instance.show('发送超时');
+          AppLoading.showError('发送超时');
           break;
         case DioExceptionType.receiveTimeout:
-          //  ToastService.instance.show('接收超时');
+          AppLoading.showError('接收超时');
           break;
         case DioExceptionType.connectionError:
-          // ToastService.instance.show('网络连接错误');
+          AppLoading.showError('网络连接错误');
           break;
         case DioExceptionType.unknown:
           if (error.error is NetworkException) {
-            // ToastService.instance.show('网络不可用');
+            AppLoading.showError('网络不可用');
           } else {
             final message = error.message ?? '未知网络异常';
-            // ToastService.instance.show('网络异常: $message');
+            AppLoading.showError('网络异常: $message');
           }
           break;
         default:
-          // ToastService.instance.show('未知错误');
+          AppLoading.showError('未知错误');
           break;
       }
     }

@@ -351,4 +351,5 @@ const de = {
       "Hochrechnung basierend auf den Betriebsbedingungen des aktuellen Monats",
   "noInternetConnection": "Keine Internetverbindung",
   "onEnable": "Nicht aktiviert",
+  "networkUnavailable": "Netzwerk nicht verfügbar",
 };

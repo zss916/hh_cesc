@@ -369,4 +369,5 @@ const es = {
       "Estimación extrapolada según las condiciones operativas del mes actual",
   "noInternetConnection": "No hay conexión a internet.",
   "onEnable": "No habilitado",
+  "networkUnavailable": "La red no está disponible",
 };

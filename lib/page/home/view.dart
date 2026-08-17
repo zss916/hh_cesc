@@ -25,7 +25,8 @@ class HomePage extends StatelessWidget {
   }) {
     return switch (viewState) {
       ViewStateEnum.common => RefreshIndicator(
-        backgroundColor: Colors.white,
+        color: Colors.white,
+        backgroundColor: Colors.black,
         onRefresh: () => refresh(logic),
         child: SingleChildScrollView(child: buildContent(logic)),
       ),

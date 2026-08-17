@@ -1,13 +1,16 @@
 import 'dart:async';
 
-import 'package:cescpro/http/base/interceptor/network_status.dart';
+import 'package:cescpro/http/base/interceptor/loading/loading_interceptor.dart';
+import 'package:cescpro/http/base/interceptor/network_status/network_status.dart';
+import 'package:cescpro/http/base/interceptor/network_status/network_status_interceptor.dart';
+import 'package:cescpro/http/base/interceptor/retry/retry_interceptor.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'base/base_options.dart' show baseDioOptions;
 import 'base/httpClientAdapter.dart' show httpAdapter;
-import 'base/interceptor/auth_interceptor.dart';
+import 'base/interceptor/auth/auth_interceptor.dart';
 
 class Http {
   static final Http _instance = Http._internal();
@@ -24,14 +27,19 @@ class Http {
     _dio = Dio(baseDioOptions);
     _dio.httpClientAdapter = httpAdapter;
     _setupInterceptors();
-    //_setupNetworkQualityListener();
+    _setupNetworkQualityListener();
   }
 
   void _setupInterceptors() {
     _dio.interceptors.add(AuthInterceptor());
-    // _dio.interceptors.add(NetworkStatusInterceptor(dioGetter: () => _dio));
-    //_dio.interceptors.add(ErrorInterceptor(),);
-    _dio.interceptors.add(prettyDioLogger);
+    _dio.interceptors.add(NetworkStatusInterceptor(dioGetter: () => _dio));
+    _dio.interceptors.add(LoadingInterceptor());
+    // _dio.interceptors.add(ErrorInterceptor());
+    _dio.interceptors.add(RetryInterceptor(dioGetter: () => _dio));
+    //_dio.interceptors.add(ResponseInterceptor());
+    if (kDebugMode) {
+      _dio.interceptors.add(prettyDioLogger);
+    }
   }
 
   /// 监听网络质量变化，动态调整超时时间
@@ -68,16 +76,24 @@ class Http {
     Map<String, dynamic>? queryParameters,
     Options? options,
     bool showLoading = false,
-    bool showToast = true,
+    bool showError = false,
     CancelToken? cancelToken,
     Function(int count, int total)? onSendProgress,
   }) async {
+    // 将 showLoading、showError、缓存策略传入 extra，交由拦截器统一处理
+    final mergedOptions = (options ?? Options()).copyWith(
+      extra: {
+        ...?options?.extra,
+        'showLoading': showLoading,
+        'showError': showError,
+      },
+    );
     try {
       final response = await _dio.post(
         path,
         data: data,
         queryParameters: queryParameters,
-        //options: options,
+        options: mergedOptions,
         cancelToken: cancelToken ?? cancelTokenAll,
         onSendProgress: onSendProgress,
       );

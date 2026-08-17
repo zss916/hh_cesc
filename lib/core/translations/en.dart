@@ -605,6 +605,8 @@ class TKey {
   static const String expectedMonthRevenue = "expectedMonthRevenue";
   static const String expectedMonthRevenueTip = "expectedMonthRevenueTip";
   static const String noInternetConnection = "noInternetConnection";
+  static const String networkUnavailable = "networkUnavailable";
+
 }
 
 const en = {
@@ -976,4 +978,5 @@ const en = {
   "noInternetConnection": "No internet connection",
   "onEnable": "Not enabled",
   //"todayEstimatedRevenue": "Today's estimated revenue",
+  "networkUnavailable":"Network unavailable"
 };

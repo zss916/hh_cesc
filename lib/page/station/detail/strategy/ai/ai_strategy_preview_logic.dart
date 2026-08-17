@@ -4,7 +4,7 @@ import 'package:cescpro/core/tools/time_tools.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/http/api/ai.dart';
-import 'package:cescpro/http/base/interceptor/network_status.dart';
+import 'package:cescpro/http/base/interceptor/network_status/network_status.dart';
 import 'package:cescpro/http/bean/ai_compare_data_entity.dart';
 import 'package:cescpro/http/bean/ai_power_graph_entity.dart';
 import 'package:cescpro/page/station/detail/monitor/detail/widget/line_bar/f_line_chart.dart';

@@ -1,9 +1,12 @@
 import 'dart:async';
 
-import 'package:cescpro/http/base/interceptor/network_status.dart';
-import 'package:cescpro/http/base/interceptor/request_queue.dart';
+import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/base/exceptions/network_exception.dart';
+import 'package:cescpro/http/base/interceptor/network_status/network_status.dart';
+import 'package:cescpro/http/base/interceptor/network_status/request_queue.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 /// 网络状态拦截器
 /// 1. 请求前检查网络状态，断网时将请求入队
@@ -40,18 +43,18 @@ class NetworkStatusInterceptor extends Interceptor {
       if (enqueueOnOffline) {
         // 断网时请求入队，网络恢复后自动重试
         debugPrint('[NetworkStatusInterceptor] 断网，请求入队: ${options.path}');
-        //ToastService.instance.show('当前网络不可用，请求将在网络恢复后自动发送');
+        debugPrint('当前网络不可用，请求将在网络恢复后自动发送');
         RequestQueue.instance.enqueue(
           QueuedRequest(options: options, handler: handler),
         );
         return;
       } else {
         // 不入队则直接失败
-        // ToastService.instance.show('当前网络不可用');
+        debugPrint('当前网络不可用');
         handler.reject(
           DioException(
             requestOptions: options,
-            //error: NetworkException(message: '网络不可用'),
+            error: NetworkException(message: TKey.networkUnavailable.tr),
           ),
         );
         return;
@@ -67,6 +70,14 @@ class NetworkStatusInterceptor extends Interceptor {
       debugPrint('[NetworkStatusInterceptor] 网络恢复，开始执行队列请求');
       await RequestQueue.instance.flush((options) {
         return dioGetter().fetch(options);
+        return dioGetter().fetch(
+          options
+            ..extra = {
+              ...options.extra,
+              'showLoading': false,
+              'showError': false,
+            },
+        );
       });
     }
   }

@@ -102,6 +102,8 @@ class HomeAPI {
     int? startTimeStamp,
     int? endTimeStamp,
     int? date,
+    bool showLoading = false,
+    bool showError = false,
   }) async {
     Map<String, dynamic> map = {};
     if (siteId != null) {
@@ -129,6 +131,8 @@ class HomeAPI {
       var result = await Http.instance.post(
         ApiPath.postStatisticReportApp,
         data: map,
+        showLoading: showLoading,
+        showError: showError,
       );
       if (result["code"] == HttpStatus.ok) {
         List<StatisticReportEntity> value = await compute(
@@ -157,6 +161,8 @@ class HomeAPI {
     String? startDay,
     String? endDay,
     int? date,
+    bool showLoading = false,
+    bool showError = false,
   }) async {
     Map<String, dynamic> map = {};
     if (type != null) {
@@ -190,6 +196,8 @@ class HomeAPI {
       var result = await Http.instance.post(
         ApiPath.postStatisticReportApp2,
         data: map,
+        showLoading: showLoading,
+        showError: showError,
       );
       if (result["code"] == HttpStatus.ok) {
         List<ReportDataEntity> value = await compute(

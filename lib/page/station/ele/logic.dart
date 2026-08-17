@@ -73,7 +73,6 @@ class EleLogic extends GetxController {
 
   Future<void> loadEleList() async {
     // debugPrint("startTimeStamp:$startTimeStamp \n endTimeStamp:$endTimeStamp");
-    AppLoading.show();
     final (
       bool isSuccessful,
       List<ReportDataEntity> value,
@@ -83,7 +82,8 @@ class EleLogic extends GetxController {
       startTimeStamp: startTimeStamp,
       endTimeStamp: endTimeStamp,
       date: date,
-    ).whenComplete(() => AppLoading.dismiss());
+      showLoading: true,
+    );
 
     if (isSuccessful) {
       eleList.assignAll(value);

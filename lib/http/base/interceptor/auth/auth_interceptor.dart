@@ -14,8 +14,6 @@ class AuthInterceptor extends Interceptor {
   static bool _isRedirecting = false;
   static final _redirectLock = Completer<Null>.sync();
 
-  //AuthInterceptor();
-
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     options.headers["Accept-Timezone"] = TimezoneHeader.getTimezone();
@@ -58,7 +56,6 @@ class AuthInterceptor extends Interceptor {
 
     // 设置重定向标志
     _isRedirecting = true;
-    // final completer = Completer<Null>();
     _redirectLock.complete();
 
     try {

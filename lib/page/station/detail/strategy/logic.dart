@@ -4,7 +4,7 @@ import 'package:cescpro/core/state/view_state_mixin.dart';
 import 'package:cescpro/core/tools/time_tools.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/api/ai.dart';
-import 'package:cescpro/http/base/interceptor/network_status.dart';
+import 'package:cescpro/http/base/interceptor/network_status/network_status.dart';
 import 'package:cescpro/http/bean/check_ai_open_entity.dart';
 import 'package:cescpro/http/bean/ctrl_model_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';

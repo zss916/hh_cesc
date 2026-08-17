@@ -8,7 +8,7 @@ import 'package:cescpro/core/user/user.dart';
 import 'package:cescpro/core/utils/dialog_utils.dart';
 import 'package:cescpro/http/api/admin.dart';
 import 'package:cescpro/http/api/site.dart';
-import 'package:cescpro/http/base/interceptor/network_status.dart';
+import 'package:cescpro/http/base/interceptor/network_status/network_status.dart';
 import 'package:cescpro/http/bean/currency_entity.dart';
 import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/token_entity.dart';

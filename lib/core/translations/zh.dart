@@ -353,4 +353,5 @@ const zh = {
   "expectedMonthRevenue": "预期月收益提升",
   "expectedMonthRevenueTip": "按当月运营情况外推估算",
   "noInternetConnection": "无网络连接",
+  "networkUnavailable": "网络不可用",
 };
