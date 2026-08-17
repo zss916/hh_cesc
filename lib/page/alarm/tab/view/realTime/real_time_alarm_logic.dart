@@ -67,7 +67,7 @@ class RealTimeAlarmLogic extends ViewStateController
 
   void refreshData({bool? isLoading}) {
     pageNum = 1;
-    fetchData(pageNum: pageNum, isLoading: isLoading ?? false);
+    fetchData(pageNum: pageNum);
   }
 
   void loadMoreData() {
@@ -87,8 +87,7 @@ class RealTimeAlarmLogic extends ViewStateController
     }
   }
 
-  Future<void> fetchData({int pageNum = 1, bool isLoading = false}) async {
-    if (isLoading) AppLoading.show();
+  Future<void> fetchData({int pageNum = 1}) async {
     final (
       bool isSuccessful,
       List<AlarmItemEntity> value,
@@ -124,7 +123,7 @@ class RealTimeAlarmLogic extends ViewStateController
       update();
     }
     pageNum = 1;
-    fetchData(pageNum: pageNum, isLoading: isLoading);
+    fetchData(pageNum: pageNum);
   }
 
   ///=================================================================================

@@ -65,7 +65,7 @@ class HistoryAlarmLogic extends ViewStateController with RefresherAndLoadLogic {
 
   void refreshData({bool? isLoading}) {
     pageNum = 1;
-    fetchData(pageNum: pageNum, isLoading: isLoading ?? false);
+    fetchData(pageNum: pageNum);
   }
 
   void loadMoreData() {
@@ -80,7 +80,7 @@ class HistoryAlarmLogic extends ViewStateController with RefresherAndLoadLogic {
       update();
     }
     pageNum = 1;
-    fetchData(pageNum: pageNum, isLoading: isLoading);
+    fetchData(pageNum: pageNum);
   }
 
   void refreshAndLoadCtl(bool isRefresh, int size) {
@@ -95,8 +95,7 @@ class HistoryAlarmLogic extends ViewStateController with RefresherAndLoadLogic {
     }
   }
 
-  Future<void> fetchData({int pageNum = 1, bool isLoading = false}) async {
-    if (isLoading) AppLoading.show();
+  Future<void> fetchData({int pageNum = 1}) async {
     final (
       bool isSuccessful,
       List<AlarmItemEntity> value,

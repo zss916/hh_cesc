@@ -22,7 +22,7 @@ class AlarmStatus extends StatelessWidget {
             start: Radius.circular(50.r),
           ),
           gradient: LinearGradient(
-            colors: status == AlarmSatusEnum.ended.index
+            colors: status == AlarmStatusEnum.ended.index
                 ? [Color(0xFF989898), Color(0xFFD5D5D5)]
                 : [Color(0xFF366FFF), Color(0xFF5DA0FC)],
             begin: Alignment.centerLeft,
@@ -31,7 +31,7 @@ class AlarmStatus extends StatelessWidget {
         ),
         child: FittedBox(
           child: Text(
-            status == AlarmSatusEnum.ended.index
+            status == AlarmStatusEnum.ended.index
                 ? TKey.ended.tr
                 : TKey.inProgress.tr,
             style: TextStyle(

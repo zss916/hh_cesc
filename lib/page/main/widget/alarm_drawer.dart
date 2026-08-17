@@ -103,9 +103,6 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
           },
         ),
 
-        //Divider(height: 24.h, color: Colors.transparent),
-
-        // AlarmItemSelect(title: "设备类型", onTap: () {}),
         Divider(height: 24.h, color: Colors.transparent),
 
         AlarmItemSelect(
@@ -123,6 +120,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
             );
           },
         ),
+
         Divider(height: 24.h, color: Colors.transparent),
 
         AlarmItemSelect(
@@ -169,14 +167,14 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
                 onTap: () {
-                  safeFind<AlarmLogic>()?.startTimeMill = null;
-                  safeFind<AlarmLogic>()?.endTimeMill = null;
                   safeFind<AlarmLogic>()?.country = null;
-                  safeFind<AlarmLogic>()?.alarmLevel = null;
                   safeFind<AlarmLogic>()?.siteId = null;
                   safeFind<AlarmLogic>()?.siteName = null;
-                  safeFind<AlarmLogic>()?.refreshData(isLoading: true);
-                  setState(() {});
+                  safeFind<AlarmLogic>()?.alarmLevel = null;
+                  safeFind<AlarmLogic>()?.startTimeMill = null;
+                  safeFind<AlarmLogic>()?.endTimeMill = null;
+                  //setState(() {});
+                  safeFind<AlarmLogic>()?.refreshData();
                   widget.onReset.call();
                 },
                 child: Container(
@@ -207,7 +205,7 @@ class _AlarmDrawerState extends State<AlarmDrawer> {
                   safeFind<AlarmLogic>()?.alarmLevel = alarmLevel;
                   safeFind<AlarmLogic>()?.siteId = siteId;
                   safeFind<AlarmLogic>()?.siteName = siteName;
-                  safeFind<AlarmLogic>()?.loadData();
+                  safeFind<AlarmLogic>()?.refreshData();
                   widget.onConfirm.call();
 
                   /* debugPrint(

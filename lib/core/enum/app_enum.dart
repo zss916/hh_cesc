@@ -115,7 +115,7 @@ enum PowerType {
 enum Alarm { level1, level2, level3 }
 
 ///告警状态
-enum AlarmSatusEnum { ended, progressing }
+enum AlarmStatusEnum { ended, progressing }
 
 extension AlarmExtension on Alarm {
   int get value {

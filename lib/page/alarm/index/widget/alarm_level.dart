@@ -12,7 +12,7 @@ class AlarmLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return status == AlarmSatusEnum.ended.index
+    return status == AlarmStatusEnum.ended.index
         ? buildLevelTemp()
         : Stack(
             alignment: AlignmentDirectional.center,

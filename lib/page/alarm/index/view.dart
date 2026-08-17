@@ -1,3 +1,4 @@
+/*
 part of 'index.dart';
 
 @Deprecated("remove")
@@ -56,7 +57,7 @@ class AlarmPage extends StatelessWidget {
     required AlarmLogic logic,
   }) {
     return switch (viewState) {
-      ViewStateEnum.common => buildList2(logic: logic),
+      ViewStateEnum.common => buildList(logic: logic),
       ViewStateEnum.empty => buildEmpty(logic: logic),
       ViewStateEnum.loading => Container(
         margin: EdgeInsetsDirectional.only(bottom: 50.h),
@@ -66,7 +67,7 @@ class AlarmPage extends StatelessWidget {
     };
   }
 
-  Widget buildList2({required AlarmLogic logic}) => SmartRefresher(
+  Widget buildList({required AlarmLogic logic}) => SmartRefresher(
     header: MaterialClassicHeader(),
     footer: ClassicFooter(
       idleText: TKey.idleLoadingText.tr,
@@ -124,6 +125,6 @@ class AlarmPage extends StatelessWidget {
     ),
   );
 
-  Widget buildList3({required AlarmLogic logic}) =>
-      RefresherAndLoad(logic: logic);
+
 }
+*/
