@@ -13,7 +13,7 @@ class ApiPath {
   ///测试host
   static const String baseUrl = "http://192.168.8.35:9088/api/v1";
 
-  static const String baseUrl3 = Environment.isOverseas ? baseUrlEn : baseUrlZh;
+  static const String baseUrl2 = Environment.isOverseas ? baseUrlEn : baseUrlZh;
 
   ///站点首页信息展信(海外版本)
   static const String postStatisticRecord2 =

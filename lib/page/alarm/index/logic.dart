@@ -1,6 +1,6 @@
 part of 'index.dart';
 
-class AlarmLogic extends GetxController with RefresherAndLoadLogic {
+class AlarmLogic extends GetxController {
   List<AlarmItemEntity> data = [];
 
   ViewStateEnum viewState = ViewStateEnum.common;
@@ -78,63 +78,5 @@ class AlarmLogic extends GetxController with RefresherAndLoadLogic {
     }
     viewState = data.isEmpty ? ViewStateEnum.empty : ViewStateEnum.common;
     update();
-  }
-
-  ///=================================================================================
-
-  ///刷新
-  Future<void> onRefresh() async {
-    currentPage = 1;
-    final (
-      bool isSuccessful,
-      List<AlarmItemEntity> value,
-    ) = await AlarmAPI.getListPageApp(
-      pageNum: currentPage,
-      adcode: country?.code,
-      alarmLevel: alarmLevel,
-      siteId: siteId,
-      startTimeMill: startTimeMill,
-      endTimeMill: endTimeMill,
-    );
-    data.assignAll(value);
-    update();
-  }
-
-  ///加载更多
-  Future<void> loadMore() async {
-    //1秒内请求一次
-    if (lastDateTime != null &&
-        DateTime.now().difference(lastDateTime!) < Duration(seconds: 1)) {
-      return;
-    }
-    lastDateTime = DateTime.now();
-
-    if (isLoadingMore) {
-      return;
-    }
-    //debugPrint("加载更多");
-    isLoadingMore = true;
-    currentPage++;
-    final (
-      bool isSuccessful,
-      List<AlarmItemEntity> value,
-    ) = await AlarmAPI.getListPageApp(
-      pageNum: currentPage,
-      adcode: country?.code,
-      alarmLevel: alarmLevel,
-      siteId: siteId,
-      startTimeMill: startTimeMill,
-      endTimeMill: endTimeMill,
-    );
-    // debugPrint("请求完成");
-    if (data.isEmpty) {
-      currentPage--;
-      hasMoreData = false;
-    } else {
-      data.addAll(value);
-    }
-    isLoadingMore = false;
-    update();
-    return;
   }
 }

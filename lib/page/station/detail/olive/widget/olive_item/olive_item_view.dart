@@ -22,7 +22,8 @@ class OliveItemView extends StatelessWidget {
       init: OliveItemLogic(),
       builder: (logic) {
         return RefreshIndicator(
-          color: Colors.white,
+          color: Colors.black,
+          backgroundColor: Colors.white,
           onRefresh: () => refresh(logic),
           child: SingleChildScrollView(
             child: Column(

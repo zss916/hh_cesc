@@ -1,9 +1,9 @@
-import 'package:cescpro/http/api/realTimeData.dart';
-import 'package:cescpro/http/bean/cell_data_entity.dart';
-import 'package:get/get.dart';
+part of 'index.dart';
+
+enum MapType { temp, soc, voltage, other }
 
 class DistributionMapLogic extends GetxController {
-  List<CellDataEntity> cells = [];
+  final List<CellDataEntity> _cells = [];
   String? title;
   String? content;
 
@@ -11,7 +11,9 @@ class DistributionMapLogic extends GetxController {
   int? did;
   int? nodeNo;
   int? devNo;
-  int? type;
+  MapType type = MapType.other;
+
+  UiState state = Loading();
 
   @override
   void onInit() {
@@ -23,7 +25,7 @@ class DistributionMapLogic extends GetxController {
       did = Get.arguments["did"] as int?;
       nodeNo = Get.arguments["nodeNo"] as int?;
       devNo = Get.arguments["devNo"] as int?;
-      type = Get.arguments["type"] as int?;
+      type = (Get.arguments["type"] as MapType?) ?? MapType.other;
       //debugPrint("===>>> did:$did,nodeNo:$nodeNo,devNo:$devNo");
     }
   }
@@ -36,6 +38,8 @@ class DistributionMapLogic extends GetxController {
 
   //{"siteId":530,"compType":"CLU","did":577,"devNo":3,"nodeNo":2}
   Future<void> loadData() async {
+    state = Loading();
+    update();
     final (
       bool isSuccessful,
       List<CellDataEntity> value,
@@ -45,9 +49,15 @@ class DistributionMapLogic extends GetxController {
       did: did,
       devNo: devNo,
       nodeNo: nodeNo,
+      showLoading: false,
     );
     if (isSuccessful) {
-      cells.assignAll(value);
+      _cells.assignAll(value);
+      state = Success(_cells);
+      await Future.delayed(Duration(milliseconds: 500));
+      update();
+    } else {
+      state = Failure();
       update();
     }
   }

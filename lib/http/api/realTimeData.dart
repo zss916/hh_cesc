@@ -18,6 +18,8 @@ class RealTimeDataAPI {
     int? nodeNo,
     int? devNo,
     String? compType,
+    bool showLoading = false,
+    bool showError = false,
   }) async {
     try {
       var result = await Http.instance.post(
@@ -29,6 +31,8 @@ class RealTimeDataAPI {
           "devNo": devNo,
           "compType": compType,
         },
+        showLoading: showLoading,
+        showError: showError,
       );
       if (result["code"] == HttpStatus.ok) {
         List<CellDataEntity> value = await compute(

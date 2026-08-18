@@ -38,8 +38,6 @@ class MonitorDetailLogic extends GetxController with NetWorkRefreshEvent {
       isV1 = data?.isV1 ?? false;
       deviceType = data?.deviceType ?? (DeviceEnum.other);
     }
-    state = Loading();
-    update();
     onNetWorkRefresh(
       onRefresh: () {
         loadData(isDelayed: true);
@@ -80,7 +78,7 @@ class MonitorDetailLogic extends GetxController with NetWorkRefreshEvent {
     //  AppLoading.show();
     state = Loading();
     update();
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 500));
 
     getCompTree().then((isOK) {
       if (isOK) {
@@ -194,7 +192,7 @@ class MonitorDetailLogic extends GetxController with NetWorkRefreshEvent {
     if (devType == "ARR") {
       realTimeViewStatus = ViewType.loading;
       update(["realTimeData"]);
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: 500));
 
       final (
         bool isSuccessful,
@@ -221,7 +219,7 @@ class MonitorDetailLogic extends GetxController with NetWorkRefreshEvent {
     } else if (devType == "PCS" || devType == "METER") {
       powerViewStatus = ViewType.loading;
       update(["realTimeData"]);
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: 500));
 
       final (
         bool isSuccessful,

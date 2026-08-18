@@ -88,7 +88,9 @@ class AlarmDetailLogic extends GetxController
             _list.addAll(data);
           }
           refreshAndLoadCtl(pageNum <= 1, data.length);
-          state = data.isEmpty ? Empty() : Success<List<AlarmItemEntity>>(data);
+          state = _list.isEmpty
+              ? Empty()
+              : Success<List<AlarmItemEntity>>(_list);
           update();
         case ApiError(:final errorState, :final msg):
           pageNum -= 1;

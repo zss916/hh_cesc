@@ -1,11 +1,7 @@
 part of 'index.dart';
 
-class StrategyHistoryLogic extends GetxController with NetWorkRefreshEvent {
-  late RefreshController refreshCtrl = RefreshController(
-    initialRefresh: false,
-    initialLoadStatus: LoadStatus.canLoading,
-  );
-
+class StrategyHistoryLogic extends GetxController
+    with NetWorkRefreshEvent, RefreshControllerHelper {
   int? id;
   UiState state = Loading();
   int pageNum = 1;
@@ -30,8 +26,8 @@ class StrategyHistoryLogic extends GetxController with NetWorkRefreshEvent {
 
   @override
   void onClose() {
-    refreshCtrl.dispose();
     super.onClose();
+    onRefreshDispose();
     _list.clear();
     onDisposeNetWork();
   }
@@ -85,7 +81,7 @@ class StrategyHistoryLogic extends GetxController with NetWorkRefreshEvent {
           _list.addAll(historyList);
         }
         state = _list.isEmpty ? Empty() : Success(_list);
-        refreshAndLoadCtl(pageNum == 1, historyList.length);
+        refreshAndLoadCtl(pageNum <= 1, historyList.length);
         update();
         update();
       case ApiError(:final errorState, :final msg):
@@ -96,18 +92,6 @@ class StrategyHistoryLogic extends GetxController with NetWorkRefreshEvent {
         } else {
           AppLoading.toast("Fail");
         }
-    }
-  }
-
-  void refreshAndLoadCtl(bool isRefresh, int size) {
-    if (isRefresh) {
-      refreshCtrl.refreshCompleted(resetFooterState: true);
-    } else {
-      if (size == 0) {
-        refreshCtrl.loadNoData();
-      } else {
-        refreshCtrl.loadComplete();
-      }
     }
   }
 

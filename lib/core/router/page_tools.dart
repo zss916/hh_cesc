@@ -77,7 +77,7 @@ class PageTools {
     int? did,
     int? nodeNo,
     int? devNo,
-    int? type,
+    MapType? type,
   }) => Get.toNamed(
     APages.distributionMap,
     arguments: {

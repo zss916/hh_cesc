@@ -1,15 +1,14 @@
+import 'package:cescpro/core/helper/refresh_conreoller_mixin.dart';
 import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/core/setting/app_loading.dart';
 import 'package:cescpro/core/state/view_state_mixin.dart';
 import 'package:cescpro/http/api/alarm.dart';
 import 'package:cescpro/http/base/interceptor/network_status/network_status.dart';
 import 'package:cescpro/http/bean/alarm_item_entity.dart';
-import 'package:cescpro/page/alarm/index/widget/refresher_and_load_logic.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
 
 class RealTimeAlarmLogic extends ViewStateController
-    with RefresherAndLoadLogic {
+    with RefreshControllerHelper {
   List<AlarmItemEntity> data = [];
 
   int pageNum = 1;
@@ -21,8 +20,6 @@ class RealTimeAlarmLogic extends ViewStateController
   String? siteName;
   // String? adcode;
   // SiteEntity? site
-
-  RefreshController refreshCtrl = RefreshController(initialRefresh: false);
 
   @override
   void onInit() {
@@ -44,8 +41,8 @@ class RealTimeAlarmLogic extends ViewStateController
 
   @override
   void onClose() {
-    refreshCtrl.dispose();
     super.onClose();
+    onRefreshDispose();
     onDisposeNetWork();
   }
 
@@ -73,18 +70,6 @@ class RealTimeAlarmLogic extends ViewStateController
   void loadMoreData() {
     pageNum += 1;
     fetchData(pageNum: pageNum);
-  }
-
-  void refreshAndLoadCtl(bool isRefresh, int size) {
-    if (isRefresh) {
-      refreshCtrl.refreshCompleted(resetFooterState: true);
-    } else {
-      if (size == 0) {
-        refreshCtrl.loadNoData();
-      } else {
-        refreshCtrl.loadComplete();
-      }
-    }
   }
 
   Future<void> fetchData({int pageNum = 1}) async {
@@ -124,63 +109,5 @@ class RealTimeAlarmLogic extends ViewStateController
     }
     pageNum = 1;
     fetchData(pageNum: pageNum);
-  }
-
-  ///=================================================================================
-
-  ///刷新
-  Future<void> onRefresh() async {
-    currentPage = 1;
-    final (
-      bool isSuccessful,
-      List<AlarmItemEntity> value,
-    ) = await AlarmAPI.getListPageApp(
-      pageNum: currentPage,
-      adcode: country?.code,
-      alarmLevel: alarmLevel,
-      siteId: siteId,
-      startTimeMill: startTimeMill,
-      endTimeMill: endTimeMill,
-      status: 1,
-    );
-    data.assignAll(value);
-    update();
-  }
-
-  ///加载更多
-  Future<void> loadMore() async {
-    //1秒内请求一次
-    if (lastDateTime != null &&
-        DateTime.now().difference(lastDateTime!) < Duration(seconds: 1)) {
-      return;
-    }
-    lastDateTime = DateTime.now();
-
-    if (isLoadingMore) {
-      return;
-    }
-    isLoadingMore = true;
-    currentPage++;
-    final (
-      bool isSuccessful,
-      List<AlarmItemEntity> value,
-    ) = await AlarmAPI.getListPageApp(
-      pageNum: currentPage,
-      adcode: country?.code,
-      alarmLevel: alarmLevel,
-      siteId: siteId,
-      startTimeMill: startTimeMill,
-      endTimeMill: endTimeMill,
-      status: 1,
-    );
-    if (data.isEmpty) {
-      currentPage--;
-      hasMoreData = false;
-    } else {
-      data.addAll(value);
-    }
-    isLoadingMore = false;
-    update();
-    return;
   }
 }

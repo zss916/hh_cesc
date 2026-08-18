@@ -1,15 +1,8 @@
-import 'package:cescpro/core/setting/app_loading.dart';
-import 'package:cescpro/http/api/realTimeData.dart';
-import 'package:cescpro/http/api/site.dart';
-import 'package:cescpro/http/bean/com_card_vo_entity.dart';
-import 'package:cescpro/http/bean/com_type_list_entity.dart';
-import 'package:cescpro/http/bean/comp_tree_entity.dart';
-import 'package:cescpro/http/bean/soc_entity.dart';
-import 'package:get/get.dart';
+part of 'index.dart';
 
 enum ViewType { loading, common, empty }
 
-class BatteryClusterLogic extends GetxController {
+class BatteryClusterLogic extends GetxController with NetWorkRefreshEvent {
   String? devType;
   String? siteId;
   int? did;
@@ -27,6 +20,8 @@ class BatteryClusterLogic extends GetxController {
 
   String? labelName;
 
+  UiState state = Loading();
+
   @override
   void onInit() {
     super.onInit();
@@ -35,6 +30,11 @@ class BatteryClusterLogic extends GetxController {
       siteId = Get.arguments["siteId"] as String?;
       labelName = Get.arguments["labelName"] as String?;
     }
+    onNetWorkRefresh(
+      onRefresh: () {
+        loadData(loading: true, isDelayed: true);
+      },
+    );
   }
 
   @override
@@ -46,20 +46,41 @@ class BatteryClusterLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    onDisposeNetWork();
     AppLoading.dismiss();
   }
 
-  Future<void> loadData() async {
-    AppLoading.show();
-    await getCompTree();
-    Future.wait([
-      loadComType(),
-      loadComponentListByDev(),
-    ]).whenComplete(() => AppLoading.dismiss());
-    loadSocGraph();
+  Future<void> loadData({bool loading = true, bool? isDelayed}) async {
+    if (loading) {
+      state = Loading();
+      update();
+      if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
+    }
+
+    final isConnected = await NetworkStatusService.instance.isConnected();
+    if (!isConnected) {
+      state = Offline();
+      update();
+      return;
+    }
+    fetchData();
   }
 
-  Future<void> getCompTree() async {
+  Future<void> fetchData() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    bool isSuccessful = await getCompTree();
+    if (isSuccessful) {
+      Future.wait([loadComType(), loadComponentListByDev()]);
+      loadSocGraph();
+      state = Complete();
+      update();
+    } else {
+      state = Failure();
+      update();
+    }
+  }
+
+  Future<bool> getCompTree() async {
     final (bool isSuccessful, List<CompTreeEntity> value) =
         await SiteAPI.getCompTree(siteId: siteId, type: devType);
     if (isSuccessful) {
@@ -69,6 +90,7 @@ class BatteryClusterLogic extends GetxController {
       devNo = value.first.child?.first.child?.first.val;
       update();
     }
+    return isSuccessful;
   }
 
   Future<void> loadComType() async {
@@ -111,7 +133,7 @@ class BatteryClusterLogic extends GetxController {
 
     viewStatus = ViewType.loading;
     update(["realTimeData"]);
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 500));
 
     final (
       bool isSuccessful,

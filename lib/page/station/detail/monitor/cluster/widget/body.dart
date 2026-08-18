@@ -1,0 +1,544 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cescpro/core/router/index.dart';
+import 'package:cescpro/core/translations/en.dart';
+import 'package:cescpro/http/bean/com_type_list_entity.dart';
+import 'package:cescpro/page/station/detail/monitor/cluster/index.dart';
+import 'package:cescpro/page/station/detail/monitor/cluster/widget/base_line_chart.dart';
+import 'package:cescpro/page/station/detail/monitor/detail/widget/child/real_time_data_widget.dart';
+import 'package:cescpro/page/station/detail/monitor/distribution/index.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+class BuildBody extends StatelessWidget {
+  final BatteryClusterLogic logic;
+  const BuildBody({super.key, required this.logic});
+
+  @override
+  Widget build(BuildContext context) {
+    return buildBody(logic);
+  }
+
+  Widget buildBody(BatteryClusterLogic logic) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          buildStatusItem(logic),
+          Divider(height: 12.h, color: Colors.transparent),
+          buildBaseInfoItem(logic),
+          Divider(height: 12.h, color: Colors.transparent),
+          buildLineChartWidget(),
+          Divider(height: 12.h, color: Colors.transparent),
+          buildDistributionMap(logic),
+          Divider(height: 12.h, color: Colors.transparent),
+          RealTimeDataWidget(comCardVoList: logic.comCardVoList),
+          Divider(height: 120.h, color: Colors.transparent),
+        ],
+      ),
+    );
+  }
+
+  Widget buildStatusItem(BatteryClusterLogic logic) => Column(
+    children: [
+      Container(
+        padding: EdgeInsetsDirectional.only(
+          start: 18.w,
+          end: 18.w,
+          bottom: 16.h,
+        ),
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          TKey.status.tr,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+        ),
+      ),
+      Container(
+        constraints: BoxConstraints(minHeight: 120.h),
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsetsDirectional.all(16.r),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFF313540),
+        ),
+        width: double.maxFinite,
+        child: Column(
+          children: [
+            if (logic.comTypeList?.signalStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.signalStatus?.showFieldName ?? "--"} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.signalStatus?.showValue ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+
+            Divider(height: 16.h, color: Colors.transparent),
+
+            if (logic.comTypeList?.runStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.runStatus?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.runStatus?.showValue ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+
+            Divider(height: 16.h, color: Colors.transparent),
+
+            if (logic.comTypeList?.alarmStatus?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.alarmStatus?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    logic.comTypeList?.alarmStatus?.showValue ?? "--",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+          ],
+        ),
+      ),
+    ],
+  );
+
+  Widget buildBaseInfoItem(BatteryClusterLogic logic) => Column(
+    children: [
+      Container(
+        padding: EdgeInsetsDirectional.only(
+          start: 18.w,
+          end: 18.w,
+          bottom: 16.h,
+        ),
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          TKey.basicInformation.tr,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+        ),
+      ),
+      Container(
+        constraints: BoxConstraints(minHeight: 180.h),
+        margin: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsetsDirectional.all(16.r),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFF313540),
+        ),
+        width: double.maxFinite,
+        child: Column(
+          children: [
+            if (logic.comTypeList?.soc?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.soc?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.soc?.value ?? "0"}${logic.comTypeList?.soc?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.voltage?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.voltage?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.voltage?.value ?? "0"}${logic.comTypeList?.voltage?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.current?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.current?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.current?.value ?? "0"}${logic.comTypeList?.current?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.singleMaxVoltage?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.singleMaxVoltage?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.singleMaxVoltage?.value ?? "0"}${logic.comTypeList?.singleMaxVoltage?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.singleMinVoltage?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.singleMinVoltage?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.singleMinVoltage?.value ?? "0"}${logic.comTypeList?.singleMinVoltage?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.singleMaxTemp?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.singleMaxTemp?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.singleMaxTemp?.value ?? 0}${logic.comTypeList?.singleMaxTemp?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.singleMinTemp?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.singleMinTemp?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.singleMinTemp?.value ?? 0}${logic.comTypeList?.singleMinTemp?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.maxChargePower?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.maxChargePower?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.maxChargePower?.value ?? "0"}${logic.comTypeList?.maxChargePower?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+            Divider(height: 16.h, color: Colors.transparent),
+            if (logic.comTypeList?.maxOutPower?.showFieldName != null)
+              Row(
+                children: [
+                  Text(
+                    "${logic.comTypeList?.maxOutPower?.showFieldName ?? ""} ",
+                    style: TextStyle(fontSize: 14, color: Color(0xA6FFFFFF)),
+                  ),
+                  Spacer(),
+                  Text(
+                    "${logic.comTypeList?.maxOutPower?.value ?? "0"}${logic.comTypeList?.maxOutPower?.unit ?? ""}",
+                    style: TextStyle(fontSize: 14, color: Color(0xFFFFFFFF)),
+                  ),
+                ],
+              ),
+          ],
+        ),
+      ),
+    ],
+  );
+
+  Widget buildLineChartWidget() {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsetsDirectional.only(
+            start: 18.w,
+            end: 18.w,
+            bottom: 16.h,
+          ),
+          alignment: AlignmentDirectional.center,
+          child: Row(
+            children: [
+              Text(
+                TKey.realTimeSoc.tr,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              Spacer(),
+              GetBuilder<BatteryClusterLogic>(
+                id: "realTimeData",
+                init: BatteryClusterLogic(),
+                builder: (logic) {
+                  return logic.arrList.isEmpty
+                      ? SizedBox.shrink()
+                      : InkWell(
+                          onTap: () {
+                            ///电池集群 BatteryClusterLogic
+                            Get.toNamed(APages.hClusterChart);
+                          },
+                          child: Icon(
+                            Icons.zoom_out_map_rounded,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        );
+                },
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsetsDirectional.only(
+            top: 5,
+            start: 5,
+            end: 5,
+            bottom: 5,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Color(0xFF313540),
+          ),
+          width: double.maxFinite,
+          height: 320.h,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "(kW)",
+                    style: TextStyle(color: Color(0x80FFFFFF), fontSize: 12.sp),
+                  ),
+                  Spacer(),
+                  Text(
+                    "(%)",
+                    style: TextStyle(color: Color(0xFF0BC3C4), fontSize: 12.sp),
+                  ),
+                ],
+              ),
+              Divider(height: 10, color: Colors.transparent),
+              Expanded(
+                child: GetBuilder<BatteryClusterLogic>(
+                  id: "realTimeData",
+                  init: BatteryClusterLogic(),
+                  builder: (logic) {
+                    return buildContent(logic.viewStatus, logic);
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildDistributionMap(BatteryClusterLogic logic) => Column(
+    children: [
+      Container(
+        padding: EdgeInsetsDirectional.only(
+          start: 18.w,
+          end: 18.w,
+          bottom: 16.h,
+        ),
+        alignment: AlignmentDirectional.centerStart,
+        child: Text(
+          TKey.distributionMap.tr,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+        ),
+      ),
+
+      Row(
+        children: [
+          VerticalDivider(width: 16.w, color: Colors.transparent),
+          Expanded(
+            child: Container(
+              width: double.maxFinite,
+              height: 36,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                color: Color(0xFF313540),
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    ComTypeListItem? maxTemp = logic.comTypeList?.singleMaxTemp;
+                    ComTypeListItem? minTemp = logic.comTypeList?.singleMinTemp;
+                    String content =
+                        "${maxTemp?.showFieldName ?? ""}/${minTemp?.showFieldName ?? ""}:${maxTemp?.showValue ?? ""}${minTemp?.unit ?? ""}/${minTemp?.showValue ?? ""}${minTemp?.unit ?? ""}";
+                    PageTools.toDistributionMap(
+                      title: TKey.singleTemp.tr,
+                      content: content,
+                      siteId: logic.siteId,
+                      did: logic.did,
+                      nodeNo: logic.nodeNo,
+                      devNo: logic.devNo,
+                      type: MapType.temp,
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    alignment: AlignmentDirectional.center,
+                    child: AutoSizeText(
+                      TKey.singleTemp.tr,
+                      maxLines: 1,
+                      style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          VerticalDivider(width: 16.w, color: Colors.transparent),
+          Expanded(
+            child: Container(
+              width: double.maxFinite,
+              height: 36,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                color: Color(0xFF313540),
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    PageTools.toDistributionMap(
+                      title: "SOC",
+                      content: "",
+                      siteId: logic.siteId,
+                      did: logic.did,
+                      nodeNo: logic.nodeNo,
+                      devNo: logic.devNo,
+                      type: MapType.soc,
+                    );
+                  },
+                  child: Container(
+                    alignment: AlignmentDirectional.center,
+                    child: Text(
+                      "SOC",
+                      style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          VerticalDivider(width: 16.w, color: Colors.transparent),
+          Expanded(
+            child: Container(
+              width: double.maxFinite,
+              height: 36,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                color: Color(0xFF313540),
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    ComTypeListItem? maxV = logic.comTypeList?.singleMaxVoltage;
+                    ComTypeListItem? minV = logic.comTypeList?.singleMinVoltage;
+                    String content =
+                        "${maxV?.showFieldName ?? ""}/${minV?.showFieldName ?? ""}:${maxV?.showValue ?? ""}${minV?.unit ?? ""}/${minV?.showValue ?? ""}${minV?.unit ?? ""}";
+
+                    PageTools.toDistributionMap(
+                      title: TKey.cellVoltage.tr,
+                      content: content,
+                      siteId: logic.siteId,
+                      did: logic.did,
+                      nodeNo: logic.nodeNo,
+                      devNo: logic.devNo,
+                      type: MapType.voltage,
+                    );
+                  },
+                  child: Container(
+                    alignment: AlignmentDirectional.center,
+                    child: AutoSizeText(
+                      TKey.cellVoltage.tr,
+                      maxLines: 1,
+                      style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          VerticalDivider(width: 16.w, color: Colors.transparent),
+        ],
+      ),
+    ],
+  );
+
+  Widget buildContent(ViewType viewState, BatteryClusterLogic logic) {
+    return switch (viewState) {
+      _ when viewState == ViewType.loading => buildLoading,
+      _ when viewState == ViewType.common => BaseLineChart(
+        socList: logic.arrList,
+      ),
+      _ when viewState == ViewType.empty => buildEmpty,
+      _ => buildEmpty,
+    };
+  }
+
+  Widget get buildLoading =>
+      Center(child: CircularProgressIndicator(color: Colors.white));
+
+  Widget get buildEmpty => Center(
+    child: Text(TKey.noDataAvailable.tr, style: TextStyle(color: Colors.white)),
+  );
+}
