@@ -112,6 +112,8 @@ dev_dependencies:
   #objectbox_generator: 5.2.0
 
 flutter:
+  config:
+    enable-swift-package-manager: false
   uses-material-design: true
 
 

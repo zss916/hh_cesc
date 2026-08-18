@@ -46,10 +46,7 @@ class OliveItemView extends StatelessWidget {
                 else
                   buildReport2(logic),
 
-                buildSiteInfo(
-                  siteDetail: logic.siteDetail,
-                  // deviceCount: logic.siteDetail?.containerCount ?? 0,
-                ),
+                buildSiteInfo(siteDetail: logic.siteDetail),
 
                 SizedBox(height: 200.h),
               ],

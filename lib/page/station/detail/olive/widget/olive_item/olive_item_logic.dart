@@ -29,13 +29,6 @@ class OliveItemLogic extends GetxController {
 
   ///拓扑图
   SiteTopologyEntity? topology;
-  /* double get pvPower => topology?.pv?.power ?? 0;
-  double get gridPower => topology?.grid?.power ?? 0;
-  double get loadPower => topology?.load?.power ?? 0;
-  double get storagePower => topology?.storage?.power ?? 0;
-  double get storageSoc => topology?.storage?.soc ?? 0;
-  bool get isHasPv => topology?.hasPv ?? false;
-  List<SiteTopologyLine> get line => topology?.line ?? [];*/
 
   ///判断获取货币符号
   String get currencyUnit => User.to.getCurrencyUnit();
@@ -169,8 +162,6 @@ class OliveItemLogic extends GetxController {
     }
   }
 
-  // CancelToken topologyCancelToken = CancelToken();
-
   ///获取拓扑图
   Future<void> loadSiteTopologyDelayed({CancelToken? cancelToken}) async {
     SiteTopologyEntity? value = await SiteAPI.getSiteTopology(
@@ -201,7 +192,6 @@ class OliveItemLogic extends GetxController {
 
   ///获取今天充电/今天放电
   Future<void> getPointDetails() async {
-    ///todo
     SiteDetailEntity? value = await SiteAPI.getPointDetails(
       siteId: siteId ?? 0,
     );

@@ -1,27 +1,14 @@
 part of 'index.dart';
 
-class LoginLogic extends GetxController {
+class LoginLogic extends GetxController with TextEditCtrlHelper {
   String account = '';
   String password = '';
   bool isChecked = false;
 
-  FocusNode? accountFocusNode = FocusNode();
-  FocusNode? pwdFocusNode = FocusNode();
-  TextEditingController? accountTextEditCtrl = TextEditingController();
-  TextEditingController? pwdTextEditCtrl = TextEditingController();
-
   @override
   void onInit() {
     super.onInit();
-
-    if (accountFocusNode != null) {
-      accountFocusNode?.unfocus();
-      accountFocusNode = null;
-    }
-    if (pwdFocusNode != null) {
-      pwdFocusNode?.unfocus();
-      pwdFocusNode = null;
-    }
+    initTextEditHelper();
   }
 
   @override
@@ -45,23 +32,7 @@ class LoginLogic extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    if (accountFocusNode != null) {
-      accountFocusNode?.dispose();
-      accountFocusNode = null;
-    }
-    if (pwdFocusNode != null) {
-      pwdFocusNode?.unfocus();
-      pwdFocusNode = null;
-    }
-    if (accountTextEditCtrl != null) {
-      accountTextEditCtrl?.dispose();
-      accountTextEditCtrl = null;
-    }
-    if (pwdTextEditCtrl != null) {
-      pwdTextEditCtrl?.dispose();
-      pwdTextEditCtrl = null;
-    }
-
+    disposeTextEditHelper();
     AppLoading.dismiss();
   }
 
