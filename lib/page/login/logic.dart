@@ -101,10 +101,7 @@ class LoginLogic extends GetxController with TextEditCtrlHelper {
       User.setLimitLogin(limit: !(userInfo?.canLogin ?? true));
       if (userInfo?.canLogin ?? true) {
         await loadCurrencyList(userInfo);
-        final (
-          bool isSuccessful,
-          List<SiteEntity> list,
-        ) = await SiteAPI.postSiteList(
+        List<SiteEntity> list = await SiteAPI.postSiteList(
           pageNum: 1,
           pageSize: 2,
           name: null,

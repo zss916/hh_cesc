@@ -135,10 +135,10 @@ class StationPage extends StatelessWidget {
       child: ListView.separated(
         // cacheExtent: 175,
         padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
-        itemCount: logic.data.length,
+        itemCount: logic.siteList.length,
         itemBuilder: (BuildContext context, int index) {
-          SiteEntity item = logic.data[index];
-          return buildItem(item, isLast: (index + 1 == logic.data.length));
+          SiteEntity item = logic.siteList[index];
+          return buildItem(item, isLast: (index + 1 == logic.siteList.length));
         },
         separatorBuilder: (BuildContext context, int index) =>
             Divider(height: 16.h, color: Colors.transparent),

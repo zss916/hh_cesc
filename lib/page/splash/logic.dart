@@ -33,8 +33,11 @@ class SplashLogic extends GetxController {
 
   Future<void> toNext({int seconds = 2}) async {
     if (User.to.isLogin) {
-      final (bool isSuccessful, List<SiteEntity> list) =
-          await SiteAPI.postSiteList(pageNum: 1, name: null, status: null);
+      List<SiteEntity> list = await SiteAPI.postSiteList(
+        pageNum: 1,
+        name: null,
+        status: null,
+      );
       if (list.length == 1) {
         PageTools.offAllNamedStation(siteId: list.first.id, site: list.first);
       } else {

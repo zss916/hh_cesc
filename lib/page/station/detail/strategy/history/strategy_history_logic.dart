@@ -85,6 +85,7 @@ class StrategyHistoryLogic extends GetxController
         update();
         update();
       case ApiError(:final errorState, :final msg):
+        refreshAndLoadCtl(pageNum <= 1, _list.length);
         state = Failure();
         update();
         if (errorState == ErrorState.error) {

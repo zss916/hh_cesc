@@ -1,15 +1,10 @@
 part of 'index.dart';
 
-class StationLogic extends ViewStateController {
-  List<SiteEntity> data = [];
+class StationLogic extends ViewStateController with RefreshControllerHelper {
+  List<SiteEntity> siteList = [];
   int pageNum = 1;
   String? nameParam;
   int? statusParam;
-
-  late RefreshController refreshCtrl = RefreshController(
-    initialRefresh: false,
-    initialLoadStatus: LoadStatus.canLoading,
-  );
 
   ///站点状态数据
   List<Map<String, dynamic>> get stationStatus => [
@@ -42,8 +37,8 @@ class StationLogic extends ViewStateController {
 
   @override
   void onClose() {
-    refreshCtrl.dispose();
     super.onClose();
+    onRefreshDispose();
     onDisposeNetWork();
     AppLoading.dismiss();
   }
@@ -85,42 +80,35 @@ class StationLogic extends ViewStateController {
     loadList(pageNumber: pageNum);
   }
 
-  void refreshAndLoadCtl(bool isRefresh, int size) {
-    if (isRefresh) {
-      refreshCtrl.refreshCompleted(resetFooterState: true);
-    } else {
-      if (size == 0) {
-        refreshCtrl.loadNoData();
-      } else {
-        refreshCtrl.loadComplete();
-      }
-    }
-  }
-
   Future<void> loadList({int pageNumber = 1, bool isLoading = false}) async {
     if (isLoading) {
       AppLoading.show();
     }
-
-    final (
-      bool isSuccessful,
-      List<SiteEntity> value,
-    ) = await SiteAPI.postSiteList(
+    ApiResult<List<SiteEntity>> result = await SiteAPI.fetchSites(
       pageNum: pageNumber,
       name: nameParam,
       status: statusParam,
     ).whenComplete(() => AppLoading.dismiss());
-    if (isSuccessful) {
-      if (pageNumber == 1) {
-        data = value;
-      } else {
-        data.addAll(value);
-      }
-    } else {
-      pageNum -= 1;
+    switch (result) {
+      case ApiSuccess(:final data):
+        if (pageNumber == 1) {
+          siteList = data;
+        } else {
+          siteList.addAll(data);
+        }
+        refreshAndLoadCtl(pageNumber <= 1, data.length);
+        siteList.isEmpty ? onEmpty() : onComplete();
+        update();
+      case ApiError(:final errorState, :final msg):
+        onError();
+        update();
+        refreshAndLoadCtl(pageNum <= 1, siteList.length);
+        pageNum -= 1;
+        if (errorState == ErrorState.error) {
+          AppLoading.toast(msg);
+        } else {
+          AppLoading.toast("Fail");
+        }
     }
-    refreshAndLoadCtl(pageNumber <= 1, value.length);
-    data.isEmpty ? onEmpty() : onComplete();
-    update();
   }
 }

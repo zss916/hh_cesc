@@ -15,6 +15,7 @@ import 'package:cescpro/http/bean/site_topology_entity.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
+import 'package:cescpro/http/result/result.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -71,7 +72,7 @@ class SiteAPI {
   }
 
   ///站点列表
-  static Future<(bool, List<SiteEntity>)> postSiteList({
+  static Future<List<SiteEntity>> postSiteList({
     required int pageNum,
     int? cid,
     String? location,
@@ -86,7 +87,7 @@ class SiteAPI {
     int pageSize = 10,
   }) async {
     if (Mock.isGuest) {
-      return (true, Mock.site(pageNum == 1, status));
+      return Mock.site(pageNum == 1, status);
     }
 
     try {
@@ -130,13 +131,81 @@ class SiteAPI {
               jsonList.map((e) => SiteEntity.fromJson(e)).toList(),
           (result['data']['list'] as List),
         );
-        return (true, value);
+        return value;
       } else {
-        //AppLoading.toast(result["message"]);
-        return (false, <SiteEntity>[]);
+        return <SiteEntity>[];
       }
     } catch (error) {
-      return (false, <SiteEntity>[]);
+      return <SiteEntity>[];
+    }
+  }
+
+  ///获取站点列表
+  static Future<ApiResult<List<SiteEntity>>> fetchSites({
+    required int pageNum,
+    int? cid,
+    String? location,
+    String? name,
+    List<int>? siteIds,
+    int? status,
+    String? modifyTimeStart,
+    String? modifyTimeEnd,
+    int? groupId,
+    String? adcode,
+    int? total,
+    int pageSize = 10,
+  }) async {
+    if (Mock.isGuest) {
+      return ApiSuccess(Mock.site(pageNum == 1, status));
+    }
+
+    try {
+      Map<String, dynamic> map = {};
+      map["pageNum"] = pageNum;
+      map["pageSize"] = pageSize;
+      if (cid != null) {
+        map["cid"] = cid;
+      }
+      if (location != null) {
+        map["location"] = location;
+      }
+      if (name != null) {
+        map["name"] = name;
+      }
+      if (siteIds != null) {
+        map["siteIds"] = siteIds;
+      }
+      if (status != null) {
+        map["status"] = status;
+      }
+      if (modifyTimeStart != null) {
+        map["modifyTimeStart"] = modifyTimeStart;
+      }
+      if (modifyTimeEnd != null) {
+        map["modifyTimeEnd"] = modifyTimeEnd;
+      }
+      if (groupId != null) {
+        map["groupId"] = groupId;
+      }
+      if (adcode != null) {
+        map["adcode"] = adcode;
+      }
+      if (total != null) {
+        map["total"] = total;
+      }
+      var result = await Http.instance.post(ApiPath.postSiteList, data: map);
+      if (result["code"] == HttpStatus.ok) {
+        List<SiteEntity> value = await compute(
+          (List<dynamic> jsonList) =>
+              jsonList.map((e) => SiteEntity.fromJson(e)).toList(),
+          (result['data']['list'] as List),
+        );
+        return ApiSuccess(value);
+      } else {
+        return ApiError(ErrorState.error, result["message"]);
+      }
+    } catch (error) {
+      return ApiError(ErrorState.exception, error.toString());
     }
   }
 
