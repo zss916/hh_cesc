@@ -35,31 +35,7 @@ abstract class AdminAPI {
     }
   }
 
-  ///获取当前登录用户信息
-  /*
   static Future<UserInfoEntity?> getUserInfo({String? id}) async {
-    try {
-      Map<String, dynamic> params = {};
-      if (id != null) {
-        params["id"] = id;
-      }
-      var result = await Http.instance.get(ApiPath.getInfoApp, query: params);
-      if (result["code"] == HttpStatus.ok) {
-        UserInfoEntity value = UserInfoEntity.fromJson(
-          result["data"]["userInfo"],
-        );
-        return value;
-      } else {
-        AppLoading.toast(result["message"]);
-        return null;
-      }
-    } catch (error) {
-      return null;
-    }
-  }
-*/
-
-  static Future<UserInfoEntity?> getUserInfo2({String? id}) async {
     try {
       Map<String, dynamic> params = {};
       if (id != null) {
@@ -111,6 +87,7 @@ abstract class AdminAPI {
     }
   }
 */
+
   static Future<List<CurrencyEntity>> getCurrencyList() async {
     try {
       var result = await Http.instance.get(ApiPath.getCurrencyList);

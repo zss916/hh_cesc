@@ -24,7 +24,7 @@ class ServiceLogic extends GetxController {
   }
 
   Future<void> loadUserInfo() async {
-    value = await AdminAPI.getUserInfo2();
+    value = await AdminAPI.getUserInfo();
     update();
     /* await AdminAPI.getUserProfile()
         .listen(

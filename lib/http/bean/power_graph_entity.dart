@@ -37,15 +37,6 @@ class PowerGraphList {
   ///y轴数据
   double? val;
 
-  //String dd => DateFormat.;
-
-  ///x轴数据
-  //double get xAxis => ((time ~/ 3600) % 24).toDouble();
-  //int get xAxis => Duration(seconds: time).inHours;
-
-  ///坐标
-  // FlSpot get mFlSpot => FlSpot(time.toDouble(), val);
-
   PowerGraphList();
 
   factory PowerGraphList.fromJson(Map<String, dynamic> json) =>

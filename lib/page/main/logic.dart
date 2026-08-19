@@ -25,7 +25,7 @@ class MainLogic extends GetxController {
 
   Future<String> loadCurrencyList() async {
     List<CurrencyEntity> list = await AdminAPI.getCurrencyList();
-    UserInfoEntity? userInfo = await AdminAPI.getUserInfo2();
+    UserInfoEntity? userInfo = await AdminAPI.getUserInfo();
     if (userInfo != null) {
       User.to.setIsShowRevenue(isShowRevenue: userInfo.isShowRevenue);
     }

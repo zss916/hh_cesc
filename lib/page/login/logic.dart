@@ -97,7 +97,7 @@ class LoginLogic extends GetxController with TextEditCtrlHelper {
       User.to.setIsGuest(isGuest: false);
       User.setTokenHead(tokenHead: value.tokenHeadValue);
       User.setToken(token: value.tokenValue);
-      UserInfoEntity? userInfo = await AdminAPI.getUserInfo2();
+      UserInfoEntity? userInfo = await AdminAPI.getUserInfo();
       User.setLimitLogin(limit: !(userInfo?.canLogin ?? true));
       if (userInfo?.canLogin ?? true) {
         await loadCurrencyList(userInfo);
@@ -156,7 +156,7 @@ class LoginLogic extends GetxController with TextEditCtrlHelper {
       User.to.setIsGuest(isGuest: true);
       User.setTokenHead(tokenHead: value.tokenHeadValue);
       User.setToken(token: value.tokenValue);
-      UserInfoEntity? userInfo = await AdminAPI.getUserInfo2();
+      UserInfoEntity? userInfo = await AdminAPI.getUserInfo();
       await loadCurrencyList(userInfo);
       PageTools.offAllNamedMain();
     }

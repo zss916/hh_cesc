@@ -18,18 +18,6 @@ class SiteTopologyEntity {
   bool? hasPv; //是否有光伏
   ///load只会进，pv只会出
 
-  ///pv 是否出
-  /* bool get isPVOut =>
-      (line ?? []).any((e) => (((e.from ?? "").trim().toLowerCase()) == "pv"));
-*/
-  ///load 是否进
-  /*
-  bool get isLoadIn =>
-      (line ?? []).any((e) => (((e.to ?? "").trim().toLowerCase()) == "load"));
-*/
-  //{from: GRID, to: STORAGE}
-  //    "line": [{from: GRID, to: LOAD}, {from: GRID, to: STORAGE}]
-
   bool get isHasLoad => (line ?? []).any(
     (e) =>
         (((e.from ?? "").trim().toLowerCase()) == "load") ||

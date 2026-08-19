@@ -84,7 +84,7 @@ class RealTimeAlarmLogic extends ViewStateController
       startTimeMill: startTimeMill,
       endTimeMill: endTimeMill,
       status: 1,
-    ).whenComplete(() => AppLoading.dismiss());
+    );
     if (isSuccessful) {
       if (pageNum == 1) {
         //data.where((e) => (e.status ?? 0) == 0).toList().assignAll(value);

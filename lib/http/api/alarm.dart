@@ -53,7 +53,7 @@ class AlarmAPI {
     }
   }
 
-  ///告警列表，全量
+  ///告警列表，全量ApiResult
   static Future<(bool, List<AlarmItemEntity>)> getListPageApp({
     int? pageNum = 1,
     int? pageSize = 10,

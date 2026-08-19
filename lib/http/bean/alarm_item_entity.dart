@@ -45,23 +45,16 @@ class AlarmItemEntity {
     return jsonEncode(this);
   }
 
-  String getStartTime() {
-    return DateFormat(
-      'yyyy-MM-dd HH:mm:ss',
-    ).format(DateTime.fromMillisecondsSinceEpoch(startTimeMill ?? 0));
-  }
+  String get getStartTime => DateFormat(
+    'yyyy-MM-dd HH:mm:ss',
+  ).format(DateTime.fromMillisecondsSinceEpoch(startTimeMill ?? 0));
 
-  String? get alarmLevelType {
-    if (alarmLevel == 1) {
-      return TKey.alarmLevel1.tr;
-    } else if (alarmLevel == 2) {
-      return TKey.alarmLevel2.tr;
-    } else if (alarmLevel == 3) {
-      return TKey.alarmLevel3.tr;
-    } else {
-      return null;
-    }
-  }
+  String? get alarmLevelType => switch (alarmLevel) {
+    1 => TKey.alarmLevel1.tr,
+    2 => TKey.alarmLevel2.tr,
+    3 => TKey.alarmLevel3.tr,
+    _ => null,
+  };
 
   String get showName => Get.isZh ? (name ?? "") : (enName ?? "");
 

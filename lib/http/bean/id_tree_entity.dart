@@ -65,9 +65,6 @@ class IdTreeEntity {
     return label ?? "";
   }
 
-  /*String get showChildLabel =>
-      Get.isEn ? (childLabelNameEn ?? "") : (childLabelNameCn ?? "");
-*/
   int? get didValue => val;
 
   int? get idValue => child?.first.val;
@@ -82,33 +79,3 @@ class IdTreeEntity {
     return jsonEncode(this);
   }
 }
-
-/*@JsonSerializable()
-class IdTreeChild {
-  String? label;
-  String? key;
-  int? val;
-  dynamic type;
-  dynamic labelVal;
-  String? labelCn;
-  String? labelEn;
-  List<IdTreeChild>? child;
-
-  String get showLabel => Get.isEn ? (labelEn ?? "") : (labelCn ?? "");
-
-  int? get didValue => val;
-
-  int? get idValue => child?.first.val;
-
-  IdTreeChild();
-
-  factory IdTreeChild.fromJson(Map<String, dynamic> json) =>
-      $IdTreeChildFromJson(json);
-
-  Map<String, dynamic> toJson() => $IdTreeChildToJson(this);
-
-  @override
-  String toString() {
-    return jsonEncode(this);
-  }
-}*/

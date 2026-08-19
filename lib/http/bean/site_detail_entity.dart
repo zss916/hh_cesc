@@ -66,42 +66,15 @@ class SiteDetailEntity {
 
   String get showName => (name ?? "").replaceAll(RegExp(r'[\\/:*?"<>|]'), '_');
 
-  String get workModel {
-    if (status == 99) {
-      return "Normal";
-    } else if (status == 0) {
-      return "Stop";
-    } else if (status == 1) {
-      return "Charge";
-    } else if (status == 2) {
-      return "Discharge";
-    } else if (status == 3) {
-      return "Standby";
-    } else if (status == 4) {
-      return "Fault";
-    } else if (status == -3) {
-      return "interrupt";
-    } else if (status == -2) {
-      return "alarm";
-    } else {
-      return "";
-    }
-  }
-
-  /* String showValue(double value) {
-    if (value > 1000) {
-      double mwhValue = value / 1000;
-      return mwhValue.formatMWh();
-    } else {
-      return value.formatKWh();
-    }
-  }*/
-
-  /*  String showUnit(double value) {
-    if (value > 1000) {
-      return "MWh";
-    } else {
-      return "kWh";
-    }
-  }*/
+  String get workModel => switch (status) {
+    99 => "Normal",
+    0 => "Stop",
+    1 => "Charge",
+    2 => "Discharge",
+    3 => "Standby",
+    4 => "Fault",
+    -3 => "interrupt",
+    -2 => "alarm",
+    _ => "",
+  };
 }
