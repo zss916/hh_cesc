@@ -1,10 +1,12 @@
 part of 'index.dart';
 
-class StationLogic extends ViewStateController with RefreshControllerHelper {
+class StationLogic extends GetxController
+    with NetWorkRefreshEvent, RefreshControllerHelper {
   List<SiteEntity> siteList = [];
   int pageNum = 1;
   String? nameParam;
   int? statusParam;
+  UiState state = Loading();
 
   ///站点状态数据
   List<Map<String, dynamic>> get stationStatus => [
@@ -20,8 +22,6 @@ class StationLogic extends ViewStateController with RefreshControllerHelper {
   @override
   void onInit() {
     super.onInit();
-    onLoading();
-    update();
     onNetWorkRefresh(
       onRefresh: () {
         loadData(loading: true, isDelayed: true);
@@ -45,14 +45,14 @@ class StationLogic extends ViewStateController with RefreshControllerHelper {
 
   Future<void> loadData({bool loading = true, bool? isDelayed}) async {
     if (loading) {
-      onLoading();
+      state = Loading();
       update();
       if (isDelayed == true) await Future.delayed(Duration(seconds: 2));
     }
 
     final isConnected = await NetworkStatusService.instance.isConnected();
     if (!isConnected) {
-      onOffline();
+      state = Offline();
       update();
       return;
     }
@@ -63,7 +63,7 @@ class StationLogic extends ViewStateController with RefreshControllerHelper {
   // //99.正常 (0:停止1:充电2:放电3:待机) 4: 故障，-3:中断 -2:告警
   void toSearch({bool isLoading = false}) {
     if (isLoading) {
-      onLoading();
+      state = Loading();
       update();
     }
     pageNum = 1;
@@ -97,13 +97,15 @@ class StationLogic extends ViewStateController with RefreshControllerHelper {
           siteList.addAll(data);
         }
         refreshAndLoadCtl(pageNumber <= 1, data.length);
-        siteList.isEmpty ? onEmpty() : onComplete();
+        state = siteList.isEmpty
+            ? Empty()
+            : Success<List<SiteEntity>>(siteList);
         update();
       case ApiError(:final errorState, :final msg):
-        onError();
-        update();
-        refreshAndLoadCtl(pageNum <= 1, siteList.length);
         pageNum -= 1;
+        refreshAndLoadCtl(pageNum <= 1, siteList.length);
+        state = Failure();
+        update();
         if (errorState == ErrorState.error) {
           AppLoading.toast(msg);
         } else {

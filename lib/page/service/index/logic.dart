@@ -1,17 +1,16 @@
 part of 'index.dart';
 
-class ServiceLogic extends GetxController {
+class ServiceLogic extends GetxController with MessageEventHelper {
   UserInfoEntity? value;
   String get userName => value?.username ?? '--';
   String get icon => value?.icon ?? '';
   String get uid => value?.id ?? '';
   int unreadNum = 0;
-  late StreamSubscription<MessageEvent> messageEvent;
 
   @override
   void onInit() {
     super.onInit();
-    messageEvent = AppEventBus.eventBus.on<MessageEvent>().listen((event) {
+    onEvent(() {
       getUnreadNum();
     });
   }
@@ -60,9 +59,9 @@ class ServiceLogic extends GetxController {
 
   @override
   void onClose() {
-    messageEvent.cancel();
     AppLoading.dismiss();
     super.onClose();
+    onDispose();
   }
 
   ///编辑头像

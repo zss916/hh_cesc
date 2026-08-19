@@ -69,7 +69,6 @@ class HomeLogic extends ViewStateController {
       return;
     }
     loadHome();
-    //fetchData();
   }
 
   Future<void> loadHome() async {

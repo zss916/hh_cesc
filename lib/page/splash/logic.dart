@@ -2,11 +2,6 @@ part of 'index.dart';
 
 class SplashLogic extends GetxController {
   @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
   void onReady() {
     super.onReady();
     /*if (GetPlatform.isAndroid && !AppSetting.isOverseas) {
@@ -48,10 +43,5 @@ class SplashLogic extends GetxController {
         PageTools.offAndToNamedLogin();
       });
     }
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 }

@@ -21,271 +21,226 @@ class StationPage extends StatelessWidget {
       body: GetBuilder<StationLogic>(
         init: StationLogic(),
         builder: (logic) => buildPage(
-          child: buildBody(viewState: logic.viewState, logic: logic),
+          child: buildBodyUI(state: logic.state, logic: logic),
           logic: logic,
         ),
       ),
     );
   }
 
-  Widget buildBody({
-    required ViewStateEnum viewState,
-    required StationLogic logic,
-  }) {
-    return switch (viewState) {
-      ViewStateEnum.common => buildList(logic: logic),
-      ViewStateEnum.empty => buildEmpty(logic: logic),
-      ViewStateEnum.loading => Container(
-        margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CescGlowLoading()),
-      ),
-      ViewStateEnum.offline => Center(
-        child: OfflineOnRefresh(
-          onCall: () {
-            AppEventBus.eventBus.fire(NetWorkRefresh());
-          },
-        ),
-      ),
+  Widget buildBodyUI({required UiState state, required StationLogic logic}) {
+    return switch (state) {
+      Success(:final data) => buildList(data: data, logic: logic),
+      Empty() => BuildEmpty(),
+      Loading() => BuildLoading(),
+      Offline() => BuildOffline(),
       _ => SizedBox.shrink(),
     };
   }
 
-  Widget buildPage({required Widget child, required StationLogic logic}) {
-    return Column(
-      children: [
-        Container(
-          width: double.maxFinite,
-          margin: EdgeInsetsDirectional.only(start: 16, end: 11, bottom: 6),
-          child: Row(
-            children: [
-              Expanded(
-                child: SearchBarWidget(
-                  logic: logic,
-                  onInput: () {
-                    logic.toSearch(isLoading: true);
-                  },
-                ),
-              ),
-              SizedBox.shrink(),
-            ],
-          ),
-        ),
-        Container(
-          height: 42,
-          margin: EdgeInsetsDirectional.only(bottom: 3, start: 5),
-          child: Row(
-            children: [
-              Expanded(child: SelectStatusWidget(logic: logic)),
-              FilterWidget(siteStatus: logic.statusParam),
-            ],
-          ),
-        ),
-        Expanded(child: child),
-      ],
-    );
-  }
-
-  Widget buildEmpty({required StationLogic logic}) => SizedBox(
-    width: double.maxFinite,
-    height: double.maxFinite,
-    child: GestureDetector(
-      onTap: () {
-        logic.refreshData(isLoading: true);
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+  Widget buildPage({required Widget child, required StationLogic logic}) =>
+      Column(
         children: [
-          Image.asset(Assets.imgEmpty, width: 200, height: 95),
-          Text(
-            TKey.noDataAvailable.tr,
-            style: TextStyle(fontSize: 18, color: Color(0xFF909399)),
-          ),
           Container(
-            margin: EdgeInsetsDirectional.only(top: 17.h, bottom: 120.h),
-            child: Text(
-              TKey.noDataAvailableTip.tr,
-              style: TextStyle(fontSize: 14, color: Color(0xFF909399)),
+            width: double.maxFinite,
+            margin: EdgeInsetsDirectional.only(start: 16, end: 11, bottom: 6),
+            child: Row(
+              children: [
+                Expanded(
+                  child: SearchBarWidget(
+                    logic: logic,
+                    onInput: () {
+                      logic.toSearch(isLoading: true);
+                    },
+                  ),
+                ),
+                SizedBox.shrink(),
+              ],
             ),
           ),
+          Container(
+            height: 42,
+            margin: EdgeInsetsDirectional.only(bottom: 3, start: 5),
+            child: Row(
+              children: [
+                Expanded(child: SelectStatusWidget(logic: logic)),
+                FilterWidget(siteStatus: logic.statusParam),
+              ],
+            ),
+          ),
+          Expanded(child: child),
         ],
-      ),
+      );
+
+  Widget buildList({
+    required List<SiteEntity> data,
+    required StationLogic logic,
+  }) => SmartRefresher(
+    header: MaterialClassicHeader(),
+    footer: ClassicFooter(
+      idleText: TKey.idleLoadingText.tr,
+      canLoadingText: TKey.canLoadingText.tr,
+      loadingText: TKey.loadingText.tr,
+      noDataText: TKey.noMoreText.tr,
+      failedText: TKey.loadFailedText.tr,
+    ),
+    enableSmartPreload: true,
+    enablePullDown: true,
+    enablePullUp: true,
+    controller: logic.refreshCtrl,
+    onRefresh: () {
+      logic.refreshData();
+    },
+    onLoading: () {
+      logic.loadMoreData();
+    },
+    child: ListView.separated(
+      padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
+      itemCount: data.length,
+      itemBuilder: (BuildContext context, int index) {
+        SiteEntity item = data[index];
+        return buildItem(item, isLast: (index + 1 == data.length));
+      },
+      separatorBuilder: (BuildContext context, int index) =>
+          Divider(height: 16.h, color: Colors.transparent),
     ),
   );
 
-  Widget buildList({required StationLogic logic}) {
-    return SmartRefresher(
-      header: MaterialClassicHeader(),
-      footer: ClassicFooter(
-        idleText: TKey.idleLoadingText.tr,
-        canLoadingText: TKey.canLoadingText.tr,
-        loadingText: TKey.loadingText.tr,
-        noDataText: TKey.noMoreText.tr,
-        failedText: TKey.loadFailedText.tr,
+  Widget buildItem(SiteEntity item, {bool isLast = false}) => GestureDetector(
+    onTap: () {
+      PageTools.toStationDetail(siteId: item.id, site: item);
+    },
+    child: Container(
+      width: double.maxFinite,
+      // height: 175.h,
+      constraints: BoxConstraints(minHeight: 175.h),
+      padding: EdgeInsetsDirectional.only(
+        start: 8.w,
+        end: 8.w,
+        top: 14.h,
+        bottom: 14.h,
       ),
-      enableSmartPreload: true,
-      enablePullDown: true,
-      enablePullUp: true,
-      controller: logic.refreshCtrl,
-      onRefresh: () {
-        logic.refreshData();
-      },
-      onLoading: () {
-        logic.loadMoreData();
-      },
-      child: ListView.separated(
-        // cacheExtent: 175,
-        padding: EdgeInsetsDirectional.only(top: 0, bottom: 0.h),
-        itemCount: logic.siteList.length,
-        itemBuilder: (BuildContext context, int index) {
-          SiteEntity item = logic.siteList[index];
-          return buildItem(item, isLast: (index + 1 == logic.siteList.length));
-        },
-        separatorBuilder: (BuildContext context, int index) =>
-            Divider(height: 16.h, color: Colors.transparent),
+      margin: EdgeInsetsDirectional.only(
+        start: 16.w,
+        end: 16.w,
+        bottom: isLast ? 50.h : 0,
       ),
-    );
-  }
-
-  Widget buildItem(SiteEntity item, {bool isLast = false}) {
-    return GestureDetector(
-      onTap: () {
-        PageTools.toStationDetail(siteId: item.id, site: item);
-      },
-      child: Container(
-        width: double.maxFinite,
-        // height: 175.h,
-        constraints: BoxConstraints(minHeight: 175.h),
-        padding: EdgeInsetsDirectional.only(
-          start: 8.w,
-          end: 8.w,
-          top: 14.h,
-          bottom: 14.h,
-        ),
-        margin: EdgeInsetsDirectional.only(
-          start: 16.w,
-          end: 16.w,
-          bottom: isLast ? 50.h : 0,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: Color(0xFF313540),
-        ),
-        child: Column(
-          children: [
-            Container(
-              width: double.maxFinite,
-              margin: EdgeInsetsDirectional.only(
-                bottom: 12.h,
-                start: 8.w,
-                end: 8.w,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      item.showSiteName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
-                    ),
-                  ),
-                  //Spacer(),
-                  SizedBox(width: 10),
-                  if (item.status != null) StatusTag(status: item.status ?? 99),
-                  Wrap(
-                    spacing: 0.w,
-                    children: [
-                      //if ((item.types ?? []).isNotEmpty)
-                      // CommonTag(type: (item.types ?? []).first),
-                    ],
-                  ),
-                ],
-              ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(14),
+        color: Color(0xFF313540),
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: double.maxFinite,
+            margin: EdgeInsetsDirectional.only(
+              bottom: 12.h,
+              start: 8.w,
+              end: 8.w,
             ),
-            Divider(height: 1, color: Color(0x14EEF2F8)),
-            Container(
-              margin: EdgeInsetsDirectional.only(
-                top: 10.h,
-                start: 8.w,
-                end: 8.w,
-              ),
-              width: double.maxFinite,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox.shrink(),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "SOC  ",
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    item.showSiteName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                  ),
+                ),
+                //Spacer(),
+                SizedBox(width: 10),
+                if (item.status != null) StatusTag(status: item.status ?? 99),
+                Wrap(
+                  spacing: 0.w,
+                  children: [
+                    //if ((item.types ?? []).isNotEmpty)
+                    // CommonTag(type: (item.types ?? []).first),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Divider(height: 1, color: Color(0x14EEF2F8)),
+          Container(
+            margin: EdgeInsetsDirectional.only(top: 10.h, start: 8.w, end: 8.w),
+            width: double.maxFinite,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox.shrink(),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "SOC  ",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xA6FFFFFF),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              item.showSoc,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Color(0xA6FFFFFF),
+                                color: Color(0xFFFFFFFF),
                               ),
                             ),
-                            Expanded(
-                              child: Text(
-                                item.showSoc,
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Divider(height: 8.h, color: Colors.transparent),
-                        TextRichWidget(
-                          title: "${TKey.energyStoragePower.tr}  ",
-                          value: item.showPower,
-                        ),
-                        Divider(height: 8.h, color: Colors.transparent),
-                        TextRichWidget(
-                          title: "${TKey.photovoltaicPower.tr}  ",
-                          value: item.showPvPower,
-                        ),
-                        Divider(height: 8.h, color: Colors.transparent),
-                        /* TextRichWidget(
+                          ),
+                        ],
+                      ),
+                      Divider(height: 8.h, color: Colors.transparent),
+                      TextRichWidget(
+                        title: "${TKey.energyStoragePower.tr}  ",
+                        value: item.showPower,
+                      ),
+                      Divider(height: 8.h, color: Colors.transparent),
+                      TextRichWidget(
+                        title: "${TKey.photovoltaicPower.tr}  ",
+                        value: item.showPvPower,
+                      ),
+                      Divider(height: 8.h, color: Colors.transparent),
+                      /* TextRichWidget(
                           title: "${TKey.chargeAndDischarge.tr}  ",
                           value: item.chargeAndRecharge,
                         ),*/
-                        TextRichWidget(
-                          title: "${TKey.charge.tr}  ",
-                          value: item.showCharge,
-                        ),
-                        Divider(height: 8.h, color: Colors.transparent),
-                        TextRichWidget(
-                          title: "${TKey.discharge.tr}  ",
-                          value: item.showRecharge,
-                        ),
-                      ],
-                    ),
-                  ),
-                  if (item.picture == null)
-                    Container(
-                      width: 90.r,
-                      height: 90.r,
-                      //padding: EdgeInsetsDirectional.all(10),
-                      decoration: BoxDecoration(color: Colors.white12),
-                      child: Image.asset(
-                        Assets.imgLogoText,
-                        scale: 2,
-                        color: Colors.white54,
+                      TextRichWidget(
+                        title: "${TKey.charge.tr}  ",
+                        value: item.showCharge,
                       ),
-                    )
-                  else
-                    Container(
-                      width: 90.r,
-                      height: 90.r,
-                      decoration: BoxDecoration(
-                        color: Colors.white12,
-                        /*image: DecorationImage(
+                      Divider(height: 8.h, color: Colors.transparent),
+                      TextRichWidget(
+                        title: "${TKey.discharge.tr}  ",
+                        value: item.showRecharge,
+                      ),
+                    ],
+                  ),
+                ),
+                if (item.picture == null)
+                  Container(
+                    width: 90.r,
+                    height: 90.r,
+                    //padding: EdgeInsetsDirectional.all(10),
+                    decoration: BoxDecoration(color: Colors.white12),
+                    child: Image.asset(
+                      Assets.imgLogoText,
+                      scale: 2,
+                      color: Colors.white54,
+                    ),
+                  )
+                else
+                  Container(
+                    width: 90.r,
+                    height: 90.r,
+                    decoration: BoxDecoration(
+                      color: Colors.white12,
+                      /*image: DecorationImage(
                           fit: BoxFit.cover,
                           image: CachedNetworkImageProvider(
                             item.picture ?? "",
@@ -294,32 +249,31 @@ class StationPage extends StatelessWidget {
                             },
                           ),
                         ),*/
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl: item.picture ?? "",
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) {
-                          return Image.asset(
-                            Assets.imgLogoText,
-                            scale: 2,
-                            color: Colors.white54,
-                          );
-                        },
-                        errorWidget: (context, url, error) {
-                          return Image.asset(
-                            Assets.imgLogoText,
-                            scale: 2,
-                            color: Colors.white54,
-                          );
-                        },
-                      ),
                     ),
-                ],
-              ),
+                    child: CachedNetworkImage(
+                      imageUrl: item.picture ?? "",
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) {
+                        return Image.asset(
+                          Assets.imgLogoText,
+                          scale: 2,
+                          color: Colors.white54,
+                        );
+                      },
+                      errorWidget: (context, url, error) {
+                        return Image.asset(
+                          Assets.imgLogoText,
+                          scale: 2,
+                          color: Colors.white54,
+                        );
+                      },
+                    ),
+                  ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }
