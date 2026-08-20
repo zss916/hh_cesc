@@ -42,7 +42,7 @@ class RealTimeAlarmView extends StatelessWidget {
                   onCall: (int? value) {
                     logic.alarmLevel = value;
                     logic.update();
-                    logic.toFilter(isLoading: false);
+                    logic.toFilter(isLoading: true);
                   },
                 ),
               ),

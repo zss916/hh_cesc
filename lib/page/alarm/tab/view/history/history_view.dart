@@ -7,7 +7,10 @@ class HistoryAlarmView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HistoryAlarmLogic>(
       init: HistoryAlarmLogic(),
-      builder: (logic) => buildBodyUI(state: logic.state, logic: logic),
+      builder: (logic) => buildPage(
+        logic: logic,
+        child: buildBodyUI(state: logic.state, logic: logic),
+      ),
     );
   }
 
@@ -17,14 +20,8 @@ class HistoryAlarmView extends StatelessWidget {
     required HistoryAlarmLogic logic,
   }) {
     return switch (state) {
-      Success(:final data) => buildPage(
-        child: buildList(data: data, logic: logic),
-        logic: logic,
-      ),
-      Empty() => buildPage(
-        child: buildEmpty(logic: logic),
-        logic: logic,
-      ),
+      Success(:final data) => buildList(data: data, logic: logic),
+      Empty() => buildEmpty(logic: logic),
       Loading() => BuildLoading(),
       Offline() => BuildOffline(),
       Failure() => SizedBox.shrink(),
@@ -45,7 +42,7 @@ class HistoryAlarmView extends StatelessWidget {
                   onCall: (int? value) {
                     logic.alarmLevel = value;
                     logic.update();
-                    logic.toFilter();
+                    logic.toFilter(isLoading: true);
                   },
                 ),
               ),
