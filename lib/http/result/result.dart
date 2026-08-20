@@ -9,7 +9,7 @@ class ApiSuccess<T> extends ApiResult<T> {
 }
 
 class ApiError<T> extends ApiResult<T> {
-  final String msg;
-  final ErrorState errorState;
-  ApiError(this.errorState, this.msg);
+  final String? msg;
+  final ErrorState? errorState;
+  ApiError({this.errorState, this.msg});
 }

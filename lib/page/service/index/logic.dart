@@ -25,18 +25,6 @@ class ServiceLogic extends GetxController with MessageEventHelper {
   Future<void> loadUserInfo() async {
     value = await AdminAPI.getUserInfo();
     update();
-    /* await AdminAPI.getUserProfile()
-        .listen(
-          (data) {
-            // value = data;
-            debugPrint("loadUserInfo=> ${data?.toJson()}");
-            update();
-          },
-          onError: (error) {
-            // handle error
-          },
-        )
-        .asFuture<void>();*/
   }
 
   Future<void> getUnreadNum() async {

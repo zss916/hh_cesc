@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cescpro/components/app_refresh_indicator.dart';
 import 'package:cescpro/core/helper/extension_helper.dart';
 import 'package:cescpro/core/router/index.dart';
 import 'package:cescpro/core/setting/app_setting.dart';
@@ -21,10 +22,8 @@ class OliveItemView extends StatelessWidget {
     return GetBuilder<OliveItemLogic>(
       init: OliveItemLogic(),
       builder: (logic) {
-        return RefreshIndicator(
-          color: Colors.black,
-          backgroundColor: Colors.white,
-          onRefresh: () => refresh(logic),
+        return AppRefreshIndicator(
+          onRefresh: () => logic.loadData(),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -97,10 +96,6 @@ class OliveItemView extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Future<void> refresh(OliveItemLogic logic) async {
-    await logic.loadData();
   }
 
   Widget buildReport(OliveItemLogic logic) => Column(

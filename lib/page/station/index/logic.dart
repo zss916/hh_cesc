@@ -107,7 +107,7 @@ class StationLogic extends GetxController
         state = Failure();
         update();
         if (errorState == ErrorState.error) {
-          AppLoading.toast(msg);
+          AppLoading.toast(msg ?? "");
         } else {
           AppLoading.toast("Fail");
         }

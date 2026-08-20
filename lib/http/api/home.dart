@@ -9,6 +9,8 @@ import 'package:cescpro/http/bean/report_data_entity.dart';
 import 'package:cescpro/http/bean/statistic_report_entity.dart';
 import 'package:cescpro/http/http.dart';
 import 'package:cescpro/http/path.dart';
+import 'package:cescpro/http/result/result.dart';
+import 'package:cescpro/page/home/model.dart';
 import 'package:flutter/foundation.dart';
 
 class HomeAPI {
@@ -71,24 +73,99 @@ class HomeAPI {
     }
   }
 
-  static Future<(HomeStatisticEntity?, HomeData2Entity?)> loadHomeData() async {
+  static Future<ApiResult<HomeStatisticsModel>> loadHomeData() async {
     if (Mock.isGuest) {
-      return Mock.homeData();
+      final (HomeStatisticEntity? value, HomeData2Entity? value2) =
+          Mock.homeData();
+      HomeStatisticsModel data = HomeStatisticsModel();
+      if (value != null) {
+        data = HomeStatisticsModel().copyWith(
+          totalIncome: value.totalIncome,
+          todayIncome: value.todayIncome,
+          lastDayIncome: value.lastDayIncome,
+          deviceNum: value.containerCount,
+          siteNum: value.siteNum,
+          capacity: value.capacity,
+          totalPos: value.totalPos,
+          totalNeg: value.totalNeg,
+          totalPvNeg: value.totalPvNeg,
+          co2: value.co2,
+          coal: value.coal,
+          normalNum: value.normalNum,
+          faultNum: value.faultNum,
+          alarmNum: value.alarmNum,
+          cutOffNum: value.cutOffNum,
+        );
+      }
+      if (value2 != null) {
+        data = HomeStatisticsModel().copyWith(
+          totalIncome: value2.totalIncome,
+          todayIncome: value2.todayIncome,
+          lastDayIncome: value2.lastDayIncome,
+          deviceNum: value2.containerCount,
+          siteNum: value2.siteNum,
+          capacity: value2.capacity,
+          totalPos: value2.totalPos,
+          totalNeg: value2.totalNeg,
+          totalPvNeg: value2.totalPvTotalNeg,
+          co2: value2.co2,
+          coal: value2.coal,
+          normalNum: value2.normalNum,
+          faultNum: value2.faultNum,
+          alarmNum: value2.alarmNum,
+          cutOffNum: value2.cutOffNum,
+        );
+      }
+      return ApiSuccess<HomeStatisticsModel>(data);
     }
 
     if (AppSetting.isOverseas) {
       HomeData2Entity? value2 = await HomeAPI.postStatisticRecord2();
       if (value2 != null) {
-        return (null, value2);
+        HomeStatisticsModel data = HomeStatisticsModel().copyWith(
+          totalIncome: value2.totalIncome,
+          todayIncome: value2.todayIncome,
+          lastDayIncome: value2.lastDayIncome,
+          deviceNum: value2.containerCount,
+          siteNum: value2.siteNum,
+          capacity: value2.capacity,
+          totalPos: value2.totalPos,
+          totalNeg: value2.totalNeg,
+          totalPvNeg: value2.totalPvTotalNeg,
+          co2: value2.co2,
+          coal: value2.coal,
+          normalNum: value2.normalNum,
+          faultNum: value2.faultNum,
+          alarmNum: value2.alarmNum,
+          cutOffNum: value2.cutOffNum,
+        );
+        return ApiSuccess<HomeStatisticsModel>(data);
       } else {
-        return (null, null);
+        return ApiError(errorState: ErrorState.error, msg: "");
       }
     } else {
       HomeStatisticEntity? value = await HomeAPI.postStatisticRecord();
       if (value != null) {
-        return (value, null);
+        HomeStatisticsModel data = HomeStatisticsModel().copyWith(
+          totalIncome: value.totalIncome,
+          todayIncome: value.todayIncome,
+          lastDayIncome: value.lastDayIncome,
+          deviceNum: value.containerCount,
+          siteNum: value.siteNum,
+          capacity: value.capacity,
+          totalPos: value.totalPos,
+          totalNeg: value.totalNeg,
+          totalPvNeg: value.totalPvNeg,
+          co2: value.co2,
+          coal: value.coal,
+          normalNum: value.normalNum,
+          faultNum: value.faultNum,
+          alarmNum: value.alarmNum,
+          cutOffNum: value.cutOffNum,
+        );
+        return ApiSuccess<HomeStatisticsModel>(data);
       } else {
-        return (null, null);
+        return ApiError(errorState: ErrorState.error, msg: "");
       }
     }
   }

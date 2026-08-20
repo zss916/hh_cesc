@@ -38,10 +38,14 @@ class MessageAPI {
         );
         return ApiSuccess(value);
       } else {
-        return Future.syncValue(ApiError(ErrorState.error, result["message"]));
+        return Future.syncValue(
+          ApiError(errorState: ErrorState.error, msg: result["message"]),
+        );
       }
     } catch (e) {
-      return Future.syncValue(ApiError(ErrorState.exception, e.toString()));
+      return Future.syncValue(
+        ApiError(errorState: ErrorState.exception, msg: e.toString()),
+      );
     }
   }
 

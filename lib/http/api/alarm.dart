@@ -46,10 +46,10 @@ class AlarmAPI {
         );
         return ApiSuccess(value);
       } else {
-        return ApiError(ErrorState.error, result["message"]);
+        return ApiError(errorState: ErrorState.error, msg: result["message"]);
       }
     } catch (error) {
-      return ApiError(ErrorState.error, error.toString());
+      return ApiError(errorState: ErrorState.error, msg: error.toString());
     }
   }
 
@@ -188,10 +188,10 @@ class AlarmAPI {
         );
         return ApiSuccess<List<AlarmItemEntity>>(value);
       } else {
-        return ApiError(ErrorState.error, result["message"]);
+        return ApiError(errorState: ErrorState.error, msg: result["message"]);
       }
     } catch (error) {
-      return ApiError(ErrorState.exception, error.toString());
+      return ApiError(errorState: ErrorState.exception, msg: error.toString());
     }
   }
 
