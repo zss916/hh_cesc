@@ -7,7 +7,10 @@ class RealTimeAlarmView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RealTimeAlarmLogic>(
       init: RealTimeAlarmLogic(),
-      builder: (logic) => buildBodyUI(state: logic.state, logic: logic),
+      builder: (logic) => buildPage(
+        logic: logic,
+        child: buildBodyUI(state: logic.state, logic: logic),
+      ),
     );
   }
 
@@ -17,11 +20,8 @@ class RealTimeAlarmView extends StatelessWidget {
     required RealTimeAlarmLogic logic,
   }) {
     return switch (state) {
-      Success(:final data) => buildPage(
-        child: buildList(data: data, logic: logic),
-        logic: logic,
-      ),
-      Empty() => buildPage(child: buildEmpty(), logic: logic),
+      Success(:final data) => buildList(data: data, logic: logic),
+      Empty() => buildEmpty(),
       Loading() => BuildLoading(),
       Offline() => BuildOffline(),
       Failure() => SizedBox.shrink(),
@@ -41,7 +41,8 @@ class RealTimeAlarmView extends StatelessWidget {
                   alarmLevel: logic.alarmLevel,
                   onCall: (int? value) {
                     logic.alarmLevel = value;
-                    logic.toFilter();
+                    logic.update();
+                    logic.toFilter(isLoading: false);
                   },
                 ),
               ),

@@ -44,6 +44,7 @@ class HistoryAlarmView extends StatelessWidget {
                   alarmLevel: logic.alarmLevel,
                   onCall: (int? value) {
                     logic.alarmLevel = value;
+                    logic.update();
                     logic.toFilter();
                   },
                 ),
