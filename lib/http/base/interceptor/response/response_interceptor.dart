@@ -14,6 +14,7 @@ class ResponseInterceptor extends Interceptor {
       if (code != 200) {
         handler.reject(
           DioException(
+            message: message,
             requestOptions: response.requestOptions,
             response: response,
             type: DioExceptionType.badResponse,

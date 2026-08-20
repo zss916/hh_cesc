@@ -49,7 +49,7 @@ class HomeAPI {
         AppLoading.toast(result["message"]);
         return null;
       }
-    } catch (error) {
+    } catch (e) {
       return null;
     }
   }
@@ -68,7 +68,7 @@ class HomeAPI {
         AppLoading.toast(result["message"]);
         return null;
       }
-    } catch (error) {
+    } catch (e) {
       return null;
     }
   }

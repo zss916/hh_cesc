@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cescpro/http/base/interceptor/error/error_interceptor.dart';
 import 'package:cescpro/http/base/interceptor/network_status/network_status.dart';
 import 'package:cescpro/http/base/interceptor/network_status/network_status_interceptor.dart';
-import 'package:cescpro/http/base/interceptor/retry/retry_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -37,7 +36,7 @@ class Http {
 
     ///todo
     _dio.interceptors.add(ErrorInterceptor());
-    _dio.interceptors.add(RetryInterceptor(dioGetter: () => _dio));
+    // _dio.interceptors.add(RetryInterceptor(dioGetter: () => _dio));
 
     ///todo
     // _dio.interceptors.add(ResponseInterceptor());
@@ -85,19 +84,19 @@ class Http {
     Function(int count, int total)? onSendProgress,
   }) async {
     // 将 showLoading、showError、缓存策略传入 extra，交由拦截器统一处理
-    final mergedOptions = (options ?? Options()).copyWith(
+    /*final mergedOptions = (options ?? Options()).copyWith(
       extra: {
         ...?options?.extra,
         'showLoading': showLoading,
         'showError': showError,
       },
-    );
+    );*/
     try {
       final response = await _dio.post(
         path,
         data: data,
         queryParameters: queryParameters,
-        options: mergedOptions,
+        //options: mergedOptions,
         cancelToken: cancelToken ?? cancelTokenAll,
         onSendProgress: onSendProgress,
       );
