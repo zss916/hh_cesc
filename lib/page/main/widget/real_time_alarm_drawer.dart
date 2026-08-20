@@ -3,7 +3,7 @@ import 'package:cescpro/core/model/country_entity.dart';
 import 'package:cescpro/core/service/app_info_service.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/site_data_entity.dart';
-import 'package:cescpro/page/alarm/tab/view/realTime/real_time_alarm_logic.dart';
+import 'package:cescpro/page/alarm/tab/view/realTime/index.dart';
 import 'package:cescpro/page/main/index.dart';
 import 'package:cescpro/page/main/sheet/alarm_select_sheet.dart';
 import 'package:cescpro/page/main/sheet/select_country_sheet.dart';

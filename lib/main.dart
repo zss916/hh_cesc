@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         title: AppSetting.appName,
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [RefreshLocalizations.delegate],
-        locale: LanTools.getLocale() ?? Get.deviceLocale,
+        locale: (LanTools.getLocale() ?? Get.deviceLocale),
         translations: AppTranslations(),
         fallbackLocale: const Locale("en"),
         getPages: APages.routes,

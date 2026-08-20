@@ -1,8 +1,8 @@
 import 'package:cescpro/components/keep_alive_page.dart';
 import 'package:cescpro/components/tab/rrect_indicator.dart';
 import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/page/alarm/tab/view/history/history_view.dart';
-import 'package:cescpro/page/alarm/tab/view/realTime/real_time_view.dart';
+import 'package:cescpro/page/alarm/tab/view/history/index.dart';
+import 'package:cescpro/page/alarm/tab/view/realTime/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

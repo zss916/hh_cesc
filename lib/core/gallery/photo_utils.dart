@@ -36,12 +36,7 @@ class PhotoUtils {
       minHeight: 480,
       format: format,
     );
-
-    //debugPrint("targetPath2 ==> ${result?.path ?? ""}");
     return result?.path ?? "";
-    // final result = await Luban.compress(File(targetPath));
-    // return result.value.file.path;
-    //return Future.value(targetPath);
   }
 
   static Future<String> _createTempFile({

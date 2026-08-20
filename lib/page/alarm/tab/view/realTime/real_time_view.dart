@@ -1,18 +1,4 @@
-import 'package:cescpro/components/offline_on_refresh.dart';
-import 'package:cescpro/core/enum/app_enum.dart';
-import 'package:cescpro/core/storage/app_event_bus.dart';
-import 'package:cescpro/core/translations/en.dart';
-import 'package:cescpro/generated/assets.dart';
-import 'package:cescpro/http/bean/alarm_item_entity.dart';
-import 'package:cescpro/page/alarm/index/widget/alarm_item.dart';
-import 'package:cescpro/page/alarm/tab/view/realTime/real_time_alarm_logic.dart';
-import 'package:cescpro/page/alarm/tab/view/widget/alarm_filter_widget.dart';
-import 'package:cescpro/page/alarm/tab/view/widget/select_level_widget.dart';
-import 'package:cescpro/page/home/widget/cesc_glow_loading.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:pull_to_refresh_simple/pull_to_refresh_simple.dart';
+part of 'index.dart';
 
 class RealTimeAlarmView extends StatelessWidget {
   const RealTimeAlarmView({super.key});
@@ -21,36 +7,24 @@ class RealTimeAlarmView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<RealTimeAlarmLogic>(
       init: RealTimeAlarmLogic(),
-      builder: (logic) => buildBody(viewState: logic.viewState, logic: logic),
+      builder: (logic) => buildBodyUI(state: logic.state, logic: logic),
     );
   }
 
   ///建立Body
-  Widget buildBody({
-    required ViewStateEnum viewState,
+  Widget buildBodyUI({
+    required UiState state,
     required RealTimeAlarmLogic logic,
   }) {
-    return switch (viewState) {
-      ViewStateEnum.common => buildPage(
-        child: buildList(logic: logic),
+    return switch (state) {
+      Success(:final data) => buildPage(
+        child: buildList(data: data, logic: logic),
         logic: logic,
       ),
-      ViewStateEnum.empty => buildPage(
-        child: buildEmpty(logic: logic),
-        logic: logic,
-      ),
-      ViewStateEnum.loading => Container(
-        margin: EdgeInsetsDirectional.only(bottom: 50.h),
-        child: Center(child: CescGlowLoading()),
-      ),
-      ViewStateEnum.offline => Center(
-        child: OfflineOnRefresh(
-          onCall: () {
-            AppEventBus.eventBus.fire(NetWorkRefresh());
-          },
-        ),
-      ),
-      ViewStateEnum.error => SizedBox.shrink(),
+      Empty() => buildPage(child: buildEmpty(), logic: logic),
+      Loading() => BuildLoading(),
+      Offline() => BuildOffline(),
+      Failure() => SizedBox.shrink(),
     };
   }
 
@@ -90,15 +64,12 @@ class RealTimeAlarmView extends StatelessWidget {
     );
   }
 
-  Widget buildList({required RealTimeAlarmLogic logic}) => SmartRefresher(
+  Widget buildList({
+    required List<AlarmItemEntity> data,
+    required RealTimeAlarmLogic logic,
+  }) => SmartRefresher(
     header: MaterialClassicHeader(),
-    footer: ClassicFooter(
-      idleText: TKey.idleLoadingText.tr,
-      canLoadingText: TKey.canLoadingText.tr,
-      loadingText: TKey.loadingText.tr,
-      noDataText: TKey.noMoreText.tr,
-      failedText: TKey.loadFailedText.tr,
-    ),
+    footer: BuildFooter(),
     enablePullDown: true,
     enablePullUp: true,
     enableSmartPreload: true,
@@ -111,26 +82,25 @@ class RealTimeAlarmView extends StatelessWidget {
     },
     child: ListView.separated(
       padding: EdgeInsetsDirectional.only(top: 0.h, bottom: 0.h),
-      itemCount: logic.data.length,
+      itemCount: data.length,
       itemBuilder: (BuildContext context, int index) {
-        AlarmItemEntity item = logic.data[index];
-        return AlarmItem(item: item, isLast: (index + 1 == logic.data.length));
+        AlarmItemEntity item = data[index];
+        return AlarmItem(item: item, isLast: (index + 1 == data.length));
       },
       separatorBuilder: (BuildContext context, int index) =>
           const Divider(height: 16, color: Colors.transparent),
     ),
   );
 
-  Widget buildEmpty({required RealTimeAlarmLogic logic}) => SizedBox(
+  Widget buildEmpty() => SizedBox(
     width: double.maxFinite,
     height: double.maxFinite,
     child: Column(
-      //mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Divider(height: 100.h, color: Colors.transparent),
+        Divider(height: 150.h, color: Colors.transparent),
         GestureDetector(
           onTap: () {
-            logic.refreshData(isLoading: true);
+            AppEventBus.eventBus.fire(NetWorkRefresh());
           },
           child: Image.asset(Assets.imgEmpty2, width: 200, height: 95),
         ),

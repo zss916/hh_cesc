@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "104689395718",
+    "project_id": "bujunshou-3618f",
+    "storage_bucket": "bujunshou-3618f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104689395718:android:c2a3988b082f166d753b87",
+        "android_client_info": {
+          "package_name": "com.bujunshou.product"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByRkoknENw5Rv725Da4ZSVxO8Wc3Zk7oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

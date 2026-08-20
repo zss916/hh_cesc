@@ -20,7 +20,6 @@ class APages {
   static const revenue = '/revenue';
   static const web = '/web';
   static const eleReport = '/eleReport';
-  static const alarmDetails = '/alarmDetails';
   static const hPowerGraphChart = '/hPowerGraphChart';
   static const hMeterChart = '/hMeterChart';
   static const hPCSChart = '/hPCSChart';
@@ -111,9 +110,6 @@ class APages {
 
     ///web
     GetPage(name: web, page: () => WebPage()),
-
-    /// 首页告警详情
-    GetPage(name: alarmDetails, page: () => AlarmDetailsPage()),
 
     ///策略历史
     GetPage(name: strategyHistory, page: () => StrategyHistoryPage()),
