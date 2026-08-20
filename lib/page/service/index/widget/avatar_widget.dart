@@ -28,8 +28,8 @@ class AvatarWidget extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   SizedBox(
-                    width: 40,
-                    height: 40,
+                    width: 30,
+                    height: 30,
                     child: CircularProgressIndicator(
                       color: Colors.white,
                       strokeWidth: 3,
@@ -38,38 +38,7 @@ class AvatarWidget extends StatelessWidget {
                 ],
               );
             },
-        /*placeholder: (BuildContext context, String url) {
-          return Image.asset(Assets.imgLogo);
-        },*/
       ),
     );
-
-    return url.isNotEmpty
-        ? Container(
-            width: 72,
-            height: 72,
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              color: Color(0xFF313540),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: CachedNetworkImageProvider(url),
-              ),
-              borderRadius: BorderRadius.circular(100),
-            ),
-          )
-        : Container(
-            width: 72,
-            height: 72,
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              color: Color(0xFF313540),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: ExactAssetImage(Assets.imgLogo),
-              ),
-              borderRadius: BorderRadius.circular(100),
-            ),
-          );
   }
 }

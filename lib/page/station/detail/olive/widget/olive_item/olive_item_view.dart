@@ -6,10 +6,10 @@ import 'package:cescpro/core/setting/app_setting.dart';
 import 'package:cescpro/core/tools/state.dart';
 import 'package:cescpro/core/translations/en.dart';
 import 'package:cescpro/http/bean/site_detail_entity.dart';
-import 'package:cescpro/page/station/detail/olive/widget/olive_item/line_status_widget.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/olive_item_logic.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/widget/grid_view_widget2.dart';
 import 'package:cescpro/page/station/detail/olive/widget/olive_item/widget/topology_widget.dart';
+import 'package:cescpro/page/station/detail/olive/widget/olive_item/widget/weather_and_work_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -27,7 +27,8 @@ class OliveItemView extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                if (AppSetting.isOverseas) buildTopTitle(logic),
+                if (AppSetting.isOverseas)
+                  BuildWeatherAndWorkModel(logic: logic),
 
                 RepaintBoundary(
                   child: TopologyWidget(topology: logic.topology),
@@ -53,48 +54,6 @@ class OliveItemView extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Widget buildTopTitle(OliveItemLogic logic) {
-    return Container(
-      margin: EdgeInsets.only(top: 18.h, left: 16.w, right: 16.w),
-      width: double.maxFinite,
-      child: Wrap(
-        spacing: 10,
-        children: [
-          if (logic.weather != null)
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  TKey.todayWeather.tr,
-                  style: TextStyle(fontSize: 13, color: Color(0xB3FFFFFF)),
-                ),
-                Text(
-                  logic.weatherData,
-                  style: TextStyle(fontSize: 15, color: Color(0xDEFFFFFF)),
-                ),
-              ],
-            ),
-
-          if (logic.workModel.isNotEmpty)
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '${TKey.stationStatus.tr}:',
-                  style: TextStyle(fontSize: 13, color: Color(0xB3FFFFFF)),
-                ),
-                LineStatusWidget(status: logic.siteDetail?.status ?? 99),
-                Text(
-                  logic.workModel,
-                  style: TextStyle(fontSize: 15, color: Color(0xDEFFFFFF)),
-                ),
-              ],
-            ),
-        ],
-      ),
     );
   }
 

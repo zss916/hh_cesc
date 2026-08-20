@@ -89,7 +89,6 @@ class RevenueLogic extends GetxController {
     if (AppSetting.isOverseas) {
       loadRevenueList2();
     } else {
-      ///
       if (isShowTimeSlot ?? false) {
         loadRevenueList2();
       } else {
@@ -100,6 +99,7 @@ class RevenueLogic extends GetxController {
 
   //  //{siteId: 477, dataType: 1, startTimeStamp: 1764518400000, endTimeStamp: 1767196799999, date: null}
   Future<void> loadRevenueList2() async {
+    AppLoading.show();
     // debugPrint("startTimeStamp:$startTimeStamp \n endTimeStamp:$endTimeStamp");
     final (
       bool isSuccessful,
@@ -110,9 +110,9 @@ class RevenueLogic extends GetxController {
       startTimeStamp: startTimeStamp,
       endTimeStamp: endTimeStamp,
       date: date,
-      showLoading: true,
-      showError: true,
-    );
+      showLoading: false,
+      showError: false,
+    ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       revenueList.assignAll(value);
       rows2.clear();
@@ -168,6 +168,7 @@ class RevenueLogic extends GetxController {
 
   Future<void> loadRevenueList() async {
     //1.daily 2.monthly 3.yearly
+    AppLoading.show();
     final (
       bool isSuccessful,
       List<StatisticReportEntity> value,
@@ -180,7 +181,7 @@ class RevenueLogic extends GetxController {
       date: date,
       showLoading: true,
       showError: true,
-    );
+    ).whenComplete(() => AppLoading.dismiss());
     if (isSuccessful) {
       list.assignAll(value.first.dailyElecIncomeDetail ?? []);
       rows.clear();

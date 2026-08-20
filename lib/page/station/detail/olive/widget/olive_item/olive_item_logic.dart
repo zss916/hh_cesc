@@ -14,6 +14,7 @@ import 'package:cescpro/http/bean/site_entity.dart';
 import 'package:cescpro/http/bean/site_topology_entity.dart';
 import 'package:cescpro/http/bean/statistic_record_entity.dart';
 import 'package:cescpro/http/bean/weather_entity.dart';
+import 'package:cescpro/page/station/detail/olive/widget/olive_item/widget/weather_and_work_model.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
@@ -22,19 +23,19 @@ class OliveItemLogic extends GetxController {
 
   ///天气
   WeatherEntity? weather;
-
   String get weatherData => weather == null
       ? "--"
       : "${weather?.desc ?? ""}${weather?.tempMin ?? 0}°~${weather?.tempMax ?? 0}°";
+  SmallWidgetState smallWidgetState = SmallWidgetState.loading;
+
+  ///工作模式
+  String workModel = "";
 
   ///拓扑图
   SiteTopologyEntity? topology;
 
   ///判断获取货币符号
   String get currencyUnit => User.to.getCurrencyUnit();
-
-  ///工作模式
-  String workModel = "";
 
   ///状态
   int status = 0;
@@ -157,7 +158,11 @@ class OliveItemLogic extends GetxController {
       date: DateTime.now().timestampFormat,
     );
     if (value != null) {
+      smallWidgetState = SmallWidgetState.success;
       weather = value;
+      update();
+    } else {
+      smallWidgetState = SmallWidgetState.error;
       update();
     }
   }

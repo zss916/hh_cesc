@@ -22,8 +22,8 @@ class SelectStatusWidget extends StatelessWidget {
               } else {
                 logic.statusParam = (item['value'] as int);
               }
-              logic.toSearch();
-              //logic.update();
+              logic.update();
+              logic.toSearch(isLoading: true);
             },
             child: Container(
               height: 30,

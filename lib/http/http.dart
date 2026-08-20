@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cescpro/http/base/interceptor/error/error_interceptor.dart';
-import 'package:cescpro/http/base/interceptor/loading/loading_interceptor.dart';
 import 'package:cescpro/http/base/interceptor/network_status/network_status.dart';
 import 'package:cescpro/http/base/interceptor/network_status/network_status_interceptor.dart';
 import 'package:cescpro/http/base/interceptor/retry/retry_interceptor.dart';
@@ -34,7 +33,7 @@ class Http {
   void _setupInterceptors() {
     _dio.interceptors.add(AuthInterceptor());
     _dio.interceptors.add(NetworkStatusInterceptor(dioGetter: () => _dio));
-    _dio.interceptors.add(LoadingInterceptor());
+    //_dio.interceptors.add(LoadingInterceptor());
 
     ///todo
     _dio.interceptors.add(ErrorInterceptor());
